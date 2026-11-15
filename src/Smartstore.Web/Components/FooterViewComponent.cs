@@ -10,7 +10,6 @@ namespace Smartstore.Web.Components;
 
 public class FooterViewComponent : SmartViewComponent
 {
-    private readonly static string[] _hints = new string[] { "Shopsystem", "Onlineshop Software", "Shopsoftware", "E-Commerce Solution" };
 
     private readonly IThemeRegistry _themeRegistry;
     private readonly IWidgetProvider _widgetProvider;
@@ -96,18 +95,9 @@ public class FooterViewComponent : SmartViewComponent
             model.LegalInfo = T("Tax.LegalInfoFooter2", taxInfo);
         }
 
-        var hint = Services.Settings.GetSettingByKey("Rnd_SmCopyrightHint", string.Empty, store.Id);
-        if (hint.IsEmpty())
-        {
-            hint = _hints[CommonHelper.GenerateRandomInteger(0, _hints.Length - 1)];
-
-            await Services.Settings.ApplySettingAsync("Rnd_SmCopyrightHint", hint, store.Id);
-            await Services.DbContext.SaveChangesAsync();
-        }
-
         if (_displayHelper.DisplaySmartstoreHint())
         {
-            model.SmartStoreHint = $"<a href='https://www.smartstore.com/' class='sm-hint' target='_blank'><strong>{hint}</strong></a> by SmartStore AG &copy; {DateTime.Now.Year}";
+            model.SmartStoreHint = $"<a href='https://ommlabs.ommrudraksha.com' class='sm-hint' target='_blank'><strong>OmmCMS</strong></a> by OmmLabs &copy; {DateTime.Now.Year}";
         }
 
         if (ShouldRenderGDPR())
