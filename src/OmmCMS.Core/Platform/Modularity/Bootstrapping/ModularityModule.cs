@@ -135,7 +135,6 @@ public sealed class ModularityModule : Module
             });
 
             // Register specific provider type.
-            RegisterAsSpecificProvider<ITaxProvider>(type, systemName, registration);
             RegisterAsSpecificProvider<IExchangeRateProvider>(type, systemName, registration);
             RegisterAsSpecificProvider<IActivatableWidget>(type, systemName, registration);
             RegisterAsSpecificProvider<IExportProvider>(type, systemName, registration);
@@ -266,11 +265,7 @@ public sealed class ModularityModule : Module
 
     private static string ProviderTypeToKnownGroupName(Type implType)
     {
-        if (typeof(ITaxProvider).IsAssignableFrom(implType))
-        {
-            return "Tax";
-        }
-        else if (typeof(IExchangeRateProvider).IsAssignableFrom(implType))
+        if (typeof(IExchangeRateProvider).IsAssignableFrom(implType))
         {
             return "Payment";
         }

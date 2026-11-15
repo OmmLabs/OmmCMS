@@ -18,7 +18,6 @@ using OmmCMS.Core.Content.Media.Storage;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Tests.Common;
 using OmmCMS.Core.Tests.Content.Media.Storage;
-using OmmCMS.Core.Tests.Tax;
 using OmmCMS.Data;
 using OmmCMS.Data.Providers;
 using OmmCMS.Engine;
@@ -174,7 +173,6 @@ public abstract class ServiceTestBase
 
     private void InitProviders()
     {
-        _providerManager.RegisterProvider("FixedTaxRateTest", new FixedRateTestTaxProvider());
         _providerManager.RegisterProvider("CurrencyExchange.TestProvider", new TestExchangeRateProvider());
         _providerManager.RegisterProvider(DatabaseMediaStorageProvider.SystemName, new TestDatabaseMediaStorageProvider());
     }
@@ -183,7 +181,6 @@ public abstract class ServiceTestBase
     {
         var modules = new List<IModuleDescriptor>
         {
-            new ModuleDescriptor { SystemName = "OmmCMS.Tax" },
             new ModuleDescriptor { SystemName = "OmmCMS.Shipping" },
         };
 

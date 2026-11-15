@@ -16,11 +16,6 @@ public class TaxSettings : ISettings
 
 
     /// <summary>
-    /// Gets or sets an system name of active tax provider
-    /// </summary>
-    public string ActiveTaxProviderSystemName { get; set; } = "Tax.FixedRate";
-
-    /// <summary>
     /// Gets or sets default address used for tax calculation
     /// </summary>
     public int DefaultTaxAddressId { get; set; }

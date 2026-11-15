@@ -1,4 +1,4 @@
-using OmmCMS.Core.Checkout.Tax;
+﻿using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Identity;
 using OmmCMS.Engine.Modularity;
 
@@ -19,11 +19,7 @@ public static class UrlHelperExtensions
         Guard.NotNull(url);
         Guard.NotNull(metadata);
 
-        if (metadata.ProviderType == typeof(ITaxProvider))
-        {
-            return url.Action("Providers", "Tax");
-        }
-        else if (metadata.ProviderType == typeof(IActivatableWidget))
+        if (metadata.ProviderType == typeof(IActivatableWidget))
         {
             return url.Action("Providers", "Widget");
         }

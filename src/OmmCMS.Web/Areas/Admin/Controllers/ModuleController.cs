@@ -426,12 +426,7 @@ public class ModuleController : AdminController
 
         var metadata = provider.Metadata;
 
-        if (metadata.ProviderType == typeof(ITaxProvider))
-        {
-            readPermission = Permissions.Configuration.Tax.Read;
-            updatePermission = Permissions.Configuration.Tax.Update;
-        }
-        else if (metadata.ProviderType == typeof(IActivatableWidget))
+        if (metadata.ProviderType == typeof(IActivatableWidget))
         {
             readPermission = Permissions.Cms.Widget.Read;
             updatePermission = Permissions.Cms.Widget.Update;

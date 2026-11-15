@@ -64,10 +64,7 @@ public class PriceFormattingTests : ServiceTestBase
         _localizationService = localizationServiceMock.Object;
 
         _taxService = new TaxService(
-            DbContext,
-            ProviderManager,
             _workContext,
-            _roundingHelper,
             _localizationService,
             _taxSettings);
     }
