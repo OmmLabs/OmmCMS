@@ -533,6 +533,18 @@ def verify_presentation_extraction():
 
 
 try:
+    if "--core-commerce-trimmed" in sys.argv:
+        repo = Path(__file__).resolve().parent.parent
+        for path in (
+            "Catalog/Products/Services/IStockSubscriptionService.cs",
+            "Catalog/Products/Services/StockSubscriptionService.cs",
+            "Catalog/Products/Extensions/BackInStockSubscriptionQueryExtensions.cs",
+            "Catalog/Attributes/Modelling/IProductVariantQueryFactory.cs",
+            "Catalog/Attributes/Modelling/ProductVariantQueryFactory.cs",
+            "Catalog/Attributes/Modelling/ProductAttributeQueryModelBinder.cs",
+        ):
+            assert not (repo / "src/Smartstore.Core" / path).exists(), f"Retired core source remains: {path}"
+        print("Core stock notification and storefront variant binding extraction passed.")
     if "--presentation-trimmed" in sys.argv:
         verify_presentation_extraction()
     if "--residual-commerce-trimmed" in sys.argv:

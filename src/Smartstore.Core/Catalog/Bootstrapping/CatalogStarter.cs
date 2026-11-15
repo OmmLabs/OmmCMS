@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Smartstore.Core.Catalog.Attributes;
-using Smartstore.Core.Catalog.Attributes.Modelling;
 using Smartstore.Core.Catalog.Attributes.Rules;
 using Smartstore.Core.Catalog.Brands;
 using Smartstore.Core.Catalog.Brands.Rules;
@@ -44,8 +43,6 @@ internal class CatalogStarter : StarterBase
         builder.RegisterType<ProductAttributeFormatter>().As<IProductAttributeFormatter>().InstancePerLifetimeScope();
 
         builder.RegisterType<DiscountService>().As<IDiscountService>().InstancePerLifetimeScope();
-        builder.RegisterType<StockSubscriptionService>().As<IStockSubscriptionService>().InstancePerLifetimeScope();
-        builder.RegisterType<ProductVariantQueryFactory>().As<IProductVariantQueryFactory>().InstancePerLifetimeScope();
         builder.RegisterType<ProductUrlHelper>().InstancePerLifetimeScope();
         builder.RegisterType<ProductImporter>().Keyed<IEntityImporter>(ImportEntityType.Product).InstancePerLifetimeScope();
         builder.RegisterType<CategoryImporter>().Keyed<IEntityImporter>(ImportEntityType.Category).InstancePerLifetimeScope();

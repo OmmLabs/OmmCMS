@@ -125,23 +125,4 @@ public static partial class CatalogMessageFactoryExtensions
             true,
             product);
     }
-
-    /// <summary>
-    /// Sends a 'Back in stock' notification message to a customer.
-    /// </summary>
-    /// <param name="factory">Message factory.</param>
-    /// <param name="subscription">Back in stock subscription.</param>
-    /// <returns>Create message result.</returns>
-    public static Task<CreateMessageResult> SendBackInStockNotificationAsync(this IMessageFactory factory, BackInStockSubscription subscription)
-    {
-        Guard.NotNull(subscription);
-
-        var customer = subscription.Customer;
-        var languageId = customer.GenericAttributes.LanguageId ?? 0;
-
-        return factory.CreateMessageAsync(
-            MessageContext.Create(MessageTemplateNames.BackInStockCustomer, languageId, subscription.StoreId, customer),
-            true,
-            subscription.Product);
-    }
 }

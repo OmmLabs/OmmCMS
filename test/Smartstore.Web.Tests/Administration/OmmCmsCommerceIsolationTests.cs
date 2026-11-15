@@ -150,6 +150,11 @@ public class OmmCmsCommerceIsolationTests
     [TestCase("Smartstore.Core.Catalog.Products.ProductCloner")]
     [TestCase("Smartstore.Core.Catalog.Attributes.IProductAttributeService")]
     [TestCase("Smartstore.Core.Catalog.Attributes.ProductAttributeService")]
+    [TestCase("Smartstore.Core.Catalog.Products.IStockSubscriptionService")]
+    [TestCase("Smartstore.Core.Catalog.Products.StockSubscriptionService")]
+    [TestCase("Smartstore.Core.Catalog.Attributes.Modelling.IProductVariantQueryFactory")]
+    [TestCase("Smartstore.Core.Catalog.Attributes.Modelling.ProductVariantQueryFactory")]
+    [TestCase("Smartstore.Core.Catalog.Attributes.Modelling.ProductAttributeQueryModelBinder")]
     public void RetiredCoreServiceTypesAreAbsent(string type)
     {
         Assert.That(typeof(Smartstore.Core.Data.SmartDbContext).Assembly.GetType(type), Is.Null);

@@ -59,6 +59,7 @@ CI checks removed modules and standalone commerce views are absent from source a
 | 10 | [Remaining commerce administration extraction](docs/ommcms/PHASE10_ADMIN_COMMERCE_EXTRACTION.md) |
 | 11 | [Residual commerce actions and shared component extraction](docs/ommcms/PHASE11_RESIDUAL_COMMERCE_EXTRACTION.md) |
 | 12 | [Commerce presentation and core leaf service extraction](docs/ommcms/PHASE12_COMMERCE_PRESENTATION_EXTRACTION.md) |
+| 13 | [Core stock subscription and variant binding extraction](docs/ommcms/PHASE13_CORE_COMMERCE_EXTRACTION.md) |
 | Next | Extract remaining admin commerce models, legacy assets and coupled core commerce services before reducing schema; build dedicated article taxonomy and editorial tools. |
 
 Source and project names retain their Smartstore names until the dependency extraction is complete.

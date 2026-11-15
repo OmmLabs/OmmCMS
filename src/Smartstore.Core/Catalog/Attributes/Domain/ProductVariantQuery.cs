@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using Smartstore.Core.Catalog.Attributes.Modelling;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Smartstore.Core.Checkout.Attributes;
 using Smartstore.Core.Checkout.GiftCards;
 
 namespace Smartstore.Core.Catalog.Attributes;
 
-[ModelBinder(typeof(ProductAttributeQueryModelBinder))]
 [ValidateNever]
 public class ProductVariantQuery
 {

@@ -9,21 +9,17 @@ namespace Smartstore.Core.Catalog.Products;
 internal class ProductHook : AsyncDbSaveHook<Product>
 {
     private readonly SmartDbContext _db;
-    private readonly Lazy<IStockSubscriptionService> _stockSubscriptionService;
     private readonly Lazy<IProductService> _productService;
 
-    private readonly HashSet<BaseEntity> _toSendStockNotification = new();
     private readonly HashSet<BaseEntity> _toAdjustInventory = new();
     private readonly HashSet<int> _oldSampleDownloadIds = new();
     private string _hookErrorMessage;
 
     public ProductHook(
         SmartDbContext db,
-        Lazy<IStockSubscriptionService> stockSubscriptionService,
         Lazy<IProductService> productService)
     {
         _db = db;
-        _stockSubscriptionService = stockSubscriptionService;
         _productService = productService;
     }
 
@@ -45,17 +41,6 @@ internal class ProductHook : AsyncDbSaveHook<Product>
                 {
                     var stockQuantityInDatabase = (int)prop.OriginalValue;
                     var newStockQuantity = (int)prop.CurrentValue;
-
-                    if (p.BackorderMode == BackorderMode.NoBackorders
-                        && p.AllowBackInStockSubscriptions
-                        && p.Published
-                        && !p.Deleted
-                        && !p.IsSystemProduct
-                        && newStockQuantity > 0
-                        && stockQuantityInDatabase <= 0)
-                    {
-                        _toSendStockNotification.Add(entry.Entity);
-                    }
 
                     if (newStockQuantity != stockQuantityInDatabase)
                     {
@@ -177,12 +162,5 @@ internal class ProductHook : AsyncDbSaveHook<Product>
             await _db.SaveChangesAsync(cancelToken);
             _toAdjustInventory.Clear();
         }
-
-        foreach (var entity in _toSendStockNotification)
-        {
-            await _stockSubscriptionService.Value.SendNotificationsToSubscribersAsync(entity as Product);
-        }
-
-        _toSendStockNotification.Clear();
     }
 }
