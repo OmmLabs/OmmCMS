@@ -216,23 +216,6 @@ public static partial class ProductQueryExtensions
             .ThenInclude(x => x.BundleProduct);
     }
 
-    /// <summary>
-    /// Includes product reviews for eager loading:
-    /// Approved <see cref="Product.ProductReviews"/> (sorted by <see cref="ProductBundleItem.CreatedOnUtc"/> desc), 
-    /// then <see cref="CustomerContent.Customer"/>.
-    /// </summary>
-    public static IIncludableQueryable<Product, Customer> IncludeReviews(this IQueryable<Product> query)
-    {
-        Guard.NotNull(query);
-
-        // INFO: using .Take(x) will fail due to TPH inheritance. EF bug?
-
-        return query.Include(x => x.ProductReviews
-            .Where(y => y.IsApproved)
-            .OrderByDescending(y => y.CreatedOnUtc))
-            .ThenInclude(x => x.Customer);
-    }
-
     ///// <summary>
     ///// Includes a bunch of navigation properties for eager loading:
     ///// <list type="bullet">

@@ -5,11 +5,6 @@
     "shortDescription": "A novel about a lighthouse keeper and an unexpected guest. E-book, PDF.",
     "fullDescription": "@file",
     "sku": "DG-1001",
-    "reviews": [
-      { "customer": "sophie", "rating": 5, "title": "Could not put it down", "reviewText": "Read it in one weekend. The reading sample convinced me straight away.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-42d" },
-      { "customer": "laura", "rating": 4, "title": "Calm and atmospheric", "reviewText": "A quiet, beautiful story. The download was available right after payment.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-21d" },
-      { "customer": "jonas", "rating": 3, "title": "Nice, but slow", "reviewText": "Well written, but the middle part drags a little.", "isApproved": true, "createdOnUtc": "@now-9d" }
-    ],
     "taxCategory": "books",
     "price": 9.99,
     "isDownload": true,
@@ -36,9 +31,6 @@
     "shortDescription": "Photo editing software for Windows, macOS and Linux. Download with licence agreement.",
     "fullDescription": "@file",
     "sku": "DG-1003",
-    "reviews": [
-      { "customer": "anna", "rating": 4, "title": "Easy to use", "reviewText": "All the important tools for my holiday photos, without a subscription.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-17d" }
-    ],
     "taxCategory": "digital-goods",
     "price": 49.00,
     "isDownload": true,

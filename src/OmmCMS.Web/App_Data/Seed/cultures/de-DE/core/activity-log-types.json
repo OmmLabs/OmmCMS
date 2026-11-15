@@ -161,9 +161,6 @@
   "PublicStore.Logout": {
     "name": "Öffentlicher Shop. Abmeldung"
   },
-  "PublicStore.AddProductReview": {
-    "name": "Öffentlicher Shop. Produktrezension hinzugefügt"
-  },
   "PublicStore.AddNewsComment": {
     "name": "Öffentlicher Shop. News-Kommentar hinzugefügt"
   },

@@ -84,7 +84,6 @@ public partial class PermissionService : AsyncDbSaveHook<CustomerRole>, IPermiss
         { "checkoutattribute", "Admin.Catalog.Attributes.CheckoutAttributes" },
         { "media", "Admin.Plugins.KnownGroup.Media" },
         { "download", "Common.Downloads" },
-        { "productreview", "Admin.Catalog.ProductReviews" },
         { "approve", "Common.Approve" },
         { "rule", "Common.Rules" },
     };

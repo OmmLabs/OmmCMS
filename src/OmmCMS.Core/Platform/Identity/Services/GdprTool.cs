@@ -92,13 +92,6 @@ public partial class GdprTool : IGdprTool
                 model["WalletHistory"] = await walletHistory.SelectAwait(x => _messageModelProvider.CreateModelPartAsync(x, true, "WalletUrl")).ToListAsync();
             }
 
-            // Product reviews
-            var productReviews = customer.CustomerContent.OfType<ProductReview>();
-            if (productReviews.Any())
-            {
-                model["ProductReviews"] = await productReviews.SelectAwait(x => _messageModelProvider.CreateModelPartAsync(x, true)).ToListAsync();
-            }
-
             // INFO: we're not going to export: 
             // - Activity log
             // It doesn't feel right and GDPR rules are not very clear about this. Let's wait and see :-)
@@ -160,17 +153,6 @@ public partial class GdprTool : IGdprTool
         foreach (var item in customer.CustomerContent)
         {
             AnonymizeData(item, x => x.IpAddress, IdentifierDataType.IpAddress, language);
-
-            if (pseudomyzeContent)
-            {
-                switch (item)
-                {
-                    case ProductReview c:
-                        AnonymizeData(c, x => x.ReviewText, IdentifierDataType.LongText, language);
-                        AnonymizeData(c, x => x.Title, IdentifierDataType.Text, language);
-                        break;
-                }
-            }
         }
 
         //// Anonymize Order IPs

@@ -108,10 +108,6 @@ public class CatalogSearchQueryVisitor : LinqSearchQueryVisitor<Product, Catalog
                 return query.Where(x => conditions.Contains((int)x.Condition));
             }
         }
-        else if (fieldName == names.Rating)
-        {
-            return VisitRatingFilter(filter as IAttributeSearchFilter, context, query);
-        }
         else if (fieldName == names.RoleId)
         {
             return VisitRoleFilter(filter, context, query);
@@ -406,51 +402,6 @@ public class CatalogSearchQueryVisitor : LinqSearchQueryVisitor<Product, Catalog
                     (x.SpecialPriceEndDateTimeUtc.HasValue && x.SpecialPriceEndDateTimeUtc.Value < context.Now))) &&
                     (x.Price == price))
                 );
-            }
-        }
-
-        return query;
-    }
-
-    protected virtual IQueryable<Product> VisitRatingFilter(IAttributeSearchFilter filter, CatalogSearchQueryContext context, IQueryable<Product> query)
-    {
-        if (filter is IRangeSearchFilter rf)
-        {
-            var lower = rf.Term as double?;
-            var upper = rf.UpperTerm as double?;
-
-            if (lower.HasValue || upper.HasValue)
-            {
-                query = query.Where(x => x.ApprovedTotalReviews > 0);
-            }
-
-            if (lower.HasValue)
-            {
-                if (rf.IncludesLower)
-                    query = query.Where(x => ((double)x.ApprovedRatingSum / (double)x.ApprovedTotalReviews) >= lower.Value);
-                else
-                    query = query.Where(x => ((double)x.ApprovedRatingSum / (double)x.ApprovedTotalReviews) > lower.Value);
-            }
-
-            if (upper.HasValue)
-            {
-                if (rf.IncludesUpper)
-                    query = query.Where(x => ((double)x.ApprovedRatingSum / (double)x.ApprovedTotalReviews) <= upper.Value);
-                else
-                    query = query.Where(x => ((double)x.ApprovedRatingSum / (double)x.ApprovedTotalReviews) < upper.Value);
-            }
-        }
-        else
-        {
-            var rating = Convert.ToDouble(filter.Term);
-
-            if (filter.Occurence == SearchFilterOccurence.MustNot)
-            {
-                query = query.Where(x => x.ApprovedTotalReviews > 0 && ((double)x.ApprovedRatingSum / (double)x.ApprovedTotalReviews) != rating);
-            }
-            else
-            {
-                query = query.Where(x => x.ApprovedTotalReviews > 0 && ((double)x.ApprovedRatingSum / (double)x.ApprovedTotalReviews) == rating);
             }
         }
 

@@ -193,18 +193,6 @@ public partial class CatalogSearchService : SearchServiceBase, ICatalogSearchSer
             }
         }
 
-        // Apply "rating" labels.
-        if (facets.TryGetValue("rating", out group))
-        {
-            var oneAndMoreStr = T("Search.Facet.1StarAndMore");
-            var xAndMoreStr = T("Search.Facet.XStarsAndMore");
-
-            foreach (var facet in group.Facets)
-            {
-                facet.Value.Label = (facet.Key == "1" ? oneAndMoreStr : xAndMoreStr).Value.FormatInvariant(facet.Value.Value);
-            }
-        }
-
         // Apply "numeric range" labels.
         var numericRanges = facets
             .Where(x => x.Value.TemplateHint == FacetTemplateHint.NumericRange)

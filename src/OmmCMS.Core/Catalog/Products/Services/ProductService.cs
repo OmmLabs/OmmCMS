@@ -145,39 +145,6 @@ public partial class ProductService : IProductService
         return map;
     }
 
-    public virtual async Task ApplyProductReviewTotalsAsync(IEnumerable<Product> products, CancellationToken cancelToken = default)
-    {
-        if (products.IsNullOrEmpty())
-        {
-            return;
-        }
-
-        var productIds = products.ToDistinctArray(x => x.Id);
-        var allStats = await _db.ProductReviews
-            .Where(x => productIds.Contains(x.ProductId))
-            .GroupBy(x => x.ProductId)
-            .Select(g => new
-            {
-                ProductId = g.Key,
-                ApprovedRatingSum = g.Where(x => x.IsApproved).Sum(x => (int?)x.Rating) ?? 0,
-                NotApprovedRatingSum = g.Where(x => !x.IsApproved).Sum(x => (int?)x.Rating) ?? 0,
-                ApprovedTotalReviews = g.Count(x => x.IsApproved),
-                NotApprovedTotalReviews = g.Count(x => !x.IsApproved)
-            })
-            .ToDictionaryAsync(x => x.ProductId, x => x, cancelToken);
-
-        foreach (var product in products)
-        {
-            if (allStats.TryGetValue(product.Id, out var stats))
-            {
-                product.ApprovedRatingSum = stats.ApprovedRatingSum;
-                product.NotApprovedRatingSum = stats.NotApprovedRatingSum;
-                product.ApprovedTotalReviews = stats.ApprovedTotalReviews;
-                product.NotApprovedTotalReviews = stats.NotApprovedTotalReviews;
-            }
-        }
-    }
-
     public virtual async Task<AdjustInventoryResult> AdjustInventoryAsync(OrderItem orderItem, bool decrease, int quantity)
     {
         Guard.NotNull(orderItem);

@@ -22,7 +22,6 @@ public class MessageTemplateNames
     public const string NewReturnCaseStoreOwner = "NewReturnCase.StoreOwnerNotification";
     public const string ReturnCaseStatusChangedCustomer = "ReturnCaseStatusChanged.CustomerNotification";
     public const string GiftCardCustomer = "GiftCard.Notification";
-    public const string ProductReviewStoreOwner = "Product.ProductReview";
     public const string QuantityBelowStoreOwner = "QuantityBelow.StoreOwnerNotification";
     public const string NewVatSubmittedStoreOwner = "NewVATSubmitted.StoreOwnerNotification";
     public const string SystemCampaign = "System.Campaign";

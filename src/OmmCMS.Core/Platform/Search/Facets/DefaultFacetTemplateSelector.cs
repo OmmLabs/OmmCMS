@@ -37,8 +37,6 @@ public class DefaultFacetTemplateSelector : IFacetTemplateSelector
                 return group.IsMultiSelect ? "MultiSelect" : "SingleSelect";
             case FacetGroupKind.Price:
                 return "Price";
-            case FacetGroupKind.Rating:
-                return "Rating";
             case FacetGroupKind.Unknown:
             case FacetGroupKind.Attribute:
             case FacetGroupKind.Variant:

@@ -18,7 +18,6 @@ namespace OmmCMS.Core.Catalog.Search.Modelling;
 		p	-   Price range (from~to || from(~) || ~to)
 		c	-	Categories
 		m	-	Manufacturers
-		r	-	Min Rating
 		a	-	Availability
 		n	-	New Arrivals
 		d	-	Delivery Time
@@ -102,7 +101,6 @@ public partial class CatalogSearchQueryFactory : SearchQueryFactoryBase, ICatalo
             ConvertPrice(query, origin);
             ConvertCategory(query, origin);
             ConvertManufacturer(query, origin);
-            ConvertRating(query, origin);
             ConvertNewArrivals(query, origin);
             ConvertDeliveryTime(query, origin);
         }
@@ -305,14 +303,6 @@ public partial class CatalogSearchQueryFactory : SearchQueryFactoryBase, ICatalo
                 labelKey = "Search.Facet.Price";
                 displayOrder = _searchSettings.PriceDisplayOrder;
                 break;
-            case FacetGroupKind.Rating:
-                if (_searchSettings.RatingDisabled)
-                    return;
-
-                fieldName = names.Rating;
-                labelKey = "Search.Facet.Rating";
-                displayOrder = _searchSettings.RatingDisplayOrder;
-                break;
             case FacetGroupKind.DeliveryTime:
                 if (_searchSettings.DeliveryTimeDisabled)
                     return;
@@ -497,35 +487,6 @@ public partial class CatalogSearchQueryFactory : SearchQueryFactoryBase, ICatalo
             => !value.HasValue || !double.IsFinite(value.Value) || value.Value < 0 || value.Value > (double)decimal.MaxValue
             ? null
             : value;
-    }
-
-    protected virtual void ConvertRating(CatalogSearchQuery query, string origin)
-    {
-        var alias = _catalogSearchQueryAliasMapper.GetCommonFacetAliasByGroupKind(FacetGroupKind.Rating, query.LanguageId ?? 0);
-        TryGetValueFor(alias ?? "r", out double? fromRate);
-
-        if (fromRate.HasValue && double.IsFinite(fromRate.Value) && fromRate.Value >= 0 && fromRate.Value <= 5)
-        {
-            query.WithRating(fromRate, null);
-        }
-        else
-        {
-            fromRate = null;
-        }
-
-        AddFacet(query, FacetGroupKind.Rating, false, FacetSorting.DisplayOrder, descriptor =>
-        {
-            descriptor.MinHitCount = 0;
-            descriptor.MaxChoicesCount = 5;
-
-            if (fromRate.HasValue)
-            {
-                descriptor.AddValue(new FacetValue(fromRate.Value, IndexTypeCode.Double)
-                {
-                    IsSelected = true
-                });
-            }
-        });
     }
 
     protected virtual void ConvertAvailability(CatalogSearchQuery query, string origin)

@@ -6,12 +6,6 @@
     "fullDescription": "@file",
     "sku": "FD-1001",
     "tags": [ "sustainable" ],
-    "reviews": [
-      { "customer": "anna", "rating": 5, "title": "Wonderful, fruity oil", "reviewText": "Mild and fruity, perfect for salads. The bottle is easy to pour and nothing drips.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-40d" },
-      { "customer": "markus", "rating": 5, "title": "Our standard oil now", "reviewText": "We have switched completely. Great taste even with just fresh bread.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-25d" },
-      { "customer": "sophie", "rating": 4, "title": "Very good, a little pricey", "reviewText": "Tastes great. I would only wish for a larger bottle with a better price per litre.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-12d" },
-      { "customer": "jonas", "rating": 5, "title": "Highly recommended", "reviewText": "You can taste the quality. Will order again.", "isApproved": true, "createdOnUtc": "@now-6d" }
-    ],
     "taxCategory": "food",
     "price": 12.90,
     "basePriceEnabled": true,
@@ -41,11 +35,6 @@
     "fullDescription": "@file",
     "sku": "FD-1002",
     "tags": [ "bestseller" ],
-    "reviews": [
-      { "customer": "laura", "rating": 5, "title": "Strong and aromatic", "reviewText": "Notes of cocoa and hazelnut, exactly as described. Perfect in the filter machine.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-30d" },
-      { "customer": "tim", "rating": 4, "title": "Good value in the 1 kg pack", "reviewText": "The large pack is clearly cheaper per kilogram. It just takes a little longer to arrive.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-14d" },
-      { "customer": "anna", "rating": 3, "title": "A bit too strong for me", "reviewText": "Good quality, but I prefer a milder coffee.", "isApproved": true, "createdOnUtc": "@now-3d" }
-    ],
     "taxCategory": "food",
     "price": 8.90,
     "basePriceEnabled": true,
@@ -171,9 +160,6 @@
     "shortDescription": "Oregano, thyme, rosemary and basil in a 100 g jar.",
     "fullDescription": "@file",
     "sku": "FD-1004",
-    "reviews": [
-      { "customer": "sophie", "rating": 3, "title": "Nice mix, small jar", "reviewText": "Tastes good on roast vegetables, but the jar is used up quickly.", "isApproved": true, "createdOnUtc": "@now-4d" }
-    ],
     "taxCategory": "food",
     "price": 4.90,
     "createdOnUtc": "@now-5d",
@@ -199,10 +185,6 @@
     "shortDescription": "Olive oil and two herb mixes in one gift box.",
     "fullDescription": "@file",
     "sku": "FD-1005",
-    "reviews": [
-      { "customer": "laura", "rating": 5, "title": "The perfect gift", "reviewText": "Beautifully packed and a lovely selection. My parents were delighted.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-9d" },
-      { "customer": "jonas", "rating": 5, "title": "Great value", "reviewText": "Cheaper than buying the items separately, and ready to give away.", "isApproved": true, "createdOnUtc": "@now-2d" }
-    ],
     "taxCategory": "food",
     "price": 17.03,
     "createdOnUtc": "@now-5d",
@@ -270,11 +252,6 @@
     "shortDescription": "Lightly sparkling lemonade with blood orange juice in a returnable 0.75 l bottle. The bottle deposit is added automatically.",
     "fullDescription": "@file",
     "sku": "FD-1008",
-    "reviews": [
-      { "customer": "laura", "rating": 5, "title": "Fresh and not too sweet", "reviewText": "A real blood orange taste. The deposit was added to the cart by itself, so there was nothing to forget.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-14d" },
-      { "customer": "tim", "rating": 4, "title": "Tasty, and the deposit is fair", "reviewText": "Good lemonade. I like that the deposit is shown before I order.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-8d" },
-      { "customer": "jonas", "rating": 3, "title": "Would like a larger bottle", "reviewText": "Tastes good, but 0.75 l is gone quickly when friends come over.", "isApproved": true, "createdOnUtc": "@now-3d" }
-    ],
     "taxCategory": "general",
     "price": 2.90,
     "basePriceEnabled": true,
@@ -303,7 +280,6 @@
     "shortDescription": "Fixed deposit per returnable bottle, refunded when the empty bottle is returned.",
     "fullDescription": "@file",
     "sku": "FD-1009",
-    "allowCustomerReviews": false,
     "taxCategory": "general",
     "price": 0.25,
     "quantityPerParentUnit": 1,

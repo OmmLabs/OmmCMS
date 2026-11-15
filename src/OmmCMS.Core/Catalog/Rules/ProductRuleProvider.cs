@@ -177,8 +177,6 @@ public partial class ProductRuleProvider : RuleProviderBase, IProductRuleProvide
     protected override async Task<IEnumerable<RuleDescriptor>> LoadDescriptorsAsync()
     {
         var language = _workContext.WorkingLanguage;
-        var oneStarStr = T("Search.Facet.1StarAndMore").Value;
-        var xStarsStr = T("Search.Facet.XStarsAndMore").Value;
 
         var stores = _storeContext.GetAllStores()
             .Select(x => new RuleValueSelectListOption { Value = x.Id.ToString(), Text = x.Name })
@@ -190,16 +188,6 @@ public partial class ProductRuleProvider : RuleProviderBase, IProductRuleProvide
 
         var productTypes = ((ProductType[])Enum.GetValues(typeof(ProductType)))
             .Select(x => new RuleValueSelectListOption { Value = ((int)x).ToString(), Text = _localizationService.GetLocalizedEnum(x) })
-            .ToArray();
-
-        var ratings = FacetUtility.GetRatings()
-            .Reverse()
-            .Skip(1)
-            .Select(x => new RuleValueSelectListOption
-            {
-                Value = ((double)x.Value).ToString(CultureInfo.InvariantCulture),
-                Text = (double)x.Value == 1 ? oneStarStr : xStarsStr.FormatInvariant(x.Value)
-            })
             .ToArray();
 
         var categoryTree = _catalogSettings.ShowProductsFromSubcategories
@@ -436,14 +424,6 @@ public partial class ProductRuleProvider : RuleProviderBase, IProductRuleProvide
                 Name = "CreatedOn",
                 DisplayName = T("Common.CreatedOn"),
                 RuleType = RuleType.DateTime
-            },
-            new SearchFilterDescriptor<double>((ctx, x) => ctx.Query.WithRating(x, null))
-            {
-                Name = "Rating",
-                DisplayName = T("Admin.Catalog.ProductReviews.Fields.Rating"),
-                RuleType = RuleType.Float,
-                Operators = [RuleOperator.GreaterThanOrEqualTo],
-                SelectList = new LocalRuleValueSelectList(ratings)
             },
             new SearchFilterDescriptor<bool>((ctx, x) => ctx.Query.HomePageProductsOnly(x))
             {

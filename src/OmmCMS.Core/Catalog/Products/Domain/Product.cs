@@ -258,31 +258,6 @@ public partial class Product : EntityWithDiscounts, IAuditable, ISoftDeletable, 
     [LocalizedProperty]
     public string MetaTitle { get; set; }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether customer reviews are allowed for this product.
-    /// </summary>
-    public bool AllowCustomerReviews { get; set; }
-
-    /// <summary>
-    /// Gets or sets the rating sum (approved reviews).
-    /// </summary>
-    public int ApprovedRatingSum { get; set; }
-
-    /// <summary>
-    /// Gets or sets the rating sum (not approved reviews).
-    /// </summary>
-    public int NotApprovedRatingSum { get; set; }
-
-    /// <summary>
-    /// Gets or sets the total rating votes (approved reviews).
-    /// </summary>
-    public int ApprovedTotalReviews { get; set; }
-
-    /// <summary>
-    /// Gets or sets the total rating votes (not approved reviews).
-    /// </summary>
-    public int NotApprovedTotalReviews { get; set; }
-
     /// <inheritdoc/>
     public bool SubjectToAcl { get; set; }
 
@@ -1051,17 +1026,6 @@ public partial class Product : EntityWithDiscounts, IAuditable, ISoftDeletable, 
     {
         get => LazyLoader?.Load(this, ref _productMediaFiles) ?? (_productMediaFiles ??= new HashSet<ProductMediaFile>());
         protected set => _productMediaFiles = value;
-    }
-
-    private ICollection<ProductReview> _productReviews;
-    /// <summary>
-    /// Gets or sets the product reviews.
-    /// </summary>
-    [IgnoreDataMember]
-    public ICollection<ProductReview> ProductReviews
-    {
-        get => LazyLoader?.Load(this, ref _productReviews) ?? (_productReviews ??= new HashSet<ProductReview>());
-        protected set => _productReviews = value;
     }
 
     private ICollection<ProductSpecificationAttribute> _productSpecificationAttributes;

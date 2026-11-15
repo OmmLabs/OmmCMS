@@ -57,9 +57,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
     [LocalizedDisplay("Admin.Configuration.Seo.SeName")]
     public string SeName { get; set; }
 
-    [LocalizedDisplay("*AllowCustomerReviews")]
-    public bool AllowCustomerReviews { get; set; }
-
     [LocalizedDisplay("*ProductTags")]
     public string[] ProductTagNames { get; set; }
 

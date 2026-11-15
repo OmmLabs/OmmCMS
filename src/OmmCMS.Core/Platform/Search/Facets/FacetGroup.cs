@@ -8,8 +8,7 @@ public enum FacetGroupKind
     Category,
     Brand,
     Price,
-    Rating,
-    DeliveryTime,
+    DeliveryTime = 4,
     Availability,
     NewArrivals,
     Attribute,
@@ -89,8 +88,6 @@ public class FacetGroup
                 return FacetGroupKind.Brand;
             case "price":
                 return FacetGroupKind.Price;
-            case "rating":
-                return FacetGroupKind.Rating;
             case "deliveryid":
                 return FacetGroupKind.DeliveryTime;
             case "available":

@@ -67,7 +67,6 @@
       "name": "Admin.Catalog.Products",
       "zones": [
         "productbox_add_info",
-        "productreviews_page_inside_review",
         "productsbytag_top",
         "productsbytag_bottom",
         "productdetails_add_info",
@@ -172,9 +171,6 @@
         "search_results_after",
         "active_filters_before",
         "active_filters_after",
-        "productreviews_page_top",
-        "productreviews_page_inside_review",
-        "productreviews_page_bottom",
         "profile_page_info_userdetails",
         "profile_page_info_userstats",
         "notifications",

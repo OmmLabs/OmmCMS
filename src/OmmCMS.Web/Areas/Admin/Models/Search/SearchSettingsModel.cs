@@ -49,7 +49,6 @@ public partial class SearchSettingsModel : TabbableModel
     public CommonFacetSettingsModel CategoryFacet { get; set; } = new();
     public CommonFacetSettingsModel BrandFacet { get; set; } = new();
     public CommonFacetSettingsModel PriceFacet { get; set; } = new();
-    public CommonFacetSettingsModel RatingFacet { get; set; } = new();
     public CommonFacetSettingsModel DeliveryTimeFacet { get; set; } = new();
     public CommonFacetSettingsModel AvailabilityFacet { get; set; } = new();
     public CommonFacetSettingsModel NewArrivalsFacet { get; set; } = new();

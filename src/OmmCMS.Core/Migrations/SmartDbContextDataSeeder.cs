@@ -223,17 +223,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Specifies whether customers can change their own email address in the product recommendation form. Otherwise, the address from their customer account is used and cannot be edited. Enable this option also if guests are allowed to recommend products by email.",
             "Legt fest, ob Kunden ihre eigene E-Mail-Adresse im Weiterempfehlungsformular ändern dürfen. Andernfalls wird die Adresse aus dem Kundenkonto verwendet und kann nicht bearbeitet werden. Aktivieren Sie diese Option auch, wenn Gäste Produkte per E-Mail weiterempfehlen dürfen.");
 
-        builder.AddOrUpdate(prefix + "NotifyStoreOwnerAboutNewProductReviews",
-            "Notify about new reviews by email",
-            "Über neue Bewertungen per E-Mail informieren",
-            "Specifies whether the store owner is notified by email when a new product review is submitted.",
-            "Legt fest, ob der Shop-Betreiber bei einer neuen Produktbewertung per E-Mail benachrichtigt wird.");
-
-        builder.AddOrUpdate(prefix + "ReviewsDisplay", "Show reviews…", "Bewertungen anzeigen…");
-        builder.AddOrUpdate(prefix + "ShowProductReviewsInProductLists", "In product lists", "In Produktlisten");
-        builder.AddOrUpdate(prefix + "ShowProductReviewsInProductDetail", "On the product detail page", "Auf der Produktdetailseite");
-
-        builder.AddOrUpdate(prefix + "ProductReviewsGroup", "Product reviews", "Produktbewertungen");
         builder.AddOrUpdate(prefix + "ProductContactGroup", "Product inquiries & recommendations", "Produktanfragen & Weiterempfehlungen");
         builder.AddOrUpdate(prefix + "EmailAFriendEnabled",
             "Enable product recommendations by email",
@@ -597,12 +586,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
         builder.AddOrUpdate(prefix + "Groups.Shipping.Info",
             "The quantity unit specifies how product quantities are labeled in the shop, for example as pieces, packs or pairs. It appears alongside the quantity when ordering and in the cart. Weight and dimensions can affect shipping costs, depending on the shipping provider, and are displayed on the product page when the corresponding catalog settings are enabled.",
             "Die Verpackungseinheit legt fest, wie Produktmengen im Shop bezeichnet werden, zum Beispiel als Stück, Packung oder Paar. Sie erscheint bei der Mengenauswahl und im Warenkorb neben der Anzahl. Gewicht und Maße können je nach Versandanbieter die Versandkosten beeinflussen und werden bei aktivierten Katalogeinstellungen auf der Produktseite angezeigt.");
-
-        builder.AddOrUpdate(prefix + "Fields.AllowCustomerReviews",
-            "Allow customer reviews",
-            "Kundenbewertungen erlauben",
-            "Allows customers to review this product. To display reviews on the product page, enable 'On the product detail page' under 'Show reviews…' in the catalog settings.",
-            "Legt fest, ob Kunden Produktbewertungen vornehmen dürfen. Damit Bewertungen auf der Produktseite angezeigt werden, muss in den Katalogeinstellungen unter „Bewertungen anzeigen…“ die Option „Auf der Produktdetailseite“ aktiviert sein.");
 
         builder.AddOrUpdate(prefix + "Fields.Condition",
             "Item condition",

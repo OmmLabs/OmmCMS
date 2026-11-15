@@ -3,10 +3,6 @@
     "name": "Geschenkgutschein",
     "shortDescription": "Digitaler Geschenkgutschein, Versand per E-Mail. Wählen Sie 25, 50 oder 100 €.",
     "fullDescription": "@file",
-    "reviews": [
-      { "customer": "anna", "rating": 5, "title": "Rettung in letzter Minute", "reviewText": "Kam innerhalb von Minuten per E-Mail an, mit meiner persönlichen Nachricht. Perfekt für einen fast vergessenen Geburtstag.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-29d" },
-      { "customer": "tim", "rating": 5, "title": "Einfach und schnell", "reviewText": "Leicht zu bestellen und leicht einzulösen.", "isApproved": true, "createdOnUtc": "@now-10d" }
-    ],
     "pictures": [
       { "file": "product/gc-1001-25-de.jpg", "name": "geschenkgutschein-25", "displayOrder": 1 },
       { "file": "product/gc-1001-50-de.jpg", "name": "geschenkgutschein-50", "displayOrder": 2 },

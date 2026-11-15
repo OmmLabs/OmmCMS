@@ -76,14 +76,12 @@ public class SearchSettings : ISettings
 
     public bool BrandDisabled { get; set; }
     public bool PriceDisabled { get; set; }
-    public bool RatingDisabled { get; set; }
     public bool DeliveryTimeDisabled { get; set; }
     public bool AvailabilityDisabled { get; set; }
     public bool NewArrivalsDisabled { get; set; }
 
     public int BrandDisplayOrder { get; set; } = 1;
     public int PriceDisplayOrder { get; set; } = 2;
-    public int RatingDisplayOrder { get; set; } = 3;
     public int DeliveryTimeDisplayOrder { get; set; } = 4;
     public int AvailabilityDisplayOrder { get; set; } = 5;
     public int NewArrivalsDisplayOrder { get; set; } = 6;

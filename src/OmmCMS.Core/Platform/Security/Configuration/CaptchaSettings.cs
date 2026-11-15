@@ -39,7 +39,6 @@ public class CaptchaSettings : ISettings
     public bool ShowOnBlogCommentPage => IsActiveTarget(Targets.BlogComment);
     public bool ShowOnNewsCommentPage => IsActiveTarget(Targets.NewsComment);
     public bool ShowOnForumPage => IsActiveTarget(Targets.Forum);
-    public bool ShowOnProductReviewPage => IsActiveTarget(Targets.ProductReview);
 
     public bool IsActiveTarget(string target)
         => Enabled && (target.IsEmpty() || _showOn.Contains(target, StringComparer.OrdinalIgnoreCase));
@@ -60,7 +59,6 @@ public class CaptchaSettings : ISettings
         public const string BlogComment = "BlogComment";
         public const string NewsComment = "NewsComment";
         public const string Forum = "Forum";
-        public const string ProductReview = "ProductReview";
         public const string Withdrawal = "Withdrawal";
 
         public static readonly IReadOnlyList<string> All =
@@ -75,7 +73,6 @@ public class CaptchaSettings : ISettings
             BlogComment,
             NewsComment,
             Forum,
-            ProductReview,
             Withdrawal
         ];
 
@@ -93,7 +90,6 @@ public class CaptchaSettings : ISettings
                 [nameof(ShowOnBlogCommentPage)] = BlogComment,
                 [nameof(ShowOnNewsCommentPage)] = NewsComment,
                 [nameof(ShowOnForumPage)] = Forum,
-                [nameof(ShowOnProductReviewPage)] = ProductReview
             };
         }
 
@@ -112,7 +108,6 @@ public class CaptchaSettings : ISettings
                 [BlogComment] = ResPrefix + "BlogComment",
                 [NewsComment] = ResPrefix + "NewsComment",
                 [Forum] = ResPrefix + "Forum",
-                [ProductReview] = ResPrefix + "ProductReview",
                 [Withdrawal] = ResPrefix + "Withdrawal"
             };
         }

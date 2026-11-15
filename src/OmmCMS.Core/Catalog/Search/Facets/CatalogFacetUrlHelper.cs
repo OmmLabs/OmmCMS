@@ -13,7 +13,6 @@ public partial class CatalogFacetUrlHelper : FacetUrlHelperBase
         { FacetGroupKind.Brand, "m" },
         { FacetGroupKind.Category, "c" },
         { FacetGroupKind.Price, "p" },
-        { FacetGroupKind.Rating, "r" },
         { FacetGroupKind.DeliveryTime, "d" },
         { FacetGroupKind.Availability, "a" },
         { FacetGroupKind.NewArrivals, "n" }
@@ -47,7 +46,6 @@ public partial class CatalogFacetUrlHelper : FacetUrlHelperBase
             case FacetGroupKind.Category:
             case FacetGroupKind.Brand:
             case FacetGroupKind.Price:
-            case FacetGroupKind.Rating:
             case FacetGroupKind.DeliveryTime:
             case FacetGroupKind.Availability:
             case FacetGroupKind.NewArrivals:
@@ -94,7 +92,6 @@ public partial class CatalogFacetUrlHelper : FacetUrlHelperBase
             case FacetGroupKind.Category:
             case FacetGroupKind.Brand:
             case FacetGroupKind.Price:
-            case FacetGroupKind.Rating:
             case FacetGroupKind.DeliveryTime:
             case FacetGroupKind.Availability:
             case FacetGroupKind.NewArrivals:

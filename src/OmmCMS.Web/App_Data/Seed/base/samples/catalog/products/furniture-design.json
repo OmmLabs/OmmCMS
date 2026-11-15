@@ -6,11 +6,6 @@
     "fullDescription": "@file",
     "sku": "FN-1001",
     "tags": [ "cosy" ],
-    "reviews": [
-      { "customer": "laura", "rating": 5, "title": "Our favourite spot", "reviewText": "Very comfortable for reading. We chose linen with the oak frame and it looks great.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-55d" },
-      { "customer": "markus", "rating": 4, "title": "Beautiful, but takes a while", "reviewText": "Excellent quality. Delivery took the full seven working days.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-31d" },
-      { "customer": "anna", "rating": 5, "title": "Footstool is a must", "reviewText": "Ordered it straight away with the matching footstool. Perfect combination.", "isApproved": true, "createdOnUtc": "@now-13d" }
-    ],
     "taxCategory": "general",
     "price": 590.00,
     "weight": 33.0,
@@ -107,10 +102,6 @@
     "sku": "FN-1002",
     "manufacturerPartNumber": "LV-ARC-150",
     "durabilityGuaranteeDurationYears": 5,
-    "reviews": [
-      { "customer": "jonas", "rating": 5, "title": "Lights up the whole sofa corner", "reviewText": "The arc reaches far over the sofa. The black version looks very elegant.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-24d" },
-      { "customer": "sophie", "rating": 3, "title": "Nice, but brass took long", "reviewText": "The brass finish is beautiful, but I had to wait almost two weeks for it.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-6d" }
-    ],
     "taxCategory": "general",
     "price": 149.00,
     "weight": 13.2,
@@ -206,10 +197,6 @@
     "shortDescription": "Open shelf in solid oak with four compartments.",
     "fullDescription": "@file",
     "sku": "FN-1005",
-    "reviews": [
-      { "customer": "tim", "rating": 4, "title": "Sturdy shelf", "reviewText": "Solid wood, easy to assemble in about twenty minutes.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-38d" },
-      { "customer": "laura", "rating": 5, "title": "Matches perfectly", "reviewText": "Goes perfectly with the side table from the same collection.", "isApproved": true, "createdOnUtc": "@now-15d" }
-    ],
     "taxCategory": "general",
     "price": 249.00,
     "hideQuantityControl": true,

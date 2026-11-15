@@ -250,9 +250,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             case Campaign x:
                 modelPart = await CreateModelPartAsync(x, messageContext);
                 break;
-            case ProductReview x:
-                modelPart = await CreateModelPartAsync(x, messageContext);
-                break;
             case IEnumerable<GenericAttribute> x:
                 modelPart = await CreateModelPartAsync(x, messageContext);
                 break;
@@ -720,23 +717,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             { "Subject", part.Subject.NullEmpty() },
             { "Body", WebHelper.MakeAllUrlsAbsolute(body, protocol, host).NullEmpty() },
             { "CreatedOn", _helper.ToUserDate(part.CreatedOnUtc, messageContext) }
-        };
-
-        await _helper.PublishModelPartCreatedEventAsync(part, m);
-
-        return m;
-    }
-
-    protected virtual async Task<object> CreateModelPartAsync(ProductReview part, MessageContext messageContext)
-    {
-        Guard.NotNull(messageContext);
-        Guard.NotNull(part);
-
-        var m = new Dictionary<string, object>
-        {
-            { "Title", part.Title.NullEmpty() },
-            { "Text", HtmlUtility.StripTags(part.ReviewText).NullEmpty() },
-            { "Rating", part.Rating }
         };
 
         await _helper.PublishModelPartCreatedEventAsync(part, m);

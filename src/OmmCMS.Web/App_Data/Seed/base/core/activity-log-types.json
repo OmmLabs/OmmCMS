@@ -261,10 +261,6 @@
     "name": "Public store. Logout"
   },
   {
-    "systemKeyword": "PublicStore.AddProductReview",
-    "name": "Public store. Add product review"
-  },
-  {
     "systemKeyword": "PublicStore.AddNewsComment",
     "name": "Public store. Add news comment"
   },

@@ -110,16 +110,4 @@ public static partial class FacetUtility
 
         return result;
     }
-
-    public static IEnumerable<FacetValue> GetRatings()
-    {
-        var count = 0;
-        for (double rate = 1.0; rate <= 5.0; ++rate)
-        {
-            yield return new FacetValue(rate, IndexTypeCode.Double)
-            {
-                DisplayOrder = ++count
-            };
-        }
-    }
 }

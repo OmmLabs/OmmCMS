@@ -92,24 +92,6 @@ public static partial class CatalogMessageFactoryExtensions
     }
 
     /// <summary>
-    /// Sends a product review notification message to a store owner.
-    /// </summary>
-    /// <param name="factory">Message factory.</param>
-    /// <param name="productReview">Product review</param>
-    /// <param name="languageId">Language identifier.</param>
-    /// <returns>Create message result.</returns>
-    public static Task<CreateMessageResult> SendProductReviewNotificationMessageAsync(this IMessageFactory factory, ProductReview productReview, int languageId = 0)
-    {
-        Guard.NotNull(productReview);
-
-        return factory.CreateMessageAsync(
-            MessageContext.Create(MessageTemplateNames.ProductReviewStoreOwner, languageId, customer: productReview.Customer),
-            true,
-            productReview,
-            productReview.Product);
-    }
-
-    /// <summary>
     /// Sends a "quantity below" notification to a store owner.
     /// </summary>
     /// <param name="factory">Message factory.</param>

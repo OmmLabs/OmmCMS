@@ -33,11 +33,6 @@ public partial interface IProductService
     Task<Multimap<int, ProductTag>> GetProductTagsByProductIdsAsync(int[] productIds, bool includeHidden = false);
 
     /// <summary>
-    /// Applies the product review totals to <paramref name="products"/>. The caller is responsible for database commit.
-    /// </summary>
-    Task ApplyProductReviewTotalsAsync(IEnumerable<Product> products, CancellationToken cancelToken = default);
-
-    /// <summary>
     /// Adjusts product inventory. The caller is responsible for database commit.
     /// </summary>
     /// <param name="orderItem">Order item.</param>

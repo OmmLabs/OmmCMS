@@ -57,7 +57,6 @@ public static class KnownActivityLogTypes
     public const string PublicStoreAddToWishlist = "PublicStore.AddToWishlist";
     public const string PublicStoreLogin = "PublicStore.Login";
     public const string PublicStoreLogout = "PublicStore.Logout";
-    public const string PublicStoreAddProductReview = "PublicStore.AddProductReview";
     public const string PublicStoreAddNewsComment = "PublicStore.AddNewsComment";
     public const string PublicStoreAddBlogComment = "PublicStore.AddBlogComment";
 }

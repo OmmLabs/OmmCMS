@@ -140,41 +140,6 @@ public class CatalogSettings : ISettings
     public bool ShowDescriptionInSubPages { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to display reviews in product lists
-    /// </summary>
-    public bool ShowProductReviewsInProductLists { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to display reviews in product detail
-    /// </summary>
-    public bool ShowProductReviewsInProductDetail { get; set; } = true;
-
-    /// <summary>
-    /// Gets or sets a value whether to display the badge for verified purchases.
-    /// </summary>
-    public bool ShowVerfiedPurchaseBadge { get; set; } = true;
-
-    /// <summary>
-    /// Gets or sets a value indicating product reviews must be approved
-    /// </summary>
-    public bool ProductReviewsMustBeApproved { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating the default rating value of the product reviews
-    /// </summary>
-    public int DefaultProductRatingValue { get; set; } = 5;
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to allow anonymous users write product reviews.
-    /// </summary>
-    public bool AllowAnonymousUsersToReviewProduct { get; set; } = false;
-
-    /// <summary>
-    /// Gets or sets a value indicating whether notification of a store owner about new product reviews is enabled
-    /// </summary>
-    public bool NotifyStoreOwnerAboutNewProductReviews { get; set; } = true;
-
-    /// <summary>
     /// Gets or sets a value indicating whether product 'Email a friend' feature is enabled
     /// </summary>
     public bool EmailAFriendEnabled { get; set; } = true;

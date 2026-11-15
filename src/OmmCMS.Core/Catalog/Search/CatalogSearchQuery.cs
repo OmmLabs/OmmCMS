@@ -33,7 +33,6 @@ public sealed class KnownFilterNames : IHideObjectMembers
     public readonly string ParentId = "parentid";
     public readonly string Condition = "condition";
     public readonly string StockQuantity = "stockquantity";
-    public readonly string Rating = "rating";
     public readonly string CreatedOn = "createdon";
     public readonly string Price = "price";
     public readonly string IsPublished = "published";
@@ -572,44 +571,6 @@ public partial class CatalogSearchQuery : SearchQuery<CatalogSearchQuery>, IClon
                 toUtc,
                 includeFrom ?? fromUtc.HasValue,
                 includeTo ?? toUtc.HasValue);
-
-            return WithFilter(filter.Mandatory().ExactMatch().NotAnalyzed());
-        }
-    }
-
-    public CatalogSearchQuery WithRating(
-        double? fromRate,
-        double? toRate,
-        bool? includeFrom = null,
-        bool? includeTo = null)
-    {
-        if (fromRate == null && toRate == null)
-        {
-            return this;
-        }
-        if (fromRate.HasValue)
-        {
-            Guard.InRange(fromRate.Value, 0.0, 5.0, nameof(fromRate.Value));
-        }
-        if (toRate.HasValue)
-        {
-            Guard.InRange(toRate.Value, 0.0, 5.0, nameof(toRate.Value));
-        }
-
-        if (fromRate.HasValue && toRate.HasValue && fromRate == toRate)
-        {
-            var forbidden = includeFrom.HasValue && includeTo.HasValue && !includeFrom.Value && !includeTo.Value;
-
-            return WithFilter(SearchFilter.ByField(KnownFilters.Rating, fromRate.Value).Mandatory(!forbidden).ExactMatch().NotAnalyzed());
-        }
-        else
-        {
-            var filter = SearchFilter.ByRange(
-                KnownFilters.Rating,
-                fromRate,
-                toRate,
-                includeFrom ?? fromRate.HasValue,
-                includeTo ?? toRate.HasValue);
 
             return WithFilter(filter.Mandatory().ExactMatch().NotAnalyzed());
         }

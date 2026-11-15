@@ -19,7 +19,6 @@ public partial class SmartDbContext
 
     public DbSet<ProductCategory> ProductCategories { get; set; }
     public DbSet<ProductManufacturer> ProductManufacturers { get; set; }
-    public DbSet<ProductReview> ProductReviews { get; set; }
 
     public DbSet<ProductBundleItem> ProductBundleItem { get; set; }
     public DbSet<ProductBundleItemAttributeFilter> ProductBundleItemAttributeFilter { get; set; }

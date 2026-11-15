@@ -14,6 +14,7 @@ using OmmCMS.Core.Catalog.Search;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Search;
+using OmmCMS.Core.Search.Facets;
 using OmmCMS.Core.Security;
 using OmmCMS.Core.Stores;
 
@@ -715,31 +716,10 @@ public class LinqCatalogSearchServiceTests : ServiceTestBase
     }
 
     [Test]
-    public async Task LinqSearch_filter_with_rating()
+    public void Catalog_rating_facet_is_not_registered()
     {
-        var products = new List<Product>
-        {
-            new SearchProduct(1),
-            new SearchProduct(2) { ApprovedRatingSum = 14, ApprovedTotalReviews = 3 },  // 4.66
-            new SearchProduct(3) { ApprovedRatingSum = 9, ApprovedTotalReviews = 3 },   // 3.00
-            new SearchProduct(4) { ApprovedRatingSum = 17, ApprovedTotalReviews = 4 },  // 4.25
-            new SearchProduct(5) { ApprovedRatingSum = 20, ApprovedTotalReviews = 10 }  // 2.00
-        };
-
-        var result = await SearchAsync(new CatalogSearchQuery().WithRating(3.0, null), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(3));
-
-        result = await SearchAsync(new CatalogSearchQuery().WithRating(4.0, 5.0), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(2));
-
-        result = await SearchAsync(new CatalogSearchQuery().WithRating(3.0, 3.0), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(1));
-
-        result = await SearchAsync(new CatalogSearchQuery().WithRating(4.0, 4.0), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(0));
-
-        result = await SearchAsync(new CatalogSearchQuery().WithRating(2.0, 2.0, false, false), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(3));
+        Assert.That(FacetGroup.GetKindByKey("Catalog", "rating"), Is.EqualTo(FacetGroupKind.Unknown));
+        Assert.That(FacetGroup.GetKindByKey("Catalog", "price"), Is.EqualTo(FacetGroupKind.Price));
     }
 
     [Test]

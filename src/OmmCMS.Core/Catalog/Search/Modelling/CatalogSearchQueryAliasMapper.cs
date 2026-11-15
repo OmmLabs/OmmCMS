@@ -413,7 +413,6 @@ public partial class CatalogSearchQueryAliasMapper : ICatalogSearchQueryAliasMap
                 FacetGroupKind.Category,
                 FacetGroupKind.Brand,
                 FacetGroupKind.Price,
-                FacetGroupKind.Rating,
                 FacetGroupKind.DeliveryTime,
                 FacetGroupKind.Availability,
                 FacetGroupKind.NewArrivals

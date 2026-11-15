@@ -5,10 +5,6 @@
     "shortDescription": "Digital gift card, sent by email. Choose 25, 50 or 100.",
     "fullDescription": "@file",
     "sku": "GC-1001",
-    "reviews": [
-      { "customer": "anna", "rating": 5, "title": "Last-minute rescue", "reviewText": "Arrived by email within minutes, with my personal message. Perfect for a birthday I almost forgot.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-29d" },
-      { "customer": "tim", "rating": 5, "title": "Simple and quick", "reviewText": "Easy to order and easy to redeem.", "isApproved": true, "createdOnUtc": "@now-10d" }
-    ],
     "isGiftCard": true,
     "giftCardType": "Virtual",
     "isEsd": true,

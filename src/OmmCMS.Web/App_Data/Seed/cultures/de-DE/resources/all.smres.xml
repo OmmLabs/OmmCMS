@@ -618,9 +618,6 @@
 	<LocaleResource Name="ActivityLog.PublicStore.AddNewsComment">
 		<Value>News-Kommentar wurde hinzugefügt</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.PublicStore.AddProductReview">
-		<Value>Produktrezension wurde hinzugefügt ('{0}')</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.PublicStore.AddToCompareList">
 		<Value>Produkt zur Vergleichsliste hinzugefügt ('{0}')</Value>
 	</LocaleResource>
@@ -1956,111 +1953,6 @@
 	<LocaleResource Name="Admin.Catalog.Manufacturers.Updated">
 		<Value>Der Hersteller wurde erfolgreich bearbeitet</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews">
-		<Value>Produkt Rezensionen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.ApproveSelected">
-		<Value>Ausgewählte genehmigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Deleted">
-		<Value>Sie Produktbewertung wurde erfolgreich gelöscht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.DisapproveSelected">
-		<Value>Ausgewählte ablehnen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.EditProductReviewDetails">
-		<Value>Produktbewertung bearbeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.CreatedOn.Hint">
-		<Value>Erstellt am</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.Customer">
-		<Value>Kunde</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.Customer.Hint">
-		<Value>Kunde, der die Bewertung erstellt hat</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.IPAddress">
-		<Value>IP-Adresse</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.IPAddress.Hint">
-		<Value>IP-Adresse des Kunden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.IsApproved">
-		<Value>Ist genehmigt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.IsApproved.Hint">
-		<Value>Bewertung genehmigt (wird dadurch im Shop für alle Besucher sichtbar)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.IsVerfifiedPurchase">
-		<Value>Ist verifiziert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.IsVerfifiedPurchase.Hint">
-		<Value>Legt fest, ob diese Produktbewertung von einem Kunden verfasst wurde, der das Produkt in diesem Shop gekauft hat.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.Product">
-		<Value>Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.Product.Hint">
-		<Value>Der Name des bewerteten Produkts.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.Rating">
-		<Value>Bewertung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.Rating.Hint">
-		<Value>Die Bewertung des Kunden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.ReviewText">
-		<Value>Text</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.ReviewText.Hint">
-		<Value>Text der Bewertung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.Title">
-		<Value>Titel</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.Title.Hint">
-		<Value>Titel der Produktbewertung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.List.CreatedOnFrom">
-		<Value>Erstellungsdatum ab</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.List.CreatedOnFrom.Hint">
-		<Value>Suche beginnen bei Erstellungsdatum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.List.CreatedOnTo">
-		<Value>Erstellungsdatum bis</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.List.CreatedOnTo.Hint">
-		<Value>Suchen bis Erstellungsdatum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.List.ProductName">
-		<Value>Produktname</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.List.ProductName.Hint">
-		<Value>Liste nach dem Produktnamen filtern.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.List.Rating">
-		<Value>Bewertung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.List.Rating.Hint">
-		<Value>Liste nach Bewertung filtern.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.NumberApprovedReviews">
-		<Value>Es wurden {0} Produktrezensionen genehmigt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.NumberDisapprovedReviews">
-		<Value>Es wurden {0} Produktrezensionen abgelehnt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.NumberVerfifiedReviews">
-		<Value>Es wurden {0} Produktrezensionen verifiziert.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Updated">
-		<Value>Produktbewertung wurde erfolgreich aktualisiert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.VerifySelected">
-		<Value>Ausgewählte verfizieren</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products">
 		<Value>Produkte</Value>
 	</LocaleResource>
@@ -2291,23 +2183,11 @@
 	<LocaleResource Name="Admin.Catalog.Products.Fields.AdminComment.Hint">
 		<Value>Admin Kommentar. Für interne Zwecke.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.AllowCustomerReviews">
-		<Value>Kundenbewertungen erlauben</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.AllowCustomerReviews.Hint">
-		<Value>Legt fest, ob Kunden Produktbewertungen vornehmen dürfen.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.AllowedQuantities">
 		<Value>Benutzerdefinierte Mengenliste</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.AllowedQuantities.Hint">
 		<Value>Eine kommagetrennte Liste mit erlaubten Bestellmengen für dieses Produkt. Kunden wählen i.d.F. eine Bestellmenge aus einem Dropdown-Menü aus, anstatt eine freie Eingabe zu tätigen. Wenn dieses Feld befüllt ist, werden Min/Max/Schritt außer Kraft gesetzt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.ApprovedRatingSum">
-		<Value>Summe genehmigter Bewertungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.ApprovedTotalReviews">
-		<Value>Summe genehmigter Rezensionen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.AssociatedToProductName">
 		<Value>Verknüpftes Produkt</Value>
@@ -2677,12 +2557,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.NewVersionDownloadId.Hint">
 		<Value>Laden Sie hier eine neue Version der Download-Datei hoch.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.NotApprovedRatingSum">
-		<Value>Summe nicht genehmigter Bewertungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.NotApprovedTotalReviews">
-		<Value>Summe nicht genehmigter Rezensionen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.NotifyAdminForQuantityBelow">
 		<Value>Benachrichtigt den Administrator, wenn die Mindestmenge unterschritten wird.</Value>
@@ -5169,12 +5043,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Catalog.AllowAnonymousUsersToEmailAFriend.Hint">
 		<Value>Legt fest, ob Gäste E-Mails an Freunde versenden dürfen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Catalog.AllowAnonymousUsersToReviewProduct">
-		<Value>Gäste dürfen Bewertungen abgeben</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Catalog.AllowAnonymousUsersToReviewProduct.Hint">
-		<Value>Legt fest, ob Gäste Produktbewertungen verfassen dürfen.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Catalog.AllowDifferingEmailAddressForEmailAFriend">
 		<Value>Zulassen einer anderen E-Mail-Adresse für die Weiterleitung an einen Freund</Value>
 	</LocaleResource>
@@ -5391,12 +5259,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Catalog.MiscSettings">
 		<Value>Allgemein</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Catalog.NotifyStoreOwnerAboutNewProductReviews">
-		<Value>Admin über neue Bewertungen informieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Catalog.NotifyStoreOwnerAboutNewProductReviews.Hint">
-		<Value>Administrator über neue Produktbewertungen informieren.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Catalog.NumberOfBestsellersOnHomepage">
 		<Value>Anzahl der angezeigten Bestseller</Value>
 	</LocaleResource>
@@ -5414,12 +5276,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductListSettings">
 		<Value>Produktlisten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductReviewsMustBeApproved">
-		<Value>Produktbewertungen müssen genehmigt werden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductReviewsMustBeApproved.Hint">
-		<Value>Produktbewertungen müssen vor der Veröffentlichung genehmigt werden</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductsAlsoPurchasedEnabled">
 		<Value>"Auch gekaufte Produkte" aktivieren</Value>
@@ -5637,18 +5493,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowProductOptionsInLists.Hint">
 		<Value>Legt fest, ob Variantnamen in Produktlisten angezeigt werden sollen</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowProductReviewsInProductDetail">
-		<Value>Zeige Produktbewertungen in der Produktdetailansicht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowProductReviewsInProductDetail.Hint">
-		<Value>Legt fest, ob Produktbewertungen in der Produktdetailansicht angezeigt werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowProductReviewsInProductLists">
-		<Value>Zeige Produktbewertungen in Produktlisten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowProductReviewsInProductLists.Hint">
-		<Value>Legt fest, ob Produktbewertungen in Produktlisten angezeigt werden.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowProductsFromSubcategories">
 		<Value>Produkte von Unterkategorien einschließen</Value>
 	</LocaleResource>
@@ -5675,12 +5519,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowSubCategoriesInSubPages.Hint">
 		<Value>Unterseite: Listenindex größer 1 oder mind. ein aktiver Filter.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowVerfiedPurchaseBadge">
-		<Value>Zeige Badge für verifizierte Käufe</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowVerfiedPurchaseBadge.Hint">
-		<Value>Zeigt bei Produktrezensionen einen Badge an, der anzeigt, ob der Verfasser ein verifizierter Käufer ist.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowWeight">
 		<Value>Gewicht anzeigen</Value>
@@ -6534,9 +6372,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnTargets.Option.ProductInquiry">
 		<Value>Produktanfrage</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnTargets.Option.ProductReview">
-		<Value>Produkt-Bewertung</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnTargets.Option.Registration">
 		<Value>Registrierung</Value>
@@ -18183,9 +18018,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="PageTitle.ProductEmailAFriend">
 		<Value>Weitersagen</Value>
 	</LocaleResource>
-	<LocaleResource Name="PageTitle.ProductReviews">
-		<Value>Produktbewertungen</Value>
-	</LocaleResource>
 	<LocaleResource Name="PageTitle.ProductsByTag">
 		<Value>Produkte markiert mit '{0}'</Value>
 	</LocaleResource>
@@ -19237,75 +19069,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Reviews">
 		<Value>Bewertungen</Value>
 	</LocaleResource>
-	<LocaleResource Name="Reviews.Empty">
-		<Value>Es liegen keine Bewertungen vor</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.ExistingReviews">
-		<Value>Vorliegende Bewertungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Fields.Rating">
-		<Value>Ihre Bewertung?</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Fields.Rating.Bad">
-		<Value>schlecht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Fields.Rating.Excellent">
-		<Value>sehr gut</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Fields.ReviewText">
-		<Value>Ihre Meinung zum Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Fields.Title">
-		<Value>Titel Ihrer Bewertung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.From">
-		<Value>Von</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.NotFound">
-		<Value>Die Produktbewertung {0} wurde nicht gefunden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.OnlyRegisteredUsersCanWriteReviews">
-		<Value>Nur registrierte Benutzer können eine Bewertung verfassen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Overview.AddNew">
-		<Value>Bewertung schreiben</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Overview.First">
-		<Value>Geben Sie die erste Bewertung ab</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Overview.NoReviews">
-		<Value>Zu diesem Produkt liegen noch keine Bewertungen vor.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Overview.ReadAll">
-		<Value>Alle Bewertungen lesen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Overview.Review">
-		<Value>Bewertung: {0} von 5 Sternen. {1} Bewertung.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Overview.Reviews">
-		<Value>Bewertung: {0} von 5 Sternen. {1} Bewertungen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.ProductReviewsFor">
-		<Value>Produktbewertungen für</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.SeeAfterApproving">
-		<Value>Sie können Ihre Bewertung sehen, sobald sie freigegeben wurde.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.SubmitButton">
-		<Value>Bewertung absenden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.SuccessfullyAdded">
-		<Value>Produktbewertung wurde erfolgreich übermittelt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Unverified">
-		<Value>Nicht verifiziert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Verified">
-		<Value>Verifizierter Kauf</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Write">
-		<Value>Schreiben Sie Ihre eigene Bewertung</Value>
-	</LocaleResource>
 	<LocaleResource Name="RewardPoints.CurrentBalance">
 		<Value>Sie haben aktuell {0} Bonuspunkte ({1}).</Value>
 	</LocaleResource>
@@ -19369,9 +19132,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Search.EnterSearchTerms">
 		<Value>Suchbegriffe eingeben</Value>
 	</LocaleResource>
-	<LocaleResource Name="Search.Facet.1StarAndMore">
-		<Value>1 Stern &amp; mehr</Value>
-	</LocaleResource>
 	<LocaleResource Name="Search.Facet.Availability">
 		<Value>Verfügbarkeit</Value>
 	</LocaleResource>
@@ -19426,9 +19186,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Search.Facet.RangeMin">
 		<Value>ab {0}</Value>
 	</LocaleResource>
-	<LocaleResource Name="Search.Facet.Rating">
-		<Value>Bewertung</Value>
-	</LocaleResource>
 	<LocaleResource Name="Search.Facet.RemoveAllFilters">
 		<Value>Alle Filter aufheben</Value>
 	</LocaleResource>
@@ -19443,9 +19200,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Search.Facet.StarsAndMore">
 		<Value>&amp; mehr</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Facet.XStarsAndMore">
-		<Value>{0} Sterne &amp; mehr</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.Fields.ProductAttributeOptionName">
 		<Value>Optionsname von Produktattributen</Value>

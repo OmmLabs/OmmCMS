@@ -29,7 +29,7 @@ public interface IMessageModelProvider
     /// <para>
     ///		Supported types are: Order, Product, Address, Shipment, OrderNote, 
     ///		RecurringPayment, ReturnCase, GiftCard, <see cref="NewsletterSubscription"/>, <see cref="Campaign"/>, 
-    ///		ProductReview, BlogComment, NewsComment, ForumTopic, ForumPost, Forum, PrivateMessage.
+    ///		BlogComment, NewsComment, ForumTopic, ForumPost, Forum, PrivateMessage.
     /// </para>
     /// <para>
     ///		Furthermore, any object implementing <see cref="IModelPart"/> or <see cref="INamedModelPart"/> can also be passed as model part.
@@ -54,7 +54,7 @@ public interface IMessageModelProvider
     /// <para>
     ///		Supported types are: Order, Product, Address, Shipment, OrderNote, 
     ///		RecurringPayment, ReturnCase, GiftCard, <see cref="NewsletterSubscription"/>, <see cref="Campaign"/>, 
-    ///		ProductReview, BlogComment, NewsComment, ForumTopic, ForumPost, Forum, PrivateMessage.
+    ///		BlogComment, NewsComment, ForumTopic, ForumPost, Forum, PrivateMessage.
     /// </para>
     /// <para>
     ///		Furthermore, any object implementing <see cref="IModelPart"/> or <see cref="INamedModelPart"/> can also be passed as model part.

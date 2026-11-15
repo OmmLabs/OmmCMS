@@ -636,11 +636,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.MetaKeywords), (string)product.MetaKeywords);
         _writer.WriteElementString(nameof(Product.MetaDescription), (string)product.MetaDescription);
         _writer.WriteElementString(nameof(Product.MetaTitle), (string)product.MetaTitle);
-        _writer.WriteElementString(nameof(Product.AllowCustomerReviews), entity.AllowCustomerReviews.ToString());
-        _writer.WriteElementString(nameof(Product.ApprovedRatingSum), entity.ApprovedRatingSum.ToString());
-        _writer.WriteElementString(nameof(Product.NotApprovedRatingSum), entity.NotApprovedRatingSum.ToString());
-        _writer.WriteElementString(nameof(Product.ApprovedTotalReviews), entity.ApprovedTotalReviews.ToString());
-        _writer.WriteElementString(nameof(Product.NotApprovedTotalReviews), entity.NotApprovedTotalReviews.ToString());
         _writer.WriteElementString(nameof(Product.Published), entity.Published.ToString());
         _writer.WriteElementString(nameof(Product.CreatedOnUtc), entity.CreatedOnUtc.ToString(_culture));
         _writer.WriteElementString(nameof(Product.UpdatedOnUtc), entity.UpdatedOnUtc.ToString(_culture));

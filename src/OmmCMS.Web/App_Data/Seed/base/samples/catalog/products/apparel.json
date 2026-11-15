@@ -6,12 +6,6 @@
     "fullDescription": "@file",
     "sku": "FS-1001",
     "tags": [ "bestseller", "outdoor" ],
-    "reviews": [
-      { "customer": "sophie", "rating": 5, "title": "Finally dry on the way to work", "reviewText": "Stays dry even in heavy rain and does not feel stuffy. The navy is a beautiful colour.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-50d" },
-      { "customer": "markus", "rating": 4, "title": "Good jacket, runs slightly large", "reviewText": "Very well made. I would order one size smaller next time.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-33d" },
-      { "customer": "laura", "rating": 5, "title": "My favourite jacket", "reviewText": "Light, warm enough with a sweater underneath and the hood stays in place.", "isApproved": true, "createdOnUtc": "@now-19d" },
-      { "customer": "tim", "rating": 4, "title": "Solid choice", "reviewText": "Good quality. Sadly black in XL was sold out, so I took olive, which I like a lot too.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-8d" }
-    ],
     "taxCategory": "apparel",
     "price": 189.00,
     "deliveryTime": "available-and-ready-to-ship",
@@ -97,10 +91,6 @@
     "sku": "FS-1002",
     "discounts": [ "season-sale-15" ],
     "tags": [ "cosy" ],
-    "reviews": [
-      { "customer": "anna", "rating": 5, "title": "So soft", "reviewText": "I took the merino version and it does not itch at all. Worth the extra money.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-27d" },
-      { "customer": "laura", "rating": 4, "title": "Lovely relaxed fit", "reviewText": "The grey melange looks great. It is quite wide, as described.", "isApproved": true, "createdOnUtc": "@now-12d" }
-    ],
     "taxCategory": "apparel",
     "price": 89.00,
     "deliveryTime": "available-and-ready-to-ship",
@@ -167,12 +157,6 @@
     "manufacturerPartNumber": "NL-URBAN-01",
     "durabilityGuaranteeDurationYears": 3,
     "tags": [ "limited-edition" ],
-    "reviews": [
-      { "customer": "jonas", "rating": 5, "title": "Goes with everything", "reviewText": "Comfortable from day one and the white leather is easy to clean.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-40d" },
-      { "customer": "tim", "rating": 4, "title": "Limited edition is a real eye-catcher", "reviewText": "The black and gold version gets a lot of compliments. A bit pricey, though.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-22d" },
-      { "customer": "anna", "rating": 2, "title": "Too narrow for me", "reviewText": "Nice look, but too narrow for wide feet. I sent them back.", "isApproved": true, "createdOnUtc": "@now-15d" },
-      { "customer": "sophie", "rating": 4, "title": "Good everyday sneaker", "reviewText": "Fits true to size. My size was briefly sold out but came back quickly.", "isApproved": true, "createdOnUtc": "@now-5d" }
-    ],
     "taxCategory": "apparel",
     "price": 89.00,
     "deliveryTime": "2-5-working-days",
@@ -292,9 +276,6 @@
     "fullDescription": "@file",
     "sku": "FS-1006",
     "tags": [ "sustainable", "gift" ],
-    "reviews": [
-      { "customer": "markus", "rating": 5, "title": "Great gift idea", "reviewText": "Ordered one with the name of our football team. The print is sharp and survives the washing machine.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-10d" }
-    ],
     "taxCategory": "apparel",
     "price": 19.90,
     "deliveryTime": "2-5-working-days",

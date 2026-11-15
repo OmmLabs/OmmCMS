@@ -130,7 +130,6 @@ public partial class LinqCatalogSearchService : SearchServiceBase, ICatalogSearc
                 case FacetGroupKind.Category:
                 case FacetGroupKind.Brand:
                 case FacetGroupKind.DeliveryTime:
-                case FacetGroupKind.Rating:
                 case FacetGroupKind.Price:
                     if (totalHits == 0 && !descriptor.Values.Any(x => x.IsSelected))
                     {
@@ -264,15 +263,6 @@ public partial class LinqCatalogSearchService : SearchServiceBase, ICatalogSearc
                 if (!(totalHits == 0 && !customPriceFacetValue.IsSelected))
                 {
                     facets.Insert(0, new Facet("custom", customPriceFacetValue));
-                }
-            }
-            else if (kind == FacetGroupKind.Rating)
-            {
-                foreach (var rating in FacetUtility.GetRatings())
-                {
-                    var newFacet = new Facet(rating);
-                    newFacet.Value.IsSelected = descriptor.Values.Any(x => x.IsSelected && x.Value.Equals(rating.Value));
-                    facets.Add(newFacet);
                 }
             }
             else if (kind == FacetGroupKind.Availability || kind == FacetGroupKind.NewArrivals)

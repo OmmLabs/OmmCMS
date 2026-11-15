@@ -1,7 +1,6 @@
 {
   "productType": "SimpleProduct",
   "productTemplate": "Product",
-  "allowCustomerReviews": true,
   "isShippingEnabled": true,
   "stockQuantity": 10000,
   "notifyAdminForQuantityBelow": 1,

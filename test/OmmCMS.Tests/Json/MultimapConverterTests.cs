@@ -242,7 +242,7 @@ public class MultimapConverterTests
         {
             { 1, new ProductAttribute { Name = "Attr" } },
             { 1, new Product { Name = "Product" } },
-            { 2, new ProductReview { ReviewText = "Good" } },
+            { 2, new ProductTemplate { Name = "Template" } },
             { 2, new ProductTag { Name = "Tag" } }
         };
 
@@ -255,7 +255,7 @@ public class MultimapConverterTests
             Assert.That(multimap2.TotalValueCount, Is.EqualTo(4));
             Assert.That(multimap2[1].ElementAt(0), Is.TypeOf<ProductAttribute>());
             Assert.That(multimap2[1].ElementAt(1), Is.TypeOf<Product>());
-            Assert.That(multimap2[2].ElementAt(0), Is.TypeOf<ProductReview>());
+            Assert.That(multimap2[2].ElementAt(0), Is.TypeOf<ProductTemplate>());
             Assert.That(multimap2[2].ElementAt(1), Is.TypeOf<ProductTag>());
         }
     }
@@ -269,7 +269,7 @@ public class MultimapConverterTests
         {
             { 1, new ProductAttribute { Name = "Attr" } },
             { 1, "John Doe" },
-            { 2, new ProductReview { ReviewText = "Good" } },
+            { 2, new ProductTemplate { Name = "Template" } },
             { 2, new ProductTag { Name = "Tag" } },
             { 2, 345 },
             { 2, true },
@@ -285,7 +285,7 @@ public class MultimapConverterTests
             Assert.That(multimap2.TotalValueCount, Is.EqualTo(7));
             Assert.That(multimap2[1].ElementAt(0), Is.TypeOf<ProductAttribute>());
             Assert.That(multimap2[1].ElementAt(1), Is.TypeOf<string>().And.EqualTo("John Doe"));
-            Assert.That(multimap2[2].ElementAt(0), Is.TypeOf<ProductReview>());
+            Assert.That(multimap2[2].ElementAt(0), Is.TypeOf<ProductTemplate>());
             Assert.That(multimap2[2].ElementAt(1), Is.TypeOf<ProductTag>());
 
             Assert.That(multimap2[2].ElementAt(2), Is.TypeOf<int>().And.EqualTo(345));
@@ -300,7 +300,7 @@ public class MultimapConverterTests
         var multimap = new ConcurrentMultimap<int, BaseEntity>();
         multimap.TryAdd(1, new ProductAttribute { Name = "Attr" });
         multimap.TryAdd(1, new Product { Name = "Product" });
-        multimap.TryAdd(2, new ProductReview { ReviewText = "Good" });
+        multimap.TryAdd(2, new ProductTemplate { Name = "Template" });
         multimap.TryAdd(2, new ProductTag { Name = "Tag" });
 
         var json = JsonSerializer.Serialize(multimap, _options);
@@ -312,7 +312,7 @@ public class MultimapConverterTests
             Assert.That(multimap2.TotalValueCount, Is.EqualTo(4));
             Assert.That(multimap2[1].ElementAt(0), Is.TypeOf<ProductAttribute>());
             Assert.That(multimap2[1].ElementAt(1), Is.TypeOf<Product>());
-            Assert.That(multimap2[2].ElementAt(0), Is.TypeOf<ProductReview>());
+            Assert.That(multimap2[2].ElementAt(0), Is.TypeOf<ProductTemplate>());
             Assert.That(multimap2[2].ElementAt(1), Is.TypeOf<ProductTag>());
         }
     }

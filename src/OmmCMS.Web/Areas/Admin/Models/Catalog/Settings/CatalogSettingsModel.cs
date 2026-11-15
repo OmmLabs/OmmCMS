@@ -209,24 +209,6 @@ public class CatalogSettingsModel : ILocalizedModel<PriceSettingsLocalizedModel>
 
     #region Customers 
 
-    [LocalizedDisplay("*ShowProductReviewsInProductLists")]
-    public bool ShowProductReviewsInProductLists { get; set; }
-
-    [LocalizedDisplay("*ShowProductReviewsInProductDetail")]
-    public bool ShowProductReviewsInProductDetail { get; set; }
-
-    [LocalizedDisplay("*ShowVerfiedPurchaseBadge")]
-    public bool ShowVerfiedPurchaseBadge { get; set; } = true;
-
-    [LocalizedDisplay("*ProductReviewsMustBeApproved")]
-    public bool ProductReviewsMustBeApproved { get; set; }
-
-    [LocalizedDisplay("*AllowAnonymousUsersToReviewProduct")]
-    public bool AllowAnonymousUsersToReviewProduct { get; set; }
-
-    [LocalizedDisplay("*NotifyStoreOwnerAboutNewProductReviews")]
-    public bool NotifyStoreOwnerAboutNewProductReviews { get; set; }
-
     [LocalizedDisplay("*EmailAFriendEnabled")]
     public bool EmailAFriendEnabled { get; set; }
 

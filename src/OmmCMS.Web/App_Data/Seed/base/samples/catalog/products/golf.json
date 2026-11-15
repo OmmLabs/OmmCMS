@@ -6,13 +6,6 @@
     "fullDescription": "@file",
     "sku": "GF-1001",
     "tags": [ "bestseller" ],
-    "reviews": [
-      { "customer": "tim", "rating": 5, "title": "Great feel around the green", "reviewText": "Soft off the putter, yet they still fly far. I now play nothing else.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-45d" },
-      { "customer": "markus", "rating": 5, "title": "Good value in the big pack", "reviewText": "The 24 pack is by far the cheapest way to stock up for the season.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-30d" },
-      { "customer": "laura", "rating": 4, "title": "Solid all-round ball", "reviewText": "Good distance and durable. Hardly any scuffs after a full round.", "isApproved": true, "createdOnUtc": "@now-18d" },
-      { "customer": "jonas", "rating": 4, "title": "Does what it should", "reviewText": "Nothing to complain about, delivery was quick.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-9d" },
-      { "customer": "sophie", "rating": 2, "title": "Too hard for my swing", "reviewText": "I prefer a softer ball with a slower swing. Quality is fine, but not for me.", "isApproved": true, "createdOnUtc": "@now-4d" }
-    ],
     "taxCategory": "general",
     "price": 9.90,
     "weight": 0.33,
@@ -77,11 +70,6 @@
     "fullDescription": "@file",
     "sku": "GF-1003",
     "discounts": [ "season-sale-15" ],
-    "reviews": [
-      { "customer": "anna", "rating": 5, "title": "Fits perfectly", "reviewText": "Very comfortable and a secure grip, even when it rains.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-35d" },
-      { "customer": "tim", "rating": 4, "title": "Good glove", "reviewText": "Comfortable leather. Order one size up if you are between sizes.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-20d" },
-      { "customer": "jonas", "rating": 4, "title": "Good for the price", "reviewText": "Wears well after several rounds.", "isApproved": true, "createdOnUtc": "@now-7d" }
-    ],
     "taxCategory": "general",
     "price": 14.90,
     "deliveryTime": "2-5-working-days",
@@ -151,9 +139,6 @@
     "fullDescription": "@file",
     "sku": "GF-1005",
     "tags": [ "gift" ],
-    "reviews": [
-      { "customer": "laura", "rating": 5, "title": "A great start", "reviewText": "Perfect for beginners: everything in one order and cheaper than buying it separately.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-16d" }
-    ],
     "taxCategory": "general",
     "price": 84.90,
     "deliveryTime": "2-5-working-days",
@@ -180,10 +165,6 @@
     "fullDescription": "@file",
     "sku": "GF-1006",
     "tags": [ "outdoor" ],
-    "reviews": [
-      { "customer": "markus", "rating": 4, "title": "Light and practical", "reviewText": "Very light for walking the course and the compartments are well planned.", "isApproved": true, "isVerifiedPurchase": true, "createdOnUtc": "@now-28d" },
-      { "customer": "sophie", "rating": 5, "title": "Great bag", "reviewText": "Stands firmly, the strap is comfortable. Good price.", "isApproved": true, "createdOnUtc": "@now-11d" }
-    ],
     "taxCategory": "general",
     "price": 79.90,
     "comparePrice": 119.00,

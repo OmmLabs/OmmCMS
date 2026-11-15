@@ -342,11 +342,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.MetaKeywords);
                 row.SetProperty(context.Result, (x) => x.MetaDescription);
                 row.SetProperty(context.Result, (x) => x.MetaTitle);
-                row.SetProperty(context.Result, (x) => x.AllowCustomerReviews, true);
-                row.SetProperty(context.Result, (x) => x.ApprovedRatingSum);
-                row.SetProperty(context.Result, (x) => x.NotApprovedRatingSum);
-                row.SetProperty(context.Result, (x) => x.ApprovedTotalReviews);
-                row.SetProperty(context.Result, (x) => x.NotApprovedTotalReviews);
                 row.SetProperty(context.Result, (x) => x.Published, true);
                 row.SetProperty(context.Result, (x) => x.WithdrawalPeriodDays);
                 row.SetProperty(context.Result, (x) => x.AllowWithdrawalBeforeShipping);
