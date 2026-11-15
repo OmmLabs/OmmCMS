@@ -21,13 +21,6 @@ public partial class PreProcessPaymentResult : PaymentResult
 }
 
 /// <summary>
-/// Represents a recurring payment cancellation result.
-/// </summary>
-public partial class CancelRecurringPaymentResult : PaymentResult
-{
-}
-
-/// <summary>
 /// Represents a refund payment result.
 /// </summary>
 public partial class RefundPaymentResult : PaymentResult

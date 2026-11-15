@@ -17,8 +17,4 @@ public class PaymentMethodModel : ActivatableProviderModel
 
     [LocalizedDisplay("*SupportVoid")]
     public bool SupportVoid { get; set; }
-
-    [LocalizedDisplay("*RecurringPaymentType")]
-    public string RecurringPaymentType { get; set; }
-    public RecurringPaymentType RecurringPaymentTypeEnum { get; set; }
 }

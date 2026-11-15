@@ -39,11 +39,6 @@ public partial interface IPaymentMethod : IProvider, IUserEditable
     bool SupportVoid { get; }
 
     /// <summary>
-    /// Gets the type of recurring payment.
-    /// </summary>
-    RecurringPaymentType RecurringPaymentType { get; }
-
-    /// <summary>
     /// Gets the additional handling fee for a payment.
     /// </summary>
     /// <returns>The fixed fee or a percentage value. If <c>UsePercentage</c> is <c>true</c>, the fee is calculated as a percentage of the order total.</returns>
@@ -227,26 +222,6 @@ public partial interface IPaymentMethod : IProvider, IUserEditable
     /// Throw <see cref="PaymentException"/> if a payment error occurs.
     /// </remarks>
     Task<VoidPaymentResult> VoidAsync(VoidPaymentRequest request);
-
-    /// <summary>
-    /// Processes a recurring payment.
-    /// </summary>
-    /// <param name="request">Payment info required for order processing.</param>
-    /// <returns>Process payment result.</returns>
-    /// <remarks>
-    /// Throw <see cref="PaymentException"/> if a payment error occurs.
-    /// </remarks>
-    Task<ProcessPaymentResult> ProcessRecurringPaymentAsync(ProcessPaymentRequest request);
-
-    /// <summary>
-    /// Cancels a recurring payment.
-    /// </summary>
-    /// <param name="request">Cancel recurring payment request.</param>
-    /// <returns>Cancel recurring payment result.</returns>
-    /// <remarks>
-    /// Throw <see cref="PaymentException"/> if a payment error occurs.
-    /// </remarks>
-    Task<CancelRecurringPaymentResult> CancelRecurringPaymentAsync(CancelRecurringPaymentRequest request);
 
     #endregion
 }

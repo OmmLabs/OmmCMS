@@ -39,7 +39,6 @@ SKUs are `{prefix}{number}`, starting at 1001, e.g. `FN-1002`. Combinations appe
 |---|---|---|
 | FD-1001 | Extra virgin olive oil 500 ml | Base price per litre, reduced tax rate, specifications |
 | FD-1002 | Roasted coffee | Combinations with own SKU, price, base price and delivery time; picture per pack size (assigned to the combinations) |
-| FD-1003 | Coffee subscription | Recurring product, date picker, multi-line text box |
 | FD-1004 | Mediterranean herb mix | Simple product, specification filters, low stock, new |
 | FD-1005 | Gourmet gift box | Bundle with per-item pricing and item discounts, new |
 | FD-1006 | Sea salt mill | Out of stock with back-in-stock notification |

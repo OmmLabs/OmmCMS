@@ -9,15 +9,6 @@
     "shortDescription": "Frisch gerösteter Arabica in zwei Packungsgrößen und drei Mahlgraden.",
     "fullDescription": "@file"
   },
-  "FD-1003": {
-    "variantAttributes": {
-      "first-delivery": { "textPrompt": "Wann soll die erste Lieferung ankommen?" },
-      "delivery-notes": { "textPrompt": "Lieferhinweise (optional), z. B. beim Nachbarn abgeben" }
-    },
-    "name": "Kaffee-Abo",
-    "shortDescription": "Ihr Lieblingskaffee, jeden Monat frei Haus.",
-    "fullDescription": "@file"
-  },
   "FD-1004": {
     "name": "Mediterrane Kräutermischung 100 g",
     "shortDescription": "Oregano, Thymian, Rosmarin und Basilikum im 100-g-Glas.",

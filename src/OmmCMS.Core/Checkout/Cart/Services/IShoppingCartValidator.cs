@@ -28,7 +28,7 @@ public interface IShoppingCartValidator
     bool ValidateBundleItem(ProductBundleItem bundleItems, IList<string> warnings);
 
     /// <summary>
-    /// Validates shopping cart for products not found (null), recurring and standard product mix-ups as well as checkout attributes.
+    /// Validates shopping cart for products not found (null) and checkout attributes.
     /// </summary>
     /// <param name="cart">Shopping cart.</param>
     /// <param name="warnings">List of returned warnings.</param>

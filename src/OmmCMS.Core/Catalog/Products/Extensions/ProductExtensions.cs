@@ -272,6 +272,6 @@ public static partial class ProductExtensions
 
     public static bool CanBeBundleItem(this Product product)
     {
-        return product != null && product.ProductType == ProductType.SimpleProduct && !product.IsRecurring && !product.IsDownload;
+        return product != null && product.ProductType == ProductType.SimpleProduct && !product.IsDownload;
     }
 }

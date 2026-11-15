@@ -135,18 +135,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
     [UIHint("Html")]
     public string AddChangelog { get; set; }
 
-    [LocalizedDisplay("*IsRecurring")]
-    public bool IsRecurring { get; set; }
-
-    [LocalizedDisplay("*RecurringCycleLength")]
-    public int RecurringCycleLength { get; set; }
-
-    [LocalizedDisplay("*RecurringCyclePeriod")]
-    public int RecurringCyclePeriodId { get; set; }
-
-    [LocalizedDisplay("*RecurringTotalCycles")]
-    public int RecurringTotalCycles { get; set; }
-
     [LocalizedDisplay("*IsShipEnabled")]
     public bool IsShippingEnabled { get; set; }
 

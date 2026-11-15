@@ -68,27 +68,6 @@ public enum PaymentStatus
 }
 
 /// <summary>
-/// Represents a recurring payment type.
-/// </summary>
-public enum RecurringPaymentType
-{
-    /// <summary>
-    /// Not supported.
-    /// </summary>
-    NotSupported = 0,
-
-    /// <summary>
-    /// Manual.
-    /// </summary>
-    Manual = 10,
-
-    /// <summary>
-    /// Automatic (payment is processed on payment gateway site).
-    /// </summary>
-    Automatic = 20
-}
-
-/// <summary>
 /// The reason for the automatic capturing of the payment amount.
 /// </summary>
 public enum CapturePaymentReason

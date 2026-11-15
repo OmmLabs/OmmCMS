@@ -205,11 +205,6 @@ public class PaymentMethodHandler : CheckoutHandlerBase
 
         providers = providers.Where(x => x.Value.DisplayInPaymentMethodList);
 
-        if (cart.ContainsRecurringItem())
-        {
-            providers = providers.Where(x => x.Value.RecurringPaymentType > RecurringPaymentType.NotSupported);
-        }
-
         return providers.ToList();
     }
 }

@@ -190,30 +190,27 @@ public partial class OrderCalculationService : IOrderCalculationService
 
         // Applied gift cards.
         var appliedGiftCards = new List<AppliedGiftCard>();
-        if (!cart.IncludesMatchingItems(x => x.IsRecurring))
+        var giftCards = await _giftCardService.GetValidGiftCardsAsync(_storeContext.CurrentStore.Id, customer);
+        foreach (var gc in giftCards)
         {
-            var giftCards = await _giftCardService.GetValidGiftCardsAsync(_storeContext.CurrentStore.Id, customer);
-            foreach (var gc in giftCards)
+            var usableAmount = Round(gc.UsableAmount.Amount);
+
+            if (total > 0m)
             {
-                var usableAmount = Round(gc.UsableAmount.Amount);
+                var amount = total > usableAmount.Amount ? usableAmount.Amount : total;
+                total -= amount;
 
-                if (total > 0m)
+                appliedGiftCards.Add(new()
                 {
-                    var amount = total > usableAmount.Amount ? usableAmount.Amount : total;
-                    total -= amount;
+                    GiftCard = gc.GiftCard,
+                    UsableAmount = new(amount, _primaryCurrency)
+                });
+            }
 
-                    appliedGiftCards.Add(new()
-                    {
-                        GiftCard = gc.GiftCard,
-                        UsableAmount = new(amount, _primaryCurrency)
-                    });
-                }
-
-                if (totalConverted > 0m)
-                {
-                    var amountConverted = totalConverted > usableAmount.Converted ? usableAmount.Converted : totalConverted;
-                    totalConverted -= amountConverted;
-                }
+            if (totalConverted > 0m)
+            {
+                var amountConverted = totalConverted > usableAmount.Converted ? usableAmount.Converted : totalConverted;
+                totalConverted -= amountConverted;
             }
         }
 

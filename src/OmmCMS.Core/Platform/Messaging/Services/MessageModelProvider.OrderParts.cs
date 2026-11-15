@@ -460,33 +460,6 @@ public partial class MessageModelProvider
         return m;
     }
 
-    protected virtual async Task<object> CreateModelPartAsync(RecurringPayment part, MessageContext messageContext)
-    {
-        Guard.NotNull(messageContext);
-        Guard.NotNull(part);
-
-        var paymentService = _services.Resolve<IPaymentService>();
-        var nextPaymentDate = await paymentService.GetNextRecurringPaymentDateAsync(part);
-        var remaingCycles = await paymentService.GetRecurringPaymentRemainingCyclesAsync(part);
-
-        var m = new Dictionary<string, object>
-        {
-            { "Id", part.Id },
-            { "CreatedOn", _helper.ToUserDate(part.CreatedOnUtc, messageContext) },
-            { "StartedOn", _helper.ToUserDate(part.StartDateUtc, messageContext) },
-            { "NextOn", _helper.ToUserDate(nextPaymentDate, messageContext) },
-            { "CycleLength", part.CycleLength },
-            { "CyclePeriod", part.CyclePeriod.GetLocalizedEnum(messageContext.Language.Id) },
-            { "CyclesRemaining", remaingCycles },
-            { "TotalCycles", part.TotalCycles },
-            { "Url", _helper.BuildActionUrl("Edit", "RecurringPayment", new { id = part.Id, area = "Admin" }, messageContext) }
-        };
-
-        await _helper.PublishModelPartCreatedEventAsync(part, m);
-
-        return m;
-    }
-
     protected virtual async Task<object> CreateModelPartAsync(ReturnCase part, MessageContext messageContext)
     {
         Guard.NotNull(messageContext);

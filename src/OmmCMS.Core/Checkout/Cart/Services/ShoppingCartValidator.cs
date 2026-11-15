@@ -119,7 +119,7 @@ public partial class ShoppingCartValidator : IShoppingCartValidator
             currentWarnings.Add(T("ShoppingCart.Bundle.Quantity", name));
         }
 
-        if (bundleItem.Product.IsDownload || bundleItem.Product.IsRecurring)
+        if (bundleItem.Product.IsDownload)
         {
             currentWarnings.Add(T("ShoppingCart.Bundle.ProductResrictions", name));
         }
@@ -144,25 +144,6 @@ public partial class ShoppingCartValidator : IShoppingCartValidator
         if (missingProduct != null)
         {
             currentWarnings.Add(T("ShoppingCart.CannotLoadProduct", missingProduct.Item.ProductId));
-        }
-
-        var hasNonRecurringProducts = cart.IncludesMatchingItems(x => !x.IsRecurring);
-        var hasRecurringProducts = cart.IncludesMatchingItems(x => x.IsRecurring);
-
-        // Do not mix recurring and non-recurring products
-        if (hasNonRecurringProducts && hasRecurringProducts)
-        {
-            currentWarnings.Add(T("ShoppingCart.CannotMixStandardAndAutoshipProducts"));
-        }
-
-        // Validate recurring products
-        if (hasRecurringProducts)
-        {
-            var recurringCycleInfo = cart.GetRecurringCycleInfo(_localizationService);
-            if (recurringCycleInfo.ErrorMessage.HasValue())
-            {
-                currentWarnings.Add(recurringCycleInfo.ErrorMessage);
-            }
         }
 
         // Validate checkout attributes.

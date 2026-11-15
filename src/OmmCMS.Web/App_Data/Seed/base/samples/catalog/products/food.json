@@ -114,48 +114,6 @@
     ]
   },
   {
-    "name": "Coffee Subscription",
-    "shortDescription": "Your favourite coffee, delivered every month.",
-    "fullDescription": "@file",
-    "sku": "FD-1003",
-    "variantAttributes": [
-      {
-        "productAttribute": "first-delivery",
-        "textPrompt": "When should the first delivery arrive?",
-        "isRequired": true,
-        "attributeControlType": "Datepicker",
-        "displayOrder": 1
-      },
-      {
-        "productAttribute": "delivery-notes",
-        "textPrompt": "Delivery notes (optional), e.g. leave with a neighbour",
-        "isRequired": false,
-        "attributeControlType": "MultilineTextbox",
-        "displayOrder": 2
-      }
-    ],
-    "taxCategory": "food",
-    "price": 8.50,
-    "isRecurring": true,
-    "recurringCycleLength": 1,
-    "recurringCyclePeriod": "Months",
-    "recurringTotalCycles": 12,
-    "deliveryTime": "available-and-ready-to-ship",
-    "categories": [ "Coffee and Tea" ],
-    "manufacturers": [ "casa-vireluna" ],
-    "pictures": [
-      { "file": "product/fd-1003.jpg", "name": "coffee-subscription" }
-    ],
-    "specifications": [
-      { "specificationAttributeOption": "origin/ethiopia", "allowFiltering": true, "showOnProductPage": true, "displayOrder": 1 },
-      { "specificationAttributeOption": "bean/arabica", "allowFiltering": true, "showOnProductPage": true, "displayOrder": 2 },
-      { "specificationAttributeOption": "roast/light", "allowFiltering": true, "showOnProductPage": true, "displayOrder": 3 },
-      { "specificationAttributeOption": "intensity/mild", "allowFiltering": true, "showOnProductPage": true, "displayOrder": 4 },
-      { "specificationAttributeOption": "coffee-type/rarity", "allowFiltering": true, "showOnProductPage": true, "displayOrder": 5 },
-      { "specificationAttributeOption": "decaffeinated/no", "allowFiltering": true, "showOnProductPage": true, "displayOrder": 6 }
-    ]
-  },
-  {
     "name": "Mediterranean Herb Mix 100 g",
     "shortDescription": "Oregano, thyme, rosemary and basil in a 100 g jar.",
     "fullDescription": "@file",

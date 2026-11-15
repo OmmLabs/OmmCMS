@@ -14,13 +14,6 @@ public partial class PaymentRequest
 }
 
 /// <summary>
-/// Represents a recurring payment cancellation request.
-/// </summary>
-public partial class CancelRecurringPaymentRequest : PaymentRequest
-{
-}
-
-/// <summary>
 /// Represents a request to capture a payment.
 /// </summary>
 public partial class CapturePaymentRequest : PaymentRequest

@@ -363,10 +363,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.SampleDownloadId, null, ImportUtility.ZeroToNull);    // TODO: global scope
                 row.SetProperty(context.Result, (x) => x.HasUserAgreement);
                 row.SetProperty(context.Result, (x) => x.UserAgreementText);
-                row.SetProperty(context.Result, (x) => x.IsRecurring);
-                row.SetProperty(context.Result, (x) => x.RecurringCycleLength, 100);
-                row.SetProperty(context.Result, (x) => x.RecurringCyclePeriodId);
-                row.SetProperty(context.Result, (x) => x.RecurringTotalCycles, 10);
                 row.SetProperty(context.Result, (x) => x.IsShippingEnabled, true);
                 row.SetProperty(context.Result, (x) => x.IsFreeShipping);
                 row.SetProperty(context.Result, (x) => x.AdditionalShippingCharge);

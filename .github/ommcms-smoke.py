@@ -603,6 +603,10 @@ try:
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name)='productreviewhelpfulness'") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name)='productreview'") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('AllowCustomerReviews', 'ApprovedRatingSum', 'NotApprovedRatingSum', 'ApprovedTotalReviews', 'NotApprovedTotalReviews')") == [0]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('recurringpayment', 'recurringpayments', 'recurringpaymenthistory', 'recurringpaymenthistories')") == [0]
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('IsRecurring', 'RecurringCycleLength', 'RecurringCyclePeriodId', 'RecurringTotalCycles')") == [0]
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('Order') WHERE name='SubscriptionTransactionId'") == [0]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name)='newslettersubscription'") == [1]
         topics = set(rows("SELECT SystemName FROM Topic"))
         assert {"HomePageText", "AboutUs", "ContactUs"} <= topics
         assert not topics.intersection({"PaymentInfo", "ShippingInfo", "CheckoutAsGuestOrRegister"})

@@ -11,7 +11,6 @@ public static partial class Permissions
         public const string Delete = "order.delete";
         public const string EditItem = "order.editorderitem";
         public const string EditShipment = "order.editshipment";
-        public const string EditRecurringPayment = "order.editrecurringpayment";
 
         public static class GiftCard
         {

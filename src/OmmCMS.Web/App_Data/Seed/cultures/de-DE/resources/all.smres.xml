@@ -123,33 +123,6 @@
 	<LocaleResource Name="Account.CustomerOrders.OrderTotal">
 		<Value>Auftragswert gesamt</Value>
 	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.RecurringOrders">
-		<Value>Regelmäßige Lieferungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.RecurringOrders.Cancel">
-		<Value>Regelmäßige Lieferung für Auftrag {0} abbrechen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.RecurringOrders.CancelDelivery">
-		<Value>Möchten Sie die regelmäßige Lieferung abbrechen?</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.RecurringOrders.CycleInfo">
-		<Value>Interval</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.RecurringOrders.CyclesRemaining">
-		<Value>Verbleibend</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.RecurringOrders.NextPayment">
-		<Value>Nächste Zahlung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.RecurringOrders.StartDate">
-		<Value>Anfangsdatum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.RecurringOrders.SuccessfullyCanceled">
-		<Value>Die regelmäßige Lieferung wurde erfolgreich abgebrochen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.RecurringOrders.TotalCycles">
-		<Value>Lieferungen insgesamt</Value>
-	</LocaleResource>
 	<LocaleResource Name="Account.CustomerOrders.ReturnItems">
 		<Value>Artikel zurücksenden</Value>
 	</LocaleResource>
@@ -1993,7 +1966,7 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.BundleItems.AdminNoteGeneral">
 		<Value>
-		&lt;p&gt;Alle einfachen Produkte außer Abos und Downloads können Bestandteil eines Bundle sein.&lt;/p&gt;
+		&lt;p&gt;Alle einfachen Produkte außer Downloads können Bestandteil eines Bundle sein.&lt;/p&gt;
 		</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.BundleItems.AdminNotePerItemPricing">
@@ -2012,7 +1985,7 @@
 		<Value>Attribute</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.BundleItems.CanBeBundleItemWarning">
-		<Value>Ein Bundle, Gruppenprodukt, Abo oder Download kann der Stückliste nicht hinzugefügt werden.</Value>
+		<Value>Ein Bundle, Gruppenprodukt oder Download kann der Stückliste nicht hinzugefügt werden.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.BundleItems.EditOf">
 		<Value>Bundle-Produkt bearbeiten</Value>
@@ -2477,12 +2450,6 @@
 	<LocaleResource Name="Admin.Catalog.Products.Fields.IsGiftCard.Hint">
 		<Value>Legt fest, ob dies ein Geschenkgutschein ist.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.IsRecurring">
-		<Value>Ist Abo</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.IsRecurring.Hint">
-		<Value>Legt fest, ob das Produkt ein Abonnement ist.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.IsShipEnabled">
 		<Value>Versand erforderlich</Value>
 	</LocaleResource>
@@ -2650,24 +2617,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.QuantityUnit.Hint">
 		<Value>Legt die Verpackungseinheit fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.RecurringCycleLength">
-		<Value>Erneuerungszeitraum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.RecurringCycleLength.Hint">
-		<Value>Legt den Zeitraum fest, nach dem das Abonnement erneuert wird.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.RecurringCyclePeriod">
-		<Value>Erneuerungsperiode</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.RecurringCyclePeriod.Hint">
-		<Value>Legt die Erneuerungsperiode in Tagen, Wochen, Monaten und Jahren fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.RecurringTotalCycles">
-		<Value>Anzahl Abonnement-Erneuerungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.RecurringTotalCycles.Hint">
-		<Value>Legt max. die Anzahl der Abonnement-Erneuerungen fest.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.RequiredProductIds">
 		<Value>IDs der erforderlichen Produkte</Value>
@@ -4667,9 +4616,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Payment.Methods.Configure">
 		<Value>Konfiguration</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Fields.RecurringPaymentType">
-		<Value>Abo Zahlungen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Payment.Methods.Fields.SupportCapture">
 		<Value>Buchung möglich</Value>
@@ -11341,12 +11287,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.OrderNotice.OrderVoidError">
 		<Value>Es ist ein Fehler bei der Stornierung einer Zahlungstransaktion zu Auftrag {0} aufgetreten.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.RecurringPaymentCancellationError">
-		<Value>Es ist ein Fehler bei der Stornierung einer wiederkehrenden Zahlung für Auftrag {0} aufgetreten.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.RecurringPaymentCancelled">
-		<Value>Wiederkehrende Zahlung wurde storniert</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.OrderNotice.RefundAmountError">
 		<Value>Der zu erstattende Betrag muss größer 0 sein.</Value>
 	</LocaleResource>
@@ -11755,12 +11695,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Orders.Fields.PurchaseOrderNumber.Hint">
 		<Value>Auftragsnummer</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Fields.RecurringPayment">
-		<Value>Wiederkehrende Zahlung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Fields.RecurringPayment.Hint">
-		<Value>Das ist ein widerkehrender Auftrag. Siehe entsprechenden Eintrag bei den Widerkehrenden Zahlungen.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Fields.RedeemedRewardPoints">
 		<Value>Bonuspunkte</Value>
 	</LocaleResource>
@@ -11823,12 +11757,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Fields.Store.Hint">
 		<Value>Name des Shops für diese Bestellung.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Fields.SubscriptionTransactionID">
-		<Value>Abonnement-ID</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Fields.SubscriptionTransactionID.Hint">
-		<Value>Abonnement-ID vom Zahlungsanbieter</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Fields.Tax">
 		<Value>Steuer</Value>
@@ -12696,126 +12624,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Providers.ProvidingPlugin">
 		<Value>Bereitstellendes Plugin</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments">
-		<Value>Wiederkehrende Zahlungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Cancelled">
-		<Value>Die Zahlung wurde storniert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Deleted">
-		<Value>Die Zahlung wurde gelöscht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.EditPaymentDetails">
-		<Value>Wiederkehrende Zahlungen bearbeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.Customer">
-		<Value>Kunde</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.Customer.Hint">
-		<Value>Kunde</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.CycleLength">
-		<Value>Dauer der Periode</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.CycleLength.Hint">
-		<Value>Zahlungsintervall bearbeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.CyclePeriod">
-		<Value>Periode</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.CyclePeriod.Hint">
-		<Value>Zahlungsintervall auswählen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.CyclesRemaining">
-		<Value>Verbleibende Zahlungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.CyclesRemaining.Hint">
-		<Value>Die Anzahl der verbleibenden Zahlungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.ID">
-		<Value>ID</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.InitialOrder">
-		<Value>Ursprünglicher Auftrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.InitialOrder.Hint">
-		<Value>Ursprünglicher Auftrag für die wiederkehrende Zahlung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.IsActive">
-		<Value>Aktiviert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.IsActive.Hint">
-		<Value>Legt fest, ob diese widerkehrende Zahlung aktiv ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.NextPaymentDate">
-		<Value>Nächstes Zahlungsdatum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.PaymentType">
-		<Value>Zahlungsart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.PaymentType.Hint">
-		<Value>Bestimmt die Zahlungsart (manuell oder automatisch).</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.StartDate">
-		<Value>Anfangsdatum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.StartDate.Hint">
-		<Value>Startdatum der wiederkehrenden Zahlung.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.TotalCycles">
-		<Value>Anzahl der Wiederholungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Fields.TotalCycles.Hint">
-		<Value>Gesamtzahl der Wiederholungen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.History">
-		<Value>Historie</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.History.CancelPayment">
-		<Value>Wiederholende Zahlung abbrechen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.History.NextPaymentDate">
-		<Value>Nächstes Zahlungsdatum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.History.Order">
-		<Value>Erstellter Auftrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.History.ProcessNextPayment">
-		<Value>Nächste Zahlung veranlassen (Auftrag erstellen)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Info">
-		<Value>Zahlungsinformation</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.List.CustomerEmail">
-		<Value>Kunden-E-Mail</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.List.CustomerEmail.Hint">
-		<Value>Liste nach der Kunden-E-Mail filtern.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.List.CustomerName">
-		<Value>Kundenname</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.List.CustomerName.Hint">
-		<Value>Liste nach dem Kundennamen filtern.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.List.InitialOrderNumber">
-		<Value>Nummer des ursprünglichen Auftrages</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.List.InitialOrderNumber.Hint">
-		<Value>Liste nach der Nummer des ursprünglichen Auftrages filtern.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.List.RemainingCycles">
-		<Value>Verbleibende Zahlungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.List.RemainingCycles.Hint">
-		<Value>Liste nach verbleibenden Zahlungen filtern.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.NextPaymentProcessed">
-		<Value>Die Zahlung wurde erfolgreich durchgeführt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.RecurringPayments.Updated">
-		<Value>Die Zahlung wurde erfolgreich bearbeitet</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Report.ChangeComparedTo">
 		<Value>Eine Veränderung um {0} im Vergleich zum Zeitraum {1} bis {2}.</Value>
@@ -15584,9 +15392,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Common.Payment.NoCaptureSupport">
 		<Value>Capture wird nicht unterstützt</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.Payment.NoRecurringPaymentSupport">
-		<Value>Wiederkehrende Zahlungen werden nicht unterstützt</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.Payment.NoRefundSupport">
 		<Value>Rückerstattung wird nicht unterstützt</Value>
 	</LocaleResource>
@@ -16661,27 +16466,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Enums.ProductVisibility.SearchResults">
 		<Value>In Suchergebnissen</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.RecurringPaymentType.Automatic">
-		<Value>Automatisch</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RecurringPaymentType.Manual">
-		<Value>Manuell</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RecurringPaymentType.NotSupported">
-		<Value>Nicht unterstützt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RecurringProductCyclePeriod.Days">
-		<Value>Tage</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RecurringProductCyclePeriod.Months">
-		<Value>Monate</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RecurringProductCyclePeriod.Weeks">
-		<Value>Wochen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RecurringProductCyclePeriod.Years">
-		<Value>Jahre</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.RelatedEntityType.ProductVariantAttributeCombination">
 		<Value>Attribut-Kombination</Value>
 	</LocaleResource>
@@ -17703,12 +17487,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Order.GiftCardInfo">
 		<Value>Geschenkgutschein ({0})</Value>
 	</LocaleResource>
-	<LocaleResource Name="Order.InitialOrderDoesNotExistForRecurringPayment">
-		<Value>Für die wiederkehrende Zahlung existiert kein Ausgangsauftrag.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Order.NoRecurringProducts">
-		<Value>Keine Abonnements.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Order.Notes">
 		<Value>Notizen</Value>
 	</LocaleResource>
@@ -18057,9 +17835,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="PageTitle.WishlistEmailAFriend">
 		<Value>Wunschliste per E-Mail an einen Freund senden</Value>
 	</LocaleResource>
-	<LocaleResource Name="Payment.CannotCalculateNextPaymentDate">
-		<Value>Das Datum der nächsten Zahlung kann nicht ermittelt werden.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Payment.CardCode">
 		<Value>Kartencode</Value>
 	</LocaleResource>
@@ -18107,15 +17882,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Payment.PaymentFailure">
 		<Value>Mit dieser Zahlungsart ist ein Problem aufgetreten. Bitte versuchen Sie es erneut oder wählen Sie eine andere Zahlungsart aus.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.RecurringPaymentNotActive">
-		<Value>Wiederkehrende Zahlung ist inaktiv.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.RecurringPaymentNotSupported">
-		<Value>Wiederkehrende Zahlungen sind für die gewählte Zahlungsart nicht möglich.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.RecurringPaymentTypeUnknown">
-		<Value>Der Typ von wiederkehrender Zahlung wird nicht unterstützt.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Payment.SelectCreditCard">
 		<Value>Wählen Sie Ihre Kreditkarte aus</Value>
@@ -18329,9 +18095,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Permissions.DisplayName.EditPromotion">
 		<Value>Promotion bearbeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditRecurringPayment">
-		<Value>Wiederkehrende Zahlungen bearbeiten</Value>
 	</LocaleResource>
 	<LocaleResource Name="Permissions.DisplayName.EditResource">
 		<Value>Ressourcen bearbeiten</Value>
@@ -19343,7 +19106,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Bei diesem Bundle sind Preisvorschläge nicht möglich.</Value>
 	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.Bundle.ProductResrictions">
-		<Value>Bei dem Bundle-Bestandteil "{0}" handelt es sich um ein Abo oder Download, was nicht unterstützt wird.</Value>
+		<Value>Bei dem Bundle-Bestandteil "{0}" handelt es sich um einen Download, was nicht unterstützt wird.</Value>
 	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.Bundle.Quantity">
 		<Value>Bei dem Bundle-Bestandteil "{0}" ist die Menge kleiner gleich 0.</Value>
@@ -19354,17 +19117,11 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="ShoppingCart.CannotLoadProduct">
 		<Value>Das Produkt (Id={0}) kann nicht geladen werden.</Value>
 	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.CannotMixStandardAndAutoshipProducts">
-		<Value>Ihr Warenkorb enthält Standard- und Abonnement-Produkte. Nur einer dieser Produkttypen darf im Warenkorb enthalten sein.</Value>
-	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.CartIsEmpty">
 		<Value>Ihr Warenkorb ist leer!</Value>
 	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.CommentBox">
 		<Value>Möchten Sie uns etwas Wichtiges zu Ihrer Bestellung mitteilen?</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.ConflictingShipmentSchedules">
-		<Value>Ihr Warenkorb enthält Abonnement-Produkte mit widersprüchlichen Versand-Zeitplänen. Pro Bestellung ist nur ein Abonnement-Produkt-Plan möglich.</Value>
 	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.ContinueShopping">
 		<Value>Weiter einkaufen</Value>
@@ -19441,9 +19198,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.Button">
 		<Value>Anwenden</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.DontWorkWithAutoshipProducts">
-		<Value>Sie können Geschenkgutscheine nicht bei Abonnement-Artikeln verwenden.</Value>
 	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.Removed">
 		<Value>Der Geschenkgutschein wurde entfernt</Value>
@@ -19585,9 +19339,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.RecipientNameError">
 		<Value>Geben Sie einen gültigen Empfänger-Namen ein.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.RecurringPeriod">
-		<Value>[Regelmäßige Lieferung alle {0} {1}]</Value>
 	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.Remove">
 		<Value>Entfernen</Value>

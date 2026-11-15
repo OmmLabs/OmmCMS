@@ -71,17 +71,4 @@ public static partial class IPaymentServiceExtensions
         return paymentMethod.Metadata.PaymentMethodType;
     }
 
-    /// <summary>
-    /// Gets a recurring payment type of payment method.
-    /// </summary>
-    /// <param name="systemName">Payment provider system name.</param>
-    /// <returns>A recurring payment type of payment method.</returns>
-    public static async Task<RecurringPaymentType> GetRecurringPaymentTypeAsync(this IPaymentService paymentService, string systemName)
-    {
-        Guard.NotNull(paymentService);
-
-        var paymentMethod = await paymentService.LoadPaymentProviderBySystemNameAsync(systemName);
-
-        return paymentMethod?.Value?.RecurringPaymentType ?? RecurringPaymentType.NotSupported;
-    }
 }

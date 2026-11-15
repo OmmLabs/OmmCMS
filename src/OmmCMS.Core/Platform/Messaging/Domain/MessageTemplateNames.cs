@@ -13,7 +13,6 @@ public class MessageTemplateNames
     public const string OrderCompletedCustomer = "OrderCompleted.CustomerNotification";
     public const string OrderCancelledCustomer = "OrderCancelled.CustomerNotification";
     public const string OrderNoteAddedCustomer = "Customer.NewOrderNote";
-    public const string RecurringPaymentCancelledStoreOwner = "RecurringPaymentCancelled.StoreOwnerNotification";
     public const string NewsletterSubscriptionActivation = "NewsletterSubscription.ActivationMessage";
     public const string NewsletterSubscriptionDeactivation = "NewsletterSubscription.DeactivationMessage";
     public const string ShareProduct = "Service.EmailAFriend";

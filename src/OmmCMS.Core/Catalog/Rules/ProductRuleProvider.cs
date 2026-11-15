@@ -439,13 +439,6 @@ public partial class ProductRuleProvider : RuleProviderBase, IProductRuleProvide
                 RuleType = RuleType.Boolean,
                 Operators = [RuleOperator.IsEqualTo]
             },
-            new SearchFilterDescriptor<bool>((ctx, x) => ctx.Query.RecurringOnly(x))
-            {
-                Name = "Recurring",
-                DisplayName = T("Admin.Catalog.Products.Fields.IsRecurring"),
-                RuleType = RuleType.Boolean,
-                Operators = [RuleOperator.IsEqualTo]
-            },
             new SearchFilterDescriptor<bool>((ctx, x) => ctx.Query.ShipEnabledOnly(x))
             {
                 Name = "ShipEnabled",

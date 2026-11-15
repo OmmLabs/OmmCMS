@@ -235,9 +235,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             case OrderNote x:
                 modelPart = await CreateModelPartAsync(x, messageContext);
                 break;
-            case RecurringPayment x:
-                modelPart = await CreateModelPartAsync(x, messageContext);
-                break;
             case ReturnCase x:
                 modelPart = await CreateModelPartAsync(x, messageContext);
                 break;

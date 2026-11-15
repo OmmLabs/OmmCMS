@@ -368,12 +368,6 @@ public partial class Order : EntityWithAttributes, IAuditable, ISoftDeletable
     public string CaptureTransactionResult { get; set; }
 
     /// <summary>
-    /// Gets or sets the ID for payment subscription. Usually used for recurring payment.
-    /// </summary>
-    [StringLength(400)]
-    public string SubscriptionTransactionId { get; set; }
-
-    /// <summary>
     /// Gets or sets the purchase order number
     /// </summary>
     [StringLength(400)]

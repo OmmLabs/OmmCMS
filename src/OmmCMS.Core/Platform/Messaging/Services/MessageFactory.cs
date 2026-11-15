@@ -490,7 +490,6 @@ public partial class MessageFactory : IMessageFactory
             { nameof(Order), () => GetRandomEntity<Order>(x => !x.Deleted) },
             { nameof(Shipment), () => GetRandomEntity<Shipment>(x => !x.Order.Deleted) },
             { nameof(OrderNote), () => GetRandomEntity<OrderNote>(x => !x.Order.Deleted) },
-            { nameof(RecurringPayment), () => GetRandomEntity<RecurringPayment>(x => !x.Deleted) },
             { nameof(NewsletterSubscription), () => GetRandomEntity<NewsletterSubscription>(x => true) },
             { nameof(Campaign), () => GetRandomEntity<Campaign>(x => true) },
             { nameof(ReturnCase), () => GetRandomEntity<ReturnCase>(x => true) },
@@ -680,8 +679,8 @@ public partial class MessageFactory : IMessageFactory
                 return await factory.Invoke();
             }
 
-            // If no random entity exists in the database (e.g. RecurringPayment), then the associated parent model is
-            // of type 'TestDrop' and the child model may not be resolved (e.g. RecurringPayment.InitialOrder).
+            // If no random entity exists in the database, then the associated parent model is
+            // of type 'TestDrop' and the child model may not be resolved.
             return null;
         }
     }

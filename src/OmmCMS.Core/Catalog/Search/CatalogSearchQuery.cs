@@ -39,7 +39,6 @@ public sealed class KnownFilterNames : IHideObjectMembers
     public readonly string Visibility = "visibility";
     public readonly string ShowOnHomepage = "showonhomepage";
     public readonly string IsDownload = "download";
-    public readonly string IsRecurring = "recurring";
     public readonly string IsShippingEnabled = "shipenabled";
     public readonly string IsFreeShipping = "shipfree";
     public readonly string IsTaxExempt = "taxexempt";
@@ -431,11 +430,6 @@ public partial class CatalogSearchQuery : SearchQuery<CatalogSearchQuery>, IClon
     public CatalogSearchQuery DownloadOnly(bool value)
     {
         return WithFilter(SearchFilter.ByField(KnownFilters.IsDownload, value).Mandatory().ExactMatch().NotAnalyzed());
-    }
-
-    public CatalogSearchQuery RecurringOnly(bool value)
-    {
-        return WithFilter(SearchFilter.ByField(KnownFilters.IsRecurring, value).Mandatory().ExactMatch().NotAnalyzed());
     }
 
     public CatalogSearchQuery ShipEnabledOnly(bool value)

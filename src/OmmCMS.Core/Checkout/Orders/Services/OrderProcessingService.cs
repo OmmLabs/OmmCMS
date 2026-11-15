@@ -247,17 +247,6 @@ public partial class OrderProcessingService : IOrderProcessingService
 
         AddOrderNotes(order, T("Admin.OrderNotice.OrderCancelled"));
 
-        // Cancel recurring payments.
-        var recurringPayments = await _db.RecurringPayments
-            .Include(x => x.InitialOrder)
-            .ApplyStandardFilter(order.Id)
-            .ToListAsync();
-
-        foreach (var rp in recurringPayments)
-        {
-            await CancelRecurringPaymentAsync(rp);
-        }
-
         // Adjust inventory.
         foreach (var orderItem in order.OrderItems)
         {
@@ -312,17 +301,6 @@ public partial class OrderProcessingService : IOrderProcessingService
             await LoadNavigationProperties(order, true);
 
             ApplyRewardPoints(order, true);
-
-            // Cancel recurring payments.
-            var recurringPayments = await _db.RecurringPayments
-                .Include(x => x.InitialOrder)
-                .ApplyStandardFilter(order.Id)
-                .ToListAsync();
-
-            foreach (var rp in recurringPayments)
-            {
-                await CancelRecurringPaymentAsync(rp);
-            }
 
             // Adjust inventory.
             foreach (var orderItem in order.OrderItems)

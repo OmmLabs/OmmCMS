@@ -453,36 +453,6 @@ public partial class Product : EntityWithDiscounts, IAuditable, ISoftDeletable, 
     public string UserAgreementText { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether this is a recurring product.
-    /// </summary>
-    public bool IsRecurring { get; set; }
-
-    /// <summary>
-    /// Gets or sets the recurring cycle length.
-    /// </summary>
-    public int RecurringCycleLength { get; set; }
-
-    /// <summary>
-    /// Gets or sets the recurring cycle period.
-    /// </summary>
-    public int RecurringCyclePeriodId { get; set; }
-
-    /// <summary>
-    /// Gets or sets the cycle period for recurring products.
-    /// </summary>
-    [NotMapped]
-    public RecurringProductCyclePeriod RecurringCyclePeriod
-    {
-        get => (RecurringProductCyclePeriod)RecurringCyclePeriodId;
-        set => RecurringCyclePeriodId = (int)value;
-    }
-
-    /// <summary>
-    /// Gets or sets the recurring total cycles.
-    /// </summary>
-    public int RecurringTotalCycles { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether the product is ship enabled.
     /// </summary>
     [Column("IsShipEnabled")]

@@ -661,10 +661,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.SampleDownloadId), entity.SampleDownloadId?.ToString() ?? string.Empty);
         _writer.WriteElementString(nameof(Product.HasUserAgreement), entity.HasUserAgreement.ToString());
         _writer.WriteElementString(nameof(Product.UserAgreementText), entity.UserAgreementText);
-        _writer.WriteElementString(nameof(Product.IsRecurring), entity.IsRecurring.ToString());
-        _writer.WriteElementString(nameof(Product.RecurringCycleLength), entity.RecurringCycleLength.ToString());
-        _writer.WriteElementString(nameof(Product.RecurringCyclePeriodId), entity.RecurringCyclePeriodId.ToString());
-        _writer.WriteElementString(nameof(Product.RecurringTotalCycles), entity.RecurringTotalCycles.ToString());
         _writer.WriteElementString(nameof(Product.IsShippingEnabled), entity.IsShippingEnabled.ToString());
         _writer.WriteElementString(nameof(Product.IsFreeShipping), entity.IsFreeShipping.ToString());
         _writer.WriteElementString(nameof(Product.AdditionalShippingCharge), entity.AdditionalShippingCharge.ToString(_culture));

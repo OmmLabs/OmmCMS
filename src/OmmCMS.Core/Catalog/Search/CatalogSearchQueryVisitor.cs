@@ -52,10 +52,6 @@ public class CatalogSearchQueryVisitor : LinqSearchQueryVisitor<Product, Catalog
         {
             return ApplySimpleMemberExpression(x => x.IsDownload, filter, query);
         }
-        else if (fieldName == names.IsRecurring)
-        {
-            return ApplySimpleMemberExpression(x => x.IsRecurring, filter, query);
-        }
         else if (fieldName == names.IsShippingEnabled)
         {
             return ApplySimpleMemberExpression(x => x.IsShippingEnabled, filter, query);

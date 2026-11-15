@@ -107,11 +107,6 @@ public class OrderSettings : ISettings
     public int OrderListPageSize { get; set; } = 10;
 
     /// <summary>
-    /// Gets or sets the page size of the recurring payment list.
-    /// </summary>
-    public int RecurringPaymentListPageSize { get; set; } = 10;
-
-    /// <summary>
     /// Gets or sets the page size of the return case list.
     /// </summary>
     public int ReturnCaseListPageSize { get; set; } = 10;

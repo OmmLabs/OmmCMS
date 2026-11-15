@@ -161,12 +161,10 @@ public partial interface IOrderProcessingService
     /// Checks whether an order can be placed.
     /// </summary>
     /// <param name="paymentRequest">Payment processing request.</param>
-    /// <param name="initialOrder">Initial order for recurring payment, if any.</param>
     /// <param name="customer">Customer placing the order.</param>
     /// <returns>Warnings and validated card. Warnings are empty if the order can be placed.</returns>
     Task<(IList<string> Warnings, ShoppingCart Cart)> ValidateOrderPlacementAsync(
         ProcessPaymentRequest paymentRequest,
-        Order initialOrder = null,
         Customer customer = null);
 
     /// <summary>
@@ -264,26 +262,6 @@ public partial interface IOrderProcessingService
     /// </summary>
     /// <param name="order">Order.</param>
     Task VoidOfflineAsync(Order order);
-
-    /// <summary>
-    /// Gets a value indicating whether the recurring payment can be canceled (by the customer).
-    /// </summary>
-    /// <param name="recurringPayment">The <see cref="RecurringPayment"/> to be canceled.</param>
-    /// <param name="customerToValidate">The <see cref="Customer"/> who wants to cancel.</param>
-    /// <returns><c>True</c> when the <paramref name="recurringPayment"/> can be canceled by <paramref name="customerToValidate"/>, otherwise <c>false</c>.</returns>
-    Task<bool> CanCancelRecurringPaymentAsync(RecurringPayment recurringPayment, Customer customerToValidate);
-
-    /// <summary>
-    /// Cancels a recurring payment.
-    /// </summary>
-    /// <param name="recurringPayment">Recurring payment.</param>
-    Task CancelRecurringPaymentAsync(RecurringPayment recurringPayment);
-
-    /// <summary>
-    /// Processes the next recurring payment.
-    /// </summary>
-    /// <param name="recurringPayment">Recurring payment.</param>
-    Task ProcessNextRecurringPaymentAsync(RecurringPayment recurringPayment);
 
     /// <summary>
     /// Checks whether the exception is caused by a duplicate payment reference.

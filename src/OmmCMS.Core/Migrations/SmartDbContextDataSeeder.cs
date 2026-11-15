@@ -580,8 +580,8 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
         builder.AddOrUpdate(prefix + "Groups.Taxes", "Taxes", "Steuern");
         builder.AddOrUpdate(prefix + "Groups.SalesOptions", "Sales options", "Verkaufsoptionen");
         builder.AddOrUpdate(prefix + "Groups.SalesOptions.Info",
-            "Specify whether additional items must be ordered with this product or whether it is sold as a gift card or subscription. Enable an option to show its settings.",
-            "Hier legen Sie fest, ob zum Produkt weitere Artikel mitbestellt werden müssen oder ob es als Geschenkgutschein oder Abonnement verkauft wird. Aktivieren Sie eine Option, um die zugehörigen Einstellungen einzublenden.");
+            "Specify whether additional items must be ordered with this product or whether it is sold as a gift card. Enable an option to show its settings.",
+            "Hier legen Sie fest, ob zum Produkt weitere Artikel mitbestellt werden müssen oder ob es als Geschenkgutschein verkauft wird. Aktivieren Sie eine Option, um die zugehörigen Einstellungen einzublenden.");
         builder.AddOrUpdate(prefix + "Groups.Shipping", "Shipping, dimensions and units", "Versand, Maße und Einheiten");
         builder.AddOrUpdate(prefix + "Groups.Shipping.Info",
             "The quantity unit specifies how product quantities are labeled in the shop, for example as pieces, packs or pairs. It appears alongside the quantity when ordering and in the cart. Weight and dimensions can affect shipping costs, depending on the shipping provider, and are displayed on the product page when the corresponding catalog settings are enabled.",
@@ -627,11 +627,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Als Geschenkgutschein verkaufen",
             "A gift card is created when this product is ordered. The gift card type determines whether it is virtual or physical.",
             "Bei Bestellung dieses Produkts wird ein Geschenkgutschein erstellt. Der Gutscheintyp legt fest, ob es sich um einen virtuellen oder physischen Gutschein handelt.");
-        builder.AddOrUpdate(prefix + "Fields.IsRecurring",
-            "Sell as a subscription",
-            "Als Abonnement verkaufen",
-            "Enables recurring payments for this product. Set the billing interval and number of cycles below. Requires a payment method that supports recurring payments.",
-            "Aktiviert wiederkehrende Zahlungen für dieses Produkt. Legen Sie darunter das Zahlungsintervall und die Anzahl der Zyklen fest. Erfordert eine Zahlungsart, die wiederkehrende Zahlungen unterstützt.");
         builder.AddOrUpdate(prefix + "Fields.IsShipEnabled",
             "Shipping required",
             "Versand erforderlich",

@@ -23,9 +23,6 @@ public abstract class PaymentMethodBase : IPaymentMethod
 
     public virtual bool SupportVoid => false;
 
-    public virtual RecurringPaymentType RecurringPaymentType
-        => RecurringPaymentType.NotSupported;
-
     public virtual Task<(decimal FixedFeeOrPercentage, bool UsePercentage)> GetPaymentFeeInfoAsync(ShoppingCart cart)
         => Task.FromResult((decimal.Zero, false));
 
@@ -96,12 +93,6 @@ public abstract class PaymentMethodBase : IPaymentMethod
 
     public virtual Task<VoidPaymentResult> VoidAsync(VoidPaymentRequest voidPaymentRequest)
         => throw new PaymentException(T("Common.Payment.NoVoidSupport"));
-
-    public virtual Task<ProcessPaymentResult> ProcessRecurringPaymentAsync(ProcessPaymentRequest processPaymentRequest)
-        => throw new PaymentException(T("Common.Payment.NoRecurringPaymentSupport"));
-
-    public virtual Task<CancelRecurringPaymentResult> CancelRecurringPaymentAsync(CancelRecurringPaymentRequest cancelPaymentRequest)
-        => throw new PaymentException(T("Common.Payment.NoRecurringPaymentSupport"));
 
     #endregion
 }

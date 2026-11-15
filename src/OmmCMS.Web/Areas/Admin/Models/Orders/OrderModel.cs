@@ -77,9 +77,6 @@ public partial class OrderModel : EditOrderModel
     [LocalizedDisplay("*CaptureTransactionID")]
     public string CaptureTransactionId { get; set; }
 
-    [LocalizedDisplay("*SubscriptionTransactionID")]
-    public string SubscriptionTransactionId { get; set; }
-
     [LocalizedDisplay("*AuthorizationTransactionResult")]
     public string AuthorizationTransactionResult { get; set; }
 
@@ -95,9 +92,6 @@ public partial class OrderModel : EditOrderModel
     public bool HasDownloadableProducts { get; set; }
     public string CustomerOrderComment { get; set; }
     public string CheckoutAttributeInfo { get; set; }
-
-    [LocalizedDisplay("*RecurringPayment")]
-    public int RecurringPaymentId { get; set; }
 
     public bool CanCancelOrder { get; set; }
     public bool CanCompleteOrder { get; set; }
@@ -250,8 +244,6 @@ public partial class OrderModel : EditOrderModel
         public string DiscountAmountExclTaxString { get; set; }
 
         public string AttributeDescription { get; set; }
-        public int? RecurringPaymentId { get; set; }
-        public string RecurringInfo { get; set; }
 
         public bool IsDownload { get; set; }
         public int DownloadCount { get; set; }

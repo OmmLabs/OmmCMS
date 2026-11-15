@@ -39,11 +39,6 @@ public partial class ProcessPaymentResult : PaymentResult
     public string CaptureTransactionResult { get; set; }
 
     /// <summary>
-    /// Gets or sets the ID for payment subscription. Usually used for recurring payment.
-    /// </summary>
-    public string SubscriptionTransactionId { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether storing of credit card number, CVV2 is allowed.
     /// </summary>
     public bool AllowStoringCreditCardNumber { get; set; }
