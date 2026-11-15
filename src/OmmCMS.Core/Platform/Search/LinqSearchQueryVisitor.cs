@@ -166,7 +166,7 @@ public abstract class LinqSearchQueryVisitor<TEntity, TQuery, TContext>
 
         if (expressions.Count > 0)
         {
-            var combinedExpression = new FilterExpressionGroup(entityType, expressions.ToArray())
+            var combinedExpression = new FilterExpressionGroup(typeof(TEntity), expressions.ToArray())
             {
                 LogicalOperator = LogicalRuleOperator.And,
             };

@@ -137,7 +137,7 @@ public partial class CustomerService : ICustomerService
         int[] softDeletedCustomerIds = null;
         int[] skippedAdminIds = null;
 
-        var guestCustomersQuery = await GetGuestCustomersDeletionQuery(null, null, false, cancelToken);
+        var guestCustomersQuery = await GetGuestCustomersDeletionQuery(null, null, cancelToken);
         var guestCustomerIds = await guestCustomersQuery
             .Where(x => customerIds.Contains(x.Id))
             .Select(x => x.Id)
