@@ -835,18 +835,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
         builder.AddOrUpdate("Admin.Orders.Products.Total")
             .Value("de", "Gesamt");
 
-        builder.AddOrUpdate("Admin.Common.TaxCalculator.Enable",
-            "Enable automatic gross-to-net conversion",
-            "Automatische Brutto-/Netto-Umrechnung aktivieren");
-
-        builder.AddOrUpdate("Admin.Common.TaxCalculator.Disable",
-            "Disable automatic gross-to-net conversion",
-            "Automatische Brutto-/Netto-Umrechnung deaktivieren");
-
-        builder.AddOrUpdate("Admin.Common.TaxCalculator.NoCalculation",
-            "An automatic gross-to-net conversion is not possible (e.g. due to varying tax rates).",
-            "Eine automatische Brutto-/Netto-Umrechnung ist nicht möglich (z.B. aufgrund unterschiedlicher Steuersätze).");
-
         builder.AddOrUpdate("Order.PlaceOrderError",
             "The order could not be completed due to an unexpected error. Customer ID: {0}.",
             "Die Bestellung konnte aufgrund eines unerwarteten Fehlers nicht abgeschlossen werden. Kunden-ID: {0}.");

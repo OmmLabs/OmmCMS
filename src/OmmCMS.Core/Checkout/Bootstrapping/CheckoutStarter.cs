@@ -27,7 +27,6 @@ internal sealed class CheckoutStarter : StarterBase
     {
         builder.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
         builder.RegisterType<TaxService>().As<ITaxService>().InstancePerLifetimeScope();
-        builder.RegisterType<TaxCalculator>().As<ITaxCalculator>().InstancePerLifetimeScope();
 
         // Cart rules.
         var cartRuleTypes = appContext.TypeScanner.FindTypes<IRule<CartRuleContext>>().ToList();

@@ -68,7 +68,6 @@ public class PriceFormattingTests : ServiceTestBase
 
         _taxService = new TaxService(
             DbContext,
-            null,
             ProviderManager,
             _workContext,
             _roundingHelper,

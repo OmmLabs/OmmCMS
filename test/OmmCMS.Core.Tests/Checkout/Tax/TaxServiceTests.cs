@@ -38,7 +38,6 @@ public class TaxServiceTests : ServiceTestBase
 
         _taxService = new TaxService(
             DbContext,
-            null,
             ProviderManager,
             null,
             _roundingHelper,

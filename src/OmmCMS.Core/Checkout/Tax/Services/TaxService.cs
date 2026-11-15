@@ -20,7 +20,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
 
     private readonly Dictionary<TaxRateCacheKey, TaxRate> _cachedTaxRates = new();
     private readonly Dictionary<TaxAddressKey, Address> _cachedTaxAddresses = new();
-    private readonly IGeoCountryLookup _geoCountryLookup;
     private readonly IProviderManager _providerManager;
     private readonly IWorkContext _workContext;
     private readonly IRoundingHelper _roundingHelper;
@@ -31,7 +30,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
 
     public TaxService(
         SmartDbContext db,
-        IGeoCountryLookup geoCountryLookup,
         IProviderManager providerManager,
         IWorkContext workContext,
         IRoundingHelper roundingHelper,
@@ -40,7 +38,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
         ViesTaxationHttpClient client)
     {
         _db = db;
-        _geoCountryLookup = geoCountryLookup;
         _providerManager = providerManager;
         _workContext = workContext;
         _roundingHelper = roundingHelper;
@@ -302,43 +299,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
         price = _roundingHelper.RoundIfEnabledFor(price);
 
         return (price, taxRate);
-    }
-
-    /// <summary>
-    /// Checks whether the customer is a consumer (NOT a company) within the EU.
-    /// </summary>
-    /// <param name="customer">Customer to check.</param>
-    /// <remarks>
-    /// A customer is assumed to be an EU consumer if the default tax address does not contain a company name, 
-    /// OR the IP address is within the EU, 
-    /// OR a business name has been provided but the EU VAT number is invalid.
-    /// </remarks>
-    /// <returns>
-    /// <c>True</c> if the customer is a consumer within the EU, <c>False</c> if otherwise.
-    /// </returns>
-    protected virtual bool IsEuConsumer(Customer customer)
-    {
-        if (customer == null)
-        {
-            return false;
-        }
-
-        // If BillingAddress is explicitly set but no company is specified, we assume that it is a consumer.
-        var address = customer.BillingAddress;
-        if (address != null && address.Company.IsEmpty())
-        {
-            return true;
-        }
-
-        // Otherwise check whether customer's IP country is in the EU.
-        var isInEu = _geoCountryLookup.LookupCountry(customer.LastIpAddress)?.IsInEu == true;
-        if (!isInEu)
-        {
-            return false;
-        }
-
-        // Companies with an invalid VAT number are assumed to be consumers.
-        return customer.VatNumberStatusId != (int)VatNumberStatus.Valid;
     }
 
     /// <summary>
