@@ -6,6 +6,7 @@ on:
       - cms-baseline
       - cms-shell
       - cms-admin-navigation
+      - cms-commerce-isolation
   workflow_dispatch:
 
 permissions:
