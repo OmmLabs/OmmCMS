@@ -10,8 +10,7 @@ public enum ExportEntityType
     Manufacturer,
     Customer,
     Order,
-    NewsletterSubscription,
-    ShoppingCartItem
+    NewsletterSubscription
 }
 
 /// <summary>

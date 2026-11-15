@@ -339,24 +339,6 @@ public partial class ProductAttributeMaterializer : IProductAttributeMaterialize
         return combination;
     }
 
-    public virtual async Task<int> MergeWithCombinationAsync(IEnumerable<ShoppingCartItem> cartItems)
-    {
-        Guard.NotNull(cartItems);
-
-        var num = 0;
-
-        foreach (var cartItem in cartItems)
-        {
-            if (cartItem.AttributeSelection.HasAttributes)
-            {
-                await MergeWithCombinationAsync(cartItem.Product, cartItem.AttributeSelection, null);
-                ++num;
-            }
-        }
-
-        return num;
-    }
-
     public virtual async Task<CombinationAvailabilityInfo> IsCombinationAvailableAsync(
         Product product,
         IEnumerable<ProductVariantAttribute> attributes,

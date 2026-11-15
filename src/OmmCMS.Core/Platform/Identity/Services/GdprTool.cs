@@ -164,11 +164,6 @@ public partial class GdprTool : IGdprTool
         // SAVE!!!
         await _db.SaveChangesAsync();
 
-        // Now it is safe to delete shopping cart & wishlist
-        await _db.ShoppingCartItems
-            .ApplyExpiredCartItemsFilter(DateTime.UtcNow, customer)
-            .ExecuteDeleteAsync();
-
         // Log
         Logger.Info(T("Gdpr.Anonymize.Success", language.Id, customerName));
     }

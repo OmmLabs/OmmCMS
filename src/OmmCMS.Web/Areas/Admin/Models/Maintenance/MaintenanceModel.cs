@@ -24,8 +24,6 @@ public class MaintenanceModel : ModelBase
         [LocalizedDisplay("*EndDate")]
         public DateTime? EndDate { get; set; }
 
-        [LocalizedDisplay("*OnlyWithoutShoppingCart")]
-        public bool OnlyWithoutShoppingCart { get; set; }
     }
 
     [LocalizedDisplay("Admin.System.Maintenance.DeleteExportedFiles.")]

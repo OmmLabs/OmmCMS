@@ -139,8 +139,5 @@ public class ExportFilterModel
 
     #region Shopping Cart Items
 
-    [LocalizedDisplay("*ShoppingCartTypeId")]
-    public int? ShoppingCartTypeId { get; set; }
-
     #endregion
 }

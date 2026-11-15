@@ -73,15 +73,6 @@ public partial interface IProductAttributeMaterializer
         ProductVariantAttributeCombination combination = null);
 
     /// <summary>
-    /// For each cart item, finds an attribute combination by attribute selection and applies its data to the product.
-    /// </summary>
-    /// <param name="cartItems">Cart items.</param>
-    /// <returns>Number of merged attribute combinations.</returns>
-    /// <remarks>This method can lead to unwanted results if a product with different variants appears several times in cart.</remarks>
-    [Obsolete("Iterate cart items and use other MergeWithCombinationAsync method instead.")]
-    Task<int> MergeWithCombinationAsync(IEnumerable<ShoppingCartItem> cartItems);
-
-    /// <summary>
     /// Returns informations about the availability of an attribute combination.
     /// </summary>
     /// <param name="product">Product.</param>

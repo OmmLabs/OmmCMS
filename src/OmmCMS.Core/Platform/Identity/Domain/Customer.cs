@@ -314,16 +314,6 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
         protected set => _customerRoleMappings = value;
     }
 
-    private ICollection<ShoppingCartItem> _shoppingCartItems;
-    /// <summary>
-    /// Gets or sets shopping cart items
-    /// </summary>
-    public ICollection<ShoppingCartItem> ShoppingCartItems
-    {
-        get => _shoppingCartItems ?? LazyLoader.Load(this, ref _shoppingCartItems) ?? (_shoppingCartItems ??= new HashSet<ShoppingCartItem>());
-        set => _shoppingCartItems = value;
-    }
-
     private ICollection<Order> _orders;
     /// <summary>
     /// Gets or sets orders

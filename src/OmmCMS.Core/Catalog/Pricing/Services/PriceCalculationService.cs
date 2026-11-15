@@ -103,52 +103,6 @@ public partial class PriceCalculationService : IPriceCalculationService
         return options;
     }
 
-    public virtual async Task<PriceCalculationContext> CreateCalculationContextAsync(OrganizedShoppingCartItem cartItem, PriceCalculationOptions options)
-    {
-        Guard.NotNull(cartItem);
-        Guard.NotNull(options);
-
-        var product = cartItem.Item.Product;
-        var context = new PriceCalculationContext(product, cartItem.Item.Quantity, options)
-        {
-            CartItem = cartItem
-        };
-
-        // Include attributes selected for this cart item in price calculation.
-        context.AddSelectedAttributes(cartItem);
-
-        // Include bundle item data if the cart item is a bundle item.
-        if (cartItem.Item.BundleItem != null)
-        {
-            context.BundleItem = cartItem.Item.BundleItem;
-        }
-
-        // Perf: we already have the bundle items of a bundled product. No need to load them again during calculation.
-        if (cartItem.ChildItems?.Any() ?? false)
-        {
-            context.BundleItems = cartItem.ChildItems
-                .Where(x => x.Item.BundleItem != null)
-                .Select(x => x.Item.BundleItem)
-                .ToList();
-        }
-
-        if (product.ProductType == ProductType.BundledProduct && product.BundlePerItemPricing)
-        {
-            Guard.NotNull(cartItem.ChildItems);
-
-            foreach (var bundleItem in cartItem.ChildItems)
-            {
-                await _productAttributeMaterializer.MergeWithCombinationAsync(bundleItem.Item.Product, bundleItem.Item.AttributeSelection);
-            }
-        }
-        else
-        {
-            await _productAttributeMaterializer.MergeWithCombinationAsync(product, cartItem.Item.AttributeSelection);
-        }
-
-        return context;
-    }
-
     public virtual async Task<CalculatedPrice> CalculatePriceAsync(PriceCalculationContext context)
     {
         Guard.NotNull(context);
@@ -270,7 +224,7 @@ public partial class PriceCalculationService : IPriceCalculationService
         // Handle cases where not to run any calculator.
         if (product.CustomerEntersPrice)
         {
-            return new(context, context.CartItem?.Item?.CustomerEnteredPrice ?? 0m, PricingType.CustomerEnteredPrice);
+            return new(context, 0m, PricingType.CustomerEnteredPrice);
         }
         else if (product.CallForPrice)
         {

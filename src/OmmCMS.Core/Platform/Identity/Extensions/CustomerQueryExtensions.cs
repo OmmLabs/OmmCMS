@@ -19,25 +19,6 @@ public static partial class CustomerQueryExtensions
     }
 
     /// <summary>
-    /// Includes the complete cart graph for eager loading (including bundle items, applied discounts and rule sets).
-    /// </summary>
-    public static IIncludableQueryable<Customer, ProductBundleItem> IncludeShoppingCart(this IQueryable<Customer> query)
-    {
-        Guard.NotNull(query);
-
-        var includableQuery = query
-            .AsSplitQuery()
-            .Include(x => x.ShoppingCartItems)
-                .ThenInclude(x => x.Product)
-                .ThenInclude(x => x.AppliedDiscounts)
-                .ThenInclude(x => x.RuleSets)
-            .Include(x => x.ShoppingCartItems)
-                .ThenInclude(x => x.BundleItem);
-
-        return includableQuery;
-    }
-
-    /// <summary>
     /// Selects a customer by <see cref="Customer.Email"/>, <see cref="Customer.Username"/> or <see cref="Customer.CustomerNumber"/> (in that particular order).
     /// </summary>
     /// <param name="exactMatch">Whether to perform an exact or partial field match.</param>

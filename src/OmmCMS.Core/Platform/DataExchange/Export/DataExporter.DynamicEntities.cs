@@ -242,23 +242,6 @@ public partial class DataExporter
         return result;
     }
 
-    private async Task<IEnumerable<dynamic>> Convert(ShoppingCartItem shoppingCartItem, DataExporterContext ctx)
-    {
-        var result = new List<dynamic>();
-        dynamic dynObject = await ToDynamic(shoppingCartItem, ctx);
-
-        result.Add(dynObject);
-
-        await _services.EventPublisher.PublishAsync(new RowExportingEvent
-        {
-            Row = dynObject,
-            EntityType = ExportEntityType.ShoppingCartItem,
-            ExportRequest = ctx.Request,
-            ExecuteContext = ctx.ExecuteContext
-        });
-
-        return result;
-    }
 
     private static dynamic ToDynamic(Currency currency, DataExporterContext ctx)
     {
@@ -712,26 +695,6 @@ public partial class DataExporter
         return result;
     }
 
-    private async Task<dynamic> ToDynamic(ShoppingCartItem cartItem, DataExporterContext ctx)
-    {
-        if (cartItem == null)
-        {
-            return null;
-        }
-
-        dynamic result = new DynamicEntity(cartItem);
-
-        await _productAttributeMaterializer.MergeWithCombinationAsync(cartItem.Product, cartItem.AttributeSelection);
-
-        result.Store = ctx.Stores.ContainsKey(cartItem.StoreId)
-            ? DataExporter.ToDynamic(ctx.Stores[cartItem.StoreId])
-            : null;
-
-        result.Customer = ToDynamic(cartItem.Customer);
-        result.Product = await ToDynamic(cartItem.Product, ctx);
-
-        return result;
-    }
 
     private static dynamic CreateDynamic<TEntity>(TEntity entity)
         where TEntity : BaseEntity

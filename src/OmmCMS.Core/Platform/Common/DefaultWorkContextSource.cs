@@ -658,7 +658,6 @@ public class DefaultWorkContextSource : AsyncDbSaveHook<BaseEntity>, IWorkContex
 
             // Cookie present. Try to load guest customer by its value.
             var customer = await context.Db.Customers
-                //.IncludeShoppingCart()
                 .IncludeCustomerRoles()
                 .Where(c => c.CustomerGuid == customerGuid)
                 .FirstOrDefaultAsync();

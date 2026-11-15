@@ -48,12 +48,10 @@ public partial interface ICustomerService
     /// </summary>
     /// <param name="registrationFrom">Customer registration from. <c>null</c> to ignore.</param>
     /// <param name="registrationTo">Customer registration to. <c>null</c> to ignore.</param>
-    /// <param name="onlyWithoutShoppingCart">A value indicating whether to delete only customers without shopping cart.</param>
     /// <returns>Number of deleted guest customers.</returns>
     Task<int> DeleteGuestCustomersAsync(
         DateTime? registrationFrom,
         DateTime? registrationTo,
-        bool onlyWithoutShoppingCart,
         CancellationToken cancelToken = default);
 
     /// <summary>

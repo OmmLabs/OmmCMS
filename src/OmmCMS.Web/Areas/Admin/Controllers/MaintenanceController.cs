@@ -117,7 +117,6 @@ public class MaintenanceController : AdminController
         };
 
         model.DeleteGuests.EndDate = DateTime.UtcNow.AddDays(-7);
-        model.DeleteGuests.OnlyWithoutShoppingCart = true;
 
         // Image cache stats
         var (fileCount, totalSize) = await _imageCache.Value.CacheStatisticsAsync();
@@ -161,7 +160,6 @@ public class MaintenanceController : AdminController
             var numDeletedCustomers = await _customerService.DeleteGuestCustomersAsync(
                 startDateValue,
                 endDateValue,
-                model.DeleteGuests.OnlyWithoutShoppingCart,
                 _appLifetime.ApplicationStopping);
 
             NotifyInfo(T("Admin.System.Maintenance.DeleteGuests.TotalDeleted", numDeletedCustomers));

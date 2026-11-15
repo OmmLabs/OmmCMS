@@ -46,7 +46,6 @@ public class PriceCalculationContext
         Guard.NotNull(context);
 
         Product = context.Product;
-        CartItem = context.CartItem;
         AssociatedProducts = context.AssociatedProducts;
         BundleItems = context.BundleItems;
         BundleItem = context.BundleItem;
@@ -66,13 +65,6 @@ public class PriceCalculationContext
         get => _product;
         set => _product = value ?? throw new ArgumentNullException(nameof(Product));
     }
-
-    /// <summary>
-    /// The shopping cart item to calculate price for, if any.
-    /// Use <see cref="IPriceCalculationService.CreateCalculationContextAsync(OrganizedShoppingCartItem, PriceCalculationOptions)"/>
-    /// to include selected product attributes and attribute combination prices in the price calculation.
-    /// </summary>
-    public OrganizedShoppingCartItem CartItem { get; init; }
 
     /// <summary>
     /// An explicit list of calculator instances that define the pipeline. A non-null array
@@ -131,9 +123,7 @@ public class PriceCalculationContext
     /// <summary>
     /// Gets or sets the selected product attributes to be included in the price calculation.
     /// For example required to take into account price adjustments of attributes selected by the customer.
-    /// It is recommended to use the <see cref="PriceCalculationContext"/> extension methods to apply these attributes, 
-    /// e.g. <see cref="PriceCalculationContextExtensions.AddSelectedAttributes(PriceCalculationContext, OrganizedShoppingCartItem)"/>
-    /// to apply selected attributes of all products indcluded in a shopping cart.
+    /// Use the context extension methods to apply selected product attributes.
     /// </summary>
     public List<PriceCalculationAttributes> SelectedAttributes { get; set; } = [];
 

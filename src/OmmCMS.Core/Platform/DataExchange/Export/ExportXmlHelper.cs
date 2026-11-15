@@ -572,40 +572,6 @@ public class ExportXmlHelper : Disposable
         }
     }
 
-    public void WriteShoppingCartItem(dynamic shoppingCartItem, string node)
-    {
-        if (shoppingCartItem == null)
-            return;
-
-        ShoppingCartItem entity = shoppingCartItem.Entity;
-
-        if (node.HasValue())
-        {
-            _writer.WriteStartElement(node);
-        }
-
-        _writer.WriteElementString(nameof(ShoppingCartItem.Id), entity.Id.ToString());
-        _writer.WriteElementString(nameof(ShoppingCartItem.Active), entity.Active.ToString());
-        _writer.WriteElementString(nameof(ShoppingCartItem.StoreId), entity.StoreId.ToString());
-        _writer.WriteElementString(nameof(ShoppingCartItem.ParentItemId), entity.ParentItemId?.ToString() ?? string.Empty);
-        _writer.WriteElementString(nameof(ShoppingCartItem.BundleItemId), entity.BundleItemId?.ToString() ?? string.Empty);
-        _writer.WriteElementString(nameof(ShoppingCartItem.ShoppingCartTypeId), entity.ShoppingCartTypeId.ToString());
-        _writer.WriteElementString(nameof(ShoppingCartItem.CustomerId), entity.CustomerId.ToString());
-        _writer.WriteElementString(nameof(ShoppingCartItem.ProductId), entity.ProductId.ToString());
-        _writer.WriteCData(nameof(ShoppingCartItem.RawAttributes), entity.RawAttributes);
-        _writer.WriteElementString(nameof(ShoppingCartItem.CustomerEnteredPrice), entity.CustomerEnteredPrice.ToString(_culture));
-        _writer.WriteElementString(nameof(ShoppingCartItem.Quantity), entity.Quantity.ToString());
-        _writer.WriteElementString(nameof(ShoppingCartItem.CreatedOnUtc), entity.CreatedOnUtc.ToString(_culture));
-        _writer.WriteElementString(nameof(ShoppingCartItem.UpdatedOnUtc), entity.UpdatedOnUtc.ToString(_culture));
-
-        WriteCustomer(shoppingCartItem.Customer, nameof(ShoppingCartItem.Customer));
-        WriteProduct(shoppingCartItem.Product, nameof(ShoppingCartItem.Product));
-
-        if (node.HasValue())
-        {
-            _writer.WriteEndElement();
-        }
-    }
 
     public void WriteProduct(dynamic product, string node)
     {

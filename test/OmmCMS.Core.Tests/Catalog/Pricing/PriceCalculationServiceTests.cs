@@ -50,7 +50,6 @@ public class PriceCalculationServiceTests : ServiceTestBase
     Customer _customer;
     Language _language;
     Product _product;
-    ShoppingCartItem _sci;
 
     PriceCalculationContext _priceCalculationContext;
     ProductBatchContext _productBatchContext;
@@ -146,15 +145,6 @@ public class PriceCalculationServiceTests : ServiceTestBase
             CustomerEntersPrice = false,
             Published = true,
             ProductType = ProductType.SimpleProduct
-        };
-
-        _sci = new ShoppingCartItem
-        {
-            Customer = _customer,
-            CustomerId = _customer.Id,
-            Product = _product,
-            ProductId = _product.Id,
-            Quantity = 2,
         };
 
         _productBatchContext = new ProductBatchContext(new List<Product> { _product }, DbContext, LifetimeScope, _store, _customer, false);
@@ -767,22 +757,20 @@ public class PriceCalculationServiceTests : ServiceTestBase
     }
 
     [Test]
-    public async Task Can_get_shopping_cart_item_unitPrice()
+    public async Task Can_get_product_quantity_unitPrice()
     {
-        var item = new OrganizedShoppingCartItem(_sci);
         var calculationOptions = _priceCalcService.CreateDefaultOptions(false, _customer, _currency, _productBatchContext);
-        var calculationContext = await _priceCalcService.CreateCalculationContextAsync(item, calculationOptions);
+        var calculationContext = new PriceCalculationContext(_product, 2, calculationOptions);
         var (unitPrice, _) = await _priceCalcService.CalculateSubtotalAsync(calculationContext);
 
         unitPrice.FinalPrice.Amount.ShouldEqual(12.34);
     }
 
     [Test]
-    public async Task Can_get_shopping_cart_item_subTotal()
+    public async Task Can_get_product_quantity_subTotal()
     {
-        var item = new OrganizedShoppingCartItem(_sci);
         var calculationOptions = _priceCalcService.CreateDefaultOptions(false, _customer, _currency, _productBatchContext);
-        var calculationContext = await _priceCalcService.CreateCalculationContextAsync(item, calculationOptions);
+        var calculationContext = new PriceCalculationContext(_product, 2, calculationOptions);
         var (_, subtotal) = await _priceCalcService.CalculateSubtotalAsync(calculationContext);
 
         subtotal.FinalPrice.Amount.ShouldEqual(24.68);

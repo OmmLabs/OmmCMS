@@ -13,6 +13,4 @@ public class StoreDashboardReportModel : ModelBase
     public string Sales { get; set; }
     public string CustomersCount { get; set; }
     public string OnlineCustomersCount { get; set; }
-    public string WishlistsValue { get; set; }
-    public string CartsValue { get; set; }
 }

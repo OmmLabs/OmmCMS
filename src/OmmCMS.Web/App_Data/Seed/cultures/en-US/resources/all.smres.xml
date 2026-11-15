@@ -10294,12 +10294,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.ShippingStatusIds.Hint">
 		<Value>Filter by shipping status.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.ShoppingCartTypeId">
-		<Value>Shopping cart type</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.ShoppingCartTypeId.Hint">
-		<Value>Filter by shopping cart type.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.StoreId">
 		<Value>Store</Value>
 	</LocaleResource>
@@ -12964,12 +12958,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.System.Maintenance.DeleteGuests.EndDate.Hint">
 		<Value>The end date of the search. If no date is specified, everything beginning on the start date is deleted.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.System.Maintenance.DeleteGuests.OnlyWithoutShoppingCart">
-		<Value>Only without shopping cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Maintenance.DeleteGuests.OnlyWithoutShoppingCart.Hint">
-		<Value>A value indicating whether we need to find customers without shopping carts/wishlists. If unchecked, then all customers will be found.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.System.Maintenance.DeleteGuests.StartDate">
 		<Value>Start date</Value>
 	</LocaleResource>
@@ -15577,9 +15565,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Enums.ExportEntityType.Product">
 		<Value>Product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportEntityType.ShoppingCartItem">
-		<Value>Shopping Cart</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.ExportHttpTransmissionType.MultipartFormDataPost">
 		<Value>Multipart form data POST</Value>

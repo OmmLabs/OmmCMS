@@ -9,12 +9,10 @@ public class GuestCustomerDeletingEvent : IEventMessage
 {
     public GuestCustomerDeletingEvent(
         DateTime? registrationFrom,
-        DateTime? registrationTo,
-        bool onlyWithoutShoppingCart)
+        DateTime? registrationTo)
     {
         RegistrationFrom = registrationFrom;
         RegistrationTo = registrationTo;
-        OnlyWithoutShoppingCart = onlyWithoutShoppingCart;
     }
 
     /// <summary>
@@ -28,12 +26,6 @@ public class GuestCustomerDeletingEvent : IEventMessage
     /// Already included in <see cref="Query"/>.
     /// </summary>
     public DateTime? RegistrationTo { get; }
-
-    /// <summary>
-    /// A value indicating whether to delete only customers without shopping cart.
-    /// Already included in <see cref="Query"/>.
-    /// </summary>
-    public bool OnlyWithoutShoppingCart { get; }
 
     /// <summary>
     /// Gets or sets the query used for deleting guest customers.

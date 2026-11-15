@@ -77,41 +77,6 @@ public static partial class ProductUrlHelperExtensions
     /// </summary>
     /// <param name="helper">Product URL helper.</param>
     /// <param name="productSlug">Product URL slug.</param>
-    /// <param name="cartItem">Organized shopping cart item.</param>
-    /// <returns>Product URL.</returns>
-    public static async Task<string> GetProductUrlAsync(this ProductUrlHelper helper, string productSlug, OrganizedShoppingCartItem cartItem)
-    {
-        Guard.NotNull(helper);
-        Guard.NotNull(cartItem);
-
-        var product = cartItem.Item.Product;
-        if (product.IsSystemProduct)
-        {
-            return null;
-        }
-
-        var query = new ProductVariantQuery();
-
-        if (product.ProductType != ProductType.BundledProduct)
-        {
-            await helper.AddAttributesToQueryAsync(query, cartItem.Item.AttributeSelection, product.Id);
-        }
-        else if (cartItem.ChildItems != null && product.BundlePerItemPricing)
-        {
-            foreach (var childItem in cartItem.ChildItems.Where(x => x.Item.Id != cartItem.Item.Id))
-            {
-                await helper.AddAttributesToQueryAsync(query, childItem.Item.AttributeSelection, childItem.Item.ProductId, childItem.Item.BundleItem.Id);
-            }
-        }
-
-        return helper.GetProductPath(productSlug, query);
-    }
-
-    /// <summary>
-    /// Creates a product URL including variant query string.
-    /// </summary>
-    /// <param name="helper">Product URL helper.</param>
-    /// <param name="productSlug">Product URL slug.</param>
     /// <param name="orderItem">Order item.</param>
     /// <returns>Product URL.</returns>
     public static async Task<string> GetProductUrlAsync(this ProductUrlHelper helper, string productSlug, OrderItem orderItem)

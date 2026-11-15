@@ -124,7 +124,6 @@ public partial class CustomerService : ICustomerService
                 .OrderByDescending(c => c.Id)
                 .IncludeCustomerRoles()
                 // Disabled because of SqlClient "Deadlock" exception (?)
-                //.IncludeShoppingCart()
                 .FirstOrDefaultAsync();
 
             return customer;
@@ -199,7 +198,6 @@ public partial class CustomerService : ICustomerService
     public virtual async Task<int> DeleteGuestCustomersAsync(
         DateTime? registrationFrom,
         DateTime? registrationTo,
-        bool onlyWithoutShoppingCart,
         CancellationToken cancelToken = default)
     {
         var numberOfDeletedCustomers = 0;
@@ -215,7 +213,7 @@ public partial class CustomerService : ICustomerService
         {
             var numberOfDeletedAttributes = 0;
             var batchSize = Math.Max(_performanceSettings.GuestCustomersDeletionBatchSize, 1);
-            var query = await GetGuestCustomersDeletionQuery(registrationFrom, registrationTo, onlyWithoutShoppingCart, cancelToken);
+            var query = await GetGuestCustomersDeletionQuery(registrationFrom, registrationTo, cancelToken);
             var customerIdsQuery = query
                 .OrderBy(x => x.Id)
                 .Select(x => x.Id)
@@ -274,7 +272,6 @@ public partial class CustomerService : ICustomerService
     private async Task<IQueryable<Customer>> GetGuestCustomersDeletionQuery(
         DateTime? registrationFrom,
         DateTime? registrationTo,
-        bool onlyWithoutShoppingCart,
         CancellationToken cancelToken)
     {
         var query =
@@ -284,13 +281,6 @@ public partial class CustomerService : ICustomerService
                 && !_db.CustomerContent.IgnoreQueryFilters().Any(cc => cc.CustomerId == c.Id)
             select c;
 
-        if (onlyWithoutShoppingCart)
-        {
-            query =
-                from c in query
-                where !_db.ShoppingCartItems.IgnoreQueryFilters().Any(sci => sci.CustomerId == c.Id && sci.Active)
-                select c;
-        }
         if (registrationFrom.HasValue)
         {
             query = query.Where(c => c.CreatedOnUtc >= registrationFrom.Value);
@@ -300,7 +290,7 @@ public partial class CustomerService : ICustomerService
             query = query.Where(c => c.CreatedOnUtc <= registrationTo.Value);
         }
 
-        var message = new GuestCustomerDeletingEvent(registrationFrom, registrationTo, onlyWithoutShoppingCart)
+        var message = new GuestCustomerDeletingEvent(registrationFrom, registrationTo)
         {
             Query = query
         };

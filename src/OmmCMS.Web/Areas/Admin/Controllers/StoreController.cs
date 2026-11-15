@@ -20,16 +20,13 @@ public class StoreController : AdminController
 {
     private readonly SmartDbContext _db;
     private readonly ICatalogSearchService _catalogSearchService;
-    private readonly ShoppingCartSettings _shoppingCartSettings;
 
     public StoreController(
         SmartDbContext db,
-        ICatalogSearchService catalogSearchService,
-        ShoppingCartSettings shoppingCartSettings)
+        ICatalogSearchService catalogSearchService)
     {
         _db = db;
         _catalogSearchService = catalogSearchService;
-        _shoppingCartSettings = shoppingCartSettings;
     }
 
     /// <summary>
@@ -229,8 +226,6 @@ public class StoreController : AdminController
             .ApplyRolesFilter([registeredRole.Id]);
 
         var sumAllOrders = await ordersQuery.SumAsync(x => (decimal?)x.OrderTotal) ?? 0;
-        var sumOpenCarts = await _db.ShoppingCartItems.GetOpenCartTypeSubTotalAsync(ShoppingCartType.ShoppingCart, _shoppingCartSettings.AllowActivatableCartItems ? true : null);
-        var sumWishlists = await _db.ShoppingCartItems.GetOpenCartTypeSubTotalAsync(ShoppingCartType.Wishlist);
         var totalMediaSize = await _db.MediaFiles.SumAsync(x => (long)x.Size);
 
         var model = new StoreDashboardReportModel
@@ -245,9 +240,7 @@ public class StoreController : AdminController
             CustomersCount = (await registeredCustomersQuery.CountAsync()).ToString("N0"),
             OrdersCount = (await ordersQuery.CountAsync()).ToString("N0"),
             OnlineCustomersCount = (await _db.Customers.ApplyOnlineCustomersFilter(15).CountAsync()).ToString("N0"),
-            Sales = Services.CurrencyService.CreateMoney(sumAllOrders, primaryCurrency).ToString(),
-            CartsValue = Services.CurrencyService.CreateMoney(sumOpenCarts, primaryCurrency).ToString(),
-            WishlistsValue = Services.CurrencyService.CreateMoney(sumWishlists, primaryCurrency).ToString()
+            Sales = Services.CurrencyService.CreateMoney(sumAllOrders, primaryCurrency).ToString()
         };
 
         return new JsonResult(new { model });

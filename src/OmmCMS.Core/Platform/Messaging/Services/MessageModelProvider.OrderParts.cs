@@ -337,21 +337,5 @@ public partial class MessageModelProvider
         return m;
     }
 
-    protected virtual async Task<object> CreateModelPartAsync(ShoppingCartItem part, MessageContext messageContext)
-    {
-        Guard.NotNull(messageContext);
-        Guard.NotNull(part);
-
-        var m = new Dictionary<string, object>
-        {
-            { "Id", part.Id },
-            { "Quantity", part.Quantity },
-            { "Product", await CreateModelPartAsync(part.Product, messageContext, part.AttributeSelection) },
-        };
-
-        await _helper.PublishModelPartCreatedEventAsync(part, m);
-
-        return m;
-    }
 
 }

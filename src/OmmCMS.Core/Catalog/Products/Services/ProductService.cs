@@ -548,15 +548,6 @@ public partial class ProductService : IProductService
             .Where(x => productIds.Contains(x.ProductId))
             .ExecuteDeleteAsync(cancelToken);
 
-        // Cart items of bundle items.
-        var bundleItemIdsQuery = _db.ProductBundleItem
-            .Where(x => productIds.Contains(x.BundleProductId))
-            .Select(x => x.Id);
-
-        await _db.ShoppingCartItems
-            .Where(x => x.BundleItemId != null && bundleItemIdsQuery.Contains(x.BundleItemId.Value))
-            .ExecuteDeleteAsync(cancelToken);
-
         await _db.Downloads
             .Where(x => productIds.Contains(x.EntityId) && x.EntityName == entityName)
             .ExecuteDeleteAsync(cancelToken);

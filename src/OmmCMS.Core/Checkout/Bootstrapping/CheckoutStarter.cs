@@ -26,8 +26,6 @@ internal sealed class CheckoutStarter : StarterBase
 
     public override void ConfigureContainer(ContainerBuilder builder, IApplicationContext appContext)
     {
-        builder.RegisterType<CheckoutAttributeMaterializer>().As<ICheckoutAttributeMaterializer>().InstancePerLifetimeScope();
-        builder.RegisterType<CheckoutAttributeFormatter>().As<ICheckoutAttributeFormatter>().InstancePerLifetimeScope();
         builder.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
         builder.RegisterType<TaxService>().As<ITaxService>().InstancePerLifetimeScope();
         builder.RegisterType<TaxCalculator>().As<ITaxCalculator>().InstancePerLifetimeScope();

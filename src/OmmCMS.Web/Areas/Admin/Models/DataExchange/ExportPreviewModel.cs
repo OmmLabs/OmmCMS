@@ -156,24 +156,3 @@ public class ExportPreviewNewsletterSubscriptionModel : EntityModelBase
     [LocalizedDisplay("Admin.Common.Store")]
     public string StoreName { get; set; }
 }
-
-[LocalizedDisplay("Admin.Catalog.Products.Fields.")]
-public class ExportPreviewShoppingCartItemModel : ExportPreviewProductModel
-{
-    [LocalizedDisplay("Admin.DataExchange.Export.Filter.ShoppingCartTypeId")]
-    public int ShoppingCartTypeId { get; set; }
-    [LocalizedDisplay("Admin.DataExchange.Export.Filter.ShoppingCartTypeId")]
-    public string ShoppingCartTypeName { get; set; }
-
-    [LocalizedDisplay("Common.CustomerId")]
-    public int CustomerId { get; set; }
-
-    [LocalizedDisplay("Admin.CurrentCarts.Customer")]
-    public string CustomerEmail { get; set; }
-
-    [LocalizedDisplay("Common.CreatedOn")]
-    public DateTime CreatedOn { get; set; }
-
-    [LocalizedDisplay("Admin.Common.Store")]
-    public string StoreName { get; set; }
-}

@@ -328,8 +328,7 @@ public partial class ExportProfileService : AsyncDbSaveHook<ExportProfile>, IExp
 
                 var filter = new ExportFilter
                 {
-                    IsPublished = true,
-                    ShoppingCartTypeId = (int)ShoppingCartType.ShoppingCart
+                    IsPublished = true
                 };
 
                 profile.Projection = XmlHelper.Serialize(projection);

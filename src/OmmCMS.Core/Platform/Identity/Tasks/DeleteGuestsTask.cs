@@ -26,7 +26,6 @@ public partial class DeleteGuestsTask : ITask
         await _customerService.DeleteGuestCustomersAsync(
             registrationFrom: null,
             registrationTo,
-            onlyWithoutShoppingCart: true,
             cancelToken);
     }
 }

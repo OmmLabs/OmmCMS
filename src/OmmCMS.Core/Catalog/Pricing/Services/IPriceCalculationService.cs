@@ -33,15 +33,6 @@ public partial interface IPriceCalculationService
         ProductBatchContext batchContext = null);
 
     /// <summary>
-    /// Creates and prepares a calculation context for calculating a price of a shopping cart item.
-    /// Includes selected product attributes and prices of product attribute combinations.
-    /// </summary>
-    /// <param name="cartItem">Shopping cart item.</param>
-    /// <param name="options">Price calculation options.</param>
-    /// <returns>Price calculation context.</returns>
-    Task<PriceCalculationContext> CreateCalculationContextAsync(OrganizedShoppingCartItem cartItem, PriceCalculationOptions options);
-
-    /// <summary>
     /// Calculates the unit price for a given product. Prices are returned in the currency specified by <see cref="PriceCalculationOptions.TargetCurrency"/>.
     /// </summary>
     /// <param name="context">The context that contains the input product, the calculation options and some cargo data.</param>

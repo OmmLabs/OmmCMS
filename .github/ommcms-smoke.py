@@ -629,6 +629,13 @@ try:
             "Checkout/Cart/Extensions/IShoppingCartValidatorExtensions.cs",
             "Checkout/Cart/Domain/AddToCartContext.cs",
             "Checkout/Cart/Events/MigrateShoppingCartEvent.cs",
+            "Checkout/Cart/Domain/ShoppingCartItem.cs",
+            "Checkout/Cart/Domain/ShoppingCartType.cs",
+            "Checkout/Cart/Domain/ShoppingCart.cs",
+            "Checkout/Cart/Domain/OrganizedShoppingCartItem.cs",
+            "Checkout/Cart/Extensions",
+            "Checkout/Attributes/Services",
+            "Catalog/Products/Hooks/ProductBundleItemHook.cs",
         ):
             assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
         for language in ("en", "de"):
@@ -709,6 +716,7 @@ try:
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('shipment', 'shipments', 'shipmentitem', 'shipmentitems', 'returncase', 'returncases', 'ordernote', 'ordernotes')") == [0]
         assert rows("SELECT COUNT(*) FROM MessageTemplate WHERE Name IN ('ShipmentSent.CustomerNotification', 'ShipmentDelivered.CustomerNotification', 'Customer.NewOrderNote')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name)='newslettersubscription'") == [1]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('shoppingcartitem', 'shoppingcartitems')") == [0]
         topics = set(rows("SELECT SystemName FROM Topic"))
         assert {"HomePageText", "AboutUs", "ContactUs"} <= topics
         assert not topics.intersection({"PaymentInfo", "ShippingInfo", "CheckoutAsGuestOrRegister"})

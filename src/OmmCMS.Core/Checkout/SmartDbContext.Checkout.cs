@@ -14,5 +14,4 @@ public partial class SmartDbContext
     public DbSet<TaxCategory> TaxCategories { get; set; }
     public DbSet<CheckoutAttribute> CheckoutAttributes { get; set; }
     public DbSet<CheckoutAttributeValue> CheckoutAttributeValues { get; set; }
-    public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 }

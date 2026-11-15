@@ -71,15 +71,6 @@ public partial class SettingsMenu : MenuBase
             },
             new MenuItem
             {
-                Id = "cart",
-                Text = T("ShoppingCart"),
-                Icon = "cart",
-                PermissionNames = perm,
-                ControllerName = "ShoppingCart",
-                ActionName = "ShoppingCartSettings"
-            },
-            new MenuItem
-            {
                 Id = "order",
                 Text = T("Admin.Orders"),
                 Icon = "chart-up",

@@ -321,9 +321,6 @@ public partial class DataExporter : IDataExporter
             case ExportEntityType.NewsletterSubscription:
                 data.Cast<NewsletterSubscription>().Each(x => result.Data.Add(DataExporter.ToDynamic(x, ctx)));
                 break;
-            case ExportEntityType.ShoppingCartItem:
-                await data.Cast<ShoppingCartItem>().EachAsync(async x => result.Data.Add(await ToDynamic(x, ctx)));
-                break;
         }
 
         return result;
@@ -885,62 +882,6 @@ public partial class DataExporter : IDataExporter
 
             result = query.Select(x => x.Subscription);
         }
-        else if (entityType == ExportEntityType.ShoppingCartItem)
-        {
-            var query = _db.ShoppingCartItems
-                .Include(x => x.Customer)
-                    .ThenInclude(x => x.CustomerRoleMappings)
-                    .ThenInclude(x => x.CustomerRole)
-                .Include(x => x.Product)
-                .AsSplitQuery()
-                .AsNoTrackingWithIdentityResolution()
-                .AsNoCaching()
-                .Where(x => x.Customer != null && x.Product != null);
-
-            if (storeId > 0)
-                query = query.Where(x => x.StoreId == storeId);
-
-            if (ctx.Request.ActionOrigin.EqualsNoCase("CurrentCarts"))
-            {
-                query = query.Where(x => x.ShoppingCartTypeId == (int)ShoppingCartType.ShoppingCart);
-            }
-            else if (ctx.Request.ActionOrigin.EqualsNoCase("CurrentWishlists"))
-            {
-                query = query.Where(x => x.ShoppingCartTypeId == (int)ShoppingCartType.Wishlist);
-            }
-            else if (ctx.Filter.ShoppingCartTypeId.HasValue)
-            {
-                query = query.Where(x => x.ShoppingCartTypeId == ctx.Filter.ShoppingCartTypeId.Value);
-            }
-
-            if (f.IsActiveCustomer.HasValue)
-                query = query.Where(x => x.Customer.Active == f.IsActiveCustomer.Value);
-
-            if (f.IsTaxExempt.HasValue)
-                query = query.Where(x => x.Customer.IsTaxExempt == f.IsTaxExempt.Value);
-
-            if (f.LastActivityFrom.HasValue)
-                query = query.Where(x => f.LastActivityFrom.Value <= x.Customer.LastActivityDateUtc);
-
-            if (f.LastActivityTo.HasValue)
-                query = query.Where(x => f.LastActivityTo.Value >= x.Customer.LastActivityDateUtc);
-
-            if (f.CreatedFrom.HasValue)
-                query = query.Where(x => f.CreatedFrom.Value <= x.CreatedOnUtc);
-
-            if (f.CreatedTo.HasValue)
-                query = query.Where(x => f.CreatedTo.Value >= x.CreatedOnUtc);
-
-            if (ctx.Projection.NoBundleProducts)
-                query = query.Where(x => x.Product.ProductTypeId != (int)ProductType.BundledProduct);
-            else
-                query = query.Where(x => x.BundleItemId == null);
-
-            if (customerIdsByRolesQuery != null)
-                query = query.Where(x => customerIdsByRolesQuery.Contains(x.CustomerId));
-
-            result = query;
-        }
         else
         {
             throw new NotSupportedException($"Unsupported entity type '{entityType}'.");
@@ -1087,9 +1028,6 @@ public partial class DataExporter : IDataExporter
 
             switch (ctx.Request.Provider.Value.EntityType)
             {
-                case ExportEntityType.ShoppingCartItem:
-                    Detach(x => x is ShoppingCartItem || x is Customer || x is Product || x is ProductVariantAttributeCombination);
-                    break;
                 case ExportEntityType.NewsletterSubscription:
                     Detach(x => x is NewsletterSubscription || x is Customer);
                     break;
@@ -1258,27 +1196,6 @@ public partial class DataExporter : IDataExporter
             (
                 () => LoadEntities<NewsletterSubscription>(ctx),
                 null,
-                entity => Convert(entity, ctx),
-                offset, PageSize, limit, recordsPerSegment, totalRecords
-            );
-        }
-        else if (entityType == ExportEntityType.ShoppingCartItem)
-        {
-            async Task dataLoaded(ICollection<ShoppingCartItem> entities)
-            {
-                var products = entities.Select(x => x.Product);
-
-                ctx.ProductBatchContext = _productService.CreateProductBatchContext(products, ctx.Store, null, includeHidden);
-                ctx.PriceCalculationOptions = await CreatePriceCalculationOptions(ctx.ProductBatchContext, ctx);
-
-                ctx.TranslationsPerPage[nameof(Product)] = await CreateTranslationCollection(nameof(Product), products);
-                ctx.UrlRecordsPerPage[nameof(Product)] = await CreateUrlRecordCollection(nameof(Product), products);
-            };
-
-            ctx.ExecuteContext.DataSegmenter = new ExportDataSegmenter<ShoppingCartItem>
-            (
-                () => LoadEntities<ShoppingCartItem>(ctx),
-                dataLoaded,
                 entity => Convert(entity, ctx),
                 offset, PageSize, limit, recordsPerSegment, totalRecords
             );
