@@ -27,7 +27,6 @@ public partial class SmartDbContext
     public DbSet<ProductBundleItem> ProductBundleItem { get; set; }
     public DbSet<ProductBundleItemAttributeFilter> ProductBundleItemAttributeFilter { get; set; }
     public DbSet<ProductMediaFile> ProductMediaFiles { get; set; }
-    public DbSet<BackInStockSubscription> BackInStockSubscriptions { get; set; }
     public DbSet<ProductTag> ProductTags { get; set; }
 
     public DbSet<ProductAttribute> ProductAttributes { get; set; }

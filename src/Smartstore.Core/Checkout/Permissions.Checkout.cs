@@ -38,14 +38,6 @@ public static partial class Permissions
     {
         public const string Self = "promotion";
 
-        public static class Affiliate
-        {
-            public const string Self = "promotion.affiliate";
-            public const string Read = "promotion.affiliate.read";
-            public const string Update = "promotion.affiliate.update";
-            public const string Create = "promotion.affiliate.create";
-            public const string Delete = "promotion.affiliate.delete";
-        }
     }
 
     public static partial class Configuration

@@ -107,8 +107,6 @@ public class CustomerModel : TabbableModel
     [LocalizedDisplay("*Active")]
     public bool Active { get; set; }
 
-    [LocalizedDisplay("*Affiliate")]
-    public int AffiliateId { get; set; }
     public string AffiliateFullName { get; set; }
 
     [LocalizedDisplay("*TimeZoneId")]

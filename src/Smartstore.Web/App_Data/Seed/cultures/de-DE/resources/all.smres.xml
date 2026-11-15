@@ -48,18 +48,6 @@
 	<LocaleResource Name="Account.Avatar.UploadRules">
 		<Value>Ein Avatar muss im GIF-, PNG- oder JPG-Format vorliegen und darf {0} nicht überschreiten.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Account.BackInStockSubscriptions">
-		<Value>Benachrichtigung bei Lieferfähigkeit</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.BackInStockSubscriptions.Description">
-		<Value>Sie erhalten eine E-Mail, wenn das Produkt wieder lieferbar ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.BackInStockSubscriptions.NoSubscriptions">
-		<Value>Aktuell erhalten Sie keine Benachrichtigungen, wenn Produkte wieder lieferbar sind.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.BackInStockSubscriptions.ProductColumn">
-		<Value>Produkt</Value>
-	</LocaleResource>
 	<LocaleResource Name="Account.ChangePassword">
 		<Value>Passwort ändern</Value>
 	</LocaleResource>
@@ -893,66 +881,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Address.SelectCountry">
 		<Value>Land wählen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates">
-		<Value>Partnerprogramme</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Added">
-		<Value>Der neue Partner wurde erfolgreich hinzugefügt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.AddNew">
-		<Value>Neuen Partner hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Customers">
-		<Value>Kunden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Deleted">
-		<Value>Der Partner wurde gelöscht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.EditAffiliateDetails">
-		<Value>Partner bearbeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields.Active">
-		<Value>Aktiv</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields.Active.Hint">
-		<Value>Bestimmt, ob der Partner aktiv ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields.ID">
-		<Value>ID</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields.ID.Hint">
-		<Value>Eindeutige ID des Partners bzw. Afiliates</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields.URL">
-		<Value>URL</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields.URL.Hint">
-		<Value>Wenn dieser Hyperlink aus der Partner-Website angeklickt wird, wird anhand des Partner-ID Parameters der Partner ermittelt. Auf diese Weise kann der Kunde dem Partner zugeordnet.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Info">
-		<Value>Partner Info</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Orders">
-		<Value>Aufträge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Orders.Order">
-		<Value>Erteilter Auftrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Orders.OrderStatus">
-		<Value>Auftragsstatus</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Orders.OrderTotal">
-		<Value>Auftragssumme</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Orders.PaymentStatus">
-		<Value>Zahlungsstatus</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Orders.ShippingStatus">
-		<Value>Versandstatus</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Updated">
-		<Value>Der Partner wurde erfolgreich aktualisiert.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.AI.ImageCreation.Atmosphere">
 		<Value>Die Atmosphäre wirkt {1} und wird durch {0} geprägt.</Value>
@@ -2382,12 +2310,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.AdminComment.Hint">
 		<Value>Admin Kommentar. Für interne Zwecke.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.AllowBackInStockSubscriptions">
-		<Value>Benachrichtigung bei Lieferbarkeit ermöglichen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.AllowBackInStockSubscriptions.Hint">
-		<Value>Legt fest, ob Kunden News abonnieren können, die die Lieferbarkeit von zuvor vergriffenen Produkten melden.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.AllowCustomerReviews">
 		<Value>Kundenbewertungen erlauben</Value>
@@ -6021,12 +5943,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.GenderEnabled.Hint">
 		<Value>Legt fest, ob das Eingabefeld "Geschlecht" aktiviert ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideBackInStockSubscriptionsTab">
-		<Value>"Benachrichtigung bei Lieferfähigkeit" verbergen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideBackInStockSubscriptionsTab.Hint">
-		<Value>Legt fest, ob die Funktion "Benachrichtigung bei Lieferfähigkeit" in 'Mein Konto' angezeigt werden soll.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideDownloadableProductsTab">
 		<Value>Downloads im Bereich "Mein Konto" ausblenden</Value>
@@ -9915,12 +9831,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Customers.Customers.Fields.AdminComment.Hint">
 		<Value>Kommentar für internern Gebrauch. Wird nicht veröffentlicht.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Fields.Affiliate">
-		<Value>Partner</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Fields.Affiliate.Hint">
-		<Value>Das dem Benutzer zugeordnete Unternehmen.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.Fields.City">
 		<Value>Stadt</Value>
 	</LocaleResource>
@@ -10295,9 +10205,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.ReallyDeleteAdministrator">
 		<Value>Bei dem Kunden handelt es sich um einen Administrator. Möchten Sie ihn wirklich löschen?</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.RemoveAffiliateAssignment">
-		<Value>Zuordnung zum Partner entfernen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Reports">
 		<Value>Kundenauswertungen</Value>
@@ -11714,12 +11621,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Fields.AcceptThirdPartyEmailHandOver.Hint">
 		<Value>Gibt an, ob der Kunde bei der Bestellung einer Weitergabe seiner E-Mail Adresse an Dritte zugestimmt hat oder nicht.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Fields.Affiliate">
-		<Value>Partner</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Fields.Affiliate.Hint">
-		<Value>Das Partner-Unternehmen, dem dieser Auftrag zugeordnet ist.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Fields.AuthorizationTransactionID">
 		<Value>Transaktions-ID für Autorisierung</Value>
@@ -13289,9 +13190,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Active">
 		<Value>Ist aktiv</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.Affiliate">
-		<Value>Partner</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.AllProductsFromCategoryInCart">
 		<Value>Alle Produkte aus Kategorie im Warenkorb</Value>
@@ -14910,39 +14808,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Aria.Label.UploaderProgressBar">
 		<Value>{0} Dateiupload</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.AlreadySubscribed">
-		<Value>Sie erhalten bereits Benachrichtigungen, falls dieses Produkt wieder lieferbar ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.MaxSubscriptions">
-		<Value>Abonnieren ist nicht möglich. Die maximale Anzahl der erlaubten Abonnements ist {0}.</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.NotAllowed">
-		<Value>Benachrichtigungen für dieses Produkt sind nicht möglich.</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.NotifyMe">
-		<Value>Bitte benachrichtigen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.NotifyMeWhenAvailable">
-		<Value>Bitte benachrichtigen, wenn verfügbar.</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.OnlyRegistered">
-		<Value>Nur registrierte Benutzer können diese Funktion nutzen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.PopupTitle">
-		<Value>E-Mail bei Verfügbarkeit</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.Subscribed">
-		<Value>Sie erhalten eine Benachrichtigung, wenn dieses Produkt wieder lieferbar ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.Tooltip">
-		<Value>Sie erhalten eine Nachricht, wenn dieses Produkt wieder bestellt werden kann.</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.Unsubscribe">
-		<Value>Abonnement löschen</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.Unsubscribed">
-		<Value>Die Benachrichtigung über Produktverfügbarkeit wurde storniert.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Basket.Bundle.BundleIncludes">
 		<Value>Besteht aus</Value>
@@ -18304,9 +18169,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.AllProductTags">
 		<Value>Alle Produkt-Tags</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.BackInStockSubscriptions">
-		<Value>Benachrichtigung bei Lieferfähigkeit</Value>
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.Blog">
 		<Value>Blog</Value>

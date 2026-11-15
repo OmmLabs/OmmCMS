@@ -507,11 +507,9 @@ public partial class OrderProcessingService : IOrderProcessingService
     {
         var order = ctx.Order;
         var customer = ctx.Customer;
-        var affiliate = await _db.Affiliates.FindByIdAsync(customer.AffiliateId, false);
 
         order.CustomerId = customer.Id;
         order.CustomerIp = _webHelper.ClientInfo.IpAddress.ToString();
-        order.AffiliateId = (affiliate?.Active ?? false) ? affiliate.Id : 0;
         order.ShippingStatus = ctx.CartRequiresShipping ? ShippingStatus.NotYetShipped : ShippingStatus.ShippingNotRequired;
 
         if (!ctx.PaymentRequest.IsRecurringPayment)

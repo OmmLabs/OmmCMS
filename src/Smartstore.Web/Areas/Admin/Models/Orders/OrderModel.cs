@@ -13,8 +13,6 @@ public partial class OrderModel : EditOrderModel
     [LocalizedDisplay("*CustomerIP")]
     public string CustomerIp { get; set; }
 
-    [LocalizedDisplay("*Affiliate")]
-    public int AffiliateId { get; set; }
     public string AffiliateFullName { get; set; }
 
     [LocalizedDisplay("*OrderSubtotalInclTax")]

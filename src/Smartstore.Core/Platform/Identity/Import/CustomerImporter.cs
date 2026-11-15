@@ -228,7 +228,6 @@ public class CustomerImporter : EntityImporterBase
                 customer = new Customer
                 {
                     CustomerGuid = new Guid(),
-                    AffiliateId = 0,
                     Active = true
                 };
             }
@@ -238,7 +237,6 @@ public class CustomerImporter : EntityImporterBase
                 await _db.LoadCollectionAsync(customer, x => x.CustomerRoleMappings, false, q => q.Include(x => x.CustomerRole), context.CancelToken);
             }
 
-            var affiliateId = row.GetDataValue<int>(nameof(Customer.AffiliateId));
 
             row.Initialize(customer, email ?? id.ToString());
 
@@ -293,8 +291,6 @@ public class CustomerImporter : EntityImporterBase
             // it has to be set to true by code if it's absent but "StoreIds" exists.
             row.SetProperty(context.Result, (x) => x.LimitedToStores, !row.GetDataValue<List<int>>("StoreIds").IsNullOrEmpty());
 
-            if (affiliateId > 0 && cargo.AffiliateIds.Contains(affiliateId))
-                customer.AffiliateId = affiliateId;
 
             string customerNumber = null;
 
@@ -638,11 +634,6 @@ public class CustomerImporter : EntityImporterBase
 
         var allowManagingCustomerRoles = await _services.Permissions.AuthorizeAsync(Permissions.Customer.EditRole, _services.WorkContext.CurrentCustomer);
 
-        var affiliateIds = await _db.Affiliates
-            .AsQueryable()
-            .Select(x => x.Id)
-            .ToListAsync(context.CancelToken);
-
         var customerNumbers = await _db.Customers
             .AsQueryable()
             .Where(x => !string.IsNullOrEmpty(x.CustomerNumber))
@@ -675,7 +666,6 @@ public class CustomerImporter : EntityImporterBase
         var result = new ImporterCargoData
         {
             AllowManagingCustomerRoles = allowManagingCustomerRoles,
-            AffiliateIds = affiliateIds,
             CustomerNumbers = new HashSet<string>(customerNumbers, StringComparer.OrdinalIgnoreCase),
             CustomerRoleIds = customerRoleIds.ToDictionarySafe(x => x.SystemName, x => x.Id, StringComparer.OrdinalIgnoreCase),
             Countries = countries,
@@ -692,7 +682,6 @@ public class CustomerImporter : EntityImporterBase
     protected class ImporterCargoData
     {
         public bool AllowManagingCustomerRoles { get; init; }
-        public List<int> AffiliateIds { get; init; }
         public HashSet<string> CustomerNumbers { get; init; }
         public Dictionary<string, int> CustomerRoleIds { get; init; }
         public Dictionary<string, int> Countries { get; init; }

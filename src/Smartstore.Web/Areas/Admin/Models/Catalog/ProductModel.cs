@@ -184,9 +184,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
     [LocalizedDisplay("*BackorderMode")]
     public int BackorderModeId { get; set; }
 
-    [LocalizedDisplay("*AllowBackInStockSubscriptions")]
-    public bool AllowBackInStockSubscriptions { get; set; }
-
     [LocalizedDisplay("*OrderMinimumQuantity")]
     public int OrderMinimumQuantity { get; set; }
 

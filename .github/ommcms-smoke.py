@@ -591,6 +591,10 @@ try:
         assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName = 'Admin.Common.ResetToDefault'") == [1], "Baseline locale updates missing"
         assert rows("SELECT COUNT(*) FROM Product") == [0]
         assert rows("SELECT COUNT(*) FROM Category") == [0]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='BackInStockSubscription'") == [0]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Affiliate'") == [0]
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('Customer') WHERE name='AffiliateId'") == [0]
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name='AllowBackInStockSubscriptions'") == [0]
         topics = set(rows("SELECT SystemName FROM Topic"))
         assert {"HomePageText", "AboutUs", "ContactUs"} <= topics
         assert not topics.intersection({"PaymentInfo", "ShippingInfo", "CheckoutAsGuestOrRegister"})

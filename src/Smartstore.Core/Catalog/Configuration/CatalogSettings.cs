@@ -403,11 +403,6 @@ public class CatalogSettings : ISettings
     public bool IgnoreFeaturedProducts { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating maximum number of 'back in stock' subscription per customer.
-    /// </summary>
-    public int MaximumBackInStockSubscriptions { get; set; } = 200;
-
-    /// <summary>
     /// Gets or sets a maximum file upload size in bytes for product attributes ('File Upload' type)
     /// </summary>
     public int FileUploadMaximumSizeBytes { get; set; } = 1024 * 200; //200KB

@@ -416,7 +416,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.LowStockActivityId);
                 row.SetProperty(context.Result, (x) => x.NotifyAdminForQuantityBelow, 1);
                 row.SetProperty(context.Result, (x) => x.BackorderModeId);
-                row.SetProperty(context.Result, (x) => x.AllowBackInStockSubscriptions);
                 row.SetProperty(context.Result, (x) => x.OrderMinimumQuantity, 1);
                 row.SetProperty(context.Result, (x) => x.OrderMaximumQuantity, 50);
                 row.SetProperty(context.Result, (x) => x.QuantityStep, 1);

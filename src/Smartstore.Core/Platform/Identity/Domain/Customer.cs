@@ -148,11 +148,6 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
     public bool IsTaxExempt { get; set; }
 
     /// <summary>
-    /// Gets or sets the affiliate identifier
-    /// </summary>
-    public int AffiliateId { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether the customer is active
     /// </summary>
     public bool Active { get; set; }

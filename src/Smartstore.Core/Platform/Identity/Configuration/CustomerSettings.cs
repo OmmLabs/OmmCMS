@@ -116,11 +116,6 @@ public class CustomerSettings : ISettings
     public bool HideDownloadableProductsTab { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to hide 'Back in stock subscriptions' tab on 'My account' page.
-    /// </summary>
-    public bool HideBackInStockSubscriptionsTab { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether to validate user when downloading products.
     /// </summary>
     public bool DownloadableProductsValidateUser { get; set; }

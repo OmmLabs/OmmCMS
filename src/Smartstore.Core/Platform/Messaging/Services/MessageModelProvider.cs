@@ -259,9 +259,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             case ProductReviewHelpfulness x:
                 modelPart = await CreateModelPartAsync(x, messageContext);
                 break;
-            case BackInStockSubscription x:
-                modelPart = await CreateModelPartAsync(x, messageContext);
-                break;
             default:
                 var partType = part.GetType();
                 modelPart = part;
@@ -855,24 +852,6 @@ public partial class MessageModelProvider : IMessageModelProvider
         {
             m[attr.Key] = attr.Value;
         }
-
-        await _helper.PublishModelPartCreatedEventAsync(part, m);
-
-        return m;
-    }
-
-    protected virtual async Task<object> CreateModelPartAsync(BackInStockSubscription part, MessageContext messageContext)
-    {
-        Guard.NotNull(messageContext);
-        Guard.NotNull(part);
-
-        var m = new Dictionary<string, object>
-        {
-            {  "StoreId", part.StoreId },
-            {  "CustomerId",  part.CustomerId },
-            {  "ProductId",  part.ProductId },
-            {  "CreatedOn", _helper.ToUserDate(part.CreatedOnUtc, messageContext) }
-        };
 
         await _helper.PublishModelPartCreatedEventAsync(part, m);
 

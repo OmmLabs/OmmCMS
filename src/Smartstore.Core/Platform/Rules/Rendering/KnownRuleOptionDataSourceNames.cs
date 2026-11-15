@@ -2,7 +2,6 @@
 
 public static partial class KnownRuleOptionDataSourceNames
 {
-    public const string Affiliate = "Affiliate";
     public const string Category = "Category";
     public const string Country = "Country";
     public const string Currency = "Currency";

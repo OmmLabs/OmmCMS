@@ -100,10 +100,6 @@ internal class StoreHook : AsyncDbSaveHook<Store>
             .Where(x => deletedStoreIds.Contains(x.StoreId))
             .ExecuteDeleteAsync(cancelToken);
 
-        await _db.BackInStockSubscriptions
-            .Where(x => deletedStoreIds.Contains(x.StoreId))
-            .ExecuteDeleteAsync(cancelToken);
-
         await _db.NewsletterSubscriptions
             .Where(x => deletedStoreIds.Contains(x.StoreId))
             .ExecuteDeleteAsync(cancelToken);

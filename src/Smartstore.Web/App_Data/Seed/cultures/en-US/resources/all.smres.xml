@@ -48,18 +48,6 @@
 	<LocaleResource Name="Account.Avatar.UploadRules">
 		<Value>Avatar must be in GIF, PNG or JPG format with the maximum size of {0}</Value>
 	</LocaleResource>
-	<LocaleResource Name="Account.BackInStockSubscriptions">
-		<Value>Back in stock subscriptions</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.BackInStockSubscriptions.Description">
-		<Value>You will receive an e-mail when a particular product is back in stock.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.BackInStockSubscriptions.NoSubscriptions">
-		<Value>You are not currently subscribed to any Back In Stock notification lists</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.BackInStockSubscriptions.ProductColumn">
-		<Value>Product</Value>
-	</LocaleResource>
 	<LocaleResource Name="Account.ChangePassword">
 		<Value>Change password</Value>
 	</LocaleResource>
@@ -899,69 +887,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Address.SelectCountry">
 		<Value>Select country</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates">
-		<Value>Affiliates</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Added">
-		<Value>The new affiliate has been added successfully.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.AddNew">
-		<Value>Add a new affiliate</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Customers">
-		<Value>Affiliated customers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Deleted">
-		<Value>The affiliate has been deleted successfully.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.EditAffiliateDetails">
-		<Value>Edit affiliate details</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields">
-		<Value>Active</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields.Active">
-		<Value>Active</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields.Active.Hint">
-		<Value>A value indicating whether the affiliate is active.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields.ID">
-		<Value>Affiliate identifier</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields.ID.Hint">
-		<Value>Affiliate's unique identifier.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields.URL">
-		<Value>Affiliate URL</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Fields.URL.Hint">
-		<Value>When this hyperlink is clicked from the affiliate site, this site looks for an Affiliate ID query string parameter. If one exists, the customer is tagged with that affiliate.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Info">
-		<Value>Affiliate info</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Orders">
-		<Value>Affiliated orders</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Orders.Order">
-		<Value>Created order</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Orders.OrderStatus">
-		<Value>Order status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Orders.OrderTotal">
-		<Value>Order total</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Orders.PaymentStatus">
-		<Value>Payment status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Orders.ShippingStatus">
-		<Value>Shipping status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Affiliates.Updated">
-		<Value>The affiliate has been updated successfully.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.AI.ImageCreation.Atmosphere">
 		<Value>The atmosphere feels {1} and is shaped by {0}.</Value>
@@ -2448,12 +2373,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.AdminComment.Hint">
 		<Value>Admin comment. For internal use.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.AllowBackInStockSubscriptions">
-		<Value>Allow back in stock subscriptions</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.AllowBackInStockSubscriptions.Hint">
-		<Value>Allow customers to subscribe to a notification list for a product that has gone out of stock.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.AllowCustomerReviews">
 		<Value>Allow customer reviews</Value>
@@ -6177,12 +6096,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.GenderEnabled.Hint">
 		<Value>Defines whether the input of 'Gender' is enabled.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideBackInStockSubscriptionsTab">
-		<Value>Hide 'Back in stock subscriptions' tab</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideBackInStockSubscriptionsTab.Hint">
-		<Value>Check the box to hide 'Back in stock subscriptions' tab on 'My account' page</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideDownloadableProductsTab">
 		<Value>Hide downloads in the "My account" area</Value>
@@ -10135,12 +10048,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Customers.Customers.Fields.AdminComment.Hint">
 		<Value>Admin comment. For internal use.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Fields.Affiliate">
-		<Value>Affiliate</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Fields.Affiliate.Hint">
-		<Value>The affiliate who the customer is linked to.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.Fields.City">
 		<Value>City</Value>
 	</LocaleResource>
@@ -10524,9 +10431,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.ReallyDeleteAdministrator">
 		<Value>The customer is an administrator. Do you really want to delete him?</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.RemoveAffiliateAssignment">
-		<Value>Remove assignment to affiliate</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Reports">
 		<Value>Customer reports</Value>
@@ -11973,12 +11877,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Fields.AcceptThirdPartyEmailHandOver.Hint">
 		<Value>Indicates whether the customer has agreed to a transfer of his email address to third parties.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Fields.Affiliate">
-		<Value>Affiliate</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Fields.Affiliate.Hint">
-		<Value>The affiliate who the order is linked to.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Fields.AuthorizationTransactionID">
 		<Value>Authorization transaction ID</Value>
@@ -13581,9 +13479,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Active">
 		<Value>Is active</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.Affiliate">
-		<Value>Affiliate</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.AllProductsFromCategoryInCart">
 		<Value>All products from category in cart</Value>
@@ -15256,39 +15151,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Aria.Label.UploaderProgressBar">
 		<Value>{0} fileupload</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.AlreadySubscribed">
-		<Value>You're already subscribed for this product back in stock notification</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.MaxSubscriptions">
-		<Value>You cannot subscribe. Maximum number of allowed subscriptions is {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.NotAllowed">
-		<Value>Subscriptions are not allowed for this product</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.NotifyMe">
-		<Value>Notify me</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.NotifyMeWhenAvailable">
-		<Value>Notify me when available</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.OnlyRegistered">
-		<Value>Only registered customers can used this feature</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.PopupTitle">
-		<Value>Email when available</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.Subscribed">
-		<Value>You will be notified when this product is available again.</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.Tooltip">
-		<Value>You'll receive a onetime e-mail when this product is available for ordering again. We will not send you any other e-mails or add you to our newsletter; you will only be e-mailed about this product!</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.Unsubscribe">
-		<Value>Unsubscribe</Value>
-	</LocaleResource>
-	<LocaleResource Name="BackInStockSubscriptions.Unsubscribed">
-		<Value>The back in stock notification has been cancelled.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Basket.Bundle.BundleIncludes">
 		<Value>Bundle includes</Value>
@@ -18651,9 +18513,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.AllProductTags">
 		<Value>All product tags</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.BackInStockSubscriptions">
-		<Value>Back in stock subscriptions</Value>
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.Blog">
 		<Value>Blog</Value>

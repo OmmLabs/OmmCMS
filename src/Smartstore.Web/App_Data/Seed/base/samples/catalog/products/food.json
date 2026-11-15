@@ -237,7 +237,6 @@
     "taxCategory": "food",
     "price": 14.90,
     "stockQuantity": 0,
-    "allowBackInStockSubscriptions": true,
     "displayStockAvailability": true,
     "deliveryTime": "7-working-days",
     "categories": [ "Delicacies" ],

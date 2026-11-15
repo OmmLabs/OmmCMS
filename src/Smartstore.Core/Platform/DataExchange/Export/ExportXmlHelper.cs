@@ -510,7 +510,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Customer.Email), entity.Email);
         _writer.WriteElementString(nameof(Customer.AdminComment), entity.AdminComment);
         _writer.WriteElementString(nameof(Customer.IsTaxExempt), entity.IsTaxExempt.ToString());
-        _writer.WriteElementString(nameof(Customer.AffiliateId), entity.AffiliateId.ToString());
         _writer.WriteElementString(nameof(Customer.Active), entity.Active.ToString());
         _writer.WriteElementString(nameof(Customer.Deleted), entity.Deleted.ToString());
         _writer.WriteElementString(nameof(Customer.IsSystemAccount), entity.IsSystemAccount.ToString());
@@ -684,7 +683,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.LowStockActivityId), entity.LowStockActivityId.ToString());
         _writer.WriteElementString(nameof(Product.NotifyAdminForQuantityBelow), entity.NotifyAdminForQuantityBelow.ToString());
         _writer.WriteElementString(nameof(Product.BackorderModeId), ((int)product.BackorderModeId).ToString());
-        _writer.WriteElementString(nameof(Product.AllowBackInStockSubscriptions), entity.AllowBackInStockSubscriptions.ToString());
         _writer.WriteElementString(nameof(Product.OrderMinimumQuantity), entity.OrderMinimumQuantity.ToString());
         _writer.WriteElementString(nameof(Product.OrderMaximumQuantity), entity.OrderMaximumQuantity.ToString());
         _writer.WriteElementString(nameof(Product.QuantityStep), entity.QuantityStep.ToString());

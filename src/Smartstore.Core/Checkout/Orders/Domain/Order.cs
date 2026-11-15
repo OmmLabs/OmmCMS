@@ -220,11 +220,6 @@ public partial class Order : EntityWithAttributes, IAuditable, ISoftDeletable
     public int CustomerLanguageId { get; set; }
 
     /// <summary>
-    /// Gets or sets the affiliate identifier
-    /// </summary>
-    public int AffiliateId { get; set; }
-
-    /// <summary>
     /// Gets or sets the customer IP address
     /// </summary>
     [StringLength(200)]

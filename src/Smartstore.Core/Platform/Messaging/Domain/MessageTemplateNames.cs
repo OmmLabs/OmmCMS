@@ -25,7 +25,6 @@ public class MessageTemplateNames
     public const string ProductReviewStoreOwner = "Product.ProductReview";
     public const string QuantityBelowStoreOwner = "QuantityBelow.StoreOwnerNotification";
     public const string NewVatSubmittedStoreOwner = "NewVATSubmitted.StoreOwnerNotification";
-    public const string BackInStockCustomer = "Customer.BackInStock";
     public const string SystemCampaign = "System.Campaign";
     public const string SystemContactUs = "System.ContactUs";
     public const string SystemGeneric = "System.Generic";

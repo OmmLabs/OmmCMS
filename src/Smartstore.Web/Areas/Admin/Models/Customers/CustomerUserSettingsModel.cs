@@ -64,9 +64,6 @@ public partial class CustomerUserSettingsModel : ModelBase, ILocalizedModel<Cust
         [LocalizedDisplay("*HideDownloadableProductsTab")]
         public bool HideDownloadableProductsTab { get; set; }
 
-        [LocalizedDisplay("*HideBackInStockSubscriptionsTab")]
-        public bool HideBackInStockSubscriptionsTab { get; set; }
-
         [LocalizedDisplay("*CustomerNameFormat")]
         public CustomerNameFormat CustomerNameFormat { get; set; }
 

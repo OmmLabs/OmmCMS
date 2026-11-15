@@ -107,18 +107,6 @@ public partial class GdprTool : IGdprTool
                 model["ProductReviewHelpfulness"] = await helpfulness.SelectAwait(x => _messageModelProvider.CreateModelPartAsync(x, true, ignoreMemberNames)).ToListAsync();
             }
 
-            // BackInStock subscriptions
-            var backInStockSubscriptions = await _db.BackInStockSubscriptions
-                .AsNoTracking()
-                .Where(x => x.CustomerId == customer.Id)
-                .OrderByDescending(x => x.CreatedOnUtc)
-                .ToListAsync();
-
-            if (backInStockSubscriptions.Count != 0)
-            {
-                model["BackInStockSubscriptions"] = await backInStockSubscriptions.SelectAwait(x => _messageModelProvider.CreateModelPartAsync(x, true, "CustomerId")).ToListAsync();
-            }
-
             // INFO: we're not going to export: 
             // - Activity log
             // It doesn't feel right and GDPR rules are not very clear about this. Let's wait and see :-)
@@ -151,14 +139,6 @@ public partial class GdprTool : IGdprTool
         {
             _db.CustomerRoleMappings.Add(new CustomerRoleMapping { CustomerId = customer.Id, CustomerRoleId = guestRole.Id });
         }
-
-        // Delete all customers stock subscribtions
-        var backInStockSubscriptions = await _db.BackInStockSubscriptions
-            .Where(x => x.CustomerId == customer.Id)
-            .OrderByDescending(x => x.CreatedOnUtc)
-            .ToListAsync();
-
-        _db.BackInStockSubscriptions.RemoveRange(backInStockSubscriptions);
 
         // We don't need to mask generic attrs, we just delete them.
         customer.GenericAttributes.DeleteAll();

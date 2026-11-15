@@ -622,11 +622,6 @@ public partial class Product : EntityWithDiscounts, IAuditable, ISoftDeletable, 
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to allow back in stock subscriptions.
-    /// </summary>
-    public bool AllowBackInStockSubscriptions { get; set; }
-
-    /// <summary>
     /// Gets or sets the minimum order quantity.
     /// </summary>
     public int OrderMinimumQuantity { get; set; }
