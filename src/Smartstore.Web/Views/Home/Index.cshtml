@@ -1,4 +1,7 @@
-﻿@{
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration OmmCmsConfiguration
+
+@{
+    var cmsPreview = bool.TryParse(OmmCmsConfiguration["OmmCMS:PreviewShell"], out var enabled) && enabled;
     Assets.BodyAttributes.AppendCssClass("home");
     Assets.AppendTitleParts((string)ViewBag.MetaTitle);
     Assets.AppendMetaDescriptionParts((string)ViewBag.MetaDescription);
@@ -12,23 +15,26 @@
         @await Component.InvokeAsync("TopicBlock", new { systemName = "HomePageText", isLead = true })
         <zone name="home_page_after_intro" />
 
-        @await Component.InvokeAsync("HomeCategories")
-        <zone name="home_page_after_categories" />
+        @if (!cmsPreview)
+        {
+            @await Component.InvokeAsync("HomeCategories")
+            <zone name="home_page_after_categories" />
 
-        @await Component.InvokeAsync("HomeProducts")
-        <zone name="home_page_after_products" />
+            @await Component.InvokeAsync("HomeProducts")
+            <zone name="home_page_after_products" />
 
-        @await Component.InvokeAsync("HomeBestsellers")
-        <zone name="home_page_after_bestsellers" />
+            @await Component.InvokeAsync("HomeBestsellers")
+            <zone name="home_page_after_bestsellers" />
 
-        @await Component.InvokeAsync("HomeBrands")
-        <zone name="home_page_after_manufacturers" />
+            @await Component.InvokeAsync("HomeBrands")
+            <zone name="home_page_after_manufacturers" />
 
-        @await Component.InvokeAsync("PopularProductTags")
-        <zone name="home_page_after_tags" />
+            @await Component.InvokeAsync("PopularProductTags")
+            <zone name="home_page_after_tags" />
 
-        @* TODO: (mc) find more intelligent way of rendering RecentlyViewedProducts globally *@
-        @await Component.InvokeAsync("RecentlyViewedProducts")
+            @* TODO: (mc) find more intelligent way of rendering RecentlyViewedProducts globally *@
+            @await Component.InvokeAsync("RecentlyViewedProducts")
+        }
 
         <zone name="home_page_bottom" />
     </div>
