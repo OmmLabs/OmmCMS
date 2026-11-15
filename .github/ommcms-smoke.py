@@ -172,7 +172,7 @@ def editorial_workflows(password):
 
     # Create a real navigation item on the starter Main menu and test live rendering.
     menu_id = read_rows("SELECT Id FROM MenuRecord WHERE SystemName = 'Main'")[0][0]
-    get_page(f"/admin/menu/edit/{menu_id}", admin, "CreateItem")
+    assert "createitem" in get_page(f"/admin/menu/edit/{menu_id}", admin).lower(), "Menu item creation link missing"
     blocked = f"/admin/menu/createitem?providerName=catalog&menuId={menu_id}&parentItemId=0"
     assert request(blocked, client=admin)[0] == 404, "Catalog menu editor exposed"
     create_item = f"/admin/menu/createitem?providerName=entity&menuId={menu_id}&parentItemId=0"
