@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using OmmCMS.Admin.Models.Store;
 using OmmCMS.Admin.Models.Stores;
 using OmmCMS.ComponentModel;
-using OmmCMS.Core.Catalog.Search;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Localization;
@@ -18,14 +17,11 @@ namespace OmmCMS.Admin.Controllers;
 public class StoreController : AdminController
 {
     private readonly SmartDbContext _db;
-    private readonly ICatalogSearchService _catalogSearchService;
 
     public StoreController(
-        SmartDbContext db,
-        ICatalogSearchService catalogSearchService)
+        SmartDbContext db)
     {
         _db = db;
-        _catalogSearchService = catalogSearchService;
     }
 
     /// <summary>
@@ -210,36 +206,24 @@ public class StoreController : AdminController
             throw new AccessDeniedException();
         }
 
-        var primaryCurrency = Services.CurrencyService.PrimaryCurrency;
-
-        var customer = Services.WorkContext.CurrentCustomer;
-        var authorizedStoreIds = await Services.StoreMappingService.GetAuthorizedStoreIdsAsync("Customer", customer.Id);
-
-        var ordersQuery = _db.Orders.ApplyCustomerFilter(authorizedStoreIds).AsNoTracking();
         var registeredRole = await _db.CustomerRoles
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.SystemName == SystemCustomerRoleNames.Registered);
 
         var registeredCustomersQuery = _db.Customers
             .AsNoTracking()
-            .ApplyRolesFilter([registeredRole.Id]);
+            .ApplyRolesFilter([registeredRole?.Id ?? 0]);
 
-        var sumAllOrders = await ordersQuery.SumAsync(x => (decimal?)x.OrderTotal) ?? 0;
-        var totalMediaSize = await _db.MediaFiles.SumAsync(x => (long)x.Size);
+        var totalMediaSize = await _db.MediaFiles.SumAsync(x => (long?)x.Size) ?? 0;
 
         var model = new StoreDashboardReportModel
         {
-            ProductsCount = (await _catalogSearchService.PrepareQuery(new CatalogSearchQuery()).CountAsync()).ToString("N0"),
-            CategoriesCount = (await _db.Categories.CountAsync()).ToString("N0"),
-            ManufacturersCount = (await _db.Manufacturers.CountAsync()).ToString("N0"),
-            AttributesCount = (await _db.ProductAttributes.CountAsync()).ToString("N0"),
-            AttributeCombinationsCount = (await _db.ProductVariantAttributeCombinations.CountAsync(x => x.IsActive)).ToString("N0"),
+            TopicsCount = (await _db.Topics.CountAsync()).ToString("N0"),
+            MenusCount = (await _db.Menus.CountAsync()).ToString("N0"),
             MediaCount = (await Services.MediaService.CountFilesAsync(new MediaSearchQuery { Deleted = false })).ToString("N0"),
             MediaSize = Prettifier.HumanizeBytes(totalMediaSize),
             CustomersCount = (await registeredCustomersQuery.CountAsync()).ToString("N0"),
-            OrdersCount = (await ordersQuery.CountAsync()).ToString("N0"),
-            OnlineCustomersCount = (await _db.Customers.ApplyOnlineCustomersFilter(15).CountAsync()).ToString("N0"),
-            Sales = Services.CurrencyService.CreateMoney(sumAllOrders, primaryCurrency).ToString()
+            OnlineCustomersCount = (await _db.Customers.ApplyOnlineCustomersFilter(15).CountAsync()).ToString("N0")
         };
 
         return new JsonResult(new { model });

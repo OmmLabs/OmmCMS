@@ -30,22 +30,22 @@ public class AdminDashboardLayoutProvider : IDashboardLayoutProvider
                     Order = 500,
                     Positions =
                     [
-                        At(DashboardBreakpoint.Xs, 0, 4, 12),
-                        At(DashboardBreakpoint.Md, 0, 3, 12),
-                        At(DashboardBreakpoint.Lg, 0, 3, 10),
-                        At(DashboardBreakpoint.Xxl, 3, 2, 7)
+                        At(DashboardBreakpoint.Xs, 0, 0, 12),
+                        At(DashboardBreakpoint.Md, 0, 0, 12),
+                        At(DashboardBreakpoint.Lg, 0, 0, 10),
+                        At(DashboardBreakpoint.Xxl, 0, 0, 10)
                     ]
                 },
-                new DashboardWidgetInstance("latest-orders", LatestOrdersDashboardWidget.SystemName)
+                new DashboardWidgetInstance("contact-requests", ContactRequestsDashboardWidget.SystemName)
                 {
                     Order = 600,
                     Policy = new() { AllowConfigure = true },
                     Positions =
                     [
-                        At(DashboardBreakpoint.Xs, 0, 5, 12),
-                        At(DashboardBreakpoint.Md, 0, 4, 12),
-                        At(DashboardBreakpoint.Lg, 0, 4, 10),
-                        At(DashboardBreakpoint.Xxl, 0, 3, 6)
+                        At(DashboardBreakpoint.Xs, 0, 1, 12),
+                        At(DashboardBreakpoint.Md, 0, 1, 12),
+                        At(DashboardBreakpoint.Lg, 0, 1, 10),
+                        At(DashboardBreakpoint.Xxl, 0, 1, 6)
                     ]
                 },
                 new DashboardWidgetInstance("store-report", StoreReportDashboardWidget.SystemName)
@@ -53,10 +53,10 @@ public class AdminDashboardLayoutProvider : IDashboardLayoutProvider
                     Order = 700,
                     Positions =
                     [
-                        At(DashboardBreakpoint.Xs, 0, 6, 12),
-                        At(DashboardBreakpoint.Md, 0, 5, 12),
-                        At(DashboardBreakpoint.Lg, 0, 5, 10),
-                        At(DashboardBreakpoint.Xxl, 6, 3, 4)
+                        At(DashboardBreakpoint.Xs, 0, 2, 12),
+                        At(DashboardBreakpoint.Md, 0, 2, 12),
+                        At(DashboardBreakpoint.Lg, 0, 2, 10),
+                        At(DashboardBreakpoint.Xxl, 6, 1, 4)
                     ]
                 },
                 new DashboardWidgetInstance("news-feed", NewsFeedDashboardWidget.SystemName)
@@ -64,10 +64,10 @@ public class AdminDashboardLayoutProvider : IDashboardLayoutProvider
                     Order = 800,
                     Positions =
                     [
-                        At(DashboardBreakpoint.Xs, 0, 7, 12),
-                        At(DashboardBreakpoint.Md, 0, 6, 12),
-                        At(DashboardBreakpoint.Lg, 10, 0, 2, 6),
-                        At(DashboardBreakpoint.Xxl, 10, 0, 2, 4)
+                        At(DashboardBreakpoint.Xs, 0, 3, 12),
+                        At(DashboardBreakpoint.Md, 0, 3, 12),
+                        At(DashboardBreakpoint.Lg, 10, 0, 2, 3),
+                        At(DashboardBreakpoint.Xxl, 10, 0, 2, 2)
                     ]
                 }
             ]

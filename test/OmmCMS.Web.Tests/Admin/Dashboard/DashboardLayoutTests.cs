@@ -109,7 +109,7 @@ public sealed class DashboardLayoutTests
                         At(DashboardBreakpoint.Xxl, 3, 2, 7)
                     ]
                 },
-                new DashboardWidgetInstance("latest-orders", "LatestOrdersDashboardWidget")
+                new DashboardWidgetInstance("latest-orders", "ContactRequestsDashboardWidget")
                 {
                     Order = 600,
                     Policy = new() { AllowConfigure = true },
@@ -215,8 +215,8 @@ public sealed class DashboardLayoutTests
     public void Css_Is_Scoped_To_Dashboard_Grid_Identifier()
     {
         var layout = new AdminDashboardLayoutProvider().GetDefaultLayout();
-        var instance = GetInstance(layout, LatestOrdersDashboardWidget.SystemName);
-        var dashboardWidget = new LatestOrdersDashboardWidget(Moq.Mock.Of<IPermissionService>(), new LatestOrdersDashboardWidgetValidator());
+        var instance = GetInstance(layout, ContactRequestsDashboardWidget.SystemName);
+        var dashboardWidget = new ContactRequestsDashboardWidget(Moq.Mock.Of<IPermissionService>(), new ContactRequestsDashboardWidgetValidator());
         var context = new DashboardWidgetContext
         {
             DashboardId = layout.Id,
@@ -242,10 +242,10 @@ public sealed class DashboardLayoutTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(layout.BuildWidgetId(instance.Id), Is.EqualTo("admin-dashboard__latest-orders"));
+            Assert.That(layout.BuildWidgetId(instance.Id), Is.EqualTo("admin-dashboard__contact-requests"));
             Assert.That(
                 css,
-                Does.Contain("#admin-dashboard__latest-orders { --dashboard-column-xs: 1 / span 12; --dashboard-row-xs: 6 / span 1; }"));
+                Does.Contain("#admin-dashboard__contact-requests { --dashboard-column-xs: 1 / span 12; --dashboard-row-xs: 2 / span 1; }"));
             Assert.That(css, Does.Not.Contain("#admin-dashboard-grid >"));
             Assert.That(css, Does.Contain("--dashboard-column-md:"));
             Assert.That(css, Does.Contain("--dashboard-column-lg:"));
@@ -529,32 +529,32 @@ public class DashboardWidgetConfigurationTests
         using var cancellation = new CancellationTokenSource();
         var receivedToken = CancellationToken.None;
         var receivedCount = 0;
-        var validator = new LatestOrdersDashboardWidgetValidator();
+        var validator = new ContactRequestsDashboardWidgetValidator();
         validator.RuleFor(x => x.Count).MustAsync((count, token) =>
         {
             receivedToken = token;
             receivedCount = count;
             return Task.FromResult(false);
         }).WithMessage("Widget-specific failure");
-        var widget = new LatestOrdersDashboardWidget(Mock.Of<IPermissionService>(), validator);
+        var widget = new ContactRequestsDashboardWidget(Mock.Of<IPermissionService>(), validator);
 
         var error = Assert.ThrowsAsync<ArgumentException>(async () => await widget.ValidateSettingsAsync(settings, cancellation.Token));
         Assert.That(error.Message, Does.Contain("Widget-specific failure"));
         Assert.That(receivedCount, Is.EqualTo(12));
         Assert.That(receivedToken, Is.EqualTo(cancellation.Token));
 
-        var validWidget = new LatestOrdersDashboardWidget(Mock.Of<IPermissionService>(), new LatestOrdersDashboardWidgetValidator());
+        var validWidget = new ContactRequestsDashboardWidget(Mock.Of<IPermissionService>(), new ContactRequestsDashboardWidgetValidator());
         await validWidget.ValidateSettingsAsync(settings, cancellation.Token);
     }
 
     [Test]
     public async Task Editor_Settings_Survive_Layout_Serialization_And_Reach_Renderer()
     {
-        var widget = new LatestOrdersDashboardWidget(Mock.Of<IPermissionService>(), new LatestOrdersDashboardWidgetValidator());
+        var widget = new ContactRequestsDashboardWidget(Mock.Of<IPermissionService>(), new ContactRequestsDashboardWidgetValidator());
         var service = new Mock<IDashboardService>();
-        service.Setup(x => x.GetWidget(LatestOrdersDashboardWidget.SystemName)).Returns(widget);
+        service.Setup(x => x.GetWidget(ContactRequestsDashboardWidget.SystemName)).Returns(widget);
         var layout = new AdminDashboardLayoutProvider().GetDefaultLayout();
-        var instance = layout.Widgets.Single(x => x.WidgetSystemName == LatestOrdersDashboardWidget.SystemName);
+        var instance = layout.Widgets.Single(x => x.WidgetSystemName == ContactRequestsDashboardWidget.SystemName);
         layout.Widgets = [instance];
         var changes = new DashboardLayoutChanges([
             new(instance.Id, instance.WidgetSystemName, instance.Positions, new JsonObject { ["count"] = 12 })]);
@@ -576,11 +576,11 @@ public class DashboardWidgetConfigurationTests
     [Test]
     public void Editor_Cannot_Change_Settings_Of_Locked_Instance()
     {
-        var widget = new LatestOrdersDashboardWidget(Mock.Of<IPermissionService>(), new LatestOrdersDashboardWidgetValidator());
+        var widget = new ContactRequestsDashboardWidget(Mock.Of<IPermissionService>(), new ContactRequestsDashboardWidgetValidator());
         var service = new Mock<IDashboardService>();
-        service.Setup(x => x.GetWidget(LatestOrdersDashboardWidget.SystemName)).Returns(widget);
+        service.Setup(x => x.GetWidget(ContactRequestsDashboardWidget.SystemName)).Returns(widget);
         var layout = new AdminDashboardLayoutProvider().GetDefaultLayout();
-        var instance = layout.Widgets.Single(x => x.WidgetSystemName == LatestOrdersDashboardWidget.SystemName)
+        var instance = layout.Widgets.Single(x => x.WidgetSystemName == ContactRequestsDashboardWidget.SystemName)
             with { Policy = new() { AllowConfigure = false } };
         layout.Widgets = [instance];
         var changes = new DashboardLayoutChanges([

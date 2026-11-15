@@ -317,7 +317,7 @@ public class DashboardControllerTests
     public async Task Widget_Preview_Passes_Draft_Settings_To_The_Existing_Renderer()
     {
         Mock<IDashboardService> service = null;
-        var widget = new LatestOrdersDashboardWidget(Mock.Of<IPermissionService>(), new LatestOrdersDashboardWidgetValidator());
+        var widget = new ContactRequestsDashboardWidget(Mock.Of<IPermissionService>(), new ContactRequestsDashboardWidgetValidator());
         var controller = CreateController(
             true,
             false,
@@ -325,11 +325,11 @@ public class DashboardControllerTests
             mock =>
             {
                 service = mock;
-                mock.Setup(x => x.GetWidget(LatestOrdersDashboardWidget.SystemName)).Returns(widget);
+                mock.Setup(x => x.GetWidget(ContactRequestsDashboardWidget.SystemName)).Returns(widget);
             });
         var changes = new DashboardLayoutChanges([new DashboardWidgetPlacement(
             "latest",
-            LatestOrdersDashboardWidget.SystemName,
+            ContactRequestsDashboardWidget.SystemName,
             [new DashboardWidgetPosition { Size = new DashboardWidgetSize(4) }],
             new JsonObject { ["count"] = 12 })]);
         await controller.DashboardWidget(
