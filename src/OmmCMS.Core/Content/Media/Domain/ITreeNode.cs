@@ -3,7 +3,7 @@
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization;
 
-namespace OmmCMS.Core.Catalog.Categories;
+namespace OmmCMS.Core.Content.Media;
 
 /// <summary>
 /// Represents a tree node entity.

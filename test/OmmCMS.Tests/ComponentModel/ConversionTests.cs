@@ -8,7 +8,7 @@ using System.Reflection;
 using NUnit.Framework;
 using OmmCMS.ComponentModel;
 using OmmCMS.ComponentModel.TypeConverters;
-using OmmCMS.Core.Catalog.Attributes;
+using OmmCMS.Core.Common;
 using OmmCMS.Net.Mail;
 using OmmCMS.Test.Common;
 

@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Localization;
 
 namespace OmmCMS.Core.Seo;
@@ -47,19 +46,6 @@ public static partial class SeoExtensions
     }
 
     /// <summary>
-    /// Gets the seo friendly active url slug for a category node
-    /// </summary>
-    /// <param name="node">Node instance</param>
-    /// <returns>SEO slug</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string GetActiveSlug(this ICategoryNode node)
-    {
-        Guard.NotNull(node, nameof(node));
-
-        return EngineContext.Current.Scope.ResolveOptional<LocalizedEntityHelper>()?.GetActiveSlug(nameof(Category), node.Id, null);
-    }
-
-    /// <summary>
     ///  Gets the seo friendly active url slug for a slug supporting entity.
     /// </summary>
     /// <typeparam name="T">Type of slug supporting entity</typeparam>
@@ -83,19 +69,6 @@ public static partial class SeoExtensions
             languageId,
             returnDefaultValue,
             ensureTwoPublishedLanguages);
-    }
-
-    /// <summary>
-    /// Gets the seo friendly active url slug for a category node
-    /// </summary>
-    /// <param name="node">Node instance</param>
-    /// <returns>SEO slug</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Task<string> GetActiveSlugAsync(this ICategoryNode node)
-    {
-        Guard.NotNull(node, nameof(node));
-
-        return EngineContext.Current.Scope.ResolveOptional<LocalizedEntityHelper>()?.GetActiveSlugAsync(nameof(Category), node.Id, null);
     }
 
     /// <inheritdoc cref="ValidateSlug{T}(T, string, string, bool, int?)"/>

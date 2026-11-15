@@ -1,13 +1,10 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Data.OleDb;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
 using OmmCMS.Caching;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
+using OmmCMS.Core.Content.Topics;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Identity;
@@ -17,7 +14,6 @@ using OmmCMS.Core.Seo;
 using OmmCMS.Core.Seo.Routing;
 using OmmCMS.Core.Stores;
 using OmmCMS.Test.Common;
-using OmmCMS.Threading;
 
 namespace OmmCMS.Core.Tests.Seo;
 
@@ -29,6 +25,7 @@ public class UrlServiceTests : ServiceTestBase
     private Customer _customer;
     private Language _language;
     private SeoSettings _seoSettings;
+    private readonly List<NamedEntity> _articles = new();
 
     #region Setup & Teardown
 
@@ -79,8 +76,8 @@ public class UrlServiceTests : ServiceTestBase
 
         for (var i = 1; i <= num; i++)
         {
-            db.Products.Add(new Product { Name = $"Product {i} Test" });
-            db.Categories.Add(new Category { Name = $"Category {i} Test" });
+            db.Topics.Add(new Topic { Title = $"Topic {i} Test" });
+            _articles.Add(new NamedEntity { Id = _articles.Count + 1, EntityName = "Article", DisplayName = $"Article {i} Test" });
         }
 
         db.SaveChanges();
@@ -89,8 +86,8 @@ public class UrlServiceTests : ServiceTestBase
     private void RemoveEntities()
     {
         var db = DbContext;
-        db.Products.RemoveRange(db.Products.ToList());
-        db.Categories.RemoveRange(db.Categories.ToList());
+        db.Topics.RemoveRange(db.Topics.ToList());
+        _articles.Clear();
         db.UrlRecords.RemoveRange(db.UrlRecords.ToList());
 
         db.SaveChanges();
@@ -103,20 +100,20 @@ public class UrlServiceTests : ServiceTestBase
     {
         var db = DbContext;
 
-        await PopulateSlugs(db.Products.ToList());
+        await PopulateSlugs(db.Topics.ToList());
 
         for (var i = 2; i <= 10; i++)
         {
-            // Add another product with existing name
-            var product = new Product { Name = "Product 1 Test" };
-            db.Products.Add(product);
+            // Add another topic with existing name
+            var topic = new Topic { Title = "Topic 1 Test" };
+            db.Topics.Add(topic);
             await db.SaveChangesAsync();
-            var validateSlugResult = await _urlService.ValidateSlugAsync(product, seName: null, ensureNotEmpty: true);
+            var validateSlugResult = await _urlService.ValidateSlugAsync(topic, seName: null, ensureNotEmpty: true);
             await _urlService.ApplySlugAsync(validateSlugResult);
             await db.SaveChangesAsync();
 
-            var activeSlug = await _urlService.GetActiveSlugAsync(product.Id, product.GetEntityName(), 0);
-            activeSlug.ShouldEqual($"product-1-test-{i}");
+            var activeSlug = await _urlService.GetActiveSlugAsync(topic.Id, topic.GetEntityName(), 0);
+            activeSlug.ShouldEqual($"topic-1-test-{i}");
         }
     }
 
@@ -125,45 +122,45 @@ public class UrlServiceTests : ServiceTestBase
     {
         var db = DbContext;
 
-        var products = db.Products.ToList();
-        var categories = db.Categories.ToList();
+        var topics = db.Topics.ToList();
+        var articles = _articles.ToList();
 
-        await PopulateSlugs(products);
-        await PopulateSlugs(categories);
+        await PopulateSlugs(topics);
+        await PopulateSlugs(articles);
 
         var slugs = db.UrlRecords.ToList();
-        slugs.Count.ShouldEqual(products.Count + categories.Count);
+        slugs.Count.ShouldEqual(topics.Count + articles.Count);
 
-        var product11 = products.First(x => x.Name == "Product 11 Test");
-        var activeSlug = await _urlService.GetActiveSlugAsync(product11.Id, product11.GetEntityName(), 0);
-        activeSlug.ShouldEqual("product-11-test");
+        var topic11 = topics.First(x => x.Title == "Topic 11 Test");
+        var activeSlug = await _urlService.GetActiveSlugAsync(topic11.Id, topic11.GetEntityName(), 0);
+        activeSlug.ShouldEqual("topic-11-test");
 
-        var category22 = categories.First(x => x.Name == "Category 22 Test");
-        activeSlug = await _urlService.GetActiveSlugAsync(category22.Id, category22.GetEntityName(), 0);
-        activeSlug.ShouldEqual("category-22-test");
+        var article22 = articles.First(x => x.DisplayName == "Article 22 Test");
+        activeSlug = await _urlService.GetActiveSlugAsync(article22.Id, article22.GetEntityName(), 0);
+        activeSlug.ShouldEqual("article-22-test");
 
         var collection = await _urlService.GetUrlRecordCollectionAsync(
-            NamedEntity.GetEntityName<Product>(),
+            NamedEntity.GetEntityName<Topic>(),
             languageIds: null,
-            entityIds: products.Select(x => x.Id).Take(20).ToArray(),
+            entityIds: topics.Select(x => x.Id).Take(20).ToArray(),
             isRange: true,
             isSorted: true);
 
         collection.Count.ShouldEqual(20);
 
-        var product10 = products.First(x => x.Name == "Product 10 Test");
-        var cachedSlug = collection.Find(0, product10.Id);
+        var topic10 = topics.First(x => x.Title == "Topic 10 Test");
+        var cachedSlug = collection.Find(0, topic10.Id);
         Assert.That(cachedSlug, Is.Not.Null);
-        cachedSlug.Slug.ShouldEqual("product-10-test");
+        cachedSlug.Slug.ShouldEqual("topic-10-test");
 
         // Nor prefetch
         await _urlService.PrefetchUrlRecordsAsync(
-            NamedEntity.GetEntityName<Category>(),
+            "Article",
             languageIds: null,
             entityIds: null);
 
-        activeSlug = await _urlService.GetActiveSlugAsync(category22.Id, category22.GetEntityName(), 0);
-        activeSlug.ShouldEqual("category-22-test");
+        activeSlug = await _urlService.GetActiveSlugAsync(article22.Id, article22.GetEntityName(), 0);
+        activeSlug.ShouldEqual("article-22-test");
     }
 
     [Test]
@@ -171,74 +168,31 @@ public class UrlServiceTests : ServiceTestBase
     {
         var db = DbContext;
 
-        var products = db.Products.ToList();
-        var categories = db.Categories.ToList();
+        var topics = db.Topics.ToList();
+        var articles = _articles.ToList();
 
-        await PopulateSlugsBatched(products.Cast<ISlugSupported>().Concat(categories));
+        await PopulateSlugsBatched(topics.Cast<ISlugSupported>().Concat(articles));
 
         var slugs = db.UrlRecords.ToList();
-        slugs.Count.ShouldEqual(products.Count + categories.Count);
+        slugs.Count.ShouldEqual(topics.Count + articles.Count);
 
         // Populate new entities with identical names
         PopulateEntities();
-        var newProducts = db.Products.ToList().Except(products).ToList();
-        var newCategories = db.Categories.ToList().Except(categories).ToList();
+        var newTopics = db.Topics.ToList().Except(topics).ToList();
+        var newArticles = _articles.ToList().Except(articles).ToList();
 
         // Populate with collision
-        await PopulateSlugsBatched(newProducts.Cast<ISlugSupported>().Concat(newCategories));
+        await PopulateSlugsBatched(newTopics.Cast<ISlugSupported>().Concat(newArticles));
 
         slugs = db.UrlRecords.ToList();
-        slugs.Count.ShouldEqual((newProducts.Count + newCategories.Count) * 2);
+        slugs.Count.ShouldEqual((newTopics.Count + newArticles.Count) * 2);
 
         // Populate same
-        await PopulateSlugsBatched(newProducts.Cast<ISlugSupported>().Concat(newCategories));
+        await PopulateSlugsBatched(newTopics.Cast<ISlugSupported>().Concat(newArticles));
         // Should do nothing as nothing changed
         slugs = db.UrlRecords.ToList();
-        slugs.Count.ShouldEqual((newProducts.Count + newCategories.Count) * 2);
+        slugs.Count.ShouldEqual((newTopics.Count + newArticles.Count) * 2);
     }
-
-    //// Unit test fails too often (EF EnterCriticalSection multi-threading issues)
-    /// <param name="entities"></param>
-    /// <returns></returns>
-    //[Test]
-    //public async Task CanPopulateConcurrently()
-    //{
-    //    var db = DbContext;
-
-    //    await PopulateSlugs(db.Products.ToList());
-
-    //    var tasks = new List<Task>();
-    //    var resultDictionary = new ConcurrentDictionary<Product, ValidateSlugResult>();
-
-    //    for (var i = 0; i < 100; i++)
-    //    {
-    //        var product = new Product { Name = "Product 1 Test" };
-    //        db.Products.Add(product);
-    //        await db.SaveChangesAsync();
-
-    //        tasks.Add(new Task(async state =>
-    //        {
-    //            var p = (Product)state;
-    //            var result = await _urlService.SaveSlugAsync(p, seName: null, ensureNotEmpty: true, displayName: p.GetDisplayName());
-
-    //            resultDictionary[p] = result;
-    //        }, product));
-    //    }
-
-    //    // Start all tasks at once
-    //    foreach (Task task in tasks)
-    //    {
-    //        task.Start();
-    //    }
-
-    //    await Task.WhenAll(tasks);
-
-    //    foreach (var kv in resultDictionary)
-    //    {
-    //        var activeSlug = await _urlService.GetActiveSlugAsync(kv.Key.Id, kv.Key.GetEntityName(), 0);
-    //        activeSlug.ShouldEqual(kv.Value.Slug);
-    //    }
-    //}
 
     private async Task PopulateSlugs(IEnumerable<ISlugSupported> entities)
     {

@@ -1,4 +1,4 @@
-﻿namespace OmmCMS.Core.Catalog.Attributes;
+﻿namespace OmmCMS.Core.Common;
 
 /// <summary>
 /// Represents an attribute control type.
@@ -44,22 +44,6 @@ public enum AttributeControlType
     /// Boxes.
     /// </summary>
     Boxes = 40
-}
-
-/// <summary>
-/// Represents a value type for product attributes.
-/// </summary>
-public enum ProductVariantAttributeValueType
-{
-    /// <summary>
-    /// Simple attribute value.
-    /// </summary>
-    Simple = 0,
-
-    /// <summary>
-    /// Linked product attribute value.
-    /// </summary>
-    ProductLinkage = 10
 }
 
 public enum SwatchSize

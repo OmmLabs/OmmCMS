@@ -6,8 +6,9 @@ using System.Text.Json.Serialization;
 using NUnit.Framework;
 using OmmCMS.Collections;
 using OmmCMS.Collections.JsonConverters;
-using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Products;
+using OmmCMS.Core.Common;
+using OmmCMS.Core.Content.Media;
+using OmmCMS.Core.Localization;
 using OmmCMS.Domain;
 using OmmCMS.Json;
 using OmmCMS.Test.Common;
@@ -240,10 +241,10 @@ public class MultimapConverterTests
     {
         var multimap = new Multimap<int, BaseEntity>
         {
-            { 1, new ProductAttribute { Name = "Attr" } },
-            { 1, new Product { Name = "Product" } },
-            { 2, new ProductTemplate { Name = "Template" } },
-            { 2, new ProductTag { Name = "Tag" } }
+            { 1, new Country { Name = "Attr" } },
+            { 1, new StateProvince { Name = "StateProvince" } },
+            { 2, new Language { Name = "Template" } },
+            { 2, new MediaTag { Name = "Tag" } }
         };
 
         var json = JsonSerializer.Serialize(multimap, _options);
@@ -253,10 +254,10 @@ public class MultimapConverterTests
         using (Assert.EnterMultipleScope())
         {
             Assert.That(multimap2.TotalValueCount, Is.EqualTo(4));
-            Assert.That(multimap2[1].ElementAt(0), Is.TypeOf<ProductAttribute>());
-            Assert.That(multimap2[1].ElementAt(1), Is.TypeOf<Product>());
-            Assert.That(multimap2[2].ElementAt(0), Is.TypeOf<ProductTemplate>());
-            Assert.That(multimap2[2].ElementAt(1), Is.TypeOf<ProductTag>());
+            Assert.That(multimap2[1].ElementAt(0), Is.TypeOf<Country>());
+            Assert.That(multimap2[1].ElementAt(1), Is.TypeOf<StateProvince>());
+            Assert.That(multimap2[2].ElementAt(0), Is.TypeOf<Language>());
+            Assert.That(multimap2[2].ElementAt(1), Is.TypeOf<MediaTag>());
         }
     }
 
@@ -267,10 +268,10 @@ public class MultimapConverterTests
 
         var multimap = new Multimap<int, object>
         {
-            { 1, new ProductAttribute { Name = "Attr" } },
+            { 1, new Country { Name = "Attr" } },
             { 1, "John Doe" },
-            { 2, new ProductTemplate { Name = "Template" } },
-            { 2, new ProductTag { Name = "Tag" } },
+            { 2, new Language { Name = "Template" } },
+            { 2, new MediaTag { Name = "Tag" } },
             { 2, 345 },
             { 2, true },
             { 2, now }
@@ -283,10 +284,10 @@ public class MultimapConverterTests
         using (Assert.EnterMultipleScope())
         {
             Assert.That(multimap2.TotalValueCount, Is.EqualTo(7));
-            Assert.That(multimap2[1].ElementAt(0), Is.TypeOf<ProductAttribute>());
+            Assert.That(multimap2[1].ElementAt(0), Is.TypeOf<Country>());
             Assert.That(multimap2[1].ElementAt(1), Is.TypeOf<string>().And.EqualTo("John Doe"));
-            Assert.That(multimap2[2].ElementAt(0), Is.TypeOf<ProductTemplate>());
-            Assert.That(multimap2[2].ElementAt(1), Is.TypeOf<ProductTag>());
+            Assert.That(multimap2[2].ElementAt(0), Is.TypeOf<Language>());
+            Assert.That(multimap2[2].ElementAt(1), Is.TypeOf<MediaTag>());
 
             Assert.That(multimap2[2].ElementAt(2), Is.TypeOf<int>().And.EqualTo(345));
             Assert.That(multimap2[2].ElementAt(3), Is.True);
@@ -298,10 +299,10 @@ public class MultimapConverterTests
     public void Should_Handle_Concurrent_Polymorph_Types()
     {
         var multimap = new ConcurrentMultimap<int, BaseEntity>();
-        multimap.TryAdd(1, new ProductAttribute { Name = "Attr" });
-        multimap.TryAdd(1, new Product { Name = "Product" });
-        multimap.TryAdd(2, new ProductTemplate { Name = "Template" });
-        multimap.TryAdd(2, new ProductTag { Name = "Tag" });
+        multimap.TryAdd(1, new Country { Name = "Attr" });
+        multimap.TryAdd(1, new StateProvince { Name = "StateProvince" });
+        multimap.TryAdd(2, new Language { Name = "Template" });
+        multimap.TryAdd(2, new MediaTag { Name = "Tag" });
 
         var json = JsonSerializer.Serialize(multimap, _options);
         json.ShouldNotBeNull();
@@ -310,10 +311,10 @@ public class MultimapConverterTests
         using (Assert.EnterMultipleScope())
         {
             Assert.That(multimap2.TotalValueCount, Is.EqualTo(4));
-            Assert.That(multimap2[1].ElementAt(0), Is.TypeOf<ProductAttribute>());
-            Assert.That(multimap2[1].ElementAt(1), Is.TypeOf<Product>());
-            Assert.That(multimap2[2].ElementAt(0), Is.TypeOf<ProductTemplate>());
-            Assert.That(multimap2[2].ElementAt(1), Is.TypeOf<ProductTag>());
+            Assert.That(multimap2[1].ElementAt(0), Is.TypeOf<Country>());
+            Assert.That(multimap2[1].ElementAt(1), Is.TypeOf<StateProvince>());
+            Assert.That(multimap2[2].ElementAt(0), Is.TypeOf<Language>());
+            Assert.That(multimap2[2].ElementAt(1), Is.TypeOf<MediaTag>());
         }
     }
 

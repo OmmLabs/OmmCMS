@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
+using OmmCMS.Core.Content.Topics;
+using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization;
@@ -31,10 +31,10 @@ public class DefaultDbHookHandlerTests
         [
             CreateHook<Hook_Acl_Deleted, IAclRestricted>(),
             CreateHook<Hook_Auditable_Inserting_Updating_Important, IAuditable>(),
-            CreateHook<Hook_Category_Pre, BaseEntity>(),
+            CreateHook<Hook_Topic_Pre, BaseEntity>(),
             CreateHook<Hook_Entity_Inserted_Deleted_Update, BaseEntity>(),
             CreateHook<Hook_LocalizedEntity_Deleted, ILocalizedEntity>(),
-            CreateHook<Hook_Product_Post, BaseEntity>(),
+            CreateHook<Hook_MediaFile_Post, BaseEntity>(),
             CreateHook<Hook_SoftDeletable_Updating_ChangingState, ISoftDeletable>()
         ];
         _registry = new DefaultDbHookRegistry(_hooks);
@@ -53,10 +53,10 @@ public class DefaultDbHookHandlerTests
     {
         var entries = new[]
         {
-            CreateEntry<Product>(EntityState.Modified), // > Hook_Entity_Inserted_Deleted_Update, Hook_Product_Post
+            CreateEntry<MediaFile>(EntityState.Modified), // > Hook_Entity_Inserted_Deleted_Update, Hook_MediaFile_Post
 				CreateEntry<GenericAttribute>(EntityState.Deleted), // Hook_Entity_Inserted_Deleted_Update
 				CreateEntry<Currency>(EntityState.Deleted), // Hook_Acl_Deleted, Hook_Entity_Inserted_Deleted_Update
-				CreateEntry<Category>(EntityState.Added) // Hook_Entity_Inserted_Deleted_Update
+				CreateEntry<Topic>(EntityState.Added) // Hook_Entity_Inserted_Deleted_Update
 			};
 
         var processedHooks = (await _handler.SavedChangesAsync(entries, HookImportance.Normal)).ProcessedHooks;
@@ -71,10 +71,10 @@ public class DefaultDbHookHandlerTests
     {
         var entries = new[]
         {
-            CreateEntry<Product>(EntityState.Modified), // > Important
+            CreateEntry<MediaFile>(EntityState.Modified), // > Important
 				CreateEntry<GenericAttribute>(EntityState.Deleted),
             CreateEntry<Currency>(EntityState.Modified),
-            CreateEntry<Category>(EntityState.Added) // > Important
+            CreateEntry<Topic>(EntityState.Added) // > Important
 			};
 
         var result = await _handler.SavingChangesAsync(entries, HookImportance.Important);
@@ -120,9 +120,9 @@ public class DefaultDbHookHandlerTests
         {
             result = !isPost && typeof(IAuditable).IsAssignableFrom(entry.EntityType) && (entry.State == EntityState.Added || entry.State == EntityState.Modified);
         }
-        else if (hookType == typeof(Hook_Category_Pre))
+        else if (hookType == typeof(Hook_Topic_Pre))
         {
-            result = !isPost && !importantOnly && typeof(Category).IsAssignableFrom(entry.EntityType);
+            result = !isPost && !importantOnly && typeof(Topic).IsAssignableFrom(entry.EntityType);
         }
         else if (hookType == typeof(Hook_Entity_Inserted_Deleted_Update))
         {
@@ -134,9 +134,9 @@ public class DefaultDbHookHandlerTests
         {
             result = isPost && !importantOnly && typeof(ILocalizedEntity).IsAssignableFrom(entry.EntityType) && entry.State == EntityState.Deleted;
         }
-        else if (hookType == typeof(Hook_Product_Post))
+        else if (hookType == typeof(Hook_MediaFile_Post))
         {
-            result = isPost && !importantOnly && typeof(Product).IsAssignableFrom(entry.EntityType);
+            result = isPost && !importantOnly && typeof(MediaFile).IsAssignableFrom(entry.EntityType);
         }
         else if (hookType == typeof(Hook_SoftDeletable_Updating_ChangingState))
         {

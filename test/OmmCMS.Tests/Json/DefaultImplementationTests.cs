@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 using NUnit.Framework;
 using OmmCMS.Collections;
-using OmmCMS.Core.Catalog.Categories;
+using System.Text.Json.Serialization;
 using OmmCMS.Core.Security;
 using OmmCMS.Json;
 using OmmCMS.Test.Common;
@@ -109,22 +109,22 @@ public class DefaultImplementationTests
     }
 
     [Test]
-    public void Resolve_returns_default_implementation_for_ICategoryNode()
+    public void Resolve_returns_default_implementation_for_ITestNode()
     {
-        DefaultImplementationAttribute.Resolve(typeof(ICategoryNode)).ShouldEqual(typeof(CategoryNode));
+        DefaultImplementationAttribute.Resolve(typeof(ITestNode)).ShouldEqual(typeof(TestNode));
     }
 
     [Test]
-    public void JsonSerializer_deserializes_ICategoryNode_to_CategoryNode_without_type_discriminator()
+    public void JsonSerializer_deserializes_ITestNode_to_TestNode_without_type_discriminator()
     {
         var json = "{\"Id\":1,\"Name\":\"Cat\"}";
 
-        var node = JsonSerializer.Deserialize<ICategoryNode>(json, SmartJsonOptions.Default);
+        var node = JsonSerializer.Deserialize<ITestNode>(json, SmartJsonOptions.Default);
 
         node.ShouldNotBeNull();
-        Assert.That(node, Is.TypeOf<CategoryNode>());
-        // ICategoryNode members are read-only; the main contract here is that we can materialize
-        // a CategoryNode instance without a type discriminator.
+        Assert.That(node, Is.TypeOf<TestNode>());
+        // ITestNode members are read-only; the main contract here is that we can materialize
+        // a TestNode instance without a type discriminator.
     }
 
     [Test]
@@ -132,21 +132,21 @@ public class DefaultImplementationTests
     {
         var json = "{\"Value\":{\"Id\":1,\"Name\":\"Root\"},\"Children\":[{\"Value\":{\"Id\":2,\"Name\":\"Child\"}}]}";
 
-        var tree = JsonSerializer.Deserialize<TreeNode<ICategoryNode>>(json, SmartJsonOptions.Default);
+        var tree = JsonSerializer.Deserialize<TreeNode<ITestNode>>(json, SmartJsonOptions.Default);
 
         tree.ShouldNotBeNull();
-        Assert.That(tree!.Value, Is.TypeOf<CategoryNode>());
+        Assert.That(tree!.Value, Is.TypeOf<TestNode>());
         tree.Children.Count.ShouldEqual(1);
-        Assert.That(tree.Children[0].Value, Is.TypeOf<CategoryNode>());
+        Assert.That(tree.Children[0].Value, Is.TypeOf<TestNode>());
     }
 
     [Test]
     public void Modifier_applies_implementation_conventions_to_interface_properties()
     {
-        // CategoryNode decorates several properties ([JsonIgnore(WhenWritingDefault)]).
+        // TestNode decorates several properties ([JsonIgnore(WhenWritingDefault)]).
         // The modifier should copy the already materialized property behavior to the interface type,
-        // so default values are omitted even when serializing an ICategoryNode reference.
-        ICategoryNode model = new CategoryNode
+        // so default values are omitted even when serializing an ITestNode reference.
+        ITestNode model = new TestNode
         {
             Id = 1,
             Name = "Cat",
@@ -162,7 +162,7 @@ public class DefaultImplementationTests
         Assert.That(json, Does.Contain("\"Id\":1"));
         Assert.That(json, Does.Contain("\"Name\":\"Cat\""));
 
-        // These properties should be omitted because they are default and CategoryNode marks them with JsonIgnore.WhenWritingDefault.
+        // These properties should be omitted because they are default and TestNode marks them with JsonIgnore.WhenWritingDefault.
         Assert.That(json, Does.Not.Contain("Published"));
         Assert.That(json, Does.Not.Contain("DisplayOrder"));
         Assert.That(json, Does.Not.Contain("BadgeStyle"));
@@ -203,6 +203,34 @@ public class DefaultImplementationTests
         Assert.That(json, Does.Contain("\"PermissionRecordId\":10"));
         Assert.That(json, Does.Contain("\"SystemName\":\"a\""));
         Assert.That(json, Does.Not.Contain("\"Allow\""));
+    }
+
+    [DefaultImplementation(typeof(TestNode))]
+    public interface ITestNode
+    {
+        int Id { get; }
+        string? Name { get; }
+        bool Published { get; }
+        int DisplayOrder { get; }
+        string? BadgeStyle { get; }
+        bool SubjectToAcl { get; }
+        bool LimitedToStores { get; }
+    }
+
+    public sealed class TestNode : ITestNode
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public bool Published { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public int DisplayOrder { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string? BadgeStyle { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public bool SubjectToAcl { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public bool LimitedToStores { get; set; }
     }
 
     private sealed class ConcreteType { }

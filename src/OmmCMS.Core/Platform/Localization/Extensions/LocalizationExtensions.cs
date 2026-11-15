@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Configuration;
 using OmmCMS.Core.Stores;
 using OmmCMS.Engine.Modularity;
@@ -193,66 +192,6 @@ public static partial class LocalizationExtensions
             returnDefaultValue,
             ensureTwoPublishedLanguages,
             detectEmptyHtml) ?? new LocalizedValue<TProp>(invoker.Invoke(entity));
-    }
-
-    #endregion
-
-    #region ICategoryNode
-
-    /// <summary>
-    /// Get localized property of an <see cref="ICategoryNode"/> instance
-    /// </summary>
-    /// <param name="node">Node</param>
-    /// <param name="keySelector">Key selector</param>
-    /// <returns>Localized property</returns>
-    public static LocalizedValue<string> GetLocalized(this ICategoryNode node, Expression<Func<ICategoryNode, string>> keySelector)
-    {
-        var invoker = keySelector.GetPropertyInvoker();
-        return EngineContext.Current.Scope.ResolveOptional<LocalizedEntityHelper>()?.GetLocalizedValue(
-            node,
-            node.Id,
-            nameof(Category),
-            invoker.Property.Name,
-            (Func<ICategoryNode, string>)invoker,
-            null) ?? new LocalizedValue<string>(invoker.Invoke(node));
-    }
-
-    /// <summary>
-    /// Get localized property of an <see cref="ICategoryNode"/> instance
-    /// </summary>
-    /// <param name="node">Node</param>
-    /// <param name="keySelector">Key selector</param>
-    /// /// <param name="languageId">Language identifier</param>
-    /// <returns>Localized property</returns>
-    public static LocalizedValue<string> GetLocalized(this ICategoryNode node, Expression<Func<ICategoryNode, string>> keySelector, int languageId)
-    {
-        var invoker = keySelector.GetPropertyInvoker();
-        return EngineContext.Current.Scope.ResolveOptional<LocalizedEntityHelper>()?.GetLocalizedValue(
-            node,
-            node.Id,
-            nameof(Category),
-            invoker.Property.Name,
-            (Func<ICategoryNode, string>)invoker,
-            languageId) ?? new LocalizedValue<string>(invoker.Invoke(node));
-    }
-
-    /// <summary>
-    /// Get localized property of an <see cref="ICategoryNode"/> instance
-    /// </summary>
-    /// <param name="node">Node</param>
-    /// <param name="keySelector">Key selector</param>
-    /// /// <param name="language">Language</param>
-    /// <returns>Localized property</returns>
-    public static LocalizedValue<string> GetLocalized(this ICategoryNode node, Expression<Func<ICategoryNode, string>> keySelector, Language language)
-    {
-        var invoker = keySelector.GetPropertyInvoker();
-        return EngineContext.Current.Scope.Resolve<LocalizedEntityHelper>()?.GetLocalizedValue(
-            node,
-            node.Id,
-            nameof(Category),
-            invoker.Property.Name,
-            (Func<ICategoryNode, string>)invoker,
-            language) ?? new LocalizedValue<string>(invoker.Invoke(node));
     }
 
     #endregion

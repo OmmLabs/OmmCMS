@@ -655,6 +655,7 @@ try:
             "Checkout/Attributes",
             "Checkout/Cart",
             "Checkout",
+            "Catalog",
             "Catalog/Rules",
             "Catalog/Search",
             "Catalog/Bootstrapping/CatalogStarter.cs",
@@ -741,8 +742,16 @@ try:
         assert rows("SELECT COUNT(*) FROM __MigrationVersionInfo WHERE Description LIKE '%OmmCMS initial schema%'") == [1], "Initial schema migration missing"
         assert rows("SELECT COUNT(*) FROM __MigrationVersionInfo WHERE Description LIKE '%Core:%'") == [0], "Historical core migrations must not be applied"
         assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName = 'Admin.Common.ResetToDefault'") == [1], "Baseline locale updates missing"
-        assert rows("SELECT COUNT(*) FROM Product") == [0]
-        assert rows("SELECT COUNT(*) FROM Category") == [0]
+        retired_catalog_tables = ("product", "category", "manufacturer", "producttemplate", "categorytemplate",
+            "manufacturertemplate", "product_category_mapping", "product_manufacturer_mapping",
+            "productbundleitem", "productbundleitemattributefilter", "product_mediafile_mapping", "producttag",
+            "productattribute", "product_productattribute_mapping", "productvariantattributevalue",
+            "productvariantattributecombination", "productattributeoptionsset", "productattributeoption",
+            "specificationattribute", "specificationattributeoption", "product_specificationattribute_mapping",
+            "ruleset_category_mapping")
+        tables = {name.lower() for name in rows("SELECT name FROM sqlite_master WHERE type='table'")}
+        assert not tables.intersection(retired_catalog_tables), "Retired catalogue tables remain"
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('RuleSet') WHERE name='ProductVariantAttributeId'") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='BackInStockSubscription'") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Affiliate'") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('relatedproduct', 'relatedproducts', 'crosssellproduct', 'crosssellproducts')") == [0]

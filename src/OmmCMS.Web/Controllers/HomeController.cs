@@ -1,8 +1,5 @@
 ﻿using System.Data;
 using Autofac;
-using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Content.Menus;
 using OmmCMS.Core.Content.Topics;

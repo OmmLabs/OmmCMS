@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using OmmCMS.Core.Catalog.Attributes;
+using OmmCMS.Core.Common;
 using OmmCMS.Core.Common;
 using OmmCMS.Web.Rendering.Choices;
 

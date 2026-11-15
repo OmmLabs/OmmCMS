@@ -142,6 +142,10 @@ public class OmmCmsCommerceIsolationTests
         Assert.That(typeof(OmmCmsCommerceIsolation).Assembly.GetType(type), Is.Null);
     }
 
+    [TestCase("OmmCMS.Core.Catalog.Products.Product")]
+    [TestCase("OmmCMS.Core.Catalog.Categories.Category")]
+    [TestCase("OmmCMS.Core.Catalog.Brands.Manufacturer")]
+    [TestCase("OmmCMS.Core.Catalog.Attributes.ProductAttribute")]
     [TestCase("OmmCMS.Core.Catalog.Products.IProductCompareService")]
     [TestCase("OmmCMS.Core.Catalog.Products.ProductCompareService")]
     [TestCase("OmmCMS.Core.Catalog.Products.IRecentlyViewedProductsService")]

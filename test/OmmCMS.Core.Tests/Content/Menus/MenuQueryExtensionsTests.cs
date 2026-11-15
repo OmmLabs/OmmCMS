@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Content.Menus;
 using OmmCMS.Core.Security;
 using OmmCMS.Core.Seo;

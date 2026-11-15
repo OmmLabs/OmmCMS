@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization;

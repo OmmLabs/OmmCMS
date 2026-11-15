@@ -15,11 +15,11 @@ public partial class RuleSetRuleOptionsProvider : IRuleOptionsProvider
     public int Order => 0;
 
     public bool Matches(string dataSource)
-        => dataSource == KnownRuleOptionDataSourceNames.CartRule || dataSource == KnownRuleOptionDataSourceNames.TargetGroup;
+        => dataSource == KnownRuleOptionDataSourceNames.TargetGroup;
 
     public async Task<RuleOptionsResult> GetOptionsAsync(RuleOptionsContext context)
     {
-        if (context.DataSource != KnownRuleOptionDataSourceNames.CartRule && context.DataSource != KnownRuleOptionDataSourceNames.TargetGroup)
+        if (context.DataSource != KnownRuleOptionDataSourceNames.TargetGroup)
         {
             return null;
         }
@@ -27,7 +27,7 @@ public partial class RuleSetRuleOptionsProvider : IRuleOptionsProvider
         if (context.Reason == RuleOptionsRequestReason.SelectedDisplayNames)
         {
             var ruleSets = await _db.RuleSets.GetManyAsync(context.Value.ToIntArray());
-            var options = ruleSets.Select(x => new RuleValueSelectListOption
+            var options = ruleSets.Where(x => x.Scope == RuleScope.Customer).Select(x => new RuleValueSelectListOption
             {
                 Value = x.Id.ToString(),
                 Text = x.Name

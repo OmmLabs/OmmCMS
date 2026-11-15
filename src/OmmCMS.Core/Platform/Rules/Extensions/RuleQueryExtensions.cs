@@ -12,7 +12,7 @@ public static partial class RuleQueryExtensions
     {
         Guard.NotNull(query);
 
-        query = query.Where(x => x.Scope < RuleScope.ProductAttribute);
+        query = query.Where(x => x.Scope == RuleScope.Customer);
 
         if (!includeHidden)
         {

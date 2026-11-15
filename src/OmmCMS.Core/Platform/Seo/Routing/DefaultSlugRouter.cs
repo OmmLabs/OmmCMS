@@ -14,33 +14,6 @@ public class DefaultSlugRouter : SlugRouter
 
         switch (urlRecord.EntityName.ToLowerInvariant())
         {
-            case "product":
-                return new RouteValueDictionary
-                {
-                    { "area", string.Empty },
-                    { "controller", "Product" },
-                    { "action", "ProductDetails" },
-                    { "productId", urlRecord.EntityId },
-                    { "entity", urlRecord }
-                };
-            case "category":
-                return new RouteValueDictionary
-                {
-                    { "area", string.Empty },
-                    { "controller", "Catalog" },
-                    { "action", "Category" },
-                    { "categoryId", urlRecord.EntityId },
-                    { "entity", urlRecord }
-                };
-            case "manufacturer":
-                return new RouteValueDictionary
-                {
-                    { "area", string.Empty },
-                    { "controller", "Catalog" },
-                    { "action", "Manufacturer" },
-                    { "manufacturerId", urlRecord.EntityId },
-                    { "entity", urlRecord }
-                };
             case "topic":
                 return new RouteValueDictionary
                 {
@@ -59,9 +32,6 @@ public class DefaultSlugRouter : SlugRouter
     {
         return routes.MapComposite(
         [
-            routes.MapLocalizedControllerRoute("Product", UrlPatternFor("Product"), new { controller = "Product", action = "ProductDetails" }),
-            routes.MapLocalizedControllerRoute("Category", UrlPatternFor("Category"), new { controller = "Catalog", action = "Category" }),
-            routes.MapLocalizedControllerRoute("Manufacturer", UrlPatternFor("Manufacturer"), new { controller = "Catalog", action = "Manufacturer" }),
             routes.MapLocalizedControllerRoute("Topic", UrlPatternFor("Topic"), new { controller = "Topic", action = "TopicDetails" })
         ]);
     }

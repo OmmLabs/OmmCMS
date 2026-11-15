@@ -1,4 +1,4 @@
-﻿using OmmCMS.Core.Catalog.Attributes;
+﻿using OmmCMS.Core.Common;
 using OmmCMS.Core.Common;
 using OmmCMS.Web.Modelling;
 

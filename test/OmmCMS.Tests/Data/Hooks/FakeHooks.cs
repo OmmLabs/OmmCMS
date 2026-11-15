@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
+using OmmCMS.Core.Content.Topics;
+using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Security;
@@ -47,7 +47,7 @@ internal class Hook_LocalizedEntity_Deleted : DbSaveHook<SmartDbContext, ILocali
     protected override HookResult OnDeleted(ILocalizedEntity entity, IHookedEntity entry) => HookResult.Ok;
 }
 
-internal class Hook_Product_Post : IDbSaveHook
+internal class Hook_MediaFile_Post : IDbSaveHook
 {
     public Task<HookResult> OnBeforeSaveAsync(IHookedEntity entry, CancellationToken cancelToken)
     {
@@ -57,7 +57,7 @@ internal class Hook_Product_Post : IDbSaveHook
 
     public Task<HookResult> OnAfterSaveAsync(IHookedEntity entry, CancellationToken cancelToken)
     {
-        if (entry.EntityType != typeof(Product))
+        if (entry.EntityType != typeof(MediaFile))
             return Task.FromResult(HookResult.Void);
 
         return Task.FromResult(HookResult.Ok);
@@ -74,11 +74,11 @@ internal class Hook_Product_Post : IDbSaveHook
     }
 }
 
-internal class Hook_Category_Pre : IDbSaveHook
+internal class Hook_Topic_Pre : IDbSaveHook
 {
     public Task<HookResult> OnBeforeSaveAsync(IHookedEntity entry, CancellationToken cancelToken)
     {
-        if (entry.EntityType != typeof(Category))
+        if (entry.EntityType != typeof(Topic))
             return Task.FromResult(HookResult.Void);
 
         return Task.FromResult(HookResult.Ok);

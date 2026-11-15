@@ -1,8 +1,10 @@
 ﻿using System.Linq;
 using System.Text.Json.Nodes;
 using NUnit.Framework;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
+using OmmCMS.Core.Content.Media;
+using OmmCMS.Domain;
+using System;
+using System.Collections.Generic;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Installation.Seeding;
 
@@ -13,6 +15,25 @@ public class SeedEntityFactoryTests
 {
     private SeedReferenceResolver _resolver;
     private SeedEntityFactory _factory;
+
+    public enum SeedPageType { Simple, Grouped = 10 }
+
+    public class SeedPage : BaseEntity
+    {
+        public string Key { get; set; }
+        public string Name { get; set; }
+        public SeedPageType PageType { get; set; }
+        public int? CountryId { get; set; }
+        public DateTime? AvailableStartDateTimeUtc { get; set; }
+        public DateTime? AvailableEndDateTimeUtc { get; set; }
+        public List<SeedPageTag> Tags { get; set; } = new();
+    }
+
+    public class SeedPageTag : BaseEntity
+    {
+        public MediaTag MediaTag { get; set; }
+        public int DisplayOrder { get; set; }
+    }
 
     [SetUp]
     public void SetUp()
@@ -28,14 +49,14 @@ public class SeedEntityFactoryTests
         => new SeedEntityDescriptor<Country>("twoLetterIsoCode")
             .Child("stateProvinces", x => x.StateProvinces, new SeedEntityDescriptor<StateProvince>("abbreviation"));
 
-    private static SeedEntityDescriptor<Product> ProductDescriptor()
-        => new SeedEntityDescriptor<Product>("sku")
-            .Reference<Country>("countryOfOrigin", (p, t) => p.CountryOfOriginId = t.Id)
-            .References<Category>("categories", (p, categories) =>
+    private static SeedEntityDescriptor<SeedPage> PageDescriptor()
+        => new SeedEntityDescriptor<SeedPage>("key")
+            .Reference<Country>("country", (p, t) => p.CountryId = t.Id)
+            .References<MediaTag>("tags", (p, tags) =>
             {
-                for (var i = 0; i < categories.Count; i++)
+                for (var i = 0; i < tags.Count; i++)
                 {
-                    p.ProductCategories.Add(new ProductCategory { Category = categories[i], DisplayOrder = i + 1 });
+                    p.Tags.Add(new SeedPageTag { MediaTag = tags[i], DisplayOrder = i + 1 });
                 }
             });
 
@@ -56,15 +77,15 @@ public class SeedEntityFactoryTests
     [Test]
     public void Enums_are_read_by_name()
     {
-        var product = _factory.Create(Record("P-1", """{ "sku": "P-1", "productType": "GroupedProduct" }"""), new SeedEntityDescriptor<Product>("sku"));
+        var page = _factory.Create(Record("P-1", """{ "key": "P-1", "pageType": "Grouped" }"""), new SeedEntityDescriptor<SeedPage>("key"));
 
-        Assert.That(product.ProductType, Is.EqualTo(ProductType.GroupedProduct));
+        Assert.That(page.PageType, Is.EqualTo(SeedPageType.Grouped));
     }
 
     [Test]
     public void Enum_integers_are_rejected()
         => Assert.Throws<SeedDataFormatException>(() =>
-            _factory.Create(Record("P-1", """{ "sku": "P-1", "productType": 10 }"""), new SeedEntityDescriptor<Product>("sku")));
+            _factory.Create(Record("P-1", """{ "key": "P-1", "pageType": 10 }"""), new SeedEntityDescriptor<SeedPage>("key")));
 
     [Test]
     public void Unknown_field_throws_with_context()
@@ -85,7 +106,7 @@ public class SeedEntityFactoryTests
     [Test]
     public void Navigation_fields_are_rejected_unless_bound()
         => Assert.Throws<SeedDataFormatException>(() =>
-            _factory.Create(Record("P-1", """{ "sku": "P-1", "productCategories": [] }"""), new SeedEntityDescriptor<Product>("sku")));
+            _factory.Create(Record("P-1", """{ "key": "P-1", "tags": [] }"""), new SeedEntityDescriptor<SeedPage>("key")));
 
     [Test]
     public void Child_collections_are_created_and_registered_with_composite_key()
@@ -119,49 +140,49 @@ public class SeedEntityFactoryTests
         _resolver.Add("standard", new Country { Id = 7, Name = "Normal" });
         _resolver.AddAliases<Country>([new("apparel", "standard")]);
 
-        var golf = new Category { Name = "Golf" };
-        var sports = new Category { Name = "Sports" };
+        var golf = new MediaTag { Name = "Golf" };
+        var sports = new MediaTag { Name = "Sports" };
         _resolver.Add("golf", golf);
         _resolver.Add("sports", sports);
 
-        var product = _factory.Create(Record("P-1", """{ "sku": "P-1", "countryOfOrigin": "apparel", "categories": [ "sports", "GOLF" ] }"""), ProductDescriptor());
+        var page = _factory.Create(Record("P-1", """{ "key": "P-1", "country": "apparel", "tags": [ "sports", "GOLF" ] }"""), PageDescriptor());
 
-        Assert.That(product.CountryOfOriginId, Is.EqualTo(7));
-        Assert.That(product.ProductCategories.OrderBy(x => x.DisplayOrder).Select(x => x.Category), Is.EqualTo(new[] { sports, golf }));
+        Assert.That(page.CountryId, Is.EqualTo(7));
+        Assert.That(page.Tags.OrderBy(x => x.DisplayOrder).Select(x => x.MediaTag), Is.EqualTo(new[] { sports, golf }));
     }
 
     [Test]
     public void Unknown_reference_throws_with_field()
     {
         var ex = Assert.Throws<SeedDataFormatException>(() =>
-            _factory.Create(Record("P-1", """{ "sku": "P-1", "countryOfOrigin": "missing" }"""), ProductDescriptor()));
+            _factory.Create(Record("P-1", """{ "key": "P-1", "country": "missing" }"""), PageDescriptor()));
 
-        Assert.That(ex.Message, Does.Contain("countryOfOrigin"));
+        Assert.That(ex.Message, Does.Contain("country"));
         Assert.That(ex.Message, Does.Contain("missing"));
     }
 
     [Test]
     public void Null_bound_fields_are_skipped()
     {
-        var product = _factory.Create(Record("P-1", """{ "sku": "P-1", "countryOfOrigin": null }"""), ProductDescriptor());
+        var page = _factory.Create(Record("P-1", """{ "key": "P-1", "country": null }"""), PageDescriptor());
 
-        Assert.That(product.CountryOfOriginId, Is.Null);
+        Assert.That(page.CountryId, Is.Null);
     }
 
     [Test]
     public void Custom_binder_receives_value_and_context()
     {
         string boundKey = null;
-        var descriptor = new SeedEntityDescriptor<Product>("sku")
+        var descriptor = new SeedEntityDescriptor<SeedPage>("key")
             .Bind("pictures", (p, node, context) =>
             {
                 boundKey = context.Key;
                 p.Name = string.Join(",", node.AsArray().Select(x => (string)x));
             });
 
-        var product = _factory.Create(Record("P-1", """{ "sku": "P-1", "pictures": [ "a.jpg", "b.jpg" ] }"""), descriptor);
+        var page = _factory.Create(Record("P-1", """{ "key": "P-1", "pictures": [ "a.jpg", "b.jpg" ] }"""), descriptor);
 
-        Assert.That(product.Name, Is.EqualTo("a.jpg,b.jpg"));
+        Assert.That(page.Name, Is.EqualTo("a.jpg,b.jpg"));
         Assert.That(boundKey, Is.EqualTo("P-1"));
     }
 
@@ -222,12 +243,12 @@ public class SeedEntityFactoryTests
     public void OnCreated_runs_after_binding_in_registration_order()
     {
         var calls = new System.Collections.Generic.List<string>();
-        var descriptor = new SeedEntityDescriptor<Product>("sku")
+        var descriptor = new SeedEntityDescriptor<SeedPage>("key")
             .Bind("pictures", (p, _, _) => calls.Add("bind"))
             .OnCreated((p, context) => calls.Add("created:" + context.Key + ":" + p.Name))
             .OnCreated((p, _) => calls.Add("created2"));
 
-        _factory.Create(Record("P-1", """{ "sku": "P-1", "name": "Ball", "pictures": [] }"""), descriptor);
+        _factory.Create(Record("P-1", """{ "key": "P-1", "name": "Ball", "pictures": [] }"""), descriptor);
 
         Assert.That(calls, Is.EqualTo(new[] { "bind", "created:P-1:Ball", "created2" }));
     }
@@ -236,27 +257,27 @@ public class SeedEntityFactoryTests
     public void Relative_dates_are_resolved()
     {
         var before = System.DateTime.UtcNow;
-        var product = _factory.Create(Record("P-1", """{ "sku": "P-1", "availableStartDateTimeUtc": "@now-10d", "availableEndDateTimeUtc": "@now+1M" }"""), new SeedEntityDescriptor<Product>("sku"));
+        var page = _factory.Create(Record("P-1", """{ "key": "P-1", "availableStartDateTimeUtc": "@now-10d", "availableEndDateTimeUtc": "@now+1M" }"""), new SeedEntityDescriptor<SeedPage>("key"));
 
-        Assert.That(product.AvailableStartDateTimeUtc, Is.EqualTo(before.AddDays(-10)).Within(System.TimeSpan.FromMinutes(1)));
-        Assert.That(product.AvailableEndDateTimeUtc, Is.EqualTo(before.AddMonths(1)).Within(System.TimeSpan.FromMinutes(1)));
+        Assert.That(page.AvailableStartDateTimeUtc, Is.EqualTo(before.AddDays(-10)).Within(System.TimeSpan.FromMinutes(1)));
+        Assert.That(page.AvailableEndDateTimeUtc, Is.EqualTo(before.AddMonths(1)).Within(System.TimeSpan.FromMinutes(1)));
     }
 
     [Test]
     public void Invalid_relative_date_throws()
         => Assert.Throws<SeedDataFormatException>(() =>
-            _factory.Create(Record("P-1", """{ "sku": "P-1", "availableEndDateTimeUtc": "@now+1y" }"""), new SeedEntityDescriptor<Product>("sku")));
+            _factory.Create(Record("P-1", """{ "key": "P-1", "availableEndDateTimeUtc": "@now+1y" }"""), new SeedEntityDescriptor<SeedPage>("key")));
 
     [Test]
     public void Key_field_can_be_a_bound_reference()
     {
         _resolver.Add("standard", new Country { Id = 9 });
-        var descriptor = new SeedEntityDescriptor<Product>("countryOfOrigin")
-            .Reference<Country>("countryOfOrigin", (p, t) => p.CountryOfOriginId = t.Id);
+        var descriptor = new SeedEntityDescriptor<SeedPage>("country")
+            .Reference<Country>("country", (p, t) => p.CountryId = t.Id);
 
-        var product = _factory.Create(Record("standard", """{ "countryOfOrigin": "standard", "sku": "P-1" }"""), descriptor);
+        var page = _factory.Create(Record("standard", """{ "country": "standard", "key": "P-1" }"""), descriptor);
 
-        Assert.That(product.CountryOfOriginId, Is.EqualTo(9));
+        Assert.That(page.CountryId, Is.EqualTo(9));
     }
 
     [Test]
@@ -274,27 +295,27 @@ public class SeedEntityFactoryTests
     [Test]
     public void Binding_a_field_twice_throws()
         => Assert.Throws<System.InvalidOperationException>(() =>
-            new SeedEntityDescriptor<Product>("sku").Bind("x", (_, _, _) => { }).Bind("X", (_, _, _) => { }));
+            new SeedEntityDescriptor<SeedPage>("key").Bind("x", (_, _, _) => { }).Bind("X", (_, _, _) => { }));
 
     [Test]
     public void CreateAll_strips_synthetic_key_and_registers_aliases()
     {
-        var descriptor = new SeedEntityDescriptor<Category>("key");
+        var descriptor = new SeedEntityDescriptor<MediaTag>("key");
         var set = new SeedRecordSet(
             descriptor,
             [Record("standard", """{ "key": "standard", "name": "Normal" }""")],
             new System.Collections.Generic.Dictionary<string, string> { ["apparel"] = "standard" });
 
-        var categories = _factory.CreateAll<Category>(set);
+        var tags = _factory.CreateAll<MediaTag>(set);
 
-        Assert.That(categories.Single().Name, Is.EqualTo("Normal"));
-        Assert.That(_resolver.Get<Category>("apparel"), Is.SameAs(categories[0]));
+        Assert.That(tags.Single().Name, Is.EqualTo("Normal"));
+        Assert.That(_resolver.Get<MediaTag>("apparel"), Is.SameAs(tags[0]));
     }
 
     [Test]
     public void CreateAll_rejects_record_sets_of_other_types()
     {
-        var set = new SeedRecordSet(new SeedEntityDescriptor<Category>("key"), [], new System.Collections.Generic.Dictionary<string, string>());
+        var set = new SeedRecordSet(new SeedEntityDescriptor<MediaTag>("key"), [], new System.Collections.Generic.Dictionary<string, string>());
 
         Assert.Throws<System.ArgumentException>(() => _factory.CreateAll<Country>(set));
     }

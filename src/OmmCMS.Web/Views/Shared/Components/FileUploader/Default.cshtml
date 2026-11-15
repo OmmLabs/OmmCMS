@@ -1,5 +1,4 @@
 ﻿@using OmmCMS.Core.Content.Media;
-@using OmmCMS.Core.Catalog.Products;
 @using OmmCMS.Web.TagHelpers.Shared;
 
 @model FileUploaderModel
@@ -64,20 +63,10 @@
         @foreach (var file in files)
         {
             var previewUrl = await MediaService.GetUrlAsync(file.MediaFile.Id, MediaSettings.ThumbnailSizeMd);
-            var isMainPic = file.MediaFileId == Model.MainFileId;
-            var entityMediaId = 0;
-
-            if (Model.EntityType == "Product")
-            {
-                var entityMediaFile = file as ProductMediaFile;
-                entityMediaId = entityMediaFile.Id;
-            }
-
             <div class="fu-file-preview dz-image-preview dz-success dz-complete shadow-sm"
                  data-display-order="@file.DisplayOrder"
                  data-media-id="@file.MediaFileId"
-                 data-media-name="@file.MediaFile.Name"
-                 attr-data-entity-media-id="(entityMediaId != 0, entityMediaId.ToString())">
+                 data-media-name="@file.MediaFile.Name">
 
                 @{ await FilePreviewTemplate(previewUrl, file.MediaFile.Name, file.MediaFile.MediaType); }
             </div>

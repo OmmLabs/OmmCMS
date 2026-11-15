@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using NUnit.Framework;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Rules;
@@ -59,7 +58,6 @@ public abstract class FilterTestsBase
     private string _ship2 = "Ship2";
     private string _ship3 = "Ship3";
 
-    private List<Product> _products = new();
 
     protected static class FilterDescriptors
     {
@@ -152,11 +150,6 @@ public abstract class FilterTestsBase
 
     protected virtual void SetUpEntities()
     {
-        for (int i = 1; i <= 10; i++)
-        {
-            _products.Add(new Product { Id = i });
-        }
-
         _customers = new List<FilterCustomer>();
 
         var customer1 = new FilterCustomer

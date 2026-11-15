@@ -1,4 +1,4 @@
-﻿namespace OmmCMS.Core.Catalog.Categories;
+﻿namespace OmmCMS.Core.Content.Media;
 
 public static class ITreeNodeQueryExtensions
 {

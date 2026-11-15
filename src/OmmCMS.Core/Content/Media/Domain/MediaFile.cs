@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Localization;
 
 namespace OmmCMS.Core.Content.Media;
@@ -232,13 +231,4 @@ public partial class MediaFile : EntityWithAttributes, IMediaAware, ITransient, 
         protected set => _tracks = value;
     }
 
-    private ICollection<ProductMediaFile> _productMediaFiles;
-    /// <summary>
-    /// Gets or sets the product media files.
-    /// </summary>
-    public ICollection<ProductMediaFile> ProductMediaFiles
-    {
-        get => _productMediaFiles ?? LazyLoader.Load(this, ref _productMediaFiles) ?? (_productMediaFiles ??= new HashSet<ProductMediaFile>());
-        protected set => _productMediaFiles = value;
-    }
 }

@@ -1,7 +1,7 @@
 ﻿using OmmCMS.Core.Data;
 using OmmCMS.Data.Hooks;
 
-namespace OmmCMS.Core.Catalog.Categories;
+namespace OmmCMS.Core.Content.Media;
 
 [Important(HookImportance.Essential)]
 internal class TreeNodeHook : AsyncDbSaveHook<ITreeNode>

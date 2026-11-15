@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Data;
 
 namespace OmmCMS.Core.Identity;

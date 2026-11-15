@@ -1,26 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Identity;
 using OmmCMS.Data.Caching;
 
 namespace OmmCMS.Core.Rules;
-
-internal class RuleSetEntityMap : IEntityTypeConfiguration<RuleSetEntity>
-{
-    public void Configure(EntityTypeBuilder<RuleSetEntity> builder)
-    {
-        builder.HasOne(c => c.ProductVariantAttribute)
-            .WithOne(c => c.RuleSet)
-            .HasForeignKey<RuleSetEntity>(c => c.ProductVariantAttributeId)
-            .HasConstraintName("FK_RuleSet_ProductVariantAttributeId")
-            .OnDelete(DeleteBehavior.Cascade)
-            .IsRequired(false);
-    }
-}
 
 /// <summary>
 /// Represents a set of rules.
@@ -52,7 +36,7 @@ public partial class RuleSetEntity : EntityWithAttributes, IAuditable
     /// Gets or sets the scope of the rule set.
     /// </summary>
     [Required]
-    public RuleScope Scope { get; set; }
+    public RuleScope Scope { get; set; } = RuleScope.Customer;
 
     /// <summary>
     /// <c>True</c> when this set is an internal composite container for rules within another rule set.
@@ -85,16 +69,6 @@ public partial class RuleSetEntity : EntityWithAttributes, IAuditable
         protected set => _rules = value;
     }
 
-    private ICollection<Category> _categories;
-    /// <summary>
-    /// Gets or sets assigned categories.
-    /// </summary>
-    public ICollection<Category> Categories
-    {
-        get => _categories ?? LazyLoader.Load(this, ref _categories) ?? (_categories ??= new HashSet<Category>());
-        protected set => _categories = value;
-    }
-
     private ICollection<CustomerRole> _customerRoles;
     /// <summary>
     /// Gets or sets assigned customer roles.
@@ -105,16 +79,5 @@ public partial class RuleSetEntity : EntityWithAttributes, IAuditable
         protected set => _customerRoles = value;
     }
 
-    /// <summary>
-    /// Gets or sets the identifier of an assigned <see cref="ProductVariantAttribute" />
-    /// Only applicable for <see cref="RuleScope.ProductAttribute"/>.
-    /// </summary>
-    public int? ProductVariantAttributeId { get; set; }
 
-    private ProductVariantAttribute _productVariantAttribute;
-    public ProductVariantAttribute ProductVariantAttribute
-    {
-        get => _productVariantAttribute ?? LazyLoader.Load(this, ref _productVariantAttribute);
-        set => _productVariantAttribute = value;
-    }
 }

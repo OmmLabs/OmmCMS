@@ -555,22 +555,12 @@ public partial class XmlSitemapGenerator : AsyncDbSaveHook<BaseEntity>, IXmlSite
     {
         var result = new Dictionary<string, UrlRecordCollection>();
 
-        if (batch.First().EntityName == "Product")
-        {
-            // Nothing comes after product
-            int min = batch.Last().Id;
-            int max = batch.First().Id;
-
-            result["Product"] = await _urlService.GetUrlRecordCollectionAsync("Product", languageIds, new[] { min, max }, true, true);
-        }
-
         var entityGroups = batch.ToMultimap(x => x.EntityName, x => x.Id);
         foreach (var group in entityGroups)
         {
-            var isRange = group.Key == "Product";
-            var entityIds = isRange ? new[] { group.Value.Last(), group.Value.First() } : group.Value.ToArray();
+            var entityIds = group.Value.ToArray();
 
-            result[group.Key] = await _urlService.GetUrlRecordCollectionAsync(group.Key, languageIds, entityIds, isRange, isRange);
+            result[group.Key] = await _urlService.GetUrlRecordCollectionAsync(group.Key, languageIds, entityIds, isRange: false, isSorted: false);
         }
 
         return result;

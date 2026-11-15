@@ -1,6 +1,5 @@
 ﻿#nullable enable
 
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Web;
 
 namespace OmmCMS.Core.Identity;

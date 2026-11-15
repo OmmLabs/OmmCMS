@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using OmmCMS.Admin.Models.Customers;
 using OmmCMS.Admin.Models.Orders;
 using OmmCMS.ComponentModel;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media;

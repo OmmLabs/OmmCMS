@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Runtime.Serialization;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Data;
 using OmmCMS.Data.Caching;
 

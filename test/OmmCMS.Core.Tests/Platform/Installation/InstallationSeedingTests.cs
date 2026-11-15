@@ -36,7 +36,7 @@ public partial class InstallationSeedingTests
             Assert.That(db.Currencies.Any(), Is.True, "Currencies");
             Assert.That(db.Countries.Any(), Is.True, "Countries");
             Assert.That(db.Settings.Any(), Is.True, "Settings");
-            Assert.That(db.Products.Any(), Is.False, "Sample products must not be installed.");
+            Assert.That(db.Model.GetEntityTypes().Any(x => x.ClrType.Name == "Product"), Is.False, "Product persistence must be absent.");
         }
     }
 
@@ -48,8 +48,8 @@ public partial class InstallationSeedingTests
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(db.Products.Any(), Is.False, "No products are seeded.");
-            Assert.That(db.Categories.Any(), Is.False, "No product categories are seeded.");
+            Assert.That(db.Model.GetEntityTypes().Any(x => x.ClrType.Name == "Product"), Is.False, "Product persistence must be absent.");
+            Assert.That(db.Model.GetEntityTypes().Any(x => x.ClrType.Name == "Category"), Is.False, "Category persistence must be absent.");
             Assert.That(db.Set<OmmCMS.Core.Content.Topics.Topic>().Any(x => x.SystemName == "HomePageText"), Is.True);
         }
     }
@@ -63,8 +63,8 @@ public partial class InstallationSeedingTests
         using (Assert.EnterMultipleScope())
         {
             Assert.That(db.Stores.Select(x => x.Name).Single(), Is.EqualTo("OmmCMS"));
-            Assert.That(db.Products.Any(), Is.False);
-            Assert.That(db.Categories.Any(), Is.False);
+            Assert.That(db.Model.GetEntityTypes().Any(x => x.ClrType.Name == "Product"), Is.False, "Product persistence must be absent.");
+            Assert.That(db.Model.GetEntityTypes().Any(x => x.ClrType.Name == "Category"), Is.False, "Category persistence must be absent.");
             var topics = db.Set<OmmCMS.Core.Content.Topics.Topic>().Select(x => x.SystemName).ToList();
             Assert.That(topics, Does.Contain("HomePageText"));
             Assert.That(topics, Does.Contain("AboutUs"));
