@@ -147,6 +147,14 @@ for path in removed:
 license_path = pathlib.Path("src/OmmCMS/sixlabors.lic")
 license_path.write_bytes(pathlib.Path(".github/ommcms-sixlabors.lic").read_bytes())
 
+# Keep the search fixture's partial-term matches consistent with the renamed data.
+fixture = pathlib.Path("test/OmmCMS.Core.Tests/Catalog/Search/LinqCatalogSearchServiceTests.cs")
+source = fixture.read_text(encoding="utf-8-sig")
+source = source.replace('[TestCase(new int[] { 1, 2, 4 }, "Smart")]', '[TestCase(new int[] { 1, 2, 4 }, "Omm")]')
+source = source.replace('[TestCase(new int[] { 1, 2, 4, 5 }, "Smart", SearchMode.Contains, 1)]', '[TestCase(new int[] { 1, 2, 4, 5 }, "Omm", SearchMode.Contains, 1)]')
+source = source.replace('new SearchProduct(2) { Name = "Apple iPhone Smartphone 6" },', 'new SearchProduct(2) { Name = "Apple iPhone Smartphone 6 for OmmCMS" },')
+fixture.write_text(source, encoding="utf-8-sig")
+
 # Force-add exactly the renamed tracked paths, even if they live under build ignore rules.
 subprocess.run(["git", "add", "-u"], check=True)
 destinations = [str(target) for source, target in moves.items() if source != target and target.is_file()]
