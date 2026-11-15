@@ -199,7 +199,7 @@ def editorial_workflows(password):
     page = get_page(f"/admin/topic/edit/{topic_id}", admin)
     token = Inputs(page).values["__RequestVerificationToken"]
     name = "ommcms-editorial-smoke.png"
-    png = base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=")
+    png = base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAAFElEQVR4nGO0adrCgA0wYRUdtBIAJMsBgh5OrpoAAAAASUVORK5CYII=")
     boundary = "----OmmCmsSmoke" + uuid.uuid4().hex
     parts = []
     for field, value in {"path": "file", "__RequestVerificationToken": token}.items():
@@ -212,7 +212,11 @@ def editorial_workflows(password):
     media = json.loads(result)
     assert isinstance(media, dict) and media.get("success"), "Media upload did not succeed"
     assert read_rows("SELECT Id FROM MediaFile WHERE Name = ? AND Deleted = 0", (name,)), "Media metadata missing"
-    print("Authenticated media upload passed.")
+    media_url = urllib.parse.urljoin(base + "/", media["url"])
+    assert urllib.parse.urlsplit(media_url).netloc == urllib.parse.urlsplit(base).netloc
+    with anonymous.open(media_url, timeout=30) as response:
+        assert response.status == 200 and response.read().startswith(b"\\x89PNG"), "Uploaded image not publicly readable"
+    print("Authenticated media upload and public retrieval passed.")
 
     # Check actual theme settings and configuration UI, then persist a different bundled theme.
     store_id = read_rows("SELECT Id FROM Store")[0][0]
