@@ -43,20 +43,15 @@ internal class StoreHook : AsyncDbSaveHook<Store>
         return Task.FromResult(HookResult.Ok);
     }
 
-    protected override async Task<HookResult> OnDeletingAsync(Store entity, IHookedEntity entry, CancellationToken cancelToken)
+    protected override Task<HookResult> OnDeletingAsync(Store entity, IHookedEntity entry, CancellationToken cancelToken)
     {
         if (_storeContext.GetCachedStores().Stores.Count == 1)
         {
             entry.ResetState();
             _hookErrorMessage = T("Admin.Configuration.Stores.CannotDeleteLastStore");
         }
-        else if (await _db.WalletHistory.AnyAsync(x => x.StoreId == entity.Id, cancelToken))
-        {
-            entry.ResetState();
-            _hookErrorMessage = T("Admin.Configuration.Stores.CannotDeleteStoreWithWalletPostings");
-        }
 
-        return HookResult.Ok;
+        return Task.FromResult(HookResult.Ok);
     }
 
     protected override Task<HookResult> OnDeletedAsync(Store entity, IHookedEntity entry, CancellationToken cancelToken)

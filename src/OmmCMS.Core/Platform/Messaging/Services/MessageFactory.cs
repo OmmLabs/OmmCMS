@@ -1,7 +1,5 @@
 ﻿using System.Text.Json;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Payment;
-using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Data;
@@ -454,7 +452,6 @@ public partial class MessageFactory : IMessageFactory
             { nameof(Customer), () => GetRandomEntity<Customer>(x => !x.Deleted && !x.IsSystemAccount && !string.IsNullOrEmpty(x.Email)) },
             { nameof(NewsletterSubscription), () => GetRandomEntity<NewsletterSubscription>(x => true) },
             { nameof(Campaign), () => GetRandomEntity<Campaign>(x => true) },
-            { nameof(WalletHistory), () => GetRandomEntity<WalletHistory>(x => true) }
         };
 
         var template = messageContext.MessageTemplate;

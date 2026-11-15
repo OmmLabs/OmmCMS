@@ -23,7 +23,6 @@ public static partial class SystemCustomerAttributeNames
     public static string MostRecentlyUsedManufacturers => "MostRecentlyUsedManufacturers";
     public static string HasConsentedToGdpr => "HasConsentedToGdpr";
     public static string CookieConsent => "CookieConsent";
-    public static string HasEarnedNewsletterRewardPoints => "HasEarnedNewsletterRewardPoints";
 
     // Checkout
     public static string DefaultBillingAddressId => "DefaultBillingAddressId";

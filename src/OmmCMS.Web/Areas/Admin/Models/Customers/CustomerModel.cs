@@ -139,7 +139,6 @@ public class CustomerModel : TabbableModel
     public int[] SelectedCustomerRoleIds { get; set; }
     public bool AllowManagingCustomerRoles { get; set; }
 
-    public bool DisplayRewardPointsHistory { get; set; }
     public bool DisplayProfileLink { get; set; }
 
     [LocalizedDisplay("Admin.Customers.Customers.AssociatedExternalAuth")]
@@ -147,7 +146,6 @@ public class CustomerModel : TabbableModel
 
     public bool Deleted { get; set; }
     public string EditUrl { get; set; }
-    public bool HasOrders { get; set; }
     public PermissionTree PermissionTree { get; set; }
     public AddressesModel Addresses { get; set; }
     public CookieConsentModel CookieConsent { get; set; }
@@ -173,22 +171,6 @@ public class CustomerModel : TabbableModel
 
         [LocalizedDisplay("*AuthMethodName")]
         public string AuthMethodName { get; set; }
-    }
-
-    [LocalizedDisplay("Admin.Customers.Customers.RewardPoints.Fields.")]
-    public class RewardPointsHistoryModel : EntityModelBase
-    {
-        [LocalizedDisplay("*Points")]
-        public int Points { get; set; }
-
-        [LocalizedDisplay("*PointsBalance")]
-        public int PointsBalance { get; set; }
-
-        [LocalizedDisplay("*Message")]
-        public string Message { get; set; }
-
-        [LocalizedDisplay("Common.CreatedOn")]
-        public DateTime? CreatedOn { get; set; }
     }
 
     [LocalizedDisplay("Admin.Customers.Customers.SendEmail.")]

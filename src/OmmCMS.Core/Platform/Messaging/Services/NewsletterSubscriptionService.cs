@@ -18,22 +18,19 @@ public class NewsletterSubscriptionService : AsyncDbSaveHook<NewsletterSubscript
     private readonly IStoreContext _storeContext;
     private readonly IEventPublisher _eventPublisher;
     private readonly IMessageFactory _messageFactory;
-    private readonly ICustomerService _customerService;
 
     public NewsletterSubscriptionService(
         SmartDbContext db,
         IWorkContext workContext,
         IStoreContext storeContext,
         IEventPublisher eventPublisher,
-        IMessageFactory messageFactory,
-        ICustomerService customerService)
+        IMessageFactory messageFactory)
     {
         _db = db;
         _workContext = workContext;
         _storeContext = storeContext;
         _eventPublisher = eventPublisher;
         _messageFactory = messageFactory;
-        _customerService = customerService;
     }
 
     public Localizer T { get; set; } = NullLocalizer.Instance;
@@ -163,7 +160,6 @@ public class NewsletterSubscriptionService : AsyncDbSaveHook<NewsletterSubscript
                 {
                     subscription.Active = true;
 
-                    _customerService.ApplyRewardPointsForNewsletterSubscription(customer);
                     await _db.SaveChangesAsync();
                 }
                 else
@@ -188,7 +184,6 @@ public class NewsletterSubscriptionService : AsyncDbSaveHook<NewsletterSubscript
 
             if (active)
             {
-                _customerService.ApplyRewardPointsForNewsletterSubscription(customer);
                 await _db.SaveChangesAsync();
             }
             else
@@ -269,10 +264,6 @@ public class NewsletterSubscriptionService : AsyncDbSaveHook<NewsletterSubscript
         {
             subscriber.Subscription.Active = true;
 
-            if (subscriber.Customer != null)
-            {
-                _customerService.ApplyRewardPointsForNewsletterSubscription(subscriber.Customer);
-            }
         }
         else
         {

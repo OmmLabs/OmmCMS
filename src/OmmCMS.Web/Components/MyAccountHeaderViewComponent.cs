@@ -16,7 +16,6 @@ public class MyAccountHeaderViewComponent : SmartViewComponent
             CustomerName = customerName,
             Avatar = await customer.MapAsync(customerName, true, true),
             CustomerSince = Services.DateTimeHelper.ConvertToUserTime(customer.CreatedOnUtc, DateTimeKind.Utc),
-            RewardPoints = customer.GetRewardPointsBalance()
         };
 
         return View(model);

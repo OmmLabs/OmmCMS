@@ -303,26 +303,6 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
         protected set => _customerRoleMappings = value;
     }
 
-    private ICollection<RewardPointsHistory> _rewardPointsHistory;
-    /// <summary>
-    /// Gets or sets the reward points history.
-    /// </summary>
-    public ICollection<RewardPointsHistory> RewardPointsHistory
-    {
-        get => _rewardPointsHistory ?? LazyLoader.Load(this, ref _rewardPointsHistory) ?? (_rewardPointsHistory ??= new HashSet<RewardPointsHistory>());
-        protected set => _rewardPointsHistory = value;
-    }
-
-    private ICollection<WalletHistory> _walletHistory;
-    /// <summary>
-    /// Gets or sets the wallet history.
-    /// </summary>
-    public ICollection<WalletHistory> WalletHistory
-    {
-        get => _walletHistory ?? LazyLoader.Load(this, ref _walletHistory) ?? (_walletHistory ??= new HashSet<WalletHistory>());
-        protected set => _walletHistory = value;
-    }
-
     #endregion
 
     #region Utils
@@ -370,47 +350,6 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
 
             Addresses.Remove(address);
         }
-    }
-
-    /// <summary>
-    /// Adds a reward points history entry.
-    /// </summary>
-    /// <param name="points">Points to add.</param>
-    /// <param name="message">Optional message.</param>
-    /// <param name="usedAmount">Used amount.</param>
-    public void AddRewardPointsHistoryEntry(
-        int points,
-        string message = "",
-        decimal usedAmount = 0M)
-    {
-        var newPointsBalance = GetRewardPointsBalance() + points;
-
-        RewardPointsHistory.Add(new RewardPointsHistory
-        {
-            Customer = this,
-            Points = points,
-            PointsBalance = newPointsBalance,
-            UsedAmount = usedAmount,
-            Message = message,
-            CreatedOnUtc = DateTime.UtcNow
-        });
-    }
-
-    /// <summary>
-    /// Gets the reward points balance.
-    /// </summary>
-    public int GetRewardPointsBalance()
-    {
-        if (RewardPointsHistory.Any())
-        {
-            return RewardPointsHistory
-                .OrderByDescending(x => x.CreatedOnUtc)
-                .ThenByDescending(x => x.Id)
-                .First()
-                .PointsBalance;
-        }
-
-        return 0;
     }
 
     #endregion

@@ -98,14 +98,4 @@ public partial interface ICustomerService
     /// <param name="tracked">Whether to load entity tracked. Non-tracking load will be cached.</param>
     /// <returns>Found customer</returns>
     Task<CustomerRole?> GetRoleBySystemNameAsync(string? systemName, bool tracked = true);
-
-    /// <summary>
-    /// Applies reward points for subscribing to the newsletter. The caller is responsible for database commit.
-    /// </summary>
-    /// <param name="customer">The customer for whom to apply reward points. Cannot be <c>null</c>.</param>
-    /// <remarks>
-    /// Customers earn points for subscribing to the newsletter only once per store, 
-    /// regardless of how many times they subscribe and unsubscribe.
-    /// </remarks>
-    void ApplyRewardPointsForNewsletterSubscription(Customer customer);
 }

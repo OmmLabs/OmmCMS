@@ -27,7 +27,6 @@ public partial class CustomerService : ICustomerService
     private readonly IEventPublisher _eventPublisher;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IChronometer _chronometer;
-    private readonly RewardPointsSettings _rewardPointsSettings;
     private readonly PrivacySettings _privacySettings;
     private readonly PerformanceSettings _performanceSettings;
 
@@ -42,7 +41,6 @@ public partial class CustomerService : ICustomerService
         IEventPublisher eventPublisher,
         IHttpContextAccessor httpContextAccessor,
         IChronometer chronometer,
-        RewardPointsSettings rewardPointsSettings,
         PrivacySettings privacySettings,
         PerformanceSettings performanceSettings)
     {
@@ -53,7 +51,6 @@ public partial class CustomerService : ICustomerService
         _eventPublisher = eventPublisher;
         _httpContextAccessor = httpContextAccessor;
         _chronometer = chronometer;
-        _rewardPointsSettings = rewardPointsSettings;
         _privacySettings = privacySettings;
         _performanceSettings = performanceSettings;
     }
@@ -449,26 +446,6 @@ public partial class CustomerService : ICustomerService
             .OrderBy(x => x.Id);
 
         return query.FirstOrDefaultAsync();
-    }
-
-    #endregion
-
-    #region Reward points
-
-    public virtual void ApplyRewardPointsForNewsletterSubscription(Customer customer)
-    {
-        Guard.NotNull(customer);
-
-        if (_rewardPointsSettings.Enabled
-            && _rewardPointsSettings.PointsForNewsletterSubscription > 0
-            && customer.IsRegistered()
-            && !customer.GenericAttributes.HasEarnedNewsletterRewardPoints)
-        {
-            var msg = T("RewardPoints.Message.EarnedForNewsletterSubscription", _storeContext.CurrentStore.Name.NaIfEmpty());
-
-            customer.AddRewardPointsHistoryEntry(_rewardPointsSettings.PointsForNewsletterSubscription, msg);
-            customer.GenericAttributes.HasEarnedNewsletterRewardPoints = true;
-        }
     }
 
     #endregion

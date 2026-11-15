@@ -3,7 +3,6 @@ using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Content.Media.Imaging;
@@ -240,8 +239,6 @@ public partial class DataExporter
         result.ShippingAddress = null;
         result.Addresses = null;
 
-        result.RewardPointsHistory = null;
-        result._RewardPointsBalance = 0;
 
         result._GenericAttributes = null;
         result._HasNewsletterSubscription = false;

@@ -1,5 +1,4 @@
 ﻿using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Data;
 
 namespace OmmCMS.Core.Content.Media;

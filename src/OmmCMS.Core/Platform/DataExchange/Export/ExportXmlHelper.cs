@@ -244,37 +244,6 @@ public class ExportXmlHelper : Disposable
         }
     }
 
-    public void WriteRewardPointsHistory(dynamic rewardPoints, string node)
-    {
-        if (rewardPoints == null)
-            return;
-
-        if (node.HasValue())
-        {
-            _writer.WriteStartElement(node);
-        }
-
-        foreach (dynamic rewardPoint in rewardPoints)
-        {
-            RewardPointsHistory entity = rewardPoint.Entity;
-
-            _writer.WriteStartElement("RewardPointsHistory");
-            _writer.WriteElementString(nameof(RewardPointsHistory.Id), entity.ToString());
-            _writer.WriteElementString(nameof(RewardPointsHistory.CustomerId), entity.ToString());
-            _writer.WriteElementString(nameof(RewardPointsHistory.Points), entity.Points.ToString());
-            _writer.WriteElementString(nameof(RewardPointsHistory.PointsBalance), entity.PointsBalance.ToString());
-            _writer.WriteElementString(nameof(RewardPointsHistory.UsedAmount), entity.UsedAmount.ToString(_culture));
-            _writer.WriteElementString(nameof(RewardPointsHistory.Message), (string)rewardPoint.Message);
-            _writer.WriteElementString(nameof(RewardPointsHistory.CreatedOnUtc), entity.CreatedOnUtc.ToString(_culture));
-            _writer.WriteEndElement();
-        }
-
-        if (node.HasValue())
-        {
-            _writer.WriteEndElement();
-        }
-    }
-
     public void WriteDeliveryTime(dynamic deliveryTime, string node)
     {
         if (deliveryTime == null)
@@ -492,7 +461,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Customer.Company), entity.Company);
         _writer.WriteElementString(nameof(Customer.CustomerNumber), entity.CustomerNumber);
         _writer.WriteElementString(nameof(Customer.BirthDate), entity.BirthDate?.ToString(_culture) ?? string.Empty);
-        _writer.WriteElementString("RewardPointsBalance", ((int)customer._RewardPointsBalance).ToString());
 
         if (customer.CustomerRoles != null)
         {
@@ -512,7 +480,6 @@ public class ExportXmlHelper : Disposable
             _writer.WriteEndElement();
         }
 
-        WriteRewardPointsHistory(customer.RewardPointsHistory, "RewardPointsHistories");
         WriteAddress(customer.BillingAddress, nameof(Customer.BillingAddress));
         WriteAddress(customer.ShippingAddress, nameof(Customer.ShippingAddress));
 

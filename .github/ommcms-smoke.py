@@ -613,6 +613,11 @@ try:
             "Checkout/Shipping/Configuration/ShippingSettings.cs",
             "Checkout/Orders/Domain/ReturnCase.cs",
             "Checkout/Orders/Domain/OrderNote.cs",
+            "Checkout/Payment/Domain/PaymentEnums.cs",
+            "Checkout/Shipping/Domain/ShippingStatus.cs",
+            "Platform/Identity/Configuration/RewardPointsSettings.cs",
+            "Platform/Identity/Domain/RewardPointsHistory.cs",
+            "Platform/Identity/Domain/WalletHistory.cs",
             "Checkout/Orders/Domain/Order.cs",
             "Checkout/Orders/Domain/OrderItem.cs",
             "Checkout/Orders/Domain/OrderEnums.cs",
@@ -718,7 +723,7 @@ try:
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('AllowCustomerReviews', 'ApprovedRatingSum', 'NotApprovedRatingSum', 'ApprovedTotalReviews', 'NotApprovedTotalReviews')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('recurringpayment', 'recurringpayments', 'recurringpaymenthistory', 'recurringpaymenthistories')") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('IsRecurring', 'RecurringCycleLength', 'RecurringCyclePeriodId', 'RecurringTotalCycles')") == [0]
-        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('order', 'orderitem')") == [0]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('order', 'orderitem', 'rewardpointshistory', 'wallethistory')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('giftcard', 'giftcards', 'giftcardusagehistory', 'giftcardusagehistories')") == [0]
         assert rows("SELECT COUNT(*) FROM MessageTemplate WHERE Name = 'GiftCard.Notification'") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('IsGiftCard', 'GiftCardTypeId')") == [0]

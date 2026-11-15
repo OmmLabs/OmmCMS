@@ -43,24 +43,4 @@ public class CustomerTests
         customer.Addresses.Count.ShouldEqual(0);
         customer.BillingAddress.ShouldBeNull();
     }
-
-    [Test]
-    public void Can_add_rewardPointsHistoryEntry()
-    {
-        var customer = new Customer();
-        customer.AddRewardPointsHistoryEntry(1, "Points for registration");
-
-        customer.RewardPointsHistory.Count.ShouldEqual(1);
-        customer.RewardPointsHistory.First().Points.ShouldEqual(1);
-    }
-
-    [Test]
-    public void Can_get_rewardPointsHistoryBalance()
-    {
-        var customer = new Customer();
-        customer.AddRewardPointsHistoryEntry(1, "Points for registration");
-        //customer.AddRewardPointsHistoryEntry(3, "Points for registration");
-
-        customer.GetRewardPointsBalance().ShouldEqual(1);
-    }
 }

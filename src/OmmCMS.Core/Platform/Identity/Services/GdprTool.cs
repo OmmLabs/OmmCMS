@@ -60,13 +60,6 @@ public partial class GdprTool : IGdprTool
                 model["Attributes"] = await _messageModelProvider.CreateModelPartAsync(attributes.Entities, true);
             }
 
-            // Wallet
-            var walletHistory = customer.WalletHistory;
-            if (walletHistory.Count != 0)
-            {
-                model["WalletHistory"] = await walletHistory.SelectAwait(x => _messageModelProvider.CreateModelPartAsync(x, true, "WalletUrl")).ToListAsync();
-            }
-
             // INFO: we're not going to export: 
             // - Activity log
             // It doesn't feel right and GDPR rules are not very clear about this. Let's wait and see :-)
