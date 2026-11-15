@@ -7,8 +7,6 @@ namespace Smartstore.Web.Models.Identity;
 [LocalizedDisplay("Account.Login.Fields.")]
 public partial class LoginModel : ModelBase
 {
-    public bool CheckoutAsGuest { get; set; }
-
     public CustomerLoginType CustomerLoginType { get; set; }
 
     [DataType(DataType.EmailAddress)]

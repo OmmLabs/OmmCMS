@@ -1,9 +1,6 @@
 ﻿@using Smartstore.Web.Models.Customers
-@using Smartstore.Core.Checkout.Cart 
 
 @model CustomerInfoModel
-
-@inject ShoppingCartSettings CartSettings
 
 @{
     Assets.AppendTitleParts(T("PageTitle.Account"));
@@ -12,10 +9,6 @@
     ViewBag.PageClassToken = "info";
     ViewBag.PageTitle = T("Account.CustomerInfo").Value;
 
-    var shippingMethods = (ViewBag.ShippingMethods as List<SelectListItem>) ?? new();
-    var paymentMethods = (ViewBag.PaymentMethods as List<SelectListItem>) ?? new();
-    var canChangePreferredShipping = shippingMethods.Count > 0 && CartSettings.QuickCheckoutEnabled && CartSettings.CustomersCanChangePreferredShipping;
-    var canChangePreferredPayment = paymentMethods.Count > 0 && CartSettings.QuickCheckoutEnabled && CartSettings.CustomersCanChangePreferredPayment;
 }
 
 <form asp-action="Info" class="form-horizontal" method="post">
@@ -273,7 +266,7 @@
         </div>
     </fieldset>
 
-    <fieldset sm-if="Model.AllowCustomersToSetTimeZone || canChangePreferredShipping || canChangePreferredPayment" class="content-group">
+    <fieldset sm-if="Model.AllowCustomersToSetTimeZone" class="content-group">
         <legend><span>@T("Account.Preferences")</span></legend>
         <div sm-if="Model.AllowCustomersToSetTimeZone" class="form-group row">
             <label id="customer-timezone" asp-for="TimeZoneId" class="col-lg-3 col-form-label"></label>
@@ -282,26 +275,6 @@
                         asp-items="ViewBag.AvailableTimeZones" 
                         aria-labelledby="customer-timezone"></select>
                 <span asp-validation-for="TimeZoneId"></span>
-            </div>
-        </div>
-        <div sm-if="canChangePreferredShipping" class="form-group row">
-            <label id="customer-pref-shipping" asp-for="PreferredShippingMethodId" class="col-lg-3 col-form-label"></label>
-            <div class="col-lg-9">
-                <select asp-for="PreferredShippingMethodId" 
-                        asp-items="shippingMethods" 
-                        asp-placeholder="@T("Common.Unspecified")"
-                        aria-labelledby="customer-pref-shipping"></select>
-                <span asp-validation-for="PreferredShippingMethodId"></span>
-            </div>
-        </div>
-        <div sm-if="canChangePreferredPayment" class="form-group row">
-            <label id="customer-pref-payment" asp-for="PreferredPaymentMethod" class="col-lg-3 col-form-label"></label>
-            <div class="col-lg-9">
-                <select asp-for="PreferredPaymentMethod" 
-                        asp-items="paymentMethods" 
-                        asp-placeholder="@T("Common.Unspecified")"
-                        aria-labelledby="customer-pref-payment"></select>
-                <span asp-validation-for="PreferredPaymentMethod"></span>
             </div>
         </div>
     </fieldset>

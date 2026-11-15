@@ -97,33 +97,13 @@
         </div>
 
         <div class="register-block">
-            @if (Model.CheckoutAsGuest)
-            {
-                @await Component.InvokeAsync("TopicBlock", new { systemName = "CheckoutAsGuestOrRegister", bodyOnly = true })
-                <div class="row g-2">
-                    <div class="col-12">
-                        <a class="btn btn-outline-secondary btn-lg btn-block register-button" href="@registerUrl" rel="nofollow">
-                            @T("Account.Register.Button")
-                        </a>
-                    </div>
-                    <div class="col-12">
-                        <a class="btn btn-secondary btn-lg btn-block checkout-as-guest-button" asp-route="Checkout">
-                            <span>@T("Account.Login.CheckoutAsGuest")</span>
-                            <icon name="chevron-right"  aria-hidden="true" />
-                        </a>
-                    </div>
+            <div class="row">
+                <div class="col-12 col-lg-auto">
+                    <a class="btn btn-outline-secondary btn-lg btn-block register-button" href="@registerUrl" rel="nofollow">
+                        @T("Account.Register.Button")
+                    </a>
                 </div>
-            }
-            else
-            {
-                <div class="row">
-                    <div class="col-12 col-lg-auto">
-                        <a class="btn btn-outline-secondary btn-lg btn-block register-button" href="@registerUrl" rel="nofollow">
-                            @T("Account.Register.Button")
-                        </a>
-                    </div>
-                </div>
-            }
+            </div>
         </div>
     }
 }

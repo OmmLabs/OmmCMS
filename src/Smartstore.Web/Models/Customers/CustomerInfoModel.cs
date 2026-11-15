@@ -109,12 +109,6 @@ public partial class CustomerInfoModel : TabbableModel
     [LocalizedDisplay("Account.AssociatedExternalAuth")]
     public List<AssociatedExternalAuthModel> AssociatedExternalAuthRecords { get; set; } = [];
 
-    [LocalizedDisplay("*PreferredShippingMethod")]
-    public int? PreferredShippingMethodId { get; set; }
-
-    [LocalizedDisplay("*PreferredPaymentMethod")]
-    public string PreferredPaymentMethod { get; set; }
-
     public partial class AssociatedExternalAuthModel : EntityModelBase
     {
         public string Email { get; set; }

@@ -79,9 +79,6 @@ internal class Startup : StarterBase
             //o.Filters.AddConditional<SampleActionFilter>(
             //    context => context.ControllerIs<PublicController>());
 
-            //o.Filters.AddConditional<SampleCheckoutFilter>(
-            //    context => context.ControllerIs<CheckoutController>());
-
         });
     }
 

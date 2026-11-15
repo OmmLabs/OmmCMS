@@ -35,84 +35,48 @@ public class CustomerController : PublicController
     private readonly SmartDbContext _db;
     private readonly INewsletterSubscriptionService _newsletterSubscriptionService;
     private readonly ITaxService _taxService;
-    private readonly ILocalizationService _localizationService;
-    private readonly IOrderProcessingService _orderProcessingService;
-    private readonly IOrderCalculationService _orderCalculationService;
-    private readonly IOrderService _orderService;
-    private readonly IPaymentService _paymentService;
     private readonly IMediaService _mediaService;
-    private readonly IDownloadService _downloadService;
-    private readonly ICurrencyService _currencyService;
-    private readonly IShippingService _shippingService;
     private readonly IMessageFactory _messageFactory;
     private readonly UserManager<Customer> _userManager;
     private readonly SignInManager<Customer> _signInManager;
     private readonly IProviderManager _providerManager;
     private readonly ModuleManager _moduleManager;
     private readonly IDateTimeHelper _dateTimeHelper;
-    private readonly ProductUrlHelper _productUrlHelper;
     private readonly DateTimeSettings _dateTimeSettings;
     private readonly CustomerSettings _customerSettings;
     private readonly TaxSettings _taxSettings;
     private readonly LocalizationSettings _localizationSettings;
-    private readonly OrderSettings _orderSettings;
-    private readonly RewardPointsSettings _rewardPointsSettings;
-    private readonly ShoppingCartSettings _shoppingCartSettings;
 
     public CustomerController(
         SmartDbContext db,
         INewsletterSubscriptionService newsletterSubscriptionService,
         ITaxService taxService,
-        ILocalizationService localizationService,
-        IOrderProcessingService orderProcessingService,
-        IOrderCalculationService orderCalculationService,
-        IOrderService orderService,
-        IPaymentService paymentService,
         IMediaService mediaService,
-        IDownloadService downloadService,
-        ICurrencyService currencyService,
-        IShippingService shippingService,
         IMessageFactory messageFactory,
         UserManager<Customer> userManager,
         SignInManager<Customer> signInManager,
         IProviderManager providerManager,
         ModuleManager moduleManager,
         IDateTimeHelper dateTimeHelper,
-        ProductUrlHelper productUrlHelper,
         DateTimeSettings dateTimeSettings,
         CustomerSettings customerSettings,
         TaxSettings taxSettings,
-        LocalizationSettings localizationSettings,
-        OrderSettings orderSettings,
-        RewardPointsSettings rewardPointsSettings,
-        ShoppingCartSettings shoppingCartSettings)
+        LocalizationSettings localizationSettings)
     {
         _db = db;
         _newsletterSubscriptionService = newsletterSubscriptionService;
         _taxService = taxService;
-        _localizationService = localizationService;
-        _orderProcessingService = orderProcessingService;
-        _orderCalculationService = orderCalculationService;
-        _orderService = orderService;
-        _paymentService = paymentService;
         _mediaService = mediaService;
-        _downloadService = downloadService;
-        _currencyService = currencyService;
-        _shippingService = shippingService;
         _messageFactory = messageFactory;
         _userManager = userManager;
         _signInManager = signInManager;
         _providerManager = providerManager;
         _moduleManager = moduleManager;
         _dateTimeHelper = dateTimeHelper;
-        _productUrlHelper = productUrlHelper;
         _dateTimeSettings = dateTimeSettings;
         _customerSettings = customerSettings;
         _taxSettings = taxSettings;
         _localizationSettings = localizationSettings;
-        _orderSettings = orderSettings;
-        _rewardPointsSettings = rewardPointsSettings;
-        _shoppingCartSettings = shoppingCartSettings;
     }
 
     public async Task<IActionResult> Info()
@@ -291,12 +255,6 @@ public class CustomerController : PublicController
                     customer.TimeZoneId = model.TimeZoneId;
                 }
 
-                if (_shoppingCartSettings.QuickCheckoutEnabled)
-                {
-                    customer.GenericAttributes.PreferredShippingOption = new() { ShippingMethodId = model.PreferredShippingMethodId ?? 0 };
-                    customer.GenericAttributes.PreferredPaymentMethod = model.PreferredPaymentMethod.NullEmpty();
-                }
-
                 var updateResult = await _userManager.UpdateAsync(customer);
                 if (updateResult.Succeeded)
                 {
@@ -369,7 +327,7 @@ public class CustomerController : PublicController
             return ChallengeOrForbid();
         }
 
-        var models = await customer.Addresses.MapAsync(customer, _shoppingCartSettings.QuickCheckoutEnabled);
+        var models = await customer.Addresses.MapAsync(customer, false);
 
         return View(models);
     }
@@ -408,7 +366,7 @@ public class CustomerController : PublicController
             return ChallengeOrForbid();
         }
 
-        var model = await new Address().MapAsync(customer, _shoppingCartSettings.QuickCheckoutEnabled);
+        var model = await new Address().MapAsync(customer, false);
 
         return View(model);
     }
@@ -433,7 +391,7 @@ public class CustomerController : PublicController
             return RedirectToAction(nameof(Addresses));
         }
 
-        await address.MapAsync(model, customer, _shoppingCartSettings.QuickCheckoutEnabled);
+        await address.MapAsync(model, customer, false);
 
         return View(model);
     }
@@ -458,7 +416,7 @@ public class CustomerController : PublicController
             return RedirectToAction(nameof(Addresses));
         }
 
-        var model = await address.MapAsync(customer, _shoppingCartSettings.QuickCheckoutEnabled);
+        var model = await address.MapAsync(customer, false);
 
         return View(model);
     }
@@ -481,13 +439,13 @@ public class CustomerController : PublicController
 
         if (ModelState.IsValid)
         {
-            await model.MapAsync(address, customer, _shoppingCartSettings.QuickCheckoutEnabled);
+            await model.MapAsync(address, customer, false);
             await _db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Addresses));
         }
 
-        await address.MapAsync(model, customer, _shoppingCartSettings.QuickCheckoutEnabled);
+        await address.MapAsync(model, customer, false);
 
         return View(model);
     }
@@ -527,241 +485,6 @@ public class CustomerController : PublicController
         }
 
         return RedirectToAction(nameof(Addresses));
-    }
-
-    #endregion
-
-    #region Orders
-
-    public async Task<IActionResult> Orders(int? page, int? recurringPaymentsPage)
-    {
-        if (_customerSettings.HideMyAccountOrders)
-        {
-            return RedirectToAction(nameof(Info));
-        }
-
-        var customer = Services.WorkContext.CurrentCustomer;
-        if (!customer.IsRegistered())
-        {
-            return ChallengeOrForbid();
-        }
-
-        var ordersPageIndex = Math.Max((page ?? 0) - 1, 0);
-        var rpPageIndex = Math.Max((recurringPaymentsPage ?? 0) - 1, 0);
-
-        var model = await PrepareCustomerOrderListModelAsync(customer, ordersPageIndex, rpPageIndex);
-        model.OrdersPage = page;
-        model.RecurringPaymentsPage = recurringPaymentsPage;
-
-        return View(model);
-    }
-
-    [HttpPost, ActionName("Orders")]
-    public async Task<IActionResult> CancelRecurringPayment(int recurringPaymentId)
-    {
-        var customer = Services.WorkContext.CurrentCustomer;
-        if (!customer.IsRegistered())
-        {
-            return ChallengeOrForbid();
-        }
-
-        var recurringPayment = await _db.RecurringPayments
-            .Include(x => x.InitialOrder)
-            .ThenInclude(x => x.Customer)
-            .FindByIdAsync(recurringPaymentId);
-        if (recurringPayment == null)
-        {
-            return NotFound();
-        }
-
-        if (await _orderProcessingService.CanCancelRecurringPaymentAsync(recurringPayment, customer))
-        {
-            try
-            {
-                await _orderProcessingService.CancelRecurringPaymentAsync(recurringPayment);
-                NotifySuccess(T("Account.CustomerOrders.RecurringOrders.SuccessfullyCanceled"));
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex);
-                NotifyError(ex.Message);
-            }
-        }
-
-        return RedirectToAction(nameof(Orders));
-    }
-
-    #endregion
-
-    #region Return cases
-
-    public async Task<IActionResult> ReturnCases(int? page)
-    {
-        var customer = Services.WorkContext.CurrentCustomer;
-        if (!customer.IsRegistered())
-        {
-            return ChallengeOrForbid();
-        }
-
-        var store = Services.StoreContext.CurrentStore;
-        var language = Services.WorkContext.WorkingLanguage;
-        var pageIndex = Math.Max((page ?? 0) - 1, 0);
-        var returnCases = await _db.ReturnCases
-            .AsNoTracking()
-            .ApplyStandardFilter(null, customer.Id, store.Id)
-            .ToPagedList(pageIndex, _orderSettings.ReturnCaseListPageSize)
-            .LoadAsync();
-
-        var orderItemIds = returnCases.ToDistinctArray(x => x.OrderItemId);
-        var orderItems = await _db.OrderItems
-            .AsNoTracking()
-            .Include(x => x.Product)
-            .Include(x => x.Order)
-            .Where(x => orderItemIds.Contains(x.Id))
-            .ToDictionaryAsync(x => x.Id, x => x);
-
-        var returnCaseModels = await returnCases
-            .SelectAwait(async x =>
-            {
-                if (orderItems.TryGetValue(x.OrderItemId, out var orderItem))
-                {
-                    var seName = await orderItem.Product.GetActiveSlugAsync();
-                    var m = new CustomerReturnCaseModel
-                    {
-                        ProductId = orderItem.Product.Id,
-                        ProductName = orderItem.Product.GetLocalized(x => x.Name),
-                        ProductSeName = seName,
-                        ProductUrl = await _productUrlHelper.GetProductUrlAsync(seName, orderItem),
-                        ReturnCase = await x.MapAsync(orderItem)
-                    };
-
-                    return m;
-                }
-
-                return null;
-            })
-            .Where(x => x != null)
-            .ToListAsync();
-
-        var model = new CustomerReturnCasesModel
-        {
-            ReturnCases = returnCaseModels.ToPagedList(returnCases.PageIndex, returnCases.PageSize, returnCases.TotalCount)
-        };
-
-        return View(model);
-    }
-
-    #endregion
-
-    #region Downloadable products
-
-    public async Task<IActionResult> DownloadableProducts()
-    {
-        var customer = Services.WorkContext.CurrentCustomer;
-        if (!customer.IsRegistered())
-        {
-            return ChallengeOrForbid();
-        }
-
-        var model = new CustomerDownloadableProductsModel();
-
-        var items = await _db.OrderItems
-            .AsNoTracking()
-            .ApplyStandardFilter(customerId: customer.Id)
-            .Include(x => x.Product)
-            .Include(x => x.Order)
-            .Where(x => x.Product.IsDownload)
-            .OrderByDescending(x => x.Order.CreatedOnUtc)
-            .ToListAsync();
-
-        foreach (var item in items)
-        {
-            var itemModel = new CustomerDownloadableProductsModel.DownloadableProductsModel
-            {
-                Id = item.Id,
-                OrderItemGuid = item.OrderItemGuid,
-                OrderId = item.OrderId,
-                CreatedOn = _dateTimeHelper.ConvertToUserTime(item.Order.CreatedOnUtc, DateTimeKind.Utc),
-                ProductName = item.Product.GetLocalized(x => x.Name),
-                ProductSeName = await item.Product.GetActiveSlugAsync(),
-                ProductAttributes = item.AttributeDescription,
-                ProductId = item.ProductId,
-                IsDownloadAllowed = _downloadService.IsDownloadAllowed(item)
-            };
-
-            itemModel.ProductUrl = await _productUrlHelper.GetProductPathAsync(item.ProductId, itemModel.ProductSeName, item.AttributeSelection);
-
-            if (itemModel.IsDownloadAllowed)
-            {
-                var downloads = (await _db.Downloads
-                    .AsNoTracking()
-                    .ApplyEntityFilter(item.Product)
-                    .ApplyVersionFilter()
-                    .Include(x => x.MediaFile)
-                    .ToListAsync())
-                    .OrderByVersion();
-
-                itemModel.DownloadVersions = [.. downloads
-                    .Select(x => new DownloadVersion
-                    {
-                        DownloadId = x.Id,
-                        FileVersion = x.FileVersion,
-                        FileName = x.UseDownloadUrl ? x.DownloadUrl : x.MediaFile.Name,
-                        DownloadGuid = x.DownloadGuid,
-                        Changelog = x.Changelog
-                    })];
-            }
-
-            if (_downloadService.IsLicenseDownloadAllowed(item))
-            {
-                itemModel.LicenseId = item.LicenseDownloadId ?? 0;
-            }
-
-            model.Items.Add(itemModel);
-        }
-
-        return View(model);
-    }
-
-    /// <summary>
-    /// Gets the user agreement for purchased download.
-    /// </summary>
-    /// <param name="id">OrderItemId <see cref="OrderItem.OrderItemGuid"/></param>
-    /// <param name="fileVersion">Requested version of purchased download.</param>
-    public async Task<IActionResult> UserAgreement(Guid id, string fileVersion = "")
-    {
-        if (id == Guid.Empty)
-        {
-            return NotFound();
-        }
-
-        var orderItem = await _db.OrderItems
-            .AsNoTracking()
-            .Include(x => x.Product)
-            .Where(x => x.OrderItemGuid == id)
-            .FirstOrDefaultAsync();
-
-        if (orderItem == null)
-        {
-            NotifyError(T("Customer.UserAgreement.OrderItemNotFound"));
-            return RedirectToRoute("Homepage");
-        }
-
-        var product = orderItem.Product;
-        if (product == null || !product.HasUserAgreement)
-        {
-            NotifyError(T("Customer.UserAgreement.ProductNotFound"));
-            return RedirectToRoute("Homepage");
-        }
-
-        var model = new UserAgreementModel
-        {
-            UserAgreementText = product.UserAgreementText,
-            OrderItemGuid = id,
-            FileVersion = fileVersion
-        };
-
-        return View(model);
     }
 
     #endregion
@@ -864,127 +587,6 @@ public class CustomerController : PublicController
         }
 
         return Json(new { success = true, avatar });
-    }
-
-    #endregion
-
-    #region Reward points
-
-    public IActionResult RewardPoints()
-    {
-        if (!_rewardPointsSettings.Enabled)
-        {
-            return RedirectToAction(nameof(Info));
-        }
-
-        var customer = Services.WorkContext.CurrentCustomer;
-        if (!customer.IsRegistered())
-        {
-            return ChallengeOrForbid();
-        }
-
-        var rewardPointsBalance = customer.GetRewardPointsBalance();
-        var rewardPointsAmountBase = _orderCalculationService.ConvertRewardPointsToAmount(rewardPointsBalance);
-        var rewardPointsAmount = _currencyService.ConvertFromPrimaryCurrency(rewardPointsAmountBase.Amount, Services.WorkContext.WorkingCurrency);
-
-        var model = new CustomerRewardPointsModel
-        {
-            RewardPointsBalanceFormatted = T("RewardPoints.CurrentBalance", ConvertUtility.ToHtmlDisplayString(rewardPointsBalance), rewardPointsAmount.ToString()),
-            RewardPoints = [.. customer.RewardPointsHistory
-                .OrderByDescending(rph => rph.CreatedOnUtc)
-                .ThenByDescending(rph => rph.Id)
-                .Select(x => new CustomerRewardPointsModel.RewardPointsHistoryModel()
-                {
-                    Points = x.Points,
-                    PointsBalance = x.PointsBalance,
-                    Message = x.Message,
-                    CreatedOn = _dateTimeHelper.ConvertToUserTime(x.CreatedOnUtc, DateTimeKind.Utc)
-                })]
-        };
-
-        return View(model);
-    }
-
-    #endregion
-
-    #region Stock subscriptions
-
-    public async Task<IActionResult> StockSubscriptions(int? page)
-    {
-        if (_customerSettings.HideBackInStockSubscriptionsTab)
-        {
-            return RedirectToAction(nameof(Info));
-        }
-
-        var pageIndex = 0;
-        if (page > 0)
-        {
-            pageIndex = page.Value - 1;
-        }
-
-        var customer = Services.WorkContext.CurrentCustomer;
-        var list = await _db.BackInStockSubscriptions
-            .AsNoTracking()
-            .Include(x => x.Product)
-            .ApplyStandardFilter(customerId: customer.Id, storeId: Services.StoreContext.CurrentStore.Id)
-            .ToPagedList(pageIndex, 10)
-            .LoadAsync();
-
-        var model = new CustomerStockSubscriptionsModel(list);
-
-        foreach (var subscription in list)
-        {
-            var product = subscription.Product;
-
-            if (product != null)
-            {
-                var subscriptionModel = new StockSubscriptionModel
-                {
-                    Id = subscription.Id,
-                    ProductId = product.Id,
-                    ProductName = product.GetLocalized(x => x.Name),
-                    SeName = await product.GetActiveSlugAsync()
-                };
-                model.Subscriptions.Add(subscriptionModel);
-            }
-        }
-
-        return View(model);
-    }
-
-    [HttpPost, ActionName("StockSubscriptions")]
-    public async Task<IActionResult> StockSubscriptionsPOST()
-    {
-        if (_customerSettings.HideBackInStockSubscriptionsTab)
-        {
-            return RedirectToAction(nameof(Info));
-        }
-
-        var form = HttpContext.Request.Form;
-        var customerId = Services.WorkContext.CurrentCustomer.Id;
-
-        foreach (var key in form.Keys)
-        {
-            var value = form[key];
-
-            if (value.Equals("on") && key.StartsWith("biss", StringComparison.InvariantCultureIgnoreCase))
-            {
-                var id = key.Replace("biss", string.Empty).Trim();
-
-                if (int.TryParse(id, out var subscriptionId))
-                {
-                    var subscription = await _db.BackInStockSubscriptions.FindByIdAsync(subscriptionId);
-                    if (subscription != null && subscription.CustomerId == customerId)
-                    {
-                        _db.BackInStockSubscriptions.Remove(subscription);
-                    }
-                }
-            }
-        }
-
-        await _db.SaveChangesAsync();
-
-        return RedirectToAction(nameof(StockSubscriptions));
     }
 
     #endregion
@@ -1115,137 +717,6 @@ public class CustomerController : PublicController
             })
             .ToList();
 
-        if (_shoppingCartSettings.QuickCheckoutEnabled)
-        {
-            var shippingMethods = await _shippingService.GetAllShippingMethodsAsync(store.Id);
-            var paymentProviders = await _paymentService.LoadActivePaymentProvidersAsync(null, store.Id);
-            var preferredShippingMethodId = customer.GenericAttributes.PreferredShippingOption?.ShippingMethodId ?? 0;
-            var preferredPaymentMethod = customer.GenericAttributes.PreferredPaymentMethod;
-
-            ViewBag.ShippingMethods = shippingMethods
-                .Select(x => new SelectListItem
-                {
-                    Text = x.GetLocalized(y => y.Name),
-                    Value = x.Id.ToString(),
-                    Selected = x.Id == preferredShippingMethodId
-                })
-                .ToList();
-
-            ViewBag.PaymentMethods = paymentProviders
-                .Select(x => x.Metadata)
-                .Select(x => new SelectListItem
-                {
-                    Text = _moduleManager.GetLocalizedFriendlyName(x) ?? x.FriendlyName.NullEmpty() ?? x.SystemName,
-                    Value = x.SystemName,
-                    Selected = x.SystemName.EqualsNoCase(preferredPaymentMethod)
-                })
-                .ToList();
-        }
-    }
-
-    private async Task<CustomerOrderListModel> PrepareCustomerOrderListModelAsync(Customer customer, int orderPageIndex, int recurringPaymentPageIndex)
-    {
-        Guard.NotNull(customer);
-
-        var store = Services.StoreContext.CurrentStore;
-        var model = new CustomerOrderListModel();
-        var paymentMethods = await _paymentService.GetAllPaymentMethodsAsync();
-
-        var orders = await _db.Orders
-            .AsNoTracking()
-            .IncludeCustomer(false, true)
-            .IncludeOrderItems()
-            .ApplyStandardFilter(customer.Id, _orderSettings.DisplayOrdersOfAllStores ? null : store.Id)
-            .ToPagedList(orderPageIndex, _orderSettings.OrderListPageSize)
-            .LoadAsync();
-
-        var customerCurrencyCodes = orders.ToDistinctArray(x => x.CustomerCurrencyCode);
-        var customerCurrencies = (await _db.Currencies
-            .AsNoTracking()
-            .Where(x => customerCurrencyCodes.Contains(x.CurrencyCode))
-            .ToListAsync())
-            .ToDictionarySafe(x => x.CurrencyCode, x => x, StringComparer.OrdinalIgnoreCase);
-
-        var orderModels = await orders
-            .SelectAwait(async o =>
-            {
-                var customerCurrency = customerCurrencies.Get(o.CustomerCurrencyCode.EmptyNull());
-                var paymentMethod = paymentMethods.Get(o.PaymentMethodSystemName.EmptyNull());
-                (var orderTotal, _) = await _orderService.GetOrderTotalInCustomerCurrencyAsync(o, customerCurrency, paymentMethod);
-
-                return new CustomerOrderListModel.OrderDetailsModel
-                {
-                    Id = o.Id,
-                    OrderNumber = o.GetOrderNumber(),
-                    CreatedOn = _dateTimeHelper.ConvertToUserTime(o.CreatedOnUtc, DateTimeKind.Utc),
-                    OrderStatus = _localizationService.GetLocalizedEnum(o.OrderStatus),
-                    OrderTotal = orderTotal
-                };
-            })
-            .ToListAsync();
-
-        model.Orders = orderModels.ToPagedList(orders.PageIndex, orders.PageSize, orders.TotalCount);
-
-        // Recurring payments.
-        var recurringPayments = await _db.RecurringPayments
-            .AsNoTracking()
-            .AsSplitQuery()
-            .Include(x => x.InitialOrder)
-            .ThenInclude(x => x.Customer)
-            .Include(x => x.RecurringPaymentHistory)
-            .ApplyStandardFilter(customerId: customer.Id, storeId: store.Id)
-            .ToPagedList(recurringPaymentPageIndex, _orderSettings.RecurringPaymentListPageSize)
-            .LoadAsync();
-
-        var rpModels = await recurringPayments
-            .SelectAwait(async x =>
-            {
-                var nextPaymentDate = await _paymentService.GetNextRecurringPaymentDateAsync(x);
-
-                return new CustomerOrderListModel.RecurringPaymentModel
-                {
-                    Id = x.Id,
-                    InitialOrderId = x.InitialOrder.Id,
-                    InitialOrderNumber = x.InitialOrder.GetOrderNumber(),
-                    StartDate = _dateTimeHelper.ConvertToUserTime(x.StartDateUtc, DateTimeKind.Utc),
-                    CyclesRemaining = await _paymentService.GetRecurringPaymentRemainingCyclesAsync(x),
-                    NextPayment = nextPaymentDate.HasValue ? _dateTimeHelper.ConvertToUserTime(nextPaymentDate.Value, DateTimeKind.Utc) : null,
-                    CycleLength = x.CycleLength,
-                    CyclePeriod = x.CyclePeriod,
-                    CyclePeriodString = _localizationService.GetLocalizedEnum(x.CyclePeriod),
-                    TotalCycles = x.TotalCycles,
-                    CanCancel = await _orderProcessingService.CanCancelRecurringPaymentAsync(x, customer)
-                };
-            })
-            .ToListAsync();
-
-        model.RecurringPayments = rpModels.ToPagedList(recurringPayments.PageIndex, recurringPayments.PageSize, recurringPayments.TotalCount);
-
-        return model;
-    }
-
-    private async Task<Product> GetShippableProduct(Customer customer)
-    {
-        Expression<Func<Product, bool>> predicate = x => x.Published
-            && x.Visibility < ProductVisibility.ProductPage
-            && !x.IsDownload
-            && !x.IsRecurring
-            && x.IsShippingEnabled
-            && !x.IsFreeShipping
-            && !x.IsSystemProduct
-            && x.ProductType == ProductType.SimpleProduct;
-
-        var product = await _db.Orders
-            .AsNoTracking()
-            .Where(x => x.CustomerId == customer.Id)
-            .OrderByDescending(x => x.CreatedOnUtc)
-            .SelectMany(x => x.OrderItems.Select(y => y.Product))
-            .Where(predicate)
-            .FirstOrDefaultAsync()
-            ?? await _db.Products.AsNoTracking().Where(predicate).FirstOrDefaultAsync()
-            ?? await _db.Products.FirstOrDefaultAsync();
-
-        return product;
     }
 
     #endregion

@@ -87,9 +87,46 @@ public class OmmCmsCommerceIsolationTests
         Assert.That(typeof(OmmCmsCommerceIsolation).Assembly.GetType(controllerType), Is.Null);
     }
 
-    [TestCase("Smartstore.Web.Controllers.CustomerController", "Orders")]
-    [TestCase("Smartstore.Web.Controllers.CustomerController", "StockSubscriptionsPOST")]
-    [TestCase("Smartstore.Web.Controllers.CustomerController", "CancelRecurringPayment")]
+    [TestCase("Orders")]
+    [TestCase("CancelRecurringPayment")]
+    [TestCase("ReturnCases")]
+    [TestCase("DownloadableProducts")]
+    [TestCase("UserAgreement")]
+    [TestCase("RewardPoints")]
+    [TestCase("StockSubscriptions")]
+    [TestCase("StockSubscriptionsPOST")]
+    public void ExtractedPublicAccountActionIsAbsent(string method)
+    {
+        Assert.That(typeof(Smartstore.Web.Controllers.CustomerController).GetMethods(BindingFlags.Public | BindingFlags.Instance).Any(x => x.Name == method), Is.False);
+    }
+
+    [TestCase("Smartstore.Web.Models.Customers.CustomerDownloadableProductsModel")]
+    [TestCase("Smartstore.Web.Models.Customers.CustomerOrderListModel")]
+    [TestCase("Smartstore.Web.Models.Customers.CustomerReturnCasesModel")]
+    [TestCase("Smartstore.Web.Models.Customers.CustomerRewardPointsModel")]
+    [TestCase("Smartstore.Web.Models.Customers.CustomerStockSubscriptionsModel")]
+    public void ExtractedAccountModelIsAbsent(string type)
+    {
+        Assert.That(typeof(OmmCmsCommerceIsolation).Assembly.GetType(type), Is.Null);
+    }
+
+    [TestCase("Smartstore.Web.Controllers.CustomerController", "IOrderService")]
+    [TestCase("Smartstore.Web.Controllers.CustomerController", "IOrderProcessingService")]
+    [TestCase("Smartstore.Web.Controllers.CustomerController", "IOrderCalculationService")]
+    [TestCase("Smartstore.Web.Controllers.CustomerController", "IPaymentService")]
+    [TestCase("Smartstore.Web.Controllers.CustomerController", "IShippingService")]
+    [TestCase("Smartstore.Web.Controllers.CustomerController", "ShoppingCartSettings")]
+    [TestCase("Smartstore.Web.Controllers.IdentityController", "IShoppingCartService")]
+    [TestCase("Smartstore.Web.Controllers.IdentityController", "RewardPointsSettings")]
+    [TestCase("Smartstore.Web.Infrastructure.MyAccountMenu", "OrderSettings")]
+    [TestCase("Smartstore.Web.Infrastructure.MyAccountMenu", "RewardPointsSettings")]
+    public void AccountAndIdentityNoLongerInjectCommerceDependency(string typeName, string dependency)
+    {
+        var type = typeof(OmmCmsCommerceIsolation).Assembly.GetType(typeName);
+        Assert.That(type, Is.Not.Null);
+        Assert.That(type!.GetConstructors().SelectMany(x => x.GetParameters()).Any(x => x.ParameterType.Name == dependency), Is.False);
+    }
+
     [TestCase("Smartstore.Web.Controllers.CommonController", "CurrencySelected")]
     [TestCase("Smartstore.Admin.Controllers.CustomerController", "RewardPointsInsert")]
     [TestCase("Smartstore.Admin.Controllers.CustomerController", "GetCartList")]

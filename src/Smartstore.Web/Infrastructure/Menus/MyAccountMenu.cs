@@ -11,41 +11,17 @@ namespace Smartstore.Web.Infrastructure;
 
 public partial class MyAccountMenu : IMenu
 {
-    private readonly SmartDbContext _db;
-    private readonly bool _cmsPreview;
-    private readonly IStoreContext _storeContext;
-    private readonly IWorkContext _workContext;
-    private readonly ISettingService _settingService;
     private readonly IEventPublisher _eventPublisher;
     private readonly CustomerSettings _customerSettings;
-    private readonly OrderSettings _orderSettings;
-    private readonly RewardPointsSettings _rewardPointsSettings;
 
     protected TreeNode<MenuItem> _root;
     private TreeNode<MenuItem> _currentNode;
     private bool _currentNodeResolved;
 
-    public MyAccountMenu(
-        SmartDbContext db,
-        IStoreContext storeContext,
-        IWorkContext workContext,
-        ISettingService settingService,
-        IEventPublisher eventPublisher,
-        CustomerSettings customerSettings,
-        OrderSettings orderSettings,
-        RewardPointsSettings rewardPointsSettings,
-        IApplicationContext appContext)
+    public MyAccountMenu(IEventPublisher eventPublisher, CustomerSettings customerSettings)
     {
-        _db = db;
-        _cmsPreview = OmmCmsMode.IsEnabled(appContext.Configuration);
-        _storeContext = storeContext;
-        _workContext = workContext;
-        _settingService = settingService;
         _eventPublisher = eventPublisher;
         _customerSettings = customerSettings;
-        _orderSettings = orderSettings;
-        _rewardPointsSettings = rewardPointsSettings;
-
         T = NullLocalizer.Instance;
     }
 
@@ -94,7 +70,7 @@ public partial class MyAccountMenu : IMenu
         return Task.CompletedTask;
     }
 
-    protected virtual async Task<TreeNode<MenuItem>> BuildAsync()
+    protected virtual Task<TreeNode<MenuItem>> BuildAsync()
     {
         var root = new TreeNode<MenuItem>(new())
         {
@@ -120,67 +96,6 @@ public partial class MyAccountMenu : IMenu
                 ControllerName = "Customer"
             }
         ]);
-
-        if (!_cmsPreview && !_customerSettings.HideMyAccountOrders)
-        {
-            root.Append(new MenuItem
-            {
-                Id = "orders",
-                Text = T("Account.CustomerOrders"),
-                Icon = "file-text",
-                ActionName = "Orders",
-                ControllerName = "Customer"
-            });
-        }
-
-        if (!_cmsPreview && (_orderSettings.ReturnRequestsEnabled || await _settingService.GetSettingByKeyAsync<bool>("WithdrawalSettings.Enabled"))
-            && await _db.ReturnCases.ApplyStandardFilter(null, _workContext.CurrentCustomer.Id, _storeContext.CurrentStore.Id).AnyAsync())
-        {
-            root.Append(new MenuItem
-            {
-                Id = "returncases",
-                Text = T("Account.CustomerReturnRequests"),
-                Icon = "return",
-                ActionName = "ReturnCases",
-                ControllerName = "Customer"
-            });
-        }
-
-        if (!_cmsPreview && !_customerSettings.HideDownloadableProductsTab)
-        {
-            root.Append(new MenuItem
-            {
-                Id = "downloads",
-                Text = T("Account.DownloadableProducts"),
-                Icon = "download",
-                ActionName = "DownloadableProducts",
-                ControllerName = "Customer"
-            });
-        }
-
-        if (!_cmsPreview && !_customerSettings.HideBackInStockSubscriptionsTab)
-        {
-            root.Append(new MenuItem
-            {
-                Id = "backinstock",
-                Text = T("Account.BackInStockSubscriptions"),
-                Icon = "message-notification-02",
-                ActionName = "StockSubscriptions",
-                ControllerName = "Customer"
-            });
-        }
-
-        if (!_cmsPreview && _rewardPointsSettings.Enabled)
-        {
-            root.Append(new MenuItem
-            {
-                Id = "rewardpoints",
-                Text = T("Account.RewardPoints"),
-                Icon = "award",
-                ActionName = "RewardPoints",
-                ControllerName = "Customer"
-            });
-        }
 
         root.Append(new MenuItem
         {
@@ -209,6 +124,6 @@ public partial class MyAccountMenu : IMenu
             item.Value.RouteValues["area"] = string.Empty;
         }
 
-        return root;
+        return Task.FromResult(root);
     }
 }

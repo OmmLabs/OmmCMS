@@ -130,6 +130,17 @@ def editorial_workflows(password):
     })
     page = get_page("/admin/topic/create", admin, 'id="topic-form"')
     print("Authenticated admin access passed.")
+    if "--account-trimmed" in sys.argv:
+        profile = get_page("/customer/info", admin, "save-info-button")
+        assert "PreferredShippingMethodId" not in profile and "PreferredPaymentMethod" not in profile
+        get_page("/customer/addresses", admin, "add-address-button")
+        for action in ("orders", "cancelrecurringpayment", "returncases", "downloadableproducts", "useragreement", "rewardpoints", "stocksubscriptions", "stocksubscriptionspost"):
+            path = "/customer/" + action
+            assert request(path, client=admin)[0] == 404, f"Retired account action reachable: {path}"
+        login = get_page("/login?checkoutAsGuest=true", anonymous, 'name="CustomerLoginType"')
+        assert "checkout-as-guest-button" not in login
+        assert request("/mycheckout/mybillingaddress", client=admin)[0] == 404
+        print("Public account profile and address pages, retired account actions and guest checkout removal passed.")
     if "--controllers-trimmed" in sys.argv:
         for controller in ["Affiliate","BarcodeTester","CheckoutAttribute","CollectionGroup","DeliveryTime","GiftCard","PriceLabel","ProductReview","QuantityUnit","RecurringPayment","ReturnCase","Shipment","Shipping","Tax","Payment","ShoppingCart","SpecificationAttribute","ProductAttribute"]:
             action = "index" if controller == "BarcodeTester" else "list"
@@ -286,7 +297,18 @@ def verify_public_controllers():
     print("Public commerce source and publish extraction passed.")
 
 
+def verify_account_extraction():
+    repo = Path(__file__).resolve().parent.parent
+    for path in ["src/Smartstore.Modules/Smartstore.DevTools/Controllers/MyCheckoutController.cs","src/Smartstore.Modules/Smartstore.DevTools/Views/MyCheckout/MyBillingAddress.cshtml","src/Smartstore.Modules/Smartstore.Google.Analytics/Filters/CheckoutFilter.cs","src/Smartstore.Web/Models/Customers/CustomerDownloadableProductsModel.cs","src/Smartstore.Web/Models/Customers/CustomerOrderListModel.cs","src/Smartstore.Web/Models/Customers/CustomerReturnCasesModel.cs","src/Smartstore.Web/Models/Customers/CustomerRewardPointsModel.cs","src/Smartstore.Web/Models/Customers/CustomerStockSubscriptionsModel.cs","src/Smartstore.Web/Views/Customer/DownloadableProducts.cshtml","src/Smartstore.Web/Views/Customer/Orders.cshtml","src/Smartstore.Web/Views/Customer/Partials/RecurringPayments.cshtml","src/Smartstore.Web/Views/Customer/ReturnCases.cshtml","src/Smartstore.Web/Views/Customer/RewardPoints.cshtml","src/Smartstore.Web/Views/Customer/StockSubscriptions.cshtml","src/Smartstore.Web/Views/Customer/UserAgreement.cshtml","src/Smartstore.Modules/Smartstore.DevTools/Filters/Samples/SampleCheckoutFilter.cs"]:
+        assert not (repo / path).exists(), f"Retired account source remains: {path}"
+        if path.startswith("src/Smartstore.Web/Views/"):
+            assert not (root / path.removeprefix("src/Smartstore.Web/")).exists(), f"Retired account view was published: {path}"
+    print("Account dependency source and publish extraction passed.")
+
+
 try:
+    if "--account-trimmed" in sys.argv:
+        verify_account_extraction()
     if "--public-controllers-trimmed" in sys.argv:
         verify_public_controllers()
     if "--controllers-trimmed" in sys.argv:

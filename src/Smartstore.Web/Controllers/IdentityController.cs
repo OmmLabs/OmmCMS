@@ -30,7 +30,6 @@ public class IdentityController : PublicController
     private readonly RoleManager<CustomerRole> _roleManager;
     private readonly ITaxService _taxService;
     private readonly IAddressService _addressService;
-    private readonly IShoppingCartService _shoppingCartService;
     private readonly INewsletterSubscriptionService _newsletterSubscriptionService;
     private readonly IMessageFactory _messageFactory;
     private readonly IWebHelper _webHelper;
@@ -40,7 +39,6 @@ public class IdentityController : PublicController
     private readonly DateTimeSettings _dateTimeSettings;
     private readonly TaxSettings _taxSettings;
     private readonly LocalizationSettings _localizationSettings;
-    private readonly RewardPointsSettings _rewardPointsSettings;
 
     public IdentityController(
         SmartDbContext db,
@@ -49,7 +47,6 @@ public class IdentityController : PublicController
         RoleManager<CustomerRole> roleManager,
         ITaxService taxService,
         IAddressService addressService,
-        IShoppingCartService shoppingCartService,
         INewsletterSubscriptionService newsletterSubscriptionService,
         IMessageFactory messageFactory,
         IWebHelper webHelper,
@@ -58,8 +55,7 @@ public class IdentityController : PublicController
         CaptchaSettings captchaSettings,
         DateTimeSettings dateTimeSettings,
         TaxSettings taxSettings,
-        LocalizationSettings localizationSettings,
-        RewardPointsSettings rewardPointsSettings)
+        LocalizationSettings localizationSettings)
     {
         _db = db;
         _userManager = userManager;
@@ -67,7 +63,6 @@ public class IdentityController : PublicController
         _roleManager = roleManager;
         _taxService = taxService;
         _addressService = addressService;
-        _shoppingCartService = shoppingCartService;
         _newsletterSubscriptionService = newsletterSubscriptionService;
         _messageFactory = messageFactory;
         _webHelper = webHelper;
@@ -77,7 +72,6 @@ public class IdentityController : PublicController
         _dateTimeSettings = dateTimeSettings;
         _taxSettings = taxSettings;
         _localizationSettings = localizationSettings;
-        _rewardPointsSettings = rewardPointsSettings;
     }
 
     #region Login / Logout / Register
@@ -86,12 +80,11 @@ public class IdentityController : PublicController
     [TypeFilter(typeof(DisplayExternalAuthWidgets))]
     [AllowAnonymous, NeverAuthorize, CheckStoreClosed(false)]
     [LocalizedRoute("/login", Name = "Login")]
-    public IActionResult Login(bool? checkoutAsGuest, string returnUrl = null)
+    public IActionResult Login(string returnUrl = null)
     {
         var model = new LoginModel
         {
             CustomerLoginType = _customerSettings.CustomerLoginType,
-            CheckoutAsGuest = !OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration) && checkoutAsGuest.GetValueOrDefault(),
         };
 
         ViewBag.ReturnUrl = Url.IsLocalUrl(returnUrl) ? returnUrl : Url.Content("~/");
@@ -138,11 +131,6 @@ public class IdentityController : PublicController
                 if (result.Succeeded)
                 {
                     await Services.EventPublisher.PublishAsync(new CustomerSignedInEvent { Customer = customer });
-
-                    if (!OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration))
-                    {
-                        await _shoppingCartService.MigrateCartAsync(Services.WorkContext.CurrentCustomer, customer);
-                    }
 
                     Services.ActivityLogger.LogActivity(KnownActivityLogTypes.PublicStoreLogin, T("ActivityLog.PublicStore.Login"), customer);
 
@@ -652,7 +640,7 @@ public class IdentityController : PublicController
             var customer = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
             if (customer != null)
             {
-                await FinalizeLoginAsync(Services.WorkContext.CurrentCustomer, customer, logActivity: false);
+                await FinalizeLoginAsync(customer, logActivity: false);
             }
 
             Services.ActivityLogger.LogActivity(KnownActivityLogTypes.PublicStoreLogin, T("ActivityLog.PublicStore.LoginExternal"), info.LoginProvider);
@@ -683,7 +671,7 @@ public class IdentityController : PublicController
                         await AssignCustomerRolesAsync(customer);
 
                         var result = await FinalizeCustomerRegistrationAsync(customer, returnUrl);
-                        await FinalizeLoginAsync(Services.WorkContext.CurrentCustomer, customer, logActivity: true);
+                        await FinalizeLoginAsync(customer, logActivity: true);
 
                         return result;
                     }
@@ -764,12 +752,6 @@ public class IdentityController : PublicController
     {
         // Remove ClientIdent: no other "same-building" guest should be identified by this ident.
         customer.ClientIdent = null;
-
-        // Add reward points for customer registration (if enabled).
-        if (!OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration) && _rewardPointsSettings.Enabled && _rewardPointsSettings.PointsForRegistration > 0)
-        {
-            customer.AddRewardPointsHistoryEntry(_rewardPointsSettings.PointsForRegistration, T("RewardPoints.Message.RegisteredAsCustomer"));
-        }
 
         await Services.EventPublisher.PublishAsync(new CustomerRegisteredEvent { Customer = customer });
 
@@ -1025,12 +1007,8 @@ public class IdentityController : PublicController
         }
     }
 
-    private async Task FinalizeLoginAsync(Customer guest, Customer registered, bool logActivity)
+    private async Task FinalizeLoginAsync(Customer registered, bool logActivity)
     {
-        if (!OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration))
-        {
-            await _shoppingCartService.MigrateCartAsync(guest, registered);
-        }
         await Services.EventPublisher.PublishAsync(new CustomerSignedInEvent { Customer = registered });
 
         if (logActivity)
