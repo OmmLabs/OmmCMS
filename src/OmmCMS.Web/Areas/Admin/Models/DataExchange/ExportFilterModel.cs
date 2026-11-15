@@ -52,11 +52,7 @@ public class ExportFilterModel
     [LocalizedDisplay("*PriceMaximum")]
     public decimal? PriceMaximum { get; set; }
 
-    [LocalizedDisplay("*AvailabilityMinimum")]
-    public int? AvailabilityMinimum { get; set; }
 
-    [LocalizedDisplay("*AvailabilityMaximum")]
-    public int? AvailabilityMaximum { get; set; }
 
     [LocalizedDisplay("*ProductTagId")]
     public int? ProductTagId { get; set; }

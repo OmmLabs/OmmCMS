@@ -122,10 +122,6 @@ internal class DatabaseMenu : MenuBase
                                         query = query.WithManufacturerIds(null, new[] { item.EntityId });
                                     }
 
-                                    if (!_searchSettings.IncludeNotAvailable)
-                                    {
-                                        query = query.AvailableOnly(true);
-                                    }
 
                                     var searchResult = await _catalogSearchService.Value.SearchAsync(query);
                                     item.ElementsCount = searchResult.TotalHitsCount;

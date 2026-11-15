@@ -50,15 +50,7 @@ public class ExportFilter
     /// </summary>
     public decimal? PriceMaximum { get; set; }
 
-    /// <summary>
-    /// Minimum product availability.
-    /// </summary>
-    public int? AvailabilityMinimum { get; set; }
 
-    /// <summary>
-    /// Maximum product availability.
-    /// </summary>
-    public int? AvailabilityMaximum { get; set; }
 
     /// <summary>
     /// A value indicating whether to load products without any category mapping.

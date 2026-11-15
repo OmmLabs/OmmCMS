@@ -259,8 +259,6 @@ public class CatalogSettingsModel
     public bool ShippingMetadataInProductDetail { get; set; }
 
     [UIHint("DeliveryTimes")]
-    [LocalizedDisplay("*DeliveryTimeIdForEmptyStock")]
-    public int? DeliveryTimeIdForEmptyStock { get; set; }
 
     [LocalizedDisplay("*ShowLinkedAttributeValueQuantity")]
     public bool ShowLinkedAttributeValueQuantity { get; set; }

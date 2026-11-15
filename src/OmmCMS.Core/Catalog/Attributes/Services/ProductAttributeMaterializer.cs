@@ -361,14 +361,7 @@ public partial class ProductAttributeMaterializer : IProductAttributeMaterialize
                 .AsNoTracking()
                 .Where(x => x.ProductId == product.Id);
 
-            if (product.ManageInventoryMethod == ManageInventoryMethod.ManageStockByAttributes)
-            {
-                query = query.Where(x => !x.IsActive || (x.StockQuantity <= 0 && !x.AllowOutOfStockOrders));
-            }
-            else
-            {
-                query = query.Where(x => !x.IsActive);
-            }
+            query = query.Where(x => !x.IsActive);
 
             // Do not proceed if there are too many unavailable combinations.
             var unavailableCombinationsCount = await query.CountAsync();
@@ -383,8 +376,7 @@ public partial class ProductAttributeMaterializer : IProductAttributeMaterialize
                     {
                         data[combination.HashCode] = new()
                         {
-                            IsActive = combination.IsActive,
-                            IsOutOfStock = combination.StockQuantity <= 0 && !combination.AllowOutOfStockOrders
+                            IsActive = combination.IsActive
                         };
                     }
                 }

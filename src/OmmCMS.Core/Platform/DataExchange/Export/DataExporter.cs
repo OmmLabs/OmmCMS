@@ -697,7 +697,6 @@ public partial class DataExporter : IDataExporter
                 .WithLanguage(_workContext.WorkingLanguage)
                 .HasStoreId(storeId)
                 .PriceBetween(f.PriceMinimum, f.PriceMaximum)
-                .WithStockQuantity(f.AvailabilityMinimum, f.AvailabilityMaximum)
                 .CreatedBetween(f.CreatedFrom, f.CreatedTo);
 
             if (f.Visibility.HasValue)

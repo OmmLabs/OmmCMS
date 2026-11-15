@@ -92,7 +92,6 @@ public partial class CatalogSearchQueryFactory : SearchQueryFactoryBase, ICatalo
         }
 
         // Availability.
-        ConvertAvailability(query, origin);
 
         // Instant-Search never uses these filter parameters.
         if (!isInstantSearch)
@@ -311,14 +310,6 @@ public partial class CatalogSearchQueryFactory : SearchQueryFactoryBase, ICatalo
                 labelKey = "Search.Facet.DeliveryTime";
                 displayOrder = _searchSettings.DeliveryTimeDisplayOrder;
                 break;
-            case FacetGroupKind.Availability:
-                if (_searchSettings.AvailabilityDisabled)
-                    return;
-
-                fieldName = names.IsAvailable;
-                labelKey = "Search.Facet.Availability";
-                displayOrder = _searchSettings.AvailabilityDisplayOrder;
-                break;
             case FacetGroupKind.NewArrivals:
                 if (_searchSettings.NewArrivalsDisabled)
                     return;
@@ -487,44 +478,6 @@ public partial class CatalogSearchQueryFactory : SearchQueryFactoryBase, ICatalo
             => !value.HasValue || !double.IsFinite(value.Value) || value.Value < 0 || value.Value > (double)decimal.MaxValue
             ? null
             : value;
-    }
-
-    protected virtual void ConvertAvailability(CatalogSearchQuery query, string origin)
-    {
-        var alias = _catalogSearchQueryAliasMapper.GetCommonFacetAliasByGroupKind(FacetGroupKind.Availability, query.LanguageId ?? 0);
-        TryGetValueFor(alias ?? "a", out bool availability);
-
-        // Setting specifies the logical direction of the filter. That's smarter than just to specify a default value.
-        if (_searchSettings.IncludeNotAvailable)
-        {
-            // False = show, True = hide unavailable products.
-            if (availability)
-            {
-                query.AvailableOnly(true);
-            }
-        }
-        else
-        {
-            // False = hide, True = show unavailable products.
-            if (!availability)
-            {
-                query.AvailableOnly(true);
-            }
-        }
-
-        AddFacet(query, FacetGroupKind.Availability, true, FacetSorting.LabelAsc, descriptor =>
-        {
-            descriptor.MinHitCount = 0;
-
-            var newValue = availability
-                ? new FacetValue(true, IndexTypeCode.Boolean)
-                : new FacetValue(null, IndexTypeCode.Empty);
-
-            newValue.IsSelected = availability;
-            newValue.Label = _services.Localization.GetResource(_searchSettings.IncludeNotAvailable ? "Search.Facet.ExcludeOutOfStock" : "Search.Facet.IncludeOutOfStock");
-
-            descriptor.AddValue(newValue);
-        });
     }
 
     protected virtual void ConvertNewArrivals(CatalogSearchQuery query, string origin)

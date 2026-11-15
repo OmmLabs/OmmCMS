@@ -8,11 +8,7 @@ namespace OmmCMS.Admin.Models.Catalog;
 [LocalizedDisplay("Admin.Catalog.Products.ProductVariantAttributes.AttributeCombinations.Fields.")]
 public class ProductVariantAttributeCombinationModel : EntityModelBase
 {
-    [LocalizedDisplay("*StockQuantity")]
-    public int StockQuantity { get; set; }
 
-    [LocalizedDisplay("*AllowOutOfStockOrders")]
-    public bool AllowOutOfStockOrders { get; set; }
 
     [LocalizedDisplay("*Sku")]
     public string Sku { get; set; }

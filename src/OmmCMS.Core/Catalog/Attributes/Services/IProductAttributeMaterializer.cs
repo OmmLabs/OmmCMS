@@ -90,7 +90,4 @@ public class CombinationAvailabilityInfo
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
     public bool IsActive { get; set; }
-
-    [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
-    public bool IsOutOfStock { get; set; }
 }

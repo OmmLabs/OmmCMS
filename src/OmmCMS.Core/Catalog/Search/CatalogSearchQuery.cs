@@ -32,7 +32,6 @@ public sealed class KnownFilterNames : IHideObjectMembers
     public readonly string DeliveryId = "deliveryid";
     public readonly string ParentId = "parentid";
     public readonly string Condition = "condition";
-    public readonly string StockQuantity = "stockquantity";
     public readonly string CreatedOn = "createdon";
     public readonly string Price = "price";
     public readonly string IsPublished = "published";
@@ -45,7 +44,6 @@ public sealed class KnownFilterNames : IHideObjectMembers
     public readonly string IsEsd = "esd";
     public readonly string TypeId = "typeid";
     public readonly string StoreId = "storeid";
-    public readonly string IsAvailable = "available";
     public readonly string AvailableStart = "availablestart";
     public readonly string AvailableEnd = "availableend";
     public readonly string RoleId = "roleid";
@@ -225,14 +223,6 @@ public partial class CatalogSearchQuery : SearchQuery<CatalogSearchQuery>, IClon
     public CatalogSearchQuery PublishedOnly(bool value)
     {
         return WithFilter(SearchFilter.ByField(KnownFilters.IsPublished, value).Mandatory().ExactMatch().NotAnalyzed());
-    }
-
-    /// <summary>
-    /// Filters products based on their stock level.
-    /// </summary>
-    public CatalogSearchQuery AvailableOnly(bool value)
-    {
-        return WithFilter(SearchFilter.ByField(KnownFilters.IsAvailable, value).Mandatory().ExactMatch().NotAnalyzed());
     }
 
     /// <summary>
@@ -449,36 +439,6 @@ public partial class CatalogSearchQuery : SearchQuery<CatalogSearchQuery>, IClon
     public CatalogSearchQuery EsdOnly(bool value)
     {
         return WithFilter(SearchFilter.ByField(KnownFilters.IsEsd, value).Mandatory().ExactMatch().NotAnalyzed());
-    }
-
-    public CatalogSearchQuery WithStockQuantity(
-        int? fromQuantity,
-        int? toQuantity,
-        bool? includeFrom = null,
-        bool? includeTo = null)
-    {
-        if (fromQuantity == null && toQuantity == null)
-        {
-            return this;
-        }
-
-        if (fromQuantity.HasValue && toQuantity.HasValue && fromQuantity == toQuantity)
-        {
-            var forbidden = includeFrom.HasValue && includeTo.HasValue && !includeFrom.Value && !includeTo.Value;
-
-            return WithFilter(SearchFilter.ByField(KnownFilters.StockQuantity, fromQuantity.Value).Mandatory(!forbidden).ExactMatch().NotAnalyzed());
-        }
-        else
-        {
-            var filter = SearchFilter.ByRange(
-                KnownFilters.StockQuantity,
-                fromQuantity,
-                toQuantity,
-                includeFrom ?? fromQuantity.HasValue,
-                includeTo ?? toQuantity.HasValue);
-
-            return WithFilter(filter.Mandatory().ExactMatch().NotAnalyzed());
-        }
     }
 
     public CatalogSearchQuery PriceBetween(

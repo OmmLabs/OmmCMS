@@ -237,25 +237,6 @@ public partial class ProductRuleProvider : RuleProviderBase, IProductRuleProvide
         }
         ;
 
-        CatalogSearchQuery stockQuantityFilter(SearchFilterContext ctx, int x)
-        {
-            if (ctx.Expression.Operator == RuleOperator.IsEqualTo || ctx.Expression.Operator == RuleOperator.IsNotEqualTo)
-            {
-                return ctx.Query.WithStockQuantity(x, x, ctx.Expression.Operator == RuleOperator.IsEqualTo, ctx.Expression.Operator == RuleOperator.IsEqualTo);
-            }
-            else if (ctx.Expression.Operator == RuleOperator.GreaterThanOrEqualTo || ctx.Expression.Operator == RuleOperator.GreaterThan)
-            {
-                return ctx.Query.WithStockQuantity(x, null, ctx.Expression.Operator == RuleOperator.GreaterThanOrEqualTo, null);
-            }
-            else if (ctx.Expression.Operator == RuleOperator.LessThanOrEqualTo || ctx.Expression.Operator == RuleOperator.LessThan)
-            {
-                return ctx.Query.WithStockQuantity(null, x, null, ctx.Expression.Operator == RuleOperator.LessThanOrEqualTo);
-            }
-
-            return ctx.Query;
-        }
-        ;
-
         CatalogSearchQuery priceFilter(SearchFilterContext ctx, decimal x)
         {
             if (ctx.Expression.Operator == RuleOperator.IsEqualTo || ctx.Expression.Operator == RuleOperator.IsNotEqualTo)
@@ -318,13 +299,6 @@ public partial class ProductRuleProvider : RuleProviderBase, IProductRuleProvide
             {
                 Name = "Published",
                 DisplayName = T("Admin.Catalog.Products.Fields.Published"),
-                RuleType = RuleType.Boolean,
-                Operators = [RuleOperator.IsEqualTo]
-            },
-            new SearchFilterDescriptor<bool>((ctx, x) => ctx.Query.AvailableOnly(x))
-            {
-                Name = "AvailableByStock",
-                DisplayName = T("Products.Availability.InStock"),
                 RuleType = RuleType.Boolean,
                 Operators = [RuleOperator.IsEqualTo]
             },
@@ -405,12 +379,6 @@ public partial class ProductRuleProvider : RuleProviderBase, IProductRuleProvide
                 RuleType = RuleType.IntArray,
                 Operators = [RuleOperator.In],
                 SelectList = new RemoteRuleValueSelectList("DeliveryTime") { Multiple = true }
-            },
-            new SearchFilterDescriptor<int>(stockQuantityFilter)
-            {
-                Name = "StockQuantity",
-                DisplayName = T("Admin.Catalog.Products.Fields.StockQuantity"),
-                RuleType = RuleType.Int
             },
             new SearchFilterDescriptor<decimal>(priceFilter)
             {

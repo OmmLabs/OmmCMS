@@ -363,14 +363,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.IsEsd);
                 row.SetProperty(context.Result, (x) => x.IsTaxExempt);
                 row.SetProperty(context.Result, (x) => x.TaxCategoryId, 1);    // TODO: global scope
-                row.SetProperty(context.Result, (x) => x.ManageInventoryMethodId);
-                row.SetProperty(context.Result, (x) => x.StockQuantity, 10000);
-                row.SetProperty(context.Result, (x) => x.DisplayStockAvailability);
-                row.SetProperty(context.Result, (x) => x.DisplayStockQuantity);
-                row.SetProperty(context.Result, (x) => x.MinStockQuantity);
-                row.SetProperty(context.Result, (x) => x.LowStockActivityId);
-                row.SetProperty(context.Result, (x) => x.NotifyAdminForQuantityBelow, 1);
-                row.SetProperty(context.Result, (x) => x.BackorderModeId);
                 row.SetProperty(context.Result, (x) => x.OrderMinimumQuantity, 1);
                 row.SetProperty(context.Result, (x) => x.OrderMaximumQuantity, 50);
                 row.SetProperty(context.Result, (x) => x.QuantityStep, 1);
@@ -961,7 +953,6 @@ public class ProductImporter : EntityImporterBase
                     row.SetProperty(context.Result, (x) => x.Sku);
                     row.SetProperty(context.Result, (x) => x.Gtin);
                     row.SetProperty(context.Result, (x) => x.ManufacturerPartNumber);
-                    row.SetProperty(context.Result, (x) => x.StockQuantity, 10000);
                     row.SetProperty(context.Result, (x) => x.Price);
                     row.SetProperty(context.Result, (x) => x.Weight);
                     row.SetProperty(context.Result, (x) => x.Length);
@@ -969,7 +960,6 @@ public class ProductImporter : EntityImporterBase
                     row.SetProperty(context.Result, (x) => x.Height);
                     row.SetProperty(context.Result, (x) => x.AssignedMediaFileIds);
                     row.SetProperty(context.Result, (x) => x.IsActive, true);
-                    row.SetProperty(context.Result, (x) => x.AllowOutOfStockOrders);
                     row.SetProperty(context.Result, (x) => x.DeliveryTimeId);
                     row.SetProperty(context.Result, (x) => x.QuantityUnitId);
 

@@ -107,10 +107,7 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
         nameof(AvailableEndDateTimeUtc),
         nameof(AvailableStartDateTimeUtc),
         nameof(Deleted),
-        nameof(LowStockActivityId),
         nameof(LimitedToStores),
-        nameof(ManageInventoryMethodId),
-        nameof(MinStockQuantity),
         nameof(Published),
         nameof(SubjectToAcl),
         nameof(Visibility)
@@ -455,88 +452,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     /// Gets or sets the tax category identifier.
     /// </summary>
     public int TaxCategoryId { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating how to manage the inventory.
-    /// </summary>
-    public int ManageInventoryMethodId { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating how to manage the inventory.
-    /// </summary>
-    [NotMapped]
-    public ManageInventoryMethod ManageInventoryMethod
-    {
-        get => (ManageInventoryMethod)ManageInventoryMethodId;
-        set => ManageInventoryMethodId = (int)value;
-    }
-
-    private int _stockQuantity;
-    /// <summary>
-    /// Gets or sets the stock quantity.
-    /// </summary>
-    public int StockQuantity
-    {
-        [DebuggerStepThrough]
-        get => this.GetMergedDataValue(nameof(StockQuantity), _stockQuantity);
-        set => _stockQuantity = value;
-    }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to display the stock availability.
-    /// </summary>
-    public bool DisplayStockAvailability { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to display the stock quantity.
-    /// </summary>
-    public bool DisplayStockQuantity { get; set; }
-
-    /// <summary>
-    /// Gets or sets the minimum stock quantity.
-    /// </summary>
-    public int MinStockQuantity { get; set; }
-
-    /// <summary>
-    /// Gets or sets the low stock activity identifier.
-    /// </summary>
-    public int LowStockActivityId { get; set; }
-
-    /// <summary>
-    /// Gets or sets the low stock activity.
-    /// </summary>
-    [NotMapped]
-    public LowStockActivity LowStockActivity
-    {
-        get => (LowStockActivity)LowStockActivityId;
-        set => LowStockActivityId = (int)value;
-    }
-
-    /// <summary>
-    /// Gets or sets the stock quantity when to notify the admin.
-    /// </summary>
-    public int NotifyAdminForQuantityBelow { get; set; }
-
-    private int _backorderModeId;
-    /// <summary>
-    /// Gets or sets the backorder mode identifier.
-    /// </summary>
-    public int BackorderModeId
-    {
-        [DebuggerStepThrough]
-        get => this.GetMergedDataValue(nameof(BackorderModeId), _backorderModeId);
-        set => _backorderModeId = value;
-    }
-
-    /// <summary>
-    /// Gets or sets the backorder mode.
-    /// </summary>
-    [NotMapped]
-    public BackorderMode BackorderMode
-    {
-        get => (BackorderMode)BackorderModeId;
-        set => BackorderModeId = (int)value;
-    }
 
     /// <summary>
     /// Gets or sets the minimum order quantity.

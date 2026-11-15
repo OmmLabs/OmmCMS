@@ -69,21 +69,15 @@ public class SearchSettings : ISettings
 
     #region Common facet settings
 
-    /// <summary>
-    /// Gets or sets the a value indicating whether to include or exclude not available products by default.
-    /// </summary>
-    public bool IncludeNotAvailable { get; set; }
 
     public bool BrandDisabled { get; set; }
     public bool PriceDisabled { get; set; }
     public bool DeliveryTimeDisabled { get; set; }
-    public bool AvailabilityDisabled { get; set; }
     public bool NewArrivalsDisabled { get; set; }
 
     public int BrandDisplayOrder { get; set; } = 1;
     public int PriceDisplayOrder { get; set; } = 2;
     public int DeliveryTimeDisplayOrder { get; set; } = 4;
-    public int AvailabilityDisplayOrder { get; set; } = 5;
     public int NewArrivalsDisplayOrder { get; set; } = 6;
 
     public FacetSorting CategorySorting { get; set; } = FacetSorting.HitsDesc;

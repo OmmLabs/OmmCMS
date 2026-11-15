@@ -10,7 +10,7 @@
     "price": 590.00,
     "weight": 33.0,
     "deliveryTime": "7-working-days",
-    "stockQuantity": 15,
+
     "showOnHomePage": true,
     "categories": [ "Armchairs" ],
     "manufacturers": [ "lindavero" ],
@@ -108,8 +108,8 @@
     "requiredProducts": [ "FN-1007" ],
     "automaticallyAddRequiredProducts": true,
     "deliveryTime": "available-and-ready-to-ship",
-    "manageInventoryMethod": "ManageStockByAttributes",
-    "displayStockAvailability": true,
+
+
     "categories": [ "Lighting" ],
     "manufacturers": [ "lindavero" ],
     "pictures": [
@@ -141,9 +141,9 @@
       }
     ],
     "combinations": [
-      { "sku": "FN-1002-BLK", "price": 149.00, "weight": 13.2, "stockQuantity": 20, "pictures": [ "product/fn-1002-black.jpg" ], "attributes": { "finish": "finish-black" } },
-      { "sku": "FN-1002-WHT", "price": 149.00, "weight": 13.2, "stockQuantity": 12, "pictures": [ "product/fn-1002-white.jpg" ], "attributes": { "finish": "finish-white" } },
-      { "sku": "FN-1002-BRS", "price": 199.00, "weight": 15.4, "stockQuantity": 5, "deliveryTime": "7-working-days", "pictures": [ "product/fn-1002-brass.jpg" ], "attributes": { "finish": "finish-brass" } }
+      { "sku": "FN-1002-BLK", "price": 149.00, "weight": 13.2, "pictures": [ "product/fn-1002-black.jpg" ], "attributes": { "finish": "finish-black" } },
+      { "sku": "FN-1002-WHT", "price": 149.00, "weight": 13.2, "pictures": [ "product/fn-1002-white.jpg" ], "attributes": { "finish": "finish-white" } },
+      { "sku": "FN-1002-BRS", "price": 199.00, "weight": 15.4, "deliveryTime": "7-working-days", "pictures": [ "product/fn-1002-brass.jpg" ], "attributes": { "finish": "finish-brass" } }
     ]
   },
   {
@@ -154,7 +154,7 @@
     "sku": "FN-1003",
     "taxCategory": "general",
     "showOnHomePage": true,
-    "manageInventoryMethod": "DontManageStock",
+
     "groupedProductConfiguration": {
       "collapsible": true,
       "headerFields": [ "image", "sku", "price" ]
@@ -178,7 +178,7 @@
     "taxCategory": "general",
     "price": 129.00,
     "deliveryTime": "2-5-working-days",
-    "stockQuantity": 25,
+
     "categories": [ { "category": "Sale", "displayOrder": 0, "isSystemMapping": true }, "Furniture and Design" ],
     "manufacturers": [ "lindavero" ],
     "pictures": [
@@ -200,9 +200,9 @@
     "price": 249.00,
     "hideQuantityControl": true,
     "deliveryTime": "7-working-days",
-    "stockQuantity": 3,
-    "displayStockAvailability": true,
-    "displayStockQuantity": true,
+
+
+
     "categories": [ "Furniture and Design" ],
     "manufacturers": [ "lindavero" ],
     "pictures": [
@@ -224,7 +224,7 @@
     "price": 149.00,
     "createdOnUtc": "@now-5d",
     "deliveryTime": "2-5-working-days",
-    "stockQuantity": 18,
+
     "categories": [ "Furniture and Design" ],
     "manufacturers": [ "lindavero" ],
     "pictures": [
@@ -244,7 +244,7 @@
     "taxCategory": "general",
     "price": 9.90,
     "deliveryTime": "available-and-ready-to-ship",
-    "stockQuantity": 300,
+
     "categories": [ "Lighting" ],
     "manufacturers": [ "lindavero" ],
     "pictures": [

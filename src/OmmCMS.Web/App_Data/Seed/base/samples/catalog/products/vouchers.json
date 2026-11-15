@@ -9,7 +9,7 @@
     "taxCategory": "tax-free",
     "price": 5.00,
     "isShippingEnabled": false,
-    "manageInventoryMethod": "DontManageStock",
+
     "categories": [ "Vouchers" ],
     "pictures": [
       { "file": "product/gc-1003.jpg", "name": "donation-plant-a-tree" }

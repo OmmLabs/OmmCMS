@@ -14,7 +14,7 @@
     "downloadActivationType": "WhenOrderIsPaid",
     "isEsd": true,
     "isShippingEnabled": false,
-    "manageInventoryMethod": "DontManageStock",
+
     "categories": [ "E-Books" ],
     "manufacturers": [ "pixelmoor" ],
     "pictures": [
@@ -42,7 +42,7 @@
     "userAgreementText": "@file",
     "isEsd": true,
     "isShippingEnabled": false,
-    "manageInventoryMethod": "DontManageStock",
+
     "createdOnUtc": "@now-5d",
     "categories": [ "Software" ],
     "manufacturers": [ "pixelmoor" ],

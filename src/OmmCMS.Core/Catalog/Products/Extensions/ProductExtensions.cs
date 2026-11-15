@@ -24,12 +24,6 @@ public static partial class ProductExtensions
         if (values == null)
             product.MergedDataValues = values = [];
 
-        if (ManageInventoryMethod.ManageStockByAttributes == (ManageInventoryMethod)product.ManageInventoryMethodId)
-        {
-            values.Add(nameof(Product.StockQuantity), combination.StockQuantity);
-            values.Add(nameof(Product.BackorderModeId), combination.AllowOutOfStockOrders ? (int)BackorderMode.AllowQtyBelow0 : (int)BackorderMode.NoBackorders);
-        }
-
         if (combination.Sku.HasValue())
             values.Add(nameof(Product.Sku), combination.Sku);
         if (combination.Gtin.HasValue())
@@ -55,120 +49,6 @@ public static partial class ProductExtensions
         if (combination.Height.HasValue)
             values.Add(nameof(Product.Height), combination.Height.Value);
 
-    }
-
-    /// <summary>
-    /// Gets a value indicating whether the product is available by stock.
-    /// </summary>
-    /// <param name="product">Product entity.</param>
-    /// <returns>A value indicating whether the product is available by stock</returns>
-    public static bool IsAvailableByStock(this Product product)
-    {
-        Guard.NotNull(product);
-
-        if (product.ManageInventoryMethod != ManageInventoryMethod.DontManageStock && product.StockQuantity <= 0 && product.BackorderMode == BackorderMode.NoBackorders)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    /// <summary>
-    /// Formats a message for stock availability.
-    /// </summary>
-		/// <param name="product">Product entity.</param>
-    /// <param name="localizationService">Localization service.</param>
-    /// <returns>Product stock message.</returns>
-    public static string FormatStockMessage(this Product product, ILocalizationService localizationService)
-    {
-        Guard.NotNull(product);
-        Guard.NotNull(localizationService);
-
-        var stockMessage = string.Empty;
-
-        if (product.ManageInventoryMethod != ManageInventoryMethod.DontManageStock && product.DisplayStockAvailability)
-        {
-            if (product.StockQuantity > 0)
-            {
-                if (product.DisplayStockQuantity)
-                {
-                    var str = localizationService.GetResource("Products.Availability.InStockWithQuantity");
-                    stockMessage = str.FormatInvariant(product.StockQuantity.ToString("N0"));
-                }
-                else
-                {
-                    stockMessage = localizationService.GetResource("Products.Availability.InStock");
-                }
-            }
-            else
-            {
-                if (product.BackorderMode == BackorderMode.NoBackorders || product.BackorderMode == BackorderMode.AllowQtyBelow0)
-                {
-                    stockMessage = localizationService.GetResource("Products.Availability.OutOfStock");
-                }
-                else if (product.BackorderMode == BackorderMode.AllowQtyBelow0OnBackorder)
-                {
-                    stockMessage = localizationService.GetResource("Products.Availability.Backordering");
-                }
-            }
-        }
-
-        return stockMessage;
-    }
-
-    /// <summary>
-    /// Gets a value indicating whether to display the delivery time according to stock quantity.
-    /// </summary>
-    /// <param name="product">Product entity.</param>
-    /// <param name="catalogSettings">Catalog settings.</param>
-    /// <param name="isStockManaged">
-    /// A value indicating whether the stock of the product is managed.
-    /// Will be obtained via <see cref="Product.ManageInventoryMethod"/> if <c>null</c>.
-    /// </param>
-    /// <returns>A value indicating whether to display the delivery time according to stock quantity.</returns>
-    public static bool DisplayDeliveryTimeAccordingToStock(this Product product, CatalogSettings catalogSettings, bool? isStockManaged = null)
-    {
-        Guard.NotNull(product);
-        Guard.NotNull(catalogSettings);
-
-        isStockManaged ??= product.ManageInventoryMethod != ManageInventoryMethod.DontManageStock;
-
-        if (isStockManaged == true)
-        {
-            return product.StockQuantity > 0 || (product.StockQuantity <= 0 && catalogSettings.DeliveryTimeIdForEmptyStock.HasValue);
-        }
-
-        return true;
-    }
-
-    /// <summary>
-    /// Gets the delivery time identifier according to stock quantity.
-    /// </summary>
-    /// <param name="product">Product entity.</param>
-    /// <param name="catalogSettings">Catalog settings.</param>
-    /// <param name="isStockManaged">
-    /// A value indicating whether the stock of the product is managed.
-    /// Will be obtained via <see cref="Product.ManageInventoryMethod"/> if <c>null</c>.
-    /// </param>
-    /// <returns>The delivery time identifier according to stock quantity. <c>null</c> if not specified.</returns>
-    public static int? GetDeliveryTimeIdAccordingToStock(this Product product, CatalogSettings catalogSettings, bool? isStockManaged = null)
-    {
-        Guard.NotNull(catalogSettings);
-
-        if (product == null)
-        {
-            return null;
-        }
-
-        isStockManaged ??= product.ManageInventoryMethod != ManageInventoryMethod.DontManageStock;
-
-        if (isStockManaged == true && catalogSettings.DeliveryTimeIdForEmptyStock.HasValue && product.StockQuantity <= 0)
-        {
-            return catalogSettings.DeliveryTimeIdForEmptyStock.Value;
-        }
-
-        return product.DeliveryTimeId;
     }
 
     /// <summary>

@@ -389,10 +389,6 @@ public class CatalogSettings : ISettings
     /// </summary>
     public int HtmlTextCollapsedHeight { get; set; } = 230;
 
-    /// <summary>
-    /// Gets or sets the identifier of a delivery time displayed when the stock is empty.
-    /// </summary>
-    public int? DeliveryTimeIdForEmptyStock { get; set; }
 
     /// <summary>
     /// Gets or sets how many items to display maximally in the most recently used category list

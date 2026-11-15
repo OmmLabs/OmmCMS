@@ -10,8 +10,8 @@
     "price": 9.90,
     "weight": 0.33,
     "deliveryTime": "available-and-ready-to-ship",
-    "stockQuantity": 500,
-    "displayStockAvailability": true,
+
+
     "categories": [ "Golf Balls" ],
     "manufacturers": [ "fairway-vennix" ],
     "pictures": [
@@ -48,7 +48,7 @@
     "quantityUnit": "bag",
     "orderMinimumQuantity": 2,
     "deliveryTime": "available-and-ready-to-ship",
-    "stockQuantity": 1000,
+
     "categories": [ "Golf Accessories" ],
     "manufacturers": [ "fairway-vennix" ],
     "pictures": [
@@ -68,9 +68,9 @@
     "taxCategory": "general",
     "price": 14.90,
     "deliveryTime": "2-5-working-days",
-    "stockQuantity": 40,
-    "displayStockAvailability": true,
-    "displayStockQuantity": true,
+
+
+
     "categories": [ { "category": "Sale", "displayOrder": 0, "isSystemMapping": true }, "Golf Accessories" ],
     "manufacturers": [ "fairway-vennix" ],
     "pictures": [
@@ -114,7 +114,7 @@
     "taxCategory": "general",
     "price": 249.00,
     "deliveryTime": "7-working-days",
-    "stockQuantity": 12,
+
     "categories": [ "Golf Accessories" ],
     "manufacturers": [ "fairway-vennix" ],
     "pictures": [
@@ -162,9 +162,9 @@
     "taxCategory": "general",
     "price": 79.90,
     "deliveryTime": "available-and-ready-to-ship",
-    "stockQuantity": 2,
-    "displayStockAvailability": true,
-    "displayStockQuantity": true,
+
+
+
     "categories": [ "Golf Accessories" ],
     "manufacturers": [ "fairway-vennix" ],
     "pictures": [
@@ -185,7 +185,7 @@
     "price": 12.90,
     "createdOnUtc": "@now-5d",
     "deliveryTime": "available-and-ready-to-ship",
-    "stockQuantity": 25,
+
     "categories": [ "Golf Accessories" ],
     "manufacturers": [ "fairway-vennix" ],
     "pictures": [

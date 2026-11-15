@@ -84,27 +84,6 @@ public enum AttributeChoiceBehaviour
 }
 
 /// <summary>
-/// Represents the backorder mode.
-/// </summary>
-public enum BackorderMode
-{
-    /// <summary>
-    /// No backorders.
-    /// </summary>
-    NoBackorders = 0,
-
-    /// <summary>
-    /// Allow quantity below 0.
-    /// </summary>
-    AllowQtyBelow0 = 1,
-
-    /// <summary>
-    /// Allow quantity below 0, product is on backorder.
-    /// </summary>
-    AllowQtyBelow0OnBackorder = 2
-}
-
-/// <summary>
 /// Represents the download activation type.
 /// </summary>
 public enum DownloadActivationType
@@ -118,48 +97,6 @@ public enum DownloadActivationType
     /// Activate manually.
     /// </summary>
     Manually = 10
-}
-
-/// <summary>
-/// Represents the low stock activity.
-/// </summary>
-public enum LowStockActivity
-{
-    /// <summary>
-    /// Do nothing.
-    /// </summary>
-    Nothing = 0,
-
-    /// <summary>
-    /// Disable buy button.
-    /// </summary>
-    DisableBuyButton = 1,
-
-    /// <summary>
-    /// Do not publish.
-    /// </summary>
-    Unpublish = 2
-}
-
-/// <summary>
-/// Represents the method of inventory management.
-/// </summary>
-public enum ManageInventoryMethod
-{
-    /// <summary>
-    /// Don't track inventory.
-    /// </summary>
-    DontManageStock = 0,
-
-    /// <summary>
-    /// Track inventory.
-    /// </summary>
-    ManageStock = 1,
-
-    /// <summary>
-    /// Track inventory by product attributes.
-    /// </summary>
-    ManageStockByAttributes = 2
 }
 
 /// <summary>

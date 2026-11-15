@@ -580,46 +580,6 @@ public class LinqCatalogSearchServiceTests : ServiceTestBase
     }
 
     [Test]
-    public async Task LinqSearch_filter_with_stock_quantity()
-    {
-        var products = new List<Product>
-        {
-            new SearchProduct(1) { StockQuantity = 10000 },
-            new SearchProduct(2) { StockQuantity = 10001 },
-            new SearchProduct(3) { StockQuantity = 10002 },
-            new SearchProduct(4) { StockQuantity = 10003 },
-            new SearchProduct(5) { StockQuantity = 10004 },
-            new SearchProduct(6) { StockQuantity = 0 },
-            new SearchProduct(7) { StockQuantity = 650 },
-            new SearchProduct(8) { StockQuantity = 0 }
-        };
-
-        var result = await SearchAsync(new CatalogSearchQuery().WithStockQuantity(10001, 10003), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(3));
-
-        result = await SearchAsync(new CatalogSearchQuery().WithStockQuantity(10003, null), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(2));
-
-        result = await SearchAsync(new CatalogSearchQuery().WithStockQuantity(10003, null, false), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(1));
-
-        result = await SearchAsync(new CatalogSearchQuery().WithStockQuantity(null, 10002), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(6));
-
-        result = await SearchAsync(new CatalogSearchQuery().WithStockQuantity(null, 10002, null, false), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(5));
-
-        result = await SearchAsync(new CatalogSearchQuery().WithStockQuantity(10000, 10000), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(1));
-
-        result = await SearchAsync(new CatalogSearchQuery().WithStockQuantity(20000, 20000), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(0));
-
-        result = await SearchAsync(new CatalogSearchQuery().WithStockQuantity(0, 0, false, false), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(6));
-    }
-
-    [Test]
     public async Task LinqSearch_filter_with_price()
     {
         var products = new List<Product>
@@ -687,30 +647,6 @@ public class LinqCatalogSearchServiceTests : ServiceTestBase
 
         result = await SearchAsync(new CatalogSearchQuery().CreatedBetween(new DateTime(2016, 8, 4), new DateTime(2016, 8, 4), false, false), products);
         Assert.That(result.TotalHitsCount, Is.EqualTo(5));
-    }
-
-    [Test]
-    public async Task LinqSearch_filter_available_only()
-    {
-        var products = new List<Product>
-        {
-            new SearchProduct(1),
-            new SearchProduct(2)
-            {
-                StockQuantity = 0,
-                ManageInventoryMethod = ManageInventoryMethod.ManageStock,
-                BackorderMode = BackorderMode.NoBackorders
-            },
-            new SearchProduct(3)
-            {
-                StockQuantity = 0,
-                ManageInventoryMethod = ManageInventoryMethod.ManageStock,
-                BackorderMode = BackorderMode.AllowQtyBelow0OnBackorder
-            }
-        };
-
-        var result = await SearchAsync(new CatalogSearchQuery().AvailableOnly(true), products);
-        Assert.That(result.TotalHitsCount, Is.EqualTo(2));
     }
 
     [Test]
@@ -813,7 +749,6 @@ public class LinqCatalogSearchServiceTests : ServiceTestBase
             Published = true;
             Visibility = ProductVisibility.Full;
             ProductTypeId = (int)ProductType.SimpleProduct;
-            StockQuantity = 10000;
             CreatedOnUtc = new DateTime(2016, 8, 24);
         }
     }

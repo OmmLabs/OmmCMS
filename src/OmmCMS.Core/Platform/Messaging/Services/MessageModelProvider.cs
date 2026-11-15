@@ -526,7 +526,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             { "Sku", catalogSettings.ShowProductSku ? part.Sku : null },
             { "Name", name },
             { "Description", part.GetLocalized(x => x.ShortDescription, messageContext.Language).Value.NullEmpty() },
-            { "StockQuantity", part.StockQuantity },
             { "AdditionalShippingCharge", additionalShippingCharge },
             { "Url", url },
             { "Thumbnail", await CreateModelPartAsync(file, messageContext, url, mediaSettings.MessageProductThumbPictureSize, new Size(50, 50), name) },

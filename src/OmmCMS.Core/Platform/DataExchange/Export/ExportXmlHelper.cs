@@ -595,14 +595,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.AdditionalShippingCharge), entity.AdditionalShippingCharge.ToString(_culture));
         _writer.WriteElementString(nameof(Product.IsTaxExempt), entity.IsTaxExempt.ToString());
         _writer.WriteElementString(nameof(Product.TaxCategoryId), entity.TaxCategoryId.ToString());
-        _writer.WriteElementString(nameof(Product.ManageInventoryMethodId), entity.ManageInventoryMethodId.ToString());
-        _writer.WriteElementString(nameof(Product.StockQuantity), ((int)product.StockQuantity).ToString());
-        _writer.WriteElementString(nameof(Product.DisplayStockAvailability), entity.DisplayStockAvailability.ToString());
-        _writer.WriteElementString(nameof(Product.DisplayStockQuantity), entity.DisplayStockQuantity.ToString());
-        _writer.WriteElementString(nameof(Product.MinStockQuantity), entity.MinStockQuantity.ToString());
-        _writer.WriteElementString(nameof(Product.LowStockActivityId), entity.LowStockActivityId.ToString());
-        _writer.WriteElementString(nameof(Product.NotifyAdminForQuantityBelow), entity.NotifyAdminForQuantityBelow.ToString());
-        _writer.WriteElementString(nameof(Product.BackorderModeId), ((int)product.BackorderModeId).ToString());
         _writer.WriteElementString(nameof(Product.OrderMinimumQuantity), entity.OrderMinimumQuantity.ToString());
         _writer.WriteElementString(nameof(Product.OrderMaximumQuantity), entity.OrderMaximumQuantity.ToString());
         _writer.WriteElementString(nameof(Product.QuantityStep), entity.QuantityStep.ToString());
@@ -861,8 +853,6 @@ public class ExportXmlHelper : Disposable
 
                 _writer.WriteStartElement("ProductAttributeCombination");
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.Id), entityPvac.Id.ToString());
-                _writer.WriteElementString(nameof(ProductVariantAttributeCombination.StockQuantity), entityPvac.StockQuantity.ToString());
-                _writer.WriteElementString(nameof(ProductVariantAttributeCombination.AllowOutOfStockOrders), entityPvac.AllowOutOfStockOrders.ToString());
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.RawAttributes), entityPvac.RawAttributes);
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.Sku), entityPvac.Sku);
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.Gtin), entityPvac.Gtin);

@@ -28,10 +28,6 @@ public class CatalogSearchQueryVisitor : LinqSearchQueryVisitor<Product, Catalog
         {
             return ApplySimpleMemberExpression(x => x.Id, filter, query);
         }
-        else if (fieldName == names.StockQuantity)
-        {
-            return ApplySimpleMemberExpression(x => x.StockQuantity, filter, query);
-        }
         else if (fieldName == names.ParentId)
         {
             return ApplySimpleMemberExpression(x => x.ParentGroupedProductId, filter, query);
@@ -67,14 +63,6 @@ public class CatalogSearchQueryVisitor : LinqSearchQueryVisitor<Product, Catalog
         else if (fieldName == names.IsEsd)
         {
             return ApplySimpleMemberExpression(x => x.IsEsd, filter, query);
-        }
-        else if (fieldName == names.IsAvailable)
-        {
-            return query.Where(x =>
-                x.ManageInventoryMethodId == (int)ManageInventoryMethod.DontManageStock ||
-                (x.ManageInventoryMethodId == (int)ManageInventoryMethod.ManageStock && (x.StockQuantity > 0 || x.BackorderModeId != (int)BackorderMode.NoBackorders)) ||
-                (x.ManageInventoryMethodId == (int)ManageInventoryMethod.ManageStockByAttributes && x.ProductVariantAttributeCombinations.Any(pvac => pvac.StockQuantity > 0 || pvac.AllowOutOfStockOrders))
-            );
         }
         else if (fieldName == names.DeliveryId)
         {

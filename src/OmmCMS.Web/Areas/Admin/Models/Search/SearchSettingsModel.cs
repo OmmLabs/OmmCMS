@@ -67,8 +67,6 @@ public class CommonFacetSettingsModel : ModelBase, ILocalizedModel<CommonFacetSe
     [LocalizedDisplay("Admin.Configuration.Settings.Search.CommonFacet.Sorting")]
     public FacetSorting Sorting { get; set; }
 
-    [LocalizedDisplay("Admin.Configuration.Settings.Search.IncludeNotAvailable")]
-    public bool IncludeNotAvailable { get; set; }
 
     public List<CommonFacetSettingsLocalizedModel> Locales { get; set; } = [];
 }

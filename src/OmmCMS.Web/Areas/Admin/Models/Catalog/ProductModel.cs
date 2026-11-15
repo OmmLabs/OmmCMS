@@ -143,24 +143,11 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
     [LocalizedDisplay("*TaxCategory")]
     public int? TaxCategoryId { get; set; }
 
-    [LocalizedDisplay("*ManageInventoryMethod")]
-    public int ManageInventoryMethodId { get; set; }
-    public int OriginalStockQuantity { get; set; }
 
-    [LocalizedDisplay("*DisplayStockAvailability")]
-    public bool DisplayStockAvailability { get; set; }
 
-    [LocalizedDisplay("*DisplayStockQuantity")]
-    public bool DisplayStockQuantity { get; set; }
 
-    [LocalizedDisplay("*LowStockActivity")]
-    public int LowStockActivityId { get; set; }
 
-    [LocalizedDisplay("*NotifyAdminForQuantityBelow")]
-    public int NotifyAdminForQuantityBelow { get; set; }
 
-    [LocalizedDisplay("*BackorderMode")]
-    public int BackorderModeId { get; set; }
 
     [LocalizedDisplay("*OrderMinimumQuantity")]
     public int OrderMinimumQuantity { get; set; }

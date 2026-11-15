@@ -44,7 +44,6 @@ internal class ProductVariantAttributeCombinationMap : IEntityTypeConfiguration<
 [Index(nameof(Sku), Name = "IX_ProductVariantAttributeCombination_SKU")]
 [Index(nameof(Gtin), Name = "IX_Gtin")]
 [Index(nameof(ManufacturerPartNumber), Name = "IX_ManufacturerPartNumber")]
-[Index(nameof(StockQuantity), nameof(AllowOutOfStockOrders), Name = "IX_StockQuantity_AllowOutOfStockOrders")]
 [Index(nameof(HashCode), Name = "IX_HashCode")]
 public partial class ProductVariantAttributeCombination : BaseEntity, IAttributeAware
 {
@@ -170,16 +169,6 @@ public partial class ProductVariantAttributeCombination : BaseEntity, IAttribute
     [NotMapped, IgnoreDataMember]
     public ProductVariantAttributeSelection AttributeSelection
         => _attributeSelection ??= new(RawAttributes);
-
-    /// <summary>
-    /// Gets or sets the stock quantity.
-    /// </summary>
-    public int StockQuantity { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to allow orders when out of stock.
-    /// </summary>
-    public bool AllowOutOfStockOrders { get; set; }
 
     /// <summary>
     /// Gets or sets the attributes hash code.

@@ -199,8 +199,6 @@ public class AttributeHashCodeTests : ServiceTestBase
         {
             Sku = SkuTemplate.FormatInvariant(num),
             RawAttributes = asJson ? selection.AsJson() : selection.AsXml(),
-            StockQuantity = 10000,
-            AllowOutOfStockOrders = true,
             IsActive = true,
             ProductId = num
         };

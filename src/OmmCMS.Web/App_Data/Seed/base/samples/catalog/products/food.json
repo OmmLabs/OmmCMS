@@ -9,8 +9,8 @@
     "taxCategory": "food",
     "price": 12.90,
     "deliveryTime": "available-and-ready-to-ship",
-    "stockQuantity": 120,
-    "displayStockAvailability": true,
+
+
     "showOnHomePage": true,
     "categories": [ "Oil and Vinegar" ],
     "manufacturers": [ "casa-vireluna" ],
@@ -34,7 +34,7 @@
     "taxCategory": "food",
     "price": 8.90,
     "deliveryTime": "available-and-ready-to-ship",
-    "manageInventoryMethod": "ManageStockByAttributes",
+
     "categories": [ "Coffee and Tea" ],
     "manufacturers": [ "casa-vireluna" ],
     "pictures": [
@@ -74,32 +74,32 @@
     ],
     "combinations": [
       {
-        "sku": "FD-1002-250-W", "price": 8.90, "stockQuantity": 200,
+        "sku": "FD-1002-250-W", "price": 8.90,
         "pictures": [ "product/fd-1002.jpg" ],
         "attributes": { "pack-size": "pack-250g", "grind": "grind-whole" }
       },
       {
-        "sku": "FD-1002-250-E", "price": 8.90, "stockQuantity": 200,
+        "sku": "FD-1002-250-E", "price": 8.90,
         "pictures": [ "product/fd-1002.jpg" ],
         "attributes": { "pack-size": "pack-250g", "grind": "grind-espresso" }
       },
       {
-        "sku": "FD-1002-250-F", "price": 8.90, "stockQuantity": 200,
+        "sku": "FD-1002-250-F", "price": 8.90,
         "pictures": [ "product/fd-1002.jpg" ],
         "attributes": { "pack-size": "pack-250g", "grind": "grind-filter" }
       },
       {
-        "sku": "FD-1002-1000-W", "price": 29.90, "stockQuantity": 80, "deliveryTime": "2-5-working-days",
+        "sku": "FD-1002-1000-W", "price": 29.90, "deliveryTime": "2-5-working-days",
         "pictures": [ "product/fd-1002-1kg.jpg" ],
         "attributes": { "pack-size": "pack-1kg", "grind": "grind-whole" }
       },
       {
-        "sku": "FD-1002-1000-E", "price": 29.90, "stockQuantity": 80, "deliveryTime": "2-5-working-days",
+        "sku": "FD-1002-1000-E", "price": 29.90, "deliveryTime": "2-5-working-days",
         "pictures": [ "product/fd-1002-1kg.jpg" ],
         "attributes": { "pack-size": "pack-1kg", "grind": "grind-espresso" }
       },
       {
-        "sku": "FD-1002-1000-F", "price": 29.90, "stockQuantity": 80, "deliveryTime": "2-5-working-days",
+        "sku": "FD-1002-1000-F", "price": 29.90, "deliveryTime": "2-5-working-days",
         "pictures": [ "product/fd-1002-1kg.jpg" ],
         "attributes": { "pack-size": "pack-1kg", "grind": "grind-filter" }
       }
@@ -113,9 +113,9 @@
     "taxCategory": "food",
     "price": 4.90,
     "createdOnUtc": "@now-5d",
-    "stockQuantity": 8,
-    "displayStockAvailability": true,
-    "displayStockQuantity": true,
+
+
+
     "deliveryTime": "2-5-working-days",
     "categories": [ "Delicacies" ],
     "manufacturers": [ "casa-vireluna" ],
@@ -163,8 +163,8 @@
     "sku": "FD-1006",
     "taxCategory": "food",
     "price": 14.90,
-    "stockQuantity": 0,
-    "displayStockAvailability": true,
+
+
     "deliveryTime": "7-working-days",
     "categories": [ "Delicacies" ],
     "manufacturers": [ "casa-vireluna" ],
@@ -207,8 +207,8 @@
     "requiredProducts": [ "FD-1009" ],
     "automaticallyAddRequiredProducts": true,
     "deliveryTime": "available-and-ready-to-ship",
-    "stockQuantity": 240,
-    "displayStockAvailability": true,
+
+
     "categories": [ "Delicacies" ],
     "manufacturers": [ "casa-vireluna" ],
     "pictures": [
@@ -231,7 +231,7 @@
     "quantityPerParentUnit": 1,
     "visibility": "ProductPage",
     "isShippingEnabled": false,
-    "manageInventoryMethod": "DontManageStock",
+
     "pictures": [
       { "file": "product/fd-1009.jpg", "name": "bottle-deposit" }
     ]

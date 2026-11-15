@@ -55,11 +55,7 @@ public class ProductOverviewModel : TabbableModel
     public int? DeliveryTimeId { get; set; }
     public string DeliveryTime { get; set; }
 
-    [LocalizedDisplay("*StockQuantity")]
-    public int StockQuantity { get; set; }
 
-    [LocalizedDisplay("*MinStockQuantity")]
-    public int MinStockQuantity { get; set; }
 
     [LocalizedDisplay("*Price")]
     public decimal Price { get; set; }
