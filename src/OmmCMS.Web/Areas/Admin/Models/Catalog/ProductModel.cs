@@ -116,9 +116,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
     [UIHint("Html")]
     public string AddChangelog { get; set; }
 
-    [LocalizedDisplay("*TaxCategory")]
-    public int? TaxCategoryId { get; set; }
-
 
 
 
@@ -518,10 +515,6 @@ public partial class ProductModelValidator : SmartValidator<ProductModel>
     {
         ApplyEntityRules<Product>(db);
         //ApplyNonNullableValueTypeRules();
-
-        RuleFor(x => x.TaxCategoryId)
-            .NotNull()
-            .NotEqual(0);
 
         RuleFor(x => x.WithdrawalPeriodDays)
             .GreaterThanOrEqualTo(0)

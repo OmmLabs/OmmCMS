@@ -230,7 +230,6 @@ public partial class InstallationDataSeeder
             .FromFiles(ProductFiles)
             .WithDefaults(ProductDefaultsFile)
             .Reference<ProductTemplate>("productTemplate", (product, template) => product.ProductTemplateId = template.Id)
-            .Reference<TaxCategory>("taxCategory", (product, taxCategory) => product.TaxCategoryId = taxCategory.Id)
             .Reference<DeliveryTime>("deliveryTime", (product, deliveryTime) => product.DeliveryTimeId = deliveryTime.Id)
             .Reference<QuantityUnit>("quantityUnit", (product, unit) => product.QuantityUnitId = unit.Id)
             .Bind("categories", (product, node, _) => ForEachAssignment(node, "category", (key, assignment) =>

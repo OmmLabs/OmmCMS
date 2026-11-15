@@ -6,7 +6,6 @@
     "fullDescription": "@file",
     "sku": "FD-1001",
     "tags": [ "sustainable" ],
-    "taxCategory": "food",
     "price": 12.90,
     "deliveryTime": "available-and-ready-to-ship",
 
@@ -31,7 +30,6 @@
     "fullDescription": "@file",
     "sku": "FD-1002",
     "tags": [ "bestseller" ],
-    "taxCategory": "food",
     "price": 8.90,
     "deliveryTime": "available-and-ready-to-ship",
 
@@ -110,7 +108,6 @@
     "shortDescription": "Oregano, thyme, rosemary and basil in a 100 g jar.",
     "fullDescription": "@file",
     "sku": "FD-1004",
-    "taxCategory": "food",
     "price": 4.90,
     "createdOnUtc": "@now-5d",
 
@@ -135,7 +132,6 @@
     "shortDescription": "Olive oil and two herb mixes in one gift box.",
     "fullDescription": "@file",
     "sku": "FD-1005",
-    "taxCategory": "food",
     "price": 17.03,
     "createdOnUtc": "@now-5d",
     "deliveryTime": "available-and-ready-to-ship",
@@ -161,7 +157,6 @@
     "shortDescription": "Ceramic mill filled with coarse sea salt.",
     "fullDescription": "@file",
     "sku": "FD-1006",
-    "taxCategory": "food",
     "price": 14.90,
 
 
@@ -182,7 +177,6 @@
     "fullDescription": "@file",
     "sku": "FD-1007",
     "tags": [ "limited-edition" ],
-    "taxCategory": "food",
     "price": 7.90,
     "availableStartDateTimeUtc": "@now+2M",
     "deliveryTime": "2-5-working-days",
@@ -202,7 +196,6 @@
     "shortDescription": "Lightly sparkling lemonade with blood orange juice in a returnable 0.75 l bottle. The bottle deposit is added automatically.",
     "fullDescription": "@file",
     "sku": "FD-1008",
-    "taxCategory": "general",
     "price": 2.90,
     "deliveryTime": "available-and-ready-to-ship",
 
@@ -224,7 +217,6 @@
     "shortDescription": "Fixed deposit per returnable bottle, refunded when the empty bottle is returned.",
     "fullDescription": "@file",
     "sku": "FD-1009",
-    "taxCategory": "general",
     "price": 0.25,
     "visibility": "ProductPage",
 

@@ -47,7 +47,7 @@ public partial interface ITaxService
     /// Gets tax rate for given product.
     /// </summary>
     /// <param name="product">Product. Can be <c>null</c>.</param>
-    /// <param name="taxCategoryId">Tax category identifier. Obtained from <see cref="Product.TaxCategoryId"/> if <c>null</c>.</param>
+    /// <param name="taxCategoryId">Tax category identifier. Defaults to zero if <c>null</c>.</param>
     /// <param name="customer">Customer. Obtained from <see cref="IWorkContext.CurrentCustomer"/> if <c>null</c>.</param>
     /// <returns>Tax rate.</returns>
     Task<TaxRate> GetTaxRateAsync(Product product, int? taxCategoryId = null, Customer customer = null);

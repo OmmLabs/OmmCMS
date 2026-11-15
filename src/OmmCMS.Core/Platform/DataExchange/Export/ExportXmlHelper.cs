@@ -582,7 +582,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.SampleDownloadId), entity.SampleDownloadId?.ToString() ?? string.Empty);
         _writer.WriteElementString(nameof(Product.HasUserAgreement), entity.HasUserAgreement.ToString());
         _writer.WriteElementString(nameof(Product.UserAgreementText), entity.UserAgreementText);
-        _writer.WriteElementString(nameof(Product.TaxCategoryId), entity.TaxCategoryId.ToString());
         // INFO: Export the entered price. Not "(decimal)product.Price" because it is the calculated price.
         _writer.WriteElementString(nameof(Product.Price), entity.Price.ToString(_culture));
         _writer.WriteElementString(nameof(Product.ProductCost), entity.ProductCost.ToString(_culture));

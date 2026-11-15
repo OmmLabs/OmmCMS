@@ -6,7 +6,6 @@
     "fullDescription": "@file",
     "sku": "FN-1001",
     "tags": [ "cosy" ],
-    "taxCategory": "general",
     "price": 590.00,
     "weight": 33.0,
     "deliveryTime": "7-working-days",
@@ -102,7 +101,6 @@
     "sku": "FN-1002",
     "manufacturerPartNumber": "LV-ARC-150",
     "durabilityGuaranteeDurationYears": 5,
-    "taxCategory": "general",
     "price": 149.00,
     "weight": 13.2,
     "deliveryTime": "available-and-ready-to-ship",
@@ -150,7 +148,6 @@
     "shortDescription": "Side table, shelf and footstool in solid oak, designed to go together.",
     "fullDescription": "@file",
     "sku": "FN-1003",
-    "taxCategory": "general",
     "showOnHomePage": true,
 
     "groupedProductConfiguration": {
@@ -173,7 +170,6 @@
     "shortDescription": "Round side table in solid oak, 45 cm diameter.",
     "fullDescription": "@file",
     "sku": "FN-1004",
-    "taxCategory": "general",
     "price": 129.00,
     "deliveryTime": "2-5-working-days",
 
@@ -194,7 +190,6 @@
     "shortDescription": "Open shelf in solid oak with four compartments.",
     "fullDescription": "@file",
     "sku": "FN-1005",
-    "taxCategory": "general",
     "price": 249.00,
     "deliveryTime": "7-working-days",
 
@@ -217,7 +212,6 @@
     "shortDescription": "Upholstered footstool with oak legs.",
     "fullDescription": "@file",
     "sku": "FN-1006",
-    "taxCategory": "general",
     "price": 149.00,
     "createdOnUtc": "@now-5d",
     "deliveryTime": "2-5-working-days",
@@ -238,7 +232,6 @@
     "shortDescription": "Dimmable LED bulb with warm white light, E27 socket.",
     "fullDescription": "@file",
     "sku": "FN-1007",
-    "taxCategory": "general",
     "price": 9.90,
     "deliveryTime": "available-and-ready-to-ship",
 

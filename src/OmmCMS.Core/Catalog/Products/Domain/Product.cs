@@ -360,11 +360,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     [NonSummary]
     public string UserAgreementText { get; set; }
 
-    /// <summary>
-    /// Gets or sets the tax category identifier.
-    /// </summary>
-    public int TaxCategoryId { get; set; }
-
     private decimal _price;
     /// <summary>
     /// Gets or sets the product regular price.

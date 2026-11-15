@@ -11,7 +11,7 @@ using OmmCMS.Engine.Modularity;
 
 namespace OmmCMS.Core.Checkout.Tax;
 
-public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
+public partial class TaxService : ITaxService
 {
     const string DefaultTaxFormat = "{0} *";
 
@@ -40,35 +40,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
         _taxSettings = taxSettings;
     }
 
-    #region Hook 
-
-    protected override Task<HookResult> OnDeletedAsync(TaxCategory entity, IHookedEntity entry, CancellationToken cancelToken)
-        => Task.FromResult(HookResult.Ok);
-
-    public override async Task OnAfterSaveCompletedAsync(IEnumerable<IHookedEntity> entries, CancellationToken cancelToken)
-    {
-        var deletedTaxCategoryIds = entries
-            .Where(x => x.InitialState == EntityState.Deleted)
-            .Select(x => x.Entity)
-            .OfType<TaxCategory>()
-            .Select(x => x.Id)
-            .ToList();
-
-        if (deletedTaxCategoryIds.Count > 0)
-        {
-            var newTaxCategoryId = await _db.TaxCategories
-                .OrderBy(x => x.DisplayOrder)
-                .Select(x => x.Id)
-                .FirstOrDefaultAsync(cancelToken);
-
-            await _db.Products
-                .Where(x => deletedTaxCategoryIds.Contains(x.TaxCategoryId))
-                .ExecuteUpdateAsync(x => x.SetProperty(p => p.TaxCategoryId, p => newTaxCategoryId), cancelToken);
-        }
-    }
-
-    #endregion
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public virtual Provider<ITaxProvider> LoadActiveTaxProvider()
         => LoadTaxProviderBySystemName(_taxSettings.ActiveTaxProviderSystemName) ?? LoadAllTaxProviders().FirstOrDefault();
@@ -87,7 +58,7 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
 
     public virtual async Task<TaxRate> GetTaxRateAsync(Product product, int? taxCategoryId = null, Customer customer = null)
     {
-        taxCategoryId ??= product?.TaxCategoryId ?? 0;
+        taxCategoryId ??= 0;
         customer ??= _workContext.CurrentCustomer;
 
         var cacheKey = CreateTaxRateCacheKey(customer, taxCategoryId.Value, product);
@@ -190,7 +161,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
         }
 
         customer ??= _workContext.CurrentCustomer;
-        taxCategoryId ??= product?.TaxCategoryId;
         inclusive ??= _workContext.TaxDisplayType == TaxDisplayType.IncludingTax;
 
         var taxRate = await GetTaxRateAsync(product, taxCategoryId, customer);

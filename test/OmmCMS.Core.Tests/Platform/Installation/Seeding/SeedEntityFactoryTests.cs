@@ -31,7 +31,7 @@ public class SeedEntityFactoryTests
 
     private static SeedEntityDescriptor<Product> ProductDescriptor()
         => new SeedEntityDescriptor<Product>("sku")
-            .Reference<TaxCategory>("taxCategory", (p, t) => p.TaxCategoryId = t.Id)
+            .Reference<Country>("countryOfOrigin", (p, t) => p.CountryOfOriginId = t.Id)
             .References<Category>("categories", (p, categories) =>
             {
                 for (var i = 0; i < categories.Count; i++)
@@ -117,17 +117,17 @@ public class SeedEntityFactoryTests
     [Test]
     public void References_are_resolved_including_aliases()
     {
-        _resolver.Add("standard", new TaxCategory { Id = 7, Name = "Normal" });
-        _resolver.AddAliases<TaxCategory>([new("apparel", "standard")]);
+        _resolver.Add("standard", new Country { Id = 7, Name = "Normal" });
+        _resolver.AddAliases<Country>([new("apparel", "standard")]);
 
         var golf = new Category { Name = "Golf" };
         var sports = new Category { Name = "Sports" };
         _resolver.Add("golf", golf);
         _resolver.Add("sports", sports);
 
-        var product = _factory.Create(Record("P-1", """{ "sku": "P-1", "taxCategory": "apparel", "categories": [ "sports", "GOLF" ] }"""), ProductDescriptor());
+        var product = _factory.Create(Record("P-1", """{ "sku": "P-1", "countryOfOrigin": "apparel", "categories": [ "sports", "GOLF" ] }"""), ProductDescriptor());
 
-        Assert.That(product.TaxCategoryId, Is.EqualTo(7));
+        Assert.That(product.CountryOfOriginId, Is.EqualTo(7));
         Assert.That(product.ProductCategories.OrderBy(x => x.DisplayOrder).Select(x => x.Category), Is.EqualTo(new[] { sports, golf }));
     }
 
@@ -135,18 +135,18 @@ public class SeedEntityFactoryTests
     public void Unknown_reference_throws_with_field()
     {
         var ex = Assert.Throws<SeedDataFormatException>(() =>
-            _factory.Create(Record("P-1", """{ "sku": "P-1", "taxCategory": "missing" }"""), ProductDescriptor()));
+            _factory.Create(Record("P-1", """{ "sku": "P-1", "countryOfOrigin": "missing" }"""), ProductDescriptor()));
 
-        Assert.That(ex.Message, Does.Contain("taxCategory"));
+        Assert.That(ex.Message, Does.Contain("countryOfOrigin"));
         Assert.That(ex.Message, Does.Contain("missing"));
     }
 
     [Test]
     public void Null_bound_fields_are_skipped()
     {
-        var product = _factory.Create(Record("P-1", """{ "sku": "P-1", "taxCategory": null }"""), ProductDescriptor());
+        var product = _factory.Create(Record("P-1", """{ "sku": "P-1", "countryOfOrigin": null }"""), ProductDescriptor());
 
-        Assert.That(product.TaxCategoryId, Is.EqualTo(0));
+        Assert.That(product.CountryOfOriginId, Is.Null);
     }
 
     [Test]
@@ -251,13 +251,13 @@ public class SeedEntityFactoryTests
     [Test]
     public void Key_field_can_be_a_bound_reference()
     {
-        _resolver.Add("standard", new TaxCategory { Id = 9 });
-        var descriptor = new SeedEntityDescriptor<Product>("taxCategory")
-            .Reference<TaxCategory>("taxCategory", (p, t) => p.TaxCategoryId = t.Id);
+        _resolver.Add("standard", new Country { Id = 9 });
+        var descriptor = new SeedEntityDescriptor<Product>("countryOfOrigin")
+            .Reference<Country>("countryOfOrigin", (p, t) => p.CountryOfOriginId = t.Id);
 
-        var product = _factory.Create(Record("standard", """{ "taxCategory": "standard", "sku": "P-1" }"""), descriptor);
+        var product = _factory.Create(Record("standard", """{ "countryOfOrigin": "standard", "sku": "P-1" }"""), descriptor);
 
-        Assert.That(product.TaxCategoryId, Is.EqualTo(9));
+        Assert.That(product.CountryOfOriginId, Is.EqualTo(9));
     }
 
     [Test]

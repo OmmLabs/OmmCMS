@@ -353,7 +353,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.SampleDownloadId, null, ImportUtility.ZeroToNull);    // TODO: global scope
                 row.SetProperty(context.Result, (x) => x.HasUserAgreement);
                 row.SetProperty(context.Result, (x) => x.UserAgreementText);
-                row.SetProperty(context.Result, (x) => x.TaxCategoryId, 1);    // TODO: global scope
                 row.SetProperty(context.Result, (x) => x.Price);
                 row.SetProperty(context.Result, (x) => x.ProductCost);
                 // LowestAttributeCombinationPrice: see ProcessAttributeCombinationsAsync.

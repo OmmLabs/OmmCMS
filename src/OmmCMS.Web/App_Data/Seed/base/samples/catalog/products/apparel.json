@@ -6,7 +6,6 @@
     "fullDescription": "@file",
     "sku": "FS-1001",
     "tags": [ "bestseller", "outdoor" ],
-    "taxCategory": "apparel",
     "price": 189.00,
     "deliveryTime": "available-and-ready-to-ship",
 
@@ -90,7 +89,6 @@
     "fullDescription": "@file",
     "sku": "FS-1002",
     "tags": [ "cosy" ],
-    "taxCategory": "apparel",
     "price": 89.00,
     "deliveryTime": "available-and-ready-to-ship",
 
@@ -156,7 +154,6 @@
     "manufacturerPartNumber": "NL-URBAN-01",
     "durabilityGuaranteeDurationYears": 3,
     "tags": [ "limited-edition" ],
-    "taxCategory": "apparel",
     "price": 89.00,
     "deliveryTime": "2-5-working-days",
 
@@ -227,7 +224,6 @@
     "fullDescription": "@file",
     "sku": "FS-1004",
     "tags": [ "cosy", "gift" ],
-    "taxCategory": "apparel",
     "price": 24.90,
     "createdOnUtc": "@now-5d",
     "deliveryTime": "available-and-ready-to-ship",
@@ -248,7 +244,6 @@
     "shortDescription": "Long, soft scarf made of wool, at a special price for a limited time.",
     "fullDescription": "@file",
     "sku": "FS-1005",
-    "taxCategory": "apparel",
     "price": 39.90,
     "deliveryTime": "available-and-ready-to-ship",
 
@@ -270,7 +265,6 @@
     "fullDescription": "@file",
     "sku": "FS-1006",
     "tags": [ "sustainable", "gift" ],
-    "taxCategory": "apparel",
     "price": 19.90,
     "deliveryTime": "2-5-working-days",
 
