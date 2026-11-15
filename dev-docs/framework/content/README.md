@@ -1,6 +1,0 @@
----
-icon: window-restore
----
-
-# Content
-

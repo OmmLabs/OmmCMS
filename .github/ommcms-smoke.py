@@ -281,11 +281,11 @@ def verify_trimmed_distribution():
     repo = Path(__file__).resolve().parent.parent
     module_sources = repo / "src" / "Smartstore.Modules"
     modules = root / "Modules"
-    solution = (repo / "Smartstore.sln").read_text(encoding="utf-8-sig")
+    solution = (repo / "OmmCMS.sln").read_text(encoding="utf-8-sig")
     for name in removed:
         assert not (module_sources / name).exists(), f"Retired source remains: {name}"
         assert not (modules / name).exists(), f"Retired module is in publish output: {name}"
-        assert f'"{name}"' not in solution, f"Retired project is in solution: {name}"
+        assert f'{name}.csproj' not in solution, f"Retired project is in solution: {name}"
     assert not (repo / "tools" / "Smartstore.WebApi.Client").exists(), "Obsolete API client remains"
     for name in retained:
         assert (modules / name / "module.json").is_file(), f"Retained module is absent: {name}"

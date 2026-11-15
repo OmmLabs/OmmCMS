@@ -16,8 +16,8 @@ An open-source ASP.NET Core content management system developed by OmmLabs.
 Install the .NET 10 SDK, clone this repository and run:
 
 ```bash
-dotnet restore Smartstore.sln
-dotnet build Smartstore.sln -c Release --no-restore
+dotnet restore OmmCMS.sln
+dotnet build OmmCMS.sln -c Release --no-restore
 cd src/Smartstore.Web
 dotnet run -c Release --no-build --no-launch-profile --urls http://localhost:5080
 ```
@@ -26,9 +26,13 @@ Open http://localhost:5080/install. Use a fresh database (SQLite is recommended 
 
 ## Development
 
-Work takes place on `main`. Run `dotnet test Smartstore.sln -c Release` before changing the baseline.
+Work takes place on `main`. Run `dotnet test OmmCMS.sln -c Release` before changing the baseline.
 
-CI publishes a disposable application and checks a fresh SQLite installation, editorial workflows and retired commerce endpoints. See the [roadmap](docs/ROADMAP.md) for completed work and next milestones. Internal project names are retained until dependency cleanup is complete.
+CI publishes a disposable application and checks a fresh SQLite installation, editorial workflows and retired commerce endpoints.
+
+Completed: CMS shell, administration, installation, content workflows and phases 1–13 of commerce extraction. Next: remove the remaining coupled commerce services, then reduce the database schema and complete internal namespace and assembly renaming.
+
+Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License
 

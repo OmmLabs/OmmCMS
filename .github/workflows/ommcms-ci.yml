@@ -22,9 +22,9 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
-      - run: dotnet restore Smartstore.sln
-      - run: dotnet build Smartstore.sln -c Release --no-restore
-      - run: dotnet test Smartstore.sln -c Release --no-build --no-restore --logger trx
+      - run: dotnet restore OmmCMS.sln
+      - run: dotnet build OmmCMS.sln -c Release --no-restore
+      - run: dotnet test OmmCMS.sln -c Release --no-build --no-restore --logger trx
       - run: dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release --no-build --no-restore -o "$RUNNER_TEMP/ommcms-smoke"
       - name: Fresh CMS installation and regression checks
         run: python3 .github/ommcms-smoke.py "$RUNNER_TEMP/ommcms-smoke" --editorial --trimmed --controllers-trimmed --public-controllers-trimmed --account-trimmed --admin-commerce-trimmed --residual-commerce-trimmed --presentation-trimmed --core-commerce-trimmed

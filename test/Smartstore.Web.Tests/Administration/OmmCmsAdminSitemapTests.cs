@@ -11,7 +11,7 @@ public class OmmCmsAdminSitemapTests
     {
         // Find the solution root regardless of the clone folder name (OmmCMS, Smartstore, etc.).
         var root = new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
-        while (root != null && !File.Exists(Path.Combine(root.FullName, "Smartstore.sln")))
+        while (root != null && !File.Exists(Path.Combine(root.FullName, "OmmCMS.sln")))
         {
             root = root.Parent;
         }
@@ -58,7 +58,7 @@ public class OmmCmsAdminSitemapTests
         Assert.That(xml.DocumentElement, Is.Not.Null);
 
         var root = new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
-        while (root != null && !File.Exists(Path.Combine(root.FullName, "Smartstore.sln")))
+        while (root != null && !File.Exists(Path.Combine(root.FullName, "OmmCMS.sln")))
         {
             root = root.Parent;
         }
