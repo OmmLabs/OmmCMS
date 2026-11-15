@@ -22,7 +22,7 @@ internal class ProductReviewHook : AsyncDbSaveHook<ProductReview>
     protected override Task<HookResult> OnDeletedAsync(ProductReview entity, IHookedEntity entry, CancellationToken cancelToken)
         => Task.FromResult(HookResult.Ok);
 
-    public override async Task OnBeforeSaveCompletedAsync(IEnumerable<IHookedEntity> entries, CancellationToken cancelToken)
+    public override Task OnBeforeSaveCompletedAsync(IEnumerable<IHookedEntity> entries, CancellationToken cancelToken)
     {
         var deletedReviews = entries
             .Where(x => x.State == EntityState.Deleted)
@@ -32,19 +32,8 @@ internal class ProductReviewHook : AsyncDbSaveHook<ProductReview>
         if (deletedReviews.Length > 0)
         {
             _productIdsToUpdate = deletedReviews.ToDistinctArray(x => x.ProductId);
-
-            // Delete review helpfulness entries because otherwise product reviews cannot be deleted.
-            // INFO: Batch delete is not supported here because of TPT (Table-per-Type) inheritance.
-            var deletedReviewIds = deletedReviews.ToDistinctArray(x => x.Id);
-            var toDelete = await _db.ProductReviewHelpfulness
-                .Where(x => deletedReviewIds.Contains(x.ProductReviewId))
-                .ToListAsync(cancelToken);
-            if (toDelete.Count > 0)
-            {
-                _db.ProductReviewHelpfulness.RemoveRange(toDelete);
-                await _db.SaveChangesAsync(cancelToken);
-            }
         }
+        return Task.CompletedTask;
     }
 
     public override async Task OnAfterSaveCompletedAsync(IEnumerable<IHookedEntity> entries, CancellationToken cancelToken)

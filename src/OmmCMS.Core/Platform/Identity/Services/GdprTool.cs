@@ -99,14 +99,6 @@ public partial class GdprTool : IGdprTool
                 model["ProductReviews"] = await productReviews.SelectAwait(x => _messageModelProvider.CreateModelPartAsync(x, true)).ToListAsync();
             }
 
-            // Product review helpfulness
-            var helpfulness = customer.CustomerContent.OfType<ProductReviewHelpfulness>();
-            if (helpfulness.Any())
-            {
-                ignoreMemberNames = ["CustomerId", "UpdatedOn"];
-                model["ProductReviewHelpfulness"] = await helpfulness.SelectAwait(x => _messageModelProvider.CreateModelPartAsync(x, true, ignoreMemberNames)).ToListAsync();
-            }
-
             // INFO: we're not going to export: 
             // - Activity log
             // It doesn't feel right and GDPR rules are not very clear about this. Let's wait and see :-)

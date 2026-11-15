@@ -590,22 +590,6 @@ public partial class ProductService : IProductService
             .Where(x => x.BundleItemId != null && bundleItemIdsQuery.Contains(x.BundleItemId.Value))
             .ExecuteDeleteAsync(cancelToken);
 
-        // Product review helpfulness.
-        // Produces "The operation 'ExecuteDelete' is being applied on entity type 'ProductReviewHelpfulness', which is using the TPT mapping strategy.
-        // 'ExecuteDelete'/'ExecuteUpdate' operations on hierarchies mapped as TPT is not supported."
-        //await _db.ProductReviewHelpfulness
-        //    .Where(x => productIds.Contains(x.ProductReview.ProductId))
-        //    .ExecuteDeleteAsync(cancelToken);
-
-        var reviewHelpfulnessQuery = _db.ProductReviewHelpfulness.Where(x => productIds.Contains(x.ProductReview.ProductId));
-        var reviewHelpfulnessPager = new FastPager<ProductReviewHelpfulness>(reviewHelpfulnessQuery);
-
-        while ((await reviewHelpfulnessPager.ReadNextPageAsync<ProductReviewHelpfulness>(cancelToken)).Out(out var reviewHelpfulness))
-        {
-            _db.ProductReviewHelpfulness.RemoveRange(reviewHelpfulness);
-            await _db.SaveChangesAsync(cancelToken);
-        }
-
         await _db.Downloads
             .Where(x => productIds.Contains(x.EntityId) && x.EntityName == entityName)
             .ExecuteDeleteAsync(cancelToken);

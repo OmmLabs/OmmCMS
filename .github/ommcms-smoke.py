@@ -600,6 +600,8 @@ try:
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('relatedproduct', 'relatedproducts', 'crosssellproduct', 'crosssellproducts')") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Customer') WHERE name='AffiliateId'") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name='AllowBackInStockSubscriptions'") == [0]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name)='productreviewhelpfulness'") == [0]
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('ProductReview') WHERE name IN ('HelpfulYesTotal', 'HelpfulNoTotal')") == [0]
         topics = set(rows("SELECT SystemName FROM Topic"))
         assert {"HomePageText", "AboutUs", "ContactUs"} <= topics
         assert not topics.intersection({"PaymentInfo", "ShippingInfo", "CheckoutAsGuestOrRegister"})

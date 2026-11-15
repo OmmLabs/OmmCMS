@@ -256,9 +256,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             case IEnumerable<GenericAttribute> x:
                 modelPart = await CreateModelPartAsync(x, messageContext);
                 break;
-            case ProductReviewHelpfulness x:
-                modelPart = await CreateModelPartAsync(x, messageContext);
-                break;
             default:
                 var partType = part.GetType();
                 modelPart = part;
@@ -741,25 +738,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             { "Text", HtmlUtility.StripTags(part.ReviewText).NullEmpty() },
             { "Rating", part.Rating }
         };
-
-        await _helper.PublishModelPartCreatedEventAsync(part, m);
-
-        return m;
-    }
-
-    protected virtual async Task<object> CreateModelPartAsync(ProductReviewHelpfulness part, MessageContext messageContext)
-    {
-        Guard.NotNull(messageContext);
-        Guard.NotNull(part);
-
-        var m = new Dictionary<string, object>
-        {
-            { "ProductReviewId", part.ProductReviewId },
-            { "ReviewTitle", part.ProductReview.Title },
-            { "WasHelpful", part.WasHelpful }
-        };
-
-        _helper.ApplyCustomerContentPart(m, part, messageContext);
 
         await _helper.PublishModelPartCreatedEventAsync(part, m);
 

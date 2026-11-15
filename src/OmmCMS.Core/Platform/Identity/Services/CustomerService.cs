@@ -466,19 +466,6 @@ public partial class CustomerService : ICustomerService
 
     #region Reward points
 
-    public virtual void ApplyRewardPointsForProductReview(Customer customer, Product product, bool add)
-    {
-        Guard.NotNull(customer);
-
-        if (_rewardPointsSettings.Enabled && _rewardPointsSettings.PointsForProductReview > 0)
-        {
-            var productName = product?.GetLocalized(x => x.Name) ?? StringExtensions.NotAvailable;
-            var message = T(add ? "RewardPoints.Message.EarnedForProductReview" : "RewardPoints.Message.ReducedForProductReview", productName);
-
-            customer.AddRewardPointsHistoryEntry(_rewardPointsSettings.PointsForProductReview * (add ? 1 : -1), message);
-        }
-    }
-
     public virtual void ApplyRewardPointsForNewsletterSubscription(Customer customer)
     {
         Guard.NotNull(customer);

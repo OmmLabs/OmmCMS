@@ -102,14 +102,6 @@ public partial interface ICustomerService
     Task<CustomerRole?> GetRoleBySystemNameAsync(string? systemName, bool tracked = true);
 
     /// <summary>
-    /// Applies reward points for a product review. The caller is responsible for database commit.
-    /// </summary>
-    /// <param name="customer">The customer for whom to apply or remove reward points. Cannot be <c>null</c>.</param>
-    /// <param name="product">The product that was reviewed.</param>
-    /// <param name="add"><c>true</c> to add reward points for a product review; <c>false</c> to remove them.</param>
-    void ApplyRewardPointsForProductReview(Customer customer, Product? product, bool add);
-
-    /// <summary>
     /// Applies reward points for subscribing to the newsletter. The caller is responsible for database commit.
     /// </summary>
     /// <param name="customer">The customer for whom to apply reward points. Cannot be <c>null</c>.</param>

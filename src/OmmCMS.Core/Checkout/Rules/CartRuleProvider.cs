@@ -338,13 +338,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
             },
             new()
             {
-                Name = "ProductReviewCount",
-                DisplayName = T("Admin.Rules.FilterDescriptor.ProductReviewCount"),
-                RuleType = RuleType.Int,
-                ProcessorType = typeof(ProductReviewCountRule)
-            },
-            new()
-            {
                 Name = "RewardPointsBalance",
                 DisplayName = T("Admin.Rules.FilterDescriptor.RewardPointsBalance"),
                 RuleType = RuleType.Int,

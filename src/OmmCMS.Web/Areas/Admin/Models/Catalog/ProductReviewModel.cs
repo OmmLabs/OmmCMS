@@ -69,12 +69,6 @@ public class ProductReviewModel : EntityModelBase
     [LocalizedDisplay("Common.UpdatedOn")]
     public DateTime UpdatedOn { get; set; }
 
-    [LocalizedDisplay("*HelpfulYesTotal")]
-    public int HelpfulYesTotal { get; set; }
-
-    [LocalizedDisplay("*HelpfulNoTotal")]
-    public int HelpfulNoTotal { get; set; }
-
     [LocalizedDisplay("*IsVerfifiedPurchase")]
     public bool? IsVerifiedPurchase { get; set; }
 

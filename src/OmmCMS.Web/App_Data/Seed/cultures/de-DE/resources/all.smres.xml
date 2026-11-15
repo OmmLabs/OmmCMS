@@ -1980,18 +1980,6 @@
 	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.Customer.Hint">
 		<Value>Kunde, der die Bewertung erstellt hat</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.HelpfulNoTotal">
-		<Value>Nicht hilfreich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.HelpfulNoTotal.Hint">
-		<Value>Die Anzahl der als nicht hilfreich eingestuften Bewertungen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.HelpfulYesTotal">
-		<Value>Hilfreich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.HelpfulYesTotal.Hint">
-		<Value>Die Anzahl der als hilfreich eingestuften Bewertungen.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.IPAddress">
 		<Value>IP-Adresse</Value>
 	</LocaleResource>
@@ -7853,12 +7841,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForNewsletterSubscription.Hint">
 		<Value>Legt fest, wie viele Bonuspunkte registrierte Kunden einmalig für das Abonnieren des Newsletters erhalten.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForProductReview">
-		<Value>Punkte für eine Produkt Rezension</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForProductReview.Hint">
-		<Value>Bonuspunkte, die für das Verfassen einer genehmigten Produkt Rezension gewährt werden.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Amount">
 		<Value>Punkte auf den Bestellwert</Value>
 	</LocaleResource>
@@ -7906,12 +7888,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.ShowPointsForProductPurchase.Hint">
 		<Value>Legt fest, ob die für den Kauf eines Produktes gewährten Bonuspunkte samt dem entsprechenden Betrag auf der Produktdetailseite angezeigt werden sollen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.ShowPointsForProductReview">
-		<Value>Punkte für eine Produkt-Rezension anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.ShowPointsForProductReview.Hint">
-		<Value>Legt fest, ob die für eine Produkt-Rezension gewährten Bonuspunkte samt dem entsprechenden Betrag auf der Produktdetailseite angezeigt werden sollen.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.CommonFacet.Alias">
 		<Value>Alias</Value>
@@ -13332,9 +13308,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductOnWishlist">
 		<Value>Produkt auf der Wunschliste</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductReviewCount">
-		<Value>Anzahl der Produkt Rezensionen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductWithDeliveryTimeInCart">
 		<Value>Produkt mit Lieferzeit im Warenkorb</Value>
@@ -19288,18 +19261,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Reviews.From">
 		<Value>Von</Value>
 	</LocaleResource>
-	<LocaleResource Name="Reviews.Helpfulness.OnlyRegistered">
-		<Value>Nur registrierte Benutzer können die Bewertung beurteilen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Helpfulness.SuccessfullyVoted">
-		<Value>Danke für Ihre Beurteilung.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Helpfulness.WasHelpful?">
-		<Value>War die Bewertung hilfreich?</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Helpfulness.YourOwnReview">
-		<Value>Sie können nicht Ihre eigene Bewertung beurteilen.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Reviews.NotFound">
 		<Value>Die Produktbewertung {0} wurde nicht gefunden.</Value>
 	</LocaleResource>
@@ -19366,26 +19327,17 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="RewardPoints.Message.EarnedForOrder">
 		<Value>Erhaltene Bonuspunkte für Auftrag #{0}.</Value>
 	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Message.EarnedForProductReview">
-		<Value>Erhaltene Bonuspunkte für eine Produkt Rezension zu "{0}"</Value>
-	</LocaleResource>
 	<LocaleResource Name="RewardPoints.Message.RedeemedForOrder">
 		<Value>Eingelöst für Auftrag #{0}.</Value>
 	</LocaleResource>
 	<LocaleResource Name="RewardPoints.Message.ReducedForOrder">
 		<Value>Abgezogene Bonuspunkte für Auftrag #{0}.</Value>
 	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Message.ReducedForProductReview">
-		<Value>Abgezogene Bonuspunkte für eine Produkt Rezension zu "{0}"</Value>
-	</LocaleResource>
 	<LocaleResource Name="RewardPoints.Message.RegisteredAsCustomer">
 		<Value>Als Kunde registriert</Value>
 	</LocaleResource>
 	<LocaleResource Name="RewardPoints.Message.RewardPointsForProductPurchase">
 		<Value>Sie erhalten &lt;strong&gt;{0}&lt;/strong&gt; Bonuspunkte im Wert von &lt;strong&gt;{1}&lt;/strong&gt; für diesen Einkauf.</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Message.RewardPointsForProductReview">
-		<Value>Sie erhalten &lt;strong&gt;{0}&lt;/strong&gt; Bonuspunkte im Wert von &lt;strong&gt;{1}&lt;/strong&gt; für Ihre Bewertung.</Value>
 	</LocaleResource>
 	<LocaleResource Name="RewardPoints.NoHistory">
 		<Value>Keine Aktionen vorhanden.</Value>

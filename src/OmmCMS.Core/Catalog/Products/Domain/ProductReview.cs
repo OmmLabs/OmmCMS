@@ -56,27 +56,7 @@ public partial class ProductReview : CustomerContent
     public int Rating { get; set; }
 
     /// <summary>
-    /// Gets or sets the review helpful votes total.
-    /// </summary>
-    public int HelpfulYesTotal { get; set; }
-
-    /// <summary>
-    /// Gets or sets the review not helpful votes total.
-    /// </summary>
-    public int HelpfulNoTotal { get; set; }
-
-    /// <summary>
     /// Gets or sets a flag that defines whether the reviewed product was purchased by the customer.
     /// </summary>
     public bool? IsVerifiedPurchase { get; set; }
-
-    private ICollection<ProductReviewHelpfulness> _productReviewHelpfulnessEntries;
-    /// <summary>
-    /// Gets or sets the entries of product review helpfulness.
-    /// </summary>
-    public ICollection<ProductReviewHelpfulness> ProductReviewHelpfulnessEntries
-    {
-        get => _productReviewHelpfulnessEntries ?? LazyLoader.Load(this, ref _productReviewHelpfulnessEntries) ?? (_productReviewHelpfulnessEntries ??= new HashSet<ProductReviewHelpfulness>());
-        protected set => _productReviewHelpfulnessEntries = value;
-    }
 }

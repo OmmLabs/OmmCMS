@@ -2031,18 +2031,6 @@
 	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.Customer.Hint">
 		<Value>The customer who created the review.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.HelpfulNoTotal">
-		<Value>Not helpful</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.HelpfulNoTotal.Hint">
-		<Value>The number of reviews rated as not helpful.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.HelpfulYesTotal">
-		<Value>Helpful</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.HelpfulYesTotal.Hint">
-		<Value>The number of reviews rated as helpful.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.ProductReviews.Fields.IPAddress">
 		<Value>IP Address</Value>
 	</LocaleResource>
@@ -8012,12 +8000,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForNewsletterSubscription.Hint">
 		<Value>Specifies how many reward points registered customers will receive as a one-time bonus for subscribing to the newsletter.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForProductReview">
-		<Value>Points for a product review</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForProductReview.Hint">
-		<Value>Specify number of points awarded for adding an approved product review.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Amount">
 		<Value>Points for purchases</Value>
 	</LocaleResource>
@@ -8065,12 +8047,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.ShowPointsForProductPurchase.Hint">
 		<Value>Specifies whether the reward points awarded for purchasing a product, including the corresponding amount, should be displayed on the product detail page.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.ShowPointsForProductReview">
-		<Value>Show points for a product review</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.ShowPointsForProductReview.Hint">
-		<Value>Specifies whether the reward points awarded for a product review, including the corresponding amount, should be displayed on the product detail page.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.CommonFacet.Alias">
 		<Value>Alias</Value>
@@ -13617,9 +13593,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductOnWishlist">
 		<Value>Product on wishlist</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductReviewCount">
-		<Value>Number of product reviews</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductWithDeliveryTimeInCart">
 		<Value>Product with delivery time in cart</Value>
@@ -19628,18 +19601,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Reviews.From">
 		<Value>From</Value>
 	</LocaleResource>
-	<LocaleResource Name="Reviews.Helpfulness.OnlyRegistered">
-		<Value>Only registered customers can set review helpfulness</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Helpfulness.SuccessfullyVoted">
-		<Value>Thank you for your voting.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Helpfulness.WasHelpful?">
-		<Value>Was this review helpful?</Value>
-	</LocaleResource>
-	<LocaleResource Name="Reviews.Helpfulness.YourOwnReview">
-		<Value>You cannot vote for your own review</Value>
-	</LocaleResource>
 	<LocaleResource Name="Reviews.NotFound">
 		<Value>The product review {0} was not found.</Value>
 	</LocaleResource>
@@ -19706,26 +19667,17 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="RewardPoints.Message.EarnedForOrder">
 		<Value>Earned promotion for order #{0}</Value>
 	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Message.EarnedForProductReview">
-		<Value>Earned reward points for a product review at "{0}"</Value>
-	</LocaleResource>
 	<LocaleResource Name="RewardPoints.Message.RedeemedForOrder">
 		<Value>Redeemed for order #{0}</Value>
 	</LocaleResource>
 	<LocaleResource Name="RewardPoints.Message.ReducedForOrder">
 		<Value>Reduced promotion for order #{0}</Value>
 	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Message.ReducedForProductReview">
-		<Value>Reduced reward points for a product review at "{0}"</Value>
-	</LocaleResource>
 	<LocaleResource Name="RewardPoints.Message.RegisteredAsCustomer">
 		<Value>Registered as customer</Value>
 	</LocaleResource>
 	<LocaleResource Name="RewardPoints.Message.RewardPointsForProductPurchase">
 		<Value>You will receive &lt;strong&gt;{0}&lt;/strong&gt; reward points worth &lt;strong&gt;{1}&lt;/strong&gt; for this purchase.</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Message.RewardPointsForProductReview">
-		<Value>You will receive &lt;strong&gt;{0}&lt;/strong&gt; reward points worth &lt;strong&gt;{1}&lt;/strong&gt; for your rating.</Value>
 	</LocaleResource>
 	<LocaleResource Name="RewardPoints.NoHistory">
 		<Value>There is no balance history yet</Value>

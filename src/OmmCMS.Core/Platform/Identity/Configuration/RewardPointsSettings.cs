@@ -26,16 +26,6 @@ public class RewardPointsSettings : ISettings
     public int PointsForRegistration { get; set; }
 
     /// <summary>
-    /// Gets or sets a number of points awarded for a product review.
-    /// </summary>
-    public int PointsForProductReview { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to show reward points (including amount) to receive for a product review on product detail page.
-    /// </summary>
-    public bool ShowPointsForProductReview { get; set; }
-
-    /// <summary>
     /// Gets or sets the number of reward points awarded for subscribing to the newsletter.
     /// </summary>
     public int PointsForNewsletterSubscription { get; set; }
