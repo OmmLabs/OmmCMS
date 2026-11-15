@@ -3,7 +3,6 @@
 public static class KnownActivityLogTypes
 {
     public const string AddNewCategory = "AddNewCategory";
-    public const string AddNewCheckoutAttribute = "AddNewCheckoutAttribute";
     public const string AddNewCustomer = "AddNewCustomer";
     public const string AddNewCustomerRole = "AddNewCustomerRole";
     public const string AddNewDiscount = "AddNewDiscount";
@@ -14,7 +13,6 @@ public static class KnownActivityLogTypes
     public const string AddNewSpecAttribute = "AddNewSpecAttribute";
     public const string AddNewWidget = "AddNewWidget";
     public const string DeleteCategory = "DeleteCategory";
-    public const string DeleteCheckoutAttribute = "DeleteCheckoutAttribute";
     public const string DeleteCustomer = "DeleteCustomer";
     public const string DeleteCustomerRole = "DeleteCustomerRole";
     public const string DeleteDiscount = "DeleteDiscount";
@@ -26,7 +24,6 @@ public static class KnownActivityLogTypes
     public const string DeleteWidget = "DeleteWidget";
     public const string DeleteOrder = "DeleteOrder";
     public const string EditCategory = "EditCategory";
-    public const string EditCheckoutAttribute = "EditCheckoutAttribute";
     public const string EditCustomer = "EditCustomer";
     public const string EditCustomerRole = "EditCustomerRole";
     public const string EditDiscount = "EditDiscount";

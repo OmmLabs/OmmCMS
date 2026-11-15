@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Checkout.Cart;
-using OmmCMS.Core.Checkout.Tax;
+﻿using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
@@ -25,7 +24,6 @@ public class CustomerImporter : EntityImporterBase
     private readonly TaxSettings _taxSettings;
     private readonly PrivacySettings _privacySettings;
     private readonly DateTimeSettings _dateTimeSettings;
-    private readonly ShoppingCartSettings _shoppingCartSettings;
 
     public CustomerImporter(
         ICommonServices services,
@@ -37,8 +35,7 @@ public class CustomerImporter : EntityImporterBase
         CustomerSettings customerSettings,
         TaxSettings taxSettings,
         PrivacySettings privacySettings,
-        DateTimeSettings dateTimeSettings,
-        ShoppingCartSettings shoppingCartSettings)
+        DateTimeSettings dateTimeSettings)
         : base(services, storeMappingService, urlService, seoSettings)
     {
         _mediaImporter = mediaImporter;
@@ -47,7 +44,6 @@ public class CustomerImporter : EntityImporterBase
         _taxSettings = taxSettings;
         _privacySettings = privacySettings;
         _dateTimeSettings = dateTimeSettings;
-        _shoppingCartSettings = shoppingCartSettings;
     }
 
     public static string[] SupportedKeyFields =>
@@ -469,7 +465,7 @@ public class CustomerImporter : EntityImporterBase
 
         var num = await scope.CommitAsync(context.CancelToken);
 
-        if (num > 0 && _shoppingCartSettings.QuickCheckoutEnabled)
+        if (num > 0)
         {
             // Set default billing and shipping address.
             foreach (var row in batch)

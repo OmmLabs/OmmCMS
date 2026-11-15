@@ -61,19 +61,6 @@ public partial class ProductUrlHelper
         var qs = InitialQuery ?? [];
         var languageId = _workContext.WorkingLanguage.Id;
 
-        // Checkout attributes.
-        foreach (var item in query.CheckoutAttributes)
-        {
-            if (item.Date.HasValue)
-            {
-                qs.Add(item.ToString(), string.Join("-", item.Date.Value.Year, item.Date.Value.Month, item.Date.Value.Day));
-            }
-            else
-            {
-                qs.Add(item.ToString(), item.Value);
-            }
-        }
-
         // Variants.
         foreach (var item in query.Variants)
         {

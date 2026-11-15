@@ -75,8 +75,6 @@ public partial class PermissionService : AsyncDbSaveHook<CustomerRole>, IPermiss
         { "maintenance", "Admin.System.Maintenance" },
         { "scheduletask", "Admin.System.ScheduleTasks" },
         { "urlrecord", "Admin.System.SeNames" },
-        { "cart", "ShoppingCart" },
-        { "checkoutattribute", "Admin.Catalog.Attributes.CheckoutAttributes" },
         { "media", "Admin.Plugins.KnownGroup.Media" },
         { "download", "Common.Downloads" },
         { "approve", "Common.Approve" },

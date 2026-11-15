@@ -1,5 +1,4 @@
 ﻿using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Attributes;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Identity;
 
@@ -40,20 +39,6 @@ public interface ITaxCalculator
     Task<Tax> CalculateProductTaxAsync(
         Product product,
         decimal price,
-        bool? inclusive = null,
-        Customer customer = null,
-        Currency currency = null);
-
-    /// <summary>
-    /// Calculates tax for a checkout attribute value.
-    /// </summary>
-    /// <param name="attributeValue">Checkout attribute value.</param>
-    /// <param name="inclusive">A value indicating whether the calculated price should include tax. Obtained from <see cref="IWorkContext.TaxDisplayType"/> if <c>null</c>.</param>
-    /// <param name="customer">Customer. Obtained from <see cref="IWorkContext.CurrentCustomer"/> if <c>null</c>.</param>
-    /// <param name="currency">Optional currency instance for cash rounding.</param>
-    /// <returns>A <see cref="Tax"/> structure containing the calculation result.</returns>
-    Task<Tax> CalculateCheckoutAttributeTaxAsync(
-        CheckoutAttributeValue attributeValue,
         bool? inclusive = null,
         Customer customer = null,
         Currency currency = null);

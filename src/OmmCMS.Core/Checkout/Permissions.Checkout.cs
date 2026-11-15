@@ -32,20 +32,4 @@ public static partial class Permissions
         }
     }
 
-    public static class Cart
-    {
-        public const string Self = "cart";
-        public const string Read = "cart.read";
-        public const string AccessShoppingCart = "cart.accessshoppingcart";
-        public const string AccessWishlist = "cart.accesswishlist";
-
-        public static class CheckoutAttribute
-        {
-            public const string Self = "cart.checkoutattribute";
-            public const string Read = "cart.checkoutattribute.read";
-            public const string Update = "cart.checkoutattribute.update";
-            public const string Create = "cart.checkoutattribute.create";
-            public const string Delete = "cart.checkoutattribute.delete";
-        }
-    }
 }

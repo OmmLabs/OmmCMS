@@ -6,11 +6,6 @@
     "enabled": true
   },
   {
-    "systemKeyword": "AddNewCheckoutAttribute",
-    "name": "Add a new checkout attribute",
-    "enabled": true
-  },
-  {
     "systemKeyword": "AddNewCustomer",
     "name": "Add a new customer",
     "enabled": true
@@ -61,11 +56,6 @@
     "enabled": true
   },
   {
-    "systemKeyword": "DeleteCheckoutAttribute",
-    "name": "Delete a checkout attribute",
-    "enabled": true
-  },
-  {
     "systemKeyword": "DeleteCustomer",
     "name": "Delete a customer",
     "enabled": true
@@ -113,11 +103,6 @@
   {
     "systemKeyword": "EditCategory",
     "name": "Edit category",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "EditCheckoutAttribute",
-    "name": "Edit a checkout attribute",
     "enabled": true
   },
   {

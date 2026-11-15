@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Catalog.Discounts;
-using OmmCMS.Core.Checkout.Attributes;
 using OmmCMS.Core.Identity;
 using OmmCMS.Data.Caching;
 
@@ -105,16 +104,6 @@ public partial class RuleSetEntity : EntityWithAttributes, IAuditable
     {
         get => _categories ?? LazyLoader.Load(this, ref _categories) ?? (_categories ??= new HashSet<Category>());
         protected set => _categories = value;
-    }
-
-    private ICollection<CheckoutAttribute> _checkoutAttributes;
-    /// <summary>
-    /// Gets or sets assigned checkout attributes.
-    /// </summary>
-    public ICollection<CheckoutAttribute> CheckoutAttributes
-    {
-        get => _checkoutAttributes ?? LazyLoader.Load(this, ref _checkoutAttributes) ?? (_checkoutAttributes ??= new HashSet<CheckoutAttribute>());
-        protected set => _checkoutAttributes = value;
     }
 
     private ICollection<CustomerRole> _customerRoles;

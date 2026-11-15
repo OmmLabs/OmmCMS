@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Sockets;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Data;

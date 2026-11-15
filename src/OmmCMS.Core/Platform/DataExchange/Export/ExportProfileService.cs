@@ -2,7 +2,6 @@
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using OmmCMS.Core.Catalog.Pricing;
-using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization;

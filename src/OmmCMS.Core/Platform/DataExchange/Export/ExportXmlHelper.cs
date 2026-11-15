@@ -7,7 +7,6 @@ using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Identity;

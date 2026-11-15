@@ -1,6 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Seo;
 

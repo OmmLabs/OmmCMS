@@ -1,6 +1,5 @@
 ﻿using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Cart;
 
 namespace OmmCMS.Core.Catalog.Pricing;
 

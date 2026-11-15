@@ -138,27 +138,6 @@ public enum UserRegistrationType
 }
 
 /// <summary>
-/// Specifies which checkout data to reset via <see cref="CustomerExtensions.ResetCheckoutData(Customer, int, CheckoutDataResetFlags)"/>.
-/// </summary>
-[Flags]
-public enum CheckoutDataResetFlags
-{
-    None = 0,
-    CouponCodes = 1 << 0,
-    CheckoutAttributes = 1 << 1,
-    RewardPoints = 1 << 2,
-    CreditBalance = 1 << 5,
-    CheckoutOrderData = 1 << 6,
-
-    /// <summary>
-    /// No checkout data is reset by default.
-    /// </summary>
-    Default = None,
-
-    All = CouponCodes | CheckoutAttributes | RewardPoints | CreditBalance | CheckoutOrderData
-}
-
-/// <summary>
 /// Represents the reason for creating a wallet history entry.
 /// </summary>
 public enum WalletPostingReason

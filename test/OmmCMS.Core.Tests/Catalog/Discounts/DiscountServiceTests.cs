@@ -5,7 +5,6 @@ using Moq;
 using NUnit.Framework;
 using OmmCMS.Caching;
 using OmmCMS.Core.Catalog.Discounts;
-using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Checkout.Rules;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Identity;

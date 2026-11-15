@@ -15,7 +15,6 @@ public static partial class SystemCustomerAttributeNames
 
     // Other attributes
     public static string DiscountCouponCode => "DiscountCouponCode";
-    public static string CheckoutAttributes => "CheckoutAttributes";
     public static string AvatarPictureId => "AvatarPictureId";
     public static string AvatarColor => "AvatarColor";
     public static string PasswordRecoveryToken => "PasswordRecoveryToken";
@@ -32,9 +31,6 @@ public static partial class SystemCustomerAttributeNames
     public static string DefaultBillingAddressId => "DefaultBillingAddressId";
     public static string DefaultShippingAddressId => "DefaultShippingAddressId";
 
-    public static string UseRewardPointsDuringCheckout => "UseRewardPointsDuringCheckout";
-    public static string UseCreditBalanceDuringCheckout => "UseCreditBalanceDuringCheckout";
-    public static string CheckoutOrderData => "CheckoutOrderData";
 
     // Depends on store
     public static string CurrencyId => "CurrencyId";

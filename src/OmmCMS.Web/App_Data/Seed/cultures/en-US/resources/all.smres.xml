@@ -453,9 +453,6 @@
 	<LocaleResource Name="ActivityLog.AddNewCategory">
 		<Value>Added a new category ('{0}')</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.AddNewCheckoutAttribute">
-		<Value>Added a new checkout attribute ('{0}')</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.AddNewCustomer">
 		<Value>Added a new customer (ID = {0})</Value>
 	</LocaleResource>
@@ -485,9 +482,6 @@
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteCategory">
 		<Value>Deleted a category ('{0}')</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.DeleteCheckoutAttribute">
-		<Value>Deleted a checkout attribute ('{0}')</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteCustomer">
 		<Value>Deleted a customer (ID = {0})</Value>
@@ -524,9 +518,6 @@
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.EditCategory">
 		<Value>Edited a category ('{0}')</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.EditCheckoutAttribute">
-		<Value>Edited a checkout attribute ('{0}')</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.EditCustomer">
 		<Value>Edited a customer (ID = {0})</Value>
@@ -1217,126 +1208,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Attributes.AttributeControlType.Hint">
 		<Value>Choose how to display your attribute values.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes">
-		<Value>Checkout Attributes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Added">
-		<Value>The new attribute has been added successfully.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.AddNew">
-		<Value>Add a new checkout attribute</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Deleted">
-		<Value>The attribute has been deleted successfully.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.EditAttributeDetails">
-		<Value>Edit checkout attribute details</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields">
-		<Value>Control type</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.AttributeControlType">
-		<Value>Control type</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.AttributeControlType.Hint">
-		<Value>Choose how to display your attribute values.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.DisplayOrder.Hint">
-		<Value>The checkout attribute display order. 1 represents the first item in the list.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.IsRequired">
-		<Value>Required</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.IsRequired.Hint">
-		<Value>When an attribute is required, the customer must choose an appropriate attribute value before they can continue.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.IsTaxExempt">
-		<Value>Tax exempt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.IsTaxExempt.Hint">
-		<Value>Determines whether this option is tax exempt (tax will not be applied to this option at checkout).</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.Name">
-		<Value>Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.Name.Hint">
-		<Value>The name of the checkout attribute.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.ShippableProductRequired">
-		<Value>Shippable product required</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.ShippableProductRequired.Hint">
-		<Value>An option indicating whether shippable products are required in order to display this attribute.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.TaxCategory">
-		<Value>Tax category</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.TaxCategory.Hint">
-		<Value>The tax classification for this option. You can manage tax classifications from Configuration : Tax : Tax Classes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.TextPrompt">
-		<Value>Text prompt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.TextPrompt.Hint">
-		<Value>Specifies the prompt text.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Info">
-		<Value>Attribute info</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Updated">
-		<Value>The attribute has been updated successfully.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values">
-		<Value>Options</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.AddNew">
-		<Value>Add a new checkout value</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.EditValueDetails">
-		<Value>Edit checkout value details</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields">
-		<Value>Display order</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.Color">
-		<Value>RGB color</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.Color.Hint">
-		<Value>Specifies a color for the color squares control.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.DisplayOrder.Hint">
-		<Value>The display order of the attribute value. 1 represents the first item in attribute value list.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.IsPreSelected">
-		<Value>Pre-selected</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.IsPreSelected.Hint">
-		<Value>Determines whether this attribute value is pre selected for the customer.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.MediaFile">
-		<Value>Picture</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.MediaFile.Hint">
-		<Value>Specifies an image to be displayed as the selection element for the attribute.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.Name">
-		<Value>Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.Name.Hint">
-		<Value>The name of the checkout value.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.PriceAdjustment">
-		<Value>Price adjustment</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.PriceAdjustment.Hint">
-		<Value>The price adjustment applied when choosing this attribute value e.g. '10' to add 10 dollars.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.WeightAdjustment">
-		<Value>Weight adjustment</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.WeightAdjustment.Hint">
-		<Value>The weight adjustment applied when choosing this attribute value</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Attributes.OptionsSets">
 		<Value>Option sets</Value>
@@ -14434,9 +14305,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Common.Entity.Category">
 		<Value>Category</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.CheckoutAttributeValue">
-		<Value>Checkout attribute option</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Entity.Customer">
 		<Value>Customer</Value>

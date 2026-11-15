@@ -383,47 +383,4 @@ public static class CustomerExtensions
         return null;
     }
 
-    /// <summary>
-    /// Resets data required for checkout. The caller is responsible for database commit.
-    /// </summary>
-    /// <param name="storeId">Store identifier</param>
-    /// <param name="flags">Specifies which checkout data to reset. Defaults to <see cref="CheckoutDataResetFlags.Default"/>.</param>
-    public static void ResetCheckoutData(this Customer customer,
-        int storeId,
-        CheckoutDataResetFlags flags = CheckoutDataResetFlags.Default)
-    {
-        Guard.NotNull(customer);
-
-        if (customer.IsTransientRecord())
-        {
-            return;
-        }
-
-        var ga = customer.GenericAttributes;
-
-        if (flags.HasFlag(CheckoutDataResetFlags.CouponCodes))
-        {
-            ga.DiscountCouponCode = null;
-        }
-
-        if (flags.HasFlag(CheckoutDataResetFlags.CheckoutAttributes))
-        {
-            ga.RawCheckoutAttributes = null;
-        }
-
-        if (flags.HasFlag(CheckoutDataResetFlags.RewardPoints))
-        {
-            ga.Set(SystemCustomerAttributeNames.UseRewardPointsDuringCheckout, false, storeId);
-        }
-
-        if (flags.HasFlag(CheckoutDataResetFlags.CreditBalance))
-        {
-            ga.Set(SystemCustomerAttributeNames.UseCreditBalanceDuringCheckout, decimal.Zero, storeId);
-        }
-
-        if (flags.HasFlag(CheckoutDataResetFlags.CheckoutOrderData))
-        {
-            ga.Set<string?>(SystemCustomerAttributeNames.CheckoutOrderData, null, storeId);
-        }
-    }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Text.Json.Serialization;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Cart;
 
 namespace OmmCMS.Core.Catalog.Attributes;
 

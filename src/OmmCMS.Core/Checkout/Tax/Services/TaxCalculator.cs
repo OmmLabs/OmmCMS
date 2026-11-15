@@ -1,5 +1,4 @@
 ﻿using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Attributes;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Data;
@@ -39,34 +38,6 @@ public class TaxCalculator : ITaxCalculator
         Guard.NotNull(product);
 
         return CalculateTaxAsync(product, price, _taxSettings.PricesIncludeTax, null, inclusive, customer, currency);
-    }
-
-    public virtual async Task<Tax> CalculateCheckoutAttributeTaxAsync(
-        CheckoutAttributeValue attributeValue,
-        bool? inclusive = null,
-        Customer customer = null,
-        Currency currency = null)
-    {
-        Guard.NotNull(attributeValue);
-
-        await _db.LoadReferenceAsync(attributeValue, x => x.CheckoutAttribute);
-
-        var attribute = attributeValue.CheckoutAttribute;
-        if (attribute.IsTaxExempt)
-        {
-            currency ??= _workContext.WorkingCurrency;
-            inclusive ??= _workContext.TaxDisplayType == TaxDisplayType.IncludingTax;
-
-            return CreateTax(
-                TaxRate.Zero,
-                0m,
-                attributeValue.PriceAdjustment,
-                _taxSettings.PricesIncludeTax,
-                inclusive.Value,
-                currency);
-        }
-
-        return await CalculateTaxAsync(null, attributeValue.PriceAdjustment, _taxSettings.PricesIncludeTax, attribute.TaxCategoryId, inclusive, customer, currency);
     }
 
     protected virtual async Task<Tax> CalculateTaxAsync(

@@ -4,7 +4,6 @@ using OmmCMS.Admin.Models.Store;
 using OmmCMS.Admin.Models.Stores;
 using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Search;
-using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Localization;

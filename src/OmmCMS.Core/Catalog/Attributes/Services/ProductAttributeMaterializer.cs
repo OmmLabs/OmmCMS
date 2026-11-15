@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using OmmCMS.Caching;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Data;

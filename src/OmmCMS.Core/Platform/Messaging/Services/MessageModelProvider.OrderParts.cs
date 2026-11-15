@@ -2,7 +2,6 @@
 using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Checkout.Tax;
@@ -93,10 +92,6 @@ public partial class MessageModelProvider
         d.Totals = await CreateOrderTotalsPartAsync(part, messageContext);
 
         // Checkout Attributes
-        if (part.CheckoutAttributeDescription.HasValue())
-        {
-            d.CheckoutAttributes = HtmlUtility.ConvertPlainTextToTable(HtmlUtility.ConvertHtmlToPlainText(part.CheckoutAttributeDescription)).NullEmpty();
-        }
 
         await _helper.PublishModelPartCreatedEventAsync(part, m);
 

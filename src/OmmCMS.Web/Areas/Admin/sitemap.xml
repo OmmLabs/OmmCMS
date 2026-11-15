@@ -5,7 +5,7 @@
 
         <siteMapNode id="dashboard" title="Dashboard" resKey="Admin.Dashboard" controller="Home" action="Index" area="Admin" icon="home" />
 
-        <siteMapNode id="catalog" title="Catalog" resKey="Admin.Catalog" icon="catalog" permissionNames="catalog.product, catalog.productreview, catalog.category, catalog.manufacturer, catalog.variant, catalog.attribute, cart.checkoutattribute, system.rule">
+        <siteMapNode id="catalog" title="Catalog" resKey="Admin.Catalog" icon="catalog" permissionNames="catalog.product, catalog.productreview, catalog.category, catalog.manufacturer, catalog.variant, catalog.attribute, system.rule">
             <siteMapNode id="categories-list" icon="nodes" title="List" resKey="Admin.Catalog.Categories" controller="Category" action="Index" area="Admin" permissionNames="catalog.category" />
             <siteMapNode id="products" icon="box" title="Manage products" resKey="Admin.Catalog.Products.Manage" controller="Product" action="List" area="Admin" permissionNames="catalog.product" />
             <siteMapNode id="product-rules" icon="hi:filter-edit" title="Product rules" resKey="Common.ProductRules" permissionNames="system.rule" controller="Rule" action="ProductRules" area="Admin" />
@@ -18,7 +18,6 @@
             <siteMapNode id="attributes-header" isGroupHeader="true" title="Attributes" resKey="Admin.Catalog.Attributes" />
             <siteMapNode id="attributes" icon="variants" title="Products attributes" resKey="Admin.Catalog.Attributes.ProductAttributes" controller="ProductAttribute" action="List" area="Admin" permissionNames="catalog.variant" />
             <siteMapNode id="specification-attributes" icon="tasks" title="Specification attributes" resKey="Admin.Catalog.Attributes.SpecificationAttributes" controller="SpecificationAttribute" action="List" area="Admin" permissionNames="catalog.attribute" />
-            <siteMapNode id="checkout-attributes" icon="form" title="Checkout attributes" resKey="Admin.Catalog.Attributes.CheckoutAttributes" permissionNames="cart.checkoutattribute" controller="CheckoutAttribute" action="List" area="Admin" />
         </siteMapNode>
 
         <siteMapNode id="sales" title="Sales" resKey="Admin.Sales" permissionNames="order" icon="chart-up">

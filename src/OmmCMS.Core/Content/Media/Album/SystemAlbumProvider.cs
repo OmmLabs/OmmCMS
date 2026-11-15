@@ -3,7 +3,6 @@ using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Attributes;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Identity;
@@ -132,7 +131,6 @@ public class SystemAlbumProvider : IAlbumProvider, IMediaTrackDetector
             table.Register<ProductMediaFile>(x => x.MediaFileId);
             table.Register<ProductAttributeOption>(x => x.MediaFileId);
             table.Register<ProductVariantAttributeValue>(x => x.MediaFileId);
-            table.Register<CheckoutAttributeValue>(x => x.MediaFileId);
             table.Register<SpecificationAttributeOption>(x => x.MediaFileId);
             table.Register<Category>(x => x.MediaFileId);
             table.Register<Manufacturer>(x => x.MediaFileId);
@@ -202,20 +200,6 @@ public class SystemAlbumProvider : IAlbumProvider, IMediaTrackDetector
                     foreach (var x in list)
                     {
                         yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.MediaFileId, Property = nameof(x.MediaFileId) };
-                    }
-                    list.Clear();
-                }
-            }
-
-            // CheckoutAttributeValue
-            {
-                var name = nameof(CheckoutAttributeValue);
-                var p = new FastPager<CheckoutAttributeValue>(_db.CheckoutAttributeValues.AsNoTracking().Where(x => x.MediaFileId.HasValue), 5000);
-                while ((await p.ReadNextPageAsync(x => new { x.Id, x.MediaFileId }, x => x.Id, cancelToken)).Out(out var list))
-                {
-                    foreach (var x in list)
-                    {
-                        yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.MediaFileId.Value, Property = nameof(x.MediaFileId) };
                     }
                     list.Clear();
                 }

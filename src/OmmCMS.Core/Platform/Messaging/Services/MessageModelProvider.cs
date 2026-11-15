@@ -9,7 +9,6 @@ using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
@@ -506,7 +505,6 @@ public partial class MessageModelProvider : IMessageModelProvider
 
         var storeId = messageContext.StoreId ?? 0;
         var mediaSettings = await _services.SettingFactory.LoadSettingsAsync<MediaSettings>(storeId);
-        var shoppingCartSettings = await _services.SettingFactory.LoadSettingsAsync<ShoppingCartSettings>(storeId);
         var catalogSettings = await _services.SettingFactory.LoadSettingsAsync<CatalogSettings>(storeId);
 
         var currencyService = _services.Resolve<ICurrencyService>();
@@ -537,7 +535,7 @@ public partial class MessageModelProvider : IMessageModelProvider
             { "QtyUnit", null }
         };
 
-        if (part.IsShippingEnabled && shoppingCartSettings.DeliveryTimesInShoppingCart != DeliveryTimesPresentation.None)
+        if (part.IsShippingEnabled && catalogSettings.DeliveryTimesInProductDetail != DeliveryTimesPresentation.None)
         {
             if (deliveryTime is DeliveryTime dt)
             {

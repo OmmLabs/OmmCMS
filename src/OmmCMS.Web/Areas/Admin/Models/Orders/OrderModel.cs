@@ -91,7 +91,6 @@ public partial class OrderModel : EditOrderModel
 
     public bool HasDownloadableProducts { get; set; }
     public string CustomerOrderComment { get; set; }
-    public string CheckoutAttributeInfo { get; set; }
 
     public bool CanCancelOrder { get; set; }
     public bool CanCompleteOrder { get; set; }

@@ -98,13 +98,6 @@
 {% assign totals = Order.Totals %}
 <table class="w-100 brd bg-light order-summary mb-4" cellpadding="10" style="border-top: 0">
 	<tr>
-		<!-- Checkout Attributes -->
-		<td class="text-sm" width="50%">
-			{% if Order.CheckoutAttributes %}
-				{{ Order.CheckoutAttributes }}
-			{% endif %}
-		</td>
-		
 		<!-- Totals -->
 		<td width="50%">
 			<table class="w-100">

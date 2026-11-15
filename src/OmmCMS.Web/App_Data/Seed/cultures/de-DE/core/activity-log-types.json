@@ -2,9 +2,6 @@
   "AddNewCategory": {
     "name": "Erstellen einer Warengruppe"
   },
-  "AddNewCheckoutAttribute": {
-    "name": "Neues Checkout Attribut hinzugefügt"
-  },
   "AddNewCustomer": {
     "name": "Neuen Kunden hinzugefügt"
   },
@@ -35,9 +32,6 @@
   "DeleteCategory": {
     "name": "Warengruppe gelöscht"
   },
-  "DeleteCheckoutAttribute": {
-    "name": "Checkout-Attribut gelöscht"
-  },
   "DeleteCustomer": {
     "name": "Kunde gelöscht"
   },
@@ -67,9 +61,6 @@
   },
   "EditCategory": {
     "name": "Warengruppe bearbeitet"
-  },
-  "EditCheckoutAttribute": {
-    "name": "Checkout-Attribut bearbeitet"
   },
   "EditCustomer": {
     "name": "Kunde bearbeitet"

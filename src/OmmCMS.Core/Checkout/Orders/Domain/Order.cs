@@ -203,17 +203,6 @@ public partial class Order : EntityWithAttributes, IAuditable, ISoftDeletable
     public bool RewardPointsWereAdded { get; set; }
 
     /// <summary>
-    /// Gets or sets the checkout attribute description
-    /// </summary>
-    public string CheckoutAttributeDescription { get; set; }
-
-    /// <summary>
-    /// Gets or sets the checkout attributes in XML or JSON format
-    /// </summary>
-    [Column("CheckoutAttributesXml")]
-    public string RawAttributes { get; set; }
-
-    /// <summary>
     /// Gets or sets the customer language identifier
     /// </summary>
     public int CustomerLanguageId { get; set; }

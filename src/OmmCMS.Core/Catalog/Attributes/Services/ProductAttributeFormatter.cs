@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Cart;
+using OmmCMS.Core.Catalog;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Localization;
@@ -20,7 +20,7 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
     private readonly IProductAttributeMaterializer _productAttributeMaterializer;
     private readonly ILocalizationService _localizationService;
     private readonly IPriceCalculationService _priceCalculationService;
-    private readonly ShoppingCartSettings _shoppingCartSettings;
+    private readonly CatalogSettings _catalogSettings;
     private readonly PriceSettings _priceSettings;
 
     public ProductAttributeFormatter(
@@ -30,7 +30,7 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
         IProductAttributeMaterializer productAttributeMaterializer,
         ILocalizationService localizationService,
         IPriceCalculationService priceCalculationService,
-        ShoppingCartSettings shoppingCartSettings,
+        CatalogSettings catalogSettings,
         PriceSettings priceSettings)
     {
         _db = db;
@@ -39,7 +39,7 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
         _productAttributeMaterializer = productAttributeMaterializer;
         _localizationService = localizationService;
         _priceCalculationService = priceCalculationService;
-        _shoppingCartSettings = shoppingCartSettings;
+        _catalogSettings = catalogSettings;
         _priceSettings = priceSettings;
     }
 
@@ -204,7 +204,7 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
 
                     if (options.IncludePrices)
                     {
-                        if (_shoppingCartSettings.ShowLinkedAttributeValueQuantity &&
+                        if (_catalogSettings.ShowLinkedAttributeValueQuantity &&
                             pvaValue.ValueType == ProductVariantAttributeValueType.ProductLinkage &&
                             pvaValue.Quantity > 1)
                         {

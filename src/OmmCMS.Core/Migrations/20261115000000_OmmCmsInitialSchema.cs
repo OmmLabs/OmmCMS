@@ -141,12 +141,6 @@ internal sealed class OmmCmsInitialSchema : Migration, ILocaleResourcesProvider
             + " Eine Einstellung am Artikel hat Vorrang. Bei mehreren Warengruppen gilt \"Nein\" vor \"Ja\"."
             + " Diese Einstellung gilt ausschließlich für versandfähige Artikel.");
 
-        builder.AddOrUpdate("Admin.Catalog.Attributes.CheckoutAttributes.Fields.Requirements",
-            "Requirements",
-            "Voraussetzungen",
-            "Select cart rule sets that determine when the checkout attribute is available. The attribute is available when at least one rule set matches.",
-            "Wählen Sie Warenkorb-Regelsätze aus, die festlegen, wann das Checkout-Attribut verfügbar ist. Das Attribut ist verfügbar, sobald einer der ausgewählten Regelsätze zutrifft.");
-
         builder.AddOrUpdate("Admin.Orders.Products.WithdrawalWaiver",
             "Withdrawal waiver",
             "Widerrufsverzicht",

@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using OmmCMS.Core.Checkout.Attributes;
 using OmmCMS.Core.Common;
 
 namespace OmmCMS.Core.Identity;
@@ -86,34 +85,6 @@ public class CustomerAttributeCollection : GenericAttributeCollection<Customer>
         set => Set(SystemCustomerAttributeNames.DiscountCouponCode, value);
     }
 
-    private CheckoutAttributeSelection _checkoutAttributes;
-
-    /// <summary>
-    /// Gets or sets the selected checkout attributes entered on the shopping cart page.
-    /// <seealso cref="RawCheckoutAttributes"/>.
-    /// </summary>
-    public CheckoutAttributeSelection CheckoutAttributes
-    {
-        get => _checkoutAttributes ??= new(RawCheckoutAttributes);
-        set
-        {
-            Set(SystemCustomerAttributeNames.CheckoutAttributes, value.AsJson());
-            _checkoutAttributes = null;
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets the JSON formatted checkout attributes as a string.
-    /// </summary>
-    public string RawCheckoutAttributes
-    {
-        get => Get<string>(SystemCustomerAttributeNames.CheckoutAttributes);
-        set
-        {
-            Set(SystemCustomerAttributeNames.CheckoutAttributes, value);
-            _checkoutAttributes = null;
-        }
-    }
 
     /// <summary>
     /// Gets or sets the file IDcolor of the customer's avatar picture.
@@ -281,40 +252,6 @@ public class CustomerAttributeCollection : GenericAttributeCollection<Customer>
         set => Set(SystemCustomerAttributeNames.DefaultShippingAddressId, value, CurrentStoreId);
     }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether the customer has chosen to use his reward points in checkout.
-    /// </summary>
-    public bool UseRewardPointsDuringCheckout
-    {
-        get => Get<bool>(SystemCustomerAttributeNames.UseRewardPointsDuringCheckout, CurrentStoreId);
-        set => Set(SystemCustomerAttributeNames.UseRewardPointsDuringCheckout, value, CurrentStoreId);
-    }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether the customer has chosen to use the credit balance of his wallet in checkout.
-    /// </summary>
-    public decimal UseCreditBalanceDuringCheckout
-    {
-        get => Get<decimal>(SystemCustomerAttributeNames.UseCreditBalanceDuringCheckout, CurrentStoreId);
-        set => Set(SystemCustomerAttributeNames.UseCreditBalanceDuringCheckout, value, CurrentStoreId);
-    }
-
-    /// <summary>
-    /// Gets or sets transient data to be applied during order placement.
-    /// </summary>
-    public Dictionary<string, string> CheckoutOrderData
-    {
-        get
-        {
-            var json = Get<string>(SystemCustomerAttributeNames.CheckoutOrderData, CurrentStoreId);
-            return json.HasValue() ? JsonSerializer.Deserialize<Dictionary<string, string>>(json) : null;
-        }
-        set
-        {
-            var json = value != null ? JsonSerializer.Serialize(value) : null;
-            Set(SystemCustomerAttributeNames.CheckoutOrderData, json, CurrentStoreId);
-        }
-    }
 
     #endregion
 }

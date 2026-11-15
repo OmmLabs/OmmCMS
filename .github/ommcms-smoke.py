@@ -635,6 +635,9 @@ try:
             "Checkout/Cart/Domain/OrganizedShoppingCartItem.cs",
             "Checkout/Cart/Extensions",
             "Checkout/Attributes/Services",
+            "Checkout/Attributes",
+            "Checkout/Cart",
+            "Checkout/Orders/Domain/CheckoutProcess.cs",
             "Catalog/Products/Hooks/ProductBundleItemHook.cs",
         ):
             assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
@@ -717,6 +720,8 @@ try:
         assert rows("SELECT COUNT(*) FROM MessageTemplate WHERE Name IN ('ShipmentSent.CustomerNotification', 'ShipmentDelivered.CustomerNotification', 'Customer.NewOrderNote')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name)='newslettersubscription'") == [1]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('shoppingcartitem', 'shoppingcartitems')") == [0]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('checkoutattribute', 'checkoutattributes', 'checkoutattributevalue', 'checkoutattributevalues', 'ruleset_checkoutattribute_mapping')") == [0]
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('Order') WHERE name IN ('CheckoutAttributeDescription', 'CheckoutAttributesXml')") == [0]
         topics = set(rows("SELECT SystemName FROM Topic"))
         assert {"HomePageText", "AboutUs", "ContactUs"} <= topics
         assert not topics.intersection({"PaymentInfo", "ShippingInfo", "CheckoutAsGuestOrRegister"})
