@@ -110,7 +110,8 @@ public partial class GdprTool : IGdprTool
             // BackInStock subscriptions
             var backInStockSubscriptions = await _db.BackInStockSubscriptions
                 .AsNoTracking()
-                .ApplyStandardFilter(customerId: customer.Id)
+                .Where(x => x.CustomerId == customer.Id)
+                .OrderByDescending(x => x.CreatedOnUtc)
                 .ToListAsync();
 
             if (backInStockSubscriptions.Count != 0)
@@ -153,7 +154,8 @@ public partial class GdprTool : IGdprTool
 
         // Delete all customers stock subscribtions
         var backInStockSubscriptions = await _db.BackInStockSubscriptions
-            .ApplyStandardFilter(customerId: customer.Id)
+            .Where(x => x.CustomerId == customer.Id)
+            .OrderByDescending(x => x.CreatedOnUtc)
             .ToListAsync();
 
         _db.BackInStockSubscriptions.RemoveRange(backInStockSubscriptions);
