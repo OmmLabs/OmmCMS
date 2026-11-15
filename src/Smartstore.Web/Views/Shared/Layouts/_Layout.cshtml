@@ -1,7 +1,10 @@
 ﻿@inject Smartstore.Core.Stores.IStoreContext StoreContext
+@inject Microsoft.Extensions.Configuration.IConfiguration OmmCmsConfiguration
 
 @{
     Layout = "_Document";
+
+    var cmsPreview = bool.TryParse(OmmCmsConfiguration["OmmCMS:PreviewShell"], out var enabled) && enabled;
 
     var hasLeftCol = await Display.ZoneHasWidgetsAsync("left");
     var hasRightCol = await Display.ZoneHasWidgetsAsync("right");
@@ -41,6 +44,19 @@
         <zone name="header_before"></zone>
 
         <header id="header" zone-name="header" replace-content="true">
+            @if (cmsPreview)
+            {
+                <div class="container py-3">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                        <a href="@Url.Content("~/")" class="h4 m-0 text-decoration-none">@StoreContext.CurrentStore.Name</a>
+                        <nav class="navbar navbar-light p-0" aria-label="@T("Aria.Label.MainNavigation")">
+                            <menu name="Main" template="Main" />
+                        </nav>
+                    </div>
+                </div>
+            }
+            else
+            {
             <div class="menubar-section d-none d-lg-block @(Display.GetThemeVariable<bool>("inverse-menubar") ? "menubar-inverse" : "menubar-light")">
                 <div class="container menubar-container">
                     @await Component.InvokeAsync("TopBar")
@@ -58,6 +74,7 @@
                     </div>
                 </nav>
             </div>
+            }
         </header>
 
         <div id="content-wrapper">
@@ -104,9 +121,21 @@
 
         <zone name="footer_before"></zone>
 
-        <zone name="footer" replace-content="true">
-            @await Component.InvokeAsync("Footer")
-        </zone>
+        @if (cmsPreview)
+        {
+            <footer class="border-top py-4">
+                <div class="container d-flex flex-wrap align-items-center justify-content-between gap-3">
+                    <span>@StoreContext.CurrentStore.Name</span>
+                    <span class="small text-muted">Powered by OmmCMS</span>
+                </div>
+            </footer>
+        }
+        else
+        {
+            <zone name="footer" replace-content="true">
+                @await Component.InvokeAsync("Footer")
+            </zone>
+        }
 
         <zone name="page-end"></zone>
     </div>
