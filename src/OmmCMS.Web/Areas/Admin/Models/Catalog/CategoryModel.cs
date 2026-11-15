@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using FluentValidation;
 using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Rules;
 using OmmCMS.Core.Seo;
 using OmmCMS.IconKit;
@@ -141,12 +140,6 @@ public class CategoryModel : TabbableModel, ILocalizedModel<CategoryLocalizedMod
 
     [LocalizedDisplay("Admin.Common.Store.LimitedTo")]
     public bool LimitedToStores { get; set; }
-
-    [UIHint("Discounts")]
-    [AdditionalMetadata("multiple", true)]
-    [AdditionalMetadata("discountType", DiscountType.AssignedToCategories)]
-    [LocalizedDisplay("Admin.Promotions.Discounts.AppliedDiscounts")]
-    public int[] SelectedDiscountIds { get; set; }
 
     [LocalizedDisplay("Admin.Configuration.Settings.Catalog.DefaultViewMode")]
     public string DefaultViewMode { get; set; }

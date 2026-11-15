@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Identity;
 using OmmCMS.Data.Caching;
 
@@ -84,16 +83,6 @@ public partial class RuleSetEntity : EntityWithAttributes, IAuditable
     {
         get => _rules ?? LazyLoader.Load(this, ref _rules) ?? (_rules ??= new HashSet<RuleEntity>());
         protected set => _rules = value;
-    }
-
-    private ICollection<Discount> _discounts;
-    /// <summary>
-    /// Gets or sets assigned discounts.
-    /// </summary>
-    public ICollection<Discount> Discounts
-    {
-        get => _discounts ?? LazyLoader.Load(this, ref _discounts) ?? (_discounts ??= new HashSet<Discount>());
-        protected set => _discounts = value;
     }
 
     private ICollection<Category> _categories;

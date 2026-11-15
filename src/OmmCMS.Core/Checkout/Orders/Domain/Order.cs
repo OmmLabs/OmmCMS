@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Runtime.Serialization;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Checkout.Tax;
@@ -515,16 +514,6 @@ public partial class Order : EntityWithAttributes, IAuditable, ISoftDeletable
     {
         get => _walletHistory ?? LazyLoader.Load(this, ref _walletHistory) ?? (_walletHistory ??= new HashSet<WalletHistory>());
         protected set => _walletHistory = value;
-    }
-
-    private ICollection<DiscountUsageHistory> _discountUsageHistory;
-    /// <summary>
-    /// Gets or sets discount usage history
-    /// </summary>
-    public ICollection<DiscountUsageHistory> DiscountUsageHistory
-    {
-        get => _discountUsageHistory ?? LazyLoader.Load(this, ref _discountUsageHistory) ?? (_discountUsageHistory ??= new HashSet<DiscountUsageHistory>());
-        protected set => _discountUsageHistory = value;
     }
 
     private ICollection<OrderItem> _orderItems;

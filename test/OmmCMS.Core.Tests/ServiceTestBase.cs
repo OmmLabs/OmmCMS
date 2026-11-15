@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using NUnit.Framework;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Pricing.Calculators;
 using OmmCMS.Core.Common;
@@ -196,7 +195,6 @@ public abstract class ServiceTestBase
 
     protected List<Lazy<IPriceCalculator, PriceCalculatorMetadata>> GetPriceCalculators(
         IPriceCalculatorFactory priceCalculatorFactory,
-        IDiscountService discountService,
         PriceSettings priceSettings)
     {
         var calculators = new List<Lazy<IPriceCalculator, PriceCalculatorMetadata>>();
@@ -209,11 +207,6 @@ public abstract class ServiceTestBase
             new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
                 new BundlePriceCalculator(priceCalculatorFactory, null),
                 new() { ValidTargets = CalculatorTargets.Bundle, Order = CalculatorOrdering.Early });
-
-        var discountPriceCalculator =
-            new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
-                new DiscountPriceCalculator(DbContext, discountService, priceSettings),
-                new() { ValidTargets = CalculatorTargets.All, Order = CalculatorOrdering.Late });
 
         var groupedProductPriceCalculator =
             new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
@@ -245,7 +238,6 @@ public abstract class ServiceTestBase
         calculators.AddRange(new[] {
             attributePriceCalculator,
             bundlePriceCalculator,
-            discountPriceCalculator,
             groupedProductPriceCalculator,
             lowestPriceCalculator,
             offerPriceCalculator,

@@ -67,15 +67,4 @@ public static partial class Permissions
         }
     }
 
-    public static partial class Promotion
-    {
-        public static class Discount
-        {
-            public const string Self = "promotion.discount";
-            public const string Read = "promotion.discount.read";
-            public const string Update = "promotion.discount.update";
-            public const string Create = "promotion.discount.create";
-            public const string Delete = "promotion.discount.delete";
-        }
-    }
 }

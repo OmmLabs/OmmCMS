@@ -5,7 +5,6 @@ using OmmCMS.Admin.Models.Customers;
 using OmmCMS.Admin.Models.Rules;
 using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Rules;
 using OmmCMS.Core.Checkout.Rules;
@@ -773,10 +772,6 @@ public class RuleController : AdminController
             model.ExpressionGroup = await _ruleService.CreateExpressionGroupAsync(ruleSet, provider, true);
 
             await _ruleService.ApplyMetadataAsync(model.ExpressionGroup);
-
-            ViewBag.AssignedToDiscounts = ruleSet.Discounts
-                .Select(x => new RuleSetAssignedToEntityModel { Id = x.Id, Name = x.Name.NullEmpty() ?? x.Id.ToString() })
-                .ToList();
 
             ViewBag.AssignedToCustomerRoles = ruleSet.CustomerRoles
                 .Select(x => new RuleSetAssignedToEntityModel { Id = x.Id, Name = x.Name })

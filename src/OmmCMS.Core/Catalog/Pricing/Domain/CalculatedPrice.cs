@@ -1,7 +1,6 @@
 ﻿#nullable enable
 
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
@@ -20,7 +19,6 @@ public class CalculatedPrice : ICloneable<CalculatedPrice>
 
         Product = context.Product;
         PricingType = context.PricingType;
-        AppliedDiscounts = context.AppliedDiscounts;
         HasPriceRange = context.HasPriceRange;
         AttributePriceAdjustments = context.AttributePriceAdjustments;
     }
@@ -34,7 +32,6 @@ public class CalculatedPrice : ICloneable<CalculatedPrice>
 
         Product = product;
         PricingType = pricingType;
-        AppliedDiscounts = new List<Discount>();
         AttributePriceAdjustments = new List<CalculatedPriceAdjustment>();
     }
 
@@ -103,15 +100,6 @@ public class CalculatedPrice : ICloneable<CalculatedPrice>
     /// Includes prices of attribute combinations and tier prices. Ignores price adjustments of attributes.
     /// </summary>
     public Money? LowestPrice { get; set; }
-
-    /// <summary>
-    /// List of discount entities that have been applied during calculation.
-    /// </summary>
-    /// <remarks>
-    /// May contain multiple discounts if both the product and a tier price have been discounted.
-    /// Without a tier price applied, the list will contain no discount or exactly one discount (detected via <see cref="DiscountExtensions.GetPreferredDiscount"/>).
-    /// </remarks>
-    public ICollection<Discount> AppliedDiscounts { get; init; }
 
     /// <summary>
     /// The discount amount applied to <see cref="FinalPrice"/>.

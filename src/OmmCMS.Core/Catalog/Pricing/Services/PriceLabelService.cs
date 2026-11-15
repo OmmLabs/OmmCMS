@@ -99,15 +99,6 @@ public class PriceLabelService : IPriceLabelService
 
         LocalizedValue<string> badgeLabel;
 
-        foreach (var discount in price.AppliedDiscounts)
-        {
-            badgeLabel = discount.GetLocalized(x => x.OfferBadgeLabel);
-            if (badgeLabel.HasValue())
-            {
-                return (badgeLabel, badgeStyle);
-            }
-        }
-
         badgeLabel = isLimitedOffer
             ? _priceSettings.GetLocalizedSetting(x => x.LimitedOfferBadgeLabel)
             : _priceSettings.GetLocalizedSetting(x => x.OfferBadgeLabel);
@@ -131,15 +122,6 @@ public class PriceLabelService : IPriceLabelService
         }
 
         var threshold = _priceSettings.ShowOfferCountdownRemainingHours;
-
-        foreach (var discount in price.AppliedDiscounts)
-        {
-            if (discount.ShowCountdownRemainingHours.HasValue)
-            {
-                threshold = discount.ShowCountdownRemainingHours;
-                break;
-            }
-        }
 
         if (threshold.GetValueOrDefault() < 1)
         {

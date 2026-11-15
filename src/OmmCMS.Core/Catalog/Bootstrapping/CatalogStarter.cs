@@ -5,7 +5,6 @@ using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Brands.Rules;
 using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Catalog.Categories.Rules;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Products.Rules;
@@ -42,7 +41,6 @@ internal class CatalogStarter : StarterBase
         builder.RegisterType<ProductAttributeMaterializer>().As<IProductAttributeMaterializer>().InstancePerLifetimeScope();
         builder.RegisterType<ProductAttributeFormatter>().As<IProductAttributeFormatter>().InstancePerLifetimeScope();
 
-        builder.RegisterType<DiscountService>().As<IDiscountService>().InstancePerLifetimeScope();
         builder.RegisterType<ProductUrlHelper>().InstancePerLifetimeScope();
         builder.RegisterType<ProductImporter>().Keyed<IEntityImporter>(ImportEntityType.Product).InstancePerLifetimeScope();
         builder.RegisterType<CategoryImporter>().Keyed<IEntityImporter>(ImportEntityType.Category).InstancePerLifetimeScope();

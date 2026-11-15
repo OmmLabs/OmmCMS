@@ -1,7 +1,6 @@
 ﻿using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 
@@ -37,7 +36,5 @@ public partial class SmartDbContext
     public DbSet<SpecificationAttributeOption> SpecificationAttributeOptions { get; set; }
     public DbSet<ProductSpecificationAttribute> ProductSpecificationAttributes { get; set; }
 
-    public DbSet<Discount> Discounts { get; set; }
-    public DbSet<DiscountUsageHistory> DiscountUsageHistory { get; set; }
     public DbSet<TierPrice> TierPrices { get; set; }
 }

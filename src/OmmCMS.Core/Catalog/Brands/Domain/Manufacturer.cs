@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Security;
@@ -32,7 +31,7 @@ internal class ManufacturerMap : IEntityTypeConfiguration<Manufacturer>
 [Index(nameof(LimitedToStores), Name = "IX_Manufacturer_LimitedToStores")]
 [Index(nameof(SubjectToAcl), Name = "IX_SubjectToAcl")]
 [LocalizedEntity("Published and !Deleted")]
-public partial class Manufacturer : EntityWithDiscounts, IAuditable, ISoftDeletable, ILocalizedEntity, ISlugSupported, IAclRestricted, IStoreRestricted, IPagingOptions, IDisplayOrder
+public partial class Manufacturer : EntityWithAttributes, IAuditable, ISoftDeletable, ILocalizedEntity, ISlugSupported, IAclRestricted, IStoreRestricted, IPagingOptions, IDisplayOrder
 {
     /// <summary>
     /// Gets or sets the brand name.

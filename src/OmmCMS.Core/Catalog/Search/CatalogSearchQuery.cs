@@ -43,7 +43,6 @@ public sealed class KnownFilterNames : IHideObjectMembers
     public readonly string IsFreeShipping = "shipfree";
     public readonly string IsTaxExempt = "taxexempt";
     public readonly string IsEsd = "esd";
-    public readonly string HasDiscount = "discount";
     public readonly string TypeId = "typeid";
     public readonly string StoreId = "storeid";
     public readonly string IsAvailable = "available";
@@ -450,11 +449,6 @@ public partial class CatalogSearchQuery : SearchQuery<CatalogSearchQuery>, IClon
     public CatalogSearchQuery EsdOnly(bool value)
     {
         return WithFilter(SearchFilter.ByField(KnownFilters.IsEsd, value).Mandatory().ExactMatch().NotAnalyzed());
-    }
-
-    public CatalogSearchQuery HasDiscount(bool value)
-    {
-        return WithFilter(SearchFilter.ByField(KnownFilters.HasDiscount, value).Mandatory().ExactMatch().NotAnalyzed());
     }
 
     public CatalogSearchQuery WithStockQuantity(

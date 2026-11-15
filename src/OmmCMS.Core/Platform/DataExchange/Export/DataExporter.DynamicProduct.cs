@@ -109,7 +109,6 @@ public partial class DataExporter
         dynamic result = dynamicEntity;
         var localizedName = ctx.GetTranslation(product, nameof(product.Name), product.Name);
 
-        result.AppliedDiscounts = null;
         result.Downloads = null;
         result.TierPrices = null;
         result.ProductAttributes = null;
@@ -382,15 +381,6 @@ public partial class DataExporter
             var tierPrices = await ctx.ProductBatchContextWithoutFilters.TierPrices.GetOrLoadAsync(product.Id);
 
             dynObject.TierPrices = tierPrices
-                .Select(x => CreateDynamic(x))
-                .ToList();
-        }
-
-        if (product.HasDiscountsApplied)
-        {
-            var appliedDiscounts = await ctx.ProductBatchContext.AppliedDiscounts.GetOrLoadAsync(product.Id);
-
-            dynObject.AppliedDiscounts = appliedDiscounts
                 .Select(x => CreateDynamic(x))
                 .ToList();
         }

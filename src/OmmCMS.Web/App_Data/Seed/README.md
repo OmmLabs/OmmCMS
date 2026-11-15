@@ -271,7 +271,7 @@ In installation order. `core/` is always installed, `samples/` only with sample 
 | Menus (`@resource` titles, `publishedWhen`) | `core/menus.json` |
 | Specification and product attributes, option sets | `samples/catalog/specification-attributes.json`, `product-attributes.json`, `product-attribute-option-sets.json` |
 | Sample customers (registered, no password) | `samples/customers.json` |
-| Campaign, rule sets, discounts | `samples/campaigns.json`, `samples/rule-sets.json`, `samples/discounts.json` |
+| Campaign, rule sets | `samples/campaigns.json`, `samples/rule-sets.json` |
 | Categories and manufacturers (with pictures and slugs) | `samples/catalog/categories.json`, `samples/catalog/manufacturers.json` |
 | Product tags and products (pictures, specifications, tier prices, downloads, grouped and bundle products, variants, combinations) | `samples/catalog/product-tags.json`, `samples/catalog/products/*.json`, `cultures/{culture}/samples/catalog/attribute-value-names.json` |
 

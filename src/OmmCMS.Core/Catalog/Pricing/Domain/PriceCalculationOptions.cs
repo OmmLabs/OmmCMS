@@ -1,5 +1,4 @@
 ﻿using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Identity;
@@ -156,17 +155,6 @@ public class PriceCalculationOptions : ICloneable<PriceCalculationOptions>
     /// May have impact on performance.
     /// </summary>
     public bool ApplyPriceRangeFormat { get; set; }
-
-    /// <summary>
-    /// Gets or sets flags for discount requirements to be validated.
-    /// </summary>
-    /// <remarks>
-    /// Turning this to <see cref="DiscountValidationFlags.All"/> in larger listings can have heavy impact on calculation performance!
-    /// If set to <see cref="DiscountValidationFlags.None"/> then some discount requirements (such as
-    /// usage history limitation or rule fulfilment) are ignored during price calculation.
-    /// Coupon codes and date ranges are always validated.
-    /// </remarks>
-    public DiscountValidationFlags DiscountValidationFlags { get; set; } = DiscountValidationFlags.All;
 
     /// <summary>
     /// Gets or sets a value indicating whether the lowest possible price should be determined

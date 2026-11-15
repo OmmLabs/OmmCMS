@@ -905,7 +905,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Die Bestellung wurde bereits angelegt. Kunden-ID: {0}.");
 
 
-        builder.AddOrUpdate("Admin.Rules.FilterDescriptor.DiscountApplied", "Discount code applied", "Rabattcode angewendet");
     }
 
     private static void MigrateCommonResources(LocaleResourcesBuilder builder)

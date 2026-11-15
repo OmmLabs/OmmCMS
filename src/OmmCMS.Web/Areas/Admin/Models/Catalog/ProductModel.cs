@@ -4,7 +4,6 @@ using FluentValidation;
 using OmmCMS.Admin.Models.Common;
 using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Localization;
@@ -261,12 +260,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
 
     [LocalizedDisplay("Admin.Configuration.Settings.Catalog.DisplayAllImagesNumber")]
     public int? DisplayAllImagesNumber { get; set; }
-
-    [UIHint("Discounts")]
-    [AdditionalMetadata("multiple", true)]
-    [AdditionalMetadata("discountType", DiscountType.AssignedToSkus)]
-    [LocalizedDisplay("Admin.Promotions.Discounts.AppliedDiscounts")]
-    public int[] SelectedDiscountIds { get; set; }
 
     public AddProductSpecificationAttributeModel AddSpecificationAttributeModel { get; set; } = new();
 

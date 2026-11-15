@@ -24,28 +24,6 @@ internal class CategoryHook : AsyncDbSaveHook<Category>
 
     public override async Task OnAfterSaveCompletedAsync(IEnumerable<IHookedEntity> entries, CancellationToken cancelToken)
     {
-        // Update HasDiscountsApplied property.
-        var categories = entries
-            .Select(x => x.Entity)
-            .OfType<Category>()
-            .ToList();
-
-        foreach (var categoriesChunk in categories.Chunk(100))
-        {
-            var categoryIdsChunk = categoriesChunk
-                .Select(x => x.Id)
-                .ToArray();
-
-            var appliedCategoryIds = await _db.Discounts
-                .SelectMany(x => x.AppliedToCategories)
-                .Where(x => categoryIdsChunk.Contains(x.Id))
-                .Select(x => x.Id)
-                .Distinct()
-                .ToListAsync(cancelToken);
-
-            categoriesChunk.Each(x => x.HasDiscountsApplied = appliedCategoryIds.Contains(x.Id));
-        }
-
         await _db.SaveChangesAsync(cancelToken);
 
         // Validate category hierarchy.

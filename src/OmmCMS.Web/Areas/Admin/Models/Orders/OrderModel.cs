@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Web.Models.Common;
@@ -112,7 +111,6 @@ public partial class OrderModel : EditOrderModel
     public AddressModel ShippingAddress { get; set; }
 
     public List<OrderItemModel> Items { get; set; }
-    public List<DiscountInfoModel> AppliedDiscounts { get; set; }
 
     public string UpdateOrderItemInfo { get; set; }
     public UpdateOrderItemModel UpdateOrderItem { get; set; }
@@ -206,12 +204,6 @@ public partial class OrderModel : EditOrderModel
 
         public List<BundleItemModel> BundleItems { get; set; } = [];
 
-    }
-
-    public class DiscountInfoModel : EntityModelBase
-    {
-        public string Name { get; set; }
-        public DiscountType DiscountType { get; set; }
     }
 
     #endregion

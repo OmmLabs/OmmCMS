@@ -721,6 +721,7 @@ try:
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name)='newslettersubscription'") == [1]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('shoppingcartitem', 'shoppingcartitems')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('checkoutattribute', 'checkoutattributes', 'checkoutattributevalue', 'checkoutattributevalues', 'ruleset_checkoutattribute_mapping')") == [0]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) LIKE '%discount%'") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Order') WHERE name IN ('CheckoutAttributeDescription', 'CheckoutAttributesXml')") == [0]
         topics = set(rows("SELECT SystemName FROM Topic"))
         assert {"HomePageText", "AboutUs", "ContactUs"} <= topics

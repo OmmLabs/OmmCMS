@@ -466,13 +466,6 @@ public partial class ProductRuleProvider : RuleProviderBase, IProductRuleProvide
                 DisplayName = T("Admin.Catalog.Products.Fields.IsEsd"),
                 RuleType = RuleType.Boolean,
                 Operators = [RuleOperator.IsEqualTo]
-            },
-            new SearchFilterDescriptor<bool>((ctx, x) => ctx.Query.HasDiscount(x))
-            {
-                Name = "Discount",
-                DisplayName = T("Admin.Catalog.Products.Fields.HasDiscountsApplied"),
-                RuleType = RuleType.Boolean,
-                Operators = [RuleOperator.IsEqualTo]
             }
         };
 

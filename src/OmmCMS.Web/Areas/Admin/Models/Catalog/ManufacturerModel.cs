@@ -2,7 +2,6 @@
 using FluentValidation;
 using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Seo;
 
 namespace OmmCMS.Admin.Models.Catalog;
@@ -93,11 +92,6 @@ public class ManufacturerModel : TabbableModel, ILocalizedModel<ManufacturerLoca
     [LocalizedDisplay("Admin.Common.Store.LimitedTo")]
     public bool LimitedToStores { get; set; }
 
-    [UIHint("Discounts")]
-    [AdditionalMetadata("multiple", true)]
-    [AdditionalMetadata("discountType", DiscountType.AssignedToManufacturers)]
-    [LocalizedDisplay("Admin.Promotions.Discounts.AppliedDiscounts")]
-    public int[] SelectedDiscountIds { get; set; }
 }
 
 [LocalizedDisplay("Admin.Catalog.Manufacturers.Fields.")]

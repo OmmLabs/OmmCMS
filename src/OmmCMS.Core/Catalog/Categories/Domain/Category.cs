@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Runtime.Serialization;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Data;
@@ -66,7 +65,7 @@ internal class CategoryMap : IEntityTypeConfiguration<Category>
 [Index(nameof(SubjectToAcl), Name = "IX_Category_SubjectToAcl")]
 [LocalizedEntity("Published and !Deleted")]
 public partial class Category :
-    EntityWithDiscounts,
+    EntityWithAttributes,
     ITreeNode,
     ICategoryNode,
     IAuditable,

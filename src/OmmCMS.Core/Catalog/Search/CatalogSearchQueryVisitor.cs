@@ -68,10 +68,6 @@ public class CatalogSearchQueryVisitor : LinqSearchQueryVisitor<Product, Catalog
         {
             return ApplySimpleMemberExpression(x => x.IsEsd, filter, query);
         }
-        else if (fieldName == names.HasDiscount)
-        {
-            return ApplySimpleMemberExpression(x => x.HasDiscountsApplied, filter, query);
-        }
         else if (fieldName == names.IsAvailable)
         {
             return query.Where(x =>

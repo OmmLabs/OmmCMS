@@ -21,7 +21,7 @@ public static class CalculatorOrdering
     public const int Default = 0;
 
     /// <summary>
-    /// Used by calculators that should run late in the pipeline (e.g. used by <see cref="OmmCMS.Core.Catalog.Pricing.Calculators.DiscountPriceCalculator"/>.
+    /// Used by calculators that should run late in the pipeline.
     /// </summary>
     public const int Late = 500;
 

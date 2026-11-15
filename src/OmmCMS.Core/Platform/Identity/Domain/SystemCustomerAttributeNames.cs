@@ -14,7 +14,6 @@ public static partial class SystemCustomerAttributeNames
     public static string VatNumber => "VatNumber";
 
     // Other attributes
-    public static string DiscountCouponCode => "DiscountCouponCode";
     public static string AvatarPictureId => "AvatarPictureId";
     public static string AvatarColor => "AvatarColor";
     public static string PasswordRecoveryToken => "PasswordRecoveryToken";

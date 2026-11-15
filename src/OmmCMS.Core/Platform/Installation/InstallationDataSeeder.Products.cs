@@ -3,7 +3,6 @@ using System.Text.Json.Nodes;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Products.Utilities;
@@ -263,7 +262,6 @@ public partial class InstallationDataSeeder
                 product.GroupedProductConfiguration = node.Deserialize<GroupedProductConfiguration>(SmartJsonOptions.CamelCased))
             .Bind("pictures", (product, node, _) => AddProductPictures(product, node.AsArray(), state))
             .References<ProductTag>("tags", (product, tags) => tags.Each(product.ProductTags.Add))
-            .References<Discount>("discounts", (product, discounts) => discounts.Each(product.AppliedDiscounts.Add))
             // Keyless list: an overlay replaces the specifications of a product as a whole.
             .ChildList("specifications", x => x.ProductSpecificationAttributes, new SeedEntityDescriptor<ProductSpecificationAttribute>("specificationAttributeOption")
                 .Reference<SpecificationAttributeOption>("specificationAttributeOption", (psa, option) => psa.SpecificationAttributeOptionId = option.Id))
@@ -287,7 +285,6 @@ public partial class InstallationDataSeeder
             .OnCreated((product, _) =>
             {
                 product.HasTierPrices = product.TierPrices.Count > 0;
-                product.HasDiscountsApplied = product.AppliedDiscounts.Count > 0;
             });
 
         // Child collections created after the products: declared for merging only.

@@ -119,29 +119,6 @@ internal class ProductHook : AsyncDbSaveHook<Product>
             }
         }
 
-        // Update HasDiscountsApplied property.
-        var products = entries
-            .Select(x => x.Entity)
-            .OfType<Product>()
-            .ToList();
-
-        // Process in batches to avoid errors due to too long SQL statements.
-        foreach (var productsChunk in products.Chunk(100))
-        {
-            var productIdsChunk = productsChunk
-                .Select(x => x.Id)
-                .ToArray();
-
-            var appliedProductIds = await _db.Discounts
-                .SelectMany(x => x.AppliedToProducts)
-                .Where(x => productIdsChunk.Contains(x.Id))
-                .Select(x => x.Id)
-                .Distinct()
-                .ToListAsync(cancelToken);
-
-            productsChunk.Each(x => x.HasDiscountsApplied = appliedProductIds.Contains(x.Id));
-        }
-
         await _db.SaveChangesAsync(cancelToken);
 
         // Set old sample downloads to transient.

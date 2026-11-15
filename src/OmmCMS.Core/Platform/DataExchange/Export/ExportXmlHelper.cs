@@ -4,7 +4,6 @@ using System.Xml;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common;
@@ -423,7 +422,6 @@ public class ExportXmlHelper : Disposable
             _writer.WriteElementString(nameof(Category.AllowCustomersToSelectPageSize), entity.AllowCustomersToSelectPageSize.ToString());
             _writer.WriteElementString(nameof(Category.PageSizeOptions), entity.PageSizeOptions);
             _writer.WriteElementString(nameof(Category.ShowOnHomePage), entity.ShowOnHomePage.ToString());
-            _writer.WriteElementString(nameof(Category.HasDiscountsApplied), entity.HasDiscountsApplied.ToString());
             _writer.WriteElementString(nameof(Category.Published), entity.Published.ToString());
             _writer.WriteElementString(nameof(Category.IgnoreInMenus), entity.IgnoreInMenus.ToString());
             _writer.WriteElementString(nameof(Category.WithdrawalPeriodDays), entity.WithdrawalPeriodDays?.ToString() ?? string.Empty);
@@ -478,7 +476,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Manufacturer.DisplayOrder), entity.DisplayOrder.ToString());
         _writer.WriteElementString(nameof(Manufacturer.CreatedOnUtc), entity.CreatedOnUtc.ToString(_culture));
         _writer.WriteElementString(nameof(Manufacturer.UpdatedOnUtc), entity.UpdatedOnUtc.ToString(_culture));
-        _writer.WriteElementString(nameof(Manufacturer.HasDiscountsApplied), entity.HasDiscountsApplied.ToString());
         _writer.WriteElementString(nameof(Manufacturer.SubjectToAcl), entity.SubjectToAcl.ToString());
         _writer.WriteElementString(nameof(Manufacturer.LimitedToStores), entity.LimitedToStores.ToString());
 
@@ -658,7 +655,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.MinimumCustomerEnteredPrice), entity.MinimumCustomerEnteredPrice.ToString(_culture));
         _writer.WriteElementString(nameof(Product.MaximumCustomerEnteredPrice), entity.MaximumCustomerEnteredPrice.ToString(_culture));
         _writer.WriteElementString(nameof(Product.HasTierPrices), entity.HasTierPrices.ToString());
-        _writer.WriteElementString(nameof(Product.HasDiscountsApplied), entity.HasDiscountsApplied.ToString());
         _writer.WriteElementString(nameof(Product.MainPictureId), entity.MainPictureId?.ToString() ?? string.Empty);
         _writer.WriteElementString(nameof(Product.DisplayAllImagesNumber), entity.DisplayAllImagesNumber?.ToString() ?? string.Empty);
         _writer.WriteElementString(nameof(Product.Weight), ((decimal)product.Weight).ToString(_culture));
@@ -695,31 +691,6 @@ public class ExportXmlHelper : Disposable
         WriteQuantityUnit(product.QuantityUnit, nameof(Product.QuantityUnit));
         WriteCountry(product.CountryOfOrigin, nameof(Product.CountryOfOrigin));
         WriteAttributes(product);
-
-        if (product.AppliedDiscounts != null)
-        {
-            _writer.WriteStartElement("AppliedDiscounts");
-            foreach (dynamic discount in product.AppliedDiscounts)
-            {
-                Discount entityDiscount = discount.Entity;
-
-                _writer.WriteStartElement("AppliedDiscount");
-                _writer.WriteElementString(nameof(Discount.Id), entityDiscount.Id.ToString());
-                _writer.WriteElementString(nameof(Discount.Name), (string)discount.Name);
-                _writer.WriteElementString(nameof(Discount.DiscountTypeId), entityDiscount.DiscountTypeId.ToString());
-                _writer.WriteElementString(nameof(Discount.UsePercentage), entityDiscount.UsePercentage.ToString());
-                _writer.WriteElementString(nameof(Discount.DiscountPercentage), entityDiscount.DiscountPercentage.ToString(_culture));
-                _writer.WriteElementString(nameof(Discount.DiscountAmount), entityDiscount.DiscountAmount.ToString(_culture));
-                _writer.WriteElementString(nameof(Discount.StartDateUtc), entityDiscount.StartDateUtc?.ToString(_culture) ?? string.Empty);
-                _writer.WriteElementString(nameof(Discount.EndDateUtc), entityDiscount.EndDateUtc?.ToString(_culture) ?? string.Empty);
-                _writer.WriteElementString(nameof(Discount.RequiresCouponCode), entityDiscount.RequiresCouponCode.ToString());
-                _writer.WriteElementString(nameof(Discount.CouponCode), entityDiscount.CouponCode);
-                _writer.WriteElementString(nameof(Discount.DiscountLimitationId), entityDiscount.DiscountLimitationId.ToString());
-                _writer.WriteElementString(nameof(Discount.LimitationTimes), entityDiscount.LimitationTimes.ToString());
-                _writer.WriteEndElement();
-            }
-            _writer.WriteEndElement();
-        }
 
         if (product.Downloads != null)
         {

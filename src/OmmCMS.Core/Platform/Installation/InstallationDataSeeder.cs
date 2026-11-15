@@ -153,7 +153,6 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
             await PopulateFromSeedAsync("PopulateProductAttributeOptionsSets", InstallationSeedDescriptors.ProductAttributeOptionsSets());
             await PopulateAsync("PopulateCampaigns", PopulateCampaigns);
             await PopulateFromSeedAsync("PopulateRuleSets", InstallationSeedDescriptors.RuleSets());
-            await PopulateFromSeedAsync("PopulateDiscounts", InstallationSeedDescriptors.Discounts());
             await PopulateAsync("PopulateSampleCustomers", PopulateSampleCustomers);
             await PopulateAsync("PopulateCategories", PopulateCategories);
             await PopulateAsync("PopulateManufacturers", PopulateManufacturers);

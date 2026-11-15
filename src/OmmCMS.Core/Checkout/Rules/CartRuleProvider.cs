@@ -248,13 +248,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
 
             new()
             {
-                Name = "CartDiscount",
-                DisplayName = T("Admin.Rules.FilterDescriptor.DiscountApplied"),
-                RuleType = RuleType.Boolean,
-                ProcessorType = typeof(DiscountRule)
-            },
-            new()
-            {
                 Name = "RuleSet",
                 DisplayName = T("Admin.Rules.FilterDescriptor.RuleSet"),
                 RuleType = RuleType.Int,

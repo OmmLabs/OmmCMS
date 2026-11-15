@@ -243,7 +243,6 @@ public class CategoryImporter : EntityImporterBase
             row.SetProperty(context.Result, (x) => x.AllowCustomersToSelectPageSize);
             row.SetProperty(context.Result, (x) => x.PageSizeOptions);
             row.SetProperty(context.Result, (x) => x.ShowOnHomePage);
-            row.SetProperty(context.Result, (x) => x.HasDiscountsApplied);
             row.SetProperty(context.Result, (x) => x.Published, true);
             row.SetProperty(context.Result, (x) => x.IgnoreInMenus);
             row.SetProperty(context.Result, (x) => x.WithdrawalPeriodDays);

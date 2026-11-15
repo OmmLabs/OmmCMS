@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Content.Media;
@@ -102,7 +101,7 @@ internal class ProductMap : IEntityTypeConfiguration<Product>
 [Index(nameof(DisplayOrder), Name = "IX_Product_DisplayOrder")]
 [LocalizedEntity("Published and !Deleted")]
 [DebuggerDisplay("{Id} - {Name}")]
-public partial class Product : EntityWithDiscounts, IAuditable, ISoftDeletable, ILocalizedEntity, ISlugSupported, IAclRestricted, IStoreRestricted, IMergedData
+public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable, ILocalizedEntity, ISlugSupported, IAclRestricted, IStoreRestricted, IMergedData
 {
     private string _requiredProductIds;
     private int[] _requiredProductIdList;

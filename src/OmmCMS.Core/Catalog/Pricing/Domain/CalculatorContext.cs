@@ -1,5 +1,4 @@
 ﻿using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Products;
 
 namespace OmmCMS.Core.Catalog.Pricing;
@@ -18,18 +17,6 @@ public class CalculatorContext : PriceCalculationContext
         FinalPrice = finalPrice;
         RegularPrice = finalPrice;
     }
-
-    /// <summary>
-    /// List of discount entities that have been applied during calculation.
-    /// Add an entity to this collection if your calculator applied a discount to the final price.
-    /// </summary>
-    public ICollection<Discount> AppliedDiscounts { get; } = new HashSet<Discount>();
-
-    /// <summary>
-    /// List of discount amounts to be applied later during price calculation,
-    /// e.g. the discount amount applied to a tier price.
-    /// </summary>
-    public ICollection<CalculatedDiscount> CalculatedDiscounts { get; } = new List<CalculatedDiscount>();
 
     /// <summary>
     /// Attribute combination whose price was applied during calculation.
@@ -128,11 +115,7 @@ public class CalculatorContext : PriceCalculationContext
         target.AdditionalCharge = AdditionalCharge;
         target.DiscountAmount = DiscountAmount;
 
-        target.AppliedDiscounts.Clear();
-        target.AppliedDiscounts.AddRange(AppliedDiscounts);
 
-        target.CalculatedDiscounts.Clear();
-        target.CalculatedDiscounts.AddRange(CalculatedDiscounts);
 
         target.AttributePriceAdjustments.Clear();
         target.AttributePriceAdjustments.AddRange(AttributePriceAdjustments);

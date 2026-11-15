@@ -6,7 +6,6 @@ using Moq;
 using NUnit.Framework;
 using OmmCMS.Caching;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Checkout.Tax;
@@ -34,7 +33,6 @@ public class PriceCalculationServiceTests : ServiceTestBase
     ITaxCalculator _taxCalculator;
     IProductAttributeMaterializer _productAttributeMaterializer;
     IProductService _productService;
-    IDiscountService _discountService;
 
     ICurrencyService _currencyService;
     IRoundingHelper _roundingHelper;
@@ -85,20 +83,6 @@ public class PriceCalculationServiceTests : ServiceTestBase
         var taxServiceMock = new Mock<ITaxService>();
         _taxService = taxServiceMock.Object;
 
-        var discountServiceMock = new Mock<IDiscountService>();
-        _discountService = discountServiceMock.Object;
-
-        discountServiceMock
-            .Setup(x => x.GetAllDiscountsAsync(DiscountType.AssignedToCategories, It.IsAny<string>(), It.IsAny<bool>()))
-            .ReturnsAsync(new List<Discount>());
-        discountServiceMock
-            .Setup(x => x.GetAllDiscountsAsync(DiscountType.AssignedToManufacturers, It.IsAny<string>(), It.IsAny<bool>()))
-            .ReturnsAsync(new List<Discount>());
-
-        discountServiceMock
-            .Setup(x => x.IsDiscountValidAsync(It.IsAny<Discount>(), _customer, It.IsAny<string>(), It.IsAny<Store>(), It.IsAny<DiscountValidationFlags>()))
-            .ReturnsAsync(true);
-
         var currencyServiceMock = new Mock<ICurrencyService>();
         _currencyService = currencyServiceMock.Object;
         currencyServiceMock.Setup(x => x.PrimaryCurrency).Returns(_currency);
@@ -114,7 +98,7 @@ public class PriceCalculationServiceTests : ServiceTestBase
         // INFO: Create real instance of PriceCalculatorFactory with own instances of Calculators
         var calculators = new List<Lazy<IPriceCalculator, PriceCalculatorMetadata>>();
         _priceCalculatorFactory = new PriceCalculatorFactory(_requestCache, calculators);
-        calculators.AddRange(base.GetPriceCalculators(_priceCalculatorFactory, _discountService, _priceSettings));
+        calculators.AddRange(base.GetPriceCalculators(_priceCalculatorFactory, _priceSettings));
 
         _priceCalcService = new PriceCalculationService(
             DbContext,
@@ -155,7 +139,6 @@ public class PriceCalculationServiceTests : ServiceTestBase
             Quantity = 1
         };
 
-        DbContext.Discounts.RemoveRange(DbContext.Discounts);
         DbContext.Products.RemoveRange(DbContext.Products);
         await DbContext.SaveChangesAsync();
     }
@@ -305,7 +288,7 @@ public class PriceCalculationServiceTests : ServiceTestBase
 
         _product.ProductType = ProductType.BundledProduct;
         _product.BundlePerItemPricing = true;
-        _product.Price = 17.03M;
+        _product.Price = 22.70M;
 
         _priceCalculationContext.BundleItems =
         [
@@ -313,17 +296,13 @@ public class PriceCalculationServiceTests : ServiceTestBase
             {
                 Product = oliveOil,
                 BundleProduct = _product,
-                Quantity = 1,
-                Discount = 25,
-                DiscountPercentage = true
+                Quantity = 1
             },
             new ProductBundleItem
             {
                 Product = herbMix,
                 BundleProduct = _product,
-                Quantity = 2,
-                Discount = 25,
-                DiscountPercentage = true
+                Quantity = 2
             }
         ];
 
@@ -340,19 +319,13 @@ public class PriceCalculationServiceTests : ServiceTestBase
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(price.FinalPrice.Amount, Is.EqualTo(17.025M));
-            Assert.That(price.RegularPrice?.Amount, Is.EqualTo(22.70M));
-            Assert.That(price.Saving.SavingPercent, Is.EqualTo(25));
+            Assert.That(price.FinalPrice.Amount, Is.EqualTo(22.70M));
         }
     }
 
-    [TestCase(null, 0, 20, 20, 100)]
-    [TestCase(true, 15, 20, 17, 85)]
-    [TestCase(false, 10, 20, 20, 90)]
-    [TestCase(null, 0, -2, -2, 100)]
+    [TestCase(20, 20, 100)]
+    [TestCase(-2, -2, 100)]
     public async Task Can_get_attribute_price_adjustment(
-        bool? usePercentage,
-        decimal discountValue,
         decimal adjustment,
         decimal expectedAdjustment,
         decimal expectedPrice)
@@ -373,31 +346,12 @@ public class PriceCalculationServiceTests : ServiceTestBase
         attribute.ProductVariantAttributeValues.Add(attributeValue);
         _product.ProductVariantAttributes.Add(attribute);
 
-        if (usePercentage.HasValue)
-        {
-            var discount = new Discount
-            {
-                Id = 1,
-                Name = "Discount",
-                DiscountType = DiscountType.AssignedToSkus,
-                UsePercentage = usePercentage.Value,
-                DiscountPercentage = usePercentage.Value ? discountValue : 0m,
-                DiscountAmount = usePercentage.Value ? 0m : discountValue,
-                DiscountLimitation = DiscountLimitationType.Unlimited
-            };
-
-            discount.AppliedToProducts.Add(_product);
-            _product.AppliedDiscounts.Add(discount);
-            _product.HasDiscountsApplied = true;
-            DbContext.Discounts.Add(discount);
-        }
 
         DbContext.Products.Add(_product);
         await DbContext.SaveChangesAsync();
 
         _priceCalculationContext.Options.DeterminePriceAdjustments = true;
         _priceCalculationContext.Options.IgnoreDiscounts = false;
-        _priceCalculationContext.Options.DiscountValidationFlags = DiscountValidationFlags.None;
 
         var price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
 
@@ -474,41 +428,6 @@ public class PriceCalculationServiceTests : ServiceTestBase
         price.FinalPrice.Amount.ShouldEqual(8);
     }
 
-    [Test]
-    public async Task Can_apply_percentage_discount_on_tier_price()
-    {
-        InitTierPrices();
-
-        _priceCalculationContext.Options.IgnoreDiscounts = false;
-        _priceCalculationContext.Options.IgnoreTierPrices = false;
-        _priceCalculationContext.Options.DiscountValidationFlags = DiscountValidationFlags.None;
-        _priceCalculationContext.Options.IgnorePercentageDiscountOnTierPrices = false;
-        _priceCalculationContext.Quantity = 5;
-
-        var discount = new Discount
-        {
-            Id = 1,
-            Name = "Discount 1",
-            DiscountType = DiscountType.AssignedToSkus,
-            UsePercentage = true,
-            DiscountPercentage = 10,
-            DiscountLimitation = DiscountLimitationType.Unlimited
-        };
-
-        discount.AppliedToProducts.Add(_product);
-        _product.AppliedDiscounts.Add(discount);
-        _product.HasDiscountsApplied = true;
-
-        DbContext.Discounts.Add(discount);
-        DbContext.Products.Add(_product);
-
-        await DbContext.SaveChangesAsync();
-
-        var price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-
-        // 8.00 (tier price) - 0.80 (10% discount on tier price).
-        price.FinalPrice.Amount.ShouldEqual(7.20);
-    }
 
     [Test]
     public async Task Can_get_final_product_price_with_custom_additional_charge()
@@ -520,32 +439,6 @@ public class PriceCalculationServiceTests : ServiceTestBase
         price.FinalPrice.Amount.ShouldEqual(17.34M);
     }
 
-    [Test]
-    public async Task Can_get_final_product_price_with_discount()
-    {
-        _priceCalculationContext.Options.IgnoreDiscounts = false;
-        _priceCalculationContext.Options.DiscountValidationFlags = DiscountValidationFlags.None;
-
-        var discount1 = new Discount()
-        {
-            Id = 1,
-            Name = "Discount 1",
-            DiscountType = DiscountType.AssignedToSkus,
-            DiscountAmount = 3,
-            DiscountLimitation = DiscountLimitationType.Unlimited
-        };
-
-        discount1.AppliedToProducts.Add(_product);
-        _product.AppliedDiscounts.Add(discount1);
-        _product.HasDiscountsApplied = true;
-
-        DbContext.Discounts.Add(discount1);
-        DbContext.Products.Add(_product);
-        await DbContext.SaveChangesAsync();
-
-        var price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(9.34M);
-    }
 
     [Test]
     public async Task Can_get_final_product_price_with_special_price()
@@ -670,90 +563,7 @@ public class PriceCalculationServiceTests : ServiceTestBase
         }
     }
 
-    [Test]
-    public async Task Can_get_product_discount()
-    {
-        _priceCalculationContext.Options.IgnoreDiscounts = false;
-        _priceCalculationContext.Options.DiscountValidationFlags = DiscountValidationFlags.None;
 
-        var discount1 = new Discount()
-        {
-            Id = 1,
-            Name = "Discount 1",
-            DiscountType = DiscountType.AssignedToSkus,
-            DiscountAmount = 3,
-            DiscountLimitation = DiscountLimitationType.Unlimited
-        };
-        discount1.AppliedToProducts.Add(_product);
-        _product.AppliedDiscounts.Add(discount1);
-        _product.HasDiscountsApplied = true;
-
-        var discount2 = new Discount()
-        {
-            Id = 2,
-            Name = "Discount 2",
-            DiscountType = DiscountType.AssignedToSkus,
-            DiscountAmount = 4,
-            DiscountLimitation = DiscountLimitationType.Unlimited
-        };
-        discount2.AppliedToProducts.Add(_product);
-        _product.AppliedDiscounts.Add(discount2);
-
-        var discount3 = new Discount()
-        {
-            Id = 3,
-            Name = "Discount 3",
-            DiscountType = DiscountType.AssignedToOrderSubTotal,
-            DiscountAmount = 5,
-            DiscountLimitation = DiscountLimitationType.Unlimited,
-            RequiresCouponCode = true,
-            CouponCode = "SECRET CODE"
-        };
-        discount3.AppliedToProducts.Add(_product);
-        _product.AppliedDiscounts.Add(discount3);
-
-        DbContext.Discounts.Add(discount1);
-        DbContext.Discounts.Add(discount2);
-        DbContext.Discounts.Add(discount3);
-        DbContext.Products.Add(_product);
-        await DbContext.SaveChangesAsync();
-
-        var price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-
-        price.DiscountAmount.Amount.ShouldEqual(4);
-        price.AppliedDiscounts.FirstOrDefault().ShouldNotBeNull();
-        price.AppliedDiscounts.FirstOrDefault().ShouldEqual(discount2);
-    }
-
-    [Test]
-    public async Task Discount_is_not_applied_to_customer_priced_products()
-    {
-        _priceCalculationContext.Options.IgnoreDiscounts = false;
-        _priceCalculationContext.Options.DiscountValidationFlags = DiscountValidationFlags.None;
-
-        _product.CustomerEntersPrice = true;
-
-        var discount1 = new Discount
-        {
-            Id = 1,
-            Name = "Discount 1",
-            DiscountType = DiscountType.AssignedToSkus,
-            DiscountAmount = 3,
-            DiscountLimitation = DiscountLimitationType.Unlimited
-        };
-        discount1.AppliedToProducts.Add(_product);
-        _product.AppliedDiscounts.Add(discount1);
-        _product.HasDiscountsApplied = true;
-
-        DbContext.Discounts.Add(discount1);
-        DbContext.Products.Add(_product);
-        await DbContext.SaveChangesAsync();
-
-        var price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-
-        price.DiscountAmount.Amount.ShouldEqual(0);
-        price.AppliedDiscounts.FirstOrDefault().ShouldBeNull();
-    }
 
     [Test]
     public async Task Can_get_product_quantity_unitPrice()

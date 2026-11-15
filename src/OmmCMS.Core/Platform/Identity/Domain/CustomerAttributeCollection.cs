@@ -76,15 +76,6 @@ public class CustomerAttributeCollection : GenericAttributeCollection<Customer>
 
     #region Other attributes
 
-    /// <summary>
-    /// Gets or sets the discount coupon code entered on the shopping cart page.
-    /// </summary>
-    public string DiscountCouponCode
-    {
-        get => Get<string>(SystemCustomerAttributeNames.DiscountCouponCode);
-        set => Set(SystemCustomerAttributeNames.DiscountCouponCode, value);
-    }
-
 
     /// <summary>
     /// Gets or sets the file IDcolor of the customer's avatar picture.

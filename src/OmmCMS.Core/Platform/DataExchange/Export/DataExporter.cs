@@ -8,7 +8,6 @@ using OmmCMS.Core.Catalog;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Search;
@@ -987,7 +986,7 @@ public partial class DataExporter : IDataExporter
 
             if (ctx.ProductBatchContext != null)
             {
-                Detach(x => x is Product || x is Discount || x is ProductVariantAttributeCombination || x is ProductVariantAttribute || x is ProductVariantAttributeValue ||
+                Detach(x => x is Product || x is ProductVariantAttributeCombination || x is ProductVariantAttribute || x is ProductVariantAttributeValue ||
                     x is ProductAttribute || x is ProductBundleItem || x is ProductBundleItemAttributeFilter || x is ProductCategory || x is ProductManufacturer ||
                     x is Category || x is Manufacturer || x is ProductMediaFile || x is ProductTag || x is ProductSpecificationAttribute || x is SpecificationAttributeOption ||
                     x is SpecificationAttribute || x is TierPrice || x is DeliveryTime || x is QuantityUnit || x is Download ||
@@ -1499,7 +1498,6 @@ public partial class DataExporter : IDataExporter
         var priceDisplay = ctx.Projection.PriceType ?? _priceSettings.PriceDisplayType;
         var options = _priceCalculationService.CreateDefaultOptions(false, null, null, batchContext);
 
-        options.DiscountValidationFlags = DiscountValidationFlags.All;
         options.ApplyPreselectedAttributes = priceDisplay == PriceDisplayType.PreSelectedPrice;
 
         if (forAttributeCombinations)

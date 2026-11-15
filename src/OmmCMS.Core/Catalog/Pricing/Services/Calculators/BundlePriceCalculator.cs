@@ -56,8 +56,6 @@ public class BundlePriceCalculator : PriceCalculator
                 context.FinalPrice += decimal.Multiply(childCalculation.FinalPrice, bundleItem.Quantity);
                 context.RegularPrice += decimal.Multiply(childCalculation.RegularPrice, bundleItem.Quantity);
 
-                // No copying of discounts to <see cref="CalculatorContext.AppliedDiscounts"/>. For BundlePerItemPricing they are only
-                // virtual stub discounts (<see cref="DiscountPriceCalculator"/> and <see cref="ProductBundleItem.Discount"/>).
                 context.DiscountAmount += decimal.Multiply(childCalculation.DiscountAmount, bundleItem.Quantity);
 
                 // TODO: (mg) (core) Is it not better to continue the pipeline here (unlike in OmmCMS classic)? Continuation could

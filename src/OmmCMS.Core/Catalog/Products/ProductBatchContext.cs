@@ -3,7 +3,6 @@ using OmmCMS.Collections;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Data;
@@ -19,7 +18,6 @@ public class ProductBatchContext
 {
     protected readonly List<int> _productIds = [];
     private readonly List<int> _productIdsTierPrices = [];
-    private readonly List<int> _productIdsAppliedDiscounts = [];
     private readonly List<int> _bundledProductIds = [];
     private readonly List<int> _groupedProductIds = [];
     private readonly List<int> _mainMediaFileIds = [];
@@ -38,7 +36,6 @@ public class ProductBatchContext
     private LazyMultimap<TierPrice> _tierPrices;
     private LazyMultimap<ProductCategory> _productCategories;
     private LazyMultimap<ProductManufacturer> _productManufacturers;
-    private LazyMultimap<Discount> _appliedDiscounts;
     private LazyMultimap<ProductBundleItem> _productBundleItems;
     private LazyMultimap<Product> _associatedProducts;
     private LazyMultimap<ProductMediaFile> _productMediaFiles;
@@ -68,7 +65,6 @@ public class ProductBatchContext
         {
             _productIds.AddRange(products.Select(x => x.Id));
             _productIdsTierPrices.AddRange(products.Where(x => x.HasTierPrices).Select(x => x.Id));
-            _productIdsAppliedDiscounts.AddRange(products.Where(x => x.HasDiscountsApplied).Select(x => x.Id));
             _bundledProductIds.AddRange(products.Where(x => x.ProductType == ProductType.BundledProduct).Select(x => x.Id));
             _groupedProductIds.AddRange(products.Where(x => x.ProductType == ProductType.GroupedProduct).Select(x => x.Id));
 
@@ -130,11 +126,6 @@ public class ProductBatchContext
         get => _productManufacturers ??= new LazyMultimap<ProductManufacturer>(LoadProductManufacturers, _productIds);
     }
 
-    public LazyMultimap<Discount> AppliedDiscounts
-    {
-        get => _appliedDiscounts ??= new LazyMultimap<Discount>(LoadAppliedDiscounts, _productIdsAppliedDiscounts);
-    }
-
     public LazyMultimap<ProductBundleItem> ProductBundleItems
     {
         get => _productBundleItems ??= new LazyMultimap<ProductBundleItem>(LoadProductBundleItems, _bundledProductIds);
@@ -180,7 +171,6 @@ public class ProductBatchContext
         TierPrices.Collect(productIds);
         ProductCategories.Collect(productIds);
         ProductManufacturers.Collect(productIds);
-        AppliedDiscounts.Collect(productIds);
         ProductBundleItems.Collect(productIds);
         AssociatedProducts.Collect(productIds);
         ProductMediaFiles.Collect(productIds);
@@ -200,8 +190,6 @@ public class ProductBatchContext
         _productIdsTierPrices?.Clear();
         _productCategories?.Clear();
         _productManufacturers?.Clear();
-        _appliedDiscounts?.Clear();
-        _productIdsAppliedDiscounts?.Clear();
         _productBundleItems?.Clear();
         _bundledProductIds?.Clear();
         _associatedProducts?.Clear();
@@ -281,26 +269,6 @@ public class ProductBatchContext
     {
         var productManufacturers = await ManufacturerService.GetProductManufacturersByProductIdsAsync(ids, _includeHidden);
         return productManufacturers.ToMultimap(x => x.ProductId, x => x);
-    }
-
-    protected virtual async Task<Multimap<int, Discount>> LoadAppliedDiscounts(int[] ids)
-    {
-        // INFO: AppliedDiscounts.RuleSets are not eager loaded anymore to avoid MultipleCollectionIncludeWarning.
-        var discounts = await _db.Products
-            .AsNoTracking()
-            .Include(x => x.AppliedDiscounts)
-            .Where(x => ids.Contains(x.Id))
-            .Select(x => new
-            {
-                ProductId = x.Id,
-                Discounts = x.AppliedDiscounts
-            })
-            .ToListAsync();
-
-        var map = new Multimap<int, Discount>();
-        discounts.Each(x => map.AddRange(x.ProductId, x.Discounts));
-
-        return map;
     }
 
     protected virtual async Task<Multimap<int, ProductBundleItem>> LoadProductBundleItems(int[] ids)

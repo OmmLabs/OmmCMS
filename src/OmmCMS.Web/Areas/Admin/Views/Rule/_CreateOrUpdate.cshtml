@@ -5,11 +5,9 @@
 
     var scopes = ViewBag.Scopes as List<ExtendedSelectListItem>;
 
-    var assignedToDiscounts = ViewBag.AssignedToDiscounts as List<RuleSetAssignedToEntityModel>;
     var assignedToCustomerRoles = ViewBag.AssignedToCustomerRoles as List<RuleSetAssignedToEntityModel>;
     var assignedToCategories = ViewBag.AssignedToCategories as List<RuleSetAssignedToEntityModel>;
 
-    string discountSelector(RuleSetAssignedToEntityModel x) => $"<a href='{Url.Action("Edit", "Discount", new { id = x.Id })}'>{x.Name.HtmlEncode()}</a>";
     string customerRoleSelector(RuleSetAssignedToEntityModel x) => $"<a href='{Url.Action("Edit", "CustomerRole", new { id = x.Id })}'>{x.Name.HtmlEncode()}</a>";
     string categorySelector(RuleSetAssignedToEntityModel x) => $"<a href='{Url.Action("Edit", "Category", new { id = x.Id })}'>{x.Name.HtmlEncode()}</a>";
 }
@@ -70,14 +68,6 @@
                 <input type="hidden" asp-for="Scope" />
                 <input asp-for="ScopeName" readonly="readonly" />
             }
-        </div>
-    </div>
-    <div sm-if="assignedToDiscounts?.Any() ?? false" class="adminRow">
-        <div class="adminTitle">
-            @Html.SmartLabel("AssignedToDiscounts", T("Admin.Rules.RuleSet.AssignedObjects", T("Admin.Promotions.Discounts")), T("Admin.Rules.RuleSet.AssignedObjects.Hint"))
-        </div>
-        <div class="adminData form-control-plaintext wide">
-            @Html.Raw(string.Join(" · ", assignedToDiscounts.Select(discountSelector)))
         </div>
     </div>
     <div sm-if="assignedToCustomerRoles?.Any() ?? false" class="adminRow">

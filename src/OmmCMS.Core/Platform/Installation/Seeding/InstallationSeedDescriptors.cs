@@ -1,7 +1,6 @@
 ﻿using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Checkout.Tax;
@@ -221,13 +220,8 @@ internal static class InstallationSeedDescriptors
             .Child("rules", x => x.Rules, new SeedEntityDescriptor<RuleEntity>("ruleType"))
             .References<CustomerRole>("customerRoles", (ruleSet, roles) => roles.Each(ruleSet.CustomerRoles.Add));
 
-    public static SeedEntityDescriptor<Discount> Discounts()
-        => new SeedEntityDescriptor<Discount>("key")
-            .FromFiles("samples/discounts.json")
-            .References<RuleSetEntity>("ruleSets", (discount, ruleSets) => ruleSets.Each(discount.RuleSets.Add));
-
     /// <summary>
-    /// Categories with parent, picture, rule sets and applied discounts.
+    /// Categories with parent, picture, rule sets.
     /// </summary>
     /// <param name="media">Creates a media file from a media reference (path or { file, name }).</param>
     public static SeedEntityDescriptor<Category> Categories(Func<JsonNode, MediaFile> media)
@@ -238,14 +232,11 @@ internal static class InstallationSeedDescriptors
             .FromFiles("samples/catalog/categories.json")
             .Reference<Category>("parent", (category, parent) => category.Parent = parent)
             .Bind("mediaFile", (category, node, _) => category.MediaFile = media(node))
-            .References<RuleSetEntity>("ruleSets", (category, ruleSets) => ruleSets.Each(category.RuleSets.Add))
-            .References<Discount>("discounts", (category, discounts) => discounts.Each(category.AppliedDiscounts.Add))
-            // Derived property, maintained by the discount service at runtime.
-            .OnCreated((category, _) => category.HasDiscountsApplied = category.AppliedDiscounts.Count > 0);
+            .References<RuleSetEntity>("ruleSets", (category, ruleSets) => ruleSets.Each(category.RuleSets.Add));
     }
 
     /// <summary>
-    /// Manufacturers with picture and applied discounts.
+    /// Manufacturers with picture.
     /// </summary>
     /// <param name="media">Creates a media file from a media reference (path or { file, name }).</param>
     public static SeedEntityDescriptor<Manufacturer> Manufacturers(Func<JsonNode, MediaFile> media)
@@ -254,10 +245,7 @@ internal static class InstallationSeedDescriptors
 
         return new SeedEntityDescriptor<Manufacturer>("key")
             .FromFiles("samples/catalog/manufacturers.json")
-            .Bind("mediaFile", (manufacturer, node, _) => manufacturer.MediaFile = media(node))
-            .References<Discount>("discounts", (manufacturer, discounts) => discounts.Each(manufacturer.AppliedDiscounts.Add))
-            // Derived property, maintained by the discount service at runtime.
-            .OnCreated((manufacturer, _) => manufacturer.HasDiscountsApplied = manufacturer.AppliedDiscounts.Count > 0);
+            .Bind("mediaFile", (manufacturer, node, _) => manufacturer.MediaFile = media(node));
     }
 
     public static SeedEntityDescriptor<ProductTag> ProductTags()

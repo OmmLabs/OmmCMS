@@ -24,7 +24,7 @@ public class TierPriceCalculator : IPriceCalculator
         {
             var tierPrices = await context.GetTierPricesAsync();
 
-            // Put minimum tier price to context because it's required for discount calculation.
+            // Put minimum tier price in the context.
             var (amount, tp) = GetMinimumTierPrice(product, tierPrices, context.Quantity);
             context.MinTierPrice = amount;
             tierPriceEntity = tp;
@@ -35,7 +35,7 @@ public class TierPriceCalculator : IPriceCalculator
             }
         }
 
-        // Process the whole pipeline. We need the result of discount calculation.
+        // Process the whole pipeline. Use the final calculated price.
         await next(context);
 
         if (processTierPrices && context.MinTierPrice.HasValue)
@@ -43,7 +43,7 @@ public class TierPriceCalculator : IPriceCalculator
             // Wrong result:
             //context.FinalPrice = Math.Min(context.FinalPrice, context.MinTierPrice.Value);
 
-            // Apply the minimum tier price if it achieves a lower price than the discounted FinalPrice
+            // Apply the minimum tier price if it achieves a lower price than the FinalPrice
             // but exclude additional charge from comparing.
             context.FinalPrice -= context.AdditionalCharge;
 
@@ -52,19 +52,6 @@ public class TierPriceCalculator : IPriceCalculator
             {
                 context.FinalPrice = context.MinTierPrice.Value;
                 context.AppliedTierPrice = tierPriceEntity;
-
-                // Apply discount on minimum tier price (if any).
-                var discountOnTierPrice = context.CalculatedDiscounts
-                    .Where(x => x.Origin == nameof(context.MinTierPrice))
-                    .OrderByDescending(x => x.DiscountAmount)
-                    .FirstOrDefault();
-
-                if (discountOnTierPrice != null)
-                {
-                    context.AppliedDiscounts.Add(discountOnTierPrice.Discount);
-                    context.DiscountAmount += discountOnTierPrice.DiscountAmount;
-                    context.FinalPrice -= discountOnTierPrice.DiscountAmount;
-                }
             }
 
             context.FinalPrice += context.AdditionalCharge;

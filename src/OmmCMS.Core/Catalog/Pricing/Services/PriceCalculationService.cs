@@ -1,6 +1,5 @@
 ﻿using System.Linq.Dynamic.Core;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
@@ -329,8 +328,7 @@ public partial class PriceCalculationService : IPriceCalculationService
         // Determine tax rate for product.
         var taxRate = await _taxService.GetTaxRateAsync(context.Product, null, options.Customer);
 
-        var endDates = context.AppliedDiscounts.Select(x => x.EndDateUtc)
-            .Concat([context.OfferEndDateUtc])
+        var endDates = new[] { context.OfferEndDateUtc }
             .Where(x => x.HasValue && x > DateTime.UtcNow)
             .ToArray();
 
@@ -397,15 +395,6 @@ public partial class PriceCalculationService : IPriceCalculationService
 
     protected virtual decimal GetEffectivePriceAdjustment(decimal adjustment, CalculatorContext context)
     {
-        // INFO: Discounts calculated exclusively for a tier price do not reduce attribute price adjustments.
-        // A single fixed-amount discount does not change the price difference between the variants.
-        var percentageDiscounts = context.AppliedDiscounts
-            .Where(x => x.UsePercentage && !context.CalculatedDiscounts.Any(y => y.Discount == x));
-
-        foreach (var discount in percentageDiscounts)
-        {
-            adjustment -= discount.GetDiscountAmount(adjustment);
-        }
 
         return adjustment;
     }

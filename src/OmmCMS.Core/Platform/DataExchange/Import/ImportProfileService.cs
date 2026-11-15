@@ -458,7 +458,6 @@ public partial class ImportProfileService : IImportProfileService
         ["BillingAddress.CreatedOnUtc"] = "Common.CreatedOn",
         ["ShippingAddress.CreatedOnUtc"] = "Common.CreatedOn",
         ["UpdatedOnUtc"] = "Common.UpdatedOn",
-        ["HasDiscountsApplied"] = "Admin.Catalog.Products.Fields.HasDiscountsApplied",
         ["DefaultViewMode"] = "Admin.Configuration.Settings.Catalog.DefaultViewMode",
         ["StoreId"] = "Admin.Common.Store",
         ["LimitedToStores"] = "Admin.Common.Store.LimitedTo",

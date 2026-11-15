@@ -5,7 +5,6 @@ using Autofac;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Content.Media;
@@ -41,7 +40,6 @@ public partial class DisplayControl : IDisplayControl
         [typeof(Product)] = HandleProductAsync,
         [typeof(SpecificationAttribute)] = HandleSpecificationAttributeAsync,
         [typeof(ProductVariantAttributeValue)] = HandleProductVariantAttributeValueAsync,
-        [typeof(Discount)] = HandleDiscountAsync,
         [typeof(LocalizedProperty)] = HandleLocalizedPropertyAsync
     };
 
@@ -160,23 +158,6 @@ public partial class DisplayControl : IDisplayControl
         if (pva != null)
         {
             return new[] { "p" + pva.ProductId };
-        }
-
-        return Enumerable.Empty<string>();
-    }
-
-    private static async Task<IEnumerable<string>> HandleDiscountAsync(BaseEntity entity, SmartDbContext db, IComponentContext ctx)
-    {
-        var discount = (Discount)entity;
-        if (discount.DiscountType == DiscountType.AssignedToCategories)
-        {
-            await db.LoadCollectionAsync(discount, x => x.AppliedToCategories);
-            return discount.AppliedToCategories.Select(category => "c" + category.Id);
-        }
-        else if (discount.DiscountType == DiscountType.AssignedToSkus)
-        {
-            await db.LoadCollectionAsync(discount, x => x.AppliedToProducts);
-            return discount.AppliedToProducts.Select(product => "p" + product.Id);
         }
 
         return Enumerable.Empty<string>();
