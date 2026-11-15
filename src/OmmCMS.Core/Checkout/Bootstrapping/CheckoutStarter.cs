@@ -14,7 +14,6 @@ internal sealed class CheckoutStarter : StarterBase
 {
     public override void ConfigureContainer(ContainerBuilder builder, IApplicationContext appContext)
     {
-        builder.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
 
         // Cart rules.
         var cartRuleTypes = appContext.TypeScanner.FindTypes<IRule<CartRuleContext>>().ToList();

@@ -27,27 +27,6 @@ public partial class GenericAttributeService : AsyncDbSaveHook<GenericAttribute>
     public override Task<HookResult> OnAfterSaveAsync(IHookedEntity entry, CancellationToken cancelToken)
         => Task.FromResult(HookResult.Ok);
 
-    public override async Task OnAfterSaveCompletedAsync(IEnumerable<IHookedEntity> entries, CancellationToken cancelToken)
-    {
-        // Publish OrderUpdated event for attributes referring to order entities.
-        var orderIds = entries
-            .Select(x => x.Entity)
-            .OfType<GenericAttribute>()
-            .Where(x => x.KeyGroup.EqualsNoCase(nameof(Order)) && x.EntityId > 0)
-            .Select(x => x.EntityId)
-            .Distinct()
-            .ToArray();
-
-        if (orderIds.Any())
-        {
-            var orders = await _db.Orders.GetManyAsync(orderIds, true);
-            foreach (var order in orders)
-            {
-                await _eventPublisher.PublishOrderUpdatedAsync(order);
-            }
-        }
-    }
-
     #endregion
 
     public virtual GenericAttributeCollection GetAttributesForEntity(string entityName, int entityId)
