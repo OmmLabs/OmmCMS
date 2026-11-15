@@ -17,7 +17,7 @@ public class TopicController : PublicController
     private readonly IStoreMappingService _storeMappingService;
     private readonly SeoSettings _seoSettings;
     private readonly IBreadcrumb _breadcrumb;
-    private readonly CatalogHelper _helper;
+    private readonly IMenuService _menuService;
 
     public TopicController(
         SmartDbContext db,
@@ -25,19 +25,24 @@ public class TopicController : PublicController
         IStoreMappingService storeMappingService,
         SeoSettings seoSettings,
         IBreadcrumb breadcrumb,
-        CatalogHelper helper)
+        IMenuService menuService)
     {
         _db = db;
         _aclService = aclService;
         _storeMappingService = storeMappingService;
         _seoSettings = seoSettings;
         _breadcrumb = breadcrumb;
-        _helper = helper;
+        _menuService = menuService;
     }
 
     public async Task<IActionResult> TopicDetails(int topicId, bool popup = false)
     {
-        await _helper.GetBreadcrumbAsync(_breadcrumb, ControllerContext);
+        var menu = await _menuService.GetMenuAsync("Main");
+        if (menu != null)
+        {
+            var currentNode = await menu.ResolveCurrentNodeAsync(ControllerContext);
+            currentNode?.Trail.Where(x => !x.IsRoot).Each(x => _breadcrumb.Track(x.Value));
+        }
 
         var cacheKey = string.Format(ModelCacheInvalidator.TOPIC_BY_ID_KEY,
             topicId,

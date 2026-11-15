@@ -2,7 +2,7 @@
 
 An open-source, ASP.NET Core content management system in development by [OmmLabs](https://github.com/OmmLabs). OmmCMS builds on the Smartstore platform, retaining its content, administration and extension foundations while progressively separating e-commerce.
 
-**Status:** development preview, not a production release. OmmCMS is now CMS-only: the application enables the CMS profile automatically. Ten previously isolated commerce modules, 29 extracted commerce admin controllers, eight public commerce controllers and their dedicated views have been removed. Public account and identity no longer depend on order, checkout, delivery/payment preferences or rewards. The commerce database schema and shared services remain during the transition. The repository is no longer a supported storefront build.
+**Status:** development preview, not a production release. OmmCMS is now CMS-only: the application enables the CMS profile automatically. Ten previously isolated commerce modules, 29 extracted commerce admin controllers, eight public commerce controllers and their dedicated views have been removed. Public account and identity no longer depend on order, checkout, delivery/payment preferences or rewards. Remaining commerce domain entities and the compatibility database schema remain during the transition; obsolete storefront presentation and detached core services have been removed. The repository is no longer a supported storefront build.
 
 ## What the CMS profile provides
 
@@ -19,7 +19,7 @@ Prerequisites: .NET 10 SDK, a supported database (SQLite for local evaluation, S
 ```bash
 git clone https://github.com/OmmLabs/OmmCMS.git
 cd OmmCMS
-git switch cms-residual-commerce-extraction
+git switch cms-commerce-presentation-extraction
 dotnet restore Smartstore.sln
 dotnet build Smartstore.sln -c Release --no-restore
 cd src/Smartstore.Web
@@ -58,7 +58,8 @@ CI checks removed modules and standalone commerce views are absent from source a
 | 9 | [Public account and authentication dependency extraction](docs/ommcms/PHASE9_ACCOUNT_DEPENDENCY_EXTRACTION.md) |
 | 10 | [Remaining commerce administration extraction](docs/ommcms/PHASE10_ADMIN_COMMERCE_EXTRACTION.md) |
 | 11 | [Residual commerce actions and shared component extraction](docs/ommcms/PHASE11_RESIDUAL_COMMERCE_EXTRACTION.md) |
-| Next | Extract remaining shared commerce models, helpers and core service implementations before reducing schema; build dedicated article taxonomy and editorial tools. |
+| 12 | [Commerce presentation and core leaf service extraction](docs/ommcms/PHASE12_COMMERCE_PRESENTATION_EXTRACTION.md) |
+| Next | Extract remaining admin commerce models, legacy assets and coupled core commerce services before reducing schema; build dedicated article taxonomy and editorial tools. |
 
 Source and project names retain their Smartstore names until the dependency extraction is complete.
 

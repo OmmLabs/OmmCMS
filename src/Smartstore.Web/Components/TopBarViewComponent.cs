@@ -1,5 +1,4 @@
-﻿using Smartstore.Core.Catalog;
-using Smartstore.Core.Content.Menus;
+﻿using Smartstore.Core.Content.Menus;
 using Smartstore.Core.Identity;
 using Smartstore.Core.Security;
 using Smartstore.Web.Models.Common;
@@ -8,15 +7,6 @@ namespace Smartstore.Web.Components;
 
 public class TopBarViewComponent : SmartViewComponent
 {
-    private readonly CatalogSettings _catalogSettings;
-    private readonly CustomerSettings _customerSettings;
-
-    public TopBarViewComponent(CatalogSettings catalogSettings, CustomerSettings customerSettings)
-    {
-        _catalogSettings = catalogSettings;
-        _customerSettings = customerSettings;
-    }
-
     public async Task<IViewComponentResult> InvokeAsync()
     {
         var customer = Services.WorkContext.CurrentCustomer;
@@ -24,7 +14,6 @@ public class TopBarViewComponent : SmartViewComponent
 
         var model = new TopBarModel
         {
-            RecentlyAddedProductsEnabled = _catalogSettings.RecentlyAddedProductsEnabled,
             CustomerEmailUsername = isRegistered ? HttpContext.User.Identity.Name : string.Empty,
             IsCustomerImpersonated = Services.WorkContext.CurrentImpersonator != null,
             IsAuthenticated = isRegistered,

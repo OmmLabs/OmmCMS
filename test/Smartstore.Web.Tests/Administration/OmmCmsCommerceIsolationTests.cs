@@ -38,7 +38,6 @@ public class OmmCmsCommerceIsolationTests
         };
     }
 
-    [TestCase("Smartstore.Web.Controllers.PdfController")]
     [TestCase("Smartstore.Controllers.PackagingController")]
     public void BlocksEveryActionOnCommerceOnlyController(string controllerType)
     {
@@ -127,6 +126,44 @@ public class OmmCmsCommerceIsolationTests
         Assert.That(type!.GetConstructors().SelectMany(x => x.GetParameters()).Any(x => x.ParameterType.Name == dependency), Is.False);
     }
 
+    [TestCase("Smartstore.Web.Controllers.CatalogHelper")]
+    [TestCase("Smartstore.Web.Controllers.OrderHelper")]
+    [TestCase("Smartstore.Web.Controllers.PdfController")]
+    [TestCase("Smartstore.Web.Components.SearchBoxViewComponent")]
+    [TestCase("Smartstore.Web.Components.FacetGroupViewComponent")]
+    [TestCase("Smartstore.Web.Models.Catalog.ProductDetailsModel")]
+    [TestCase("Smartstore.Web.Models.Catalog.ProductSummaryModel")]
+    [TestCase("Smartstore.Web.Models.Cart.ShoppingCartModel")]
+    [TestCase("Smartstore.Web.Models.Checkout.CheckoutConfirmModel")]
+    [TestCase("Smartstore.Web.Models.Orders.OrderDetailsModel")]
+    [TestCase("Smartstore.Web.Models.Search.SearchResultModel")]
+    public void RemovedCommercePresentationTypesAreAbsent(string type)
+    {
+        Assert.That(typeof(OmmCmsCommerceIsolation).Assembly.GetType(type), Is.Null);
+    }
+
+    [TestCase("Smartstore.Core.Catalog.Products.IProductCompareService")]
+    [TestCase("Smartstore.Core.Catalog.Products.ProductCompareService")]
+    [TestCase("Smartstore.Core.Catalog.Products.IRecentlyViewedProductsService")]
+    [TestCase("Smartstore.Core.Catalog.Products.RecentlyViewedProductsService")]
+    [TestCase("Smartstore.Core.Catalog.Products.IProductCloner")]
+    [TestCase("Smartstore.Core.Catalog.Products.ProductCloner")]
+    [TestCase("Smartstore.Core.Catalog.Attributes.IProductAttributeService")]
+    [TestCase("Smartstore.Core.Catalog.Attributes.ProductAttributeService")]
+    public void RetiredCoreServiceTypesAreAbsent(string type)
+    {
+        Assert.That(typeof(Smartstore.Core.Data.SmartDbContext).Assembly.GetType(type), Is.Null);
+    }
+
+    [Test]
+    public void TopicBreadcrumbDependsOnCmsMenuServiceInsteadOfCatalogHelper()
+    {
+        var parameters = typeof(Smartstore.Web.Controllers.TopicController)
+            .GetConstructors().SelectMany(x => x.GetParameters()).Select(x => x.ParameterType.Name).ToArray();
+        Assert.That(parameters, Does.Contain("IMenuService"));
+        Assert.That(parameters, Does.Not.Contain("CatalogHelper"));
+    }
+
     [TestCase("Smartstore.Web.Controllers.CommonController", "CurrencySelected")]
     [TestCase("Smartstore.Web.Controllers.MenuController", "OffCanvasBrands")]
     [TestCase("Smartstore.Admin.Controllers.CustomerController", "RemoveAffiliateAssignment")]
@@ -211,7 +248,7 @@ public class OmmCmsCommerceIsolationTests
         Assert.That(OmmCmsCommerceIsolation.IsBlocked(Action(controllerType, action)), Is.False);
     }
 
-    [TestCase("/pdf/receiptheader", "GET", "Smartstore.Web.Controllers.PdfController", "ReceiptHeader")]
+    [TestCase("/admin/packaging/uploadpackage", "POST", "Smartstore.Controllers.PackagingController", "UploadPackage")]
     public async Task SelectedCommerceEndpointReturns404WithoutInvokingDownstream(string path, string verb, string controller, string method)
     {
         var context = new DefaultHttpContext();

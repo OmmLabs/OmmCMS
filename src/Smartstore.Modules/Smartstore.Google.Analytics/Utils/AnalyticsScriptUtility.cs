@@ -33,30 +33,6 @@ internal static class AnalyticsScriptUtility
     gtag('config', '{GOOGLEID}', { 'anonymize_ip': true });
     gtag('config', '{GOOGLEID}', { 'user_id': '{USERID}' });    
 
-	{ECOMMERCE}
 </script>";
-    }
-
-    internal static string GetEcommerceScript()
-    {
-        return @"gtag('event', 'purchase', {
-  'transaction_id': '{ORDERID}',
-  'value': {TOTAL},
-  'currency': '{CURRENCY}',
-  'tax': {TAX},
-  'shipping': {SHIP},
-  'items': [{DETAILS}]
-});";
-    }
-
-    internal static string GetEcommerceDetailScript()
-    {
-        return @"{
-	'item_id': '{ITEMID}',
-	'item_name': '{PRODUCTNAME}',
-	'item_category': '{CATEGORYNAME}',
-	'quantity': {QUANTITY},
-	'price': '{UNITPRICE}'
-},";
     }
 }

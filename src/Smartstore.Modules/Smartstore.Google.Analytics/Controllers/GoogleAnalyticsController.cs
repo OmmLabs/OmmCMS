@@ -16,7 +16,7 @@ public class GoogleAnalyticsController : ModuleController
         var model = MiniMapper.Map<GoogleAnalyticsSettings, ConfigurationModel>(settings);
 
         // If old script is used display hint to click on the 'Restore Scripts' button to get up-to-date script snippets.
-        model.ScriptUpdateRecommended = settings.EcommerceScript.Contains("analytics.js");
+        model.ScriptUpdateRecommended = settings.TrackingScript?.Contains("analytics.js") == true;
 
         return View(model);
     }
@@ -42,8 +42,6 @@ public class GoogleAnalyticsController : ModuleController
     public IActionResult RestoreScripts(GoogleAnalyticsSettings settings)
     {
         settings.TrackingScript = AnalyticsScriptUtility.GetTrackingScript();
-        settings.EcommerceScript = AnalyticsScriptUtility.GetEcommerceScript();
-        settings.EcommerceDetailScript = AnalyticsScriptUtility.GetEcommerceDetailScript();
 
         return RedirectToAction(nameof(Configure));
     }

@@ -41,14 +41,10 @@ internal class CatalogStarter : StarterBase
             .InstancePerLifetimeScope();
 
         builder.RegisterType<ProductAttributeMaterializer>().As<IProductAttributeMaterializer>().InstancePerLifetimeScope();
-        builder.RegisterType<ProductAttributeService>().As<IProductAttributeService>().InstancePerLifetimeScope();
         builder.RegisterType<ProductAttributeFormatter>().As<IProductAttributeFormatter>().InstancePerLifetimeScope();
 
         builder.RegisterType<DiscountService>().As<IDiscountService>().InstancePerLifetimeScope();
         builder.RegisterType<StockSubscriptionService>().As<IStockSubscriptionService>().InstancePerLifetimeScope();
-        builder.RegisterType<RecentlyViewedProductsService>().As<IRecentlyViewedProductsService>().InstancePerLifetimeScope();
-        builder.RegisterType<ProductCompareService>().As<IProductCompareService>().InstancePerLifetimeScope();
-        builder.RegisterType<ProductCloner>().As<IProductCloner>().InstancePerLifetimeScope();
         builder.RegisterType<ProductVariantQueryFactory>().As<IProductVariantQueryFactory>().InstancePerLifetimeScope();
         builder.RegisterType<ProductUrlHelper>().InstancePerLifetimeScope();
         builder.RegisterType<ProductImporter>().Keyed<IEntityImporter>(ImportEntityType.Product).InstancePerLifetimeScope();

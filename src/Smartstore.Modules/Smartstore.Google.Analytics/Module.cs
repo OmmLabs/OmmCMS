@@ -7,8 +7,6 @@ global using System.Threading.Tasks;
 global using Smartstore.Core.Localization;
 global using Smartstore.Google.Analytics.Settings;
 global using Smartstore.Web.Modelling;
-global using Smartstore.Web.Models.Cart;
-global using Smartstore.Web.Models.Catalog;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Smartstore.Core.Identity;
@@ -86,9 +84,7 @@ internal class Module : ModuleBase, IConfigurable, IActivatableWidget, ICookiePu
         await ImportLanguageResourcesAsync();
         await TrySaveSettingsAsync(new GoogleAnalyticsSettings
         {
-            TrackingScript = AnalyticsScriptUtility.GetTrackingScript(),
-            EcommerceScript = AnalyticsScriptUtility.GetEcommerceScript(),
-            EcommerceDetailScript = AnalyticsScriptUtility.GetEcommerceDetailScript()
+            TrackingScript = AnalyticsScriptUtility.GetTrackingScript()
         });
         await base.InstallAsync(context);
     }

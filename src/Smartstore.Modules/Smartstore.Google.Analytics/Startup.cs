@@ -27,6 +27,5 @@ internal class Startup : StarterBase
         observer.ObserveSettingProperty<GoogleAnalyticsSettings>(x => x.GoogleId, x => x.RemoveAllAsync());
         observer.ObserveSettingProperty<GoogleAnalyticsSettings>(x => x.MinifyScripts, x => x.RemoveAllAsync());
         observer.ObserveSettingProperty<GoogleAnalyticsSettings>(x => x.RenderWithUserConsentOnly, x => x.RemoveAllAsync());
-        observer.ObserveSettingProperty<GoogleAnalyticsSettings>(x => x.RenderCatalogScripts, x => x.InvalidateByRouteAsync([.. OutputCacheDefaults.AllProductListsRoutes, OutputCacheDefaults.ProductDetailsRoute]));
     }
 }

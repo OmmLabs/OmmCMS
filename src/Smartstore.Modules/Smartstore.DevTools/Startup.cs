@@ -30,7 +30,6 @@ internal class Startup : StarterBase
         services.AddTransient<IDbContextConfigurationSource<SmartDbContext>, SmartDbContextConfigurer>();
 
         services.AddScoped<IChronometer, MiniProfilerChronometer>();
-        //services.AddScoped<IFacetTemplateSelector, CustomFacetTemplateSelector>();
 
         services.AddMiniProfiler(o =>
         {
@@ -69,12 +68,6 @@ internal class Startup : StarterBase
             o.Filters.AddEndpointFilter<MiniProfilerFilter, SmartController>().When(context => ShouldProfile(context.HttpContext.Request));
             o.Filters.AddEndpointFilter<MachineNameFilter, SmartController>().WhenNonAjaxGet();
             o.Filters.AddEndpointFilter<WidgetZoneFilter, SmartController>().WhenNonAjaxGet();
-
-            //o.Filters.AddConditional<SampleProductDetailActionFilter>(
-            //    context => context.ControllerIs<ProductController>());
-
-            //o.Filters.AddConditional<SampleResultFilter>(
-            //    context => context.ControllerIs<CatalogController>());
 
             //o.Filters.AddConditional<SampleActionFilter>(
             //    context => context.ControllerIs<PublicController>());
