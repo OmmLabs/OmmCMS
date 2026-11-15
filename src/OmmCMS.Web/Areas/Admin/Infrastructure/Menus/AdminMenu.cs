@@ -12,16 +12,11 @@ public partial class AdminMenu : MenuBase
 
     public override bool ApplyPermissions => true;
 
-    private bool IsCmsPreviewEnabled
-        => bool.TryParse(Services.ApplicationContext.Configuration["OmmCMS:PreviewShell"], out var enabled) && enabled;
-
     protected override string GetCacheKey()
     {
-        // A CMS preview must never reuse a cached storefront admin menu.
-        var cacheKey = "{0}-{1}-{2}".FormatInvariant(
+        var cacheKey = "{0}-{1}-cms".FormatInvariant(
             Services.WorkContext.WorkingLanguage.Id,
-            Services.WorkContext.CurrentCustomer.GetRolesIdent(),
-            IsCmsPreviewEnabled ? "cms" : "store");
+            Services.WorkContext.CurrentCustomer.GetRolesIdent());
 
         return cacheKey;
     }
@@ -29,9 +24,7 @@ public partial class AdminMenu : MenuBase
     protected override Task<TreeNode<MenuItem>> BuildAsync(CacheEntryOptions cacheEntryOptions)
     {
         var contentRoot = Services.ApplicationContext.ContentRoot;
-        var file = contentRoot.GetFile(IsCmsPreviewEnabled
-            ? "/Areas/Admin/ommcms-sitemap.xml"
-            : "/Areas/Admin/sitemap.xml");
+        var file = contentRoot.GetFile("/Areas/Admin/ommcms-sitemap.xml");
         var xmlSitemap = new XmlDocument();
         xmlSitemap.Load(file.PhysicalPath);
 

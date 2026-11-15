@@ -66,6 +66,8 @@ Phases 767–775: removed the product detail JavaScript bundle, unused catalogue
 
 Phases 776–784: removed unused storefront menu, store and topic seed files and their localized content. The CMS seed descriptors and common configuration remain authoritative. Corrected stale messaging permissions, export validation and installer provider selection exposed by compilation.
 
+Phases 785–790: make route isolation, entity patch restrictions, catalogue menu blocking and retired module exclusion unconditional; remove the obsolete storefront administration sitemap and always use the CMS navigation.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

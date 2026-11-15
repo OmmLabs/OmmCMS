@@ -150,8 +150,7 @@ public partial class EntityController : PublicController
     [Route("entity/patch")]
     public async Task<IActionResult> Patch(string entityName, int entityId, string propertyName, [FromBody] object value)
     {
-        if (OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration) &&
-            !OmmCmsCommerceIsolation.IsAllowedPatchEntity(entityName))
+        if (!OmmCmsCommerceIsolation.IsAllowedPatchEntity(entityName))
         {
             return NotFound();
         }
@@ -184,8 +183,7 @@ public partial class EntityController : PublicController
     [Route("entity/patchlocalized")]
     public async Task<IActionResult> PatchLocalized(int languageId, string entityName, int entityId, string propertyName, [FromBody] object value)
     {
-        if (OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration) &&
-            !OmmCmsCommerceIsolation.IsAllowedPatchEntity(entityName))
+        if (!OmmCmsCommerceIsolation.IsAllowedPatchEntity(entityName))
         {
             return NotFound();
         }

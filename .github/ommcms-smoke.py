@@ -693,6 +693,9 @@ try:
                 assert not (repo / "src/OmmCMS.Web" / template).exists(), f"Retired template remains: {template}"
                 assert not (root / template).exists(), f"Retired template was published: {template}"
         cart_template = Path("Areas/Admin/Views/Rule/ValueTemplates/CartItemQuantity.cshtml")
+        for web_root in (repo / "src/OmmCMS.Web", root):
+            assert not (web_root / "Areas/Admin/sitemap.xml").exists(), "Retired admin sitemap remains"
+            assert (web_root / "Areas/Admin/ommcms-sitemap.xml").exists(), "CMS admin sitemap missing"
         assert not (repo / "src/OmmCMS.Web" / cart_template).exists()
         assert not (root / cart_template).exists()
         assert not (repo / "src/OmmCMS.Web/Areas/Admin/Models/ShoppingCart").exists()

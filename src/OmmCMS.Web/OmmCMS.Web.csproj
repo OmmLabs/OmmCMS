@@ -63,7 +63,6 @@
 
 	<!-- Copy publishable files in Areas directory -->
 	<ItemGroup>
-		<Content Include="Areas\Admin\sitemap.xml" CopyToPublishDirectory="PreserveNewest" />
 		<Content Include="Areas\Admin\ommcms-sitemap.xml" CopyToPublishDirectory="PreserveNewest" />
 		<None Include="Areas\Admin\Views\**\*.cshtml" CopyToPublishDirectory="PreserveNewest" />
 	</ItemGroup>

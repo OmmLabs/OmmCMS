@@ -37,7 +37,7 @@ public class MenuController : AdminController
     #region Utilities
 
     private bool IsAllowedMenuProvider(string providerName)
-        => !OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration) || !string.Equals(providerName, "catalog", StringComparison.OrdinalIgnoreCase);
+        => !string.Equals(providerName, "catalog", StringComparison.OrdinalIgnoreCase);
 
     private async Task PrepareModelAsync(MenuEntityModel model, MenuEntity entity)
     {

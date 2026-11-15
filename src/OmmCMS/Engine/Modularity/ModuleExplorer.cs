@@ -34,8 +34,6 @@ internal class ModuleExplorer
 
         // Exclude bundled commerce modules before any assembly is loaded or registered.
         // The files and existing installation records are deliberately left intact.
-        return OmmCmsMode.IsEnabled(_appContext.Configuration)
-            ? modules.Where(x => !OmmCmsMode.IsExcludedModule(x.SystemName))
-            : modules;
+        return modules.Where(x => !OmmCmsMode.IsExcludedModule(x.SystemName));
     }
 }
