@@ -279,7 +279,6 @@ public class ShoppingCartServiceTests : ServiceTestBase
             null,
             null,
             null,
-            new Lazy<ICheckoutFactory>(() => null),
             Mock.Of<ICurrencyService>(),
             new RewardPointsSettings(),
             new ShoppingCartSettings())

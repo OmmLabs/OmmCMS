@@ -32,7 +32,7 @@ Work takes place on `main`. Run `dotnet test OmmCMS.sln -c Release` before chang
 
 CI publishes a disposable application and checks a fresh SQLite installation, editorial workflows and retired commerce endpoints.
 
-Completed: CMS shell, administration, installation, content workflows and phases 1–18 of commerce extraction, including affiliates, stock subscriptions, related products, product reviews and recurring payments. Next: remove remaining coupled order and catalog services, then complete dependency removal.
+Completed: CMS shell, administration, installation, content workflows and phases 1–19 of commerce extraction, including affiliates, stock subscriptions, related products, product reviews recurring payments, and checkout workflow/session orchestration. Next: remove remaining cart, order and catalog services, then complete dependency removal.
 
 Report security issues privately to the maintainers; do not publish sensitive details.
 

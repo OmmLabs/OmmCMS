@@ -33,7 +33,6 @@ public partial class ShoppingCartService : IShoppingCartService
     private readonly IRoundingHelper _roundingHelper;
     private readonly IProductAttributeMaterializer _productAttributeMaterializer;
     private readonly ICheckoutAttributeMaterializer _checkoutAttributeMaterializer;
-    private readonly Lazy<ICheckoutFactory> _checkoutFactory;
     private readonly ShoppingCartSettings _shoppingCartSettings;
     private readonly RewardPointsSettings _rewardPointsSettings;
     private readonly Currency _primaryCurrency;
@@ -48,7 +47,6 @@ public partial class ShoppingCartService : IShoppingCartService
         IRoundingHelper roundingHelper,
         IProductAttributeMaterializer productAttributeMaterializer,
         ICheckoutAttributeMaterializer checkoutAttributeMaterializer,
-        Lazy<ICheckoutFactory> checkoutFactory,
         ICurrencyService currencyService,
         RewardPointsSettings rewardPointsSettings,
         ShoppingCartSettings shoppingCartSettings)
@@ -62,11 +60,19 @@ public partial class ShoppingCartService : IShoppingCartService
         _roundingHelper = roundingHelper;
         _productAttributeMaterializer = productAttributeMaterializer;
         _checkoutAttributeMaterializer = checkoutAttributeMaterializer;
-        _checkoutFactory = checkoutFactory;
         _rewardPointsSettings = rewardPointsSettings;
         _shoppingCartSettings = shoppingCartSettings;
 
         _primaryCurrency = currencyService.PrimaryCurrency;
+    }
+
+    private CheckoutRequirements GetCheckoutRequirements()
+    {
+        return _shoppingCartSettings.CheckoutProcess.EqualsNoCase(CheckoutProcess.Terminal)
+            ? 0
+            : _shoppingCartSettings.CheckoutProcess.EqualsNoCase(CheckoutProcess.TerminalWithPayment)
+                ? CheckoutRequirements.Payment
+                : CheckoutRequirements.All;
     }
 
     public Localizer T { get; set; } = NullLocalizer.Instance;
@@ -428,7 +434,7 @@ public partial class ShoppingCartService : IShoppingCartService
             return new ShoppingCart(customer, storeId, organizedItems)
             {
                 CartType = cartType,
-                Requirements = _checkoutFactory.Value.GetRequirements()
+                Requirements = GetCheckoutRequirements()
             };
         });
 
@@ -509,7 +515,7 @@ public partial class ShoppingCartService : IShoppingCartService
         var cart = new ShoppingCart(fromCustomer, firstItem.StoreId, cartItems)
         {
             CartType = firstItem.ShoppingCartType,
-            Requirements = _checkoutFactory.Value.GetRequirements()
+            Requirements = GetCheckoutRequirements()
         };
 
         await DeleteCartAsync(cart);

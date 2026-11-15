@@ -454,13 +454,13 @@ public partial class OrderProcessingService : IOrderProcessingService
         }
 
         // Apply checkout data.
-        if (ctx.CheckoutOrderData.TryGetValue(CheckoutWorkflow.CustomerCommentKey, out var customerComment))
+        if (ctx.CheckoutOrderData.TryGetValue("CustomerComment", out var customerComment))
         {
             order.CustomerOrderComment = customerComment;
         }
 
         if (_shoppingCartSettings.ThirdPartyEmailHandOver != CheckoutThirdPartyEmailHandOver.None
-            && ctx.CheckoutOrderData.TryGetValue(CheckoutWorkflow.AcceptThirdPartyEmailHandOverKey, out var acceptEmailHandOver))
+            && ctx.CheckoutOrderData.TryGetValue("AcceptThirdPartyEmailHandOver", out var acceptEmailHandOver))
         {
             order.AcceptThirdPartyEmailHandOver = acceptEmailHandOver.ToBool();
         }
@@ -834,7 +834,7 @@ public partial class OrderProcessingService : IOrderProcessingService
 
         // Newsletter subscription.
         if (_shoppingCartSettings.NewsletterSubscription != CheckoutNewsletterSubscription.None
-            && ctx.CheckoutOrderData.TryGetValue(CheckoutWorkflow.SubscribeToNewsletterKey, out var addSubscription))
+            && ctx.CheckoutOrderData.TryGetValue("SubscribeToNewsletter", out var addSubscription))
         {
             var email = ctx.Customer.Email ?? ctx.Customer.Addresses?.FirstOrDefault()?.Email;
 

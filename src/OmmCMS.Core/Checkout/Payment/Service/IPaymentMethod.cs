@@ -113,39 +113,6 @@ public partial interface IPaymentMethod : IProvider, IUserEditable
     #endregion
 
 
-    #region Payment confirmation (called after "buy now" button click, before order placement)
-
-    /// <summary>
-    /// Gets a value indicating whether the payment needs to be confirmed.
-    /// If <c>true</c>, then the customer is redirected to the payment provider's confirmation page after clicking the "buy now" button.
-    /// </summary>
-    bool RequiresConfirmation { get; }
-
-    /// <summary>
-    /// Gets the URL to which the user should be redirected for payment confirmation.
-    /// This occurs immediately after the customer clicks the "buy now" button.
-    /// Only applicable if <see cref="RequiresConfirmation"/> is <c>true</c>.
-    /// </summary>
-    /// <returns>Confirmation URL or <c>null</c> if no redirection is necessary and the order can be placed directly.</returns>
-    /// <remarks>
-    /// Throw an exception, preferably <see cref="PaymentException"/>, to abort confirmation and redirect back to payment selection.
-    /// </remarks>
-    Task<string> GetConfirmationUrlAsync(ProcessPaymentRequest request, CheckoutContext context);
-
-    /// <summary>
-    /// Optional processing to complete the payment confirmation. Called when the customer is redirected back from 
-    /// the payment provider's confirmation page.
-    /// The order is placed immediately after this method returns. Unless an exception is thrown.
-    /// Only applicable if <see cref="RequiresConfirmation"/> is <c>true</c>.
-    /// </summary>
-    /// <returns>
-    /// <c>true</c> if the payment succeeded and the order is to be placed; otherwise <c>false</c>.
-    /// </returns>
-    Task<bool> CompletePaymentAsync(ProcessPaymentRequest request, CheckoutContext context);
-
-    #endregion
-
-
     #region Payment processing (called during order placement)
 
     /// <summary>

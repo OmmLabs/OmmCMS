@@ -33,7 +33,6 @@ internal sealed class CheckoutStarter : StarterBase
     {
         builder.RegisterType<CheckoutAttributeMaterializer>().As<ICheckoutAttributeMaterializer>().InstancePerLifetimeScope();
         builder.RegisterType<CheckoutAttributeFormatter>().As<ICheckoutAttributeFormatter>().InstancePerLifetimeScope();
-        builder.RegisterType<DefaultCheckoutStateAccessor>().As<ICheckoutStateAccessor>().InstancePerLifetimeScope();
         builder.RegisterType<OrderCalculationService>().As<IOrderCalculationService>().InstancePerLifetimeScope();
         builder.RegisterType<OrderProcessingService>().As<IOrderProcessingService>().InstancePerLifetimeScope();
         builder.RegisterType<ShoppingCartValidator>().As<IShoppingCartValidator>().InstancePerLifetimeScope();
@@ -44,11 +43,6 @@ internal sealed class CheckoutStarter : StarterBase
         builder.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
         builder.RegisterType<TaxService>().As<ITaxService>().InstancePerLifetimeScope();
         builder.RegisterType<TaxCalculator>().As<ITaxCalculator>().InstancePerLifetimeScope();
-
-        // Checkout
-        builder.RegisterType<CheckoutFactory>().As<ICheckoutFactory>().InstancePerLifetimeScope();
-        builder.RegisterType<CheckoutWorkflow>().As<ICheckoutWorkflow>().InstancePerLifetimeScope();
-        DiscoverCheckoutHandlers(builder, appContext);
 
         // Cart rules.
         var cartRuleTypes = appContext.TypeScanner.FindTypes<IRule<CartRuleContext>>().ToList();
@@ -66,34 +60,4 @@ internal sealed class CheckoutStarter : StarterBase
         builder.RegisterType<ShippingMethodRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
     }
 
-    private static void DiscoverCheckoutHandlers(ContainerBuilder builder, IApplicationContext appContext)
-    {
-        var handlerTypes = appContext.TypeScanner.FindTypes<ICheckoutHandler>();
-
-        foreach (var handlerType in handlerTypes)
-        {
-            var targetAttribute = handlerType.GetAttribute<CheckoutStepAttribute>(true);
-
-            builder
-                .RegisterType(handlerType)
-                .As<ICheckoutHandler>()
-                .Keyed<ICheckoutHandler>(handlerType)
-                .InstancePerAttributedLifetime()
-                .WithMetadata<CheckoutHandlerMetadata>(m =>
-                {
-                    m.For(x => x.HandlerType, handlerType);
-                    m.For(x => x.Actions, targetAttribute?.Actions);
-                    m.For(x => x.Controller, targetAttribute?.Controller ?? "Checkout");
-                    m.For(x => x.Area, targetAttribute?.Area);
-                    m.For(x => x.Order, targetAttribute?.Order ?? 0);
-                    m.For(x => x.ProgressLabelKey, targetAttribute?.ProgressLabelKey);
-                });
-        }
-
-        builder.Register<Func<Type, ICheckoutHandler>>(c =>
-        {
-            var cc = c.Resolve<IComponentContext>();
-            return key => cc.ResolveKeyed<ICheckoutHandler>(key);
-        });
-    }
 }

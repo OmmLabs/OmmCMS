@@ -546,6 +546,21 @@ try:
             "Catalog/Attributes/Modelling/IProductVariantQueryFactory.cs",
             "Catalog/Attributes/Modelling/ProductVariantQueryFactory.cs",
             "Catalog/Attributes/Modelling/ProductAttributeQueryModelBinder.cs",
+            "Checkout/Orders/Services/CheckoutWorkflow.cs",
+            "Checkout/Orders/Services/ICheckoutWorkflow.cs",
+            "Checkout/Orders/Services/CheckoutFactory.cs",
+            "Checkout/Orders/Services/ICheckoutFactory.cs",
+            "Checkout/Orders/Services/CheckoutContext.cs",
+            "Checkout/Orders/Services/CheckoutHandler.cs",
+            "Checkout/Orders/Services/CheckoutHandlerBase.cs",
+            "Checkout/Orders/Services/CheckoutHandlerMetadata.cs",
+            "Checkout/Orders/Services/CheckoutResult.cs",
+            "Checkout/Orders/Services/CheckoutStep.cs",
+            "Checkout/Orders/Services/Handlers",
+            "Checkout/Orders/Services/DefaultCheckoutStateAccessor.cs",
+            "Checkout/Orders/Services/ICheckoutStateAccessor.cs",
+            "Checkout/Orders/Domain/CheckoutState.cs",
+            "Checkout/Bootstrapping/CheckoutBootstrappingExtensions.cs",
         ):
             assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
         print("Core stock notification and storefront variant binding extraction passed.")

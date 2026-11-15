@@ -3,10 +3,6 @@
 /// <summary>
 /// Represents requirements of a standard checkout.
 /// </summary>
-/// <remarks>
-/// If you have custom checkout requirements/steps then you must check directly via 
-/// <see cref="ICheckoutFactory"/> whether they are required.
-/// </remarks>
 [Flags]
 public enum CheckoutRequirements
 {

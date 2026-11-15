@@ -54,19 +54,6 @@ public abstract class PaymentMethodBase : IPaymentMethod
     #endregion
 
 
-    #region Payment confirmation (called after "buy now" button click, before order placement)
-
-    public virtual bool RequiresConfirmation => false;
-
-    public virtual Task<string> GetConfirmationUrlAsync(ProcessPaymentRequest request, CheckoutContext context)
-        => Task.FromResult<string>(null);
-
-    public virtual Task<bool> CompletePaymentAsync(ProcessPaymentRequest request, CheckoutContext context)
-        => Task.FromResult(true);
-
-    #endregion
-
-
     #region Payment processing (called during order placement)
 
     public virtual Task<PreProcessPaymentResult> PreProcessPaymentAsync(ProcessPaymentRequest request)
