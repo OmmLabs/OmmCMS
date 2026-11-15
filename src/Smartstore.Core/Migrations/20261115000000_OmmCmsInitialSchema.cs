@@ -1,95 +1,20 @@
 using FluentMigrator;
-using FluentMigrator.Builders.Create.Column;
-using Smartstore.Core.Catalog.Attributes;
-using Smartstore.Core.Checkout.Attributes;
-using Smartstore.Core.Data;
-using Smartstore.Core.Data.Migrations;
 using Smartstore.Data.Migrations;
 
-namespace Smartstore.Core.Migrations;
+namespace Smartstore.Core.Data.Migrations;
 
-[MigrationVersion("2026-09-16 12:00:00", "Core: Product attribute swatches")]
-internal class ProductAttributeSwatches : Migration, ILocaleResourcesProvider, IDataSeeder<SmartDbContext>
+/// <summary>
+/// Initial OmmCMS schema marker. Fresh installation creates the current entity model,
+/// then records this migration as applied. Historical commerce upgrades are unsupported.
+/// </summary>
+[MigrationVersion("2026-11-15 00:00:00", "OmmCMS initial schema")]
+internal sealed class OmmCmsInitialSchema : Migration, ILocaleResourcesProvider
 {
-    const string AttrTableName = "ProductAttribute";
-    const string ProductAttrTableName = "Product_ProductAttribute_Mapping";
-    const string ProductVariantValueTableName = "ProductVariantAttributeValue";
-    const string ProductAttributeOptionTableName = "ProductAttributeOption";
-    const string CheckoutAttributeTableName = "CheckoutAttribute";
-    const string CheckoutAttributeValueTableName = "CheckoutAttributeValue";
-
     public override void Up()
-    {
-        Migrate(AttrTableName, nameof(ProductAttribute.SwatchSize), c => c.AsInt32().Nullable());
-        Migrate(AttrTableName, nameof(ProductAttribute.SwatchAspectRatio), c => c.AsDecimal(18, 4).NotNullable().WithDefaultValue(1m));
-        Migrate(AttrTableName, nameof(ProductAttribute.SwatchShape), c => c.AsInt32().Nullable());
-        Migrate(AttrTableName, nameof(ProductAttribute.ShowValueNameInSwatch), c => c.AsBoolean().NotNullable().WithDefaultValue(false));
-        Migrate(AttrTableName, nameof(ProductAttribute.SwatchPriceDisplay), c => c.AsInt32().NotNullable().WithDefaultValue(0));
-
-        Migrate(ProductAttrTableName, nameof(ProductVariantAttribute.SwatchSize), c => c.AsInt32().Nullable());
-        Migrate(ProductAttrTableName, nameof(ProductVariantAttribute.SwatchAspectRatio), c => c.AsDecimal(18, 4).Nullable());
-        Migrate(ProductAttrTableName, nameof(ProductVariantAttribute.SwatchShape), c => c.AsInt32().Nullable());
-        Migrate(ProductAttrTableName, nameof(ProductVariantAttribute.ShowValueNameInSwatch), c => c.AsBoolean().Nullable());
-        Migrate(ProductAttrTableName, nameof(ProductVariantAttribute.SwatchPriceDisplay), c => c.AsInt32().Nullable());
-
-        Migrate(CheckoutAttributeTableName, nameof(CheckoutAttribute.SwatchSize), c => c.AsInt32().Nullable());
-        Migrate(CheckoutAttributeTableName, nameof(CheckoutAttribute.SwatchAspectRatio), c => c.AsDecimal(18, 4).NotNullable().WithDefaultValue(1m));
-        Migrate(CheckoutAttributeTableName, nameof(CheckoutAttribute.SwatchShape), c => c.AsInt32().Nullable());
-        Migrate(CheckoutAttributeTableName, nameof(CheckoutAttribute.ShowValueNameInSwatch), c => c.AsBoolean().NotNullable().WithDefaultValue(false));
-        Migrate(CheckoutAttributeTableName, nameof(CheckoutAttribute.SwatchPriceDisplay), c => c.AsInt32().NotNullable().WithDefaultValue(0));
-
-        Migrate(ProductVariantValueTableName, nameof(ProductVariantAttributeValue.AdditionalColors), c => c.AsString(100).Nullable());
-        Migrate(ProductAttributeOptionTableName, nameof(ProductAttributeOption.AdditionalColors), c => c.AsString(100).Nullable());
-        Migrate(CheckoutAttributeValueTableName, nameof(CheckoutAttributeValue.AdditionalColors), c => c.AsString(100).Nullable());
-    }
+        => throw new NotSupportedException("The initial OmmCMS schema must be created by the fresh installer.");
 
     public override void Down()
-    {
-        Migrate(AttrTableName, nameof(ProductAttribute.SwatchSize), null);
-        Migrate(AttrTableName, nameof(ProductAttribute.SwatchAspectRatio), null);
-        Migrate(AttrTableName, nameof(ProductAttribute.SwatchShape), null);
-        Migrate(AttrTableName, nameof(ProductAttribute.ShowValueNameInSwatch), null);
-        Migrate(AttrTableName, nameof(ProductAttribute.SwatchPriceDisplay), null);
-
-        Migrate(ProductAttrTableName, nameof(ProductVariantAttribute.SwatchSize), null);
-        Migrate(ProductAttrTableName, nameof(ProductVariantAttribute.SwatchAspectRatio), null);
-        Migrate(ProductAttrTableName, nameof(ProductVariantAttribute.SwatchShape), null);
-        Migrate(ProductAttrTableName, nameof(ProductVariantAttribute.ShowValueNameInSwatch), null);
-        Migrate(ProductAttrTableName, nameof(ProductVariantAttribute.SwatchPriceDisplay), null);
-
-        Migrate(CheckoutAttributeTableName, nameof(CheckoutAttribute.SwatchSize), null);
-        Migrate(CheckoutAttributeTableName, nameof(CheckoutAttribute.SwatchAspectRatio), null);
-        Migrate(CheckoutAttributeTableName, nameof(CheckoutAttribute.SwatchShape), null);
-        Migrate(CheckoutAttributeTableName, nameof(CheckoutAttribute.ShowValueNameInSwatch), null);
-        Migrate(CheckoutAttributeTableName, nameof(CheckoutAttribute.SwatchPriceDisplay), null);
-
-        Migrate(ProductVariantValueTableName, nameof(ProductVariantAttributeValue.AdditionalColors), null);
-        Migrate(ProductAttributeOptionTableName, nameof(ProductAttributeOption.AdditionalColors), null);
-        Migrate(CheckoutAttributeValueTableName, nameof(CheckoutAttributeValue.AdditionalColors), null);
-    }
-
-    private void Migrate(string table, string column, Action<ICreateColumnAsTypeSyntax> configure)
-    {
-        var exists = Schema.Table(table).Column(column).Exists();
-
-        if (!exists && configure != null)
-        {
-            var schema = Create.Column(column).OnTable(table);
-            configure(schema);
-        }
-        else if (exists && configure == null)
-        {
-            Delete.Column(column).FromTable(table);
-        }
-    }
-
-    public DataSeederStage Stage => DataSeederStage.Early;
-    public bool AbortOnFailure => false;
-
-    public async Task SeedAsync(SmartDbContext context, CancellationToken cancelToken = default)
-    {
-        await context.MigrateLocaleResourcesAsync(MigrateLocaleResources);
-    }
+        => throw new NotSupportedException("The OmmCMS initial schema cannot be rolled back.");
 
     public void MigrateLocaleResources(LocaleResourcesBuilder builder)
     {
@@ -195,5 +120,47 @@ internal class ProductAttributeSwatches : Migration, ILocaleResourcesProvider, I
         builder.AddOrUpdate("Admin.Common.ColorPalette.PrimaryColorRequired",
             "Select the primary color before adding more colors.",
             "Wählen Sie zuerst die Hauptfarbe aus, bevor Sie weitere Farben hinzufügen.");
+
+        builder.AddOrUpdate("Common.CompletedOn", "Completed on", "Abgeschlossen am");
+
+        builder.AddOrUpdate("Admin.Catalog.Products.Fields.AllowWithdrawalBeforeShipping",
+            "Allow withdrawal before shipping",
+            "Widerruf vor Versand erlauben",
+            "Specifies whether this product can still be withdrawn before it has been shipped if it is otherwise excluded from withdrawal (withdrawal period 0)."
+            + " This setting applies only to items eligible for shipping.",
+            "Legt fest, ob dieser Artikel noch widerrufen werden kann, bevor er versendet wurde, obwohl er ansonsten vom Widerruf ausgeschlossen ist (Widerrufsfrist 0)."
+            + " Diese Einstellung gilt ausschließlich für versandfähige Artikel.");
+
+        builder.AddOrUpdate("Admin.Catalog.Categories.Fields.AllowWithdrawalBeforeShipping",
+            "Allow withdrawal before shipping",
+            "Widerruf vor Versand erlauben",
+            "Specifies whether products in this category can still be withdrawn before they have been shipped if they are otherwise excluded from withdrawal (withdrawal period 0)."
+            + " A product setting takes precedence. For multiple categories, \"No\" takes precedence over \"Yes\"."
+            + " This setting applies only to items eligible for shipping.",
+            "Legt fest, ob Artikel dieser Warengruppe noch widerrufen werden können, bevor sie versendet wurden, obwohl sie ansonsten vom Widerruf ausgeschlossen sind (Widerrufsfrist 0)."
+            + " Eine Einstellung am Artikel hat Vorrang. Bei mehreren Warengruppen gilt \"Nein\" vor \"Ja\"."
+            + " Diese Einstellung gilt ausschließlich für versandfähige Artikel.");
+
+        builder.AddOrUpdate("Admin.ReturnRequests.GoDirectlyToReturnCase",
+            "Search by case number",
+            "Nach Fallnummer suchen",
+            "Opens the edit page for the withdrawal or return with the specified ID directly.",
+            "Öffnet direkt die Bearbeitungsseite des Widerrufs bzw. der Retoure mit der angegebenen ID.");
+
+        builder.AddOrUpdate("Admin.ReturnRequests.NotFound",
+            "A withdrawal or return with ID {0} could not be found.",
+            "Ein Widerruf oder eine Retoure mit der ID {0} konnte nicht gefunden werden.");
+
+        builder.AddOrUpdate("Admin.Catalog.Attributes.CheckoutAttributes.Fields.Requirements",
+            "Requirements",
+            "Voraussetzungen",
+            "Select cart rule sets that determine when the checkout attribute is available. The attribute is available when at least one rule set matches.",
+            "Wählen Sie Warenkorb-Regelsätze aus, die festlegen, wann das Checkout-Attribut verfügbar ist. Das Attribut ist verfügbar, sobald einer der ausgewählten Regelsätze zutrifft.");
+
+        builder.AddOrUpdate("Admin.Orders.Products.WithdrawalWaiver",
+            "Withdrawal waiver",
+            "Widerrufsverzicht",
+            "Indicates whether and when the customer accepted the withdrawal waiver for this order item.",
+            "Zeigt an, ob und wann der Kunde den Widerrufsverzicht für diese Auftragsposition erklärt hat.");
     }
 }

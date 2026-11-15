@@ -562,6 +562,7 @@ try:
     start()
     page = wait_for("/install?noAutoInstall=true")
     assert "OmmCMS" in page, "CMS installer branding missing"
+    assert "https://ommlabs.ommrudraksha.com" in page, "CMS installer website missing"
     assert 'name="InstallSampleData"' not in page, "Shop sample switch displayed"
     password = "Smoke-" + uuid.uuid4().hex + "!9"
     status, body = request("/install/Install", {
@@ -585,6 +586,9 @@ try:
             return [row[0] for row in connection.execute(sql)]
 
         assert rows("SELECT Name FROM Store") == ["OmmCMS"]
+        assert rows("SELECT COUNT(*) FROM __MigrationVersionInfo WHERE Description LIKE '%OmmCMS initial schema%'") == [1], "Initial schema migration missing"
+        assert rows("SELECT COUNT(*) FROM __MigrationVersionInfo WHERE Description LIKE '%Core:%'") == [0], "Historical core migrations must not be applied"
+        assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName = 'Admin.Common.ResetToDefault'") == [1], "Baseline locale updates missing"
         assert rows("SELECT COUNT(*) FROM Product") == [0]
         assert rows("SELECT COUNT(*) FROM Category") == [0]
         topics = set(rows("SELECT SystemName FROM Topic"))

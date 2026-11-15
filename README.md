@@ -24,7 +24,7 @@ cd src/Smartstore.Web
 dotnet run -c Release --no-build --no-launch-profile --urls http://localhost:5080
 ```
 
-Open http://localhost:5080/install. Use a fresh database (SQLite is recommended for local evaluation), complete the installer and visit `/admin` to manage content. Do not connect the preview to an existing commerce database.
+Open http://localhost:5080/install. Use a fresh database (SQLite is recommended for local evaluation), complete the installer and visit `/admin` to manage content. The initial OmmCMS schema is created directly by the installer and recorded as one core migration. Older Smartstore and OmmCMS preview databases are not supported for in-place upgrade; use a fresh database.
 
 ## Development
 
