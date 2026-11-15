@@ -19,7 +19,6 @@ public class PriceFormattingTests : ServiceTestBase
     IWorkContext _workContext;
     IRoundingHelper _roundingHelper;
     TaxSettings _taxSettings;
-    ViesTaxationHttpClient _client;
 
     Currency _currencyEUR;
     Currency _currencyUSD;
@@ -61,8 +60,6 @@ public class PriceFormattingTests : ServiceTestBase
 
         _roundingHelper = new RoundingHelper(_workContext, new CurrencySettings());
 
-        _client = new ViesTaxationHttpClient(new HttpClient());
-
         var localizationServiceMock = new Mock<ILocalizationService>();
         _localizationService = localizationServiceMock.Object;
 
@@ -72,8 +69,7 @@ public class PriceFormattingTests : ServiceTestBase
             _workContext,
             _roundingHelper,
             _localizationService,
-            _taxSettings,
-            _client);
+            _taxSettings);
     }
 
     [Test]

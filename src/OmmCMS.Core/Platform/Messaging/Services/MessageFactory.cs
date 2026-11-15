@@ -544,13 +544,6 @@ public partial class MessageFactory : IMessageFactory
                         ["To"] = "john@doe.com",
                     });
                     break;
-                case MessageTemplateNames.NewVatSubmittedStoreOwner:
-                    result.Add(new NamedModelPart("VatValidationResult")
-                    {
-                        ["Name"] = "VatName",
-                        ["Address"] = "VatAddress"
-                    });
-                    break;
                 case MessageTemplateNames.SystemGeneric:
                     result.Add(new NamedModelPart("Generic")
                     {

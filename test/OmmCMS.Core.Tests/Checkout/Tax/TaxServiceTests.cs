@@ -21,7 +21,6 @@ public class TaxServiceTests : ServiceTestBase
     IRoundingHelper _roundingHelper;
     ITaxService _taxService;
     Currency _currency;
-    ViesTaxationHttpClient _client;
 
     [OneTimeSetUp]
     public new void SetUp()
@@ -34,16 +33,13 @@ public class TaxServiceTests : ServiceTestBase
 
         _roundingHelper = new RoundingHelper(_workContext, new CurrencySettings());
 
-        _client = new ViesTaxationHttpClient(new HttpClient());
-
         _taxService = new TaxService(
             DbContext,
             ProviderManager,
             null,
             _roundingHelper,
             null,
-            new TaxSettings { DefaultTaxAddressId = 10, EuVatUseWebService = true },
-            _client);
+            new TaxSettings { DefaultTaxAddressId = 10 });
     }
 
     [Test]
@@ -70,25 +66,4 @@ public class TaxServiceTests : ServiceTestBase
 
     // TODO: (mh) (core) Implement test for Can_get_productPrice_priceIncludesTax_includingTax in PriceCalculation tests.
 
-    [TestCase("DE814160246", VatNumberStatus.Valid)]
-    [TestCase("DE000000000", VatNumberStatus.Invalid)]
-    public async Task Can_check_VAT_number(string vatNumber, VatNumberStatus status)
-    {
-        var result = await _taxService.GetVatNumberStatusAsync(vatNumber);
-
-        if (result.Exception != null)
-        {
-            Assert.Warn($"{nameof(ITaxService.GetVatNumberStatusAsync)} threw an exception. Is the VAT check service perhaps temporarily out of service? {result.Exception.Message}");
-            return;
-        }
-
-        if (status == VatNumberStatus.Invalid)
-        {
-            result.Status.ShouldEqual(status);
-        }
-        else if (result.Exception == null)
-        {
-            result.Status.ShouldEqual(status);
-        }
-    }
 }

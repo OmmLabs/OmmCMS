@@ -81,14 +81,4 @@ public class TaxSettings : ISettings
     /// </summary>
     public bool EuVatAllowVatExemption { get; set; } = true;
 
-    /// <summary>
-    /// Gets or sets a value indicating whether we should use the VIES service of the EU to validate VAT numbers.
-    /// </summary>
-    public bool EuVatUseWebService { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether we should notify a store owner when a new VAT number is submitted
-    /// </summary>
-    public bool EuVatEmailAdminWhenNewVatSubmitted { get; set; }
-
 }

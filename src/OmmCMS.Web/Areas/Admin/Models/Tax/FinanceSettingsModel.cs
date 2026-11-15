@@ -54,12 +54,6 @@ public partial class FinanceSettingsModel : ModelBase
         [LocalizedDisplay("*EuVatAllowVatExemption")]
         public bool EuVatAllowVatExemption { get; set; }
 
-        [LocalizedDisplay("*EuVatUseWebService")]
-        public bool EuVatUseWebService { get; set; }
-
-        [LocalizedDisplay("*EuVatEmailAdminWhenNewVatSubmitted")]
-        public bool EuVatEmailAdminWhenNewVatSubmitted { get; set; }
-
     }
 
     [LocalizedDisplay("Admin.Configuration.Settings.Currency.")]

@@ -864,14 +864,6 @@ public class MaintenanceController : AdminController
             AddEntry(SystemWarningLevel.Pass, T("Admin.System.Warnings.AttributeCombinationHashCodes.OK"));
         }
 
-        // EU-VAT Web service
-        // ====================================
-        if (HttpContext.Connection.LocalIpAddress.AddressFamily != AddressFamily.InterNetwork)
-        {
-            // EU-VAT check may fail on non-IPv4 addresses (e.g. IPv6 only)
-            AddEntry(SystemWarningLevel.Fail, T("Admin.System.Warnings.EuVatWebService.Unstable"));
-        }
-
         return View(model);
 
         void AddEntry(SystemWarningLevel level, string text)

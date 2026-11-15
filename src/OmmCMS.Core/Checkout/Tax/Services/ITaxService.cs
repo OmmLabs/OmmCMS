@@ -78,13 +78,6 @@ public partial interface ITaxService
         Language language = null);
 
     /// <summary>
-    /// Checks the validity of a VAT number using an online service like VIES service of the EU.
-    /// </summary>
-    /// <param name="fullVatNumber">The full VAT number including the two letter country ISO code (e.g. DE 111 1111 111).</param>
-    /// <returns>Result of the VAT check including current status.</returns>
-    Task<VatCheckResult> GetVatNumberStatusAsync(string fullVatNumber);
-
-    /// <summary>
     /// Checks whether the customer has a EU VAT exemption (the European Union value added tax).
     /// </summary>
     /// <param name="customer">Customer for VAT exemption.</param>

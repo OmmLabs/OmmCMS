@@ -13,16 +13,6 @@ namespace OmmCMS.Core.Bootstrapping;
 
 internal sealed class CheckoutStarter : StarterBase
 {
-    public override void ConfigureServices(IServiceCollection services, IApplicationContext appContext)
-    {
-        services.AddHttpClient<ViesTaxationHttpClient>()
-            .AddOmmCMSUserAgent()
-            .ConfigureHttpClient(client =>
-            {
-                client.Timeout = TimeSpan.FromSeconds(10);
-            });
-    }
-
     public override void ConfigureContainer(ContainerBuilder builder, IApplicationContext appContext)
     {
         builder.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();

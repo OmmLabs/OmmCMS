@@ -58,19 +58,4 @@ public static partial class CustomerMessageFactoryExtensions
         return factory.CreateMessageAsync(MessageContext.Create(MessageTemplateNames.ShareWishlist, languageId, customer: customer), true, model);
     }
 
-    /// <summary>
-    /// Sends a "new VAT sumitted" notification to a store owner.
-    /// </summary>
-    public static Task<CreateMessageResult> SendNewVatSubmittedStoreOwnerNotificationAsync(this IMessageFactory factory, Customer customer, string vatName, string vatAddress, int languageId = 0)
-    {
-        Guard.NotNull(customer, nameof(customer));
-
-        var model = new NamedModelPart("VatValidationResult")
-        {
-            ["Name"] = vatName,
-            ["Address"] = vatAddress
-        };
-
-        return factory.CreateMessageAsync(MessageContext.Create(MessageTemplateNames.NewVatSubmittedStoreOwner, languageId, customer: customer), true, model);
-    }
 }

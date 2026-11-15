@@ -15,9 +15,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
 {
     const string DefaultTaxFormat = "{0} *";
 
-    [GeneratedRegex("^(\\w{2})(.*)")]
-    private static partial Regex VatNumberRegex();
-
     private readonly Dictionary<TaxRateCacheKey, TaxRate> _cachedTaxRates = new();
     private readonly Dictionary<TaxAddressKey, Address> _cachedTaxAddresses = new();
     private readonly IProviderManager _providerManager;
@@ -26,7 +23,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
     private readonly ILocalizationService _localizationService;
     private readonly TaxSettings _taxSettings;
     private readonly SmartDbContext _db;
-    private readonly ViesTaxationHttpClient _client;
 
     public TaxService(
         SmartDbContext db,
@@ -34,8 +30,7 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
         IWorkContext workContext,
         IRoundingHelper roundingHelper,
         ILocalizationService localizationService,
-        TaxSettings taxSettings,
-        ViesTaxationHttpClient client)
+        TaxSettings taxSettings)
     {
         _db = db;
         _providerManager = providerManager;
@@ -43,7 +38,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
         _roundingHelper = roundingHelper;
         _localizationService = localizationService;
         _taxSettings = taxSettings;
-        _client = client;
     }
 
     #region Hook 
@@ -122,55 +116,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
         };
 
         return await activeTaxProvider.Value.GetTaxRateAsync(request);
-    }
-
-    public virtual async Task<VatCheckResult> GetVatNumberStatusAsync(string fullVatNumber)
-    {
-        if (fullVatNumber.IsEmpty())
-        {
-            return new(VatNumberStatus.Empty, fullVatNumber);
-        }
-
-        // DE 111 1111 111 or DE1111111111
-        // More advanced regex - https://forum.codeigniter.com/thread-31835.html
-        // This regex only checks whether the first two chars are alphanumeric...
-        var match = VatNumberRegex().Match(fullVatNumber.Trim());
-        if (!match.Success)
-        {
-            return new(VatNumberStatus.Invalid, fullVatNumber);
-        }
-
-        var twoLetterIsoCode = match.Groups[1].Value;
-        var vatNumber = match.Groups[2].Value;
-
-        if (twoLetterIsoCode.IsEmpty() || vatNumber.IsEmpty())
-        {
-            return new(VatNumberStatus.Empty, fullVatNumber);
-        }
-
-        if (!_taxSettings.EuVatUseWebService)
-        {
-            return new(VatNumberStatus.Unknown, fullVatNumber);
-        }
-
-        try
-        {
-            var response = await _client.CheckVatAsync(vatNumber.Replace(" ", string.Empty), twoLetterIsoCode.ToUpper());
-
-            return new(response.IsValid ? VatNumberStatus.Valid : VatNumberStatus.Invalid, fullVatNumber)
-            {
-                Name = response.Name,
-                Address = response.Address,
-                CountryCode = response.CountryCode,
-            };
-        }
-        catch (Exception ex)
-        {
-            return new(VatNumberStatus.ServiceUnavailable, fullVatNumber)
-            {
-                Exception = ex
-            };
-        }
     }
 
     public virtual async Task<bool> IsVatExemptAsync(Customer customer, Address address = null)

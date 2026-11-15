@@ -15,7 +15,6 @@ public class MessageTemplateNames
     public const string ShareProduct = "Service.EmailAFriend";
     public const string ShareWishlist = "Wishlist.EmailAFriend";
     public const string ProductQuestion = "Product.AskQuestion";
-    public const string NewVatSubmittedStoreOwner = "NewVATSubmitted.StoreOwnerNotification";
     public const string SystemCampaign = "System.Campaign";
     public const string SystemContactUs = "System.ContactUs";
     public const string SystemGeneric = "System.Generic";
