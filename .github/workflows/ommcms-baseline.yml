@@ -1,0 +1,48 @@
+name: OmmCMS baseline - build and test
+
+on:
+  push:
+    branches:
+      - cms-baseline
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ommcms-baseline-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build and test upstream baseline (.NET 10)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
+      DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+      DOTNET_ROLL_FORWARD: Major
+      MSBUILDTERMINALLOGGER: 'off'
+    steps:
+      - name: Check out CMS baseline
+        uses: actions/checkout@v4
+
+      - name: Install .NET 10 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Environment information
+        run: dotnet --info
+
+      - name: Restore solution
+        run: dotnet restore Smartstore.sln
+
+      - name: Build solution
+        run: dotnet build Smartstore.sln -c Release --no-restore
+
+      - name: Run existing tests
+        run: dotnet test Smartstore.sln -c Release --no-build --no-restore --logger trx
+
+# This workflow intentionally performs no publish, package push,
+# deployment, database migration or modification to the upstream main branch.
