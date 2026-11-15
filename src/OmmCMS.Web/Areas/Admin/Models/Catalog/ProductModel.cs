@@ -520,9 +520,8 @@ public partial class ProductModelValidator : SmartValidator<ProductModel>
         //ApplyNonNullableValueTypeRules();
 
         RuleFor(x => x.TaxCategoryId)
-            .NotNull()  // Nullable required for IsTaxExempt.
-            .NotEqual(0)
-            .When(x => !x.IsTaxExempt);
+            .NotNull()
+            .NotEqual(0);
 
         RuleFor(x => x.WithdrawalPeriodDays)
             .GreaterThanOrEqualTo(0)

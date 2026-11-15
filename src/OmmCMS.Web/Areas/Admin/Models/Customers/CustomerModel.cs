@@ -101,9 +101,6 @@ public class CustomerModel : TabbableModel
     [LocalizedDisplay("*AdminComment")]
     public string AdminComment { get; set; }
 
-    [LocalizedDisplay("*IsTaxExempt")]
-    public bool IsTaxExempt { get; set; }
-
     [LocalizedDisplay("*Active")]
     public bool Active { get; set; }
 

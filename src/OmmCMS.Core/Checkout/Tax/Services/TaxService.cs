@@ -112,7 +112,7 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
     protected virtual async Task<TaxRate> GetTaxRateCore(Product product, int taxCategoryId, Customer customer)
     {
         var activeTaxProvider = LoadActiveTaxProvider();
-        if (activeTaxProvider == null || await IsTaxExemptAsync(product, customer))
+        if (activeTaxProvider == null)
         {
             return new(0m, taxCategoryId);
         }
@@ -174,22 +174,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
                 Exception = ex
             };
         }
-    }
-
-    public virtual async Task<bool> IsTaxExemptAsync(Product product, Customer customer)
-    {
-        if (customer != null)
-        {
-            if (customer.IsTaxExempt)
-                return true;
-
-            await _db.LoadCollectionAsync(customer, x => x.CustomerRoleMappings, false, q => q.Include(x => x.CustomerRole));
-
-            if (customer.CustomerRoleMappings.Select(x => x.CustomerRole).Where(x => x.Active).Any(x => x.TaxExempt))
-                return true;
-        }
-
-        return product?.IsTaxExempt ?? false;
     }
 
     public virtual async Task<bool> IsVatExemptAsync(Customer customer, Address address = null)

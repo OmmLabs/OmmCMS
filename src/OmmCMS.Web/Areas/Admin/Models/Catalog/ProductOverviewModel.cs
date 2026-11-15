@@ -44,9 +44,6 @@ public class ProductOverviewModel : TabbableModel
     [LocalizedDisplay("*GTIN")]
     public string Gtin { get; set; }
 
-    [LocalizedDisplay("*IsTaxExempt")]
-    public bool IsTaxExempt { get; set; }
-
     [UIHint("DeliveryTimes")]
     [LocalizedDisplay("*DeliveryTime")]
     public int? DeliveryTimeId { get; set; }

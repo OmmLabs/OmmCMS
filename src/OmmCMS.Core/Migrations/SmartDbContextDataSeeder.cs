@@ -501,11 +501,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Herkunftsland",
             "Country of origin of the goods. This information is available to integrations and exports. It does not determine tax or shipping costs in the standard implementation.",
             "Ursprungsland der Ware. Die Angabe steht für Schnittstellen und Exporte zur Verfügung. Sie bestimmt im Standard keine Steuer- oder Versandkosten.");
-        builder.AddOrUpdate(prefix + "Fields.IsTaxExempt",
-            "Exempt from VAT",
-            "Von der Umsatzsteuer befreit",
-            "No VAT is calculated for this product during checkout.",
-            "Für dieses Produkt wird im Bestellvorgang keine Umsatzsteuer berechnet.");
         builder.AddOrUpdate(prefix + "Fields.TaxCategory",
             "Tax category",
             "Steuerkategorie",

@@ -69,60 +69,6 @@ public class TaxServiceTests : ServiceTestBase
         provider.ShouldNotBeNull();
     }
 
-    [Test]
-    public async Task Can_check_taxExempt_product()
-    {
-        var product = new Product
-        {
-            IsTaxExempt = true
-        };
-        (await _taxService.IsTaxExemptAsync(product, null)).ShouldEqual(true);
-
-        product.IsTaxExempt = false;
-        (await _taxService.IsTaxExemptAsync(product, null)).ShouldEqual(false);
-    }
-
-    [Test]
-    public async Task Can_check_taxExempt_customer()
-    {
-        var customer = new Customer
-        {
-            IsTaxExempt = true
-        };
-        (await _taxService.IsTaxExemptAsync(null, customer)).ShouldEqual(true);
-
-        customer.IsTaxExempt = false;
-        (await _taxService.IsTaxExemptAsync(null, customer)).ShouldEqual(false);
-    }
-
-    [Test]
-    public async Task Can_check_taxExempt_customer_in_taxExemptCustomerRole()
-    {
-        var customer = new Customer();
-        customer.IsTaxExempt = false;
-        (await _taxService.IsTaxExemptAsync(null, customer)).ShouldEqual(false);
-
-        var customerRole = new CustomerRole
-        {
-            TaxExempt = true,
-            Active = true
-        };
-
-        customer.CustomerRoleMappings.Add(new CustomerRoleMapping
-        {
-            CustomerId = customer.Id,
-            CustomerRole = customerRole
-        });
-        (await _taxService.IsTaxExemptAsync(null, customer)).ShouldEqual(true);
-
-        customerRole.TaxExempt = false;
-        (await _taxService.IsTaxExemptAsync(null, customer)).ShouldEqual(false);
-
-        // If role is not active, weshould ignore 'TaxExempt' property.
-        customerRole.Active = false;
-        (await _taxService.IsTaxExemptAsync(null, customer)).ShouldEqual(false);
-    }
-
     // TODO: (mh) (core) Implement test for Can_get_productPrice_priceIncludesTax_includingTax in PriceCalculation tests.
 
     [TestCase("DE814160246", VatNumberStatus.Valid)]

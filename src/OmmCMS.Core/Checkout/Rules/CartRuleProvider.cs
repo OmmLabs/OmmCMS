@@ -270,14 +270,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
             },
             new()
             {
-                Name = "CustomerTaxExempt",
-                DisplayName = T("Admin.Rules.FilterDescriptor.TaxExempt"),
-                GroupKey = "Common.Entity.Customer",
-                RuleType = RuleType.Boolean,
-                ProcessorType = typeof(CustomerTaxExemptRule)
-            },
-            new()
-            {
                 Name = "CustomerVatNumberStatus",
                 DisplayName = T("Admin.Rules.FilterDescriptor.VatNumberStatus"),
                 GroupKey = "Common.Entity.Customer",

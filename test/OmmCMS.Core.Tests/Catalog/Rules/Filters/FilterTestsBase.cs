@@ -18,10 +18,10 @@ public abstract class FilterTestsBase
 {
     private List<Customer> _customers;
 
-    private CustomerRole _role1 = new() { Id = 1, Active = true, TaxExempt = false, TaxDisplayType = 1 };
-    private CustomerRole _role2 = new() { Id = 2, Active = true, TaxExempt = true, TaxDisplayType = 1 };
-    private CustomerRole _role3 = new() { Id = 3, Active = false, TaxExempt = false, TaxDisplayType = 1 };
-    private CustomerRole _role4 = new() { Id = 4, Active = true, TaxExempt = false, TaxDisplayType = 2 };
+    private CustomerRole _role1 = new() { Id = 1, Active = true, TaxDisplayType = 1 };
+    private CustomerRole _role2 = new() { Id = 2, Active = true, TaxDisplayType = 1 };
+    private CustomerRole _role3 = new() { Id = 3, Active = false, TaxDisplayType = 1 };
+    private CustomerRole _role4 = new() { Id = 4, Active = true, TaxDisplayType = 2 };
 
     private Store _store1 = new() { Id = 1 };
     private Store _store2 = new() { Id = 2 };
@@ -39,10 +39,10 @@ public abstract class FilterTestsBase
 
     protected static class FilterDescriptors
     {
-        public static FilterDescriptor TaxExempt = new FilterDescriptor<Customer, bool>(x => x.IsTaxExempt)
+        public static FilterDescriptor Active = new FilterDescriptor<Customer, bool>(x => x.Active)
         {
             RuleType = RuleType.Boolean,
-            Name = "TaxExempt"
+            Name = "Active"
         };
         public static FilterDescriptor BillingCountry = new FilterDescriptor<Customer, int?>(x => x.BillingAddress.CountryId)
         {
@@ -142,7 +142,7 @@ public abstract class FilterTestsBase
             BillingAddress = new Address { CountryId = 1 },
             ShippingAddress = new Address { CountryId = 1 },
             BirthDate = new DateTime(1980, 1, 1),
-            IsTaxExempt = false,
+            Active = false,
             LastActivityDateUtc = DateTime.Now.AddDays(-5),
             Orders = new List<Order>
             {
@@ -174,7 +174,7 @@ public abstract class FilterTestsBase
             BillingAddress = new Address { CountryId = 2 },
             ShippingAddress = new Address { CountryId = 1 },
             BirthDate = new DateTime(1999, 12, 24),
-            IsTaxExempt = true,
+            Active = true,
             LastActivityDateUtc = DateTime.Now.AddDays(-1),
             Orders = new List<Order>
             {
@@ -209,7 +209,7 @@ public abstract class FilterTestsBase
             BillingAddress = new Address { CountryId = 3 },
             ShippingAddress = new Address { CountryId = 3 },
             BirthDate = new DateTime(1960, 10, 10),
-            IsTaxExempt = false,
+            Active = false,
             LastActivityDateUtc = DateTime.Now.AddDays(-100),
             Orders = new List<Order>
             {
@@ -242,7 +242,7 @@ public abstract class FilterTestsBase
             BillingAddress = new Address { CountryId = 1 },
             ShippingAddress = new Address { CountryId = 1 },
             BirthDate = DateTime.Now.AddYears(-32),
-            IsTaxExempt = true,
+            Active = true,
             LastActivityDateUtc = DateTime.Now.AddDays(0),
             Orders = new List<Order>
             {

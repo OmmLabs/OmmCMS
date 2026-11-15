@@ -127,11 +127,6 @@ public class ExportFilter
     public bool? IsActiveCustomer { get; set; }
 
     /// <summary>
-    /// Filter by tax exempt customers.
-    /// </summary>
-    public bool? IsTaxExempt { get; set; }
-
-    /// <summary>
     /// Identifiers of customer roles.
     /// </summary>
     public int[] CustomerRoleIds { get; set; }

@@ -570,7 +570,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             ["CustomerGuid"] = part.CustomerGuid,
             ["Username"] = part.Username,
             ["Email"] = email,
-            ["IsTaxExempt"] = part.IsTaxExempt,
             ["LastIpAddress"] = part.LastIpAddress,
             ["CreatedOn"] = _helper.ToUserDate(part.CreatedOnUtc, messageContext),
             ["LastLoginOn"] = _helper.ToUserDate(part.LastLoginDateUtc, messageContext),

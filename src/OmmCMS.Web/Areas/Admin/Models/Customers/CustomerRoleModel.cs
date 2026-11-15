@@ -12,9 +12,6 @@ public class CustomerRoleModel : TabbableModel
     [LocalizedDisplay("*Name")]
     public string Name { get; set; }
 
-    [LocalizedDisplay("*TaxExempt")]
-    public bool TaxExempt { get; set; }
-
     [LocalizedDisplay("*TaxDisplayType")]
     public int? TaxDisplayType { get; set; }
 

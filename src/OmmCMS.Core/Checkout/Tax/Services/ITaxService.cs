@@ -85,19 +85,6 @@ public partial interface ITaxService
     Task<VatCheckResult> GetVatNumberStatusAsync(string fullVatNumber);
 
     /// <summary>
-    /// Checks whether the product is tax exempt for the customer.
-    /// </summary>
-    /// <param name="product">Product for tax exemption.</param>
-    /// <param name="customer">Customer to check.</param>
-    /// <remarks>
-    /// Either product or customer can be <c>null</c>.
-    /// </remarks>
-    /// <returns>
-    /// <c>True</c> if the product is tax exempted, <c>False</c> if otherwise.
-    /// </returns>
-    Task<bool> IsTaxExemptAsync(Product product, Customer customer);
-
-    /// <summary>
     /// Checks whether the customer has a EU VAT exemption (the European Union value added tax).
     /// </summary>
     /// <param name="customer">Customer for VAT exemption.</param>

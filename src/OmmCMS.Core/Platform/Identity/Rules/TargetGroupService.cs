@@ -196,12 +196,6 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
                 RuleType = RuleType.IntArray,
                 SelectList = new RemoteRuleValueSelectList("CustomerRole") { Multiple = true }
             },
-            new FilterDescriptor<Customer, bool>(x => x.IsTaxExempt)
-            {
-                Name = "TaxExempt",
-                DisplayName = T("Admin.Rules.FilterDescriptor.TaxExempt"),
-                RuleType = RuleType.Boolean
-            },
             new FilterDescriptor<Customer, int>(x => x.VatNumberStatusId)
             {
                 Name = "VatNumberStatus",

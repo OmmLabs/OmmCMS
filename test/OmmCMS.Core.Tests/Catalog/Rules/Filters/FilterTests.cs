@@ -101,8 +101,8 @@ public class FilterTests : FilterTestsBase
         Assert.That(op.Match(e3, e1), Is.False);
         Assert.That(op.Match(e2, e3), Is.False);
 
-        var expectedResult = Customers.Where(x => x.IsTaxExempt == true).ToList();
-        var result = ExecuteQuery(op, x => x.IsTaxExempt, true);
+        var expectedResult = Customers.Where(x => x.Active == true).ToList();
+        var result = ExecuteQuery(op, x => x.Active, true);
 
         AssertEquality(expectedResult, result);
     }
@@ -134,8 +134,8 @@ public class FilterTests : FilterTestsBase
             Assert.That(op.Match(e2, e3), Is.EqualTo(true));
         });
 
-        var expectedResult = Customers.Where(x => x.IsTaxExempt == false).ToList();
-        var result = ExecuteQuery(op, x => x.IsTaxExempt, true);
+        var expectedResult = Customers.Where(x => x.Active == false).ToList();
+        var result = ExecuteQuery(op, x => x.Active, true);
 
         AssertEquality(expectedResult, result);
     }
@@ -300,9 +300,9 @@ public class FilterTests : FilterTestsBase
     [Test]
     public void SimpleMemberFiltersMatchAnd()
     {
-        var taxExemptFilter = new FilterExpression
+        var activeFilter = new FilterExpression
         {
-            Descriptor = FilterDescriptors.TaxExempt,
+            Descriptor = FilterDescriptors.Active,
             Operator = RuleOperator.IsEqualTo,
             Value = true
         };
@@ -315,9 +315,9 @@ public class FilterTests : FilterTestsBase
         };
 
         var expectedResult = Customers
-            .Where(x => x.IsTaxExempt && x.BillingAddress != null && x.BillingAddress.CountryId == 2)
+            .Where(x => x.Active && x.BillingAddress != null && x.BillingAddress.CountryId == 2)
             .ToList();
-        var result = ExecuteQuery(LogicalRuleOperator.And, taxExemptFilter, countryFilter);
+        var result = ExecuteQuery(LogicalRuleOperator.And, activeFilter, countryFilter);
 
         AssertEquality(expectedResult, result);
     }
@@ -325,9 +325,9 @@ public class FilterTests : FilterTestsBase
     [Test]
     public void SimpleMemberFiltersMatchOr()
     {
-        var taxExemptFilter = new FilterExpression
+        var activeFilter = new FilterExpression
         {
-            Descriptor = FilterDescriptors.TaxExempt,
+            Descriptor = FilterDescriptors.Active,
             Operator = RuleOperator.IsEqualTo,
             Value = true
         };
@@ -347,9 +347,9 @@ public class FilterTests : FilterTestsBase
         };
 
         var expectedResult = Customers
-            .Where(x => x.IsTaxExempt || x.BillingAddress?.CountryId == 2 || x.ShippingAddress?.CountryId == 2)
+            .Where(x => x.Active || x.BillingAddress?.CountryId == 2 || x.ShippingAddress?.CountryId == 2)
             .ToList();
-        var result = ExecuteQuery(LogicalRuleOperator.Or, taxExemptFilter, countryFilter, shippingCountryFilter);
+        var result = ExecuteQuery(LogicalRuleOperator.Or, activeFilter, countryFilter, shippingCountryFilter);
 
         AssertEquality(expectedResult, result);
     }

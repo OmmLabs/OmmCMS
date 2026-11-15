@@ -85,9 +85,6 @@ public class ExportFilterModel
     [LocalizedDisplay("*IsActiveCustomer")]
     public bool? IsActiveCustomer { get; set; }
 
-    [LocalizedDisplay("*IsTaxExempt")]
-    public bool? IsTaxExempt { get; set; }
-
     [LocalizedDisplay("*BillingCountryIds")]
     public int[] BillingCountryIds { get; set; }
 

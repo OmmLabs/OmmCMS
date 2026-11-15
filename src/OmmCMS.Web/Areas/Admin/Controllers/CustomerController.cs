@@ -150,7 +150,6 @@ public class CustomerController : AdminController
             model.Email = customer.Email;
             model.Username = customer.Username;
             model.AdminComment = customer.AdminComment;
-            model.IsTaxExempt = customer.IsTaxExempt;
             model.Active = customer.Active;
             model.TimeZoneId = customer.TimeZoneId;
             model.Deleted = customer.Deleted;
@@ -283,7 +282,6 @@ public class CustomerController : AdminController
     private void MapCustomerModel(CustomerModel from, Customer to)
     {
         to.AdminComment = from.AdminComment;
-        to.IsTaxExempt = from.IsTaxExempt;
         to.Active = from.Active;
         to.FirstName = from.FirstName;
         to.LastName = from.LastName;
@@ -463,7 +461,6 @@ public class CustomerController : AdminController
                 CreatedOn = dtHelper.ConvertToUserTime(x.CreatedOnUtc, DateTimeKind.Utc),
                 LastActivityDate = dtHelper.ConvertToUserTime(x.LastActivityDateUtc, DateTimeKind.Utc),
                 EditUrl = Url.Action(nameof(Edit), "Customer", new { id = x.Id }),
-                IsTaxExempt = x.IsTaxExempt,
                 LastIpAddress = x.LastIpAddress,
                 DateOfBirth = x.BirthDate.HasValue ? dtHelper.ConvertToUserTime(x.BirthDate.Value, DateTimeKind.Utc) : null,
                 Gender = x.Gender,

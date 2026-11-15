@@ -781,8 +781,6 @@ public partial class DataExporter : IDataExporter
             if (f.IsActiveCustomer.HasValue)
                 query = query.Where(x => x.Active == f.IsActiveCustomer.Value);
 
-            if (f.IsTaxExempt.HasValue)
-                query = query.Where(x => x.IsTaxExempt == f.IsTaxExempt.Value);
 
             if (!f.BillingCountryIds.IsNullOrEmpty())
                 query = query.Where(x => x.BillingAddress != null && f.BillingCountryIds.Contains(x.BillingAddress.CountryId ?? 0));

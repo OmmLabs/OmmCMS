@@ -268,7 +268,6 @@ public class CustomerImporter : EntityImporterBase
             }
 
             row.SetProperty(context.Result, (x) => x.AdminComment);
-            row.SetProperty(context.Result, (x) => x.IsTaxExempt);
             row.SetProperty(context.Result, (x) => x.Active);
 
             row.SetProperty(context.Result, (x) => x.CreatedOnUtc, context.UtcNow);

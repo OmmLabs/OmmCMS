@@ -142,11 +142,6 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
     public string AdminComment { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the customer is tax exempt
-    /// </summary>
-    public bool IsTaxExempt { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether the customer is active
     /// </summary>
     public bool Active { get; set; }

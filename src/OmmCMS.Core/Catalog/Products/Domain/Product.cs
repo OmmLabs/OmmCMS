@@ -361,11 +361,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     public string UserAgreementText { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the product is marked as tax exempt.
-    /// </summary>
-    public bool IsTaxExempt { get; set; }
-
-    /// <summary>
     /// Gets or sets the tax category identifier.
     /// </summary>
     public int TaxCategoryId { get; set; }

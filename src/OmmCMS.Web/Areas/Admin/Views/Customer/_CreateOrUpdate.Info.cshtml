@@ -287,15 +287,6 @@
             <span asp-validation-for="SelectedCustomerRoleIds"></span>
         </div>
     </div>
-    <div class="adminRow">
-        <div class="adminTitle">
-            <smart-label asp-for="IsTaxExempt" />
-        </div>
-        <div class="adminData">
-            <input asp-for="IsTaxExempt" />
-            <span asp-validation-for="IsTaxExempt"></span>
-        </div>
-    </div>
     <div sm-if="Model.AllowCustomersToSetTimeZone" class="adminRow">
         <div class="adminTitle">
             <smart-label asp-for="TimeZoneId" />

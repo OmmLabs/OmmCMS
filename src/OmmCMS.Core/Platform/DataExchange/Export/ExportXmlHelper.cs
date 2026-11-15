@@ -475,7 +475,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Customer.Username), entity.Username);
         _writer.WriteElementString(nameof(Customer.Email), entity.Email);
         _writer.WriteElementString(nameof(Customer.AdminComment), entity.AdminComment);
-        _writer.WriteElementString(nameof(Customer.IsTaxExempt), entity.IsTaxExempt.ToString());
         _writer.WriteElementString(nameof(Customer.Active), entity.Active.ToString());
         _writer.WriteElementString(nameof(Customer.Deleted), entity.Deleted.ToString());
         _writer.WriteElementString(nameof(Customer.IsSystemAccount), entity.IsSystemAccount.ToString());
@@ -505,7 +504,6 @@ public class ExportXmlHelper : Disposable
                 _writer.WriteStartElement("CustomerRole");
                 _writer.WriteElementString(nameof(CustomerRole.Id), entityRole.Id.ToString());
                 _writer.WriteElementString(nameof(CustomerRole.Name), (string)role.Name);
-                _writer.WriteElementString(nameof(CustomerRole.TaxExempt), entityRole.TaxExempt.ToString());
                 _writer.WriteElementString(nameof(CustomerRole.TaxDisplayType), entityRole.TaxDisplayType?.ToString() ?? string.Empty);
                 _writer.WriteElementString(nameof(CustomerRole.Active), entityRole.Active.ToString());
                 _writer.WriteElementString(nameof(CustomerRole.IsSystemRole), entityRole.IsSystemRole.ToString());
@@ -584,7 +582,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.SampleDownloadId), entity.SampleDownloadId?.ToString() ?? string.Empty);
         _writer.WriteElementString(nameof(Product.HasUserAgreement), entity.HasUserAgreement.ToString());
         _writer.WriteElementString(nameof(Product.UserAgreementText), entity.UserAgreementText);
-        _writer.WriteElementString(nameof(Product.IsTaxExempt), entity.IsTaxExempt.ToString());
         _writer.WriteElementString(nameof(Product.TaxCategoryId), entity.TaxCategoryId.ToString());
         // INFO: Export the entered price. Not "(decimal)product.Price" because it is the calculated price.
         _writer.WriteElementString(nameof(Product.Price), entity.Price.ToString(_culture));
