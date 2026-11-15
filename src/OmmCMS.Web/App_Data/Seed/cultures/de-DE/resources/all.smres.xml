@@ -12037,15 +12037,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Active">
 		<Value>Ist aktiv</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.AllProductsFromCategoryInCart">
-		<Value>Alle Produkte aus Kategorie im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.AllProductsFromManufacturerInCart">
-		<Value>Alle Produkte von Hersteller im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.AllProductsWithDeliveryTimeInCart">
-		<Value>Alle Produkte mit Lieferzeit im Warenkorb</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Authentication">
 		<Value>Authentifizierung</Value>
 	</LocaleResource>
@@ -12075,15 +12066,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.CancelledOrderCount">
 		<Value>Anzahl stornierter Bestellungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartItemFromCategoryQuantity">
-		<Value>Produktmenge aus Warengruppe liegt in folgendem Bereich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartItemQuantity">
-		<Value>Produktmenge liegt in folgendem Bereich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartProductCount">
-		<Value>Anzahl der Produkte</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Company">
 		<Value>Firma</Value>
@@ -12169,23 +12151,8 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.PaymentStatus">
 		<Value>Zahlungsstatus</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductFromCategoryInCart">
-		<Value>Produkt aus Kategorie im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductFromManufacturerInCart">
-		<Value>Produkt von Hersteller im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductInCart">
-		<Value>Produkt im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductInCategoryTreeCartRule">
-		<Value>Produkt aus Kategorie oder Unterkategorien im Warenkorb</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductOnWishlist">
 		<Value>Produkt auf der Wunschliste</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductWithDeliveryTimeInCart">
-		<Value>Produkt mit Lieferzeit im Warenkorb</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.PurchasedFromManufacturer">
 		<Value>Gekauft von Hersteller</Value>
@@ -12234,9 +12201,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Title">
 		<Value>Titel</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.VariantInCart">
-		<Value>Produkt mit SKU im Warenkorb</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.VatNumberStatus">
 		<Value>Status der Steuernummer</Value>

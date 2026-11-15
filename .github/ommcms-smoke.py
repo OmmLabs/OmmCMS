@@ -617,6 +617,7 @@ try:
             "Checkout/Orders/Hooks/OrderNoteHook.cs",
             "Common/Services/DeliveryTimeService.cs",
             "Common/Services/IDeliveryTimeService.cs",
+            "Checkout/Rules/Impl/Cart",
         ):
             assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
         for language in ("en", "de"):
@@ -624,6 +625,9 @@ try:
                 template = Path("App_Data/EmailTemplates") / language / name
                 assert not (repo / "src/OmmCMS.Web" / template).exists(), f"Retired template remains: {template}"
                 assert not (root / template).exists(), f"Retired template was published: {template}"
+        cart_template = Path("Areas/Admin/Views/Rule/ValueTemplates/CartItemQuantity.cshtml")
+        assert not (repo / "src/OmmCMS.Web" / cart_template).exists()
+        assert not (root / cart_template).exists()
         print("Core commerce source extraction passed.")
     if "--presentation-trimmed" in sys.argv:
         verify_presentation_extraction()

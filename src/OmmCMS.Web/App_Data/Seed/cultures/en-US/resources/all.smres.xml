@@ -12292,15 +12292,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Active">
 		<Value>Is active</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.AllProductsFromCategoryInCart">
-		<Value>All products from category in cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.AllProductsFromManufacturerInCart">
-		<Value>All products from manufacturer in cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.AllProductsWithDeliveryTimeInCart">
-		<Value>All products with delivery time in cart</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Authentication">
 		<Value>Authentication</Value>
 	</LocaleResource>
@@ -12330,15 +12321,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.CancelledOrderCount">
 		<Value>Cancelled order count</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartItemFromCategoryQuantity">
-		<Value>Product quantity from category is in range</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartItemQuantity">
-		<Value>Product quantity is in range</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartProductCount">
-		<Value>Number of products</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Company">
 		<Value>Company</Value>
@@ -12424,23 +12406,8 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.PaymentStatus">
 		<Value>Payment status</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductFromCategoryInCart">
-		<Value>Product from category in cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductFromManufacturerInCart">
-		<Value>Product from manufacturer in cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductInCart">
-		<Value>Product in cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductInCategoryTreeCartRule">
-		<Value>Product from category or subcategories in cart</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductOnWishlist">
 		<Value>Product on wishlist</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductWithDeliveryTimeInCart">
-		<Value>Product with delivery time in cart</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.PurchasedFromManufacturer">
 		<Value>Purchased from manufacturer</Value>
@@ -12489,9 +12456,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Title">
 		<Value>Title</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.VariantInCart">
-		<Value>Product with SKU in cart</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.VatNumberStatus">
 		<Value>Status of tax number</Value>
