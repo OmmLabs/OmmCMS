@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - cms-baseline
+      - cms-shell
   workflow_dispatch:
 
 permissions:
