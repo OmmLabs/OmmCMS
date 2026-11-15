@@ -128,8 +128,60 @@ public class OmmCmsCommerceIsolationTests
     }
 
     [TestCase("Smartstore.Web.Controllers.CommonController", "CurrencySelected")]
+    [TestCase("Smartstore.Web.Controllers.MenuController", "OffCanvasBrands")]
+    [TestCase("Smartstore.Admin.Controllers.CustomerController", "RemoveAffiliateAssignment")]
+    [TestCase("Smartstore.Admin.Controllers.CustomerController", "UpdateVatNumberStatus")]
+    [TestCase("Smartstore.Admin.Controllers.CustomerController", "RewardPointsHistoryList")]
     [TestCase("Smartstore.Admin.Controllers.CustomerController", "RewardPointsInsert")]
+    [TestCase("Smartstore.Admin.Controllers.CustomerController", "Reports")]
+    [TestCase("Smartstore.Admin.Controllers.CustomerController", "ReportTopCustomersList")]
     [TestCase("Smartstore.Admin.Controllers.CustomerController", "GetCartList")]
+    [TestCase("Smartstore.Admin.Controllers.CustomerController", "RewardPointsSettings")]
+    [TestCase("Smartstore.Admin.Controllers.CustomerController", "RewardPointsForPurchasesInfo")]
+    public void ResidualCommerceActionIsAbsent(string controller, string method)
+    {
+        var type = typeof(OmmCmsCommerceIsolation).Assembly.GetType(controller);
+        Assert.That(type, Is.Not.Null);
+        Assert.That(type!.GetMethods(BindingFlags.Public | BindingFlags.Instance).Any(x => x.Name == method), Is.False);
+    }
+
+    [TestCase("Smartstore.Web.Components.CheckoutProgressViewComponent")]
+    [TestCase("Smartstore.Web.Components.CrossSellProductsViewComponent")]
+    [TestCase("Smartstore.Web.Components.CurrencySelectorViewComponent")]
+    [TestCase("Smartstore.Web.Components.HomeBestsellersViewComponent")]
+    [TestCase("Smartstore.Web.Components.HomeBrandsViewComponent")]
+    [TestCase("Smartstore.Web.Components.HomeCategoriesViewComponent")]
+    [TestCase("Smartstore.Web.Components.HomeProductsViewComponent")]
+    [TestCase("Smartstore.Web.Components.OffCanvasCartViewComponent")]
+    [TestCase("Smartstore.Web.Components.OrderSummaryViewComponent")]
+    [TestCase("Smartstore.Web.Components.OrderTotalsViewComponent")]
+    [TestCase("Smartstore.Web.Components.PopularProductTagsViewComponent")]
+    [TestCase("Smartstore.Web.Components.RecentlyViewedProductsViewComponent")]
+    [TestCase("Smartstore.Web.Models.Checkout.CheckoutProgressStepModel")]
+    [TestCase("Smartstore.Web.Models.Cart.OffCanvasCartModel")]
+    [TestCase("Smartstore.Web.Models.Cart.OrderTotalsModel")]
+    [TestCase("Smartstore.Web.Models.Catalog.PopularProductTagsModel")]
+    public void ResidualCommerceTypeIsAbsent(string type)
+    {
+        Assert.That(typeof(OmmCmsCommerceIsolation).Assembly.GetType(type), Is.Null);
+    }
+
+    [TestCase("Smartstore.Web.Controllers.EntityController", "ICatalogSearchService")]
+    [TestCase("Smartstore.Web.Controllers.EntityController", "CatalogSettings")]
+    [TestCase("Smartstore.Web.Controllers.EntityController", "SearchSettings")]
+    [TestCase("Smartstore.Web.Controllers.EntityController", "ICategoryService")]
+    [TestCase("Smartstore.Web.Controllers.EntityController", "IMediaService")]
+    [TestCase("Smartstore.Web.Controllers.MenuController", "CatalogHelper")]
+    [TestCase("Smartstore.Web.Components.ShopBarViewComponent", "ShoppingCartSettings")]
+    [TestCase("Smartstore.Admin.Controllers.CustomerController", "RewardPointsSettings")]
+    [TestCase("Smartstore.Admin.Controllers.CustomerController", "TaxSettings")]
+    public void ResidualCommerceDependencyIsAbsent(string typeName, string dependency)
+    {
+        var type = typeof(OmmCmsCommerceIsolation).Assembly.GetType(typeName);
+        Assert.That(type, Is.Not.Null);
+        Assert.That(type!.GetConstructors().SelectMany(x => x.GetParameters()).Any(x => x.ParameterType.Name == dependency), Is.False);
+    }
+
     [TestCase("Smartstore.Admin.Controllers.HomeController", "DashboardWidget")]
     [TestCase("Smartstore.Admin.Controllers.HomeController", "DashboardSave")]
     [TestCase("Smartstore.Admin.Controllers.SettingController", "SettingUpdate")]
@@ -160,7 +212,6 @@ public class OmmCmsCommerceIsolationTests
     }
 
     [TestCase("/pdf/receiptheader", "GET", "Smartstore.Web.Controllers.PdfController", "ReceiptHeader")]
-    [TestCase("/admin/customer/getcartlist", "POST", "Smartstore.Admin.Controllers.CustomerController", "GetCartList")]
     public async Task SelectedCommerceEndpointReturns404WithoutInvokingDownstream(string path, string verb, string controller, string method)
     {
         var context = new DefaultHttpContext();

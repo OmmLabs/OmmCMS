@@ -2,15 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
-using Smartstore.Admin.Models.Cart;
 using Smartstore.Admin.Models.Customers;
 using Smartstore.Admin.Models.Scheduling;
 using Smartstore.ComponentModel;
-using Smartstore.Core.Checkout.Cart;
-using Smartstore.Core.Checkout.Orders;
-using Smartstore.Core.Checkout.Payment;
-using Smartstore.Core.Checkout.Shipping;
-using Smartstore.Core.Checkout.Tax;
 using Smartstore.Core.Common.Configuration;
 using Smartstore.Core.Common.Services;
 using Smartstore.Core.Configuration;
@@ -41,19 +35,12 @@ public class CustomerController : AdminController
     private readonly ModuleManager _moduleManager;
     private readonly IMessageFactory _messageFactory;
     private readonly DateTimeSettings _dateTimeSettings;
-    private readonly TaxSettings _taxSettings;
-    private readonly RewardPointsSettings _rewardPointsSettings;
     private readonly CustomerSettings _customerSettings;
-    private readonly ITaxService _taxService;
     private readonly Lazy<IEmailAccountService> _emailAccountService;
     private readonly Lazy<IGdprTool> _gdprTool;
     private readonly Lazy<IGeoCountryLookup> _geoCountryLookup;
-    private readonly Lazy<IShoppingCartService> _shoppingCartService;
-    private readonly Lazy<IShippingService> _shippingService;
-    private readonly Lazy<IPaymentService> _paymentService;
     private readonly MultiStoreSettingHelper _multiStoreSettingHelper;
     private readonly ILocalizedEntityService _localizedEntityService;
-    private readonly ShoppingCartSettings _shoppingCartSettings;
     private readonly IStoreMappingService _storeMappingService;
     private readonly Lazy<IConfigureOptions<IdentityOptions>> _identityOptionsConfigurer;
     private readonly IOptions<IdentityOptions> _identityOptions;
@@ -69,19 +56,12 @@ public class CustomerController : AdminController
         ModuleManager moduleManager,
         IMessageFactory messageFactory,
         DateTimeSettings dateTimeSettings,
-        TaxSettings taxSettings,
-        RewardPointsSettings rewardPointsSettings,
         CustomerSettings customerSettings,
-        ITaxService taxService,
         Lazy<IEmailAccountService> emailAccountService,
         Lazy<IGdprTool> gdprTool,
         Lazy<IGeoCountryLookup> geoCountryLookup,
-        Lazy<IShoppingCartService> shoppingCartService,
-        Lazy<IShippingService> shippingService,
-        Lazy<IPaymentService> paymentService,
         MultiStoreSettingHelper multiStoreSettingHelper,
         ILocalizedEntityService localizedEntityService,
-        ShoppingCartSettings shoppingCartSettings,
         IStoreMappingService storeMappingService,
         Lazy<IConfigureOptions<IdentityOptions>> identityOptionsConfigurer,
         IOptions<IdentityOptions> identityOptions,
@@ -96,19 +76,12 @@ public class CustomerController : AdminController
         _moduleManager = moduleManager;
         _messageFactory = messageFactory;
         _dateTimeSettings = dateTimeSettings;
-        _taxSettings = taxSettings;
-        _rewardPointsSettings = rewardPointsSettings;
         _customerSettings = customerSettings;
-        _taxService = taxService;
         _emailAccountService = emailAccountService;
         _gdprTool = gdprTool;
         _geoCountryLookup = geoCountryLookup;
-        _shoppingCartService = shoppingCartService;
-        _shippingService = shippingService;
-        _paymentService = paymentService;
         _multiStoreSettingHelper = multiStoreSettingHelper;
         _localizedEntityService = localizedEntityService;
-        _shoppingCartSettings = shoppingCartSettings;
         _storeMappingService = storeMappingService;
         _identityOptionsConfigurer = identityOptionsConfigurer;
         _identityOptions = identityOptions;
@@ -180,8 +153,6 @@ public class CustomerController : AdminController
             model.IsTaxExempt = customer.IsTaxExempt;
             model.Active = customer.Active;
             model.TimeZoneId = customer.TimeZoneId;
-            model.VatNumber = ga.VatNumber;
-            model.AffiliateId = customer.AffiliateId;
             model.Deleted = customer.Deleted;
             model.Title = customer.Title;
             model.FirstName = customer.FirstName;
@@ -199,9 +170,6 @@ public class CustomerController : AdminController
             model.Phone = ga.Phone;
             model.Fax = ga.Fax;
             model.DateOfBirth = customer.BirthDate;
-            model.DisplayVatNumber = _taxSettings.EuVatEnabled;
-            model.DisplayRewardPointsHistory = _rewardPointsSettings.Enabled;
-            model.VatNumberStatus = (VatNumberStatus)customer.VatNumberStatusId;
             model.CreatedOn = dtHelper.ConvertToUserTime(customer.CreatedOnUtc, DateTimeKind.Utc);
             model.LastActivityDate = dtHelper.ConvertToUserTime(customer.LastActivityDateUtc, DateTimeKind.Utc);
             model.LastIpAddress = customer.LastIpAddress;
@@ -209,7 +177,6 @@ public class CustomerController : AdminController
             model.DisplayProfileLink = _customerSettings.AllowViewingProfiles && !model.IsGuest;
             model.AssociatedExternalAuthRecords = await GetAssociatedExternalAuthRecords(customer);
             model.PermissionTree = await Services.Permissions.BuildCustomerPermissionTreeAsync(customer, true);
-            model.HasOrders = await _db.Orders.AnyAsync(x => x.CustomerId == customer.Id);
             model.LastUserAgent = customer.LastUserAgent.NaIfEmpty();
             model.LastUserDeviceType = customer.LastUserDeviceType.NaIfEmpty();
             model.Location = _geoCountryLookup.Value.LookupCountry(model.LastIpAddress)?.Name;
@@ -217,18 +184,12 @@ public class CustomerController : AdminController
             model.Addresses = new()
             {
                 Id = customer.Id,
-                Addresses = await customer.Addresses.MapAsync(customer, _shoppingCartSettings.QuickCheckoutEnabled)
+                Addresses = await customer.Addresses.MapAsync(customer, false)
             };
 
             model.SelectedCustomerRoleIds = [.. customer.CustomerRoleMappings
                 .Where(x => !x.IsSystemMapping)
                 .Select(x => x.CustomerRoleId)];
-
-            var affiliate = await _db.Affiliates
-                .Include(x => x.Address)
-                .FindByIdAsync(customer.AffiliateId, false);
-
-            model.AffiliateFullName = affiliate?.Address?.GetFullName();
 
             var cookieConsent = ga.CookieConsent;
             model.CookieConsent = cookieConsent != null
@@ -268,32 +229,6 @@ public class CustomerController : AdminController
                 ?? [new() { Text = T("Address.OtherNonUS"), Value = "0" }];
         }
 
-        if (_shoppingCartSettings.QuickCheckoutEnabled)
-        {
-            var shippingMethods = await _shippingService.Value.GetAllShippingMethodsAsync();
-            var paymentProviders = await _paymentService.Value.LoadAllPaymentProvidersAsync(true);
-            var preferredShippingMethodId = ga?.PreferredShippingOption?.ShippingMethodId ?? 0;
-            var preferredPaymentMethod = ga?.PreferredPaymentMethod;
-
-            ViewBag.ShippingMethods = shippingMethods
-                .Select(x => new SelectListItem
-                {
-                    Text = x.GetLocalized(y => y.Name),
-                    Value = x.Id.ToString(),
-                    Selected = x.Id == preferredShippingMethodId
-                })
-                .ToList();
-
-            ViewBag.PaymentMethods = paymentProviders
-                .Select(x => x.Metadata)
-                .Select(x => new SelectListItem
-                {
-                    Text = _moduleManager.GetLocalizedFriendlyName(x) ?? x.FriendlyName.NullEmpty() ?? x.SystemName,
-                    Value = x.SystemName,
-                    Selected = x.SystemName.EqualsNoCase(preferredPaymentMethod)
-                })
-                .ToList();
-        }
     }
 
     private async Task<(List<CustomerRole> NewCustomerRoles, string ErrMessage)> ValidateCustomerRoles(
@@ -406,11 +341,6 @@ public class CustomerController : AdminController
             to.GenericAttributes.Fax = from.Fax;
         }
 
-        if (_shoppingCartSettings.QuickCheckoutEnabled)
-        {
-            to.GenericAttributes.PreferredShippingOption = new() { ShippingMethodId = from.PreferredShippingMethodId ?? 0 };
-            to.GenericAttributes.PreferredPaymentMethod = from.PreferredPaymentMethod.NullEmpty();
-        }
     }
 
     private void AddModelErrors(IdentityResult result, string key)
@@ -426,7 +356,7 @@ public class CustomerController : AdminController
 
     private async Task PrepareAddressModelAsync(CustomerAddressModel model, Customer customer, Address address)
     {
-        await address.MapAsync(model.Address, customer, _shoppingCartSettings.QuickCheckoutEnabled, true);
+        await address.MapAsync(model.Address, customer, false, true);
 
         model.CustomerId = customer.Id;
         model.Username = customer.Username;
@@ -740,13 +670,6 @@ public class CustomerController : AdminController
                     }
                 }
 
-                // VAT number.
-                if (_taxSettings.EuVatEnabled && !customer.GenericAttributes.VatNumber.EqualsNoCase(model.VatNumber))
-                {
-                    customer.GenericAttributes.VatNumber = model.VatNumber;
-                    customer.VatNumberStatusId = await GetVatNumberStatus(model.VatNumber);
-                }
-
                 // Model properties.
                 MapCustomerModel(model, customer);
 
@@ -852,64 +775,6 @@ public class CustomerController : AdminController
         }
 
         return PartialView("_ChangePasswordPopup", model);
-    }
-
-    [HttpPost]
-    [FormValueRequired("removeAffiliateAssignment"), ActionName("Edit")]
-    [Permission(Permissions.Customer.Update)]
-    public async Task<IActionResult> RemoveAffiliateAssignment(int id)
-    {
-        var customer = await _db.Customers.FindByIdAsync(id);
-        if (customer == null)
-        {
-            return NotFound();
-        }
-
-        customer.AffiliateId = 0;
-        await _db.SaveChangesAsync();
-
-        return RedirectToAction(nameof(Edit), customer.Id);
-    }
-
-    [HttpPost]
-    [FormValueRequired("updateVatNumberStatus"), ActionName("Edit")]
-    [Permission(Permissions.Customer.Update)]
-    public async Task<IActionResult> UpdateVatNumberStatus(CustomerModel model, string command)
-    {
-        var customer = await _db.Customers.FindByIdAsync(model.Id);
-        if (customer == null)
-        {
-            return NotFound();
-        }
-
-        switch (command)
-        {
-            case "mark-valid":
-                customer.VatNumberStatusId = (int)VatNumberStatus.Valid;
-                break;
-            case "mark-invalid":
-                customer.VatNumberStatusId = (int)VatNumberStatus.Invalid;
-                break;
-            case "check":
-                customer.VatNumberStatusId = await GetVatNumberStatus(model.VatNumber);
-                break;
-        }
-
-        await _db.SaveChangesAsync();
-
-        return RedirectToAction(nameof(Edit), customer.Id);
-    }
-
-    private async Task<int> GetVatNumberStatus(string vatNumber)
-    {
-        var response = await _taxService.GetVatNumberStatusAsync(vatNumber);
-
-        if (response.Exception != null)
-        {
-            NotifyError(T("Admin.Customers.VatNumberValidationError", response.Exception.Message));
-        }
-
-        return (int)response.Status;
     }
 
     [HttpPost]
@@ -1079,52 +944,6 @@ public class CustomerController : AdminController
 
     #endregion
 
-    #region Reward points history
-
-    [Permission(Permissions.Customer.Read)]
-    public async Task<IActionResult> RewardPointsHistoryList(int customerId, GridCommand command)
-    {
-        var entities = await _db.RewardPointsHistory
-            .AsNoTracking()
-            .Where(x => x.CustomerId == customerId)
-            .OrderByDescending(rph => rph.CreatedOnUtc)
-            .ApplyGridCommand(command)
-            .ToPagedList(command)
-            .LoadAsync();
-
-        var rows = entities
-            .Select(x => new CustomerModel.RewardPointsHistoryModel
-            {
-                Id = x.Id,
-                Points = x.Points,
-                PointsBalance = x.PointsBalance,
-                Message = x.Message,
-                CreatedOn = Services.DateTimeHelper.ConvertToUserTime(x.CreatedOnUtc, DateTimeKind.Utc)
-            })
-            .ToList();
-
-        return Json(new GridModel<CustomerModel.RewardPointsHistoryModel>
-        {
-            Rows = rows,
-            Total = await entities.GetTotalCountAsync()
-        });
-    }
-
-    [HttpPost]
-    [Permission(Permissions.Customer.Update)]
-    public async Task<IActionResult> RewardPointsInsert(CustomerModel.RewardPointsHistoryModel model, int customerId)
-    {
-        var customer = await _db.Customers.FindByIdAsync(customerId) ?? throw new ArgumentException("No customer found with the specified id");
-
-        customer.AddRewardPointsHistoryEntry(model.Points, model.Message);
-        await _db.SaveChangesAsync();
-        bool success = true;
-
-        return Json(new { success });
-    }
-
-    #endregion
-
     #region Addresses
 
     [Permission(Permissions.Customer.ReadAddress)]
@@ -1236,7 +1055,7 @@ public class CustomerController : AdminController
 
         if (ModelState.IsValid)
         {
-            await model.Address.MapAsync(address, customer, _shoppingCartSettings.QuickCheckoutEnabled);
+            await model.Address.MapAsync(address, customer, false);
             await _db.SaveChangesAsync();
 
             NotifySuccess(T("Admin.Customers.Customers.Addresses.Updated"));
@@ -1290,7 +1109,7 @@ public class CustomerController : AdminController
         var model = new CustomerModel.AddressesModel
         {
             Id = customer.Id,
-            Addresses = await customer.Addresses.MapAsync(customer, _shoppingCartSettings.QuickCheckoutEnabled)
+            Addresses = await customer.Addresses.MapAsync(customer, false)
         };
 
         return PartialView("_Addresses", model);
@@ -1317,125 +1136,10 @@ public class CustomerController : AdminController
         var model = new CustomerModel.AddressesModel
         {
             Id = customer.Id,
-            Addresses = await customer.Addresses.MapAsync(customer, _shoppingCartSettings.QuickCheckoutEnabled)
+            Addresses = await customer.Addresses.MapAsync(customer, false)
         };
 
         return PartialView("_Addresses", model);
-    }
-
-    #endregion
-
-    #region Reports
-
-    [Permission(Permissions.Customer.Read)]
-    public async Task<IActionResult> Reports()
-    {
-        ViewBag.UsernamesEnabled = _customerSettings.SupportsUsernames();
-        ViewBag.AvailableOrderStatuses = OrderStatus.Pending.ToSelectList(false).ToList();
-        ViewBag.AvailablePaymentStatuses = PaymentStatus.Pending.ToSelectList(false).ToList();
-        ViewBag.AvailableShippingStatuses = ShippingStatus.NotYetShipped.ToSelectList(false).ToList();
-
-        var registeredRoleId = await _db.CustomerRoles
-            .Where(x => x.SystemName == SystemCustomerRoleNames.Registered)
-            .Select(x => x.Id)
-            .FirstOrDefaultAsync();
-
-        ViewBag.RegisteredCustomerReportLines = new Dictionary<string, int>
-        {
-            {
-                T("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.7days"),
-                await GetRegisteredCustomersReport(7)
-            },
-            {
-                T("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.14days"),
-                await GetRegisteredCustomersReport(14)
-            },
-            {
-                T("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.month"),
-                await GetRegisteredCustomersReport(30)
-            },
-            {
-                T("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.year"),
-                await GetRegisteredCustomersReport(365)
-            }
-        };
-
-        return View();
-
-        async Task<int> GetRegisteredCustomersReport(int days)
-        {
-            var startDate = Services.DateTimeHelper.ConvertToUserTime(DateTime.Now).AddDays(-days);
-
-            return await _db.Customers
-                .ApplyRolesFilter(new[] { registeredRoleId })
-                .ApplyRegistrationFilter(startDate, null)
-                .CountAsync();
-        }
-    }
-
-    [Permission(Permissions.Customer.Read)]
-    public async Task<IActionResult> ReportTopCustomersList(GridCommand command, TopCustomersReportModel model)
-    {
-        var dtHelper = Services.DateTimeHelper;
-
-        DateTime? startDate = model.StartDate != null
-            ? dtHelper.ConvertToUtcTime(model.StartDate.Value, dtHelper.CurrentTimeZone)
-            : null;
-
-        DateTime? endDate = model.EndDate != null
-            ? dtHelper.ConvertToUtcTime(model.EndDate.Value, dtHelper.CurrentTimeZone).AddDays(1)
-            : null;
-
-        var orderStatusIds = model.OrderStatusId > 0 ? new[] { model.OrderStatusId } : null;
-        var paymentStatusIds = model.PaymentStatusId > 0 ? new[] { model.PaymentStatusId } : null;
-        var shippingStatusIds = model.ShippingStatusId > 0 ? new[] { model.ShippingStatusId } : null;
-
-        var orderQuery = _db.Orders
-            .Where(x => !x.Customer.Deleted)
-            .ApplyStatusFilter(orderStatusIds, paymentStatusIds, shippingStatusIds)
-            .ApplyAuditDateFilter(startDate, endDate);
-
-        var reportLines = await orderQuery
-            .SelectAsTopCustomerReportLine()
-            .ApplyGridCommand(command)
-            .ToPagedList(command)
-            .LoadAsync();
-
-        var gridModel = new GridModel<TopCustomerReportLineModel>
-        {
-            Rows = await reportLines.MapAsync(_db),
-            Total = await reportLines.GetTotalCountAsync()
-        };
-
-        return Json(gridModel);
-    }
-
-    #endregion
-
-    #region Current shopping cart\wishlist
-
-    [Permission(Permissions.Cart.Read)]
-    public async Task<IActionResult> GetCartList(int customerId, int cartTypeId)
-    {
-        var customer = await _db.Customers
-            .IncludeShoppingCart()
-            .FindByIdAsync(customerId);
-
-        if (customer == null)
-        {
-            return NotFound();
-        }
-
-        var cart = await _shoppingCartService.Value.GetCartAsync(customer, (ShoppingCartType)cartTypeId, 0, null);
-        var models = await cart.MapAsync();
-
-        var gridModel = new GridModel<ShoppingCartItemModel>
-        {
-            Rows = models,
-            Total = cart.Items.Length
-        };
-
-        return Json(gridModel);
     }
 
     #endregion
@@ -1556,57 +1260,6 @@ public class CustomerController : AdminController
 
         NotifySuccess(T("Admin.Configuration.Updated"));
         return RedirectToAction(nameof(CustomerUserSettings));
-    }
-
-    [Permission(Permissions.Configuration.Setting.Read)]
-    [LoadSetting]
-    public IActionResult RewardPointsSettings(RewardPointsSettings settings)
-    {
-        var model = MiniMapper.Map<RewardPointsSettings, RewardPointsSettingsModel>(settings);
-
-        return View(model);
-    }
-
-    [Permission(Permissions.Configuration.Setting.Update)]
-    [HttpPost, LoadSetting]
-    public async Task<IActionResult> RewardPointsSettings(RewardPointsSettingsModel model, RewardPointsSettings settings, int storeScope)
-    {
-        if (!ModelState.IsValid)
-        {
-            return RewardPointsSettings(settings);
-        }
-
-        var form = Request.Form;
-
-        ModelState.Clear();
-
-        settings = ((ISettings)settings).Clone() as RewardPointsSettings;
-        MiniMapper.Map(model, settings);
-
-        await _multiStoreSettingHelper.UpdateSettingsAsync(settings, form);
-
-        if (storeScope != 0 && MultiStoreSettingHelper.IsOverrideChecked(settings, nameof(Core.Identity.RewardPointsSettings.PointsForPurchases_Amount), form))
-        {
-            await Services.Settings.ApplySettingAsync(settings, x => x.PointsForPurchases_Points, storeScope);
-        }
-
-        await _db.SaveChangesAsync();
-
-        NotifySuccess(T("Admin.Configuration.Updated"));
-        return RedirectToAction(nameof(RewardPointsSettings));
-    }
-
-    public IActionResult RewardPointsForPurchasesInfo(decimal amount, int points)
-    {
-        if (amount == decimal.Zero && points == 0)
-        {
-            return new EmptyResult();
-        }
-
-        var amountFormatted = Services.CurrencyService.ConvertFromPrimaryCurrency(amount, Services.WorkContext.WorkingCurrency).ToString();
-        var info = T("RewardPoints.PointsForPurchasesInfo", amountFormatted, points.ToString("N0"));
-
-        return Content(info);
     }
 
     #endregion

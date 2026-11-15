@@ -10,7 +10,7 @@ An open-source, ASP.NET Core content management system in development by [OmmLab
 - Account authentication, roles and permissions, localization, and theme infrastructure.
 - Content-focused public layout and administration navigation.
 - A starter website with Home, About and Contact pages; no sample shop catalog.
-- Commerce route isolation and physical removal of ten bundled commerce modules and 18 admin controllers.
+- Commerce route isolation and physical removal of ten bundled commerce modules and 29 admin controllers.
 
 ## Try a fresh installation
 
@@ -19,7 +19,7 @@ Prerequisites: .NET 10 SDK, a supported database (SQLite for local evaluation, S
 ```bash
 git clone https://github.com/OmmLabs/OmmCMS.git
 cd OmmCMS
-git switch cms-admin-commerce-extraction
+git switch cms-residual-commerce-extraction
 dotnet restore Smartstore.sln
 dotnet build Smartstore.sln -c Release --no-restore
 cd src/Smartstore.Web
@@ -57,7 +57,8 @@ CI checks removed modules and standalone commerce views are absent from source a
 | 8 | [Public commerce controller extraction](docs/ommcms/PHASE8_PUBLIC_COMMERCE_EXTRACTION.md) |
 | 9 | [Public account and authentication dependency extraction](docs/ommcms/PHASE9_ACCOUNT_DEPENDENCY_EXTRACTION.md) |
 | 10 | [Remaining commerce administration extraction](docs/ommcms/PHASE10_ADMIN_COMMERCE_EXTRACTION.md) |
-| Next | Extract residual commerce actions, shared components and core service dependencies before reducing schema; build dedicated article taxonomy and editorial tools. |
+| 11 | [Residual commerce actions and shared component extraction](docs/ommcms/PHASE11_RESIDUAL_COMMERCE_EXTRACTION.md) |
+| Next | Extract remaining shared commerce models, helpers and core service implementations before reducing schema; build dedicated article taxonomy and editorial tools. |
 
 Source and project names retain their Smartstore names until the dependency extraction is complete.
 

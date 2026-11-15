@@ -130,6 +130,13 @@ def editorial_workflows(password):
     })
     page = get_page("/admin/topic/create", admin, 'id="topic-form"')
     print("Authenticated admin access passed.")
+    if "--residual-commerce-trimmed" in sys.argv:
+        for path in ("/currency-selected/1", "/admin/customer/reports", "/admin/customer/rewardpointssettings", "/admin/customer/rewardpointsforpurchasesinfo"):
+            assert request(path, client=admin)[0] == 404, f"Residual commerce action reachable: {path}"
+        for entity_type in ("product", "category", "manufacturer"):
+            assert request("/entity/picker?entityType=" + entity_type, client=admin)[0] == 404
+        get_page("/entity/picker?entityType=customer", admin, "CustomerSearchType")
+        print("Residual commerce routes absent; authorized customer picker remains available.")
     if "--admin-commerce-trimmed" in sys.argv:
         for controller, action in (("campaign","list"), ("category","list"), ("currency","list"), ("discount","list"), ("export","list"), ("import","list"), ("manufacturer","list"), ("measure","weights"), ("order","list"), ("product","list"), ("search","searchsettings")):
             path = f"/admin/{controller}/{action}"
@@ -329,7 +336,18 @@ def verify_remaining_admin_extraction():
     print("Remaining admin commerce source and published views extraction passed.")
 
 
+def verify_residual_extraction():
+    repo = Path(__file__).resolve().parent.parent
+    for path in ["src/Smartstore.Web/Components/CheckoutProgressViewComponent.cs","src/Smartstore.Web/Components/CrossSellProductsViewComponent.cs","src/Smartstore.Web/Components/CurrencySelectorViewComponent.cs","src/Smartstore.Web/Components/HomeBestsellersViewComponent.cs","src/Smartstore.Web/Components/HomeBrandsViewComponent.cs","src/Smartstore.Web/Components/HomeCategoriesViewComponent.cs","src/Smartstore.Web/Components/HomeProductsViewComponent.cs","src/Smartstore.Web/Components/OffCanvasCartViewComponent.cs","src/Smartstore.Web/Components/OrderSummaryViewComponent.cs","src/Smartstore.Web/Components/OrderTotalsViewComponent.cs","src/Smartstore.Web/Components/PopularProductTagsViewComponent.cs","src/Smartstore.Web/Components/RecentlyViewedProductsViewComponent.cs","src/Smartstore.Web/Views/Shared/Components/CheckoutProgress/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/CrossSellProducts/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/CurrencySelector/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/HomeBestSellers/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/HomeBrands/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/HomeCategories/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/HomeProducts/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/OffCanvasCart/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/OrderSummary/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/OrderTotals/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/OrderTotals/OrderTotalOnly.cshtml","src/Smartstore.Web/Views/Shared/Components/PopularProductTags/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/RecentlyViewedProducts/Default.cshtml","src/Smartstore.Web/Models/Checkout/CheckoutProgressModel.cs","src/Smartstore.Web/Models/ShoppingCart/OffCanvasCartModel.cs","src/Smartstore.Web/Models/ShoppingCart/OrderTotalsModel.cs","src/Smartstore.Web/Models/Catalog/PopularProductTagsModel.cs","src/Smartstore.Web/Views/Menu/OffCanvas.Brands.cshtml","src/Smartstore.Web/Views/Checkout/Partials/CheckoutOrderTotals.cshtml","src/Smartstore.Web/Views/Checkout/Partials/ConfirmDetails.cshtml","src/Smartstore.Web/Views/Checkout/Partials/Terminal.ConfirmDetails.cshtml","src/Smartstore.Modules/Smartstore.Google.Analytics/Events.cs","src/Smartstore.Web/Areas/Admin/Models/Customers/RewardPointsSettingsModel.cs","src/Smartstore.Web/Areas/Admin/Models/Customers/TopCustomersReportModel.cs","src/Smartstore.Web/Areas/Admin/Views/Customer/Grids/_Grid.BestCustomers.Search.cshtml","src/Smartstore.Web/Areas/Admin/Views/Customer/Grids/_Grid.BestCustomers.cshtml","src/Smartstore.Web/Areas/Admin/Views/Customer/Reports.cshtml","src/Smartstore.Web/Areas/Admin/Views/Customer/RewardPointsSettings.cshtml"]:
+        assert not (repo / path).exists(), f"Retired source remains: {path}"
+        if path.startswith("src/Smartstore.Web/") and path.endswith(".cshtml"):
+            assert not (root / path.removeprefix("src/Smartstore.Web/")).exists(), f"Retired view published: {path}"
+    print("Residual commerce source and publish extraction passed.")
+
+
 try:
+    if "--residual-commerce-trimmed" in sys.argv:
+        verify_residual_extraction()
     if "--admin-commerce-trimmed" in sys.argv:
         verify_remaining_admin_extraction()
     if "--account-trimmed" in sys.argv:

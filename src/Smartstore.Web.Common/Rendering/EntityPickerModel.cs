@@ -54,13 +54,3 @@ public class EntityPickerModel : ModelBase
         public string LabelClassName { get; set; }
     }
 }
-
-public class EntityPickerProduct
-{
-    public int Id { get; set; }
-    public string Sku { get; set; }
-    public string Name { get; set; }
-    public bool Published { get; set; }
-    public int ProductTypeId { get; set; }
-    public int? MainPictureId { get; set; }
-}

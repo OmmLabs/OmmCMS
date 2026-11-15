@@ -3,7 +3,6 @@ using System.Xml.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Smartstore.Caching;
 using Smartstore.Core.AI;
-using Smartstore.Core.Checkout.Payment;
 using Smartstore.Core.Content.Media;
 using Smartstore.Core.Content.Menus;
 using Smartstore.Core.Identity;
@@ -225,21 +224,6 @@ public class CommonController : PublicController
         {
             return Json(new { Success = true });
         }
-
-        return RedirectToReferrer(returnUrl);
-    }
-
-    [DisallowRobot]
-    [LocalizedRoute("/currency-selected/{customerCurrency:int}", Name = "ChangeCurrency")]
-    public async Task<IActionResult> CurrencySelected(int customerCurrency, string returnUrl = null)
-    {
-        var currency = await _db.Currencies.FindByIdAsync(customerCurrency);
-        if (currency == null || !currency.Published)
-        {
-            return NotFound();
-        }
-
-        Services.WorkContext.WorkingCurrency = currency;
 
         return RedirectToReferrer(returnUrl);
     }

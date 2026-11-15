@@ -7,10 +7,8 @@ using Smartstore.Web.Rendering.Builders;
 
 namespace Smartstore.Web.Components;
 
-public class AccountDropdownViewComponent(CustomerSettings customerSettings) : SmartViewComponent
+public class AccountDropdownViewComponent : SmartViewComponent
 {
-    private readonly CustomerSettings _customerSettings = customerSettings;
-
     public async Task<IViewComponentResult> InvokeAsync()
     {
         var customer = Services.WorkContext.CurrentCustomer;
@@ -19,10 +17,6 @@ public class AccountDropdownViewComponent(CustomerSettings customerSettings) : S
         {
             IsAuthenticated = customer.IsRegistered(),
             DisplayAdminLink = await Services.Permissions.AuthorizeAsync(Permissions.System.AccessBackend),
-            ShoppingCartEnabled = await Services.Permissions.AuthorizeAsync(Permissions.Cart.AccessShoppingCart),
-            WishlistEnabled = await Services.Permissions.AuthorizeAsync(Permissions.Cart.AccessWishlist),
-            //ShoppingCartItems = await Services.DbContext.ShoppingCartItems.CountCartItemsAsync(customer, ShoppingCartType.ShoppingCart, Services.StoreContext.CurrentStore.Id),
-            //WishlistItems = await Services.DbContext.ShoppingCartItems.CountCartItemsAsync(customer, ShoppingCartType.Wishlist, Services.StoreContext.CurrentStore.Id)
         };
 
         model.MenuItems.Add(new MenuItem().ToBuilder()
@@ -33,17 +27,6 @@ public class AccountDropdownViewComponent(CustomerSettings customerSettings) : S
             .Text(T("Account.MyAccount"))
             .AsItem());
 
-        if (!_customerSettings.HideMyAccountOrders)
-        {
-            model.MenuItems.Add(new MenuItem().ToBuilder()
-            .Action("Orders", "Customer")
-            .LinkHtmlAttributes(new { @class = "dropdown-item", rel = "nofollow" })
-            .Icon("file-text")
-            .IconClass("icon-fw")
-            .Text(T("Account.MyOrders"))
-            .AsItem());
-        }
-
         if (model.DisplayAdminLink)
         {
             model.MenuItems.Add(new MenuItem().ToBuilder()
@@ -52,32 +35,6 @@ public class AccountDropdownViewComponent(CustomerSettings customerSettings) : S
                 .Icon("gear")
                 .IconClass("icon-fw")
                 .Text(T("Account.Administration"))
-                .AsItem());
-        }
-
-        if (model.WishlistEnabled)
-        {
-            model.MenuItems.Add(new MenuItem().ToBuilder()
-                .Route("Wishlist")
-                .LinkHtmlAttributes(new { @class = "dropdown-item" })
-                .Icon("heart")
-                .IconClass("icon-fw")
-                .Text(T("Wishlist"))
-                .Badge(model.WishlistItems.ToString(), "success")
-                .BadgeHtmlAttributes("class", "wishlist-qty " + (model.WishlistItems > 0 ? "label-success" : "d-none"))
-                .AsItem());
-        }
-
-        if (model.ShoppingCartEnabled)
-        {
-            model.MenuItems.Add(new MenuItem().ToBuilder()
-                .Route("ShoppingCart")
-                .LinkHtmlAttributes(new { @class = "dropdown-item", id = "topcartlink" })
-                .Icon("basket")
-                .IconClass("icon-fw")
-                .Text(T("ShoppingCart"))
-                .Badge(model.ShoppingCartItems.ToString(), "success")
-                .BadgeHtmlAttributes("class", "cart-qty " + (model.ShoppingCartItems > 0 ? "label-success" : "d-none"))
                 .AsItem());
         }
 

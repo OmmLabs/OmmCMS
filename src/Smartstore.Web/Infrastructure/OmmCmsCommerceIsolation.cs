@@ -39,7 +39,7 @@ public static class OmmCmsCommerceIsolation
     {
         "RemoveAffiliateAssignment", "UpdateVatNumberStatus", "RewardPointsHistoryList",
         "RewardPointsInsert", "Reports", "ReportTopCustomersList", "GetCartList",
-        "RewardPointsSettings"
+        "RewardPointsSettings", "RewardPointsForPurchasesInfo"
     };
 
     private static readonly HashSet<string> _adminDashboardActions = new(StringComparer.OrdinalIgnoreCase)
@@ -93,7 +93,8 @@ public static class OmmCmsCommerceIsolation
         {
             return _publicControllers.Contains(name)
                 || (name == "CustomerController" && IsOneOf(_publicCustomerActions))
-                || (name == "CommonController" && IsAction("CurrencySelected"));
+                || (name == "CommonController" && IsAction("CurrencySelected"))
+                || (name == "MenuController" && IsAction("OffCanvasBrands"));
         }
 
         if (type.Namespace == "Smartstore.Admin.Controllers")

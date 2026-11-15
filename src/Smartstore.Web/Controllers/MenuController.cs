@@ -1,5 +1,4 @@
-﻿using Smartstore.Core.Catalog;
-using Smartstore.Core.Content.Menus;
+﻿using Smartstore.Core.Content.Menus;
 using Smartstore.Core.Security;
 using Smartstore.Web.Rendering.Menus;
 
@@ -8,19 +7,13 @@ namespace Smartstore.Web.Controllers;
 public class MenuController : SmartController
 {
     private readonly IMenuService _menuService;
-    private readonly CatalogSettings _catalogSettings;
-    private readonly CatalogHelper _catalogHelper;
     private readonly IconSettings _iconSettings;
 
     public MenuController(
         IMenuService menuService,
-        CatalogSettings catalogSettings,
-        CatalogHelper catalogHelper,
         IconSettings iconSettings)
     {
         _menuService = menuService;
-        _catalogSettings = catalogSettings;
-        _catalogHelper = catalogHelper;
         _iconSettings = iconSettings;
     }
 
@@ -38,10 +31,6 @@ public class MenuController : SmartController
 
         ViewBag.AllowNavigation = allowNavigation;
         ViewBag.ShowNodes = allowNavigation;
-        ViewBag.ShowBrands = allowNavigation
-            && _catalogSettings.ShowManufacturersInOffCanvas
-            && _catalogSettings.ManufacturerItemsToDisplayInOffcanvasMenu > 0;
-
         if (!allowNavigation)
         {
             return PartialView("OffCanvas.Home", null);
@@ -63,13 +52,6 @@ public class MenuController : SmartController
             : "OffCanvas.Menu";
 
         return PartialView(templateName, model);
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> OffCanvasBrands()
-    {
-        var model = await _catalogHelper.PrepareBrandNavigationModelAsync(_catalogSettings.ManufacturerItemsToDisplayInOffcanvasMenu);
-        return PartialView("OffCanvas.Brands", model);
     }
 
     /// <summary>
