@@ -64,6 +64,8 @@ Phase 766: fixed core compilation after commerce extraction.
 
 Phases 767–775: removed the product detail JavaScript bundle, unused catalogue editor and tax provider model, retired product and recurring-payment email templates, obsolete order email layout, and the product-specific DevTools example. Publish checks guard the retired assets; general developer tooling and CMS navigation remain.
 
+Phases 776–784: removed unused storefront menu, store and topic seed files and their localized content. The CMS seed descriptors and common configuration remain authoritative. Corrected stale messaging permissions, export validation and installer provider selection exposed by compilation.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

@@ -1,8 +1,0 @@
-{
-  "default": {
-    "name": "Mein Shop",
-    "hosts": "mein-shop.de,www.mein-shop.de",
-    "defaultCurrency": "EUR",
-    "primaryExchangeRateCurrency": "EUR"
-  }
-}

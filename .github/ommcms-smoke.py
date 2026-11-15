@@ -685,6 +685,8 @@ try:
                 assert not (seed_root / "media" / name).exists(), f"Retired demo media remains: {name}"
             assert (seed_root / "base/core/cms/topics.json").exists(), "CMS starter topics missing"
             assert (seed_root / "base/core/cms/menus.json").exists(), "CMS starter menus missing"
+            for path in ("base/core/menus.json", "base/core/stores.json", "base/core/topics.json", "base/core/topics", "cultures/de-DE/core/stores.json", "cultures/de-DE/core/topics.json", "cultures/de-DE/core/topics"):
+                assert not (seed_root / path).exists(), f"Retired storefront seed remains: {path}"
         for language in ("en", "de"):
             for name in ("GiftCard.Notification.xml", "ShipmentSent.CustomerNotification.xml", "ShipmentDelivered.CustomerNotification.xml", "Customer.NewOrderNote.xml", "Product.ProductReview.xml", "RecurringPaymentCancelled.StoreOwnerNotification.xml"):
                 template = Path("App_Data/EmailTemplates") / language / name

@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using OmmCMS.Core.Common;
-using OmmCMS.Core.Common;
 using OmmCMS.Web.Rendering.Choices;
 
 namespace OmmCMS.Web.Tests.Common.Rendering.Choices;
