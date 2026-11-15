@@ -1,0 +1,50 @@
+name: One-time OmmCMS repository consolidation
+on:
+  push:
+    branches: [cms-core-commerce-extraction]
+permissions:
+  contents: read
+jobs:
+  validate:
+    if: github.repository == 'OmmLabs/OmmCMS' && github.event.before == '6ed32385b2979513ee7acfc3dc9ba3a57ea94a91'
+    uses: ./.github/workflows/ommcms-ci.yml
+  consolidate:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify exact approved refs and publish one root commit atomically
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = "OmmLabs/OmmCMS"
+          test "$GITHUB_REF" = "refs/heads/cms-core-commerce-extraction"
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          manifest=.github/consolidation-refs.txt
+          expected="$RUNNER_TEMP/expected-refs"
+          current="$RUNNER_TEMP/current-refs"
+          awk -v sha="$GITHUB_SHA" '$2 == "refs/heads/cms-core-commerce-extraction" { $1 = sha } { print $1 "\t" $2 }' "$manifest" | sort > "$expected"
+          git ls-remote --refs --heads --tags origin | sort > "$current"
+          diff -u "$expected" "$current"
+          git rm -- .github/workflows/repository-consolidation.yml "$manifest"
+          tree=$(git write-tree)
+          git config user.name "OmmLabs"
+          git config user.email "OmmLabs@users.noreply.github.com"
+          root=$(git commit-tree "$tree" -m "OmmCMS initial validated CMS baseline")
+          test "$(git rev-list --count "$root")" = 1
+          leases=()
+          refspecs=("$root:refs/heads/main")
+          while IFS=$'\t' read -r sha ref; do
+            leases+=("--force-with-lease=$ref:$sha")
+            if [[ "$ref" != refs/heads/main ]]; then
+              refspecs+=(":$ref")
+            fi
+          done < "$expected"
+          git push --atomic "${leases[@]}" origin "${refspecs[@]}"
+          git ls-remote --refs --heads --tags origin > "$current"
+          test "$(wc -l < "$current")" = 1
+          test "$(cat "$current")" = "$(printf '%s\trefs/heads/main' "$root")"
+          echo "Consolidated main root commit: $root"
+          echo "Verified exactly one remote branch and no tags."

@@ -1,7 +1,9 @@
-# AGENTS.md — Smartstore
+# AGENTS.md — OmmCMS
 
-Smartstore is a modular, open-source e-commerce platform built on ASP.NET Core.
+OmmCMS is a modular, open-source content management system built on ASP.NET Core. Existing internal project and namespace names are retained during extraction.
 This file states the rules that apply to **every** change in this repository.
+
+Work on `main` only. Follow `docs/ROADMAP.md`, and keep the full CMS regression suite green. Do not reintroduce commerce functionality.
 
 `dev-docs/` is the authoritative knowledge base. Consult the relevant page before
 implementing anything non-trivial — do not reverse-engineer a subsystem that is
