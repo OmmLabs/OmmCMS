@@ -2,10 +2,6 @@
 using System.Runtime.CompilerServices;
 using Autofac;
 
-using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Content.Menus;
 using OmmCMS.Core.Content.Topics;
@@ -21,23 +17,10 @@ public partial class DisplayControl : IDisplayControl
 {
     private static readonly ConcurrentDictionary<Type, DisplayControlHandler> _handlers = new()
     {
-        [typeof(Category)] = (x, d, c) => ToTask("c" + x.Id),
-        [typeof(Manufacturer)] = (x, d, c) => ToTask("m" + x.Id),
-        [typeof(ProductBundleItem)] = (x, d, c) => ToTask("p" + ((ProductBundleItem)x).ProductId),
-        [typeof(ProductMediaFile)] = (x, d, c) => ToTask("p" + ((ProductMediaFile)x).ProductId),
-        [typeof(ProductSpecificationAttribute)] = (x, d, c) => ToTask("p" + ((ProductSpecificationAttribute)x).ProductId),
-        [typeof(ProductVariantAttributeCombination)] = (x, d, c) => ToTask("p" + ((ProductVariantAttributeCombination)x).ProductId),
-        [typeof(ProductCategory)] = (x, d, c) => ToTask("p" + ((ProductCategory)x).CategoryId, "p" + ((ProductCategory)x).ProductId),
-        [typeof(ProductManufacturer)] = (x, d, c) => ToTask("p" + ((ProductManufacturer)x).ManufacturerId, "p" + ((ProductManufacturer)x).ProductId),
         [typeof(Topic)] = (x, d, c) => ToTask("t" + x.Id),
         [typeof(MenuEntity)] = (x, d, c) => ToTask("mnu" + x.Id),
         [typeof(MenuItemEntity)] = (x, d, c) => ToTask("mnu" + ((MenuItemEntity)x).MenuId),
         [typeof(MediaFile)] = (x, d, c) => ToTask("mf" + x.Id),
-        [typeof(SpecificationAttributeOption)] = HandleSpecificationAttributeOptionsAsync,
-        [typeof(ProductTag)] = HandleProductTagsAsync,
-        [typeof(Product)] = HandleProductAsync,
-        [typeof(SpecificationAttribute)] = HandleSpecificationAttributeAsync,
-        [typeof(ProductVariantAttributeValue)] = HandleProductVariantAttributeValueAsync,
         [typeof(LocalizedProperty)] = HandleLocalizedPropertyAsync
     };
 
@@ -77,134 +60,22 @@ public partial class DisplayControl : IDisplayControl
         return Task.FromResult<IEnumerable<string>>(tags);
     }
 
-    private static Task<IEnumerable<string>> HandleProductAsync(BaseEntity entity, SmartDbContext db, IComponentContext ctx)
-        => Task.FromResult(ProductTagIterator((Product)entity));
-
-    private static IEnumerable<string> ProductTagIterator(Product product)
-    {
-        yield return "p" + product.Id;
-        if (product.ProductType == ProductType.GroupedProduct && product.ParentGroupedProductId > 0)
-        {
-            yield return "p" + product.ParentGroupedProductId;
-        }
-    }
-
-    private static async Task<IEnumerable<string>> HandleProductTagsAsync(BaseEntity entity, SmartDbContext db, IComponentContext ctx)
-    {
-        var tag = (ProductTag)entity;
-        IEnumerable<int> productIds = null;
-
-        if (db.IsCollectionLoaded(tag, x => x.Products, out var entry))
-        {
-            productIds = tag.Products.Select(x => x.Id);
-        }
-        else if (entry != null)
-        {
-            productIds = await entry.Query().Select(x => x.Id).ToListAsync();
-        }
-
-        if (productIds != null)
-        {
-            return productIds.Select(id => "p" + id);
-        }
-
-        return Enumerable.Empty<string>();
-    }
-
-    private static async Task<IEnumerable<string>> HandleSpecificationAttributeAsync(BaseEntity entity, SmartDbContext db, IComponentContext ctx)
-    {
-        // Determine all affected products (which are assigned to this attribute).
-        var specAttrId = ((SpecificationAttribute)entity).Id;
-        var affectedProductIds = await db.ProductSpecificationAttributes
-            .AsNoTracking()
-            .Where(x => x.SpecificationAttributeOption.SpecificationAttributeId == specAttrId)
-            .Select(x => x.ProductId)
-            .Distinct()
-            .ToListAsync();
-
-        return affectedProductIds.Select(id => "p" + id);
-    }
-
-    private static async Task<IEnumerable<string>> HandleSpecificationAttributeOptionsAsync(BaseEntity entity, SmartDbContext db, IComponentContext ctx)
-    {
-        var option = (SpecificationAttributeOption)entity;
-        IEnumerable<int> productIds = null;
-
-        if (db.IsCollectionLoaded(option, x => x.ProductSpecificationAttributes, out var entry))
-        {
-            productIds = option.ProductSpecificationAttributes.Select(x => x.ProductId);
-        }
-        else if (entry != null)
-        {
-            productIds = await entry.Query().Select(x => x.ProductId).ToListAsync();
-        }
-
-        if (productIds != null)
-        {
-            return productIds.Select(id => "p" + id);
-        }
-
-        return Enumerable.Empty<string>();
-    }
-
-    private static async Task<IEnumerable<string>> HandleProductVariantAttributeValueAsync(BaseEntity entity, SmartDbContext db, IComponentContext ctx)
-    {
-        var value = ((ProductVariantAttributeValue)entity);
-        await db.LoadReferenceAsync(value, x => x.ProductVariantAttribute);
-        var pva = value.ProductVariantAttribute;
-
-        if (pva != null)
-        {
-            return new[] { "p" + pva.ProductId };
-        }
-
-        return Enumerable.Empty<string>();
-    }
-
-    private static async Task<IEnumerable<string>> HandleLocalizedPropertyAsync(BaseEntity entity, SmartDbContext db, IComponentContext ctx)
+    private static Task<IEnumerable<string>> HandleLocalizedPropertyAsync(BaseEntity entity, SmartDbContext db, IComponentContext ctx)
     {
         var lp = (LocalizedProperty)entity;
         string prefix = null;
-        BaseEntity targetEntity = null;
 
         switch (lp.LocaleKeyGroup)
         {
-            case nameof(Product):
-                prefix = "p";
-                break;
-            case nameof(Category):
-                prefix = "c";
-                break;
-            case nameof(Manufacturer):
-                prefix = "m";
-                break;
             case nameof(Topic):
                 prefix = "t";
                 break;
             case nameof(MediaFile):
                 prefix = "mf";
                 break;
-            case nameof(SpecificationAttribute):
-                targetEntity = await db.SpecificationAttributes.FindByIdAsync(lp.EntityId, false);
-                break;
-            case nameof(SpecificationAttributeOption):
-                targetEntity = await db.SpecificationAttributeOptions.FindByIdAsync(lp.EntityId, false);
-                break;
-            case nameof(ProductVariantAttributeValue):
-                targetEntity = await db.ProductVariantAttributeValues.FindByIdAsync(lp.EntityId, false);
-                break;
         }
 
-        if (prefix.HasValue())
-        {
-            return new[] { prefix + lp.EntityId };
-        }
-        else if (targetEntity != null)
-        {
-            return await ctx.Resolve<IDisplayControl>().GetCacheControlTagsForAsync(targetEntity);
-        }
-
-        return Enumerable.Empty<string>();
+        return prefix.HasValue() ? ToTask(prefix + lp.EntityId) : Task.FromResult(Enumerable.Empty<string>());
     }
 
     #endregion

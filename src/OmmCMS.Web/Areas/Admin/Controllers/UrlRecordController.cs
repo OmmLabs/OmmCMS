@@ -230,9 +230,7 @@ public class UrlRecordController : AdminController
             //var slugSupportedTypes = Services.ApplicationContext.TypeScanner.FindTypes(typeof(ISlugSupported));
             var entitySets = new Dictionary<string, IQueryable<ISlugSupported>>
             {
-                ["Product"] = _db.Products,
-                ["Category"] = _db.Categories,
-                ["Manufacturer"] = _db.Manufacturers
+                ["Topic"] = _db.Topics
                 // TODO: Not found entity types. Cleanup using SQL?
                 //["BlogPost"] = GetEntityQueryByName("BlogPost"),
                 //["NewsItem"] = GetEntityQueryByName("NewsItem"),

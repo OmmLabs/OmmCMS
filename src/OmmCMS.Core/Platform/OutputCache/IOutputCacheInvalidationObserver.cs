@@ -37,8 +37,8 @@ public partial interface IOutputCacheInvalidationObserver
     /// <summary>
     /// Registers a setting key to be observed by the framework. If the value for the passed
     /// setting key changes, the framework calls the <paramref name="invalidationAction"/> handler.
-    /// The key can either be fully qualified - e.g. "CatalogSettings.ShowProductSku" -,
-    /// or prefixed - e.g. "CatalogSettings.*". The latter calls the invalidator when ANY CatalogSetting changes.
+    /// The key can either be fully qualified, e.g. "ContentSettings.EnableHtmlTextCollapser",
+    /// or prefixed, e.g. "ContentSettings.*". The latter calls the invalidator when any content setting changes.
     /// </summary>
     /// <param name="invalidationAction">
     /// The invalidation action handler. If <c>null</c> is passed, the framework

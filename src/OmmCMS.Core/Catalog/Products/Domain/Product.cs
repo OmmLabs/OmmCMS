@@ -577,7 +577,7 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
 
     /// <summary>
     /// Gets or sets the threshold above which only images that are not assigned to any or the selected attribute combination are displayed.
-    /// Overwrites the system default <see cref="CatalogSettings.DisplayAllImagesNumber"/>.
+    /// Overrides the legacy system default for the number of displayed images.
     /// </summary>
     public int? DisplayAllImagesNumber { get; set; }
 

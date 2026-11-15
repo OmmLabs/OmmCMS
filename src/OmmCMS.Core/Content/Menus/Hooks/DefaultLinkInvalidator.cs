@@ -1,6 +1,3 @@
-﻿using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Content.Topics;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Seo;

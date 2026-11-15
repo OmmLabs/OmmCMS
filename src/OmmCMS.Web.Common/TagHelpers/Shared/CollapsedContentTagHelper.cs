@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using OmmCMS.Core.Catalog;
+using OmmCMS.Core.Content.Topics;
 using OmmCMS.Utilities;
 
 namespace OmmCMS.Web.TagHelpers.Shared;
@@ -10,11 +10,11 @@ public class CollapsedContentTagHelper : TagHelper
 {
     const string MaxHeightAttributeName = "sm-max-height";
 
-    private readonly CatalogSettings _catalogSettings;
+    private readonly ContentSettings _contentSettings;
 
-    public CollapsedContentTagHelper(CatalogSettings catalogSettings)
+    public CollapsedContentTagHelper(ContentSettings contentSettings)
     {
-        _catalogSettings = catalogSettings;
+        _contentSettings = contentSettings;
     }
 
     [HtmlAttributeName(MaxHeightAttributeName)]
@@ -30,9 +30,9 @@ public class CollapsedContentTagHelper : TagHelper
         output.TagName = null;
         await output.LoadAndSetChildContentAsync();
 
-        if (_catalogSettings.EnableHtmlTextCollapser && (MaxHeight == null || MaxHeight > 0))
+        if (_contentSettings.EnableHtmlTextCollapser && (MaxHeight == null || MaxHeight > 0))
         {
-            var maxHeight = MaxHeight ?? _catalogSettings.HtmlTextCollapsedHeight;
+            var maxHeight = MaxHeight ?? _contentSettings.HtmlTextCollapsedHeight;
             var classes = output.Attributes.TryGetAttribute("class", out var attr) ? $"text-expander {attr.Value}" : "text-expander";
             var id = "text-expander" + CommonHelper.GenerateRandomInteger();
 

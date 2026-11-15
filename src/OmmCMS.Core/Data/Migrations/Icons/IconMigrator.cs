@@ -1,7 +1,4 @@
 using System.Diagnostics;
-using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Content.Topics;
 using OmmCMS.Events;
 using OmmCMS.IconKit;
@@ -47,12 +44,6 @@ public class IconMigrator : IIconMigrator
             var message = new IconMigrationEvent(migrationContext);
             message.Providers.Add(new MenuIconMigrationProvider());
             // Core owns these fields. Installed plugins append their own registrations through the event.
-            message.RegisterHtml<Manufacturer>(x => x.Description);
-            message.RegisterHtml<Manufacturer>(x => x.BottomDescription);
-            message.RegisterHtml<Category>(x => x.Description);
-            message.RegisterHtml<Category>(x => x.BottomDescription);
-            message.RegisterHtml<Product>(x => x.UserAgreementText);
-            message.RegisterHtml<Product>(x => x.FullDescription);
             message.RegisterHtml<Topic>(x => x.Body);
             await _eventPublisher.PublishAsync(message, cancelToken);
 

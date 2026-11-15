@@ -1,5 +1,3 @@
-using OmmCMS.Core.Catalog;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Configuration;
 using OmmCMS.Core.Theming;
 using OmmCMS.Data.Migrations;
@@ -25,49 +23,7 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             builder.Add(TypeHelper.NameOf<ThemeSettings>(x => x.KeepSassCompilerInMemory, true), "False");
         });
 
-        var settings = context.Set<Setting>();
-        const string oldName1 = "TaxSettings.ShowLegalHintsInProductDetails";
-        const string oldName2 = "TaxSettings.ShowLegalHintsInProductList";
 
-        var oldSettings = await settings
-            .Where(x => x.Name == oldName1 || x.Name == oldName2)
-            .ToListAsync(cancelToken);
-        var oldSettings1 = oldSettings.Where(x => x.Name == oldName1).ToList();
-        var oldSettings2 = oldSettings.Where(x => x.Name == oldName2).ToList();
-
-        await MigrateLegalInfo(oldSettings1, TypeHelper.NameOf<CatalogSettings>(x => x.LegalInfoInProductDetail, true));
-        await MigrateLegalInfo(oldSettings2, TypeHelper.NameOf<CatalogSettings>(x => x.LegalInfoInLists, true));
-
-        if (oldSettings1.Count > 0 || oldSettings2.Count > 0)
-        {
-            await context.SaveChangesAsync(cancelToken);
-        }
-
-        async Task MigrateLegalInfo(List<Setting> oldSettings, string newName)
-        {
-            if (oldSettings.Count == 0)
-            {
-                return;
-            }
-
-            var storeIds = oldSettings.ToDistinctArray(x => x.StoreId);
-            var existingNewSettings = await settings
-                .Where(x => x.Name == newName && storeIds.Contains(x.StoreId))
-                .Select(x => x.StoreId)
-                .ToListAsync(cancelToken);
-
-            foreach (var oldSetting in oldSettings.Where(x => !existingNewSettings.Contains(x.StoreId)))
-            {
-                settings.Add(new()
-                {
-                    Name = newName,
-                    StoreId = oldSetting.StoreId,
-                    Value = (oldSetting.Value.Convert<bool>() ? ProductLegalInfo.All : ProductLegalInfo.None).Convert(string.Empty)
-                });
-            }
-
-            settings.RemoveRange(oldSettings);
-        }
     }
 
     public void MigrateLocaleResources(LocaleResourcesBuilder builder)

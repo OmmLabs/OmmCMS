@@ -1,5 +1,4 @@
 ﻿using System.Collections.Frozen;
-using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Messaging;
@@ -19,10 +18,6 @@ internal class AssignedEntitiesHook(SmartDbContext db) : AsyncDbSaveHook<BaseEnt
 
     private static readonly FrozenSet<Type> _candidateTypes = new Type[]
     {
-        typeof(ProductAttribute),
-        typeof(ProductVariantAttribute),
-        typeof(ProductAttributeOptionsSet),
-        typeof(SpecificationAttribute),
         typeof(QueuedEmail)
     }.ToFrozenSet();
 
@@ -45,55 +40,7 @@ internal class AssignedEntitiesHook(SmartDbContext db) : AsyncDbSaveHook<BaseEnt
         {
             var deletedEntityIds = group.ToDistinctArray(x => x.Entity.Id);
 
-            if (group.Key == typeof(ProductAttribute))
-            {
-                var optionIdsQuery =
-                    from a in _db.ProductAttributes.AsNoTracking()
-                    from os in a.ProductAttributeOptionsSets
-                    from ao in os.ProductAttributeOptions
-                    where deletedEntityIds.Contains(a.Id)
-                    select ao.Id;
-
-                _assignedItems.Add(new()
-                {
-                    EntityName = nameof(ProductAttributeOption),
-                    EntityIds = await optionIdsQuery.ToArrayAsync(cancelToken)
-                });
-            }
-            else if (group.Key == typeof(ProductVariantAttribute))
-            {
-                _assignedItems.Add(new()
-                {
-                    EntityName = nameof(ProductVariantAttributeValue),
-                    EntityIds = await _db.ProductVariantAttributeValues
-                        .Where(x => deletedEntityIds.Contains(x.ProductVariantAttributeId))
-                        .Select(x => x.Id)
-                        .ToArrayAsync(cancelToken)
-                });
-            }
-            else if (group.Key == typeof(ProductAttributeOptionsSet))
-            {
-                _assignedItems.Add(new()
-                {
-                    EntityName = nameof(ProductAttributeOption),
-                    EntityIds = await _db.ProductAttributeOptions
-                        .Where(x => deletedEntityIds.Contains(x.ProductAttributeOptionsSetId))
-                        .Select(x => x.Id)
-                        .ToArrayAsync(cancelToken)
-                });
-            }
-            else if (group.Key == typeof(SpecificationAttribute))
-            {
-                _assignedItems.Add(new()
-                {
-                    EntityName = nameof(SpecificationAttributeOption),
-                    EntityIds = await _db.SpecificationAttributeOptions
-                        .Where(x => deletedEntityIds.Contains(x.SpecificationAttributeId))
-                        .Select(x => x.Id)
-                        .ToArrayAsync(cancelToken)
-                });
-            }
-            else if (group.Key == typeof(QueuedEmail))
+            if (group.Key == typeof(QueuedEmail))
             {
                 _assignedItems.Add(new()
                 {

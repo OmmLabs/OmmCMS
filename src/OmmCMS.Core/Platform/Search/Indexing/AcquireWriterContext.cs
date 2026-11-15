@@ -1,6 +1,4 @@
 ﻿using OmmCMS.Collections;
-using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Stores;
@@ -25,8 +23,6 @@ public class AcquireWriterContext
         CustomerRoleIds = Array.Empty<int>();
         CustomerRoleMappings = new Multimap<int, int>();
         DeliveryTimes = new Dictionary<int, DeliveryTime>();
-        Manufacturers = new Dictionary<int, Manufacturer>();
-        Categories = new Dictionary<int, Category>();
         Translations = new Dictionary<string, LocalizedPropertyCollection>(StringComparer.OrdinalIgnoreCase);
         CustomProperties = new Dictionary<string, object>();
     }
@@ -57,7 +53,7 @@ public class AcquireWriterContext
     public IList<Store> Stores { get; set; }
 
     /// <summary>
-    /// Map of product to store identifiers if the product is limited to certain stores
+    /// Map of entity to store identifiers if the entity is limited to certain stores
     /// </summary>
     public Multimap<int, int> StoreMappings { get; set; }
 
@@ -72,22 +68,12 @@ public class AcquireWriterContext
     public Multimap<int, int> CustomerRoleMappings { get; set; }
 
     /// <summary>
-    /// All manufacturers
-    /// </summary>
-    public Dictionary<int, Manufacturer> Manufacturers { get; set; }
-
-    /// <summary>
-    /// All categories
-    /// </summary>
-    public Dictionary<int, Category> Categories { get; set; }
-
-    /// <summary>
     /// All delivery times
     /// </summary>
     public Dictionary<int, DeliveryTime> DeliveryTimes { get; set; }
 
     /// <summary>
-    /// All translations for global scopes (like Category, Manufacturer etc.)
+    /// All translations for global scopes
     /// </summary>
     public Dictionary<string, LocalizedPropertyCollection> Translations { get; set; }
 
@@ -102,8 +88,6 @@ public class AcquireWriterContext
         Currencies.Clear();
         StoreMappings.Clear();
         CustomerRoleMappings.Clear();
-        Manufacturers.Clear();
-        Categories.Clear();
         DeliveryTimes.Clear();
         Translations.Clear();
         CustomProperties.Clear();

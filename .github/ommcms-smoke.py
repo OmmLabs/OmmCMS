@@ -662,6 +662,8 @@ try:
             "Catalog/Categories/Services",
             "Catalog/Brands/Services",
             "Catalog/Attributes/Services",
+            "Catalog/Permissions.Catalog.cs",
+            "Catalog/Configuration/CatalogSettings.cs",
             "Checkout/Orders/Domain/CheckoutProcess.cs",
             "Catalog/Products/Hooks/ProductBundleItemHook.cs",
             "Platform/Installation/InstallationDataSeeder.Products.cs",

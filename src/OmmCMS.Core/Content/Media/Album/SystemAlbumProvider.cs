@@ -1,8 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Identity;
@@ -34,13 +30,6 @@ public class SystemAlbumProvider : IAlbumProvider, IMediaTrackDetector
     {
         return new[]
         {
-            new MediaAlbum
-            {
-                Name = Catalog,
-                ResKey = "Admin.Catalog",
-                CanDetectTracks = true,
-                Order = int.MinValue
-            },
             new MediaAlbum
             {
                 Name = Content,
@@ -82,10 +71,6 @@ public class SystemAlbumProvider : IAlbumProvider, IMediaTrackDetector
 
     public AlbumDisplayHint GetDisplayHint(MediaAlbum album)
     {
-        if (album.Name == Catalog)
-        {
-            return new AlbumDisplayHint { OverlayIcon = "fa fa-cube" };
-        }
         if (album.Name == Content)
         {
             return new AlbumDisplayHint { OverlayIcon = "fa fa-sitemap" };
@@ -119,23 +104,14 @@ public class SystemAlbumProvider : IAlbumProvider, IMediaTrackDetector
     {
         return albumName switch
         {
-            Catalog or Content or Downloads or Messages or Customers => true,
+            Content or Downloads or Messages or Customers => true,
             _ => false,
         };
     }
 
     public void ConfigureTracks(string albumName, TrackedMediaPropertyTable table)
     {
-        if (albumName == Catalog)
-        {
-            table.Register<ProductMediaFile>(x => x.MediaFileId);
-            table.Register<ProductAttributeOption>(x => x.MediaFileId);
-            table.Register<ProductVariantAttributeValue>(x => x.MediaFileId);
-            table.Register<SpecificationAttributeOption>(x => x.MediaFileId);
-            table.Register<Category>(x => x.MediaFileId);
-            table.Register<Manufacturer>(x => x.MediaFileId);
-        }
-        else if (albumName == Content)
+        if (albumName == Content)
         {
             table.Register<Store>(x => x.LogoMediaFileId);
             table.Register<Store>(x => x.FavIconMediaFileId);
@@ -159,96 +135,6 @@ public class SystemAlbumProvider : IAlbumProvider, IMediaTrackDetector
     public async IAsyncEnumerable<MediaTrack> DetectAllTracksAsync(string albumName, [EnumeratorCancellation] CancellationToken cancelToken = default)
     {
         var entityName = string.Empty;
-
-        // Catalog
-        if (albumName == Catalog)
-        {
-            // Products
-            {
-                var name = nameof(ProductMediaFile);
-                var p = new FastPager<ProductMediaFile>(_db.ProductMediaFiles.AsNoTracking(), 5000);
-                while ((await p.ReadNextPageAsync(x => new { x.Id, x.ProductId, x.MediaFileId }, x => x.Id, cancelToken)).Out(out var list))
-                {
-                    foreach (var x in list)
-                    {
-                        yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.MediaFileId, Property = nameof(x.MediaFileId) };
-                    }
-                    list.Clear();
-                }
-            }
-
-            // ProductAttributeOption
-            {
-                var name = nameof(ProductAttributeOption);
-                var p = new FastPager<ProductAttributeOption>(_db.ProductAttributeOptions.AsNoTracking().Where(x => x.MediaFileId > 0), 5000);
-                while ((await p.ReadNextPageAsync(x => new { x.Id, x.MediaFileId }, x => x.Id, cancelToken)).Out(out var list))
-                {
-                    foreach (var x in list)
-                    {
-                        yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.MediaFileId, Property = nameof(x.MediaFileId) };
-                    }
-                    list.Clear();
-                }
-            }
-
-            // ProductVariantAttributeValue
-            {
-                var name = nameof(ProductVariantAttributeValue);
-                var p = new FastPager<ProductVariantAttributeValue>(_db.ProductVariantAttributeValues.AsNoTracking().Where(x => x.MediaFileId > 0), 5000);
-                while ((await p.ReadNextPageAsync(x => new { x.Id, x.MediaFileId }, x => x.Id, cancelToken)).Out(out var list))
-                {
-                    foreach (var x in list)
-                    {
-                        yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.MediaFileId, Property = nameof(x.MediaFileId) };
-                    }
-                    list.Clear();
-                }
-            }
-
-            // SpecificationAttributeOption
-            {
-                var name = nameof(SpecificationAttributeOption);
-                var p = new FastPager<SpecificationAttributeOption>(_db.SpecificationAttributeOptions.AsNoTracking().Where(x => x.MediaFileId > 0), 5000);
-                while ((await p.ReadNextPageAsync(x => new { x.Id, x.MediaFileId }, x => x.Id, cancelToken)).Out(out var list))
-                {
-                    foreach (var x in list)
-                    {
-                        yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.MediaFileId, Property = nameof(x.MediaFileId) };
-                    }
-                    list.Clear();
-                }
-            }
-
-            // Categories
-            {
-                var name = nameof(Category);
-                var p = new FastPager<Category>(_db.Categories.AsNoTracking().Where(x => x.MediaFileId.HasValue), 5000);
-                while ((await p.ReadNextPageAsync(x => new { x.Id, x.MediaFileId }, x => x.Id, cancelToken)).Out(out var list))
-                {
-                    foreach (var x in list)
-                    {
-                        yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.MediaFileId.Value, Property = nameof(x.MediaFileId) };
-                    }
-                    list.Clear();
-                }
-            }
-
-            // Brands
-            {
-                var name = nameof(Manufacturer);
-                var p = new FastPager<Manufacturer>(_db.Manufacturers.AsNoTracking().Where(x => x.MediaFileId.HasValue), 5000);
-                while ((await p.ReadNextPageAsync(x => new { x.Id, x.MediaFileId }, x => x.Id, cancelToken)).Out(out var list))
-                {
-                    foreach (var x in list)
-                    {
-                        yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.MediaFileId.Value, Property = nameof(x.MediaFileId) };
-                    }
-                    list.Clear();
-                }
-            }
-
-            yield break;
-        }
 
         // Content
         if (albumName == Content)

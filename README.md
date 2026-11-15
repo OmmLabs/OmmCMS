@@ -54,6 +54,8 @@ Phases 680–690: removed checkout and catalogue rule implementations, scheduled
 
 Phases 691–715: removed catalogue services, product and category hooks, product search and registration, legacy catalogue/search settings navigation and product overview mapping. Generic search, media tree infrastructure and catalogue persistence remain separate.
 
+Phases 716–730: removed the catalogue admin models, permissions, export previews and settings; detached cache invalidation, media tracking, icon migration, quantity-unit maintenance and generic index writer context from catalogue records. CMS-specific settings now retain content collapsing and upload filtering.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

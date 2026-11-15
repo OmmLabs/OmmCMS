@@ -24,7 +24,6 @@ public partial class StandardPermissionProvider : IPermissionProvider
                 CustomerRoleSystemName = SystemCustomerRoleNames.Administrators,
                 PermissionRecords = new[]
                 {
-                    new PermissionRecord { SystemName = Permissions.Catalog.Self },
                     new PermissionRecord { SystemName = Permissions.Customer.Self },
                     new PermissionRecord { SystemName = Permissions.Promotion.Self },
                     new PermissionRecord { SystemName = Permissions.Cms.Self },
@@ -40,7 +39,6 @@ public partial class StandardPermissionProvider : IPermissionProvider
                 CustomerRoleSystemName = SystemCustomerRoleNames.ForumModerators,
                 PermissionRecords = new[]
                 {
-                    new PermissionRecord { SystemName = Permissions.Catalog.DisplayPrice },
                     new PermissionRecord { SystemName = Permissions.System.AccessShop }
                 }
             },
@@ -49,7 +47,6 @@ public partial class StandardPermissionProvider : IPermissionProvider
                 CustomerRoleSystemName = SystemCustomerRoleNames.Guests,
                 PermissionRecords = new[]
                 {
-                    new PermissionRecord { SystemName = Permissions.Catalog.DisplayPrice },
                     new PermissionRecord { SystemName = Permissions.System.AccessShop }
                 }
             },
@@ -58,7 +55,6 @@ public partial class StandardPermissionProvider : IPermissionProvider
                 CustomerRoleSystemName = SystemCustomerRoleNames.Registered,
                 PermissionRecords = new[]
                 {
-                    new PermissionRecord { SystemName = Permissions.Catalog.DisplayPrice },
                     new PermissionRecord { SystemName = Permissions.System.AccessShop }
                 }
             }
