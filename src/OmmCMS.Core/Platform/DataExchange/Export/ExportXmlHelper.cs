@@ -648,9 +648,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.Price), entity.Price.ToString(_culture));
         _writer.WriteElementString(nameof(Product.ComparePrice), entity.ComparePrice.ToString(_culture));
         _writer.WriteElementString(nameof(Product.ProductCost), entity.ProductCost.ToString(_culture));
-        _writer.WriteElementString(nameof(Product.SpecialPrice), entity.SpecialPrice?.ToString(_culture) ?? string.Empty);
-        _writer.WriteElementString(nameof(Product.SpecialPriceStartDateTimeUtc), entity.SpecialPriceStartDateTimeUtc?.ToString(_culture) ?? string.Empty);
-        _writer.WriteElementString(nameof(Product.SpecialPriceEndDateTimeUtc), entity.SpecialPriceEndDateTimeUtc?.ToString(_culture) ?? string.Empty);
         _writer.WriteElementString(nameof(Product.CustomerEntersPrice), entity.CustomerEntersPrice.ToString());
         _writer.WriteElementString(nameof(Product.MinimumCustomerEnteredPrice), entity.MinimumCustomerEnteredPrice.ToString(_culture));
         _writer.WriteElementString(nameof(Product.MaximumCustomerEnteredPrice), entity.MaximumCustomerEnteredPrice.ToString(_culture));

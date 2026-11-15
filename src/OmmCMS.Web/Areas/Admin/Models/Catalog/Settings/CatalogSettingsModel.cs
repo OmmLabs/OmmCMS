@@ -7,7 +7,7 @@ using OmmCMS.Core.Catalog.Products;
 namespace OmmCMS.Admin.Models.Catalog;
 
 [LocalizedDisplay("Admin.Configuration.Settings.Catalog.")]
-public class CatalogSettingsModel : ILocalizedModel<PriceSettingsLocalizedModel>
+public class CatalogSettingsModel
 {
     #region General
 
@@ -287,17 +287,12 @@ public class CatalogSettingsModel : ILocalizedModel<PriceSettingsLocalizedModel>
     #endregion
 
     public PriceSettingsModel PriceSettings { get; set; } = new();
-    public List<PriceSettingsLocalizedModel> Locales { get; set; } = [];
 }
 
 public partial class CatalogSettingsValidator : SettingModelValidator<CatalogSettingsModel, CatalogSettings>
 {
     public CatalogSettingsValidator()
     {
-        RuleFor(x => x.PriceSettings.ShowOfferCountdownRemainingHours)
-            .GreaterThan(0)
-            .WhenSettingOverriden((m, ctx) => m.PriceSettings.ShowOfferCountdownRemainingHours != null);
-
         RuleFor(x => x.MaxItemsToDisplayInCatalogMenu)
             .GreaterThanOrEqualTo(0);
 

@@ -51,7 +51,7 @@ public class CalculatedPrice : ICloneable<CalculatedPrice>
 
     /// <summary>
     /// The regular unit price of the input <see cref="Product"/> in the target currency, 
-    /// usually <see cref="Product.Price"/>, <see cref="Product.ComparePrice"/> or <see cref="Product.SpecialPrice"/>.
+    /// usually <see cref="Product.Price"/> or <see cref="Product.ComparePrice"/>.
     /// </summary>
     public Money? RegularPrice { get; set; }
 
@@ -75,19 +75,9 @@ public class CalculatedPrice : ICloneable<CalculatedPrice>
 
     /// <summary>
     /// A value indicating whether the price has a range, which is mostly the case if the lowest price
-    /// was determined or any tier price was applied.
+    /// was determined.
     /// </summary>
     public bool HasPriceRange { get; set; }
-
-    /// <summary>
-    /// The special offer price, if any (see <see cref="Product.SpecialPrice"/>).
-    /// </summary>
-    public Money? OfferPrice { get; set; }
-
-    /// <summary>
-    /// The date until <see cref="FinalPrice"/> is valid.
-    /// </summary>
-    public DateTime? ValidUntilUtc { get; set; }
 
     /// <summary>
     /// The price that is initially displayed on the product detail page, if any.
@@ -97,14 +87,9 @@ public class CalculatedPrice : ICloneable<CalculatedPrice>
 
     /// <summary>
     /// The lowest possible price of a product, if any.
-    /// Includes prices of attribute combinations and tier prices. Ignores price adjustments of attributes.
+    /// Includes prices of attribute combinations. Ignores price adjustments of attributes.
     /// </summary>
     public Money? LowestPrice { get; set; }
-
-    /// <summary>
-    /// The discount amount applied to <see cref="FinalPrice"/>.
-    /// </summary>
-    public Money DiscountAmount { get; set; }
 
     /// <summary>
     /// Gets a list of calculated attribute price adjustments, usually <see cref="ProductVariantAttributeValue.PriceAdjustment"/>.

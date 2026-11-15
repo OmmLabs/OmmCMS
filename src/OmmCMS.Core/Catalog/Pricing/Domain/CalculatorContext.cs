@@ -43,16 +43,6 @@ public class CalculatorContext : PriceCalculationContext
     public bool HasPriceRange { get; set; }
 
     /// <summary>
-    /// The special offer price, if any (see <see cref="Product.SpecialPrice"/>).
-    /// </summary>
-    public decimal? OfferPrice { get; set; }
-
-    /// <summary>
-    /// The end date of the special offer price, if any (see <see cref="Product.SpecialPrice"/>).
-    /// </summary>
-    public DateTime? OfferEndDateUtc { get; set; }
-
-    /// <summary>
     /// The price that is initially displayed on the product detail page, if any.
     /// Includes price adjustments of preselected attributes and prices of attribute combinations.
     /// </summary>
@@ -73,14 +63,6 @@ public class CalculatorContext : PriceCalculationContext
     public decimal AdditionalCharge { get; set; }
 
     /// <summary>
-    /// The discount amount resulting from applying discounts and tier prices.
-    /// </summary>
-    /// <remarks>
-    /// A calculator should add any discount amount included in <see cref="FinalPrice"/> to this property.
-    /// </remarks>
-    public decimal DiscountAmount { get; set; }
-
-    /// <summary>
     /// Gets or sets a list of calculated product attribute price adjustments, usually <see cref="ProductVariantAttributeValue.PriceAdjustment"/>.
     /// </summary>
     public ICollection<CalculatedPriceAdjustment> AttributePriceAdjustments { get; set; } = new List<CalculatedPriceAdjustment>();
@@ -97,12 +79,9 @@ public class CalculatorContext : PriceCalculationContext
         target.PricingType = PricingType;
         target.FinalPrice = FinalPrice;
         target.HasPriceRange = HasPriceRange;
-        target.OfferPrice = OfferPrice;
-        target.OfferEndDateUtc = OfferEndDateUtc;
         target.PreselectedPrice = PreselectedPrice;
         target.LowestPrice = LowestPrice;
         target.AdditionalCharge = AdditionalCharge;
-        target.DiscountAmount = DiscountAmount;
 
 
 

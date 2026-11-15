@@ -216,11 +216,6 @@ public abstract class ServiceTestBase
         var lowestPriceCalculator = new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
             new LowestPriceCalculator(), productMetadata);
 
-        var offerPriceCalculator =
-            new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
-                new OfferPriceCalculator(),
-                new() { ValidTargets = CalculatorTargets.Product | CalculatorTargets.Bundle, Order = CalculatorOrdering.Default });
-
         var preselectedPriceCalculator =
             new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
                 new PreselectedPriceCalculator(null),
@@ -235,7 +230,6 @@ public abstract class ServiceTestBase
             bundlePriceCalculator,
             groupedProductPriceCalculator,
             lowestPriceCalculator,
-            offerPriceCalculator,
             preselectedPriceCalculator,
             customCalculator
         });

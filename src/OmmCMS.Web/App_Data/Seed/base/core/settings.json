@@ -12,8 +12,6 @@
   },
   "PriceSettings": {
     "DefaultComparePriceLabelId": "$ref:PriceLabel:msrp",
-    "DefaultRegularPriceLabelId": "$ref:PriceLabel:lowest",
-    "LimitedOfferBadgeLabel": "Limited time deal",
-    "OfferBadgeLabel": "Deal"
+    "DefaultRegularPriceLabelId": "$ref:PriceLabel:lowest"
   }
 }

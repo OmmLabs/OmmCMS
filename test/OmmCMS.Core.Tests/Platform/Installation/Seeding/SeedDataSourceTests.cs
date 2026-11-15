@@ -226,12 +226,12 @@ public class SeedDataSourceTests
     [Test]
     public void LoadObject_applies_sample_overlay_only_with_sample_data()
     {
-        WriteFile("base/core/settings.json", """{ "PriceSettings": { "OfferBadgeLabel": "Deal" } }""");
+        WriteFile("base/core/settings.json", """{ "PriceSettings": { "DisplayTextForZeroPrices": "true" } }""");
         WriteFile("base/samples/core/settings.json", """{ "PriceSettings": { "PriceDisplayType": "PreSelectedPrice" } }""");
 
         var withSamples = new SeedDataSource(new LocalFileSystem(_root), "de-DE") { IncludeSamples = true }.LoadObject("core/settings.json");
         Assert.That((string)withSamples["PriceSettings"]["PriceDisplayType"], Is.EqualTo("PreSelectedPrice"));
-        Assert.That((string)withSamples["PriceSettings"]["OfferBadgeLabel"], Is.EqualTo("Deal"));
+        Assert.That((string)withSamples["PriceSettings"]["DisplayTextForZeroPrices"], Is.EqualTo("true"));
 
         var withoutSamples = CreateSource().LoadObject("core/settings.json");
         Assert.That(withoutSamples["PriceSettings"]["PriceDisplayType"], Is.Null);

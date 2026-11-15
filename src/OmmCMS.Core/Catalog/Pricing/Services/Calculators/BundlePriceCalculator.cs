@@ -55,11 +55,6 @@ public class BundlePriceCalculator : PriceCalculator
                 // Add price of part to root final price (unit price * contained quantity in this bundle).
                 context.FinalPrice += decimal.Multiply(childCalculation.FinalPrice, bundleItem.Quantity);
                 context.RegularPrice += decimal.Multiply(childCalculation.RegularPrice, bundleItem.Quantity);
-
-                context.DiscountAmount += decimal.Multiply(childCalculation.DiscountAmount, bundleItem.Quantity);
-
-                // TODO: (mg) (core) Is it not better to continue the pipeline here (unlike in OmmCMS classic)? Continuation could
-                // apply OfferPrice and/or further discounts to the automatically calculated final price here. TBD with MC please.
             }
         }
         else

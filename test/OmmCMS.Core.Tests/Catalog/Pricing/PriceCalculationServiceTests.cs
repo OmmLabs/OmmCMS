@@ -259,30 +259,6 @@ public class PriceCalculationServiceTests : ServiceTestBase
 
 
     [Test]
-    public async Task Can_get_final_product_price_with_special_price()
-    {
-        _priceCalculationContext.Options.IgnoreOfferPrice = false;
-
-        _priceCalculationContext.Product.SpecialPrice = 10.01M;
-        _priceCalculationContext.Product.SpecialPriceStartDateTimeUtc = DateTime.UtcNow.AddDays(-1);
-        _priceCalculationContext.Product.SpecialPriceEndDateTimeUtc = DateTime.UtcNow.AddDays(1);
-
-        var price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(10.01M);
-
-        // Invalid date
-        _product.SpecialPriceStartDateTimeUtc = DateTime.UtcNow.AddDays(1);
-        price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(12.34M);
-
-        // No dates
-        _product.SpecialPriceStartDateTimeUtc = null;
-        _product.SpecialPriceEndDateTimeUtc = null;
-        price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(10.01M);
-    }
-
-    [Test]
     public async Task Can_get_final_product_price_with_variant_combination_price()
     {
         var combination = new ProductVariantAttributeCombination

@@ -385,9 +385,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.ComparePrice);
                 row.SetProperty(context.Result, (x) => x.ComparePriceLabelId);
                 row.SetProperty(context.Result, (x) => x.ProductCost);
-                row.SetProperty(context.Result, (x) => x.SpecialPrice);
-                row.SetProperty(context.Result, (x) => x.SpecialPriceStartDateTimeUtc);
-                row.SetProperty(context.Result, (x) => x.SpecialPriceEndDateTimeUtc);
                 row.SetProperty(context.Result, (x) => x.CustomerEntersPrice);
                 row.SetProperty(context.Result, (x) => x.MinimumCustomerEnteredPrice);
                 row.SetProperty(context.Result, (x) => x.MaximumCustomerEnteredPrice, 1000);

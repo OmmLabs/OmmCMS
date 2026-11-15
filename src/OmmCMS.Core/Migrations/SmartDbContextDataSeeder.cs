@@ -179,12 +179,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
 
         prefix = "Admin.Configuration.Settings.Price.";
 
-        builder.AddOrUpdate(prefix + "ShowOfferCountdownRemainingHours",
-            "Show countdown before offer ends",
-            "Countdown vor Angebotsende anzeigen",
-            "Specifies how many hours before an offer ends a countdown is displayed on the product detail page and in the shopping cart. A value of 72 hours displays it during the last three days. Only applies to offers with an end date. Leave the field empty to disable the countdown. A setting on the discount takes precedence.",
-            "Legt fest, wie viele Stunden vor Angebotsende ein Countdown auf der Produktdetailseite und im Warenkorb angezeigt wird. Bei 72 Stunden erscheint er während der letzten drei Tage. Gilt nur für Angebote mit Enddatum. Lassen Sie das Feld leer, um den Countdown zu deaktivieren. Eine eigene Einstellung am Rabatt hat Vorrang.");
-
 
         builder.AddOrUpdate(prefix + "CheckListPrices", "Check when displaying list prices…", "Bei Listenpreisen prüfen…");
 

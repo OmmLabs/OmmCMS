@@ -1,5 +1,4 @@
 ﻿using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Localization;
 
 namespace OmmCMS.Core.Catalog.Pricing;
 
@@ -32,20 +31,4 @@ public interface IPriceLabelService
     /// </remarks>
     PriceLabel GetRegularPriceLabel(Product product);
 
-    /// <summary>
-    /// Gets a promotion badge for the given calculated price as defined by the badge configuration.
-    /// </summary>
-    /// <param name="price">The calculated price to get a badge for.</param>
-    /// <returns>A value tuple: (localized badge label, badge variant).</returns>
-    (LocalizedValue<string>, string) GetPricePromoBadge(CalculatedPrice price);
-
-    /// <summary>
-    /// Gets a promotion countdown text for the given calculated price as defined by countdown configuration.
-    /// </summary>
-    /// <param name="price">The calculated price to get a countdown text for.</param>
-    /// <returns>
-    /// The localized and humanized countdown text, e.g.: "Ends in 3 h, 12 min.".
-    /// Returns <c>null</c> if offer is not limited or remaining time is larger than threshold.
-    /// </returns>
-    LocalizedString GetPromoCountdownText(CalculatedPrice price);
 }

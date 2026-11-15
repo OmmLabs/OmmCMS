@@ -641,21 +641,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     public decimal ProductCost { get; set; }
 
     /// <summary>
-    /// Gets or sets a special price.
-    /// </summary>
-    public decimal? SpecialPrice { get; set; }
-
-    /// <summary>
-    /// Gets or sets the start date of the special price.
-    /// </summary>
-    public DateTime? SpecialPriceStartDateTimeUtc { get; set; }
-
-    /// <summary>
-    /// Gets or sets the end date of the special price.
-    /// </summary>
-    public DateTime? SpecialPriceEndDateTimeUtc { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether the customer can enter a price.
     /// </summary>
     public bool CustomerEntersPrice { get; set; }

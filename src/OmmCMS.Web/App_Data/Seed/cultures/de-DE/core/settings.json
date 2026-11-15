@@ -7,9 +7,6 @@
     "BaseDimensionId": "$ref:MeasureDimension:m",
     "BaseWeightId": "$ref:MeasureWeight:kg"
   },
-  "PriceSettings": {
-    "LimitedOfferBadgeLabel": "Befristetes Angebot"
-  },
   "SeoSettings": {
     "MetaTitle": "Mein Shop"
   },

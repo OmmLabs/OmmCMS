@@ -241,7 +241,6 @@ public partial class PriceCalculationService : IPriceCalculationService
         var product = context.Product;
         var retailPrice = (decimal?)null;
         var hasComparePrice = product.ComparePrice > 0;
-        var hasDiscount = context.DiscountAmount > 0 || (context.OfferPrice.HasValue && context.OfferPrice < product.Price);
 
         PriceLabel comparePriceLabel = null;
 
@@ -260,9 +259,9 @@ public partial class PriceCalculationService : IPriceCalculationService
             }
         }
 
-        if (hasComparePrice && product.ComparePrice > context.FinalPrice && retailPrice == null && !hasDiscount)
+        if (hasComparePrice && product.ComparePrice > context.FinalPrice && retailPrice == null)
         {
-            // A compare price which is NOT the retail price is the regular price (if no discounts are present)
+            // A compare price which is NOT the retail price is the regular price
             result.RegularPriceLabel = comparePriceLabel;
             result.RegularPrice = ConvertAmount(product.ComparePrice, context, taxRate, false, out _);
             return;
@@ -282,32 +281,7 @@ public partial class PriceCalculationService : IPriceCalculationService
         var product = context.Product;
         var regularPrice = (decimal?)null;
         var hasComparePrice = product.ComparePrice > 0;
-        var hasOfferPrice = context.OfferPrice.HasValue;
         var price = context.RegularPrice;
-
-        if (hasOfferPrice && _priceSettings.OfferPriceReplacesRegularPrice)
-        {
-            // Hide regular price.
-            return null;
-        }
-
-        if (context.DiscountAmount > 0)
-        {
-            if (hasOfferPrice)
-            {
-                regularPrice = Math.Min(context.OfferPrice.Value, hasComparePrice ? product.ComparePrice : price);
-            }
-            else
-            {
-                regularPrice = hasComparePrice ? Math.Min(product.ComparePrice, price) : price;
-            }
-        }
-
-        if (regularPrice == null && hasOfferPrice)
-        {
-            // PAngV: price would not be allowed if greater than compare price.
-            regularPrice = hasComparePrice ? Math.Min(product.ComparePrice, price) : price;
-        }
 
         if (regularPrice == null && hasComparePrice && product.ComparePrice > price)
         {
@@ -324,19 +298,12 @@ public partial class PriceCalculationService : IPriceCalculationService
         // Determine tax rate for product.
         var taxRate = await _taxService.GetTaxRateAsync(context.Product, null, options.Customer);
 
-        var endDates = new[] { context.OfferEndDateUtc }
-            .Where(x => x.HasValue && x > DateTime.UtcNow)
-            .ToArray();
-
         // Prepare result by converting price amounts.
         var result = new CalculatedPrice(context)
         {
             Product = context.Product,
-            ValidUntilUtc = endDates.Min(),
-            OfferPrice = ConvertAmount(context.OfferPrice, context, taxRate, false, out _, subtotalQuantity),
             PreselectedPrice = ConvertAmount(context.PreselectedPrice, context, taxRate, false, out _, subtotalQuantity),
             LowestPrice = ConvertAmount(context.LowestPrice, context, taxRate, false, out _, subtotalQuantity),
-            DiscountAmount = ConvertAmount(context.DiscountAmount, context, taxRate, false, out _, subtotalQuantity).Value,
             FinalPrice = ConvertAmount(context.FinalPrice, context, taxRate, true, out var tax, subtotalQuantity).Value,
             Tax = tax
         };
@@ -351,7 +318,7 @@ public partial class PriceCalculationService : IPriceCalculationService
         // Convert attribute price adjustments.
         context.AttributePriceAdjustments.Each(x =>
         {
-            var adjustment = GetEffectivePriceAdjustment(x.RawPriceAdjustment, context);
+            var adjustment = x.RawPriceAdjustment;
             x.Price = ConvertPriceAdjustment(adjustment, context, taxRate);
         });
 
@@ -387,12 +354,6 @@ public partial class PriceCalculationService : IPriceCalculationService
         }
 
         return result;
-    }
-
-    protected virtual decimal GetEffectivePriceAdjustment(decimal adjustment, CalculatorContext context)
-    {
-
-        return adjustment;
     }
 
     protected virtual Money ConvertPriceAdjustment(decimal amount, CalculatorContext context, TaxRate taxRate)

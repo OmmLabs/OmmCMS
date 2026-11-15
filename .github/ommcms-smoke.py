@@ -722,6 +722,7 @@ try:
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('shoppingcartitem', 'shoppingcartitems')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('checkoutattribute', 'checkoutattributes', 'checkoutattributevalue', 'checkoutattributevalues', 'ruleset_checkoutattribute_mapping')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('tierprice', 'tierprices')") == [0]
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('SpecialPrice', 'SpecialPriceStartDateTimeUtc', 'SpecialPriceEndDateTimeUtc')") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('ProductBundleItem') WHERE name IN ('Discount', 'DiscountPercentage')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) LIKE '%discount%'") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Order') WHERE name IN ('CheckoutAttributeDescription', 'CheckoutAttributesXml')") == [0]

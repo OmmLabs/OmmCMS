@@ -39,34 +39,8 @@ public class PriceSettingsModel : ModelBase
     [LocalizedDisplay("*DefaultRegularPriceLabelId")]
     public int? DefaultRegularPriceLabelId { get; set; }
 
-    [LocalizedDisplay("*OfferPriceReplacesRegularPrice")]
-    public bool OfferPriceReplacesRegularPrice { get; set; }
-
     [LocalizedDisplay("*AlwaysDisplayRetailPrice")]
     public bool AlwaysDisplayRetailPrice { get; set; }
-
-    [LocalizedDisplay("*ShowOfferCountdownRemainingHours")]
-    public int? ShowOfferCountdownRemainingHours { get; set; }
-
-    [LocalizedDisplay("*ShowOfferBadge")]
-    public bool ShowOfferBadge { get; set; }
-
-    [LocalizedDisplay("*ShowOfferBadgeInLists")]
-    public bool ShowOfferBadgeInLists { get; set; }
-
-    [LocalizedDisplay("*OfferBadgeLabel")]
-    public string OfferBadgeLabel { get; set; }
-
-    [LocalizedDisplay("*OfferBadgeStyle")]
-    [UIHint("BadgeStyles")]
-    public string OfferBadgeStyle { get; set; }
-
-    [LocalizedDisplay("*LimitedOfferBadgeLabel")]
-    public string LimitedOfferBadgeLabel { get; set; }
-
-    [LocalizedDisplay("*LimitedOfferBadgeStyle")]
-    [UIHint("BadgeStyles")]
-    public string LimitedOfferBadgeStyle { get; set; }
 
     [LocalizedDisplay("*ShowPriceLabelInLists")]
     public bool ShowPriceLabelInLists { get; set; }
@@ -84,16 +58,4 @@ public class PriceSettingsModel : ModelBase
     public bool? RulesCalculateIncludingTax { get; set; }
 
     #endregion
-}
-
-[LocalizedDisplay("Admin.Configuration.Settings.Price.")]
-public class PriceSettingsLocalizedModel : ILocalizedLocaleModel
-{
-    public int LanguageId { get; set; }
-
-    [LocalizedDisplay("*OfferBadgeLabel")]
-    public string OfferBadgeLabel { get; set; }
-
-    [LocalizedDisplay("*LimitedOfferBadgeLabel")]
-    public string LimitedOfferBadgeLabel { get; set; }
 }

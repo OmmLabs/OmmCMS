@@ -59,56 +59,10 @@ public class PriceSettings : ISettings
     public int? DefaultRegularPriceLabelId { get; set; }
 
     /// <summary>
-    /// If TRUE, the special offer price just replaces the regular price
-    /// as if there was no offer. If FALSE, the regular price will be displayed crossed out.
-    /// </summary>
-    public bool OfferPriceReplacesRegularPrice { get; set; }
-
-    /// <summary>
     /// If TRUE, the MSRP will be displayed in product detail even if there is already an offer or a discount.
     /// In this case the MSRP will appear as another crossed out price alongside the discounted price.
     /// </summary>
     public bool AlwaysDisplayRetailPrice { get; set; } = true;
-
-    /// <summary>
-    /// Sets the offer remaining time (in hours) from which a countdown should be displayed in product details,
-    /// e.g. "ends in 3 hours, 23 min.". To hide the countdown, set this to NULL.
-    /// Only applies to limited time offers with a non-null end date.
-    /// </summary>
-    public int? ShowOfferCountdownRemainingHours { get; set; } = 72;
-
-    /// <summary>
-    /// <c>true</c> to display a badge if an offer price is active.
-    /// </summary>
-    public bool ShowOfferBadge { get; set; } = true;
-
-    /// <summary>
-    /// If TRUE, displays a badge in product lists if an offer price is active.
-    /// <see cref="ShowOfferBadge"/> must be TRUE for this to take effect.
-    /// </summary>  
-    public bool ShowOfferBadgeInLists { get; set; } = true;
-
-    /// <summary>
-    /// The label of the offer badge, e.g. "Deal".
-    /// </summary>
-    [LocalizedProperty]
-    public string OfferBadgeLabel { get; set; }
-
-    /// <summary>
-    /// The style of the offer badge.
-    /// </summary>
-    public string OfferBadgeStyle { get; set; } = "dark";
-
-    /// <summary>
-    /// The label of the offer badge if the offer is limited, e.g. "Limited time deal".
-    /// </summary>
-    [LocalizedProperty]
-    public string LimitedOfferBadgeLabel { get; set; }
-
-    /// <summary>
-    /// The style of the limited time offer badge.
-    /// </summary>
-    public string LimitedOfferBadgeStyle { get; set; } = "dark";
 
     /// <summary>
     /// <c>true</c> to display the compare price label's short name in product lists.

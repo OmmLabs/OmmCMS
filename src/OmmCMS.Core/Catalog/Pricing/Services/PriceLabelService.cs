@@ -1,7 +1,5 @@
-﻿using Humanizer;
-using OmmCMS.Core.Catalog.Products;
+﻿using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Data;
-using OmmCMS.Core.Localization;
 
 namespace OmmCMS.Core.Catalog.Pricing;
 
@@ -20,7 +18,6 @@ public class PriceLabelService : IPriceLabelService
         _priceSettings = priceSettings;
     }
 
-    public Localizer T { get; set; } = NullLocalizer.Instance;
 
     public virtual PriceLabel GetDefaultComparePriceLabel()
     {
@@ -84,59 +81,4 @@ public class PriceLabelService : IPriceLabelService
         return GetDefaultRegularPriceLabel();
     }
 
-    public virtual (LocalizedValue<string>, string) GetPricePromoBadge(CalculatedPrice price)
-    {
-        Guard.NotNull(price);
-
-        if (!price.Saving.HasSaving || price.RegularPrice == null)
-        {
-            return (null, null);
-        }
-
-        var validUntilUtc = price.ValidUntilUtc;
-        var isLimitedOffer = validUntilUtc.HasValue && validUntilUtc > DateTime.UtcNow;
-        var badgeStyle = isLimitedOffer ? _priceSettings.LimitedOfferBadgeStyle : _priceSettings.OfferBadgeStyle;
-
-        LocalizedValue<string> badgeLabel;
-
-        badgeLabel = isLimitedOffer
-            ? _priceSettings.GetLocalizedSetting(x => x.LimitedOfferBadgeLabel)
-            : _priceSettings.GetLocalizedSetting(x => x.OfferBadgeLabel);
-
-        if (isLimitedOffer && !badgeLabel.HasValue())
-        {
-            // If LimitedOfferBadgeLabel is empty, fall back to OfferBadgeLabel.
-            badgeLabel = _priceSettings.GetLocalizedSetting(x => x.OfferBadgeLabel);
-        }
-
-        return (badgeLabel, badgeStyle);
-    }
-
-    public virtual LocalizedString GetPromoCountdownText(CalculatedPrice price)
-    {
-        Guard.NotNull(price);
-
-        if (price.ValidUntilUtc == null)
-        {
-            return null;
-        }
-
-        var threshold = _priceSettings.ShowOfferCountdownRemainingHours;
-
-        if (threshold.GetValueOrDefault() < 1)
-        {
-            return null;
-        }
-
-        var maxTime = TimeSpan.FromHours(threshold.Value);
-        var remainingTime = price.ValidUntilUtc.Value - DateTime.UtcNow;
-
-        if (remainingTime > maxTime)
-        {
-            return null;
-        }
-
-        var humanizedTimeString = remainingTime.Humanize(precision: 2, maxUnit: TimeUnit.Day, minUnit: TimeUnit.Minute);
-        return T("Products.Price.OfferCountdown", humanizedTimeString);
-    }
 }

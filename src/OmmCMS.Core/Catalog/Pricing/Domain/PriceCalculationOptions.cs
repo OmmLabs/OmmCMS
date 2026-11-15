@@ -105,11 +105,6 @@ public class PriceCalculationOptions : ICloneable<PriceCalculationOptions>
     public bool ApplyPreselectedAttributes { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether an offer price should be ignored during price calculation.
-    /// </summary>
-    public bool IgnoreOfferPrice { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether the source price (the one retrieved from database) includes sales tax already.
     /// </summary>
     public bool IsGrossPrice { get; set; }

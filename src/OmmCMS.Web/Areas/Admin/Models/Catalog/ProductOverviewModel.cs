@@ -67,17 +67,6 @@ public class ProductOverviewModel : TabbableModel
     [LocalizedDisplay("*ComparePrice")]
     public decimal? ComparePrice { get; set; }
 
-    [LocalizedDisplay("*SpecialPrice")]
-    public decimal? SpecialPrice { get; set; }
-
-    [LocalizedDisplay("*SpecialPriceStartDateTimeUtc")]
-    [AdditionalMetadata("pickTime", true)]
-    public DateTime? SpecialPriceStartDateTimeUtc { get; set; }
-
-    [LocalizedDisplay("*SpecialPriceEndDateTimeUtc")]
-    [AdditionalMetadata("pickTime", true)]
-    public DateTime? SpecialPriceEndDateTimeUtc { get; set; }
-
     [LocalizedDisplay("*Weight")]
     public decimal? Weight { get; set; }
 

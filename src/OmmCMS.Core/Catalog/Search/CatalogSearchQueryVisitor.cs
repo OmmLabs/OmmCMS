@@ -333,34 +333,14 @@ public class CatalogSearchQueryVisitor : LinqSearchQueryVisitor<Product, Catalog
             {
                 var minPrice = Convert.ToDecimal(lower.Value);
 
-                query = query.Where(x =>
-                    ((x.SpecialPrice.HasValue &&
-                    ((!x.SpecialPriceStartDateTimeUtc.HasValue || x.SpecialPriceStartDateTimeUtc.Value < context.Now) &&
-                    (!x.SpecialPriceEndDateTimeUtc.HasValue || x.SpecialPriceEndDateTimeUtc.Value > context.Now))) &&
-                    (x.SpecialPrice >= minPrice))
-                    ||
-                    ((!x.SpecialPrice.HasValue ||
-                    ((x.SpecialPriceStartDateTimeUtc.HasValue && x.SpecialPriceStartDateTimeUtc.Value > context.Now) ||
-                    (x.SpecialPriceEndDateTimeUtc.HasValue && x.SpecialPriceEndDateTimeUtc.Value < context.Now))) &&
-                    (x.Price >= minPrice))
-                );
+                query = query.Where(x => x.Price >= minPrice);
             }
 
             if (upper.HasValue)
             {
                 var maxPrice = Convert.ToDecimal(upper);
 
-                query = query.Where(x =>
-                    ((x.SpecialPrice.HasValue &&
-                    ((!x.SpecialPriceStartDateTimeUtc.HasValue || x.SpecialPriceStartDateTimeUtc.Value < context.Now) &&
-                    (!x.SpecialPriceEndDateTimeUtc.HasValue || x.SpecialPriceEndDateTimeUtc.Value > context.Now))) &&
-                    (x.SpecialPrice <= maxPrice))
-                    ||
-                    ((!x.SpecialPrice.HasValue ||
-                    ((x.SpecialPriceStartDateTimeUtc.HasValue && x.SpecialPriceStartDateTimeUtc.Value > context.Now) ||
-                    (x.SpecialPriceEndDateTimeUtc.HasValue && x.SpecialPriceEndDateTimeUtc.Value < context.Now))) &&
-                    (x.Price <= maxPrice))
-                );
+                query = query.Where(x => x.Price <= maxPrice);
             }
         }
         else
@@ -369,31 +349,11 @@ public class CatalogSearchQueryVisitor : LinqSearchQueryVisitor<Product, Catalog
 
             if (filter.Occurence == SearchFilterOccurence.MustNot)
             {
-                query = query.Where(x =>
-                    ((x.SpecialPrice.HasValue &&
-                    ((!x.SpecialPriceStartDateTimeUtc.HasValue || x.SpecialPriceStartDateTimeUtc.Value < context.Now) &&
-                    (!x.SpecialPriceEndDateTimeUtc.HasValue || x.SpecialPriceEndDateTimeUtc.Value > context.Now))) &&
-                    (x.SpecialPrice != price))
-                    ||
-                    ((!x.SpecialPrice.HasValue ||
-                    ((x.SpecialPriceStartDateTimeUtc.HasValue && x.SpecialPriceStartDateTimeUtc.Value > context.Now) ||
-                    (x.SpecialPriceEndDateTimeUtc.HasValue && x.SpecialPriceEndDateTimeUtc.Value < context.Now))) &&
-                    (x.Price != price))
-                );
+                query = query.Where(x => x.Price != price);
             }
             else
             {
-                query = query.Where(x =>
-                    ((x.SpecialPrice.HasValue &&
-                    ((!x.SpecialPriceStartDateTimeUtc.HasValue || x.SpecialPriceStartDateTimeUtc.Value < context.Now) &&
-                    (!x.SpecialPriceEndDateTimeUtc.HasValue || x.SpecialPriceEndDateTimeUtc.Value > context.Now))) &&
-                    (x.SpecialPrice == price))
-                    ||
-                    ((!x.SpecialPrice.HasValue ||
-                    ((x.SpecialPriceStartDateTimeUtc.HasValue && x.SpecialPriceStartDateTimeUtc.Value > context.Now) ||
-                    (x.SpecialPriceEndDateTimeUtc.HasValue && x.SpecialPriceEndDateTimeUtc.Value < context.Now))) &&
-                    (x.Price == price))
-                );
+                query = query.Where(x => x.Price == price);
             }
         }
 
@@ -589,32 +549,7 @@ public class CatalogSearchQueryVisitor : LinqSearchQueryVisitor<Product, Catalog
 
     protected virtual IQueryable<Product> ApplyPriceSorting(IQueryable<Product> query, bool descending)
     {
-        var now = DateTime.UtcNow;
-
-        // TODO: (mg) Do we need more database indexes for this?
-        // Results in "Oder by case when... else x.Price".
-        var priceQuery = query
-            .Select(x => new
-            {
-                Price = x.SpecialPrice != null
-                    && (x.SpecialPriceStartDateTimeUtc == null || now >= x.SpecialPriceStartDateTimeUtc)
-                    && (x.SpecialPriceEndDateTimeUtc == null || now <= x.SpecialPriceEndDateTimeUtc)
-                    ? x.SpecialPrice.Value : x.Price,
-                Product = x
-            });
-
-        if (descending)
-        {
-            return priceQuery
-                .OrderByDescending(x => x.Price)
-                .Select(x => x.Product);
-        }
-        else
-        {
-            return priceQuery
-                .OrderBy(x => x.Price)
-                .Select(x => x.Product);
-        }
+        return descending ? query.OrderByDescending(x => x.Price) : query.OrderBy(x => x.Price);
     }
 
     protected virtual IQueryable<Product> ApplyFeaturedSorting(CatalogSearchQueryContext context, IQueryable<Product> query, bool byCategory)

@@ -237,16 +237,16 @@ public class SeedEntityFactoryTests
     public void Relative_dates_are_resolved()
     {
         var before = System.DateTime.UtcNow;
-        var product = _factory.Create(Record("P-1", """{ "sku": "P-1", "specialPriceStartDateTimeUtc": "@now-10d", "specialPriceEndDateTimeUtc": "@now+1M" }"""), new SeedEntityDescriptor<Product>("sku"));
+        var product = _factory.Create(Record("P-1", """{ "sku": "P-1", "availableStartDateTimeUtc": "@now-10d", "availableEndDateTimeUtc": "@now+1M" }"""), new SeedEntityDescriptor<Product>("sku"));
 
-        Assert.That(product.SpecialPriceStartDateTimeUtc, Is.EqualTo(before.AddDays(-10)).Within(System.TimeSpan.FromMinutes(1)));
-        Assert.That(product.SpecialPriceEndDateTimeUtc, Is.EqualTo(before.AddMonths(1)).Within(System.TimeSpan.FromMinutes(1)));
+        Assert.That(product.AvailableStartDateTimeUtc, Is.EqualTo(before.AddDays(-10)).Within(System.TimeSpan.FromMinutes(1)));
+        Assert.That(product.AvailableEndDateTimeUtc, Is.EqualTo(before.AddMonths(1)).Within(System.TimeSpan.FromMinutes(1)));
     }
 
     [Test]
     public void Invalid_relative_date_throws()
         => Assert.Throws<SeedDataFormatException>(() =>
-            _factory.Create(Record("P-1", """{ "sku": "P-1", "specialPriceEndDateTimeUtc": "@now+1y" }"""), new SeedEntityDescriptor<Product>("sku")));
+            _factory.Create(Record("P-1", """{ "sku": "P-1", "availableEndDateTimeUtc": "@now+1y" }"""), new SeedEntityDescriptor<Product>("sku")));
 
     [Test]
     public void Key_field_can_be_a_bound_reference()
