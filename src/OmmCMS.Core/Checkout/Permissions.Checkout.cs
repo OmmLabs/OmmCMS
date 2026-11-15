@@ -31,14 +31,6 @@ public static partial class Permissions
 
     public static partial class Configuration
     {
-        public static class PaymentMethod
-        {
-            public const string Self = "configuration.paymentmethod";
-            public const string Read = "configuration.paymentmethod.read";
-            public const string Update = "configuration.paymentmethod.update";
-            public const string Activate = "configuration.paymentmethod.activate";
-        }
-
         public static class Shipping
         {
             public const string Self = "configuration.shipping";

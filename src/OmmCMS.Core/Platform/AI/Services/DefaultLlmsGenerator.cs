@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OmmCMS.Core.Catalog;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
@@ -22,15 +21,12 @@ public class DefaultLlmsGenerator : ILlmsGenerator
     private readonly IWorkContext _workContext;
     private readonly ICategoryService _categoryService;
     private readonly IAddressService _addressService;
-    private readonly Lazy<IProviderManager> _providerManager;
-    private readonly Lazy<ModuleManager> _moduleManager;
     private readonly Lazy<IUrlHelper> _urlHelper;
     private readonly CompanyInformationSettings _companyInfoSettings;
     private readonly ContactDataSettings _contactSettings;
     private readonly HomePageSettings _homepageSettings;
     private readonly SocialSettings _socialSettings;
     private readonly TaxSettings _taxSettings;
-    private readonly PaymentSettings _paymentSettings;
     private readonly CatalogSettings _catalogSettings;
 
     protected IUrlHelper Url => _urlHelper.Value;
@@ -41,15 +37,12 @@ public class DefaultLlmsGenerator : ILlmsGenerator
         IWorkContext workContext,
         ICategoryService categoryService,
         IAddressService addressService,
-        Lazy<IProviderManager> providerManager,
-        Lazy<ModuleManager> moduleManager,
         Lazy<IUrlHelper> urlHelper,
         CompanyInformationSettings companyInfoSettings,
         ContactDataSettings contactSettings,
         HomePageSettings homepageSettings,
         SocialSettings socialSettings,
         TaxSettings taxSettings,
-        PaymentSettings paymentSettings,
         CatalogSettings catalogSettings)
     {
         _db = db;
@@ -57,15 +50,12 @@ public class DefaultLlmsGenerator : ILlmsGenerator
         _workContext = workContext;
         _categoryService = categoryService;
         _addressService = addressService;
-        _providerManager = providerManager;
-        _moduleManager = moduleManager;
         _urlHelper = urlHelper;
         _companyInfoSettings = companyInfoSettings;
         _contactSettings = contactSettings;
         _homepageSettings = homepageSettings;
         _socialSettings = socialSettings;
         _taxSettings = taxSettings;
-        _paymentSettings = paymentSettings;
         _catalogSettings = catalogSettings;
     }
 
@@ -93,8 +83,6 @@ public class DefaultLlmsGenerator : ILlmsGenerator
             .ApplyStandardFilter(false, store.Id)
             .ToListAsync();
 
-        var providers = _providerManager.Value.GetAllProviders<IPaymentMethod>()
-            .Where(x => x.IsPaymentProviderEnabled(_paymentSettings));
 
         writer.WriteLine("## Metadata");
 
@@ -131,7 +119,6 @@ public class DefaultLlmsGenerator : ILlmsGenerator
 
         WriteLine(writer, "Currency", _workContext.WorkingCurrency?.CurrencyCode);
         WriteLine(writer, "Available Languages", string.Join(", ", languages.Select(x => x.UniqueSeoCode)));
-        WriteLine(writer, "Available Payment Methods", string.Join(", ", providers.Select(x => _moduleManager.Value.GetLocalizedFriendlyName(x.Metadata))));
         writer.WriteLine();
     }
 

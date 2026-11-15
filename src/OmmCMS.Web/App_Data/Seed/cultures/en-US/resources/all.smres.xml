@@ -219,9 +219,6 @@
 	<LocaleResource Name="Account.Fields.Phone">
 		<Value>Phone</Value>
 	</LocaleResource>
-	<LocaleResource Name="Account.Fields.PreferredPaymentMethod">
-		<Value>Preferred payment method</Value>
-	</LocaleResource>
 	<LocaleResource Name="Account.Fields.PreferredShippingMethod">
 		<Value>Preferred shipping method</Value>
 	</LocaleResource>
@@ -4688,78 +4685,6 @@
 	<LocaleResource Name="Admin.Configuration.Measures.Weights.Fields.SystemKeyword">
 		<Value>System keyword</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment">
-		<Value>Payment</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.CannotActivatePaymentMethod">
-		<Value>Activating this payment method is forbidden by the plugin.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods">
-		<Value>Payment methods</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.AdditionalFee">
-		<Value>Additional fee</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.AdditionalFee.Hint">
-		<Value>Specifies an additional fee to be charged to the customer for using the payment method.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.AdditionalFeePercentage">
-		<Value>Additional fee percentage</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.AdditionalFeePercentage.Hint">
-		<Value>Specifies whether the additional fee should be calculated as a percentage. A fixed value is used if this option is disabled.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.AddOrderNotes">
-		<Value>Create order notes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.AddOrderNotes.Hint">
-		<Value>Specifies whether to create order notes when exchanging data with the payment provider.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Configure">
-		<Value>Configure</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Fields">
-		<Value>Display order</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Fields.SupportCapture">
-		<Value>Supports capture</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Fields.SupportPartiallyRefund">
-		<Value>Supports partial refund</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Fields.SupportRefund">
-		<Value>Supports refund</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Fields.SupportVoid">
-		<Value>Supports void</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.FullDescription">
-		<Value>Full description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.FullDescription.Hint">
-		<Value>Specifies a full description of the payment method. It appears in the payment list in checkout.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Requirements">
-		<Value>Requirements</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Requirements.Hint">
-		<Value>Specifies requirements for the availability of the payment method. The payment method is offered if one of the selected rules is fulfilled.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.RestrictionNote">
-		<Value>There were no possibilities found to restrict payment methods.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.RoundOrderTotalEnabled">
-		<Value>Round order total amount (if enabled)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.RoundOrderTotalEnabled.Hint">
-		<Value>Specifies whether to round the order total in accordance with currency configuration if this payment method was selected in checkout.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.ShortDescription">
-		<Value>Short description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.ShortDescription.Hint">
-		<Value>Specifies a short description of the payment method.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Plugins">
 		<Value>Plugins</Value>
 	</LocaleResource>
@@ -7373,21 +7298,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestSettings">
 		<Value>Returns</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.DisplayPaymentMethodIcons">
-		<Value>Show icons on the payment method selection page</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.ProductDetailPaymentMethodSystemNames">
-		<Value>Payment method icons on the product detail page</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.ProductDetailPaymentMethodSystemNames.Hint">
-		<Value>Specifies for which payment methods icons informing about the accepted payment methods are displayed on product detail pages.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.SkipPaymentSelectionIfSingleOption">
-		<Value>Only display payment method selection if more than one payment method is available</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.SkipPaymentSelectionIfSingleOption.Hint">
-		<Value>Specifies whether the payment method selection in checkout is only displayed if more than one payment method is available.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance">
 		<Value>Performance</Value>
@@ -12991,12 +12901,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.OrderTotal">
 		<Value>Order total</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.PaidBy">
-		<Value>Paid by</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.PaymentMethod">
-		<Value>Payment method</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.PaymentStatus">
 		<Value>Payment status</Value>
 	</LocaleResource>
@@ -14208,15 +14112,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.NoShipmentItems">
 		<Value>No shipment items</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Warnings.PaymentMethods">
-		<Value>You don't have active payment methods</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Warnings.PaymentMethods.NoActive">
-		<Value>You don't have active payment methods</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Warnings.PaymentMethods.OK">
-		<Value>Payment methods are OK</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.PrimaryCurrency">
 		<Value>Primary store currency is not set</Value>

@@ -7,13 +7,11 @@
 
     var assignedToDiscounts = ViewBag.AssignedToDiscounts as List<RuleSetAssignedToEntityModel>;
     var assignedToShippingMethods = ViewBag.AssignedToShippingMethods as List<RuleSetAssignedToEntityModel>;
-    var assignedToPaymentMethods = ViewBag.AssignedToPaymentMethods as List<RuleSetAssignedToEntityModel>;
     var assignedToCustomerRoles = ViewBag.AssignedToCustomerRoles as List<RuleSetAssignedToEntityModel>;
     var assignedToCategories = ViewBag.AssignedToCategories as List<RuleSetAssignedToEntityModel>;
 
     string discountSelector(RuleSetAssignedToEntityModel x) => $"<a href='{Url.Action("Edit", "Discount", new { id = x.Id })}'>{x.Name.HtmlEncode()}</a>";
     string shippingSelector(RuleSetAssignedToEntityModel x) => $"<a href='{Url.Action("Edit", "Shipping", new { id = x.Id })}'>{x.Name.HtmlEncode()}</a>";
-    string paymentSelector(RuleSetAssignedToEntityModel x) => $"<a href='{Url.Action("Edit", "Payment", new { systemName = x.SystemName })}' title='{x.SystemName.AttributeEncode()}'>{x.Name.HtmlEncode()}</a>";
     string customerRoleSelector(RuleSetAssignedToEntityModel x) => $"<a href='{Url.Action("Edit", "CustomerRole", new { id = x.Id })}'>{x.Name.HtmlEncode()}</a>";
     string categorySelector(RuleSetAssignedToEntityModel x) => $"<a href='{Url.Action("Edit", "Category", new { id = x.Id })}'>{x.Name.HtmlEncode()}</a>";
 }
@@ -90,14 +88,6 @@
         </div>
         <div class="adminData form-control-plaintext wide">
             @Html.Raw(string.Join(" · ", assignedToShippingMethods.Select(shippingSelector)))
-        </div>
-    </div>
-    <div sm-if="assignedToPaymentMethods?.Any() ?? false" class="adminRow">
-        <div class="adminTitle">
-            @Html.SmartLabel("AssignedToPaymentMethods", T("Admin.Rules.RuleSet.AssignedObjects", T("Admin.Configuration.Payment.Methods")), T("Admin.Rules.RuleSet.AssignedObjects.Hint"))
-        </div>
-        <div class="adminData form-control-plaintext wide">
-            @Html.Raw(string.Join(" · ", assignedToPaymentMethods.Select(paymentSelector)))
         </div>
     </div>
     <div sm-if="assignedToCustomerRoles?.Any() ?? false" class="adminRow">

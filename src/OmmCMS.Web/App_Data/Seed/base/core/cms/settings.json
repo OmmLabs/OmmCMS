@@ -1,7 +1,4 @@
 {
-  "PaymentSettings": {
-    "ActivePaymentMethodSystemNames": []
-  },
   "SeoSettings": {
     "MetaTitle": "OmmCMS",
     "MetaDescription": "A content-managed website",

@@ -2,7 +2,6 @@
 using OmmCMS.Core.Checkout.Attributes;
 using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Checkout.Orders;
-using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Checkout.Tax;
 
@@ -21,5 +20,4 @@ public partial class SmartDbContext
     public DbSet<ShipmentItem> ShipmentItems { get; set; }
     public DbSet<ShippingMethod> ShippingMethods { get; set; }
     public DbSet<ReturnCase> ReturnCases { get; set; }
-    public DbSet<PaymentMethod> PaymentMethods { get; set; }
 }

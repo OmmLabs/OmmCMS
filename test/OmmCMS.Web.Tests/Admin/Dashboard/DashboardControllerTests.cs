@@ -33,6 +33,7 @@ using OmmCMS.Core.Widgets.Dashboard;
 using OmmCMS.Engine.Modularity;
 using OmmCMS.Json;
 using OmmCMS.Web.Modelling;
+using OmmCMS.Web.Models;
 
 namespace OmmCMS.Web.Tests.Admin.Dashboard;
 
@@ -116,13 +117,13 @@ public class DashboardControllerTests
     [TestCase("Count", "51", false)]
     [TestCase("Count", "", false)]
     [TestCase("Count", "abc", false)]
-    [TestCase("Fees[Payments.Example].Value", "2.75", true)]
-    [TestCase("Fees[Payments.Example].Value", "101", false)]
-    [TestCase("Fees[Payments.Example].Value", "", false)]
+    [TestCase("Fees[Example].Value", "2.75", true)]
+    [TestCase("Fees[Example].Value", "101", false)]
+    [TestCase("Fees[Example].Value", "", false)]
     [SetCulture("de-DE")]
     public async Task Configuration_Form_Binds_Validates_And_Renders_In_One_Request(string field, string value, bool valid)
     {
-        var model = new PaymentMethodsDashboardWidgetSettings();
+        var model = new TestDashboardSettings();
         var configuration = new PartialViewWidget("Configuration", model);
         var widget = new Mock<IDashboardWidget>();
         widget.SetupGet(x => x.Descriptor).Returns(new DashboardWidgetDescriptor("test-widget", "Test")
@@ -184,7 +185,7 @@ public class DashboardControllerTests
         services.AddLogging();
         services.AddMvcCore(options => options.ModelBinderProviders.Insert(0, new InvariantFloatingPointTypeModelBinderProvider())).AddDataAnnotations();
         services.AddFluentValidationAutoValidation();
-        services.AddTransient<IValidator<PaymentMethodsDashboardWidgetSettings>, PaymentMethodsDashboardWidgetValidator>();
+        services.AddTransient<IValidator<TestDashboardSettings>, TestDashboardSettingsValidator>();
         services.AddSingleton(invoker.Object);
         using var provider = services.BuildServiceProvider();
         controller.HttpContext.RequestServices = provider;
@@ -193,8 +194,8 @@ public class DashboardControllerTests
         var fields = new Dictionary<string, StringValues>
         {
             ["Count"] = "7",
-            ["Fees[Payments.Example].Value"] = "2.75",
-            ["Fees[Payments.Example].Unit"] = "%"
+            ["Fees[Example].Value"] = "2.75",
+            ["Fees[Example].Unit"] = "%"
         };
         fields[field] = value;
         controller.Request.ContentType = "application/x-www-form-urlencoded";
@@ -215,7 +216,7 @@ public class DashboardControllerTests
             var json = (JsonResult)result;
             var settings = (JsonObject)json.Value.GetType().GetProperty("settings").GetValue(json.Value);
             Assert.That(settings["count"].GetValue<int>(), Is.EqualTo(field == "Count" ? 3 : 7));
-            Assert.That(settings["fees"]["Payments.Example"]["value"].GetValue<decimal>(), Is.EqualTo(2.75m));
+            Assert.That(settings["fees"]["Example"]["value"].GetValue<decimal>(), Is.EqualTo(2.75m));
             Assert.That(json.Value.GetType().GetProperty("html").GetValue(json.Value), Is.EqualTo("<div>Updated widget</div>"));
             Assert.That(controller.ModelState, Is.Empty);
             dashboard.Verify(x => x.PrepareWidgetAsync(
@@ -724,5 +725,49 @@ public class DashboardControllerTests
 
         Assert.ThrowsAsync<AccessDeniedException>(async () => await filter.OnAuthorizationAsync(context));
         permission.Verify(x => x.AuthorizeAsync(Permissions.Dashboard.Read, null, false), Times.Once);
+    }
+}
+
+public class TestDashboardSettings
+{
+    /// <summary>Gets or sets the maximum number of items to display.</summary>
+    public int Count { get; set; } = 10;
+
+    /// <summary>Gets or sets the fee amount and unit for each item.</summary>
+    public Dictionary<string, Amount> Fees { get; set; } = new(StringComparer.Ordinal);
+}
+
+/// <summary>Validates the test widget configuration.</summary>
+public class TestDashboardSettingsValidator : AbstractValidator<TestDashboardSettings>
+{
+    public TestDashboardSettingsValidator()
+    {
+        RuleFor(x => x.Count).InclusiveBetween(1, 50)
+            .WithMessage("The number of items must be between 1 and 50.");
+
+        RuleFor(x => x.Fees).NotNull();
+        RuleFor(x => x.Fees).Custom((fees, context) =>
+        {
+            if (fees == null)
+            {
+                return;
+            }
+
+            foreach (var fee in fees)
+            {
+                var field = $"Fees[{fee.Key}]";
+
+                if (!fee.Key.HasValue() || fee.Value == null ||
+                    fee.Value.Value < 0 || fee.Value.Value > (fee.Value.IsPercentage() ? 100 : 1000000))
+                {
+                    context.AddFailure(field + ".Value", "Invalid fee value.");
+                }
+
+                if (fee.Value != null && !fee.Value.Unit.HasValue())
+                {
+                    context.AddFailure(field + ".Unit", "A fee unit is required.");
+                }
+            }
+        });
     }
 }

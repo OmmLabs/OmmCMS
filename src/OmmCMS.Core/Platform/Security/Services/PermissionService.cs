@@ -52,7 +52,6 @@ public partial class PermissionService : AsyncDbSaveHook<CustomerRole>, IPermiss
         { "country", "Admin.Configuration.Countries" },
         { "language", "Admin.Configuration.Languages" },
         { "setting", "Admin.Configuration.Settings" },
-        { "paymentmethod", "Admin.Configuration.Payment.Methods" },
         { "activate", "Admin.Common.Activate" },
         { "authentication", "Admin.Configuration.ExternalAuthenticationMethods" },
         { "currency", "Admin.Configuration.Currencies" },

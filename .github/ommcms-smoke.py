@@ -590,6 +590,15 @@ try:
             "Checkout/GiftCards/Domain/GiftCardQueryItem.cs",
             "Checkout/GiftCards/Domain/GiftCardInfo.cs",
             "Checkout/GiftCards/Domain/GiftCardType.cs",
+            "Checkout/Payment/Domain/PaymentMethod.cs",
+            "Checkout/Payment/Service/IPaymentService.cs",
+            "Checkout/Payment/Service/PaymentService.cs",
+            "Checkout/Payment/Service/IPaymentMethod.cs",
+            "Checkout/Payment/Service/PaymentMethodBase.cs",
+            "Checkout/Payment/Service/IUcpPaymentHandler.cs",
+            "Checkout/Payment/Configuration/PaymentSettings.cs",
+            "Checkout/Rules/Impl/PaymentMethodRule.cs",
+            "Checkout/Rules/Impl/PaidByRule.cs",
         ):
             assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
         for language in ("en", "de"):
@@ -657,6 +666,7 @@ try:
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('giftcard', 'giftcards', 'giftcardusagehistory', 'giftcardusagehistories')") == [0]
         assert rows("SELECT COUNT(*) FROM MessageTemplate WHERE Name = 'GiftCard.Notification'") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('IsGiftCard', 'GiftCardTypeId')") == [0]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('paymentmethod', 'paymentmethods', 'ruleset_paymentmethod_mapping')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name)='newslettersubscription'") == [1]
         topics = set(rows("SELECT SystemName FROM Topic"))
         assert {"HomePageText", "AboutUs", "ContactUs"} <= topics

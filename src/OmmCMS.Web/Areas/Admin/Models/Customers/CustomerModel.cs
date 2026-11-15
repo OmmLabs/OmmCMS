@@ -139,8 +139,6 @@ public class CustomerModel : TabbableModel
     [LocalizedDisplay("Account.Fields.PreferredShippingMethod")]
     public int? PreferredShippingMethodId { get; set; }
 
-    [LocalizedDisplay("Account.Fields.PreferredPaymentMethod")]
-    public string PreferredPaymentMethod { get; set; }
 
     [LocalizedDisplay("Common.CreatedOn")]
     public DateTime CreatedOn { get; set; }

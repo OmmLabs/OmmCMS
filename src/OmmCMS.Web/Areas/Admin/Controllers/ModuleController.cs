@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Routing;
 using OmmCMS.Admin.Models.Modularity;
 using OmmCMS.Admin.Models.Stores;
 using OmmCMS.ComponentModel;
-using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Identity;
@@ -428,12 +427,7 @@ public class ModuleController : AdminController
 
         var metadata = provider.Metadata;
 
-        if (metadata.ProviderType == typeof(IPaymentMethod))
-        {
-            readPermission = Permissions.Configuration.PaymentMethod.Read;
-            updatePermission = Permissions.Configuration.PaymentMethod.Update;
-        }
-        else if (metadata.ProviderType == typeof(ITaxProvider))
+        if (metadata.ProviderType == typeof(ITaxProvider))
         {
             readPermission = Permissions.Configuration.Tax.Read;
             updatePermission = Permissions.Configuration.Tax.Update;

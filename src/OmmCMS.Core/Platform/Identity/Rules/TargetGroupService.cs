@@ -407,14 +407,6 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
                 RuleType = RuleType.Int,
                 SelectList = new RemoteRuleValueSelectList("Language")
             },
-            new AnyFilterDescriptor<Customer, Order, string>(x => x.Orders, o => o.PaymentMethodSystemName)
-            {
-                Name = "PaymentMethod",
-                DisplayName = T("Admin.Rules.FilterDescriptor.PaidBy"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.String,
-                SelectList = new RemoteRuleValueSelectList("PaymentMethod")
-            },
             new AnyFilterDescriptor<Customer, Order, string>(x => x.Orders, o => o.ShippingMethod)
             {
                 Name = "ShippingMethod",

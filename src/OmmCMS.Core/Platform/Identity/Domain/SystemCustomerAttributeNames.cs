@@ -32,13 +32,11 @@ public static partial class SystemCustomerAttributeNames
     public static string DefaultBillingAddressId => "DefaultBillingAddressId";
     public static string DefaultShippingAddressId => "DefaultShippingAddressId";
     public static string PreferredShippingOption => "PreferredShippingOption";
-    public static string PreferrePaymentMethod => "PreferredPaymentMethod";
 
     public static string UseRewardPointsDuringCheckout => "UseRewardPointsDuringCheckout";
     public static string UseCreditBalanceDuringCheckout => "UseCreditBalanceDuringCheckout";
     public static string SelectedShippingOption => "SelectedShippingOption";
     public static string OfferedShippingOptions => "OfferedShippingOptions";
-    public static string SelectedPaymentMethod => "SelectedPaymentMethod";
     public static string CheckoutOrderData => "CheckoutOrderData";
 
     // Depends on store

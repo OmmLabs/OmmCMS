@@ -3,7 +3,6 @@ using Autofac.Builder;
 using Humanizer;
 using Microsoft.Extensions.FileProviders;
 using OmmCMS.Core.AI;
-using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common.Services;
@@ -109,7 +108,6 @@ public sealed class ModularityModule : Module
             var isEditable = typeof(IUserEditable).IsAssignableFrom(type);
             var isHidden = GetIsHidden(type);
             var exportFeature = GetExportFeature(type);
-            var paymentMethodType = GetPaymentMethodType(type);
 
             var registration = builder
                 .RegisterType(type)
@@ -135,7 +133,6 @@ public sealed class ModularityModule : Module
                 m.For(em => em.IsEditable, isEditable);
                 m.For(em => em.IsHidden, isHidden);
                 m.For(em => em.ExportFeatures, exportFeature);
-                m.For(em => em.PaymentMethodType, paymentMethodType);
             });
 
             // Register specific provider type.
@@ -143,7 +140,6 @@ public sealed class ModularityModule : Module
             RegisterAsSpecificProvider<IExchangeRateProvider>(type, systemName, registration);
             RegisterAsSpecificProvider<IShippingRateComputationMethod>(type, systemName, registration);
             RegisterAsSpecificProvider<IActivatableWidget>(type, systemName, registration);
-            RegisterAsSpecificProvider<IPaymentMethod>(type, systemName, registration);
             RegisterAsSpecificProvider<IExportProvider>(type, systemName, registration);
             RegisterAsSpecificProvider<IOutputCacheProvider>(type, systemName, registration);
             RegisterAsSpecificProvider<IMediaStorageProvider>(type, systemName, registration);
@@ -232,16 +228,6 @@ public sealed class ModularityModule : Module
         return ExportFeatures.None;
     }
 
-    private static PaymentMethodType GetPaymentMethodType(Type type)
-    {
-        if (type.TryGetAttribute<PaymentMethodAttribute>(true, out var attr))
-        {
-            return attr.Type;
-        }
-
-        return PaymentMethodType.Unknown;
-    }
-
     private static (string Name, string Description) GetFriendlyName(Type type, IModuleDescriptor descriptor)
     {
         string name = null;
@@ -293,10 +279,6 @@ public sealed class ModularityModule : Module
         else if (typeof(IShippingRateComputationMethod).IsAssignableFrom(implType))
         {
             return "Shipping";
-        }
-        else if (typeof(IPaymentMethod).IsAssignableFrom(implType))
-        {
-            return "Payment";
         }
         //else if (typeof(IExternalAuthenticationMethod).IsAssignableFrom(implType))
         //{

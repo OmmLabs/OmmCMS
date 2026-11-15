@@ -2,7 +2,6 @@
 
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Localization;
@@ -66,53 +65,6 @@ public static class SelectListExtensions
             Selected = selectedCustomerRoleIds != null && selectedCustomerRoleIds.Contains(x.Id)
         })
         .ToList();
-    }
-
-    /// <summary>
-    /// Get a select list of all payment methods.
-    /// </summary>
-    /// <param name="paymentProviders">Payment providers.</param>
-    /// <param name="pluginMediator">Plugin mediator.</param>
-    /// <param name="selectedMethods">System name of selected methods.</param>
-    /// <returns>List of select items</returns>
-    public static IList<ExtendedSelectListItem> ToSelectListItems(
-        this IEnumerable<Provider<IPaymentMethod>> paymentProviders,
-        ModuleManager moduleManager,
-        params string[] selectedMethods)
-    {
-        Guard.NotNull(paymentProviders);
-        Guard.NotNull(moduleManager);
-
-        var list = new List<ExtendedSelectListItem>();
-
-        foreach (var provider in paymentProviders)
-        {
-            var systemName = provider.Metadata.SystemName;
-            var name = moduleManager.GetLocalizedFriendlyName(provider.Metadata);
-
-            if (name.IsEmpty())
-            {
-                name = provider.Metadata.FriendlyName;
-            }
-
-            if (name.IsEmpty())
-            {
-                name = provider.Metadata.SystemName;
-            }
-
-            var item = new ExtendedSelectListItem
-            {
-                Text = name.NaIfEmpty(),
-                Value = systemName,
-                Selected = selectedMethods != null && selectedMethods.Contains(systemName)
-            };
-
-            item.CustomProperties.Add("hint", systemName.Replace("OmmCMS.", "").Replace("Payments.", ""));
-
-            list.Add(item);
-        }
-
-        return list.OrderBy(x => x.Text).ToList();
     }
 
     /// <summary>

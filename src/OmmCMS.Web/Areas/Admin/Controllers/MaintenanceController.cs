@@ -15,7 +15,6 @@ using OmmCMS.Admin.Models.Maintenance;
 using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
@@ -58,7 +57,6 @@ public class MaintenanceController : AdminController
     private readonly Lazy<IImageOffloder> _imageOffloader;
     private readonly Lazy<IFilePermissionChecker> _filePermissionChecker;
     private readonly Lazy<ICurrencyService> _currencyService;
-    private readonly Lazy<IPaymentService> _paymentService;
     private readonly Lazy<IShippingService> _shippingService;
     private readonly Lazy<IExportProfileService> _exportProfileService;
     private readonly Lazy<IImportProfileService> _importProfileService;
@@ -80,7 +78,6 @@ public class MaintenanceController : AdminController
         Lazy<IImageOffloder> imageOffloader,
         Lazy<IFilePermissionChecker> filePermissionChecker,
         Lazy<ICurrencyService> currencyService,
-        Lazy<IPaymentService> paymentService,
         Lazy<IShippingService> shippingService,
         Lazy<IExportProfileService> exportProfileService,
         Lazy<IImportProfileService> importProfileService,
@@ -101,7 +98,6 @@ public class MaintenanceController : AdminController
         _imageOffloader = imageOffloader;
         _filePermissionChecker = filePermissionChecker;
         _currencyService = currencyService;
-        _paymentService = paymentService;
         _shippingService = shippingService;
         _exportProfileService = exportProfileService;
         _importProfileService = importProfileService;
@@ -838,26 +834,6 @@ public class MaintenanceController : AdminController
         if (numActiveShippingMethods > 1)
         {
             AddEntry(SystemWarningLevel.Warning, T("Admin.System.Warnings.Shipping.OnlyOneOffline"));
-        }
-
-        // Payment providers
-        // ====================================
-        int numEnabledPaymentProviders = 0;
-        try
-        {
-            numEnabledPaymentProviders = (await _paymentService.Value.LoadAllPaymentProvidersAsync(onlyEnabled: true)).Count();
-        }
-        catch
-        {
-        }
-
-        if (numEnabledPaymentProviders > 0)
-        {
-            AddEntry(SystemWarningLevel.Pass, T("Admin.System.Warnings.PaymentMethods.OK"));
-        }
-        else
-        {
-            AddEntry(SystemWarningLevel.Fail, T("Admin.System.Warnings.PaymentMethods.NoActive"));
         }
 
         // Incompatible modules

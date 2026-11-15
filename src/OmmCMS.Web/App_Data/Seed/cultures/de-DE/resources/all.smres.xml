@@ -219,9 +219,6 @@
 	<LocaleResource Name="Account.Fields.Phone">
 		<Value>Telefon</Value>
 	</LocaleResource>
-	<LocaleResource Name="Account.Fields.PreferredPaymentMethod">
-		<Value>Bevorzugte Zahlungsart</Value>
-	</LocaleResource>
 	<LocaleResource Name="Account.Fields.PreferredShippingMethod">
 		<Value>Bevorzugte Versandart</Value>
 	</LocaleResource>
@@ -4566,75 +4563,6 @@
 	<LocaleResource Name="Admin.Configuration.Measures.Weights.Fields.SystemKeyword">
 		<Value>System-Schlüsselwort</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment">
-		<Value>Zahlung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.CannotActivatePaymentMethod">
-		<Value>Das Plugin erlaubt keine Aktivierung dieser Zahlungsart.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods">
-		<Value>Zahlungsarten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.AdditionalFee">
-		<Value>Zusätzliche Gebühr</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.AdditionalFee.Hint">
-		<Value>Legt eine zusätzliche Gebühr fest, die dem Kunden für die Inanspruchnahme der Zahlart berechnet wird.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.AdditionalFeePercentage">
-		<Value>Zusätzliche Gebühr prozentual</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.AdditionalFeePercentage.Hint">
-		<Value>Legt fest, ob die zusätzliche Gebühr prozentual berechnet werden soll. Es wird ein fester Wert verwendet, falls diese Option deaktiviert ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.AddOrderNotes">
-		<Value>Auftragsnotizen anlegen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.AddOrderNotes.Hint">
-		<Value>Legt fest, ob beim Datenaustausch mit dem Zahlungsanbieter Auftragsnotizen angelegt werden sollen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Configure">
-		<Value>Konfiguration</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Fields.SupportCapture">
-		<Value>Buchung möglich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Fields.SupportPartiallyRefund">
-		<Value>Teilerstattung möglich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Fields.SupportRefund">
-		<Value>Erstattung möglich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Fields.SupportVoid">
-		<Value>Stornierung möglich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.FullDescription">
-		<Value>Langtext</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.FullDescription.Hint">
-		<Value>Legt eine vollständige Beschreibung der Zahlungsmethode fest. Sie erscheint in der Zahlungsliste im Kassenbereich.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Requirements">
-		<Value>Voraussetzungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.Requirements.Hint">
-		<Value>Legt Voraussetzungen für die Verfügbarkeit der Zahlart fest. Die Zahlart wird angeboten, wenn eine der ausgewählten Regeln erfüllt ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.RestrictionNote">
-		<Value>Es wurden keine Möglichkeiten zur Einschränkung von Zahlungsarten gefunden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.RoundOrderTotalEnabled">
-		<Value>Bestellsumme runden, sofern aktiviert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.RoundOrderTotalEnabled.Hint">
-		<Value>Legt fest, ob die Bestellsumme gemäß Währungs-Konfiguration gerundet werden soll, wenn diese Zahlart im Checkout gewählt wurde.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.ShortDescription">
-		<Value>Kurzbeschreibung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Payment.Methods.ShortDescription.Hint">
-		<Value>Legt eine Kurzbeschreibung der Zahlungsmethode fest.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Plugins">
 		<Value>Plugins</Value>
 	</LocaleResource>
@@ -7218,21 +7146,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestSettings">
 		<Value>Retouren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.DisplayPaymentMethodIcons">
-		<Value>Icons auf der Zahlartauswahlseite anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.ProductDetailPaymentMethodSystemNames">
-		<Value>Zahlungsart-Icons auf der Produktdetailseite</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.ProductDetailPaymentMethodSystemNames.Hint">
-		<Value>Bestimmt, für welche Zahlarten Icons zur Information über die akzeptierten Zahlungsarten auf Produktdetailseiten angezeigt werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.SkipPaymentSelectionIfSingleOption">
-		<Value>Zahlartauswahl nur anzeigen, wenn mehr als eine Zahlart zur Verfügung steht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.SkipPaymentSelectionIfSingleOption.Hint">
-		<Value>Legt fest, ob die Zahlartauswahl im Checkout nur angezeigt wird, wenn mehr als eine Zahlart zur Verfügung steht.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance">
 		<Value>Leistung</Value>
@@ -12721,12 +12634,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.OrderTotal">
 		<Value>Gesamtbetrag der Bestellung</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.PaidBy">
-		<Value>Bezahlt mit</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.PaymentMethod">
-		<Value>Zahlart</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.PaymentStatus">
 		<Value>Zahlungsstatus</Value>
 	</LocaleResource>
@@ -13902,12 +13809,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.NoShipmentItems">
 		<Value>Keine Versand-Artikel</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Warnings.PaymentMethods.NoActive">
-		<Value>Es existieren keine aktiven Zahlungsarten.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Warnings.PaymentMethods.OK">
-		<Value>Die Zahlungsarten sind OK.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.PrimaryCurrency.NotSet">
 		<Value>Die Hauptwährung für den Shop wurde nicht festgelegt.</Value>

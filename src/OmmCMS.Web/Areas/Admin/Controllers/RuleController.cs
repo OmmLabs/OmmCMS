@@ -8,7 +8,6 @@ using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Rules;
-using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Rules;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Identity;
@@ -33,8 +32,6 @@ public class RuleController : AdminController
     private readonly IRuleService _ruleService;
     private readonly IRuleProviderFactory _ruleProviderFactory;
     private readonly IEnumerable<IRuleOptionsProvider> _ruleOptionsProviders;
-    private readonly Lazy<IPaymentService> _paymentService;
-    private readonly Lazy<ModuleManager> _moduleManager;
     private readonly AdminAreaSettings _adminAreaSettings;
     private readonly CustomerSettings _customerSettings;
 
@@ -43,8 +40,6 @@ public class RuleController : AdminController
         IRuleService ruleService,
         IRuleProviderFactory ruleProviderFactory,
         IEnumerable<IRuleOptionsProvider> ruleOptionsProviders,
-        Lazy<IPaymentService> paymentService,
-        Lazy<ModuleManager> moduleManager,
         AdminAreaSettings adminAreaSettings,
         CustomerSettings customerSettings)
     {
@@ -52,8 +47,6 @@ public class RuleController : AdminController
         _ruleService = ruleService;
         _ruleProviderFactory = ruleProviderFactory;
         _ruleOptionsProviders = ruleOptionsProviders;
-        _paymentService = paymentService;
-        _moduleManager = moduleManager;
         _adminAreaSettings = adminAreaSettings;
         _customerSettings = customerSettings;
     }
@@ -797,27 +790,6 @@ public class RuleController : AdminController
                 .Select(x => new RuleSetAssignedToEntityModel { Id = x.Id, Name = x.GetLocalized(y => y.Name) })
                 .ToList();
 
-            var paymentMethods = ruleSet.PaymentMethods;
-            if (paymentMethods.Count != 0)
-            {
-                var paymentProviders = (await _paymentService.Value.LoadAllPaymentProvidersAsync()).ToDictionarySafe(x => x.Metadata.SystemName);
-
-                ViewBag.AssignedToPaymentMethods = paymentMethods
-                    .Select(x =>
-                    {
-                        var friendlyName = paymentProviders.TryGetValue(x.PaymentMethodSystemName, out var paymentProvider)
-                            ? _moduleManager.Value.GetLocalizedFriendlyName(paymentProvider.Metadata)
-                            : null;
-
-                        return new RuleSetAssignedToEntityModel
-                        {
-                            Id = x.Id,
-                            Name = friendlyName.NullEmpty() ?? x.PaymentMethodSystemName,
-                            SystemName = x.PaymentMethodSystemName
-                        };
-                    })
-                    .ToList();
-            }
         }
     }
 

@@ -4,7 +4,6 @@ using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Checkout.Orders;
-using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
@@ -75,12 +74,7 @@ public partial class MessageModelProvider
         d.PaidOn = _helper.ToUserDate(part.PaidDateUtc, messageContext);
         d.CurrencyCode = part.CustomerCurrencyCode;
 
-        // Payment method
-        var paymentMethod = _services.Resolve<IProviderManager>().GetProvider<IPaymentMethod>(part.PaymentMethodSystemName);
-        var paymentMethodName = paymentMethod != null
-            ? _moduleManager.GetLocalizedFriendlyName(paymentMethod.Metadata, messageContext.Language.Id)
-            : part.PaymentMethodSystemName;
-        d.PaymentMethod = paymentMethodName.NullEmpty();
+        d.PaymentMethod = part.PaymentMethodSystemName.NullEmpty();
 
         d.Url = part.Customer != null && !part.Customer.IsGuest()
             ? _helper.BuildActionUrl("Details", "Order", new { id = part.Id, area = string.Empty }, messageContext)

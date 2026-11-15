@@ -1,4 +1,3 @@
-﻿using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Engine.Modularity;
 using OmmCMS.Http;
 
@@ -47,7 +46,6 @@ public class ProviderModel : ModelBase, ILocalizedModel<ProviderLocalizedModel>
         set => _locales = value;
     }
 
-    public bool IsPaymentMethod => ProviderType == typeof(IPaymentMethod);
 }
 
 public class ProviderLocalizedModel : ILocalizedLocaleModel

@@ -1,4 +1,3 @@
-﻿using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Identity;
@@ -21,11 +20,7 @@ public static class UrlHelperExtensions
         Guard.NotNull(url);
         Guard.NotNull(metadata);
 
-        if (metadata.ProviderType == typeof(IPaymentMethod))
-        {
-            return url.Action("Providers", "Payment");
-        }
-        else if (metadata.ProviderType == typeof(ITaxProvider))
+        if (metadata.ProviderType == typeof(ITaxProvider))
         {
             return url.Action("Providers", "Tax");
         }

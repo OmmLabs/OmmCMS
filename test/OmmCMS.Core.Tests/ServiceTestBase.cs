@@ -20,7 +20,6 @@ using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media.Storage;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Tests.Catalog.Pricing.Calculators;
-using OmmCMS.Core.Tests.Checkout.Payment;
 using OmmCMS.Core.Tests.Common;
 using OmmCMS.Core.Tests.Content.Media.Storage;
 using OmmCMS.Core.Tests.Shipping;
@@ -182,8 +181,6 @@ public abstract class ServiceTestBase
     {
         _providerManager.RegisterProvider("FixedTaxRateTest", new FixedRateTestTaxProvider());
         _providerManager.RegisterProvider("FixedRateTestShippingRateComputationMethod", new FixedRateTestShippingRateComputationMethod());
-        _providerManager.RegisterProvider("Payments.TestMethod1", new TestPaymentMethod1());
-        _providerManager.RegisterProvider("Payments.TestMethod2", new TestPaymentMethod2());
         _providerManager.RegisterProvider("CurrencyExchange.TestProvider", new TestExchangeRateProvider());
         _providerManager.RegisterProvider(DatabaseMediaStorageProvider.SystemName, new TestDatabaseMediaStorageProvider());
     }
@@ -194,7 +191,6 @@ public abstract class ServiceTestBase
         {
             new ModuleDescriptor { SystemName = "OmmCMS.Tax" },
             new ModuleDescriptor { SystemName = "OmmCMS.Shipping" },
-            new ModuleDescriptor { SystemName = "OmmCMS.Payment" },
         };
 
         //ModuleExplorer.ReferencedPlugins = plugins;

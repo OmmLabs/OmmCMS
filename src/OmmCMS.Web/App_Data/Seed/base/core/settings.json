@@ -10,14 +10,6 @@
     "BaseDimensionId": "$ref:MeasureDimension:inch",
     "BaseWeightId": "$ref:MeasureWeight:lb"
   },
-  "PaymentSettings": {
-    "ActivePaymentMethodSystemNames": [
-      "Payments.CashOnDelivery",
-      "Payments.Manual",
-      "Payments.PayInStore",
-      "Payments.Prepayment"
-    ]
-  },
   "PriceSettings": {
     "DefaultComparePriceLabelId": "$ref:PriceLabel:msrp",
     "DefaultRegularPriceLabelId": "$ref:PriceLabel:lowest",

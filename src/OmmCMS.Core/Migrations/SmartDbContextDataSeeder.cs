@@ -144,25 +144,8 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Admin.SalesReport.ByAmount",
             "Admin.Customers.Reports.BestBy.Fields.Customer");
 
-        builder.AddOrUpdate("Permissions.DisplayName.PaymentMethods", "Payment methods", "Zahlungsarten");
-        builder.AddOrUpdate("Admin.Dashboard.PaymentMethods", "Payment methods", "Zahlungsarten");
-        builder.AddOrUpdate("Admin.Dashboard.PaymentMethods.Description", "Active payment methods ranked by order count or order total, including tax and shipping, across all order dates and statuses.", "Aktive Zahlungsarten nach Bestellanzahl oder Bestellgesamtbetrag einschließlich Steuer und Versand über alle Bestellzeiträume und Bestellstatus hinweg.");
-        builder.AddOrUpdate("Admin.Dashboard.PaymentMethods.Name", "Payment method", "Zahlungsart");
-        builder.AddOrUpdate("Admin.Dashboard.PaymentMethods.OrderCount", "Orders", "Bestellungen");
-        builder.AddOrUpdate("Admin.Dashboard.PaymentMethods.DisplaySettings", "Display", "Anzeige");
-        builder.AddOrUpdate("Admin.Dashboard.PaymentMethods.FeeSettings", "Payment fees", "Zahlungsgebühren");
-
-        builder.AddOrUpdate("Admin.Dashboard.PaymentMethods.EstimatedFees", "Estimated fees", "Geschätzte Gebühren");
-        builder.AddOrUpdate("Admin.Dashboard.PaymentMethods.FeeNotConfigured", "No fee configured.", "Noch kein Gebührensatz hinterlegt.");
-        builder.AddOrUpdate("Admin.Dashboard.PaymentMethods.FeeNotice",
-            "The widget uses these settings to estimate payment fees for all paid orders. Changes also apply to past orders. The calculation includes tax and shipping but does not account for refunds.",
-            "Mit diesen Angaben schätzt das Widget die Zahlungsgebühren für alle bezahlten Bestellungen. Änderungen gelten auch für frühere Bestellungen. Steuern und Versand gehören zur Berechnungsgrundlage; Erstattungen werden nicht berücksichtigt.");
         builder.Delete("FixedValueOrPercent.Absolute", "FixedValueOrPercent.Percentage",
             "Common.AmountOrPercent.Absolute", "Common.AmountOrPercent.Percentage");
-        builder.Delete("Admin.Dashboard.PaymentMethods.FixedFee");
-        builder.Delete("Admin.Dashboard.PaymentMethods.Fee", "Admin.Dashboard.PaymentMethods.Fee.Hint");
-        builder.Delete("Admin.Dashboard.PaymentMethods.FeePercentage", "Admin.Dashboard.PaymentMethods.FeePercentage.Hint");
-
         builder.AddOrUpdate("Permissions.DisplayName.Dashboard", "Dashboard", "Dashboard");
         builder.AddOrUpdate("Permissions.DisplayName.Widgets", "Widgets", "Widgets");
         builder.AddOrUpdate("Permissions.DisplayName.Sales", "Sales", "Verkäufe");
@@ -792,9 +775,7 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Anzahl angezeigter Elemente",
             "Show between 1 and 50 items.",
             "Zeigt zwischen 1 und 50 Elemente an.");
-        builder.Delete("Admin.Dashboard.LatestOrders.Fields.Count", "Admin.Dashboard.LatestOrders.Fields.Count.Hint",
-            "Admin.Dashboard.PaymentMethods.Fields.Count", "Admin.Dashboard.PaymentMethods.Fields.Count.Hint",
-            "Admin.Dashboard.PaymentMethods.Fields.FeePercentage", "Admin.Dashboard.PaymentMethods.Fields.FeePercentage.Hint");
+        builder.Delete("Admin.Dashboard.LatestOrders.Fields.Count", "Admin.Dashboard.LatestOrders.Fields.Count.Hint");
         builder.AddOrUpdate("Admin.Dashboard.Editor.Width", "Change widget width", "Widget-Breite ändern");
         builder.AddOrUpdate("Admin.Dashboard.Editor.Height", "Change widget row span (Home: one row)", "Widget-Zeilenspanne ändern (Pos1: eine Zeile)");
         builder.Delete("Permissions.DisplayName.dashboard.personalize", "Permissions.DisplayName.dashboard.manageglobal");
@@ -985,33 +966,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "The order has already been created. Customer ID: {0}.",
             "Die Bestellung wurde bereits angelegt. Kunden-ID: {0}.");
 
-        string prefix = "Admin.Configuration.Payment.Methods.";
-
-        builder.AddOrUpdate(prefix + "NoMatchingCartHash",
-            "Cannot recover order. The current cart hash {0} does not match the original cart hash {1}.",
-            "Die Bestellung kann nicht wiederhergestellt werden. Der aktuelle Warenkorb-Hash {0} stimmt nicht mit dem ursprünglichen Warenkorb-Hash {1} überein.");
-
-        builder.AddOrUpdate(prefix + "NoMatchingCartTotal",
-            "Cannot recover order. The current cart total {0} does not match the paid amount {1}.",
-            "Die Bestellung kann nicht wiederhergestellt werden. Der aktuelle Warenkorb-Gesamtbetrag {0} stimmt nicht mit dem bezahlten Betrag {1} überein.");
-
-        builder.AddOrUpdate(prefix + "EnableOrderRecovery",
-            "Recover missing orders",
-            "Fehlende Aufträge wiederherstellen",
-            "Specifies whether a missing order should be recovered when a webhook notification about a successful payment is received.",
-            "Legt fest, ob ein fehlender Auftrag wiederhergestellt werden soll, wenn eine Webhook-Nachricht über eine erfolgreiche Zahlung eingeht.");
-
-        builder.AddOrUpdate(prefix + "OrderRecoveryMinAgeSeconds",
-            "Recover missing order x seconds after payment",
-            "Fehlenden Auftrag x Sekunden nach Zahlung wiederherstellen",
-            "Specifies how many seconds must elapse after payment before a missing order is recovered. The value should not be too small, so that the order process has enough time to be completed. The default is 10 seconds.",
-            "Legt fest, wie viele Sekunden nach Zahlung vergehen müssen, damit ein fehlender Auftrag wiederhergestellt wird. Der Wert sollte nicht zu klein sein, um dem Bestellvorgang genügend Zeit für den Abschluss zu geben. Standard ist 10 Sekunden.");
-
-        builder.AddOrUpdate(prefix + "OrderRecoveryMaxAgeHours",
-            "Recover missing orders only up to x hours after payment",
-            "Fehlenden Auftrag nur bis x Stunden nach Zahlung wiederherstellen",
-            "Specifies how many hours after a payment is completed a missing order may be automatically recovered. If the payment is older than the specified value, automatic recovery will no longer be performed. 0 means unlimited age. The default is 24 hours.",
-            "Legt fest, wie viele Stunden nach Abschluss einer Zahlung ein fehlender Auftrag automatisch wiederhergestellt werden darf. Ist die Zahlung älter als der angegebene Wert, wird keine automatische Wiederherstellung mehr durchgeführt. 0 bedeutet unbegrenztes Alter. Standard ist 24 Stunden.");
 
         builder.AddOrUpdate("Admin.Rules.FilterDescriptor.DiscountApplied", "Discount code applied", "Rabattcode angewendet");
     }

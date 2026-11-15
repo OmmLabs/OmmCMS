@@ -89,15 +89,6 @@ public partial class SettingsMenu : MenuBase
             },
             new MenuItem
             {
-                Id = "payment",
-                Text = T("Admin.Configuration.Payment"),
-                Icon = "creditcard",
-                PermissionNames = perm,
-                ControllerName = "Payment",
-                ActionName = "PaymentSettings"
-            },
-            new MenuItem
-            {
                 Id = "finance",
                 Text = T("Common.Finance"),
                 Icon = "discount",

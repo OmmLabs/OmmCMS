@@ -307,14 +307,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
             },
             new()
             {
-                Name = "CartPaymentMethod",
-                DisplayName = T("Admin.Rules.FilterDescriptor.PaymentMethod"),
-                RuleType = RuleType.StringArray,
-                ProcessorType = typeof(PaymentMethodRule),
-                SelectList = new RemoteRuleValueSelectList(KnownRuleOptionDataSourceNames.PaymentMethod) { Multiple = true }
-            },
-            new()
-            {
                 Name = "CartDiscount",
                 DisplayName = T("Admin.Rules.FilterDescriptor.DiscountApplied"),
                 RuleType = RuleType.Boolean,
@@ -469,16 +461,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
                 GroupKey = "Admin.Orders",
                 RuleType = RuleType.Money,
                 ProcessorType = typeof(SpentAmountRule)
-            },
-            new()
-            {
-                Name = "CartPaidBy",
-                DisplayName = T("Admin.Rules.FilterDescriptor.PaidBy"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.StringArray,
-                ProcessorType = typeof(PaidByRule),
-                SelectList = new RemoteRuleValueSelectList(KnownRuleOptionDataSourceNames.PaymentMethod) { Multiple = true },
-                IsComparingSequences = true
             },
             new()
             {

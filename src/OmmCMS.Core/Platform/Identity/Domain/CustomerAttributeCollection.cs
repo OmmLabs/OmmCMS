@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using OmmCMS.Core.Checkout.Attributes;
-using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common;
 
@@ -317,19 +316,6 @@ public class CustomerAttributeCollection : GenericAttributeCollection<Customer>
     }
 
     /// <summary>
-    /// Gets or sets the customer's preferred payment method. It is preselected in the checkout if Quick Checkout is activated.
-    /// </summary>
-    /// <remarks>
-    /// Only payment methods for which <see cref="IPaymentMethod.RequiresPaymentSelection"/> 
-    /// is <c>false</c> are permitted as preferred payment method.
-    /// </remarks>
-    public string PreferredPaymentMethod
-    {
-        get => Get<string>(SystemCustomerAttributeNames.PreferrePaymentMethod, CurrentStoreId);
-        set => Set(SystemCustomerAttributeNames.PreferrePaymentMethod, value, CurrentStoreId);
-    }
-
-    /// <summary>
     /// Gets or sets a value indicating whether the customer has chosen to use his reward points in checkout.
     /// </summary>
     public bool UseRewardPointsDuringCheckout
@@ -364,15 +350,6 @@ public class CustomerAttributeCollection : GenericAttributeCollection<Customer>
     {
         get => Get<List<ShippingOption>>(SystemCustomerAttributeNames.OfferedShippingOptions, CurrentStoreId);
         set => Set(SystemCustomerAttributeNames.OfferedShippingOptions, value, CurrentStoreId);
-    }
-
-    /// <summary>
-    /// Gets or sets the payment method selected by the customer in checkout.
-    /// </summary>
-    public string SelectedPaymentMethod
-    {
-        get => Get<string>(SystemCustomerAttributeNames.SelectedPaymentMethod, CurrentStoreId);
-        set => Set(SystemCustomerAttributeNames.SelectedPaymentMethod, value, CurrentStoreId);
     }
 
     /// <summary>
