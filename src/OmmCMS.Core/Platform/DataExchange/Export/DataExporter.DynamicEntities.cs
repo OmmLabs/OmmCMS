@@ -3,7 +3,6 @@ using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Content.Media;
@@ -19,84 +18,6 @@ namespace OmmCMS.Core.DataExchange.Export;
 
 public partial class DataExporter
 {
-    private readonly static string[] _orderCustomerAttributes =
-    [
-        SystemCustomerAttributeNames.ImpersonatedCustomerId
-    ];
-
-    private async Task<IEnumerable<dynamic>> Convert(Order order, DataExporterContext ctx)
-    {
-        var result = new List<dynamic>();
-
-        ctx.OrderBatchContext.Addresses.Collect(order.ShippingAddressId ?? 0);
-        if (order.BillingAddressId.HasValue)
-        {
-            await ctx.OrderBatchContext.Addresses.GetOrLoadAsync(order.BillingAddressId.Value);
-        }
-
-        var customers = await ctx.OrderBatchContext.Customers.GetOrLoadAsync(order.CustomerId);
-        var customer = customers.FirstOrDefault(x => x.Id == order.CustomerId);
-        var orderItems = await ctx.OrderBatchContext.OrderItems.GetOrLoadAsync(order.Id);
-
-
-        dynamic dynObject = ToDynamic(order, ctx);
-
-        if (customer != null)
-        {
-            var genericAttributes = await ctx.OrderBatchContext.CustomerGenericAttributes.GetOrLoadAsync(order.CustomerId);
-            var rewardPointsHistories = await ctx.OrderBatchContext.RewardPointsHistories.GetOrLoadAsync(order.CustomerId);
-
-            dynObject.Customer = ToDynamic(customer);
-
-            // We do not export all customer generic attributes because otherwise the export file gets too big.
-            dynObject.Customer._GenericAttributes = genericAttributes
-                .Where(x => x.Value.HasValue() && _orderCustomerAttributes.Contains(x.Key))
-                .Select(x => CreateDynamic(x))
-                .ToList();
-
-            dynObject.Customer.RewardPointsHistory = rewardPointsHistories
-                .Select(x => CreateDynamic(x))
-                .ToList();
-
-            if (rewardPointsHistories.Count > 0)
-            {
-                dynObject.Customer._RewardPointsBalance = rewardPointsHistories
-                    .OrderByDescending(x => x.CreatedOnUtc)
-                    .ThenByDescending(x => x.Id)
-                    .FirstOrDefault()
-                    .PointsBalance;
-            }
-        }
-        else
-        {
-            dynObject.Customer = null;
-        }
-
-        dynObject.BillingAddress = order.BillingAddressId.HasValue && ctx.OrderBatchContext.Addresses.TryGetValues(order.BillingAddressId.Value, out var billingAddresses)
-            ? ToDynamic(billingAddresses.FirstOrDefault(), ctx)
-            : null;
-
-        dynObject.ShippingAddress = order.ShippingAddressId.HasValue && ctx.OrderBatchContext.Addresses.TryGetValues(order.ShippingAddressId.Value, out var shippingAddresses)
-            ? ToDynamic(shippingAddresses.FirstOrDefault(), ctx)
-            : null;
-
-        dynObject.OrderItems = await orderItems
-            .SelectAwait(async x => await ToDynamic(x, ctx))
-            .ToListAsync();
-
-        result.Add(dynObject);
-
-        await _services.EventPublisher.PublishAsync(new RowExportingEvent
-        {
-            Row = dynObject,
-            EntityType = ExportEntityType.Order,
-            ExportRequest = ctx.Request,
-            ExecuteContext = ctx.ExecuteContext
-        });
-
-        return result;
-    }
-
     private async Task<IEnumerable<dynamic>> Convert(Manufacturer manufacturer, DataExporterContext ctx)
     {
         var result = new List<dynamic>();
@@ -605,51 +526,6 @@ public partial class DataExporter
             ctx.Log.Error(ex, $"Failed to get details for file with ID {file.File.Id}.");
             return null;
         }
-    }
-
-    private dynamic ToDynamic(Order order, DataExporterContext ctx)
-    {
-        if (order == null)
-        {
-            return null;
-        }
-
-        dynamic result = new DynamicEntity(order);
-
-        result.OrderNumber = order.GetOrderNumber();
-        result.OrderStatus = _services.Localization.GetLocalizedEnum(order.OrderStatus, ctx.LanguageId);
-        result.PaymentStatus = _services.Localization.GetLocalizedEnum(order.PaymentStatus, ctx.LanguageId);
-        result.ShippingStatus = _services.Localization.GetLocalizedEnum(order.ShippingStatus, ctx.LanguageId);
-
-        result.Customer = null;
-        result.BillingAddress = null;
-        result.ShippingAddress = null;
-
-        result.Store = ctx.Stores.ContainsKey(order.StoreId)
-            ? DataExporter.ToDynamic(ctx.Stores[order.StoreId])
-            : null;
-
-        if (!ctx.IsPreview)
-        {
-            result.RedeemedRewardPointsEntry = CreateDynamic(order.RedeemedRewardPointsEntry);
-        }
-
-        return result;
-    }
-
-    private async Task<dynamic> ToDynamic(OrderItem orderItem, DataExporterContext ctx)
-    {
-        if (orderItem == null)
-        {
-            return null;
-        }
-
-        await _productAttributeMaterializer.MergeWithCombinationAsync(orderItem.Product, orderItem.AttributeSelection);
-
-        dynamic result = new DynamicEntity(orderItem);
-        result.Product = await ToDynamic(orderItem.Product, ctx);
-
-        return result;
     }
 
     private static dynamic ToDynamic(NewsletterSubscription subscription, DataExporterContext ctx)

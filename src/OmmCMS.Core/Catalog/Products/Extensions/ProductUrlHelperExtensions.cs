@@ -1,6 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Seo;
 
 namespace OmmCMS.Core.Catalog.Products;
@@ -71,40 +70,4 @@ public static partial class ProductUrlHelperExtensions
         return helper.GetProductUrl(product.Id, await product.GetActiveSlugAsync(), 0, variantValues);
     }
 
-    /// <summary>
-    /// Creates a product URL including variant query string.
-    /// </summary>
-    /// <param name="helper">Product URL helper.</param>
-    /// <param name="productSlug">Product URL slug.</param>
-    /// <param name="orderItem">Order item.</param>
-    /// <returns>Product URL.</returns>
-    public static async Task<string> GetProductUrlAsync(this ProductUrlHelper helper, string productSlug, OrderItem orderItem)
-    {
-        Guard.NotNull(helper);
-        Guard.NotNull(orderItem);
-        Guard.NotNull(orderItem.Product);
-
-        if (orderItem.Product.IsSystemProduct)
-        {
-            return null;
-        }
-
-        var query = new ProductVariantQuery();
-
-        if (orderItem.Product.ProductType != ProductType.BundledProduct)
-        {
-            await helper.AddAttributesToQueryAsync(query, orderItem.AttributeSelection, orderItem.ProductId);
-        }
-        else if (orderItem.Product.BundlePerItemPricing && orderItem.BundleData.HasValue())
-        {
-            var bundleData = orderItem.GetBundleData();
-
-            foreach (var item in bundleData)
-            {
-                await helper.AddAttributesToQueryAsync(query, item.AttributeSelection, item.ProductId, item.BundleItemId);
-            }
-        }
-
-        return helper.GetProductPath(productSlug, query);
-    }
 }

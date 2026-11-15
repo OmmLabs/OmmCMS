@@ -20,16 +20,6 @@ public class PdfSettings : ISettings
     public bool LetterPageSizeEnabled { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to attach the order PDF to 'Order Placed (customer)' email.
-    /// </summary>
-    public bool AttachOrderPdfToOrderPlacedEmail { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to attach the order PDF to 'Order Completed (customer)' email.
-    /// </summary>
-    public bool AttachOrderPdfToOrderCompletedEmail { get; set; }
-
-    /// <summary>
     /// Gets or sets the maximum number of items to print.
     /// </summary>
     public int MaxItemsToPrint { get; set; } = 500;

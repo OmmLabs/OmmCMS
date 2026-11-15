@@ -100,25 +100,6 @@ public class ExportFilter
 
     #endregion
 
-    #region Order
-
-    /// <summary>
-    /// Filter by order status.
-    /// </summary>
-    public int[] OrderStatusIds { get; set; }
-
-    /// <summary>
-    /// Filter by payment status.
-    /// </summary>
-    public int[] PaymentStatusIds { get; set; }
-
-    /// <summary>
-    /// Filter by shipping status.
-    /// </summary>
-    public int[] ShippingStatusIds { get; set; }
-
-    #endregion
-
     #region Customer
 
     /// <summary>
@@ -150,16 +131,6 @@ public class ExportFilter
     /// Filter by last activity date to.
     /// </summary>
     public DateTime? LastActivityTo { get; set; }
-
-    /// <summary>
-    /// Filter by at least spent amount.
-    /// </summary>
-    public decimal? HasSpentAtLeastAmount { get; set; }
-
-    /// <summary>
-    /// Filter by at least placed orders.
-    /// </summary>
-    public int? HasPlacedAtLeastOrders { get; set; }
 
     #endregion
 

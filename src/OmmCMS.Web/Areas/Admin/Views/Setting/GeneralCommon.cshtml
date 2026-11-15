@@ -586,29 +586,6 @@
                         <span asp-validation-for="PdfSettings.LogoPictureId"></span>
                     </div>
                 </div>
-                <div class="adminRow">
-                    <div class="adminSeparator">
-                        <hr />
-                    </div>
-                </div>
-                <div class="adminRow">
-                    <div class="adminTitle">
-                        <smart-label asp-for="PdfSettings.AttachOrderPdfToOrderPlacedEmail" />
-                    </div>
-                    <div class="adminData">
-                        <setting-editor asp-for="PdfSettings.AttachOrderPdfToOrderPlacedEmail"></setting-editor>
-                        <span asp-validation-for="PdfSettings.AttachOrderPdfToOrderPlacedEmail"></span>
-                    </div>
-                </div>
-                <div class="adminRow">
-                    <div class="adminTitle">
-                        <smart-label asp-for="PdfSettings.AttachOrderPdfToOrderCompletedEmail" />
-                    </div>
-                    <div class="adminData">
-                        <setting-editor asp-for="PdfSettings.AttachOrderPdfToOrderCompletedEmail"></setting-editor>
-                        <span asp-validation-for="PdfSettings.AttachOrderPdfToOrderCompletedEmail"></span>
-                    </div>
-                </div>
             </div>
         </tab>
         <tab sm-title="@T("Admin.Configuration.Settings.GeneralCommon.CompanyInformationSettings")">

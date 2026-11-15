@@ -121,32 +121,4 @@ public class ExportProjection
     public bool OnlyIndividuallyVisibleAssociated { get; set; } = true;
 
     #endregion
-
-    #region Order
-
-    /// <summary>
-    /// Identifier of the new state of order after exporting them.
-    /// </summary>
-    public int OrderStatusChangeId { get; set; }
-
-    /// <summary>
-    /// Gets or sets the new state of orders.
-    /// </summary>
-    [XmlIgnore]
-    public ExportOrderStatusChange OrderStatusChange
-    {
-        get => (ExportOrderStatusChange)OrderStatusChangeId;
-        set => OrderStatusChangeId = (int)value;
-    }
-
-    #endregion
-
-    #region Shopping Cart Item
-
-    /// <summary>
-    /// A value indicating whether to export bundle products.
-    /// </summary>
-    public bool NoBundleProducts { get; set; }
-
-    #endregion
 }

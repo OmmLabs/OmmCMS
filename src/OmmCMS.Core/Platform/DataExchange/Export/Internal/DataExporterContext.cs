@@ -38,11 +38,6 @@ internal class DataExporterContext
     public DataExportResult Result { get; set; } = new();
 
     /// <summary>
-    /// All entity identifiers per export.
-    /// </summary>
-    public List<int> EntityIdsLoaded { get; set; } = [];
-
-    /// <summary>
     /// All entity identifiers per segment (used to avoid exporting products multiple times).
     /// </summary>
     public HashSet<int> EntityIdsPerSegment { get; set; } = [];
@@ -89,7 +84,6 @@ internal class DataExporterContext
     public ProductBatchContext ProductBatchContext { get; set; }
 
     public ProductBatchContext AssociatedProductBatchContext { get; set; }
-    public OrderBatchContext OrderBatchContext { get; set; }
     public ManufacturerBatchContext ManufacturerBatchContext { get; set; }
     public CategoryBatchContext CategoryBatchContext { get; set; }
     public CustomerBatchContext CustomerBatchContext { get; set; }
@@ -103,14 +97,6 @@ internal class DataExporterContext
     #endregion
 
     #region Utilities
-
-    public void SetLoadedEntityIds(IEnumerable<int> ids)
-    {
-        EntityIdsLoaded = EntityIdsLoaded
-            .Union(ids)
-            .Distinct()
-            .ToList();
-    }
 
     public bool Supports(ExportFeatures feature)
     {

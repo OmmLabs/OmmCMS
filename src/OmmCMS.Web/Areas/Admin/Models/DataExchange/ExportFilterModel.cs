@@ -99,25 +99,6 @@ public class ExportFilterModel
     [AdditionalMetadata("pickTime", true)]
     public DateTime? LastActivityTo { get; set; }
 
-    [LocalizedDisplay("*HasSpentAtLeastAmount")]
-    public decimal? HasSpentAtLeastAmount { get; set; }
-
-    [LocalizedDisplay("*HasPlacedAtLeastOrders")]
-    public int? HasPlacedAtLeastOrders { get; set; }
-
-    #endregion
-
-    #region Order
-
-    [LocalizedDisplay("*OrderStatusIds")]
-    public int[] OrderStatusIds { get; set; }
-
-    [LocalizedDisplay("*PaymentStatusIds")]
-    public int[] PaymentStatusIds { get; set; }
-
-    [LocalizedDisplay("*ShippingStatusIds")]
-    public int[] ShippingStatusIds { get; set; }
-
     #endregion
 
     #region Newsletter Subscription

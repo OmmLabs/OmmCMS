@@ -226,11 +226,6 @@ public partial class GeneralCommonSettingsModel : ModelBase
         [UIHint("Media"), AdditionalMetadata("album", "content"), AdditionalMetadata("transientUpload", true)]
         public int LogoPictureId { get; set; }
 
-        [LocalizedDisplay("*AttachOrderPdfToOrderPlacedEmail")]
-        public bool AttachOrderPdfToOrderPlacedEmail { get; set; }
-
-        [LocalizedDisplay("*AttachOrderPdfToOrderCompletedEmail")]
-        public bool AttachOrderPdfToOrderCompletedEmail { get; set; }
     }
 
     [LocalizedDisplay("Admin.Configuration.Settings.GeneralCommon.")]

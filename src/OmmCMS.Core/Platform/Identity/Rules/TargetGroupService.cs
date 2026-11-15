@@ -1,17 +1,11 @@
 ﻿using System.Runtime.CompilerServices;
 
 using OmmCMS.Collections;
-using OmmCMS.Core.Checkout.Orders;
-using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Rules.Impl;
-using OmmCMS.Core.Checkout.Shipping;
-using OmmCMS.Core.Common;
-using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Rules;
 using OmmCMS.Core.Rules.Filters;
-using OmmCMS.Core.Stores;
 
 namespace OmmCMS.Core.Identity.Rules;
 
@@ -19,25 +13,14 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
 {
     private readonly SmartDbContext _db;
     private readonly IRuleService _ruleService;
-    private readonly IStoreContext _storeContext;
-    private readonly ILocalizationService _localizationService;
-
-    private readonly Currency _primaryCurrency;
 
     public TargetGroupService(
         SmartDbContext db,
-        IRuleService ruleService,
-        IStoreContext storeContext,
-        ILocalizationService localizationService,
-        ICurrencyService currencyService)
+        IRuleService ruleService)
         : base(RuleScope.Customer)
     {
         _db = db;
         _ruleService = ruleService;
-        _storeContext = storeContext;
-        _localizationService = localizationService;
-
-        _primaryCurrency = currencyService.PrimaryCurrency;
     }
 
     public Localizer T { get; set; } = NullLocalizer.Instance;
@@ -130,18 +113,6 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
 
     protected override Task<IEnumerable<RuleDescriptor>> LoadDescriptorsAsync()
     {
-        var stores = _storeContext.GetAllStores()
-            .Select(x => new RuleValueSelectListOption { Value = x.Id.ToString(), Text = x.Name })
-            .ToArray();
-
-        var shippingStatus = ((ShippingStatus[])Enum.GetValues(typeof(ShippingStatus)))
-            .Select(x => new RuleValueSelectListOption { Value = ((int)x).ToString(), Text = _localizationService.GetLocalizedEnum(x) })
-            .ToArray();
-
-        var paymentStatus = ((PaymentStatus[])Enum.GetValues(typeof(PaymentStatus)))
-            .Select(x => new RuleValueSelectListOption { Value = ((int)x).ToString(), Text = _localizationService.GetLocalizedEnum(x) })
-            .ToArray();
-
         var descriptors = new List<FilterDescriptor>
         {
             new FilterDescriptor<Customer, bool>(x => x.Active)
@@ -259,123 +230,7 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
                 SelectList = new RemoteRuleValueSelectList(KnownRuleOptionDataSourceNames.TargetGroup)
             },
 
-            new AnyFilterDescriptor<Customer, Order, int>(x => x.Orders, o => o.StoreId)
-            {
-                Name = "OrderInStore",
-                DisplayName = T("Admin.Rules.FilterDescriptor.OrderInStore"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.IntArray,
-                SelectList = new LocalRuleValueSelectList(stores) { Multiple = true }
-            },
-            new FilterDescriptor<Customer, int>(x => x.Orders.Count(o => o.OrderStatusId == 10 || o.OrderStatusId == 20))
-            {
-                Name = "NewOrderCount",
-                DisplayName = T("Admin.Rules.FilterDescriptor.NewOrderCount"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.Int
-            },
-            new FilterDescriptor<Customer, int>(x => x.Orders.Count(o => o.OrderStatusId == 30))
-            {
-                Name = "CompletedOrderCount",
-                DisplayName = T("Admin.Rules.FilterDescriptor.CompletedOrderCount"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.Int
-            },
-            new FilterDescriptor<Customer, int>(x => x.Orders.Count(o => o.OrderStatusId == 40))
-            {
-                Name = "CancelledOrderCount",
-                DisplayName = T("Admin.Rules.FilterDescriptor.CancelledOrderCount"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.Int
-            },
-            new FilterDescriptor<Customer, int?>(x => EF.Functions.DateDiffDay(x.Orders.Max(o => o.CreatedOnUtc), DateTime.UtcNow))
-            {
-                Name = "LastOrderDateDays",
-                DisplayName = T("Admin.Rules.FilterDescriptor.LastOrderDateDays"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.NullableInt
-            },
-            new AnyFilterDescriptor<Customer, Order, decimal>(x => x.Orders, o => o.OrderTotal)
-            {
-                Name = "OrderTotal",
-                DisplayName = T("Admin.Rules.FilterDescriptor.OrderTotal"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.Money
-            },
-            new AnyFilterDescriptor<Customer, Order, decimal>(x => x.Orders, o => o.OrderSubtotalInclTax)
-            {
-                Name = "OrderSubtotalInclTax",
-                DisplayName = T("Admin.Rules.FilterDescriptor.OrderSubtotalInclTax"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.Money
-            },
-            new AnyFilterDescriptor<Customer, Order, decimal>(x => x.Orders, o => o.OrderSubtotalExclTax)
-            {
-                Name = "OrderSubtotalExclTax",
-                DisplayName = T("Admin.Rules.FilterDescriptor.OrderSubtotalExclTax"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.Money
-            },
-            new AnyFilterDescriptor<Customer, Order, int>(x => x.Orders, o => o.ShippingStatusId)
-            {
-                Name = "ShippingStatus",
-                DisplayName = T("Admin.Rules.FilterDescriptor.ShippingStatus"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.Int,
-                SelectList = new LocalRuleValueSelectList(shippingStatus)
-            },
-            new AnyFilterDescriptor<Customer, Order, int>(x => x.Orders, o => o.PaymentStatusId)
-            {
-                Name = "PaymentStatus",
-                DisplayName = T("Admin.Rules.FilterDescriptor.PaymentStatus"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.Int,
-                SelectList = new LocalRuleValueSelectList(paymentStatus)
-            },
-            new AnyFilterDescriptor<Customer, OrderItem, int>(x => x.Orders.SelectMany(o => o.OrderItems), oi => oi.ProductId)
-            {
-                Name = "HasPurchasedProduct",
-                DisplayName = T("Admin.Rules.FilterDescriptor.HasPurchasedProduct"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.IntArray,
-                SelectList = new RemoteRuleValueSelectList("Product") { Multiple = true }
-            },
-            new AllFilterDescriptor<Customer, OrderItem, int>(x => x.Orders.SelectMany(o => o.OrderItems), oi => oi.ProductId)
-            {
-                Name = "HasPurchasedAllProducts",
-                DisplayName = T("Admin.Rules.FilterDescriptor.HasPurchasedAllProducts"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.IntArray,
-                SelectList = new RemoteRuleValueSelectList("Product") { Multiple = true }
-            },
-            new AnyFilterDescriptor<Customer, Order, bool>(x => x.Orders, o => o.AcceptThirdPartyEmailHandOver)
-            {
-                Name = "AcceptThirdPartyEmailHandOver",
-                DisplayName = T("Admin.Rules.FilterDescriptor.AcceptThirdPartyEmailHandOver"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.Boolean
-            },
-            new AnyFilterDescriptor<Customer, Order, string>(x => x.Orders, o => o.CustomerCurrencyCode)
-            {
-                Name = "CurrencyCode",
-                DisplayName = T("Admin.Rules.FilterDescriptor.Currency"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.String,
-                SelectList = new RemoteRuleValueSelectList("Currency")
-            },
-            new AnyFilterDescriptor<Customer, Order, int>(x => x.Orders, o => o.CustomerLanguageId)
-            {
-                Name = "OrderLanguage",
-                DisplayName = T("Admin.Rules.FilterDescriptor.Language"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.Int,
-                SelectList = new RemoteRuleValueSelectList("Language")
-            },
         };
-
-        descriptors
-            .Where(x => x.RuleType == RuleType.Money)
-            .Each(x => x.Metadata["postfix"] = _primaryCurrency.CurrencyCode);
 
         return Task.FromResult(descriptors.Cast<RuleDescriptor>());
     }

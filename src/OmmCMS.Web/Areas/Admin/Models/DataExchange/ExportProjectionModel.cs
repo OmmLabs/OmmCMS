@@ -63,18 +63,4 @@ public class ExportProjectionModel
     public bool OnlyIndividuallyVisibleAssociated { get; set; }
 
     #endregion
-
-    #region Order
-
-    [LocalizedDisplay("*OrderStatusChange")]
-    public int OrderStatusChangeId { get; set; }
-
-    #endregion
-
-    #region Shopping Cart Item
-
-    [LocalizedDisplay("*NoBundleProducts")]
-    public bool NoBundleProducts { get; set; }
-
-    #endregion
 }

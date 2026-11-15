@@ -218,32 +218,6 @@ public class CustomerModel : TabbableModel
         public List<AddressModel> Addresses { get; set; }
     }
 
-    [LocalizedDisplay("Admin.Customers.Customers.Orders.")]
-    public class OrderModel : EntityModelBase
-    {
-        [LocalizedDisplay("*ID")]
-        public override int Id { get; set; }
-
-        [LocalizedDisplay("*OrderStatus")]
-        public string OrderStatus { get; set; }
-
-        [LocalizedDisplay("*PaymentStatus")]
-        public string PaymentStatus { get; set; }
-
-        [LocalizedDisplay("*ShippingStatus")]
-        public string ShippingStatus { get; set; }
-
-        [LocalizedDisplay("*OrderTotal")]
-        public Money OrderTotal { get; set; }
-
-        [LocalizedDisplay("*Store")]
-        public string StoreName { get; set; }
-
-        [LocalizedDisplay("Common.CreatedOn")]
-        public DateTime CreatedOn { get; set; }
-        public string EditUrl { get; set; }
-    }
-
     [LocalizedDisplay("Account.ChangePassword.Fields.")]
     public class ChangePasswordModel : EntityModelBase
     {

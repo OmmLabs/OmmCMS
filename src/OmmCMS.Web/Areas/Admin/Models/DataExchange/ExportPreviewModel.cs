@@ -40,37 +40,6 @@ public class ExportPreviewProductModel : EntityModelBase
     public string AdminComment { get; set; }
 }
 
-[LocalizedDisplay("Admin.Orders.Fields.")]
-public class ExportPreviewOrderModel : EntityModelBase
-{
-    public bool HasNewPaymentNotification { get; set; }
-    public string EditUrl { get; set; }
-
-    [LocalizedDisplay("*OrderNumber")]
-    public string OrderNumber { get; set; }
-
-    [LocalizedDisplay("*OrderStatus")]
-    public string OrderStatus { get; set; }
-
-    [LocalizedDisplay("*PaymentStatus")]
-    public string PaymentStatus { get; set; }
-
-    [LocalizedDisplay("*ShippingStatus")]
-    public string ShippingStatus { get; set; }
-
-    [LocalizedDisplay("Common.CustomerId")]
-    public int CustomerId { get; set; }
-
-    [LocalizedDisplay("*OrderTotal")]
-    public decimal OrderTotal { get; set; }
-
-    [LocalizedDisplay("Common.CreatedOn")]
-    public DateTime CreatedOn { get; set; }
-
-    [LocalizedDisplay("*Store")]
-    public string StoreName { get; set; }
-}
-
 [LocalizedDisplay("Admin.Catalog.Categories.Fields.")]
 public class ExportPreviewCategoryModel : EntityModelBase
 {

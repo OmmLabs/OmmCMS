@@ -10,7 +10,6 @@ using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Search;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Configuration;
@@ -239,22 +238,6 @@ public partial class DataExporter : IDataExporter
                 await Finalize(ctx);
             }
 
-            if (!ctx.IsPreview && ctx.ExecuteContext.Abort != DataExchangeAbortion.Hard)
-            {
-                // Post process entities.
-                if (ctx.EntityIdsLoaded.Any() && ctx.Request.Provider.Value.EntityType == ExportEntityType.Order)
-                {
-                    try
-                    {
-                        await UpdateOrderStatus(ctx, cancelToken);
-                    }
-                    catch (Exception ex)
-                    {
-                        ctx.Log.ErrorsAll(ex);
-                        ctx.Result.LastError = ex.ToAllMessages(true);
-                    }
-                }
-            }
         }
 
         cancelToken.ThrowIfCancellationRequested();
@@ -292,9 +275,6 @@ public partial class DataExporter : IDataExporter
         {
             case ExportEntityType.Product:
                 await data.Cast<Product>().EachAsync(async x => result.Data.Add(await ToDynamic(x, ctx)));
-                break;
-            case ExportEntityType.Order:
-                data.Cast<Order>().Each(x => result.Data.Add(ToDynamic(x, ctx)));
                 break;
             case ExportEntityType.Manufacturer:
                 data.Cast<Manufacturer>().Each(x => result.Data.Add(ToDynamic(x, ctx)));
@@ -352,12 +332,11 @@ public partial class DataExporter : IDataExporter
             ctx.ManufacturerTemplates = await _db.ManufacturerTemplates.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x.ViewPath, ct);
 
             if (provider.EntityType == ExportEntityType.Product ||
-                provider.EntityType == ExportEntityType.Order ||
                 provider.EntityType == ExportEntityType.Customer)
             {
                 ctx.Countries = await _db.Countries.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x, ct);
             }
-            if (provider.EntityType == ExportEntityType.Order || provider.EntityType == ExportEntityType.Customer)
+            if (provider.EntityType == ExportEntityType.Customer)
             {
                 ctx.StateProvinces = await _db.StateProvinces.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x, ct);
             }
@@ -659,10 +638,6 @@ public partial class DataExporter : IDataExporter
                 }
             }
         }
-        else if (entityType == ExportEntityType.Order && ctx.Projection.OrderStatusChange != ExportOrderStatusChange.None)
-        {
-            ctx.SetLoadedEntityIds(entities.Select(x => x.Id));
-        }
 
         ctx.LastId = entities.Last().Id;
         await SetProgress(entities.Count, ctx);
@@ -740,24 +715,6 @@ public partial class DataExporter : IDataExporter
                 .AsNoTracking()
                 .AsNoCaching();
         }
-        else if (entityType == ExportEntityType.Order)
-        {
-            var query = _db.Orders.AsNoTracking();
-
-            if (storeId > 0)
-                query = query.Where(x => x.StoreId == storeId);
-
-            // That's actually wrong because it is a projection and not a filter.
-            if (ctx.Projection.CustomerId.HasValue)
-                query = query.Where(x => x.CustomerId == ctx.Projection.CustomerId.Value);
-
-            if (customerIdsByRolesQuery != null)
-                query = query.Where(x => customerIdsByRolesQuery.Contains(x.CustomerId));
-
-            result = query
-                .ApplyAuditDateFilter(f.CreatedFrom, f.CreatedTo)
-                .ApplyStatusFilter(f.OrderStatusIds, f.PaymentStatusIds, f.ShippingStatusIds);
-        }
         else if (entityType == ExportEntityType.Manufacturer)
         {
             result = _db.Manufacturers.AsNoTracking();
@@ -801,28 +758,6 @@ public partial class DataExporter : IDataExporter
 
             if (customerIdsByRolesQuery != null)
                 query = query.Where(x => customerIdsByRolesQuery.Contains(x.Id));
-
-            if (f.HasSpentAtLeastAmount.HasValue)
-            {
-                var subQuery =
-                    from o in _db.Orders.AsNoTracking()
-                    group o by o.CustomerId into grp
-                    where grp.Sum(y => y.OrderTotal) >= f.HasSpentAtLeastAmount.Value
-                    select grp.Key;
-
-                query = query.Where(x => subQuery.Contains(x.Id));
-            }
-
-            if (ctx.Filter.HasPlacedAtLeastOrders.HasValue)
-            {
-                var subQuery =
-                    from o in _db.Orders.AsNoTracking()
-                    group o by o.CustomerId into grp
-                    where grp.Count() >= f.HasPlacedAtLeastOrders.Value
-                    select grp.Key;
-
-                query = query.Where(x => subQuery.Contains(x.Id));
-            }
 
             result = query;
         }
@@ -977,14 +912,6 @@ public partial class DataExporter : IDataExporter
                 ctx.ProductBatchContext.Clear();
             }
 
-            if (ctx.OrderBatchContext != null)
-            {
-                Detach(x => x is Order || x is Address || x is GenericAttribute || x is Customer ||
-                    x is OrderItem || x is RewardPointsHistory || x is ProductVariantAttributeCombination);
-
-                ctx.OrderBatchContext.Clear();
-            }
-
             if (ctx.CategoryBatchContext != null)
             {
                 Detach(x => x is Category || x is MediaFile || x is ProductCategory);
@@ -1088,31 +1015,6 @@ public partial class DataExporter : IDataExporter
             ctx.ExecuteContext.DataSegmenter = new ExportDataSegmenter<Product>
             (
                 () => LoadEntities<Product>(ctx),
-                dataLoaded,
-                entity => Convert(entity, ctx),
-                offset, PageSize, limit, recordsPerSegment, totalRecords
-            );
-        }
-        else if (entityType == ExportEntityType.Order)
-        {
-            async Task dataLoaded(ICollection<Order> entities)
-            {
-                ctx.OrderBatchContext = new OrderBatchContext(entities, _services);
-
-                await ctx.OrderBatchContext.OrderItems.LoadAllAsync();
-
-                var orderItems = ctx.OrderBatchContext.OrderItems.SelectMany(x => x.Value);
-                var products = orderItems.Select(x => x.Product);
-
-                ctx.ProductBatchContext = _productService.CreateProductBatchContext(products, ctx.Store, null, includeHidden);
-
-                ctx.TranslationsPerPage[nameof(Product)] = await CreateTranslationCollection(nameof(Product), products);
-                ctx.UrlRecordsPerPage[nameof(Product)] = await CreateUrlRecordCollection(nameof(Product), products);
-            };
-
-            ctx.ExecuteContext.DataSegmenter = new ExportDataSegmenter<Order>
-            (
-                () => LoadEntities<Order>(ctx),
                 dataLoaded,
                 entity => Convert(entity, ctx),
                 offset, PageSize, limit, recordsPerSegment, totalRecords
@@ -1440,33 +1342,6 @@ public partial class DataExporter : IDataExporter
         //    SendManually = true
         //});
         //await _db.SaveChangesAsync();
-    }
-
-    private async Task UpdateOrderStatus(DataExporterContext ctx, CancellationToken cancelToken)
-    {
-        var num = 0;
-        int? newOrderStatusId = null;
-
-        if (ctx.Projection.OrderStatusChange == ExportOrderStatusChange.Processing)
-        {
-            newOrderStatusId = (int)OrderStatus.Processing;
-        }
-        else if (ctx.Projection.OrderStatusChange == ExportOrderStatusChange.Complete)
-        {
-            newOrderStatusId = (int)OrderStatus.Complete;
-        }
-
-        if (newOrderStatusId.HasValue)
-        {
-            foreach (var chunk in ctx.EntityIdsLoaded.Chunk(200))
-            {
-                num += await _db.Orders
-                    .Where(x => chunk.Contains(x.Id))
-                    .ExecuteUpdateAsync(setter => setter.SetProperty(o => o.OrderStatusId, o => newOrderStatusId.Value), cancelToken);
-            }
-
-            ctx.Log.Info($"Updated order status for {num} order(s).");
-        }
     }
 
     private DataExporterContext CreateExporterContext(DataExportRequest request, bool isPreview, CancellationToken cancelToken)

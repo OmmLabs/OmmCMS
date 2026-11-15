@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Checkout.Orders;
-using OmmCMS.Core.Checkout.Orders.Reporting;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common;

@@ -9,8 +9,7 @@ public enum ExportEntityType
     Category,
     Manufacturer,
     Customer,
-    Order,
-    NewsletterSubscription
+    NewsletterSubscription = 5
 }
 
 /// <summary>
@@ -134,14 +133,4 @@ public enum ExportFeatures
     /// A value indicating whether to provide extra data units for related data.
     /// </summary>
     UsesRelatedDataUnits = 1 << 13
-}
-
-/// <summary>
-/// Possible order status change after exporting orders.
-/// </summary>
-public enum ExportOrderStatusChange
-{
-    None = 0,
-    Processing,
-    Complete
 }
