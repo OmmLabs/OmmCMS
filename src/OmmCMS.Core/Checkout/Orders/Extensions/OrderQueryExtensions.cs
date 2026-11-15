@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Orders.Reporting;
 using OmmCMS.Core.Checkout.Payment;
@@ -35,19 +34,6 @@ public static class OrderQueryExtensions
         return query
             .Include(x => x.ShippingAddress.StateProvince)
             .Include(x => x.ShippingAddress.Country);
-    }
-
-    /// <summary>
-    /// Includes the gift card history graph for eager loading.
-    /// </summary>
-    public static IIncludableQueryable<Order, GiftCard> IncludeGiftCardHistory(this IQueryable<Order> query)
-    {
-        Guard.NotNull(query);
-
-        return query
-            .AsSplitQuery()
-            .Include(x => x.GiftCardUsageHistory)
-            .ThenInclude(x => x.GiftCard);
     }
 
     /// <summary>

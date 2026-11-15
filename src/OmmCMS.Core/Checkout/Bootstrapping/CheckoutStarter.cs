@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using OmmCMS.Core.Checkout.Attributes;
 using OmmCMS.Core.Checkout.Cart;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Payment.Rules;
@@ -35,7 +34,6 @@ internal sealed class CheckoutStarter : StarterBase
         builder.RegisterType<CheckoutAttributeFormatter>().As<ICheckoutAttributeFormatter>().InstancePerLifetimeScope();
         builder.RegisterType<ShoppingCartValidator>().As<IShoppingCartValidator>().InstancePerLifetimeScope();
         builder.RegisterType<ShoppingCartService>().As<IShoppingCartService>().InstancePerLifetimeScope();
-        builder.RegisterType<GiftCardService>().As<IGiftCardService>().InstancePerLifetimeScope();
         builder.RegisterType<ShippingService>().As<IShippingService>().InstancePerLifetimeScope();
         builder.RegisterType<PaymentService>().As<IPaymentService>().InstancePerLifetimeScope();
         builder.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();

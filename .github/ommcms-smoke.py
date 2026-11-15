@@ -580,9 +580,19 @@ try:
             "Checkout/Cart/Domain/ShoppingCartSubTotal.cs",
             "Checkout/Cart/Domain/ShoppingCartShippingTotal.cs",
             "Checkout/Cart/Domain/ShoppingCartLineItem.cs",
+            "Checkout/GiftCards/Domain/GiftCard.cs",
+            "Checkout/GiftCards/Domain/GiftCardUsageHistory.cs",
+            "Checkout/GiftCards/Domain/AppliedGiftCard.cs",
+            "Checkout/GiftCards/Services/GiftCardService.cs",
+            "Checkout/GiftCards/Services/IGiftCardService.cs",
+            "Checkout/Rules/Impl/GiftCardRule.cs",
         ):
             assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
-        print("Core stock notification and storefront variant binding extraction passed.")
+        for language in ("en", "de"):
+            template = Path("App_Data/EmailTemplates") / language / "GiftCard.Notification.xml"
+            assert not (repo / "src/OmmCMS.Web" / template).exists(), f"Retired template remains: {template}"
+            assert not (root / template).exists(), f"Retired template was published: {template}"
+        print("Core commerce source extraction passed.")
     if "--presentation-trimmed" in sys.argv:
         verify_presentation_extraction()
     if "--residual-commerce-trimmed" in sys.argv:
@@ -640,6 +650,8 @@ try:
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('recurringpayment', 'recurringpayments', 'recurringpaymenthistory', 'recurringpaymenthistories')") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('IsRecurring', 'RecurringCycleLength', 'RecurringCyclePeriodId', 'RecurringTotalCycles')") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Order') WHERE name='SubscriptionTransactionId'") == [0]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('giftcard', 'giftcards', 'giftcardusagehistory', 'giftcardusagehistories')") == [0]
+        assert rows("SELECT COUNT(*) FROM MessageTemplate WHERE Name = 'GiftCard.Notification'") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name)='newslettersubscription'") == [1]
         topics = set(rows("SELECT SystemName FROM Topic"))
         assert {"HomePageText", "AboutUs", "ContactUs"} <= topics

@@ -1026,7 +1026,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Legt fest, wie viele Stunden nach Abschluss einer Zahlung ein fehlender Auftrag automatisch wiederhergestellt werden darf. Ist die Zahlung älter als der angegebene Wert, wird keine automatische Wiederherstellung mehr durchgeführt. 0 bedeutet unbegrenztes Alter. Standard ist 24 Stunden.");
 
         builder.AddOrUpdate("Admin.Rules.FilterDescriptor.DiscountApplied", "Discount code applied", "Rabattcode angewendet");
-        builder.AddOrUpdate("Admin.Rules.FilterDescriptor.GiftCardApplied", "Gift card applied", "Geschenkgutschein angewendet");
     }
 
     private static void MigrateCommonResources(LocaleResourcesBuilder builder)

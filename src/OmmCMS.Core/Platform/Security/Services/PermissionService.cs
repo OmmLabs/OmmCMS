@@ -32,7 +32,6 @@ public partial class PermissionService : AsyncDbSaveHook<CustomerRole>, IPermiss
         { "impersonate", "Admin.Customers.Customers.Impersonate" },
         { "role", "Admin.Customers.CustomerRoles" },
         { "order", "Admin.Orders" },
-        { "giftcard", "Admin.GiftCards" },
         { "notify", "Common.Notify" },
         { "returncase", "Admin.ReturnRequests" },
         { "accept", "Admin.ReturnRequests.Accept" },

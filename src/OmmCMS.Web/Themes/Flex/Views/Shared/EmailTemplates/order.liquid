@@ -164,16 +164,6 @@
 				</tr>
 				{% endif %}
 				
-				<!-- Gift Cards -->
-				{% if totals.GiftCardUsage %}
-					{% for gc in totals.GiftCardUsage %}
-						<tr>
-							<td class="text-sm" width="60%" style="padding-top: 5px" nowrap>{{ gc.GiftCard }}:</td>
-							<td class="text-sm text-right" width="40%" style="padding-top: 5px" nowrap>{{ gc.UsedAmount }}</td>
-						</tr>
-					{% endfor %}
-				{% endif %}
-				
 				<!-- Redeemed Reward Points-->
 				             
 				{% if totals.RedeemedRewardPoints %}
@@ -202,13 +192,3 @@
 </table>
 
 {% zone 'order_summary_after' %}
-
-
-
-
-
-
-
-
-
-

@@ -7162,24 +7162,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Order.DisplayOrdersOfAllStores.Hint">
 		<Value>Legt fest, ob dem Kunden die Aufträge aller Shops angezeigt werden sollen. Ist diese Option deaktiviert, so werden nur die Aufträge des aktuellen Shops angezeigt.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.GiftCards_Activated">
-		<Value>Geschenkgutschein ist aktiviert, wenn Auftragsstatus...</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.GiftCards_Activated.Hint">
-		<Value>Legt den Auftragsstatus einer Bestellung fest, bei dem in der Bestellung enthaltene Geschenkgutscheine automatisch aktiviert werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.GiftCards_Activated.Pending">
-		<Value>Der Auftragsstatus konnte nicht auf "in Bearbeitung" gesetzt werden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.GiftCards_Deactivated">
-		<Value>Geschenkgutschein wird deaktiviert, wenn Auftragsstatus...</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.GiftCards_Deactivated.Hint">
-		<Value>Geschenkgutscheine sind deaktiviert, wenn der Auftragsstatus ist …</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.GiftCards_Deactivated.Pending">
-		<Value>Der Auftragsstaus konnte nicht auf "unerledigt" gesetzt werden</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Order.IsReOrderAllowed">
 		<Value>"Erneut bestellen" aktiviert</Value>
 	</LocaleResource>
@@ -10876,138 +10858,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Download.UseDownloadURL">
 		<Value>Benutze Download-URL</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards">
-		<Value>Geschenkgutscheine</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Added">
-		<Value>Der neue Geschenkgutschein wurde hinzugefügt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.AddNew">
-		<Value>Geschenkgutschein hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Deleted">
-		<Value>Der Geschenkgutschein wurde gelöscht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.EditGiftCardDetails">
-		<Value>Geschenkgutscheindetails</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.Amount">
-		<Value>Gesamtbetrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.Amount.Hint">
-		<Value>Wert des Geschenkgutscheines</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.CreatedOn.Hint">
-		<Value>Gibt an, an welchem Datum der Geschenkgutschein erstellt wurde.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.GiftCardCouponCode">
-		<Value>Gutscheinnummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.GiftCardCouponCode.Generate">
-		<Value>Gutscheinnummer generieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.GiftCardCouponCode.Hint">
-		<Value>Gutscheinnummer. Kann während des Checkouts eingelöst werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.GiftCardType">
-		<Value>Typ des Geschenkgutscheines</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.GiftCardType.Hint">
-		<Value>Gibt den Typ des Geschenkgutscheines an.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.IsGiftCardActivated">
-		<Value>Aktiviert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.IsGiftCardActivated.Hint">
-		<Value>Gibt an, ob der Geschenkgutschein aktiviert und einlösbar ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.IsRecipientNotified">
-		<Value>Empfänger ist benachrichtigt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.IsRecipientNotified.Hint">
-		<Value>Empfänger ist benachrichtigt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.IsRecipientNotified.Notify">
-		<Value>Empfänger benachrichtigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.Language">
-		<Value>Sprache</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.Language.Hint">
-		<Value>Legt die Sprache des Nachrichteninhalts fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.Message">
-		<Value>Nachricht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.Message.Hint">
-		<Value>Nachricht eingeben.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.Order">
-		<Value>Auftrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.Order.Hint">
-		<Value>Der Geschenkgutschein wurde mit diesem Auftrag gekauft.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.RecipientEmail">
-		<Value>E-Mail des Empfängers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.RecipientEmail.Hint">
-		<Value>E-Mail Adresse des Empfängers.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.RecipientName">
-		<Value>Name des Empfängers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.RecipientName.Hint">
-		<Value>Name des Empfängers.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.RemainingAmount">
-		<Value>Restbetrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.RemainingAmount.Hint">
-		<Value>Der aktuelle Restbetrag des Geschenkgutscheines.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.SenderEmail">
-		<Value>E-Mail des Absenders</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.SenderEmail.Hint">
-		<Value>E-Mail Adresse des Absenders.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.SenderName">
-		<Value>Name des Absenders</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Fields.SenderName.Hint">
-		<Value>Name des Absenders.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.History">
-		<Value>Bisherige Verwendung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.History.Order">
-		<Value>Auftrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.History.UsedValue">
-		<Value>Verbrauchter Betrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.List.Activated">
-		<Value>Status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.List.Activated.Hint">
-		<Value>Suche durch Status des Geschenkgutscheines, z.B. eingelöst.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.List.CouponCode">
-		<Value>Gutscheinnummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.List.CouponCode.Hint">
-		<Value>Gutscheinnummer. Freilassen um alle Gutscheine anzuzeigen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.RecipientEmailInvalid">
-		<Value>Die E-Mail Adresse des Empfängers ist ungültig.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.SenderEmailInvalid">
-		<Value>Die E-Mail Adresse des Absenders ist ungültig.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.GiftCards.Updated">
-		<Value>Der Geschenkgutschein wurde erfolgreich bearbeitet.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Header.Account">
 		<Value>Account</Value>
 	</LocaleResource>
@@ -11536,12 +11386,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Orders.Fields.EditOrderTotals">
 		<Value>Auftragssumme bearbeiten</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Fields.GiftCardInfo">
-		<Value>Geschenkgutschein</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Fields.GiftCardInfo.Hint">
-		<Value>Verwendeter Geschenkgutschein</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Fields.ID">
 		<Value>Auftrags-ID</Value>
 	</LocaleResource>
@@ -11848,9 +11692,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Orders.OrderItem.AutoUpdate.UpdateTotals.Hint">
 		<Value>Legt fest, ob die Auftragssummen angepasst werden sollen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderItem.CannotDeleteAssociatedGiftCards">
-		<Value>Die Auftragsposition kann nicht gelöscht werden, weil ihr Geschenkgutscheine zugeordnet sind. Bitte löschen Sie zunächst die Geschenkgutscheine.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.OrderNotes">
 		<Value>Auftragsnotizen</Value>
 	</LocaleResource>
@@ -11976,9 +11817,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Products.Edit.InclTax">
 		<Value>Inkl. Steuer:</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Products.GiftCards">
-		<Value>Geschenkgutschein(e)</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Products.License">
 		<Value>Lizenzdatei (optional):</Value>
@@ -17241,9 +17079,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Media.Product.ImageLinkTitleFormat">
 		<Value>Zeige Details für {0}</Value>
 	</LocaleResource>
-	<LocaleResource Name="Messages.Order.GiftCardInfo">
-		<Value>Geschenkgutschein ({0}):</Value>
-	</LocaleResource>
 	<LocaleResource Name="Messages.Order.OrderTotal">
 		<Value>Gesamtauftragswert</Value>
 	</LocaleResource>
@@ -17462,9 +17297,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="order.getpdfinvoice">
 		<Value>Bestellung als PDF</Value>
-	</LocaleResource>
-	<LocaleResource Name="Order.GiftCardInfo">
-		<Value>Geschenkgutschein ({0})</Value>
 	</LocaleResource>
 	<LocaleResource Name="Order.Notes">
 		<Value>Notizen</Value>

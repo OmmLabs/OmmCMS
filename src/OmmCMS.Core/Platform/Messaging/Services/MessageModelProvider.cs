@@ -10,7 +10,6 @@ using OmmCMS.Core.Catalog;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Checkout.Cart;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
@@ -236,9 +235,6 @@ public partial class MessageModelProvider : IMessageModelProvider
                 modelPart = await CreateModelPartAsync(x, messageContext);
                 break;
             case ReturnCase x:
-                modelPart = await CreateModelPartAsync(x, messageContext);
-                break;
-            case GiftCard x:
                 modelPart = await CreateModelPartAsync(x, messageContext);
                 break;
             case NewsletterSubscription x:
@@ -613,45 +609,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             ["BillingAddress"] = await CreateModelPartAsync(part.BillingAddress ?? new Address(), messageContext),
             ["ShippingAddress"] = part.ShippingAddress == null ? null : await CreateModelPartAsync(part.ShippingAddress, messageContext),
         };
-
-        await _helper.PublishModelPartCreatedEventAsync(part, m);
-
-        return m;
-    }
-
-    protected virtual async Task<object> CreateModelPartAsync(GiftCard part, MessageContext messageContext)
-    {
-        Guard.NotNull(messageContext);
-        Guard.NotNull(part);
-
-        var m = new Dictionary<string, object>
-        {
-            { "Id", part.Id },
-            { "SenderName", part.SenderName.NullEmpty() },
-            { "SenderEmail", part.SenderEmail.NullEmpty() },
-            { "RecipientName", part.RecipientName.NullEmpty() },
-            { "RecipientEmail", part.RecipientEmail.NullEmpty() },
-            { "Amount", _helper.FormatPrice(part.Amount, messageContext) },
-            { "CouponCode", part.GiftCardCouponCode.NullEmpty() }
-        };
-
-        // Message
-        var message = (string)null;
-        if (part.Message.HasValue())
-        {
-            message = HtmlUtility.StripTags(part.Message);
-        }
-        m["Message"] = message;
-
-        // RemainingAmount
-        Money remainingAmount = new();
-        var order = part?.PurchasedWithOrderItem?.Order;
-        if (order != null)
-        {
-            var remainingAmountBase = await _services.Resolve<IGiftCardService>().GetRemainingAmountAsync(part);
-            remainingAmount = _helper.FormatPrice(remainingAmountBase.Amount, order, messageContext);
-        }
-        m["RemainingAmount"] = remainingAmount;
 
         await _helper.PublishModelPartCreatedEventAsync(part, m);
 

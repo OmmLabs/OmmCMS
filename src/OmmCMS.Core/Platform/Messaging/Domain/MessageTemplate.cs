@@ -25,7 +25,7 @@ public partial class MessageTemplate : EntityWithAttributes, ILocalizedEntity, I
     public string ReplyTo { get; set; }
 
     /// <summary>
-    /// A comma separated list of required model types (e.g.: Product, Order, Customer, GiftCard).
+    /// A comma separated list of required model types (e.g.: Product, Order, Customer).
     /// </summary>
     [StringLength(500)]
     public string ModelTypes { get; set; }

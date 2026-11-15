@@ -82,16 +82,6 @@ public class OrderSettings : ISettings
     public int NumberOfDaysReturnRequestAvailable { get; set; } = 365;
 
     /// <summary>
-    /// Gets or sets the order status when gift cards are activated.
-    /// </summary>
-    public int GiftCards_Activated_OrderStatusId { get; set; }
-
-    /// <summary>
-    /// Gets or sets the order status when gift cards are deactivated.
-    /// </summary>
-    public int GiftCards_Deactivated_OrderStatusId { get; set; }
-
-    /// <summary>
     /// Gets or sets an order placement interval in seconds (prevent 2 orders being placed within an X seconds time frame).
     /// </summary>
     public int MinimumOrderPlacementInterval { get; set; } = 30;

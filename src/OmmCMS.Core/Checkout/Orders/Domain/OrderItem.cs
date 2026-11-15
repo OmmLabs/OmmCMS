@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.GiftCards;
 
 namespace OmmCMS.Core.Checkout.Orders;
 
@@ -189,15 +188,5 @@ public partial class OrderItem : BaseEntity, IAttributeAware
     {
         get => _product ?? LazyLoader.Load(this, ref _product);
         set => _product = value;
-    }
-
-    private ICollection<GiftCard> _associatedGiftCards;
-    /// <summary>
-    /// Gets or sets the associated gift card
-    /// </summary>
-    public ICollection<GiftCard> AssociatedGiftCards
-    {
-        get => _associatedGiftCards ?? LazyLoader.Load(this, ref _associatedGiftCards) ?? (_associatedGiftCards ??= new HashSet<GiftCard>());
-        protected set => _associatedGiftCards = value;
     }
 }

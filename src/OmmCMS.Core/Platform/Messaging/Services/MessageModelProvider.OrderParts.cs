@@ -3,7 +3,6 @@ using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Checkout.Cart;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
@@ -116,7 +115,6 @@ public partial class MessageModelProvider
         Guard.NotNull(order);
 
         var language = messageContext.Language;
-        var giftCardService = _services.Resolve<IGiftCardService>();
         var orderService = _services.Resolve<IOrderService>();
         var taxService = _services.Resolve<ITaxService>();
         var taxSettings = await _services.SettingFactory.LoadSettingsAsync<TaxSettings>(messageContext.Store.Id);
@@ -203,19 +201,6 @@ public partial class MessageModelProvider
                 Value = _helper.FormatPrice(x.Value, order, messageContext)
             };
         }).ToArray();
-
-        // Gift Cards
-        m.GiftCardUsage = order.GiftCardUsageHistory.Count == 0 ? null : await order.GiftCardUsageHistory.SelectAwait(async x =>
-        {
-            var remainingAmount = await giftCardService.GetRemainingAmountAsync(x.GiftCard);
-
-            return new
-            {
-                GiftCard = T("Order.GiftCardInfo", language.Id, x.GiftCard.GiftCardCouponCode).ToString(),
-                UsedAmount = _helper.FormatPrice(-x.UsedValue, order, messageContext),
-                RemainingAmount = _helper.FormatPrice(remainingAmount.Amount, order, messageContext)
-            };
-        }).ToArrayAsync();
 
         // Reward Points
         m.RedeemedRewardPoints = order.RedeemedRewardPointsEntry == null ? null : new

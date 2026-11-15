@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
 using OmmCMS.Core.Catalog.Discounts;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Checkout.Rules;
 using OmmCMS.Core.Checkout.Rules.Impl;
 using OmmCMS.Core.Identity;
@@ -67,41 +66,6 @@ public class CartRuleTests : ServiceTestBase
         {
             discountService.VerifyNoOtherCalls();
         }
-    }
-
-    [TestCase(false, false, true)]
-    [TestCase(false, true, false)]
-    [TestCase(true, false, false)]
-    [TestCase(true, true, true)]
-    public async Task Matches_gift_card_rule(bool hasValidGiftCard, bool value, bool expectedResult)
-    {
-        var customer = new Customer { Id = 1 };
-        var store = new Store { Id = 2 };   
-        var giftCards = hasValidGiftCard
-            ? new List<AppliedGiftCard> { new() }
-            : [];
-
-        var giftCardService = new Mock<IGiftCardService>();
-        giftCardService
-            .Setup(x => x.GetValidGiftCardsAsync(store.Id, customer))
-            .ReturnsAsync(giftCards);
-
-        var rule = new GiftCardRule(giftCardService.Object);
-        var context = new CartRuleContext(() => 0)
-        {
-            Customer = customer,
-            Store = store
-        };
-        var expression = new RuleExpression
-        {
-            Operator = RuleOperator.IsEqualTo,
-            Value = value
-        };
-
-        var result = await rule.MatchAsync(context, expression);
-
-        result.ShouldEqual(expectedResult);
-        giftCardService.Verify(x => x.GetValidGiftCardsAsync(store.Id, customer), Times.Once);
     }
 
     private Customer CreateTestCustomer()

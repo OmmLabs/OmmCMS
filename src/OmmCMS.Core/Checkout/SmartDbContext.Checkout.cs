@@ -1,7 +1,6 @@
 ﻿
 using OmmCMS.Core.Checkout.Attributes;
 using OmmCMS.Core.Checkout.Cart;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
@@ -15,8 +14,6 @@ public partial class SmartDbContext
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<OrderNote> OrderNotes { get; set; }
     public DbSet<TaxCategory> TaxCategories { get; set; }
-    public DbSet<GiftCard> GiftCards { get; set; }
-    public DbSet<GiftCardUsageHistory> GiftCardUsageHistory { get; set; }
     public DbSet<CheckoutAttribute> CheckoutAttributes { get; set; }
     public DbSet<CheckoutAttributeValue> CheckoutAttributeValues { get; set; }
     public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }

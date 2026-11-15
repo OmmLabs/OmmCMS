@@ -44,12 +44,6 @@ public class OrderSettingsModel : TabbableModel, ILocalizedModel<OrderSettingsLo
     [LocalizedDisplay("*NumberOfDaysReturnRequestAvailable")]
     public int NumberOfDaysReturnRequestAvailable { get; set; }
 
-    [LocalizedDisplay("*GiftCards_Activated")]
-    public int? GiftCardsActivatedOrderStatusId { get; set; }
-
-    [LocalizedDisplay("*GiftCards_Deactivated")]
-    public int? GiftCardsDeactivatedOrderStatusId { get; set; }
-
     [LocalizedDisplay("*MaxMessageOrderAgeInDays")]
     public int MaxMessageOrderAgeInDays { get; set; }
 
@@ -89,12 +83,6 @@ public partial class OrderSettingsValidator : SettingModelValidator<OrderSetting
 {
     public OrderSettingsValidator(Localizer T)
     {
-        RuleFor(x => x.GiftCardsActivatedOrderStatusId).NotEqual((int)OrderStatus.Pending)
-            .WithMessage(T("Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Awarded.Pending"));
-
-        RuleFor(x => x.GiftCardsDeactivatedOrderStatusId).NotEqual((int)OrderStatus.Pending)
-            .WithMessage(T("Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Canceled.Pending"));
-
         RuleFor(x => x.OrderListPageSize).GreaterThan(0);
         RuleFor(x => x.OrderTotalMaximum).GreaterThan(x => x.OrderTotalMinimum ?? 0);
         RuleFor(x => x.OrderTotalMinimum).GreaterThan(0);

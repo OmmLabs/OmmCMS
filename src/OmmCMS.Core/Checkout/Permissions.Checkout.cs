@@ -12,16 +12,6 @@ public static partial class Permissions
         public const string EditItem = "order.editorderitem";
         public const string EditShipment = "order.editshipment";
 
-        public static class GiftCard
-        {
-            public const string Self = "order.giftcard";
-            public const string Read = "order.giftcard.read";
-            public const string Update = "order.giftcard.update";
-            public const string Create = "order.giftcard.create";
-            public const string Delete = "order.giftcard.delete";
-            public const string Notify = "order.giftcard.notify";
-        }
-
         public static class ReturnCase
         {
             public const string Self = "order.returncase";

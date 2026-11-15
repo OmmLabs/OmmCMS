@@ -26,11 +26,6 @@
     "enabled": true
   },
   {
-    "systemKeyword": "AddNewGiftCard",
-    "name": "Add a new gift card",
-    "enabled": true
-  },
-  {
     "systemKeyword": "AddNewManufacturer",
     "name": "Add a new manufacturer",
     "enabled": true
@@ -83,11 +78,6 @@
   {
     "systemKeyword": "DeleteDiscount",
     "name": "Delete a discount",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "DeleteGiftCard",
-    "name": "Delete a gift card",
     "enabled": true
   },
   {
@@ -148,11 +138,6 @@
   {
     "systemKeyword": "EditDiscount",
     "name": "Edit a discount",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "EditGiftCard",
-    "name": "Edit a gift card",
     "enabled": true
   },
   {

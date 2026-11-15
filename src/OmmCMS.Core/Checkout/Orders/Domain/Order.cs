@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OmmCMS.Core.Catalog.Discounts;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Checkout.Tax;
@@ -538,16 +537,6 @@ public partial class Order : EntityWithAttributes, IAuditable, ISoftDeletable
     {
         get => _discountUsageHistory ?? LazyLoader.Load(this, ref _discountUsageHistory) ?? (_discountUsageHistory ??= new HashSet<DiscountUsageHistory>());
         protected set => _discountUsageHistory = value;
-    }
-
-    private ICollection<GiftCardUsageHistory> _giftCardUsageHistory;
-    /// <summary>
-    /// Gets or sets gift card usage history (gift card that were used with this order)
-    /// </summary>
-    public ICollection<GiftCardUsageHistory> GiftCardUsageHistory
-    {
-        get => _giftCardUsageHistory ?? LazyLoader.Load(this, ref _giftCardUsageHistory) ?? (_giftCardUsageHistory ??= new HashSet<GiftCardUsageHistory>());
-        protected set => _giftCardUsageHistory = value;
     }
 
     private ICollection<OrderNote> _orderNotes;

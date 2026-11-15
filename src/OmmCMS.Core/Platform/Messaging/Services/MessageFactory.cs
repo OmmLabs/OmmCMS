@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
@@ -494,7 +493,6 @@ public partial class MessageFactory : IMessageFactory
             { nameof(Campaign), () => GetRandomEntity<Campaign>(x => true) },
             { nameof(ReturnCase), () => GetRandomEntity<ReturnCase>(x => true) },
             { nameof(OrderItem), () => GetRandomEntity<OrderItem>(x => !x.Order.Deleted && !x.Product.Deleted) },
-            { nameof(GiftCard), () => GetRandomEntity<GiftCard>(x => true) },
             { nameof(WalletHistory), () => GetRandomEntity<WalletHistory>(x => true) }
         };
 

@@ -112,7 +112,6 @@ public partial class OrderModel : EditOrderModel
     [ValidateNever]
     public AddressModel ShippingAddress { get; set; }
 
-    public List<GiftCard> GiftCards { get; set; }
     public List<OrderItemModel> Items { get; set; }
     public List<DiscountInfoModel> AppliedDiscounts { get; set; }
 
@@ -125,14 +124,6 @@ public partial class OrderModel : EditOrderModel
     {
         public string Rate { get; set; }
         public string Value { get; set; }
-    }
-
-    public class GiftCard : ModelBase
-    {
-        [LocalizedDisplay("Admin.Orders.Fields.GiftCardInfo")]
-        public string CouponCode { get; set; }
-        public string Amount { get; set; }
-        public int GiftCardId { get; set; }
     }
 
     public class ReturnCaseModel : EntityModelBase
@@ -259,7 +250,6 @@ public partial class OrderModel : EditOrderModel
 
         public List<BundleItemModel> BundleItems { get; set; } = [];
         public List<ReturnCaseModel> ReturnCases { get; set; } = [];
-        public List<int> PurchasedGiftCardIds { get; set; } = [];
 
         public bool CanReturnItems
             => ReturnCases.IsNullOrEmpty() || ReturnCases.Sum(x => x.Quantity) < Quantity;

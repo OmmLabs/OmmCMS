@@ -17,7 +17,7 @@ public interface IMessageTemplateService
     /// <summary>
     /// Loads a single message template from file and deserializes its XML content.
     /// </summary>
-    /// <param name="templateName">Name of template without extension, e.g. 'GiftCard.Notification'</param>
+    /// <param name="templateName">Name of template without extension, e.g. 'System.ContactUs'</param>
     /// <param name="culture">Language ISO code</param>
     /// <param name="rootPath">The application root path of template to load, e.g. "/Modules/MyModule/App_Data/EmailTemplates". Default is "/App_Data/EmailTemplates".</param>
     /// <returns>Deserialized template xml</returns>

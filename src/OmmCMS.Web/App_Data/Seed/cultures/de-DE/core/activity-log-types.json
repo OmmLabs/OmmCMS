@@ -14,9 +14,6 @@
   "AddNewDiscount": {
     "name": "Neuer Rabatt hinzugefügt"
   },
-  "AddNewGiftCard": {
-    "name": "Neuer Geschenkgutschein hinzugefügt"
-  },
   "AddNewManufacturer": {
     "name": "Neuer Hersteller hinzugefügt"
   },
@@ -49,9 +46,6 @@
   },
   "DeleteDiscount": {
     "name": "Rabatt gelöscht"
-  },
-  "DeleteGiftCard": {
-    "name": "Geschenkgutschein gelöscht"
   },
   "DeleteManufacturer": {
     "name": "Hersteller gelöscht"
@@ -88,9 +82,6 @@
   },
   "EditDiscount": {
     "name": "Rabatt bearbeitet"
-  },
-  "EditGiftCard": {
-    "name": "Geschenkgutschein bearbeitet"
   },
   "EditManufacturer": {
     "name": "Hersteller bearbeitet"
