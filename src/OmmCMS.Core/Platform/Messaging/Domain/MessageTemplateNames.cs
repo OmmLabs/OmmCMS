@@ -6,15 +6,8 @@ public class MessageTemplateNames
     public const string CustomerWelcome = "Customer.WelcomeMessage";
     public const string CustomerEmailValidation = "Customer.EmailValidationMessage";
     public const string CustomerPasswordRecovery = "Customer.PasswordRecovery";
-    public const string OrderPlacedStoreOwner = "OrderPlaced.StoreOwnerNotification";
-    public const string OrderPlacedCustomer = "OrderPlaced.CustomerNotification";
-    public const string OrderCompletedCustomer = "OrderCompleted.CustomerNotification";
-    public const string OrderCancelledCustomer = "OrderCancelled.CustomerNotification";
     public const string NewsletterSubscriptionActivation = "NewsletterSubscription.ActivationMessage";
     public const string NewsletterSubscriptionDeactivation = "NewsletterSubscription.DeactivationMessage";
-    public const string ShareProduct = "Service.EmailAFriend";
-    public const string ShareWishlist = "Wishlist.EmailAFriend";
-    public const string ProductQuestion = "Product.AskQuestion";
     public const string SystemCampaign = "System.Campaign";
     public const string SystemContactUs = "System.ContactUs";
     public const string SystemGeneric = "System.Generic";

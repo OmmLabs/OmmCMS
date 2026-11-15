@@ -44,6 +44,8 @@ Phases 628–645: extracted catalogue export queries, data segmenters, batch con
 
 Phases 646–653: removed catalogue sitemap publishers, their SEO settings, administrator controls and seed values. The LLM discovery directory lists public, published CMS topics rather than catalogue categories and storefront links.
 
+Phases 654–662: removed product messaging models, thumbnail selection, template test models, product sharing and question dispatch, wishlist sharing and obsolete order notification templates. Customer identity, contact and newsletter messages are retained.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

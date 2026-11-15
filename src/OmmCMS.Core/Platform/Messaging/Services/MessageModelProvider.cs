@@ -6,9 +6,6 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using OmmCMS.Collections;
 using OmmCMS.ComponentModel;
-using OmmCMS.Core.Catalog;
-using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
@@ -207,9 +204,6 @@ public partial class MessageModelProvider : IMessageModelProvider
                 break;
             case IModelPart x:
                 MergeModelBag(x, model, messageContext);
-                break;
-            case Product x:
-                modelPart = await CreateModelPartAsync(x, messageContext);
                 break;
             case Customer x:
                 modelPart = await CreateModelPartAsync(x, messageContext);
@@ -482,62 +476,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             Height = height,
             Alt = alt
         };
-
-        await _helper.PublishModelPartCreatedEventAsync(part, m);
-
-        return m;
-    }
-
-    protected virtual async Task<object> CreateModelPartAsync(Product part, MessageContext messageContext, ProductVariantAttributeSelection attrSelection = null)
-    {
-        Guard.NotNull(messageContext);
-        Guard.NotNull(part);
-
-        var storeId = messageContext.StoreId ?? 0;
-        var mediaSettings = await _services.SettingFactory.LoadSettingsAsync<MediaSettings>(storeId);
-        var catalogSettings = await _services.SettingFactory.LoadSettingsAsync<CatalogSettings>(storeId);
-
-        var currencyService = _services.Resolve<ICurrencyService>();
-        var productUrlHelper = _services.Resolve<ProductUrlHelper>();
-
-        var quantityUnit = await _db.QuantityUnits.FindByIdAsync(part.QuantityUnitId ?? 0, false);
-        var deliveryTime = await _db.DeliveryTimes.FindByIdAsync(part.DeliveryTimeId ?? 0, false);
-
-        var slug = await part.GetActiveSlugAsync(messageContext.Language.Id);
-        var productUrl = await productUrlHelper.GetProductPathAsync(part.Id, slug, attrSelection);
-        var url = _helper.BuildUrl(productUrl, messageContext);
-        var file = await _helper.GetMediaFileFor(part, attrSelection);
-        var name = part.GetLocalized(x => x.Name, messageContext.Language.Id).Value;
-
-        var m = new Dictionary<string, object>
-        {
-            { "Id", part.Id },
-            { "Sku", catalogSettings.ShowProductSku ? part.Sku : null },
-            { "Name", name },
-            { "Description", part.GetLocalized(x => x.ShortDescription, messageContext.Language).Value.NullEmpty() },
-            { "Url", url },
-            { "Thumbnail", await CreateModelPartAsync(file, messageContext, url, mediaSettings.MessageProductThumbPictureSize, new Size(50, 50), name) },
-            { "ThumbnailLg", await CreateModelPartAsync (file, messageContext, url, mediaSettings.ProductThumbPictureSize, new Size(120, 120), name) },
-            { "DeliveryTime", null },
-            { "QtyUnit", null }
-        };
-
-        if (catalogSettings.DeliveryTimesInProductDetail != DeliveryTimesPresentation.None)
-        {
-            if (deliveryTime is DeliveryTime dt)
-            {
-                m["DeliveryTime"] = new Dictionary<string, object>
-                {
-                    { "Color", dt.ColorHexValue },
-                    { "Name", dt.GetLocalized(x => x.Name, messageContext.Language).Value },
-                };
-            }
-        }
-
-        if (quantityUnit is QuantityUnit qu)
-        {
-            m["QtyUnit"] = qu.GetLocalized(x => x.Name, messageContext.Language).Value;
-        }
 
         await _helper.PublishModelPartCreatedEventAsync(part, m);
 

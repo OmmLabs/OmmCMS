@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Data;
@@ -448,7 +447,6 @@ public partial class MessageFactory : IMessageFactory
     {
         _testModelFactories ??= new Dictionary<string, Func<Task<object>>>(StringComparer.OrdinalIgnoreCase)
         {
-            { nameof(Product), () => GetRandomEntity<Product>(x => !x.Deleted && !x.IsSystemProduct && x.Visibility != ProductVisibility.Hidden && x.Published) },
             { nameof(Customer), () => GetRandomEntity<Customer>(x => !x.Deleted && !x.IsSystemAccount && !string.IsNullOrEmpty(x.Email)) },
             { nameof(NewsletterSubscription), () => GetRandomEntity<NewsletterSubscription>(x => true) },
             { nameof(Campaign), () => GetRandomEntity<Campaign>(x => true) },
@@ -482,31 +480,6 @@ public partial class MessageFactory : IMessageFactory
                         ["Message"] = LoremIpsum,
                         ["SenderEmail"] = "jane@doe.com",
                         ["SenderName"] = "Jane Doe"
-                    });
-                    break;
-                case MessageTemplateNames.ProductQuestion:
-                    result.Add(new NamedModelPart("Message")
-                    {
-                        ["Message"] = LoremIpsum,
-                        ["SenderEmail"] = "jane@doe.com",
-                        ["SenderName"] = "Jane Doe",
-                        ["SenderPhone"] = "123456789"
-                    });
-                    break;
-                case MessageTemplateNames.ShareProduct:
-                    result.Add(new NamedModelPart("Message")
-                    {
-                        ["Body"] = LoremIpsum,
-                        ["From"] = "jane@doe.com",
-                        ["To"] = "john@doe.com",
-                    });
-                    break;
-                case MessageTemplateNames.ShareWishlist:
-                    result.Add(new NamedModelPart("Wishlist")
-                    {
-                        ["PersonalMessage"] = LoremIpsum,
-                        ["From"] = "jane@doe.com",
-                        ["To"] = "john@doe.com",
                     });
                     break;
                 case MessageTemplateNames.SystemGeneric:

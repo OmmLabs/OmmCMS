@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media;
@@ -22,8 +20,6 @@ public partial class MessageModelHelper
     private readonly IDateTimeHelper _dateTimeHelper;
     private readonly IEventPublisher _eventPublisher;
     private readonly ILocalizationService _localizationService;
-    private readonly IMediaService _mediaService;
-    private readonly IProductAttributeMaterializer _productAttributeMaterializer;
     private readonly Lazy<IUrlHelper> _urlHelper;
 
     public MessageModelHelper(
@@ -32,8 +28,6 @@ public partial class MessageModelHelper
         IDateTimeHelper dateTimeHelper,
         IEventPublisher eventPublisher,
         ILocalizationService localizationService,
-        IMediaService mediaService,
-        IProductAttributeMaterializer productAttributeMaterializer,
         Lazy<IUrlHelper> urlHelper)
     {
         _db = db;
@@ -41,8 +35,6 @@ public partial class MessageModelHelper
         _dateTimeHelper = dateTimeHelper;
         _eventPublisher = eventPublisher;
         _localizationService = localizationService;
-        _mediaService = mediaService;
-        _productAttributeMaterializer = productAttributeMaterializer;
         _urlHelper = urlHelper;
     }
 
@@ -145,42 +137,6 @@ public partial class MessageModelHelper
         }
 
         return new(price, currency);
-    }
-
-    public async Task<MediaFileInfo> GetMediaFileFor(Product product, ProductVariantAttributeSelection attrSelection = null)
-    {
-        MediaFileInfo file = null;
-
-        if (attrSelection != null)
-        {
-            var combination = await _productAttributeMaterializer.FindAttributeCombinationAsync(product.Id, attrSelection);
-            if (combination != null)
-            {
-                var fileIds = combination.GetAssignedMediaIds();
-                if (!fileIds.IsNullOrEmpty())
-                {
-                    file = await _mediaService.GetFileByIdAsync(fileIds[0], MediaLoadFlags.AsNoTracking);
-                }
-            }
-        }
-
-        file ??= await _mediaService.GetFileByIdAsync(product.MainPictureId ?? 0, MediaLoadFlags.AsNoTracking);
-
-        if (file == null && product.Visibility == ProductVisibility.Hidden && product.ParentGroupedProductId > 0)
-        {
-            var productFile = await _db.ProductMediaFiles
-                .AsNoTracking()
-                .Include(x => x.MediaFile)
-                .ApplyProductFilter(product.ParentGroupedProductId)
-                .FirstOrDefaultAsync();
-
-            if (productFile?.MediaFile != null)
-            {
-                file = _mediaService.ConvertMediaFile(productFile.MediaFile);
-            }
-        }
-
-        return file;
     }
 
     public static string GetDisplayNameForCustomer(Customer customer)
