@@ -63,36 +63,6 @@
                 {
                     @await info.Widget.InvokeAsync(new WidgetContext(ViewContext, (link, label, value)))
                 }
-                else if (schema == DefaultLinkProvider.SchemaProduct)
-                {
-                    <div class="input-group" attr-class='(size.HasValue(), "input-group-" + size)'>
-                        <input type="text" class="form-control resettable product-picker-input bg-white text-muted" value="@label" readonly />
-                        <div class="input-group-append">
-                            <entity-picker max-items="1"
-                                           onselectioncompleted="lbPickerSelectionCompleted@(rnd.ToString())"
-                                           append-mode="false"
-                                           icon="ellipsis"
-                                           dialog-title="@T("Common.Entity.SelectProduct").Value"
-                                           aria-label="@T("Common.Entity.SelectProduct").Value" />
-                        </div>
-                    </div>
-                }
-                else if (schema == DefaultLinkProvider.SchemaCategory)
-                {
-                    <select class="form-control transferable resettable"
-                            attr-class='(size.HasValue(), "form-control-" + size)'
-                            data-select-url="@Url.Action("AllCategories", "Category", new { area = "Admin" })"
-                            data-select-selected-id="@value"
-                            data-select-init-text="@label"></select>
-                }
-                else if (schema == DefaultLinkProvider.SchemaManufacturer)
-                {
-                    <select class="form-control transferable resettable"
-                            attr-class='(size.HasValue(), "form-control-" + size)'
-                            data-select-url="@Url.Action("AllManufacturers", "Manufacturer", new { area = "Admin" })"
-                            data-select-selected-id="@value"
-                            data-select-init-text="@label"></select>
-                }
                 else if (schema == DefaultLinkProvider.SchemaTopic)
                 {
                     <select class="form-control transferable resettable"
@@ -173,23 +143,3 @@
         </div>
     </div>
 </div>
-
-@if (allowedSchemas.Contains(DefaultLinkProvider.SchemaProduct))
-{
-    <script>
-        function lbPickerSelectionCompleted@(rnd)(ids, selectedItems) {
-            var cnt = $("#link-builder-@rnd");
-            var val = 'product:' + ids[0];
-            var qs = cnt.find(".query-string").val() || '';
-            while (qs.startsWith('?')) {
-                qs = qs.substring(1);
-            }
-            if (!_.isEmpty(qs)) {
-                val = val + '?' + qs;
-            }
-            $('#@id').val(val).trigger("change");
-            cnt.find(".product-picker-input").val(selectedItems[0].name);
-            return true;
-        }
-    </script>
-} 

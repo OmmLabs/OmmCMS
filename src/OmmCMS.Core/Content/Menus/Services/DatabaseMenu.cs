@@ -1,15 +1,7 @@
-﻿using AngleSharp.Dom;
-using Microsoft.AspNetCore.Mvc;
-using OmmCMS.Caching;
+﻿using OmmCMS.Caching;
 using OmmCMS.Collections;
-using OmmCMS.Core.Catalog;
-using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Catalog.Search;
 using OmmCMS.Core.Data;
 using OmmCMS.Diagnostics;
-using OmmCMS.Threading;
 
 namespace OmmCMS.Core.Content.Menus;
 
@@ -18,30 +10,16 @@ namespace OmmCMS.Core.Content.Menus;
 /// </summary>
 internal class DatabaseMenu : MenuBase
 {
-    private readonly static AsyncLock _asyncLock = new();
-
-    private readonly Lazy<ICatalogSearchService> _catalogSearchService;
-    private readonly Lazy<ICategoryService> _categoryService;
-    private readonly CatalogSettings _catalogSettings;
-    private readonly SearchSettings _searchSettings;
     private readonly IDictionary<string, Lazy<IMenuItemProvider, MenuItemProviderMetadata>> _menuItemProviders;
 
     public DatabaseMenu(
         string menuName,
-        Lazy<ICatalogSearchService> catalogSearchService,
-        Lazy<ICategoryService> categoryService,
-        CatalogSettings catalogSettings,
-        SearchSettings searchSettings,
         IEnumerable<Lazy<IMenuItemProvider, MenuItemProviderMetadata>> menuItemProviders)
     {
         Guard.NotEmpty(menuName);
 
         Name = menuName;
 
-        _catalogSearchService = catalogSearchService;
-        _categoryService = categoryService;
-        _catalogSettings = catalogSettings;
-        _searchSettings = searchSettings;
         _menuItemProviders = menuItemProviders.ToDictionarySafe(x => x.Metadata.ProviderName, x => x);
     }
 
@@ -52,153 +30,6 @@ internal class DatabaseMenu : MenuBase
     public override string Name { get; }
 
     public override bool ApplyPermissions => true;
-
-    public override async Task ResolveElementCountAsync(TreeNode<MenuItem> curNode, bool deep = false)
-    {
-        if (curNode == null || !_catalogSettings.ShowCategoryProductNumber || !await ContainsProviderAsync("catalog"))
-        {
-            return;
-        }
-
-        try
-        {
-            using (Services.Chronometer.Step($"DatabaseMenu.ResolveElementCountAsync() for {curNode.Value.Text.NaIfEmpty()}"))
-            {
-                // Perf: only resolve counts for categories in the current path.
-                while (curNode != null)
-                {
-                    if (curNode.Children.Any(x => !x.Value.ElementsCountResolved))
-                    {
-                        using (await _asyncLock.LockAsync())
-                        {
-                            if (curNode.Children.Any(x => !x.Value.ElementsCountResolved))
-                            {
-                                var nodes = deep ? curNode.SelectNodes(x => true, false) : curNode.Children.AsEnumerable();
-
-                                foreach (var node in nodes)
-                                {
-                                    var item = node.Value;
-                                    if (item.EntityId <= 0)
-                                    {
-                                        item.ElementsCountResolved = true;
-                                        continue;
-                                    }
-
-                                    var isCategory = item.EntityName.EqualsNoCase(nameof(Category));
-                                    var isManufacturer = item.EntityName.EqualsNoCase(nameof(Manufacturer));
-
-                                    if (!isCategory && !isManufacturer)
-                                    {
-                                        item.ElementsCountResolved = true;
-                                        continue;
-                                    }
-
-                                    var storeId = Services.StoreContext.CurrentStoreIdIfMultiStoreMode;
-                                    var query = new CatalogSearchQuery()
-                                        .VisibleOnly()
-                                        .WithVisibility(ProductVisibility.Full)
-                                        .HasStoreId(storeId)
-                                        .BuildFacetMap(false)
-                                        .BuildHits(false);
-
-                                    if (isCategory)
-                                    {
-                                        if (_catalogSettings.ShowCategoryProductNumberIncludingSubcategories)
-                                        {
-                                            var categoryTree = await _categoryService.Value.GetCategoryTreeAsync(0, false, storeId);
-                                            var categoryNode = categoryTree.SelectNodeById(item.EntityId);
-                                            if (categoryNode != null)
-                                            {
-                                                query = query.WithCategoryTreePath(categoryNode.GetTreePath(), null);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            query = query.WithCategoryIds(null, new[] { item.EntityId });
-                                        }
-                                    }
-                                    else
-                                    {
-                                        query = query.WithManufacturerIds(null, new[] { item.EntityId });
-                                    }
-
-
-                                    var searchResult = await _catalogSearchService.Value.SearchAsync(query);
-                                    item.ElementsCount = searchResult.TotalHitsCount;
-                                    item.ElementsCountResolved = true;
-                                }
-                            }
-                        }
-                    }
-
-                    curNode = curNode.Parent;
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex);
-        }
-    }
-
-    public override async Task<TreeNode<MenuItem>> ResolveCurrentNodeAsync(ActionContext actionContext)
-    {
-        Guard.NotNull(actionContext);
-
-        if (actionContext == null || !await ContainsProviderAsync("catalog"))
-        {
-            return await base.ResolveCurrentNodeAsync(actionContext);
-        }
-
-        TreeNode<MenuItem> currentNode = null;
-
-        try
-        {
-            int currentCategoryId = GetRequestValue<int?>(actionContext, "currentCategoryId") ?? GetRequestValue<int>(actionContext, "categoryId");
-            int currentProductId = 0;
-
-            if (currentCategoryId == 0)
-            {
-                currentProductId = GetRequestValue<int?>(actionContext, "currentProductId") ?? GetRequestValue<int>(actionContext, "productId");
-            }
-
-            if (currentCategoryId == 0 && currentProductId == 0)
-            {
-                // Possibly not a category node of a menu where the category tree is attached to.
-                return await base.ResolveCurrentNodeAsync(actionContext);
-            }
-
-            var cacheKey = $"sm.temp.category.breadcrumb.{currentCategoryId}-{currentProductId}";
-            currentNode = await Services.RequestCache.GetAsync(cacheKey, async () =>
-            {
-                var root = await GetRootNodeAsync();
-                TreeNode<MenuItem> node = null;
-
-                if (currentCategoryId > 0)
-                {
-                    node = root.SelectNodeById(currentCategoryId) ?? root.SelectNode(x => x.Value.EntityId == currentCategoryId);
-                }
-
-                if (node == null && currentProductId > 0)
-                {
-                    var productCategories = await _categoryService.Value.GetProductCategoriesByProductIdsAsync([currentProductId]);
-                    if (productCategories.Any())
-                    {
-                        currentCategoryId = productCategories[0].Category.Id;
-                        node = root.SelectNodeById(currentCategoryId) ?? root.SelectNode(x => x.Value.EntityId == currentCategoryId);
-                    }
-                }
-
-                return node;
-            });
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex);
-        }
-
-        return currentNode;
-    }
 
     protected override async Task<TreeNode<MenuItem>> BuildAsync(CacheEntryOptions cacheEntryOptions)
     {

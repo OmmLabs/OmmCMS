@@ -363,7 +363,6 @@ public partial class ProductService : IProductService
             .Where(x => productIds.Contains(x.ParentGroupedProductId))
             .ExecuteUpdateAsync(x => x.SetProperty(p => p.ParentGroupedProductId, p => 0), cancelToken);
 
-        await DeleteProductMenuItems(productIds, cancelToken);
 
         // ----- Missing cascade delete rules.
         // Avoids "The DELETE statement conflicted with the REFERENCE constraint...".
@@ -429,47 +428,6 @@ public partial class ProductService : IProductService
             .IgnoreQueryFilters()
             .Where(x => productIds.Contains(x.Id))
             .ExecuteDeleteAsync(cancelToken);
-    }
-
-    private async Task DeleteProductMenuItems(int[] productIds, CancellationToken cancelToken)
-    {
-        var menuItemSchema = DefaultLinkProvider.SchemaProduct.EnsureEndsWith(':');
-        var menuItems = await _db.MenuItems
-            .Where(x => x.ProviderName == "entity" && x.Model.StartsWith(menuItemSchema))
-            .Select(x => new { x.Id, x.Model })
-            .ToListAsync(cancelToken);
-
-        if (menuItems.Count > 0)
-        {
-            var menuItemIds = menuItems
-                .Select(x =>
-                {
-                    try
-                    {
-                        var link = LinkExpression.Parse(x.Model);
-                        if (int.TryParse(link.Target, out var entityId) && productIds.Contains(entityId))
-                        {
-                            return x.Id;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Error(ex);
-                    }
-
-                    return 0;
-                })
-                .Where(x => x != 0)
-                .Distinct()
-                .ToArray();
-
-            if (menuItemIds.Length > 0)
-            {
-                await _db.MenuItems
-                    .Where(x => menuItemIds.Contains(x.Id))
-                    .ExecuteDeleteAsync(cancelToken);
-            }
-        }
     }
 
     #endregion

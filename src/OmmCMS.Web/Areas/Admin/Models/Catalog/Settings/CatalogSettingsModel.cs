@@ -68,9 +68,6 @@ public class CatalogSettingsModel
     [LocalizedDisplay("*ShowManufacturersInOffCanvas")]
     public bool ShowManufacturersInOffCanvas { get; set; }
 
-    [LocalizedDisplay("*MaxItemsToDisplayInCatalogMenu")]
-    public int MaxItemsToDisplayInCatalogMenu { get; set; }
-
     [LocalizedDisplay("*ManufacturerItemsToDisplayOnHomepage")]
     public int ManufacturerItemsToDisplayOnHomepage { get; set; }
 
@@ -109,12 +106,6 @@ public class CatalogSettingsModel
 
     [LocalizedDisplay("*IncludeFeaturedProductsInNormalLists")]
     public bool IncludeFeaturedProductsInNormalLists { get; set; }
-
-    [LocalizedDisplay("*ShowCategoryProductNumber")]
-    public bool ShowCategoryProductNumber { get; set; }
-
-    [LocalizedDisplay("*ShowCategoryProductNumberIncludingSubcategories")]
-    public bool ShowCategoryProductNumberIncludingSubcategories { get; set; }
 
     [LocalizedDisplay("*CategoryBreadcrumbEnabled")]
     public bool CategoryBreadcrumbEnabled { get; set; }
@@ -290,9 +281,6 @@ public partial class CatalogSettingsValidator : SettingModelValidator<CatalogSet
 {
     public CatalogSettingsValidator()
     {
-        RuleFor(x => x.MaxItemsToDisplayInCatalogMenu)
-            .GreaterThanOrEqualTo(0);
-
         RuleFor(x => x.HtmlTextCollapsedHeight)
             .GreaterThan(0);
 

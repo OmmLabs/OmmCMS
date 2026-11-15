@@ -80,11 +80,6 @@ public class CatalogSettings : ISettings
     public bool ShowProductTags { get; set; } = true;
 
     /// <summary>
-    /// Gets or sets a value indicating how many menu items will be displayed
-    /// </summary>
-    public int? MaxItemsToDisplayInCatalogMenu { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether product sorting is enabled
     /// </summary>
     public bool AllowProductSorting { get; set; } = true;
@@ -108,16 +103,6 @@ public class CatalogSettings : ISettings
     /// Gets or sets a value indicating whether a category details page should include products from subcategories
     /// </summary>
     public bool ShowProductsFromSubcategories { get; set; } = true;
-
-    /// <summary>
-    /// Gets or sets a value indicating whether number of products should be displayed beside each category
-    /// </summary>
-    public bool ShowCategoryProductNumber { get; set; } = true;
-
-    /// <summary>
-    /// Gets or sets a value indicating whether we include subcategories (when 'ShowCategoryProductNumber' is 'true')
-    /// </summary>
-    public bool ShowCategoryProductNumberIncludingSubcategories { get; set; } = true;
 
     /// <summary>
     /// Gets or sets a value indicating whether category breadcrumb is enabled

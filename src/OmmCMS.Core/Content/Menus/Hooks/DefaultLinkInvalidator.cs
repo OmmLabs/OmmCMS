@@ -23,11 +23,6 @@ internal partial class DefaultLinkInvalidator : AsyncDbSaveHook<BaseEntity>
         nameof(Topic.Title),
         nameof(Topic.ShortTitle),
         nameof(Topic.Intro),
-        nameof(Product.Name),
-        nameof(Product.Deleted),
-        nameof(Product.MainPictureId),
-        nameof(Category.Published),
-        nameof(Category.MediaFileId),
         nameof(StoreMapping.StoreId),
         nameof(UrlRecord.IsActive),
         nameof(UrlRecord.Slug)
@@ -43,7 +38,7 @@ internal partial class DefaultLinkInvalidator : AsyncDbSaveHook<BaseEntity>
     {
         var e = entry.Entity;
 
-        var evict = e is Topic || e is Product || e is Category || e is Manufacturer || e is StoreMapping || e is UrlRecord;
+        var evict = e is Topic || e is StoreMapping || e is UrlRecord;
         if (!evict)
             return HookResult.Void; // Perf
 
@@ -64,10 +59,6 @@ internal partial class DefaultLinkInvalidator : AsyncDbSaveHook<BaseEntity>
         {
             _linkResolver.InvalidateLink("topic", t.Id);
             _linkResolver.InvalidateLink("topic", t.SystemName);
-        }
-        else if (e is Category || e is Product || e is Manufacturer)
-        {
-            _linkResolver.InvalidateLink(e.GetEntityName().ToLowerInvariant(), e.Id);
         }
         else if (e is UrlRecord ur)
         {

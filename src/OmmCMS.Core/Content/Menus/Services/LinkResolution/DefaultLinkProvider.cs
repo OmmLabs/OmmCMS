@@ -1,7 +1,4 @@
-﻿using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Content.Topics;
+﻿using OmmCMS.Core.Content.Topics;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization;
 
@@ -10,12 +7,9 @@ namespace OmmCMS.Core.Content.Menus;
 public partial class DefaultLinkProvider : ILinkProvider
 {
     public const string SchemaTopic = "topic";
-    public const string SchemaProduct = "product";
-    public const string SchemaCategory = "category";
-    public const string SchemaManufacturer = "manufacturer";
 
     private static readonly string[] _supportedSchemas =
-        new[] { SchemaTopic, SchemaProduct, SchemaCategory, SchemaManufacturer };
+        new[] { SchemaTopic };
 
     private readonly SmartDbContext _db;
 
@@ -30,9 +24,6 @@ public partial class DefaultLinkProvider : ILinkProvider
     {
         return new[]
         {
-            new LinkBuilderMetadata { Schema = SchemaProduct, Icon = "box", ResKey = "Common.Entity.Product" },
-            new LinkBuilderMetadata { Schema = SchemaCategory, Icon = "nodes", ResKey = "Common.Entity.Category" },
-            new LinkBuilderMetadata { Schema = SchemaManufacturer, Icon = "building", ResKey = "Common.Entity.Manufacturer" },
             new LinkBuilderMetadata { Schema = SchemaTopic, Icon = "file-pen", ResKey = "Common.Entity.Topic" },
         };
     }
@@ -53,46 +44,7 @@ public partial class DefaultLinkProvider : ILinkProvider
             case SchemaTopic:
                 entityType = typeof(Topic);
                 entityName = nameof(Topic);
-                summary = await GetEntityDataAsync<Topic>(expression, storeId, x => null);
-                break;
-            case SchemaProduct:
-                entityType = typeof(Product);
-                entityName = nameof(Product);
-                summary = await GetEntityDataAsync<Product>(expression, storeId, x => new LinkTranslatorEntitySummary
-                {
-                    Name = x.Name,
-                    Published = x.Published,
-                    Deleted = x.Deleted,
-                    SubjectToAcl = x.SubjectToAcl,
-                    LimitedToStores = x.LimitedToStores,
-                    PictureId = x.MainPictureId
-                });
-                break;
-            case SchemaCategory:
-                entityType = typeof(Category);
-                entityName = nameof(Category);
-                summary = await GetEntityDataAsync<Category>(expression, storeId, x => new LinkTranslatorEntitySummary
-                {
-                    Name = x.Name,
-                    Published = x.Published,
-                    Deleted = x.Deleted,
-                    SubjectToAcl = x.SubjectToAcl,
-                    LimitedToStores = x.LimitedToStores,
-                    PictureId = x.MediaFileId
-                });
-                break;
-            case SchemaManufacturer:
-                entityType = typeof(Manufacturer);
-                entityName = nameof(Manufacturer);
-                summary = await GetEntityDataAsync<Manufacturer>(expression, storeId, x => new LinkTranslatorEntitySummary
-                {
-                    Name = x.Name,
-                    Published = x.Published,
-                    Deleted = x.Deleted,
-                    SubjectToAcl = x.SubjectToAcl,
-                    LimitedToStores = x.LimitedToStores,
-                    PictureId = x.MediaFileId
-                });
+                summary = await GetEntityDataAsync(expression, storeId);
                 break;
         }
 
@@ -107,8 +59,7 @@ public partial class DefaultLinkProvider : ILinkProvider
         };
     }
 
-    private async Task<LinkTranslatorEntitySummary> GetEntityDataAsync<T>(LinkExpression expression, int storeId, Expression<Func<T, LinkTranslatorEntitySummary>> selector)
-        where T : BaseEntity
+    private async Task<LinkTranslatorEntitySummary> GetEntityDataAsync(LinkExpression expression, int storeId)
     {
         LinkTranslatorEntitySummary summary = null;
         string systemName = null;
@@ -148,20 +99,6 @@ public partial class DefaultLinkProvider : ILinkProvider
                     // INFO: 'ShortTitle' is intended for links. 'Title' can be very long.
                     LocalizedPropertyNames = new[] { nameof(Topic.ShortTitle), nameof(Topic.Title) }
                 };
-            }
-        }
-        else
-        {
-            summary = await _db.Set<T>()
-                .AsNoTracking()
-                .Where(x => x.Id == entityId)
-                .Select(selector)
-                .SingleOrDefaultAsync();
-
-            if (summary != null)
-            {
-                summary.Id = entityId;
-                summary.LocalizedPropertyNames = new[] { "Name" };
             }
         }
 
