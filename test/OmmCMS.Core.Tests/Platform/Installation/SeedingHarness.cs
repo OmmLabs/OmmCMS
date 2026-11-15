@@ -141,7 +141,7 @@ internal sealed class SeedingHarness : IDisposable
     /// <summary>
     /// Seeds a fresh database for the given culture and returns the harness holding it.
     /// </summary>
-    public static async Task<SeedingHarness> SeedAsync(SeedCulture culture, bool seedSampleData, bool cmsPreview = false)
+    public static async Task<SeedingHarness> SeedAsync(SeedCulture culture, bool seedSampleData)
     {
         var harness = new SeedingHarness();
 
@@ -152,7 +152,6 @@ internal sealed class SeedingHarness : IDisposable
                 DefaultUserName = AdminEmail,
                 DefaultUserPassword = Guid.NewGuid().ToString("N"),
                 SeedSampleData = seedSampleData,
-                CmsPreview = cmsPreview,
                 StoreMediaInDB = true,
                 Language = new Language
                 {

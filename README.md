@@ -68,6 +68,8 @@ Phases 776–784: removed unused storefront menu, store and topic seed files and
 
 Phases 785–790: make route isolation, entity patch restrictions, catalogue menu blocking and retired module exclusion unconditional; remove the obsolete storefront administration sitemap and always use the CMS navigation.
 
+Phases 791–800: retire storefront layout and installer presentation fallbacks, make CMS settings navigation unconditional, remove the stale storefront search action from structured data, and remove unused CMS-preview installation seed state. Retain the existing CMS home and administrator presentation.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

@@ -57,7 +57,7 @@ public partial class InstallationSeedingTests
     [TestCaseSource(nameof(Cultures))]
     public async Task Cms_mode_seeds_content_without_commerce(SeedCulture culture)
     {
-        using var harness = await SeedingHarness.SeedAsync(culture, seedSampleData: true, cmsPreview: true);
+        using var harness = await SeedingHarness.SeedAsync(culture, seedSampleData: true);
         var db = harness.Db;
 
         using (Assert.EnterMultipleScope())

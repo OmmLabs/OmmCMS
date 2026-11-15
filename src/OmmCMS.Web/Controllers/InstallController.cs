@@ -48,7 +48,6 @@ public class InstallController : Controller
 
     private void PrepareInstallForm()
     {
-        ViewBag.CmsPreview = true;
         var curLanguage = _installService.GetCurrentLanguage();
 
         var installLanguages = _installService.GetInstallationLanguages()

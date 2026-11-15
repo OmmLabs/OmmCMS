@@ -4,7 +4,6 @@
 
 @{
     Layout = null;
-    var cmsPreview = ViewBag.CmsPreview == true;
     var availableLanguages = ViewBag.AvailableInstallationLanguages as IList<SelectListItem>;
 }
 
@@ -19,7 +18,7 @@
     <nav id="navbar" class="navbar navbar-dark navbar-expand-sm content p-0">
         <a class="navbar-brand hstack mx-0 mr-3 font-weight-bold" href="https://ommlabs.ommrudraksha.com">OmmCMS</a>
         <div class="navbar-text h5 p-0 m-0 pl-1" style="transform: translateY(3px)">
-            @(cmsPreview ? "Installation" : T("Title"))
+            Installation
         </div>
 
         <div class="collapse navbar-collapse ml-auto">

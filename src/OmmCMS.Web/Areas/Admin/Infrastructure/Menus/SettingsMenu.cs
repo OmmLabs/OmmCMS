@@ -11,11 +11,9 @@ public partial class SettingsMenu : MenuBase
 
     protected override string GetCacheKey()
     {
-        var cmsPreview = bool.TryParse(Services.ApplicationContext.Configuration["OmmCMS:PreviewShell"], out var enabled) && enabled;
-        var cacheKey = "{0}-{1}-{2}".FormatInvariant(
+        var cacheKey = "{0}-{1}-cms".FormatInvariant(
             Services.WorkContext.WorkingLanguage.Id,
-            Services.WorkContext.CurrentCustomer.GetRolesIdent(),
-            cmsPreview ? "cms" : "store");
+            Services.WorkContext.CurrentCustomer.GetRolesIdent());
 
         return cacheKey;
     }
@@ -99,21 +97,12 @@ public partial class SettingsMenu : MenuBase
             }
         ]);
 
-        // Keep settings navigation in sync with the CMS profile.
-        if (bool.TryParse(Services.ApplicationContext.Configuration["OmmCMS:PreviewShell"], out var cmsEnabled) && cmsEnabled)
+        // Keep unsupported settings navigation inaccessible in the CMS profile.
+        foreach (var child in root.Children)
         {
-            var commerceSettingIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            if (child.Value.Id is "dataexchange" or "all")
             {
-                "catalog", "search", "cart", "order", "payment", "finance", "shipping",
-                "reward-points", "dataexchange", "all"
-            };
-
-            foreach (var child in root.Children)
-            {
-                if (commerceSettingIds.Contains(child.Value.Id))
-                {
-                    child.Value.Visible = false;
-                }
+                child.Value.Visible = false;
             }
         }
 

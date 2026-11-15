@@ -1,10 +1,7 @@
 ﻿@using OmmCMS.Core.Stores;
 @using OmmCMS.Core.Packaging;
 
-@inject Microsoft.Extensions.Configuration.IConfiguration OmmCmsConfiguration
-
 @{
-    var cmsPreview = OmmCMS.Engine.OmmCmsMode.IsEnabled(OmmCmsConfiguration);
     var currentCustomer = this.WorkContext.CurrentCustomer;
     var currentLanguage = this.WorkContext.WorkingLanguage;
     var stores = ((ICollection<Store>)ViewBag.Stores) ?? new List<Store>();

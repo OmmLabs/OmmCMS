@@ -185,13 +185,6 @@ public class HomeController : PublicController
             }
         }
 
-        var searchAction = JsonLdFragment.Create("SearchAction")
-            .Obj("target", JsonLdFragment.Create("EntryPoint", new
-            {
-                urlTemplate = storeUrl + "search?q={search_term_string}"
-            }))
-            .Prop("query-input", "required name=search_term_string");
-
         builder.Organization
             .Prop("@id", storeUrl + "#organization")
             .Prop("name", store.Name)
@@ -204,9 +197,5 @@ public class HomeController : PublicController
             .Prop("name", store.Name)
             .Prop("url", store.Url);
 
-        if (!OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration))
-        {
-            builder.WebSite.Obj("potentialAction", searchAction);
-        }
     }
 }

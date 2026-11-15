@@ -246,7 +246,6 @@ public partial class InstallationService : IInstallationService
             {
                 DefaultUserName = model.AdminEmail,
                 DefaultUserPassword = model.AdminPassword,
-                CmsPreview = true,
                 SeedSampleData = model.InstallSampleData,
                 Language = primaryLanguage,
                 StoreMediaInDB = model.MediaStorage == "db",
