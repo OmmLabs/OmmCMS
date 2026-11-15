@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
@@ -86,13 +85,12 @@ public class InstallController : Controller
             }
         }
 
-        var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
         var dataProviders = new List<SelectListItem>
         {
-            new SelectListItem { Value = "mysql", Text = T("UseMySql"), Selected = !cmsPreview && !isWindows },
-            new SelectListItem { Value = "sqlserver", Text = T("UseSqlServer"), Selected = !cmsPreview && isWindows },
+            new SelectListItem { Value = "mysql", Text = T("UseMySql"), Selected = false },
+            new SelectListItem { Value = "sqlserver", Text = T("UseSqlServer"), Selected = false },
             new SelectListItem { Value = "postgresql", Text = T("UsePostgreSql"), Selected = false },
-            new SelectListItem { Value = "sqlite", Text = T("UseSqlite"), Selected = cmsPreview }
+            new SelectListItem { Value = "sqlite", Text = T("UseSqlite"), Selected = true }
         };
 
         ViewBag.AvailableInstallationLanguages = installLanguages;

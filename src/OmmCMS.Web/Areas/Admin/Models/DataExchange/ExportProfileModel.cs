@@ -165,7 +165,7 @@ public partial class ResolveTokensExampleModel : EntityModelBase
 
 public partial class ExportProfileValidator : AbstractValidator<ExportProfileModel>
 {
-    public ExportProfileValidator(Localizer T)
+    public ExportProfileValidator()
     {
         RuleFor(x => x.Name).NotEmpty();
         RuleFor(x => x.FileNamePattern).NotEmpty();
@@ -173,9 +173,5 @@ public partial class ExportProfileValidator : AbstractValidator<ExportProfileMod
         RuleFor(x => x.Limit).GreaterThanOrEqualTo(0);
         RuleFor(x => x.BatchSize).GreaterThanOrEqualTo(0);
 
-        RuleFor(x => x.ExportRelatedData)
-            .Must(x => x == false)
-            .When(x => x.Projection?.AttributeCombinationAsProduct ?? false)
-            .WithMessage(T("Admin.DataExchange.Export.ExportRelatedData.Validate"));
     }
 }
