@@ -207,19 +207,6 @@ public partial class ProductService : IProductService
             .Select(x => x.ProductId)
             .ToArrayAsync(cancelToken));
 
-        var requiredProductIds = await _db.Products
-            .IgnoreQueryFilters()
-            .Where(x => productIds.Contains(x.Id) && x.RequireOtherProducts && x.Deleted)
-            .Select(x => x.RequiredProductIds)
-            .ToArrayAsync(cancelToken);
-
-        foreach (var idsStr in requiredProductIds)
-        {
-            productIds.AddRange(idsStr.SplitSafe(',', StringSplitOptions.TrimEntries)
-                .Select(x => int.TryParse(x, out var id) ? id : int.MaxValue)
-                .Where(x => x < int.MaxValue));
-        }
-
         // First restore products, then all other entities.
         // Allow hooks to react (e.g. for updating search index).
         var products = await _db.Products

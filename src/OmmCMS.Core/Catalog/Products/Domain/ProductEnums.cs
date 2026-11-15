@@ -59,15 +59,6 @@ public enum ProductCondition
 }
 
 /// <summary>
-/// Represents a quantity control type.
-/// </summary>
-public enum QuantityControlType
-{
-    Spinner = 0,
-    Dropdown = 1
-}
-
-/// <summary>
 /// Represents the behaviour when selecting product attributes.
 /// </summary>
 public enum AttributeChoiceBehaviour

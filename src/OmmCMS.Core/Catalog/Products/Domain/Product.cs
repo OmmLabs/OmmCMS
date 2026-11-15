@@ -97,8 +97,6 @@ internal class ProductMap : IEntityTypeConfiguration<Product>
 [DebuggerDisplay("{Id} - {Name}")]
 public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable, ILocalizedEntity, ISlugSupported, IAclRestricted, IStoreRestricted, IMergedData
 {
-    private string _requiredProductIds;
-    private int[] _requiredProductIdList;
 
     #region Static
 
@@ -291,65 +289,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the product requires other products to be added to the cart (product X requires product Y).
-    /// </summary>
-    public bool RequireOtherProducts { get; set; }
-
-    /// <summary>
-    /// Gets or sets the required product identifiers (comma separated).
-    /// </summary>
-    [StringLength(1000)]
-    public string RequiredProductIds
-    {
-        get => _requiredProductIds;
-        set
-        {
-            if (_requiredProductIds != value)
-            {
-                _requiredProductIds = value;
-                _requiredProductIdList = null;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets the required product identifiers as an array.
-    /// It is the split equivalent of <see cref="RequiredProductIds"/>.
-    /// </summary>
-    [NotMapped, IgnoreDataMember]
-    public int[] RequiredProductIdList
-    {
-        get => _requiredProductIdList ??= RequiredProductIds
-                .SplitSafe(',', StringSplitOptions.TrimEntries)
-                .Select(x => int.TryParse(x, out var id) ? (int?)id : null)
-                .Where(x => x.HasValue)
-                .Select(x => x.Value)
-                .ToArray();
-        set
-        {
-            var newIds = value ?? [];
-            var newString = string.Join(',', newIds);
-
-            if (_requiredProductIds != newString)
-            {
-                _requiredProductIds = newString;
-                _requiredProductIdList = newIds;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether required products are automatically added to the cart.
-    /// </summary>
-    public bool AutomaticallyAddRequiredProducts { get; set; }
-
-    /// <summary>
-    /// Gets or sets how many units of the required product are automatically kept in the cart for each unit of the main product.
-    /// 0 (default) to not synchronize the quantity of the required product. Only applicable for required products.
-    /// </summary>
-    public int QuantityPerParentUnit { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether the product is a download.
     /// </summary>
     public bool IsDownload { get; set; }
@@ -452,53 +391,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     /// Gets or sets the tax category identifier.
     /// </summary>
     public int TaxCategoryId { get; set; }
-
-    /// <summary>
-    /// Gets or sets the minimum order quantity.
-    /// </summary>
-    public int OrderMinimumQuantity { get; set; }
-
-    /// <summary>
-    /// Gets or sets the maximum order quantity.
-    /// </summary>
-    public int OrderMaximumQuantity { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value by which the product quantity can be changed.
-    /// </summary>
-    public int QuantityStep { get; set; }
-
-    /// <summary>
-    /// Gets or sets the quantity control type.
-    /// </summary>
-    [Column("QuantiyControlType")]
-    public QuantityControlType QuantityControlType { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to hide the quantity input control.
-    /// </summary>
-    public bool HideQuantityControl { get; set; }
-
-    /// <summary>
-    /// Gets or sets the comma seperated list of allowed quantities. If <c>null</c> or empty then any quantity is allowed.
-    /// </summary>
-    [StringLength(1000)]
-    public string AllowedQuantities { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to disable the "Add to cart" button.
-    /// </summary>
-    public bool DisableBuyButton { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to disable "Add to wishlist" button.
-    /// </summary>
-    public bool DisableWishlistButton { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether the product is available for pre-ordering.
-    /// </summary>
-    public bool AvailableForPreOrder { get; set; }
 
     private decimal _price;
     /// <summary>

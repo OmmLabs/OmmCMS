@@ -577,10 +577,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.Sku), (string)product.Sku);
         _writer.WriteElementString(nameof(Product.ManufacturerPartNumber), (string)product.ManufacturerPartNumber);
         _writer.WriteElementString(nameof(Product.Gtin), (string)product.Gtin);
-        _writer.WriteElementString(nameof(Product.RequireOtherProducts), entity.RequireOtherProducts.ToString());
-        _writer.WriteElementString(nameof(Product.RequiredProductIds), entity.RequiredProductIds);
-        _writer.WriteElementString(nameof(Product.AutomaticallyAddRequiredProducts), entity.AutomaticallyAddRequiredProducts.ToString());
-        _writer.WriteElementString(nameof(Product.QuantityPerParentUnit), entity.QuantityPerParentUnit.ToString());
         _writer.WriteElementString(nameof(Product.IsDownload), entity.IsDownload.ToString());
         _writer.WriteElementString(nameof(Product.UnlimitedDownloads), entity.UnlimitedDownloads.ToString());
         _writer.WriteElementString(nameof(Product.MaxNumberOfDownloads), entity.MaxNumberOfDownloads.ToString());
@@ -595,15 +591,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.AdditionalShippingCharge), entity.AdditionalShippingCharge.ToString(_culture));
         _writer.WriteElementString(nameof(Product.IsTaxExempt), entity.IsTaxExempt.ToString());
         _writer.WriteElementString(nameof(Product.TaxCategoryId), entity.TaxCategoryId.ToString());
-        _writer.WriteElementString(nameof(Product.OrderMinimumQuantity), entity.OrderMinimumQuantity.ToString());
-        _writer.WriteElementString(nameof(Product.OrderMaximumQuantity), entity.OrderMaximumQuantity.ToString());
-        _writer.WriteElementString(nameof(Product.QuantityStep), entity.QuantityStep.ToString());
-        _writer.WriteElementString(nameof(Product.QuantityControlType), ((int)entity.QuantityControlType).ToString());
-        _writer.WriteElementString(nameof(Product.HideQuantityControl), entity.HideQuantityControl.ToString());
-        _writer.WriteElementString(nameof(Product.AllowedQuantities), entity.AllowedQuantities);
-        _writer.WriteElementString(nameof(Product.DisableBuyButton), entity.DisableBuyButton.ToString());
-        _writer.WriteElementString(nameof(Product.DisableWishlistButton), entity.DisableWishlistButton.ToString());
-        _writer.WriteElementString(nameof(Product.AvailableForPreOrder), entity.AvailableForPreOrder.ToString());
         // INFO: Export the entered price. Not "(decimal)product.Price" because it is the calculated price.
         _writer.WriteElementString(nameof(Product.Price), entity.Price.ToString(_culture));
         _writer.WriteElementString(nameof(Product.ProductCost), entity.ProductCost.ToString(_culture));

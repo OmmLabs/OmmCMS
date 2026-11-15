@@ -204,8 +204,6 @@
     "sku": "FD-1008",
     "taxCategory": "general",
     "price": 2.90,
-    "requiredProducts": [ "FD-1009" ],
-    "automaticallyAddRequiredProducts": true,
     "deliveryTime": "available-and-ready-to-ship",
 
 
@@ -228,7 +226,6 @@
     "sku": "FD-1009",
     "taxCategory": "general",
     "price": 0.25,
-    "quantityPerParentUnit": 1,
     "visibility": "ProductPage",
     "isShippingEnabled": false,
 

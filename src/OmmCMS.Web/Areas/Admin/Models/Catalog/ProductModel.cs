@@ -62,18 +62,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
     [LocalizedDisplay("*CountryOfOriginId")]
     public int? CountryOfOriginId { get; set; }
 
-    [LocalizedDisplay("*RequireOtherProducts")]
-    public bool RequireOtherProducts { get; set; }
-
-    [LocalizedDisplay("*RequiredProductIds")]
-    public string RequiredProductIds { get; set; }
-
-    [LocalizedDisplay("*AutomaticallyAddRequiredProducts")]
-    public bool AutomaticallyAddRequiredProducts { get; set; }
-
-    [LocalizedDisplay("*QuantityPerParentUnit")]
-    public int QuantityPerParentUnit { get; set; }
-
     [LocalizedDisplay("*IsDownload")]
     public bool IsDownload { get; set; }
 
@@ -149,36 +137,9 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
 
 
 
-    [LocalizedDisplay("*OrderMinimumQuantity")]
-    public int OrderMinimumQuantity { get; set; }
-
-    [LocalizedDisplay("*OrderMaximumQuantity")]
-    public int OrderMaximumQuantity { get; set; }
-
-    [LocalizedDisplay("*QuantityStep")]
-    public int QuantityStep { get; set; }
-
-    [LocalizedDisplay("*QuantityControlType")]
-    public QuantityControlType QuantityControlType { get; set; }
-
-    [LocalizedDisplay("*HideQuantityControl")]
-    public bool HideQuantityControl { get; set; }
-
     [UIHint("SelectList")]
     [AdditionalMetadata("multiple", true)]
     [AdditionalMetadata("data_tags", true)]
-    [LocalizedDisplay("*AllowedQuantities")]
-    public int[] AllowedQuantities { get; set; } = [];
-
-    [LocalizedDisplay("*DisableBuyButton")]
-    public bool DisableBuyButton { get; set; }
-
-    [LocalizedDisplay("*DisableWishlistButton")]
-    public bool DisableWishlistButton { get; set; }
-
-    [LocalizedDisplay("*AvailableForPreOrder")]
-    public bool AvailableForPreOrder { get; set; }
-
     [LocalizedDisplay("*ProductCost")]
     public decimal? ProductCost { get; set; }
 
@@ -589,22 +550,6 @@ public partial class ProductModelValidator : SmartValidator<ProductModel>
             .GreaterThanOrEqualTo(0)
             .When(x => x.DisplayAllImagesNumber != null);
 
-        RuleFor(x => x.QuantityPerParentUnit)
-            .GreaterThanOrEqualTo(0);
-
-        When(x => x.IsTabLoaded("Inventory"), () =>
-        {
-            RuleFor(x => x.OrderMinimumQuantity).GreaterThan(0); // dont't remove "Admin.Validation.ValueGreaterZero" resource. It is used elsewhere.
-            RuleFor(x => x.OrderMaximumQuantity).GreaterThan(0);
-            RuleFor(x => string.Join(',', x.AllowedQuantities ?? Array.Empty<int>()))
-                .MaximumLength(1000)
-                .OverridePropertyName(nameof(ProductModel.AllowedQuantities));
-            RuleForEach(x => x.AllowedQuantities)
-                // Associate item errors with the AllowedQuantities field.
-                .OverrideIndexer((_, _, _, _) => string.Empty)
-                .GreaterThan(0);
-        });
-
         When(x => x.IsTabLoaded("Downloads"), () =>
         {
             RuleFor(x => x.DownloadFileVersion)
@@ -643,7 +588,6 @@ public class ProductMapper : IMapper<Product, ProductModel>
     public async Task MapAsync(Product from, ProductModel to, dynamic parameters = null)
     {
         MiniMapper.Map(from, to);
-        to.AllowedQuantities ??= [];
         to.SeName = await from.GetActiveSlugAsync(0, true, false);
     }
 }

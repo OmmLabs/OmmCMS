@@ -250,8 +250,6 @@
     "sku": "FS-1005",
     "taxCategory": "apparel",
     "price": 39.90,
-    "orderMaximumQuantity": 110,
-    "quantityStep": 1,
     "deliveryTime": "available-and-ready-to-ship",
 
     "categories": [ "Apparel" ],

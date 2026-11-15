@@ -46,7 +46,6 @@
     "taxCategory": "general",
     "price": 2.90,
     "quantityUnit": "bag",
-    "orderMinimumQuantity": 2,
     "deliveryTime": "available-and-ready-to-ship",
 
     "categories": [ "Golf Accessories" ],

@@ -516,16 +516,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Elektronisch erbrachte Dienstleistung",
             "When EU VAT handling is enabled, the billing address is used as the tax address for EU consumers. This setting does not enable downloadable products.",
             "Bei aktivierter EU-Umsatzsteuerbehandlung wird für EU-Verbraucher die Rechnungsadresse als Steueradresse verwendet. Diese Einstellung aktiviert keine Downloadbereitstellung.");
-        builder.AddOrUpdate(prefix + "Fields.RequireOtherProducts",
-            "Additional products must be ordered",
-            "Weitere Produkte müssen mitbestellt werden",
-            "The selected additional products must be ordered together with this product. Enable automatic addition to add them to the cart automatically.",
-            "Die ausgewählten Zusatzprodukte müssen zusammen mit diesem Produkt bestellt werden. Aktivieren Sie das automatische Hinzufügen, um sie automatisch in den Warenkorb zu legen.");
-        builder.AddOrUpdate(prefix + "Fields.RequiredProductIds",
-            "Required product IDs",
-            "IDs der erforderlichen Produkte",
-            "Select the products that must be ordered together with this product. Ensure they are available to customers; otherwise, this product cannot be added to the cart. Avoid circular dependencies.",
-            "Wählen Sie die Produkte aus, die zusammen mit diesem Produkt bestellt werden müssen. Stellen Sie sicher, dass sie für Kunden verfügbar sind; andernfalls kann auch dieses Produkt nicht in den Warenkorb gelegt werden. Vermeiden Sie zirkuläre Abhängigkeiten.");
         builder.AddOrUpdate(prefix + "Fields.IsShipEnabled",
             "Shipping required",
             "Versand erforderlich",
@@ -544,11 +534,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Specify the page sizes customers can select in this manufacturer's product list. Leave empty to use the page sizes from the catalog settings.",
             "Legt die auswählbaren Seitengrößen der Produktliste dieses Herstellers fest. Lassen Sie das Feld leer, um die Seitengrößen der Katalog-Einstellungen zu verwenden.");
 
-        builder.AddOrUpdate(prefix + "Fields.AllowedQuantities",
-            "Custom quantities",
-            "Benutzerdefinierte Mengenliste",
-            "Specify the order quantities customers can select for this product. If this field is populated, the minimum, maximum and step settings are ignored.",
-            "Bestimmen Sie hier die Bestellmengen, die Kunden für dieses Produkt auswählen können. Wenn dieses Feld befüllt ist, werden die Einstellungen für Mindestmenge, Höchstmenge und Mengenschritt ignoriert.");
 
         builder.AddOrUpdate(prefix + "Deleted",
             "The product was moved to the recycle bin.",

@@ -58,7 +58,6 @@ public partial class InstallationSeedingTests
             Assert.That(DuplicateSkus(db), Is.Empty, "SKUs must be unique across products and attribute combinations.");
             Assert.That(VisibleProductsWithoutCategory(db), Is.Empty, "Visible products need a category.");
             Assert.That(BrokenInternalLinks(db), Is.Empty, "Links to other records must point to an existing slug.");
-            Assert.That(InvalidRequiredProducts(db), Is.Empty, "Automatically required products must be available to all sample customers and stores.");
         }
     }
 
@@ -124,24 +123,4 @@ public partial class InstallationSeedingTests
             .ToList();
     }
 
-    private static List<string> InvalidRequiredProducts(SmartDbContext db)
-    {
-        var products = db.Products.AsNoTracking().ToList();
-        var productsById = products.ToDictionary(x => x.Id);
-
-        return products
-            .Where(x => x.RequireOtherProducts && x.AutomaticallyAddRequiredProducts)
-            .SelectMany(x => x.RequiredProductIdList.Select(id => new
-            {
-                Owner = x.Sku,
-                RequiredProduct = productsById.GetValueOrDefault(id)
-            }))
-            .Where(x => x.RequiredProduct == null
-                || x.RequiredProduct.Deleted
-                || !x.RequiredProduct.Published
-                || x.RequiredProduct.SubjectToAcl
-                || x.RequiredProduct.LimitedToStores)
-            .Select(x => $"{x.Owner}: {x.RequiredProduct?.Sku ?? "missing"}")
-            .ToList();
-    }
 }

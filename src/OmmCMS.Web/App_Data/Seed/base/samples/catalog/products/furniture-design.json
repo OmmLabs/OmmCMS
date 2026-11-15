@@ -105,8 +105,6 @@
     "taxCategory": "general",
     "price": 149.00,
     "weight": 13.2,
-    "requiredProducts": [ "FN-1007" ],
-    "automaticallyAddRequiredProducts": true,
     "deliveryTime": "available-and-ready-to-ship",
 
 
@@ -198,7 +196,6 @@
     "sku": "FN-1005",
     "taxCategory": "general",
     "price": 249.00,
-    "hideQuantityControl": true,
     "deliveryTime": "7-working-days",
 
 

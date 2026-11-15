@@ -344,9 +344,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.Sku);
                 row.SetProperty(context.Result, (x) => x.ManufacturerPartNumber);
                 row.SetProperty(context.Result, (x) => x.Gtin);
-                row.SetProperty(context.Result, (x) => x.RequireOtherProducts);
-                row.SetProperty(context.Result, (x) => x.RequiredProductIds);   // TODO: global scope
-                row.SetProperty(context.Result, (x) => x.AutomaticallyAddRequiredProducts);
                 row.SetProperty(context.Result, (x) => x.IsDownload);
                 //row.SetProperty(context.Result, (x) => x.DownloadId);
                 //row.SetProperty(context.Result, (x) => x.UnlimitedDownloads, true);
@@ -363,14 +360,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.IsEsd);
                 row.SetProperty(context.Result, (x) => x.IsTaxExempt);
                 row.SetProperty(context.Result, (x) => x.TaxCategoryId, 1);    // TODO: global scope
-                row.SetProperty(context.Result, (x) => x.OrderMinimumQuantity, 1);
-                row.SetProperty(context.Result, (x) => x.OrderMaximumQuantity, 50);
-                row.SetProperty(context.Result, (x) => x.QuantityStep, 1);
-                row.SetProperty(context.Result, (x) => x.HideQuantityControl);
-                row.SetProperty(context.Result, (x) => x.AllowedQuantities);
-                row.SetProperty(context.Result, (x) => x.DisableBuyButton);
-                row.SetProperty(context.Result, (x) => x.DisableWishlistButton);
-                row.SetProperty(context.Result, (x) => x.AvailableForPreOrder);
                 row.SetProperty(context.Result, (x) => x.Price);
                 row.SetProperty(context.Result, (x) => x.ProductCost);
                 // LowestAttributeCombinationPrice: see ProcessAttributeCombinationsAsync.
@@ -395,10 +384,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.CountryOfOriginId);
                 row.SetProperty(context.Result, (x) => x.AttributeCombinationRequired);
 
-                if (row.TryGetDataValue(nameof(Product.QuantityControlType), out int qct))
-                {
-                    product.QuantityControlType = (QuantityControlType)qct;
-                }
                 if (row.TryGetDataValue(nameof(Product.AttributeChoiceBehaviour), out int attributeChoiceBehaviour))
                 {
                     product.AttributeChoiceBehaviour = (AttributeChoiceBehaviour)attributeChoiceBehaviour;
