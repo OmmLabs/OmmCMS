@@ -276,7 +276,19 @@ def verify_trimmed_controllers():
     print(f"Controller extraction passed: {len(names)} retired admin controllers and their standalone views absent.")
 
 
+def verify_public_controllers():
+    source = Path(__file__).resolve().parent.parent / "src" / "Smartstore.Web"
+    for name in ["Catalog","Checkout","Download","Order","Product","ReturnCase","Search","ShoppingCart"]:
+        assert not (source / "Controllers" / (name + "Controller.cs")).exists(), f"Retired public controller remains: {name}"
+    for path in ["Views/Catalog/CategoryTemplate.ProductsInGridOrLines.cshtml","Views/Catalog/CompareProducts.cshtml","Views/Catalog/ManufacturerAll.cshtml","Views/Catalog/ManufacturerTemplate.ProductsInGridOrLines.cshtml","Views/Catalog/ProductTagsAll.cshtml","Views/Catalog/ProductsByTag.cshtml","Views/Catalog/RecentlyAddedProducts.cshtml","Views/Catalog/RecentlyViewedProducts.cshtml","Views/Checkout/BillingAddress.cshtml","Views/Checkout/Completed.cshtml","Views/Checkout/Confirm.cshtml","Views/Checkout/PaymentMethod.cshtml","Views/Checkout/ShippingAddress.cshtml","Views/Checkout/ShippingMethod.cshtml","Views/Checkout/Terminal.Confirm.cshtml","Views/Order/Details.cshtml","Views/Order/ShipmentDetails.cshtml","Views/Product/AskQuestion.cshtml","Views/Product/BackInStockSubscribePopup.cshtml","Views/Product/EmailAFriend.cshtml","Views/Product/Product.cshtml","Views/Product/Reviews.cshtml","Views/ReturnCase/ReturnCase.cshtml","Views/Search/Search.cshtml","Views/ShoppingCart/Cart.cshtml","Views/ShoppingCart/EmailWishlist.cshtml","Views/ShoppingCart/Wishlist.cshtml"]:
+        assert not (source / path).exists(), f"Retired source view remains: {path}"
+        assert not (root / path).exists(), f"Retired published view remains: {path}"
+    print("Public commerce source and publish extraction passed.")
+
+
 try:
+    if "--public-controllers-trimmed" in sys.argv:
+        verify_public_controllers()
     if "--controllers-trimmed" in sys.argv:
         verify_trimmed_controllers()
     if "--trimmed" in sys.argv:
@@ -328,6 +340,10 @@ try:
         status, _ = request(path)
         assert status == 404, f"{path}: expected HTTP 404, got {status}"
         print(f"{path}: {status}")
+    if "--public-controllers-trimmed" in sys.argv:
+        for path in ("/catalog/manufacturerall", "/product/productdetails/1", "/checkout/billingaddress", "/shoppingcart/cart", "/order/details/1", "/returncase/returncase/1", "/download/getdownload/1", "/search/search"):
+            assert request(path)[0] == 404, f"Former public commerce endpoint reachable: {path}"
+        print("Extracted public commerce endpoints return HTTP 404.")
     print("CMS fresh-install HTTP smoke test passed.")
     if "--editorial" in sys.argv:
         editorial_workflows(password)

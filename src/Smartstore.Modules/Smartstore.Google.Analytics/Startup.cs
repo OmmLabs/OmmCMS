@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Smartstore.Core.OutputCache;
 using Smartstore.Engine;
 using Smartstore.Engine.Builders;
-using Smartstore.Google.Analytics.Filters;
 using Smartstore.Google.Analytics.Services;
-using Smartstore.Web.Controllers;
 
 namespace Smartstore.Google.Analytics;
 
@@ -17,12 +14,6 @@ internal class Startup : StarterBase
         {
             services.AddScoped<GoogleAnalyticsScriptHelper>();
 
-            services.Configure<MvcOptions>(o =>
-            {
-                o.Filters.AddEndpointFilter<CheckoutFilter, CheckoutController>()
-                    .ForAction(x => x.Confirm())
-                    .WhenNonAjax();
-            });
         }
     }
 

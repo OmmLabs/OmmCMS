@@ -54,7 +54,8 @@ CI checks removed modules and standalone commerce views are absent from source a
 | 5 | [Authenticated CMS editorial workflows](docs/ommcms/PHASE5_EDITORIAL_WORKFLOWS.md) |
 | 6 | [Physical commerce module extraction](docs/ommcms/PHASE6_MODULE_EXTRACTION.md) |
 | 7 | [Physical admin commerce controller extraction](docs/ommcms/PHASE7_CONTROLLER_EXTRACTION.md) |
-| Next | Extract remaining public commerce surfaces and shared core services before reducing schema dependencies; build dedicated article taxonomy and editorial tools. |
+| 8 | [Public commerce controller extraction](docs/ommcms/PHASE8_PUBLIC_COMMERCE_EXTRACTION.md) |
+| Next | Extract remaining shared commerce surfaces and core services before reducing schema dependencies; build dedicated article taxonomy and editorial tools. |
 
 Source and project names retain their Smartstore names until the dependency extraction is complete.
 

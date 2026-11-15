@@ -11,6 +11,7 @@ on:
       - cms-editorial-workflows
       - cms-module-extraction
       - cms-controller-extraction
+      - cms-public-commerce-extraction
   workflow_dispatch:
 
 permissions:
@@ -52,14 +53,15 @@ jobs:
         run: dotnet test Smartstore.sln -c Release --no-build --no-restore --logger trx
 
       - name: Publish disposable CMS application
-        if: github.ref_name == 'cms-installation' || github.ref_name == 'cms-editorial-workflows' || github.ref_name == 'cms-module-extraction' || github.ref_name == 'cms-controller-extraction'
+        if: github.ref_name == 'cms-installation' || github.ref_name == 'cms-editorial-workflows' || github.ref_name == 'cms-module-extraction' || github.ref_name == 'cms-controller-extraction' || github.ref_name == 'cms-public-commerce-extraction'
         run: dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release --no-build --no-restore -o "$RUNNER_TEMP/ommcms-smoke"
 
       - name: Fresh CMS installation smoke test (SQLite)
-        if: github.ref_name == 'cms-installation' || github.ref_name == 'cms-editorial-workflows' || github.ref_name == 'cms-module-extraction' || github.ref_name == 'cms-controller-extraction'
+        if: github.ref_name == 'cms-installation' || github.ref_name == 'cms-editorial-workflows' || github.ref_name == 'cms-module-extraction' || github.ref_name == 'cms-controller-extraction' || github.ref_name == 'cms-public-commerce-extraction'
         run: |
           args=(--editorial --trimmed)
-          if [[ "$GITHUB_REF_NAME" == "cms-controller-extraction" ]]; then args+=(--controllers-trimmed); fi
+          if [[ "$GITHUB_REF_NAME" == "cms-controller-extraction" || "$GITHUB_REF_NAME" == "cms-public-commerce-extraction" ]]; then args+=(--controllers-trimmed); fi
+          if [[ "$GITHUB_REF_NAME" == "cms-public-commerce-extraction" ]]; then args+=(--public-controllers-trimmed); fi
           python3 .github/ommcms-smoke.py "$RUNNER_TEMP/ommcms-smoke" "${args[@]}"
 
 # No package push, external deployment or production database access.
