@@ -561,6 +561,16 @@ try:
             "Checkout/Orders/Services/ICheckoutStateAccessor.cs",
             "Checkout/Orders/Domain/CheckoutState.cs",
             "Checkout/Bootstrapping/CheckoutBootstrappingExtensions.cs",
+            "Checkout/Orders/Services/IOrderProcessingService.cs",
+            "Checkout/Orders/Services/OrderProcessingService.cs",
+            "Checkout/Orders/Services/OrderProcessingService.Payment.cs",
+            "Checkout/Orders/Services/OrderProcessingService.PlaceOrder.cs",
+            "Checkout/Orders/Services/OrderRecoveryData.cs",
+            "Checkout/Orders/Domain/AutoUpdateOrderItemContext.cs",
+            "Checkout/Orders/Domain/OrderPlacementResult.cs",
+            "Checkout/Orders/Domain/OrderTotalValidationResult.cs",
+            "Checkout/Cart/Consumers/ValidatingCartEventConsumer.cs",
+            "Checkout/Cart/Events/ValidatingCartEvent.cs",
         ):
             assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
         print("Core stock notification and storefront variant binding extraction passed.")

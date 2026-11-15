@@ -1,5 +1,4 @@
 ﻿using OmmCMS.Core.Checkout.Payment;
-using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Data;
@@ -12,54 +11,25 @@ public partial class OrderService : AsyncDbSaveHook<Order>, IOrderService
 {
     private readonly SmartDbContext _db;
     private readonly IWorkContext _workContext;
-    private readonly Lazy<IOrderProcessingService> _orderProcessingService;
     private readonly IRoundingHelper _roundingHelper;
     private readonly IEventPublisher _eventPublisher;
-    private readonly PaymentSettings _paymentSettings;
-    private readonly HashSet<Order> _toCapture = [];
 
     public OrderService(
         SmartDbContext db,
         IWorkContext workContext,
-        Lazy<IOrderProcessingService> orderProcessingService,
         IRoundingHelper roundingHelper,
-        IEventPublisher eventPublisher,
-        PaymentSettings paymentSettings)
+        IEventPublisher eventPublisher)
     {
         _db = db;
         _workContext = workContext;
-        _orderProcessingService = orderProcessingService;
         _roundingHelper = roundingHelper;
         _eventPublisher = eventPublisher;
-        _paymentSettings = paymentSettings;
     }
-
-    public ILogger Logger { get; set; } = NullLogger.Instance;
 
     #region Hook
 
     protected override Task<HookResult> OnUpdatingAsync(Order entity, IHookedEntity entry, CancellationToken cancelToken)
     {
-        // Check whether to automatically capture payment.
-        if (_paymentSettings.CapturePaymentReason.HasValue)
-        {
-            var prop = entry.Entry.Property(nameof(entity.ShippingStatusId));
-            var equalValue = prop?.CurrentValue?.Equals(prop.OriginalValue) ?? true;
-            if (!equalValue)
-            {
-                var newStatus = (ShippingStatus)(int)prop.CurrentValue;
-                var reason = _paymentSettings.CapturePaymentReason.Value;
-
-                // INFO: CapturePaymentReason.OrderCompleted is processed in CompleteOrderAsync. Would be too late here
-                // because the payment would already be marked as paid and capturing never happens.
-                if ((newStatus == ShippingStatus.Shipped && reason == CapturePaymentReason.OrderShipped) ||
-                    (newStatus == ShippingStatus.Delivered && reason == CapturePaymentReason.OrderDelivered))
-                {
-                    _toCapture.Add(entity);
-                }
-            }
-        }
-
         if (entity.OrderStatus == OrderStatus.Complete && entity.CompletedOn == null)
         {
             entity.CompletedOn = DateTime.UtcNow;
@@ -81,31 +51,6 @@ public partial class OrderService : AsyncDbSaveHook<Order>, IOrderService
         foreach (var order in orders)
         {
             await _eventPublisher.PublishOrderUpdatedAsync(order);
-        }
-
-        // Automatically capture payments.
-        if (_toCapture.Any())
-        {
-            var numErrors = 0;
-            foreach (var order in _toCapture)
-            {
-                if (await _orderProcessingService.Value.CanCaptureAsync(order))
-                {
-                    try
-                    {
-                        await _orderProcessingService.Value.CaptureAsync(order);
-                    }
-                    catch (Exception ex)
-                    {
-                        if (++numErrors <= 3)
-                        {
-                            Logger.Error(ex);
-                        }
-                    }
-                }
-            }
-
-            _toCapture.Clear();
         }
     }
 

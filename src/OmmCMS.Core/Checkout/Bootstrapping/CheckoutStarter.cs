@@ -34,7 +34,6 @@ internal sealed class CheckoutStarter : StarterBase
         builder.RegisterType<CheckoutAttributeMaterializer>().As<ICheckoutAttributeMaterializer>().InstancePerLifetimeScope();
         builder.RegisterType<CheckoutAttributeFormatter>().As<ICheckoutAttributeFormatter>().InstancePerLifetimeScope();
         builder.RegisterType<OrderCalculationService>().As<IOrderCalculationService>().InstancePerLifetimeScope();
-        builder.RegisterType<OrderProcessingService>().As<IOrderProcessingService>().InstancePerLifetimeScope();
         builder.RegisterType<ShoppingCartValidator>().As<IShoppingCartValidator>().InstancePerLifetimeScope();
         builder.RegisterType<ShoppingCartService>().As<IShoppingCartService>().InstancePerLifetimeScope();
         builder.RegisterType<GiftCardService>().As<IGiftCardService>().InstancePerLifetimeScope();

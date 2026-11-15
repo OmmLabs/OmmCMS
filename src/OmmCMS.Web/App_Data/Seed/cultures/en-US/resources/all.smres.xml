@@ -7413,12 +7413,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestSettings">
 		<Value>Returns</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.CapturePaymentReason">
-		<Value>Capture payment amount when…</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.CapturePaymentReason.Hint">
-		<Value>Specifies the event when the payment amount is automatically captured. The selected payment method must support capturing for this.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Payment.DisplayPaymentMethodIcons">
 		<Value>Show icons on the payment method selection page</Value>
 	</LocaleResource>
@@ -16246,15 +16240,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Enums.CanonicalHostNameRule.RequireWww">
 		<Value>Require www prefix</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CapturePaymentReason.OrderCompleted">
-		<Value>The order has been marked as completed</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CapturePaymentReason.OrderDelivered">
-		<Value>The order has been marked as delivered</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CapturePaymentReason.OrderShipped">
-		<Value>The order has been marked as shipped</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.CheckoutNewsletterSubscription.Activated">
 		<Value>Show activated</Value>

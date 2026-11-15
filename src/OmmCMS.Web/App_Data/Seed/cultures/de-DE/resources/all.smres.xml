@@ -7258,12 +7258,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestSettings">
 		<Value>Retouren</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.CapturePaymentReason">
-		<Value>Zahlungsbetrag einziehen, wenn…</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Payment.CapturePaymentReason.Hint">
-		<Value>Legt das Ereignis fest, zu dem der Zahlunsgbetrag automatisch eingezogen wird. Die gewählte Zahlart muss hierfür Buchungen unterstützen.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Payment.DisplayPaymentMethodIcons">
 		<Value>Icons auf der Zahlartauswahlseite anzeigen</Value>
 	</LocaleResource>
@@ -15916,15 +15910,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Enums.CanonicalHostNameRule.RequireWww">
 		<Value>www-Präfix erzwingen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CapturePaymentReason.OrderCompleted">
-		<Value>Der Auftrag wurde als abgeschlossen markiert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CapturePaymentReason.OrderDelivered">
-		<Value>Der Auftrag wurde als ausgeliefert markiert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CapturePaymentReason.OrderShipped">
-		<Value>Der Auftrag wurde als versendet markiert</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.CheckoutNewsletterSubscription.Activated">
 		<Value>Aktiviert anzeigen</Value>

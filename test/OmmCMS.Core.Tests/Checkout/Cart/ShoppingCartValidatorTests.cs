@@ -8,7 +8,6 @@ using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Security;
 using OmmCMS.Core.Stores;
-using OmmCMS.Events;
 
 namespace OmmCMS.Core.Tests.Checkout.Cart;
 
@@ -136,7 +135,6 @@ public class ShoppingCartValidatorTests : ServiceTestBase
             null,
             materializer,
             null,
-            null,
-            NullEventPublisher.Instance);
+            null);
     }
 }

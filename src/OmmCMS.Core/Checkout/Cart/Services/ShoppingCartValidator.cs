@@ -2,7 +2,6 @@
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Rules;
 using OmmCMS.Core.Checkout.Attributes;
-using OmmCMS.Core.Checkout.Cart.Events;
 using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Data;
@@ -11,7 +10,6 @@ using OmmCMS.Core.Localization;
 using OmmCMS.Core.Rules;
 using OmmCMS.Core.Security;
 using OmmCMS.Core.Stores;
-using OmmCMS.Events;
 
 namespace OmmCMS.Core.Checkout.Cart;
 
@@ -33,7 +31,6 @@ public partial class ShoppingCartValidator : IShoppingCartValidator
     private readonly ICheckoutAttributeMaterializer _checkoutAttributeMaterializer;
     private readonly IRuleProviderFactory _ruleProviderFactory;
     private readonly ProductUrlHelper _productUrlHelper;
-    private readonly IEventPublisher _eventPublisher;
 
     public ShoppingCartValidator(
         SmartDbContext db,
@@ -48,8 +45,7 @@ public partial class ShoppingCartValidator : IShoppingCartValidator
         IProductAttributeMaterializer productAttributeMaterializer,
         ICheckoutAttributeMaterializer checkoutAttributeMaterializer,
         IRuleProviderFactory ruleProviderFactory,
-        ProductUrlHelper productUrlHelper,
-        IEventPublisher eventPublisher)
+        ProductUrlHelper productUrlHelper)
     {
         _db = db;
         _aclService = aclService;
@@ -64,7 +60,6 @@ public partial class ShoppingCartValidator : IShoppingCartValidator
         _checkoutAttributeMaterializer = checkoutAttributeMaterializer;
         _ruleProviderFactory = ruleProviderFactory;
         _productUrlHelper = productUrlHelper;
-        _eventPublisher = eventPublisher;
     }
 
     public Localizer T { get; set; } = NullLocalizer.Instance;
@@ -188,9 +183,6 @@ public partial class ShoppingCartValidator : IShoppingCartValidator
                 }
             }
         }
-
-        var validatingCartEvent = new ValidatingCartEvent(cart, warnings);
-        await _eventPublisher.PublishAsync(validatingCartEvent);
 
         warnings.AddRange(currentWarnings);
 
