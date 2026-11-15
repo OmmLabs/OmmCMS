@@ -52,6 +52,8 @@ Phases 671–679: constrained the administration rule editor to customer groups,
 
 Phases 680–690: removed checkout and catalogue rule implementations, scheduled product rule evaluation and obsolete tax permissions; retained customer device filters, authentication rule options and messaging permissions.
 
+Phases 691–715: removed catalogue services, product and category hooks, product search and registration, legacy catalogue/search settings navigation and product overview mapping. Generic search, media tree infrastructure and catalogue persistence remain separate.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

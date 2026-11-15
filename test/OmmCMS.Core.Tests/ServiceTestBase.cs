@@ -11,7 +11,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using NUnit.Framework;
-using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media.Storage;
@@ -134,9 +133,6 @@ public abstract class ServiceTestBase
 
                 builder.RegisterInstance(genericAttributeServiceMock.Object).As<IGenericAttributeService>().SingleInstance();
 
-                // Register some dependencies for tests using product attributes.
-                var productAttributeMaterializerMock = new Mock<IProductAttributeMaterializer>();
-                builder.RegisterInstance(productAttributeMaterializerMock.Object).As<IProductAttributeMaterializer>().SingleInstance();
             });
 
         return builder;

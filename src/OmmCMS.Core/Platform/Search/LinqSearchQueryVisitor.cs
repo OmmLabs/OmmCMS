@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Rules;
+﻿using OmmCMS.Core.Rules;
 using OmmCMS.Core.Rules.Filters;
 
 namespace OmmCMS.Core.Search;
@@ -108,8 +107,7 @@ public abstract class LinqSearchQueryVisitor<TEntity, TQuery, TContext>
         IQueryable<TEntity> query)
         where TMember : struct
     {
-        var entityType = typeof(TEntity);
-        var descriptor = new FilterDescriptor<TEntity, TMember>(memberExpression, entityType == typeof(Product) ? RuleScope.Product : RuleScope.Other);
+        var descriptor = new FilterDescriptor<TEntity, TMember>(memberExpression, RuleScope.Other);
         var expressions = new List<FilterExpression>(2);
         var negate = filter.Occurence == SearchFilterOccurence.MustNot;
 

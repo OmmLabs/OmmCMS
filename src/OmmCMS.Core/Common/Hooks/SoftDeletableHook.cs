@@ -30,8 +30,6 @@ internal class SoftDeletableHook : AsyncDbSaveHook<ISoftDeletable>
 
     protected override Task<HookResult> OnUpdatingAsync(ISoftDeletable entity, IHookedEntity entry, CancellationToken cancelToken)
     {
-        // TODO: (core) Handle IAclRestricted, ISlugSupported, Product, Manufacturer and Category in their specific hooks, not here. See OmmCMS.Core.Catalog.Products.ProductHook.
-
         if (entry.IsSoftDeleted == true)
         {
             _softDeletedEntries.Add(entry);

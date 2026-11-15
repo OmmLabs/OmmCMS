@@ -44,24 +44,6 @@ public partial class SettingsMenu : MenuBase
             },
             new MenuItem
             {
-                Id = "catalog",
-                Text = T("Admin.Catalog"),
-                Icon = "box",
-                PermissionNames = perm,
-                ControllerName = "Product",
-                ActionName = "CatalogSettings"
-            },
-            new MenuItem
-            {
-                Id = "search",
-                Text = T("Search.Title"),
-                Icon = "search",
-                PermissionNames = perm,
-                ControllerName = "Search",
-                ActionName = "SearchSettings"
-            },
-            new MenuItem
-            {
                 Id = "customer",
                 Text = T("Admin.Customers"),
                 Icon = "user",

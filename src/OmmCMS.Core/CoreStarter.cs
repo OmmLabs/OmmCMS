@@ -18,7 +18,6 @@ using System.Text;
 using Autofac;
 using OmmCMS.Bootstrapping;
 using OmmCMS.ComponentModel;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Data.Migrations;
 using OmmCMS.Core.Data.Migrations.Icons;
