@@ -12,6 +12,7 @@ using Smartstore.Core.Security;
 using Smartstore.Core.Stores;
 using Smartstore.Data;
 using Smartstore.Web.Rendering;
+using Smartstore.Web.Infrastructure;
 
 namespace Smartstore.Web.Controllers;
 
@@ -51,6 +52,12 @@ public partial class EntityController : PublicController
 
     public async Task<IActionResult> Picker(EntityPickerModel model)
     {
+        if (OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration) &&
+            OmmCmsCommerceIsolation.IsCommercePickerEntity(model.EntityType))
+        {
+            return NotFound();
+        }
+
         if (model.EntityType.EqualsNoCase("product"))
         {
             ViewBag.AvailableCategories = (await _categoryService.GetCategoryTreeAsync(includeHidden: true))
@@ -94,6 +101,12 @@ public partial class EntityController : PublicController
     [ActionName("Picker")]
     public async Task<IActionResult> PickerPost(EntityPickerModel model)
     {
+        if (OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration) &&
+            OmmCmsCommerceIsolation.IsCommercePickerEntity(model.EntityType))
+        {
+            return NotFound();
+        }
+
         var isCustomerPicker = model.EntityType.EqualsNoCase("customer");
         if (isCustomerPicker && !await CanAccessCustomerPicker())
         {
@@ -421,6 +434,12 @@ public partial class EntityController : PublicController
     [Route("entity/patch")]
     public async Task<IActionResult> Patch(string entityName, int entityId, string propertyName, [FromBody] object value)
     {
+        if (OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration) &&
+            !OmmCmsCommerceIsolation.IsAllowedPatchEntity(entityName))
+        {
+            return NotFound();
+        }
+
         var success = false;
 
         try
@@ -449,6 +468,12 @@ public partial class EntityController : PublicController
     [Route("entity/patchlocalized")]
     public async Task<IActionResult> PatchLocalized(int languageId, string entityName, int entityId, string propertyName, [FromBody] object value)
     {
+        if (OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration) &&
+            !OmmCmsCommerceIsolation.IsAllowedPatchEntity(entityName))
+        {
+            return NotFound();
+        }
+
         var success = false;
 
         try

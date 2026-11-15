@@ -171,12 +171,12 @@ public partial class SettingsMenu : MenuBase
             }
         ]);
 
-        // CMS preview only filters the settings navigation, not the underlying commerce endpoints.
+        // Keep settings navigation in sync with the CMS profile.
         if (bool.TryParse(Services.ApplicationContext.Configuration["OmmCMS:PreviewShell"], out var cmsEnabled) && cmsEnabled)
         {
             var commerceSettingIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
             {
-                "catalog", "cart", "order", "payment", "finance", "shipping",
+                "catalog", "search", "cart", "order", "payment", "finance", "shipping",
                 "reward-points", "dataexchange", "all"
             };
 

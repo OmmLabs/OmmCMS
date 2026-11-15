@@ -12,6 +12,7 @@ namespace Smartstore.Web.Infrastructure;
 public partial class MyAccountMenu : IMenu
 {
     private readonly SmartDbContext _db;
+    private readonly bool _cmsPreview;
     private readonly IStoreContext _storeContext;
     private readonly IWorkContext _workContext;
     private readonly ISettingService _settingService;
@@ -32,9 +33,11 @@ public partial class MyAccountMenu : IMenu
         IEventPublisher eventPublisher,
         CustomerSettings customerSettings,
         OrderSettings orderSettings,
-        RewardPointsSettings rewardPointsSettings)
+        RewardPointsSettings rewardPointsSettings,
+        IApplicationContext appContext)
     {
         _db = db;
+        _cmsPreview = OmmCmsMode.IsEnabled(appContext.Configuration);
         _storeContext = storeContext;
         _workContext = workContext;
         _settingService = settingService;
@@ -118,7 +121,7 @@ public partial class MyAccountMenu : IMenu
             }
         ]);
 
-        if (!_customerSettings.HideMyAccountOrders)
+        if (!_cmsPreview && !_customerSettings.HideMyAccountOrders)
         {
             root.Append(new MenuItem
             {
@@ -130,7 +133,7 @@ public partial class MyAccountMenu : IMenu
             });
         }
 
-        if ((_orderSettings.ReturnRequestsEnabled || await _settingService.GetSettingByKeyAsync<bool>("WithdrawalSettings.Enabled"))
+        if (!_cmsPreview && (_orderSettings.ReturnRequestsEnabled || await _settingService.GetSettingByKeyAsync<bool>("WithdrawalSettings.Enabled"))
             && await _db.ReturnCases.ApplyStandardFilter(null, _workContext.CurrentCustomer.Id, _storeContext.CurrentStore.Id).AnyAsync())
         {
             root.Append(new MenuItem
@@ -143,7 +146,7 @@ public partial class MyAccountMenu : IMenu
             });
         }
 
-        if (!_customerSettings.HideDownloadableProductsTab)
+        if (!_cmsPreview && !_customerSettings.HideDownloadableProductsTab)
         {
             root.Append(new MenuItem
             {
@@ -155,7 +158,7 @@ public partial class MyAccountMenu : IMenu
             });
         }
 
-        if (!_customerSettings.HideBackInStockSubscriptionsTab)
+        if (!_cmsPreview && !_customerSettings.HideBackInStockSubscriptionsTab)
         {
             root.Append(new MenuItem
             {
@@ -167,7 +170,7 @@ public partial class MyAccountMenu : IMenu
             });
         }
 
-        if (_rewardPointsSettings.Enabled)
+        if (!_cmsPreview && _rewardPointsSettings.Enabled)
         {
             root.Append(new MenuItem
             {

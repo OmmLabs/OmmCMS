@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- OmmCMS preview administration. Navigation only; commerce routes remain accessible until backend isolation. -->
+<!-- OmmCMS preview administration. Known commerce MVC endpoints are isolated by Phase 3. -->
 <siteMap>
     <siteMapNode id="home" title="OmmCMS" controller="Topic" action="List" area="Admin">
         <siteMapNode id="cms" title="Content" permissionNames="cms" icon="cms">

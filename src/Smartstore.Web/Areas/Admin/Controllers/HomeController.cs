@@ -133,6 +133,11 @@ public class HomeController : AdminController
     [Permission(Permissions.Dashboard.Read)]
     public async Task<IActionResult> Index(bool edit = false, DashboardLayoutLayer? layer = null)
     {
+        if (OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration))
+        {
+            return RedirectToAction("List", "Topic", new { area = "Admin" });
+        }
+
         return View(await BuildDashboardModelAsync(layer, edit));
     }
 
