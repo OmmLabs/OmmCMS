@@ -1,14 +1,6 @@
 ﻿namespace OmmCMS.Core.Checkout.Tax;
 
 /// <summary>
-/// Represents the pricing target for tax formatting.
-/// </summary>
-public enum PricingTarget
-{
-    Product
-}
-
-/// <summary>
 /// Represents the tax display type.
 /// </summary>
 public enum TaxDisplayType

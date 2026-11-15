@@ -11,29 +11,9 @@ public class TaxSettings : ISettings
 
 
     /// <summary>
-    /// Gets or sets a value indicating whether to display tax suffix
-    /// </summary>
-    public bool DisplayTaxSuffix { get; set; } = true;
-
-    /// <summary>
-    /// Gets or sets a value indicating whether each tax rate should be displayed on separate line (shopping cart page)
-    /// </summary>
-    public bool DisplayTaxRates { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether customers are allowed to select tax display type
     /// </summary>
     public bool AllowCustomersToSelectTaxDisplayType { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to hide zero tax
-    /// </summary>
-    public bool HideZeroTax { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to hide tax in order summary when prices are shown tax inclusive
-    /// </summary>
-    public bool HideTaxInOrderSummary { get; set; }
 
 
 

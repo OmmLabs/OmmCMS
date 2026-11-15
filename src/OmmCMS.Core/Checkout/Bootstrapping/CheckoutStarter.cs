@@ -2,7 +2,6 @@
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Rules;
 using OmmCMS.Core.Checkout.Shipping;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Identity.Rules;
 using OmmCMS.Core.Rules;
 using OmmCMS.Core.Rules.Rendering;
@@ -16,7 +15,6 @@ internal sealed class CheckoutStarter : StarterBase
     public override void ConfigureContainer(ContainerBuilder builder, IApplicationContext appContext)
     {
         builder.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
-        builder.RegisterType<TaxService>().As<ITaxService>().InstancePerLifetimeScope();
 
         // Cart rules.
         var cartRuleTypes = appContext.TypeScanner.FindTypes<IRule<CartRuleContext>>().ToList();

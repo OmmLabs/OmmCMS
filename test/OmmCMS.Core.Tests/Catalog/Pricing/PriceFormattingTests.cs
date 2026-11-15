@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Net.Http;
-using Moq;
 using NUnit.Framework;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
-using OmmCMS.Core.Common.Configuration;
-using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Localization;
 using OmmCMS.Test.Common;
 
@@ -14,20 +10,12 @@ namespace OmmCMS.Core.Tests.Catalog.Pricing;
 [TestFixture]
 public class PriceFormattingTests : ServiceTestBase
 {
-    ITaxService _taxService;
-    ILocalizationService _localizationService;
-    IWorkContext _workContext;
-    IRoundingHelper _roundingHelper;
-    TaxSettings _taxSettings;
-
     Currency _currencyEUR;
     Currency _currencyUSD;
 
     [SetUp]
     public new void SetUp()
     {
-        _taxSettings = new TaxSettings();
-
         _currencyEUR = new Currency
         {
             Id = 1,
@@ -54,19 +42,6 @@ public class PriceFormattingTests : ServiceTestBase
             UpdatedOnUtc = DateTime.UtcNow
         };
 
-        var workContextMock = new Mock<IWorkContext>();
-        workContextMock.Setup(x => x.WorkingCurrency).Returns(_currencyEUR);
-        _workContext = workContextMock.Object;
-
-        _roundingHelper = new RoundingHelper(_workContext, new CurrencySettings());
-
-        var localizationServiceMock = new Mock<ILocalizationService>();
-        _localizationService = localizationServiceMock.Object;
-
-        _taxService = new TaxService(
-            _workContext,
-            _localizationService,
-            _taxSettings);
     }
 
     [Test]
@@ -90,23 +65,6 @@ public class PriceFormattingTests : ServiceTestBase
             _currencyEUR.CustomFormatting = string.Empty;
             new Money(1234.5M, _currencyEUR).ToString().ShouldEqual("1.234,50 €");
         }
-    }
-
-    [Test]
-    public void Can_formatPrice_with_showTax()
-    {
-        var language = new Language
-        {
-            Id = 1,
-            Name = "English",
-            LanguageCulture = "en-US"
-        };
-
-        var formatIncl = _taxService.GetTaxFormat(true, true, PricingTarget.Product, language);
-        var formatExcl = _taxService.GetTaxFormat(true, false, PricingTarget.Product, language);
-
-        new Money(1234.5M, _currencyUSD, false, formatIncl).ToString().ShouldEqual("$1,234.50 *");
-        new Money(1234.5M, _currencyUSD, false, formatExcl).ToString().ShouldEqual("$1,234.50 *");
     }
 
     [Test]

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OmmCMS.Core.Catalog;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Menus;
@@ -26,7 +25,6 @@ public class DefaultLlmsGenerator : ILlmsGenerator
     private readonly ContactDataSettings _contactSettings;
     private readonly HomePageSettings _homepageSettings;
     private readonly SocialSettings _socialSettings;
-    private readonly TaxSettings _taxSettings;
     private readonly CatalogSettings _catalogSettings;
 
     protected IUrlHelper Url => _urlHelper.Value;
@@ -42,7 +40,6 @@ public class DefaultLlmsGenerator : ILlmsGenerator
         ContactDataSettings contactSettings,
         HomePageSettings homepageSettings,
         SocialSettings socialSettings,
-        TaxSettings taxSettings,
         CatalogSettings catalogSettings)
     {
         _db = db;
@@ -55,7 +52,6 @@ public class DefaultLlmsGenerator : ILlmsGenerator
         _contactSettings = contactSettings;
         _homepageSettings = homepageSettings;
         _socialSettings = socialSettings;
-        _taxSettings = taxSettings;
         _catalogSettings = catalogSettings;
     }
 
@@ -105,17 +101,6 @@ public class DefaultLlmsGenerator : ILlmsGenerator
         WriteLine(writer, "VAT ID", company.VatId);
         WriteLine(writer, "Support Email", _contactSettings.SupportEmailAddress);
         WriteLine(writer, "Support Phone", _contactSettings.HotlineTelephoneNumber);
-
-        if (_taxSettings.TaxDisplayType == TaxDisplayType.IncludingTax)
-        {
-            WriteLine(writer, "Target Audience", "B2C");
-            WriteLine(writer, "Price Display", "Gross (Prices include VAT)");
-        }
-        else
-        {
-            WriteLine(writer, "Target Audience", "B2B");
-            WriteLine(writer, "Price Display", "Net (Prices exclude VAT)");
-        }
 
         WriteLine(writer, "Currency", _workContext.WorkingCurrency?.CurrencyCode);
         WriteLine(writer, "Available Languages", string.Join(", ", languages.Select(x => x.UniqueSeoCode)));

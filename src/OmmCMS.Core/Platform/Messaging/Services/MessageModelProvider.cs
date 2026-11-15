@@ -9,7 +9,6 @@ using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Checkout.Tax;
@@ -211,12 +210,6 @@ public partial class MessageModelProvider : IMessageModelProvider
                 break;
             case IModelPart x:
                 MergeModelBag(x, model, messageContext);
-                break;
-            case Order x:
-                modelPart = await CreateModelPartAsync(x, messageContext);
-                break;
-            case OrderItem x:
-                modelPart = await CreateModelPartAsync(x, messageContext);
                 break;
             case Product x:
                 modelPart = await CreateModelPartAsync(x, messageContext);
