@@ -18,10 +18,10 @@ public abstract class FilterTestsBase
 {
     private List<Customer> _customers;
 
-    private CustomerRole _role1 = new() { Id = 1, Active = true, TaxDisplayType = 1 };
-    private CustomerRole _role2 = new() { Id = 2, Active = true, TaxDisplayType = 1 };
-    private CustomerRole _role3 = new() { Id = 3, Active = false, TaxDisplayType = 1 };
-    private CustomerRole _role4 = new() { Id = 4, Active = true, TaxDisplayType = 2 };
+    private CustomerRole _role1 = new() { Id = 1, Active = true };
+    private CustomerRole _role2 = new() { Id = 2, Active = true };
+    private CustomerRole _role3 = new() { Id = 3, Active = false };
+    private CustomerRole _role4 = new() { Id = 4, Active = true };
 
     private Store _store1 = new() { Id = 1 };
     private Store _store2 = new() { Id = 2 };

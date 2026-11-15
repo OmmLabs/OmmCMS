@@ -504,7 +504,6 @@ public class ExportXmlHelper : Disposable
                 _writer.WriteStartElement("CustomerRole");
                 _writer.WriteElementString(nameof(CustomerRole.Id), entityRole.Id.ToString());
                 _writer.WriteElementString(nameof(CustomerRole.Name), (string)role.Name);
-                _writer.WriteElementString(nameof(CustomerRole.TaxDisplayType), entityRole.TaxDisplayType?.ToString() ?? string.Empty);
                 _writer.WriteElementString(nameof(CustomerRole.Active), entityRole.Active.ToString());
                 _writer.WriteElementString(nameof(CustomerRole.IsSystemRole), entityRole.IsSystemRole.ToString());
                 _writer.WriteElementString(nameof(CustomerRole.SystemName), entityRole.SystemName);

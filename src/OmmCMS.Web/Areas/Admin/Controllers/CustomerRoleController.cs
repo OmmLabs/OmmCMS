@@ -459,10 +459,6 @@ public class CustomerRoleController : AdminController
             ViewBag.PrimaryStoreCurrencyCode = _currencyService.PrimaryCurrency.CurrencyCode;
         }
 
-        ViewBag.TaxDisplayTypes = model.TaxDisplayType.HasValue
-            ? ((TaxDisplayType)model.TaxDisplayType.Value).ToSelectList()
-            : TaxDisplayType.IncludingTax.ToSelectList(false);
-
         ViewBag.UsernamesEnabled = _customerSettings.SupportsUsernames();
     }
 

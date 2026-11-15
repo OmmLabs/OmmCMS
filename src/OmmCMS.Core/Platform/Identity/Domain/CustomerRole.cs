@@ -54,11 +54,6 @@ public partial class CustomerRole : EntityWithAttributes, IRulesContainer
     public string Name { get; set; }
 
     /// <summary>
-    /// Gets or sets the tax display type.
-    /// </summary>
-    public int? TaxDisplayType { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether the customer role is active.
     /// </summary>
     public bool Active { get; set; }

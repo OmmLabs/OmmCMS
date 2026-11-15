@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
-using OmmCMS.Caching;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Services;
@@ -12,25 +11,14 @@ using OmmCMS.Core.Localization;
 using OmmCMS.Core.Security;
 using OmmCMS.Core.Stores;
 using OmmCMS.Core.Web;
-using OmmCMS.Data.Hooks;
 using OmmCMS.Net;
 using OmmCMS.Threading;
 using OmmCMS.Utilities;
 
 namespace OmmCMS.Core;
 
-public class DefaultWorkContextSource : AsyncDbSaveHook<BaseEntity>, IWorkContextSource
+public class DefaultWorkContextSource : IWorkContextSource
 {
-    /// <summary>
-    /// Key for tax display type caching
-    /// </summary>
-    /// <remarks>
-    /// {0} : customer role ids
-    /// {1} : store identifier
-    /// </remarks>
-    const string CUSTOMERROLES_TAX_DISPLAY_TYPES_KEY = "customerroles:taxdisplaytypes-{0}-{1}";
-    const string CUSTOMERROLES_TAX_DISPLAY_TYPES_PATTERN_KEY = "customerroles:taxdisplaytypes*";
-
     private readonly static Func<DetectCustomerContext, Task<Customer>>[] _customerDetectors =
     [
         DetectTaskScheduler,
@@ -51,7 +39,6 @@ public class DefaultWorkContextSource : AsyncDbSaveHook<BaseEntity>, IWorkContex
     private readonly ICustomerService _customerService;
     private readonly Lazy<ICurrencyService> _currencyService;
     private readonly TaxSettings _taxSettings;
-    private readonly ICacheManager _cache;
     private readonly IUserAgent _userAgent;
     private readonly IWebHelper _webHelper;
     private readonly IOverloadProtector _overloadProtector;
@@ -65,7 +52,6 @@ public class DefaultWorkContextSource : AsyncDbSaveHook<BaseEntity>, IWorkContex
         ICustomerService customerService,
         Lazy<ICurrencyService> currencyService,
         TaxSettings taxSettings,
-        ICacheManager cache,
         IUserAgent userAgent,
         IWebHelper webHelper,
         IOverloadProtector overloadProtector,
@@ -79,34 +65,12 @@ public class DefaultWorkContextSource : AsyncDbSaveHook<BaseEntity>, IWorkContex
         _taxSettings = taxSettings;
         _currencyService = currencyService;
         _userAgent = userAgent;
-        _cache = cache;
         _webHelper = webHelper;
         _overloadProtector = overloadProtector;
         _appContext = appContext;
     }
 
     public ILogger Logger { get; set; } = NullLogger.Instance;
-
-    public override async Task<HookResult> OnAfterSaveAsync(IHookedEntity entry, CancellationToken cancelToken)
-    {
-        if (entry.Entity is CustomerRole)
-        {
-            await _cache.RemoveByPatternAsync(CUSTOMERROLES_TAX_DISPLAY_TYPES_PATTERN_KEY);
-            return HookResult.Ok;
-        }
-        else if (entry.Entity is Setting setting && entry.InitialState == EntityState.Modified)
-        {
-            if (setting.Name.EqualsNoCase(TypeHelper.NameOf<TaxSettings>(x => x.TaxDisplayType, true)))
-            {
-                await _cache.RemoveByPatternAsync(CUSTOMERROLES_TAX_DISPLAY_TYPES_PATTERN_KEY); // depends on TaxSettings.TaxDisplayType
-            }
-            return HookResult.Ok;
-        }
-        else
-        {
-            return HookResult.Void;
-        }
-    }
 
     public async Task<(Customer, Customer)> ResolveCurrentCustomerAsync()
     {
@@ -370,39 +334,10 @@ public class DefaultWorkContextSource : AsyncDbSaveHook<BaseEntity>, IWorkContex
         return currency;
     }
 
-    public virtual async Task<TaxDisplayType> ResolveTaxDisplayTypeAsync(Customer customer, int storeId)
-    {
-        int? taxDisplayTypeId = null;
-
-        if (_taxSettings.AllowCustomersToSelectTaxDisplayType && customer != null)
-        {
-            taxDisplayTypeId = customer.TaxDisplayTypeId;
-        }
-
-        if (taxDisplayTypeId == null)
-        {
-            var customerRoles = customer.CustomerRoleMappings.Select(x => x.CustomerRole).ToList();
-            string cacheKey = string.Format(CUSTOMERROLES_TAX_DISPLAY_TYPES_KEY, string.Join(",", customerRoles.Select(x => x.Id)), storeId);
-            var cacheResult = _cache.Get(cacheKey, () =>
-            {
-                var roleTaxDisplayTypes = customerRoles
-                    .Where(x => x.TaxDisplayType.HasValue)
-                    .OrderByDescending(x => x.TaxDisplayType.Value)
-                    .Select(x => x.TaxDisplayType.Value);
-
-                if (roleTaxDisplayTypes.Any())
-                {
-                    return (TaxDisplayType)roleTaxDisplayTypes.FirstOrDefault();
-                }
-
-                return _taxSettings.TaxDisplayType;
-            });
-
-            taxDisplayTypeId = (int)cacheResult;
-        }
-
-        return (TaxDisplayType)taxDisplayTypeId.Value;
-    }
+    public virtual Task<TaxDisplayType> ResolveTaxDisplayTypeAsync(Customer customer, int storeId)
+        => Task.FromResult(_taxSettings.AllowCustomersToSelectTaxDisplayType && customer != null
+            ? (TaxDisplayType)customer.TaxDisplayTypeId
+            : _taxSettings.TaxDisplayType);
 
     public Task SaveCustomerAttribute(Customer customer, string name, int? value, bool async)
     {
