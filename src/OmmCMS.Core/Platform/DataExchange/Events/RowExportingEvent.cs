@@ -1,4 +1,4 @@
-﻿using OmmCMS.Core.Catalog.Products;
+﻿using OmmCMS.Core.Identity;
 using OmmCMS.Events;
 
 namespace OmmCMS.Core.DataExchange.Export.Events;
@@ -9,7 +9,7 @@ namespace OmmCMS.Core.DataExchange.Export.Events;
 public class RowExportingEvent : IEventMessage
 {
     /// <summary>
-    /// A dynamic object which wraps and extents the actual entity, e.g. <see cref="Product"/>.
+    /// A dynamic object which wraps and extends the actual entity, e.g. <see cref="Customer"/>.
     /// </summary>
     public dynamic Row { get; init; }
 

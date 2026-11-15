@@ -1,8 +1,6 @@
 ﻿#nullable enable
 
 using OmmCMS.Collections;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Data;
 using OmmCMS.IO;
@@ -11,7 +9,7 @@ using OmmCMS.Net.Http;
 namespace OmmCMS.Core.DataExchange.Import;
 
 /// <summary>
-/// Helper to import images (like product and category images) in a performant way.
+/// Helper to import images in a performant way.
 /// Images are downloaded if <see cref="DownloadManagerItem.Url"/> is specified and
 /// they will not be imported if they already exist (duplicate check).
 /// </summary>
@@ -30,7 +28,7 @@ public interface IMediaImporter
     /// In that case, the images in the import file are referenced by file path (absolute or relative).
     /// </param>
     /// <param name="downloadDirectory">Directory in which the downloaded images will be saved.</param>
-    /// <param name="entity">The entity to which the file belongs. E.g. <see cref="Product"/>, <see cref="Category"/> etc.</param>
+    /// <param name="entity">The entity to which the file belongs.</param>
     /// <param name="urlOrPath">URL or path to download.</param>
     /// <param name="state">Any state to identify the source later after batch save. E.g. <see cref="ImportRow{T}"/> etc.</param>
     /// <param name="displayOrder">Display order of the item.</param>
@@ -69,13 +67,13 @@ public interface IMediaImporter
         CancellationToken cancelToken = default) where T : BaseEntity;
 
     /// <summary>
-    /// Generic method that imports a batch of media files assigned to entities with a 1:n relationship to media files (e.g. <see cref="Product"/> --&gt; <see cref="ProductMediaFile"/>).
+    /// Generic method that imports a batch of media files assigned to entities with a 1:n relationship to media files.
     /// </summary>
     /// <param name="items">Collection of files to be imported. Files are downloaded if <see cref="DownloadManagerItem.Url"/> is specified.</param>
     /// <param name="album">Media album to be assigned to the imported files.</param>
     /// <param name="existingFiles">Map of already assigned media files.</param>
     /// <param name="assignMediaFileHandler">
-    ///     Callback function to assign imported files to designated entities which derive from IMediaFile (e.g. <see cref="ProductMediaFile"/>).
+    ///     Callback function to assign imported files to designated entities which derive from IMediaFile.
     ///     Returns the assigned media file so it can be added to the existing files dictionary (so that it won't be imported again).
     /// </param>
     /// <param name="duplicateFileHandling">A value indicating how to handle duplicate images.</param>
@@ -86,59 +84,6 @@ public interface IMediaImporter
         MediaFolderNode album,
         Multimap<int, IMediaFile> existingFiles,
         Func<MediaFile, DownloadManagerItem, IMediaFile> assignMediaFileHandler,
-        DuplicateFileHandling duplicateFileHandling = DuplicateFileHandling.Rename,
-        CancellationToken cancelToken = default);
-
-    /// <summary>
-    /// Imports a batch of product images.
-    /// </summary>
-    /// <param name="items">Collection of product images to be imported. Images are downloaded if <see cref="DownloadManagerItem.Url"/> is specified.</param>
-    /// <param name="duplicateFileHandling">A value indicating how to handle duplicate images.</param>
-    /// <returns>Number of new images.</returns>
-    Task<int> ImportProductImagesAsync(
-        DbContextScope scope,
-        ICollection<DownloadManagerItem>? items,
-        DuplicateFileHandling duplicateFileHandling = DuplicateFileHandling.Rename,
-        CancellationToken cancelToken = default);
-
-    /// <summary>
-    /// Imports a batch of product images.
-    /// </summary>
-    /// <param name="product">Product entity.</param>
-    /// <param name="items">
-    /// Collection of product images to be imported.
-    /// Existing files can be overwritten by passing a dictionary{string},{oblect} for <see cref="FileBatchSource.State"/>
-    /// using key "MediaFileId" and value <see cref="MediaFile"/> identifier.
-    /// </param>
-    /// <param name="duplicateFileHandling">A value indicating how to handle duplicate images.</param>
-    /// <returns>Number of new images.</returns>
-    Task<int> ImportProductImagesAsync(
-        Product product,
-        ICollection<FileBatchSource>? items,
-        DuplicateFileHandling duplicateFileHandling = DuplicateFileHandling.Rename,
-        CancellationToken cancelToken = default);
-
-    /// <summary>
-    /// Imports a batch of category images.
-    /// </summary>
-    /// <param name="items">Collection of category images to be imported. Images are downloaded if <see cref="DownloadManagerItem.Url"/> is specified.</param>
-    /// <param name="duplicateFileHandling">A value indicating how to handle duplicate images.</param>
-    /// <returns>Number of new images.</returns>
-    Task<int> ImportCategoryImagesAsync(
-        DbContextScope scope,
-        ICollection<DownloadManagerItem>? items,
-        DuplicateFileHandling duplicateFileHandling = DuplicateFileHandling.Rename,
-        CancellationToken cancelToken = default);
-
-    /// <summary>
-    /// Imports a batch of manufacturer images.
-    /// </summary>
-    /// <param name="items">Collection of manufacturer images to be imported. Images are downloaded if <see cref="DownloadManagerItem.Url"/> is specified.</param>
-    /// <param name="duplicateFileHandling">A value indicating how to handle duplicate images.</param>
-    /// <returns>Number of new images.</returns>
-    Task<int> ImportManufacturerImagesAsync(
-        DbContextScope scope,
-        ICollection<DownloadManagerItem>? items,
         DuplicateFileHandling duplicateFileHandling = DuplicateFileHandling.Rename,
         CancellationToken cancelToken = default);
 

@@ -1,4 +1,3 @@
-﻿using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Engine.Modularity;
 using OmmCMS.Scheduling;
 
@@ -29,8 +28,6 @@ public class DataExportRequest
     public string ActionOrigin { get; set; }
 
     public IDictionary<string, object> CustomData { get; private set; } = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-
-    public IQueryable<Product> ProductQuery { get; set; }
 
     Task OnProgress(int value, int max, string msg)
     {

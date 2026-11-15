@@ -1,5 +1,3 @@
-﻿using OmmCMS.Core.Catalog.Products;
-
 namespace OmmCMS.Core.DataExchange;
 
 /// <summary>
@@ -22,83 +20,6 @@ public class ExportFilter
     /// Entity created to.
     /// </summary>
     public DateTime? CreatedTo { get; set; }
-
-    /// <summary>
-    /// A value indicating whether to load only published or non published entities.
-    /// </summary>
-    public bool? IsPublished { get; set; }
-
-    #region Product
-
-    /// <summary>
-    /// Minimum product identifier.
-    /// </summary>
-    public int? IdMinimum { get; set; }
-
-    /// <summary>
-    /// Maximum product identifier.
-    /// </summary>
-    public int? IdMaximum { get; set; }
-
-    /// <summary>
-    /// Minimum price.
-    /// </summary>
-    public decimal? PriceMinimum { get; set; }
-
-    /// <summary>
-    /// Maximum price.
-    /// </summary>
-    public decimal? PriceMaximum { get; set; }
-
-
-
-    /// <summary>
-    /// A value indicating whether to load products without any category mapping.
-    /// </summary>
-    public bool? WithoutCategories { get; set; }
-
-    /// <summary>
-    /// Category identifiers.
-    /// </summary>
-    public int[] CategoryIds { get; set; }
-    public int? CategoryId { get; set; }
-
-    /// <summary>
-    /// A value indicating whether products from subcategories should also be filtered.
-    /// </summary>
-    public bool IncludeSubCategories { get; set; }
-
-    /// <summary>
-    /// A value indicating whether to load products without any manufacturer mapping.
-    /// </summary>
-    public bool? WithoutManufacturers { get; set; }
-
-    /// <summary>
-    /// Manufacturer identifier.
-    /// </summary>
-    public int? ManufacturerId { get; set; }
-
-    /// <summary>
-    /// Identifiers of product tag.
-    /// </summary>
-    public int? ProductTagId { get; set; }
-
-    /// <summary>
-    /// A value indicating whether to load products that are marked as featured (relates only to categories and manufacturers).
-    /// </summary>
-    public bool? FeaturedProducts { get; set; }
-
-    /// <summary>
-    /// Filter by product type.
-    /// </summary>
-    public ProductType? ProductType { get; set; }
-
-    /// <summary>
-    /// Filter by visibility.
-    /// </summary>
-    public ProductVisibility? Visibility { get; set; } = ProductVisibility.Full;
-
-    #endregion
 
     #region Customer
 

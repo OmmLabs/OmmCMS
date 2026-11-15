@@ -1,6 +1,3 @@
-﻿using System.Xml.Serialization;
-using OmmCMS.Core.Catalog.Products;
-
 namespace OmmCMS.Core.DataExchange;
 
 /// <summary>
@@ -30,95 +27,6 @@ public class ExportProjection
     /// Customer identifier.
     /// </summary>
     public int? CustomerId { get; set; }
-
-    #endregion
-
-    #region Product
-
-    /// <summary>
-    /// Description merging identifier.
-    /// </summary>
-    public int DescriptionMergingId { get; set; }
-
-    /// <summary>
-    /// Decription merging.
-    /// </summary>
-    [XmlIgnore]
-    public ExportDescriptionMerging DescriptionMerging
-    {
-        get => (ExportDescriptionMerging)DescriptionMergingId;
-        set => DescriptionMergingId = (int)value;
-    }
-
-    /// <summary>
-    /// A value indicating whether to convert HTML decription to plain text.
-    /// </summary>
-    public bool DescriptionToPlainText { get; set; }
-
-    /// <summary>
-    /// Comma separated text to append to the decription.
-    /// </summary>
-    public string AppendDescriptionText { get; set; }
-
-    /// <summary>
-    /// Remove critical characters from the description.
-    /// </summary>
-    public bool RemoveCriticalCharacters { get; set; }
-
-    /// <summary>
-    /// Comma separated list of critical characters.
-    /// </summary>
-    public string CriticalCharacters { get; set; }
-
-    /// <summary>
-    /// Fallback for product brand.
-    /// </summary>
-    public string Brand { get; set; }
-
-    /// <summary>
-    /// Number of images per object to be exported.
-    /// </summary>
-    public int? NumberOfMediaFiles { get; set; }
-
-    /// <summary>
-    /// The size of exported pictures in pixel.
-    /// </summary>
-    public int PictureSize { get; set; }
-
-    /// <summary>
-    /// Fallback for shipping time.
-    /// </summary>
-    public string ShippingTime { get; set; }
-
-    /// <summary>
-    /// A value indicating whether to export attribute combinations as products.
-    /// </summary>
-    public bool AttributeCombinationAsProduct { get; set; }
-
-    /// <summary>
-    /// Identifier for merging attribute values of attribute combinations.
-    /// </summary>
-    public int AttributeCombinationValueMergingId { get; set; }
-
-    /// <summary>
-    /// Merging attribute values of attribute combinations.
-    /// </summary>
-    [XmlIgnore]
-    public ExportAttributeValueMerging AttributeCombinationValueMerging
-    {
-        get => (ExportAttributeValueMerging)AttributeCombinationValueMergingId;
-        set => AttributeCombinationValueMergingId = (int)value;
-    }
-
-    /// <summary>
-    /// A value indicating whether to export grouped products.
-    /// </summary>
-    public bool NoGroupedProducts { get; set; }
-
-    /// <summary>
-    /// A value indicating whether to ignore associated products with <see cref="Product.Visibility"/> set to <see cref="ProductVisibility.Hidden"/> during export.
-    /// </summary>
-    public bool OnlyIndividuallyVisibleAssociated { get; set; } = true;
 
     #endregion
 }

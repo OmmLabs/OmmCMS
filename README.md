@@ -40,6 +40,8 @@ Phases 616–620: removed bundled storefront brand, category, product and downlo
 
 Phases 621–627: extracted the product, category and manufacturer import engines, their container registrations, import entity choices, and profile field maps. Customer and newsletter imports remain supported with their existing persisted type identifiers; retired profiles are rejected before import.
 
+Phases 628–645: extracted catalogue export queries, data segmenters, batch contexts, dynamic projections, XML output, provider options, filters and admin models; removed product, category and manufacturer media import adapters while preserving generic media import and customer avatars. Customer and newsletter export identifiers remain unchanged, and retired providers are rejected before running.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

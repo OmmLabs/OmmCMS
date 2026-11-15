@@ -3,7 +3,7 @@
 public abstract class ExportProviderBase : IExportProvider
 {
     /// <inheritdoc/>
-    public virtual ExportEntityType EntityType => ExportEntityType.Product;
+    public abstract ExportEntityType EntityType { get; }
 
     /// <inheritdoc/>
     public virtual string FileExtension => null;

@@ -4,12 +4,6 @@ using System.Security;
 using Autofac;
 using Microsoft.AspNetCore.Mvc;
 using OmmCMS.Collections;
-using OmmCMS.Core.Catalog;
-using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Catalog.Search;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
@@ -41,27 +35,16 @@ public partial class DataExporter : IDataExporter
     private readonly ICommonServices _services;
     private readonly IWorkContext _workContext;
     private readonly IExportProfileService _exportProfileService;
-    private readonly IProductService _productService;
-    private readonly IProductAttributeMaterializer _productAttributeMaterializer;
-    private readonly ICatalogSearchService _catalogSearchService;
-    private readonly ICategoryService _categoryService;
-    private readonly IManufacturerService _manufacturerService;
-    private readonly ICurrencyService _currencyService;
     private readonly IMediaService _mediaService;
     private readonly ILanguageService _languageService;
     private readonly ILocalizedEntityService _localizedEntityService;
-    private readonly IGenericAttributeService _genericAttributeService;
-    private readonly IUrlService _urlService;
     private readonly IMailService _mailService;
     private readonly IQueuedEmailService _queuedEmailService;
     private readonly Lazy<IUrlHelper> _urlHelper;
-    private readonly ProductUrlHelper _productUrlHelper;
     private readonly IProviderManager _providerManager;
     private readonly IHttpClientFactory _httpClientFactory;
 
-    private readonly CatalogSettings _catalogSettings;
     private readonly MediaSettings _mediaSettings;
-    private readonly SeoSettings _seoSettings;
     private readonly CustomerSettings _customerSettings;
     private readonly ContactDataSettings _contactDataSettings;
 
@@ -70,26 +53,15 @@ public partial class DataExporter : IDataExporter
         ICommonServices services,
         IWorkContext workContext,
         IExportProfileService exportProfileService,
-        IProductService productService,
-        IProductAttributeMaterializer productAttributeMaterializer,
-        ICatalogSearchService catalogSearchService,
-        ICategoryService categoryService,
-        IManufacturerService manufacturerService,
-        ICurrencyService currencyService,
         IMediaService mediaService,
         ILanguageService languageService,
         ILocalizedEntityService localizedEntityService,
-        IGenericAttributeService genericAttributeService,
-        IUrlService urlService,
         IMailService mailService,
         IQueuedEmailService queuedEmailService,
         Lazy<IUrlHelper> urlHelper,
-        ProductUrlHelper productUrlHelper,
         IProviderManager providerManager,
         IHttpClientFactory httpClientFactory,
-        CatalogSettings catalogSettings,
         MediaSettings mediaSettings,
-        SeoSettings seoSettings,
         CustomerSettings customerSettings,
         ContactDataSettings contactDataSettings)
     {
@@ -97,27 +69,16 @@ public partial class DataExporter : IDataExporter
         _services = services;
         _workContext = workContext;
         _exportProfileService = exportProfileService;
-        _productService = productService;
-        _productAttributeMaterializer = productAttributeMaterializer;
-        _catalogSearchService = catalogSearchService;
-        _categoryService = categoryService;
-        _manufacturerService = manufacturerService;
-        _currencyService = currencyService;
         _mediaService = mediaService;
         _languageService = languageService;
         _localizedEntityService = localizedEntityService;
-        _genericAttributeService = genericAttributeService;
-        _urlService = urlService;
         _mailService = mailService;
         _queuedEmailService = queuedEmailService;
         _urlHelper = urlHelper;
-        _productUrlHelper = productUrlHelper;
         _providerManager = providerManager;
         _httpClientFactory = httpClientFactory;
 
-        _catalogSettings = catalogSettings;
         _mediaSettings = mediaSettings;
-        _seoSettings = seoSettings;
         _customerSettings = customerSettings;
         _contactDataSettings = contactDataSettings;
     }
@@ -272,15 +233,6 @@ public partial class DataExporter : IDataExporter
 
         switch (ctx.Request.Provider.Value.EntityType)
         {
-            case ExportEntityType.Product:
-                await data.Cast<Product>().EachAsync(async x => result.Data.Add(await ToDynamic(x, ctx)));
-                break;
-            case ExportEntityType.Manufacturer:
-                data.Cast<Manufacturer>().Each(x => result.Data.Add(ToDynamic(x, ctx)));
-                break;
-            case ExportEntityType.Category:
-                data.Cast<Category>().Each(x => result.Data.Add(ToDynamic(x, ctx)));
-                break;
             case ExportEntityType.Customer:
                 data.Cast<Customer>().Each(x => result.Data.Add(ToDynamic(x)));
                 break;
@@ -324,14 +276,8 @@ public partial class DataExporter : IDataExporter
 
         if (!ctx.IsPreview)
         {
-            ctx.DeliveryTimes = await _db.DeliveryTimes.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x, ct);
-            ctx.QuantityUnits = await _db.QuantityUnits.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x, ct);
-            ctx.ProductTemplates = await _db.ProductTemplates.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x.ViewPath, ct);
-            ctx.CategoryTemplates = await _db.CategoryTemplates.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x.ViewPath, ct);
-            ctx.ManufacturerTemplates = await _db.ManufacturerTemplates.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x.ViewPath, ct);
 
-            if (provider.EntityType == ExportEntityType.Product ||
-                provider.EntityType == ExportEntityType.Customer)
+            if (provider.EntityType == ExportEntityType.Customer)
             {
                 ctx.Countries = await _db.Countries.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x, ct);
             }
@@ -355,13 +301,7 @@ public partial class DataExporter : IDataExporter
             ctx.Translations[nameof(Currency)] = await _localizedEntityService.GetLocalizedPropertyCollectionAsync(nameof(Currency), null);
             ctx.Translations[nameof(Country)] = await _localizedEntityService.GetLocalizedPropertyCollectionAsync(nameof(Country), null);
             ctx.Translations[nameof(StateProvince)] = await _localizedEntityService.GetLocalizedPropertyCollectionAsync(nameof(StateProvince), null);
-            ctx.Translations[nameof(DeliveryTime)] = await _localizedEntityService.GetLocalizedPropertyCollectionAsync(nameof(DeliveryTime), null);
-            ctx.Translations[nameof(QuantityUnit)] = await _localizedEntityService.GetLocalizedPropertyCollectionAsync(nameof(QuantityUnit), null);
-            ctx.Translations[nameof(Manufacturer)] = await _localizedEntityService.GetLocalizedPropertyCollectionAsync(nameof(Manufacturer), null);
-            ctx.Translations[nameof(Category)] = await _localizedEntityService.GetLocalizedPropertyCollectionAsync(nameof(Category), null);
 
-            ctx.UrlRecords[nameof(Category)] = await _urlService.GetUrlRecordCollectionAsync(nameof(Category), null, null);
-            ctx.UrlRecords[nameof(Manufacturer)] = await _urlService.GetUrlRecordCollectionAsync(nameof(Manufacturer), null, null);
         }
 
         if (!ctx.IsPreview && ctx.Request.Profile.PerStore)
@@ -433,10 +373,6 @@ public partial class DataExporter : IDataExporter
                 context.FileName = _exportProfileService.ResolveTokens(profile, profile.FileNamePattern, context.FileIndex, context.MaxFileNameLength, ctx.Store) + fileExtension;
                 file = await dir.GetFileAsync(context.FileName);
 
-                if (profile.ExportRelatedData && ctx.Supports(ExportFeatures.UsesRelatedDataUnits))
-                {
-                    context.ExtraDataUnits.AddRange(await GetDataUnitsForRelatedEntities(ctx));
-                }
             }
 
             if (await CallExportProvider("Execute", file, ctx))
@@ -450,8 +386,6 @@ public partial class DataExporter : IDataExporter
                     });
                 }
             }
-
-            ctx.EntityIdsPerSegment.Clear();
 
             if (context.IsMaxFailures)
             {
@@ -530,14 +464,9 @@ public partial class DataExporter : IDataExporter
         try
         {
             ctx.NewsletterSubscriptions.Clear();
-            ctx.ProductTemplates.Clear();
-            ctx.CategoryTemplates.Clear();
-            ctx.ManufacturerTemplates.Clear();
             ctx.Countries.Clear();
             ctx.StateProvinces.Clear();
             ctx.Languages.Clear();
-            ctx.QuantityUnits.Clear();
-            ctx.DeliveryTimes.Clear();
             ctx.Stores.Clear();
             ctx.Translations.Clear();
             ctx.UrlRecords.Clear();
@@ -563,9 +492,6 @@ public partial class DataExporter : IDataExporter
     {
         DetachAllEntitiesAndClear(ctx);
 
-        List<Product> productEntities = null;
-        var entityType = ctx.Request.Provider.Value.EntityType;
-
         if (ctx.LastId >= ctx.ShopMetadata[ctx.Store.Id].MaxId)
         {
             // End of data reached.
@@ -581,67 +507,10 @@ public partial class DataExporter : IDataExporter
             return null;
         }
 
-        // Some entities need extra treatment.
-        if (entityType == ExportEntityType.Product)
-        {
-            productEntities = [];
-
-            Multimap<int, Product> associatedProductsMap = null;
-            var products = entities.Cast<Product>();
-
-            if (ctx.Projection.NoGroupedProducts)
-            {
-                var groupedProductIds = products
-                    .Where(x => x.ProductType == ProductType.GroupedProduct)
-                    .Select(x => x.Id)
-                    .ToArray();
-
-                var associatedProducts = await _db.Products
-                    .AsNoTracking()
-                    .ApplyAssociatedProductsFilter(groupedProductIds, true)
-                    .ToListAsync(ctx.CancelToken);
-
-                associatedProductsMap = associatedProducts.ToMultimap(x => x.ParentGroupedProductId, x => x);
-            }
-
-            foreach (var product in products)
-            {
-                if (product.ProductType == ProductType.SimpleProduct || product.ProductType == ProductType.BundledProduct)
-                {
-                    // We use ctx.EntityIdsPerSegment to avoid exporting products multiple times per segment\file (cause of associated products).
-                    if (ctx.EntityIdsPerSegment.Add(product.Id))
-                        productEntities.Add(product);
-                }
-                else if (product.ProductType == ProductType.GroupedProduct)
-                {
-                    if (ctx.Projection.NoGroupedProducts)
-                    {
-                        if (associatedProductsMap.ContainsKey(product.Id))
-                        {
-                            foreach (var associatedProduct in associatedProductsMap[product.Id])
-                            {
-                                if (ctx.Projection.OnlyIndividuallyVisibleAssociated && associatedProduct.Visibility == ProductVisibility.Hidden)
-                                    continue;
-                                if (ctx.Filter.IsPublished.HasValue && ctx.Filter.IsPublished.Value != associatedProduct.Published)
-                                    continue;
-
-                                if (ctx.EntityIdsPerSegment.Add(associatedProduct.Id))
-                                    productEntities.Add(associatedProduct);
-                            }
-                        }
-                    }
-                    else if (ctx.EntityIdsPerSegment.Add(product.Id))
-                    {
-                        productEntities.Add(product);
-                    }
-                }
-            }
-        }
-
         ctx.LastId = entities.Last().Id;
         await SetProgress(entities.Count, ctx);
 
-        return productEntities?.Cast<TEntity>() ?? entities.Cast<TEntity>();
+        return entities.Cast<TEntity>();
     }
 
     private async Task<IQueryable<BaseEntity>> GetEntitiesQuery(DataExporterContext ctx)
@@ -660,69 +529,7 @@ public partial class DataExporter : IDataExporter
                 .Select(x => x.CustomerId);
         }
 
-        if (entityType == ExportEntityType.Product)
-        {
-            if (ctx.Request.ProductQuery != null)
-                return ctx.Request.ProductQuery;
-
-            var searchQuery = new CatalogSearchQuery()
-                .WithCurrency(_workContext.WorkingCurrency)
-                .WithLanguage(_workContext.WorkingLanguage)
-                .HasStoreId(storeId)
-                .PriceBetween(f.PriceMinimum, f.PriceMaximum)
-                .CreatedBetween(f.CreatedFrom, f.CreatedTo);
-
-            if (f.Visibility.HasValue)
-                searchQuery = searchQuery.WithVisibility(f.Visibility.Value);
-
-            if (f.IsPublished.HasValue)
-                searchQuery = searchQuery.PublishedOnly(f.IsPublished.Value);
-
-            if (f.ProductType.HasValue)
-                searchQuery = searchQuery.IsProductType(f.ProductType.Value);
-
-            if (f.ProductTagId.HasValue)
-                searchQuery = searchQuery.WithProductTagIds(f.ProductTagId.Value);
-
-            if (ctx.Request.EntitiesToExport.Count > 0)
-                searchQuery = searchQuery.WithProductIds(ctx.Request.EntitiesToExport.ToArray());
-            else
-                searchQuery = searchQuery.WithProductId(f.IdMinimum, f.IdMaximum);
-
-            if (f.WithoutManufacturers.HasValue)
-                searchQuery = searchQuery.HasAnyManufacturer(!f.WithoutManufacturers.Value);
-            else if (f.ManufacturerId.HasValue)
-                searchQuery = searchQuery.WithManufacturerIds(f.FeaturedProducts, f.ManufacturerId.Value);
-
-            if (f.WithoutCategories.HasValue)
-            {
-                searchQuery = searchQuery.HasAnyCategory(!f.WithoutCategories.Value);
-            }
-            else if (!f.IncludeSubCategories && !f.CategoryIds.IsNullOrEmpty())
-            {
-                searchQuery = searchQuery.WithCategoryIds(f.FeaturedProducts, f.CategoryIds);
-            }
-            else if (f.IncludeSubCategories && f.CategoryId.GetValueOrDefault() != 0)
-            {
-                var categoryTree = await _categoryService.GetCategoryTreeAsync(0, true);
-                var treePath = categoryTree.SelectNodeById(f.CategoryId.Value)?.GetTreePath();
-
-                searchQuery = searchQuery.WithCategoryTreePath(treePath, f.FeaturedProducts);
-            }
-
-            return _catalogSearchService.PrepareQuery(searchQuery)
-                .AsNoTracking()
-                .AsNoCaching();
-        }
-        else if (entityType == ExportEntityType.Manufacturer)
-        {
-            result = _db.Manufacturers.AsNoTracking();
-        }
-        else if (entityType == ExportEntityType.Category)
-        {
-            result = _db.Categories.AsNoTracking();
-        }
-        else if (entityType == ExportEntityType.Customer)
+        if (entityType == ExportEntityType.Customer)
         {
             var query = _db.Customers
                 .IncludeCustomerRoles()
@@ -839,92 +646,10 @@ public partial class DataExporter : IDataExporter
         return query;
     }
 
-    /// <summary>
-    /// Related data is data without own export provider or importer.
-    /// For a flat formatted export it has to be exported together with metadata to know what to be edited.
-    /// Extra data units are only exported for file based exports, not for memory based on-the-fly exports.
-    /// </summary>
-    private static async Task<IEnumerable<ExportDataUnit>> GetDataUnitsForRelatedEntities(DataExporterContext ctx)
-    {
-        RelatedEntityType[] types;
-
-        switch (ctx.Request.Provider.Value.EntityType)
-        {
-            case ExportEntityType.Product:
-                types =
-                [
-                    RelatedEntityType.ProductVariantAttributeValue,
-                    RelatedEntityType.ProductVariantAttributeCombination
-                ];
-                break;
-            default:
-                return [];
-        }
-
-        var result = new List<ExportDataUnit>();
-        var context = ctx.ExecuteContext;
-        var dir = context.ExportDirectory;
-        var fileExtension = Path.GetExtension(context.FileName);
-
-        foreach (var type in types)
-        {
-            // Convention: must end with type name because that's how the import identifies the entity.
-            // Be careful in case of accidents with file names. They must not be too long.
-            var fileName = $"{ctx.Store.Id}-{context.FileIndex:D4}-{type}";
-            var file = await dir.GetFileAsync(fileName + fileExtension);
-
-            if (file.Exists)
-            {
-                fileName = $"{CommonHelper.GenerateRandomDigitCode(4)}-{fileName}";
-            }
-
-            fileName += fileExtension;
-            file = await dir.GetFileAsync(fileName);
-            await file.CreateAsync(null, true, ctx.CancelToken);
-
-            result.Add(new ExportDataUnit
-            {
-                RelatedType = type,
-                DisplayInFileDialog = true,
-                FileName = fileName,
-                DataStream = new ExportFileStream(await file.OpenWriteAsync(null, ctx.CancelToken))
-            });
-        }
-
-        return result;
-    }
-
     private void DetachAllEntitiesAndClear(DataExporterContext ctx)
     {
         try
         {
-            ctx.AssociatedProductBatchContext?.Clear();
-
-            if (ctx.ProductBatchContext != null)
-            {
-                Detach(x => x is Product || x is ProductVariantAttributeCombination || x is ProductVariantAttribute || x is ProductVariantAttributeValue ||
-                    x is ProductAttribute || x is ProductBundleItem || x is ProductBundleItemAttributeFilter || x is ProductCategory || x is ProductManufacturer ||
-                    x is Category || x is Manufacturer || x is ProductMediaFile || x is ProductTag || x is ProductSpecificationAttribute || x is SpecificationAttributeOption ||
-                    x is SpecificationAttribute || x is DeliveryTime || x is QuantityUnit || x is Download ||
-                    x is MediaFile || x is MediaStorage || x is GenericAttribute || x is UrlRecord);
-
-                ctx.ProductBatchContext.Clear();
-            }
-
-            if (ctx.CategoryBatchContext != null)
-            {
-                Detach(x => x is Category || x is MediaFile || x is ProductCategory);
-
-                ctx.CategoryBatchContext.Clear();
-            }
-
-            if (ctx.ManufacturerBatchContext != null)
-            {
-                Detach(x => x is Manufacturer || x is MediaFile || x is ProductManufacturer);
-
-                ctx.ManufacturerBatchContext.Clear();
-            }
-
             if (ctx.CustomerBatchContext != null)
             {
                 Detach(x => x is Customer || x is GenericAttribute || x is CustomerContent);
@@ -961,97 +686,8 @@ public partial class DataExporter : IDataExporter
         var limit = Math.Max(ctx.Request.Profile.Limit, 0);
         var recordsPerSegment = ctx.IsPreview ? 0 : Math.Max(ctx.Request.Profile.BatchSize, 0);
         var totalRecords = offset + ctx.ShopMetadata[ctx.Store.Id].TotalRecords;
-        var includeHidden = !ctx.Filter.IsPublished.HasValue || ctx.Filter.IsPublished.Value == false;
 
-        if (entityType == ExportEntityType.Product)
-        {
-            async Task dataLoaded(ICollection<Product> entities)
-            {
-                // Load data behind navigation properties for current entities batch in one go.
-                ctx.ProductBatchContext = _productService.CreateProductBatchContext(entities, ctx.Store, null, includeHidden);
-                ctx.AssociatedProductBatchContext = null;
-
-                var context = ctx.ProductBatchContext;
-                if (!ctx.Projection.NoGroupedProducts && entities.Where(x => x.ProductType == ProductType.GroupedProduct).Any())
-                {
-                    await context.AssociatedProducts.LoadAllAsync();
-                    var associatedProducts = context.AssociatedProducts.SelectMany(x => x.Value);
-                    ctx.AssociatedProductBatchContext = _productService.CreateProductBatchContext(associatedProducts, ctx.Store, null, includeHidden);
-
-                    var allProductEntities = entities.Where(x => x.ProductType != ProductType.GroupedProduct).Concat(associatedProducts);
-                    ctx.TranslationsPerPage[nameof(Product)] = await CreateTranslationCollection(nameof(Product), allProductEntities);
-                    ctx.UrlRecordsPerPage[nameof(Product)] = await CreateUrlRecordCollection(nameof(Product), allProductEntities);
-                }
-                else
-                {
-                    ctx.TranslationsPerPage[nameof(Product)] = await CreateTranslationCollection(nameof(Product), entities);
-                    ctx.UrlRecordsPerPage[nameof(Product)] = await CreateUrlRecordCollection(nameof(Product), entities);
-                }
-
-                await context.ProductTags.LoadAllAsync();
-                await context.ProductBundleItems.LoadAllAsync();
-                await context.SpecificationAttributes.LoadAllAsync();
-                await context.Attributes.LoadAllAsync();
-
-                var psa = context.SpecificationAttributes.SelectMany(x => x.Value);
-                var sao = psa.Select(x => x.SpecificationAttributeOption);
-                var sa = psa.Select(x => x.SpecificationAttributeOption.SpecificationAttribute);
-                var cg = sa.Select(x => x.CollectionGroupMapping?.CollectionGroup).Where(x => x != null);
-
-                var pva = context.Attributes.SelectMany(x => x.Value);
-                var pvav = pva.SelectMany(x => x.ProductVariantAttributeValues);
-                var pa = pva.Select(x => x.ProductAttribute);
-
-                ctx.TranslationsPerPage[nameof(ProductTag)] = await CreateTranslationCollection(nameof(ProductTag), context.ProductTags.SelectMany(x => x.Value));
-                ctx.TranslationsPerPage[nameof(ProductBundleItem)] = await CreateTranslationCollection(nameof(ProductBundleItem), context.ProductBundleItems.SelectMany(x => x.Value));
-                ctx.TranslationsPerPage[nameof(SpecificationAttribute)] = await CreateTranslationCollection(nameof(SpecificationAttribute), sa);
-                ctx.TranslationsPerPage[nameof(SpecificationAttributeOption)] = await CreateTranslationCollection(nameof(SpecificationAttributeOption), sao);
-                ctx.TranslationsPerPage[nameof(CollectionGroup)] = await CreateTranslationCollection(nameof(CollectionGroup), cg);
-                ctx.TranslationsPerPage[nameof(ProductAttribute)] = await CreateTranslationCollection(nameof(ProductAttribute), pa);
-                ctx.TranslationsPerPage[nameof(ProductVariantAttributeValue)] = await CreateTranslationCollection(nameof(ProductVariantAttributeValue), pvav);
-            }
-
-            ctx.ExecuteContext.DataSegmenter = new ExportDataSegmenter<Product>
-            (
-                () => LoadEntities<Product>(ctx),
-                dataLoaded,
-                entity => Convert(entity, ctx),
-                offset, PageSize, limit, recordsPerSegment, totalRecords
-            );
-        }
-        else if (entityType == ExportEntityType.Manufacturer)
-        {
-            Task dataLoaded(ICollection<Manufacturer> entities)
-            {
-                ctx.ManufacturerBatchContext = new ManufacturerBatchContext(entities, _services);
-                return Task.CompletedTask;
-            };
-
-            ctx.ExecuteContext.DataSegmenter = new ExportDataSegmenter<Manufacturer>
-            (
-                () => LoadEntities<Manufacturer>(ctx),
-                dataLoaded,
-                entity => Convert(entity, ctx),
-                offset, PageSize, limit, recordsPerSegment, totalRecords
-            );
-        }
-        else if (entityType == ExportEntityType.Category)
-        {
-            Task dataLoaded(ICollection<Category> entities)
-            {
-                ctx.CategoryBatchContext = new CategoryBatchContext(entities, _services);
-                return Task.CompletedTask;
-            };
-
-            ctx.ExecuteContext.DataSegmenter = new ExportDataSegmenter<Category>
-            (
-                () => LoadEntities<Category>(ctx),
-                dataLoaded,
-                entity => Convert(entity, ctx),
-                offset, PageSize, limit, recordsPerSegment, totalRecords
-            );
-        }
-        else if (entityType == ExportEntityType.Customer)
+        if (entityType == ExportEntityType.Customer)
         {
             Task dataLoaded(ICollection<Customer> entities)
             {
@@ -1347,6 +983,8 @@ public partial class DataExporter : IDataExporter
     {
         var profile = request.Profile;
         var provider = request.Provider.Value;
+        if (!Enum.IsDefined(provider.EntityType))
+            throw new NotSupportedException($"Export profile {profile.Id} targets a retired entity type.");
 
         var context = new DataExporterContext
         {
@@ -1357,11 +995,6 @@ public partial class DataExporter : IDataExporter
             Projection = XmlHelper.Deserialize<ExportProjection>(profile.Projection),
             ProgressInfo = T("Admin.DataExchange.Export.ProgressInfo")
         };
-
-        if (profile.Projection.IsEmpty())
-        {
-            context.Projection.DescriptionMergingId = (int)ExportDescriptionMerging.Description;
-        }
 
         context.ExecuteContext = new ExportExecuteContext(context.Result, cancelToken)
         {
@@ -1379,26 +1012,6 @@ public partial class DataExporter : IDataExporter
         request.CustomData.Each(x => context.ExecuteContext.CustomProperties.Add(x.Key, x.Value));
 
         return context;
-    }
-
-    private async Task<LocalizedPropertyCollection> CreateTranslationCollection(string keyGroup, IEnumerable<BaseEntity> entities)
-    {
-        if (entities == null || !entities.Any())
-        {
-            return new LocalizedPropertyCollection(keyGroup, null, []);
-        }
-
-        return await _localizedEntityService.GetLocalizedPropertyCollectionAsync(keyGroup, entities.ToDistinctArray(x => x.Id));
-    }
-
-    private async Task<UrlRecordCollection> CreateUrlRecordCollection(string entityName, IEnumerable<BaseEntity> entities)
-    {
-        if (entities == null || !entities.Any())
-        {
-            return new UrlRecordCollection(entityName, null, []);
-        }
-
-        return await _urlService.GetUrlRecordCollectionAsync(entityName, null, entities.ToDistinctArray(x => x.Id));
     }
 
     private string CreateLogHeader(DataExporterContext ctx)

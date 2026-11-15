@@ -312,21 +312,8 @@ public partial class ExportProfileService : AsyncDbSaveHook<ExportProfile>, IExp
             }
             else
             {
-                // What we do here is to preset typical settings for feed creation
-                // but on the other hand they may be untypical for generic data export\exchange.
-                var projection = new ExportProjection
-                {
-                    RemoveCriticalCharacters = true,
-                    CriticalCharacters = "¼,½,¾",
-                    NoGroupedProducts = features.HasFlag(ExportFeatures.CanOmitGroupedProducts),
-                    OnlyIndividuallyVisibleAssociated = true,
-                    DescriptionMerging = ExportDescriptionMerging.Description
-                };
-
-                var filter = new ExportFilter
-                {
-                    IsPublished = true
-                };
+                var projection = new ExportProjection();
+                var filter = new ExportFilter();
 
                 profile.Projection = XmlHelper.Serialize(projection);
                 profile.Filtering = XmlHelper.Serialize(filter);

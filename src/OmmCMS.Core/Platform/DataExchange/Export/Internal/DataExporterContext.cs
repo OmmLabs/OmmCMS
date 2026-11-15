@@ -1,6 +1,3 @@
-﻿using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Seo;
@@ -16,16 +13,10 @@ internal class DataExporterContext
         nameof(Currency),
         nameof(Country),
         nameof(StateProvince),
-        nameof(DeliveryTime),
-        nameof(QuantityUnit),
-        nameof(Manufacturer),
-        nameof(Category),
     ];
 
     private readonly static string[] _globalSlugEntities =
     [
-        nameof(Category),
-        nameof(Manufacturer)
     ];
 
     public bool IsPreview { get; init; }
@@ -37,10 +28,6 @@ internal class DataExporterContext
     public ExportExecuteContext ExecuteContext { get; set; }
     public DataExportResult Result { get; set; } = new();
 
-    /// <summary>
-    /// All entity identifiers per segment (used to avoid exporting products multiple times).
-    /// </summary>
-    public HashSet<int> EntityIdsPerSegment { get; set; } = [];
     public int LastId { get; set; }
 
     public string ProgressInfo { get; set; }
@@ -57,19 +44,14 @@ internal class DataExporterContext
 
     #region Data loaded once per export
 
-    public Dictionary<int, DeliveryTime> DeliveryTimes { get; set; } = [];
-    public Dictionary<int, QuantityUnit> QuantityUnits { get; set; } = [];
     public Dictionary<int, Store> Stores { get; set; } = [];
     public Dictionary<int, Language> Languages { get; set; } = [];
     public Dictionary<int, Country> Countries { get; set; } = [];
     public Dictionary<int, StateProvince> StateProvinces { get; set; } = [];
-    public Dictionary<int, string> ProductTemplates { get; set; } = [];
-    public Dictionary<int, string> CategoryTemplates { get; set; } = [];
-    public Dictionary<int, string> ManufacturerTemplates { get; set; } = [];
     public HashSet<string> NewsletterSubscriptions { get; set; } = [];
 
     /// <summary>
-    /// All translations for global scopes (like Category, Manufacturer etc.)
+    /// All translations for global scopes, such as countries and currencies.
     /// </summary>
     public Dictionary<string, LocalizedPropertyCollection> Translations { get; set; } = [];
     public Dictionary<string, UrlRecordCollection> UrlRecords { get; set; } = [];
@@ -78,18 +60,10 @@ internal class DataExporterContext
 
     #region Data loaded once per page
 
-    /// <summary>
-    /// Associated product data with applied filters (e.g. for store and customer).
-    /// </summary>
-    public ProductBatchContext ProductBatchContext { get; set; }
-
-    public ProductBatchContext AssociatedProductBatchContext { get; set; }
-    public ManufacturerBatchContext ManufacturerBatchContext { get; set; }
-    public CategoryBatchContext CategoryBatchContext { get; set; }
     public CustomerBatchContext CustomerBatchContext { get; set; }
 
     /// <summary>
-    /// All per page translations (like ProductVariantAttributeValue etc.)
+    /// All per-page translations.
     /// </summary>
     public Dictionary<string, LocalizedPropertyCollection> TranslationsPerPage { get; set; } = [];
     public Dictionary<string, UrlRecordCollection> UrlRecordsPerPage { get; set; } = [];

@@ -659,6 +659,9 @@ try:
             "Catalog/Products/Import/ProductImporter.cs",
             "Catalog/Categories/Import/CategoryImporter.cs",
             "Catalog/Brands/Import/ManufacturerImporter.cs",
+            "Platform/DataExchange/Export/DataExporter.DynamicProduct.cs",
+            "Platform/DataExchange/Export/Internal/CategoryBatchContext.cs",
+            "Platform/DataExchange/Export/Internal/ManufacturerBatchContext.cs",
         ):
             assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
         seed = Path("App_Data/Seed")

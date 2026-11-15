@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using OmmCMS.Core.Catalog.Products;
 
 namespace OmmCMS.Admin.Models.Export;
 
@@ -24,59 +23,6 @@ public class ExportFilterModel
     [AdditionalMetadata("multiple", true)]
     [LocalizedDisplay("*CustomerRoleIds")]
     public int[] CustomerRoleIds { get; set; }
-
-    #endregion
-
-    #region Product
-
-    [LocalizedDisplay("*IsPublished")]
-    public bool? IsPublished { get; set; }
-
-    [LocalizedDisplay("*ProductType")]
-    public ProductType? ProductType { get; set; }
-
-    [LocalizedDisplay("*Visibility")]
-    public ProductVisibility? Visibility { get; set; }
-
-    [LocalizedDisplay("*IdMinimum")]
-    [AdditionalMetadata("invariant", true)]
-    public int? IdMinimum { get; set; }
-
-    [LocalizedDisplay("*IdMaximum")]
-    [AdditionalMetadata("invariant", true)]
-    public int? IdMaximum { get; set; }
-
-    [LocalizedDisplay("*PriceMinimum")]
-    public decimal? PriceMinimum { get; set; }
-
-    [LocalizedDisplay("*PriceMaximum")]
-    public decimal? PriceMaximum { get; set; }
-
-
-
-    [LocalizedDisplay("*ProductTagId")]
-    public int? ProductTagId { get; set; }
-
-    [LocalizedDisplay("*FeaturedProducts")]
-    public bool? FeaturedProducts { get; set; }
-
-    [LocalizedDisplay("*WithoutManufacturers")]
-    public bool? WithoutManufacturers { get; set; }
-
-    [LocalizedDisplay("*ManufacturerId")]
-    public int? ManufacturerId { get; set; }
-
-    [LocalizedDisplay("*WithoutCategories")]
-    public bool? WithoutCategories { get; set; }
-
-    [LocalizedDisplay("*CategoryIds")]
-    public int[] CategoryIds { get; set; }
-
-    [LocalizedDisplay("*CategoryIds")]
-    public int? CategoryId { get; set; }
-
-    [LocalizedDisplay("*IncludeSubCategories")]
-    public bool IncludeSubCategories { get; set; }
 
     #endregion
 
