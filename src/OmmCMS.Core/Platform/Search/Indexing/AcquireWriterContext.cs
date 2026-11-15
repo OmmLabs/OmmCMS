@@ -22,7 +22,6 @@ public class AcquireWriterContext
         StoreMappings = new Multimap<int, int>();
         CustomerRoleIds = Array.Empty<int>();
         CustomerRoleMappings = new Multimap<int, int>();
-        DeliveryTimes = new Dictionary<int, DeliveryTime>();
         Translations = new Dictionary<string, LocalizedPropertyCollection>(StringComparer.OrdinalIgnoreCase);
         CustomProperties = new Dictionary<string, object>();
     }
@@ -63,14 +62,9 @@ public class AcquireWriterContext
     public int[] CustomerRoleIds { get; set; }
 
     /// <summary>
-    /// Map of product to customer role identifiers if the product is limited to certain customer roles
+    /// Map of entity to customer role identifiers if the entity is limited to certain customer roles
     /// </summary>
     public Multimap<int, int> CustomerRoleMappings { get; set; }
-
-    /// <summary>
-    /// All delivery times
-    /// </summary>
-    public Dictionary<int, DeliveryTime> DeliveryTimes { get; set; }
 
     /// <summary>
     /// All translations for global scopes
@@ -88,7 +82,6 @@ public class AcquireWriterContext
         Currencies.Clear();
         StoreMappings.Clear();
         CustomerRoleMappings.Clear();
-        DeliveryTimes.Clear();
         Translations.Clear();
         CustomProperties.Clear();
     }

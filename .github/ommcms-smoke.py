@@ -748,7 +748,8 @@ try:
             "productattribute", "product_productattribute_mapping", "productvariantattributevalue",
             "productvariantattributecombination", "productattributeoptionsset", "productattributeoption",
             "specificationattribute", "specificationattributeoption", "product_specificationattribute_mapping",
-            "ruleset_category_mapping")
+            "ruleset_category_mapping", "deliverytime", "quantityunit", "measuredimension",
+            "measureweight", "collectiongroup", "collectiongroupmapping")
         tables = {name.lower() for name in rows("SELECT name FROM sqlite_master WHERE type='table'")}
         assert not tables.intersection(retired_catalog_tables), "Retired catalogue tables remain"
         assert rows("SELECT COUNT(*) FROM pragma_table_info('RuleSet') WHERE name='ProductVariantAttributeId'") == [0]

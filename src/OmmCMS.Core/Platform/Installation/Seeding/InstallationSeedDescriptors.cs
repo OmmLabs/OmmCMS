@@ -16,20 +16,8 @@ namespace OmmCMS.Core.Installation.Seeding;
 /// </summary>
 internal static class InstallationSeedDescriptors
 {
-    public static SeedEntityDescriptor<MeasureDimension> MeasureDimensions()
-        => new SeedEntityDescriptor<MeasureDimension>("systemKeyword").FromFiles("core/measure-dimensions.json");
-
-    public static SeedEntityDescriptor<MeasureWeight> MeasureWeights()
-        => new SeedEntityDescriptor<MeasureWeight>("systemKeyword").FromFiles("core/measure-weights.json");
-
     public static SeedEntityDescriptor<Currency> Currencies()
         => new SeedEntityDescriptor<Currency>("currencyCode").FromFiles("core/currencies.json");
-
-    public static SeedEntityDescriptor<DeliveryTime> DeliveryTimes()
-        => new SeedEntityDescriptor<DeliveryTime>("key").FromFiles("core/delivery-times.json");
-
-    public static SeedEntityDescriptor<QuantityUnit> QuantityUnits()
-        => new SeedEntityDescriptor<QuantityUnit>("key").FromFiles("core/quantity-units.json");
 
     public static SeedEntityDescriptor<CustomerRole> CustomerRoles()
         => new SeedEntityDescriptor<CustomerRole>("systemName").FromFiles("core/customer-roles.json");

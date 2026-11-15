@@ -257,8 +257,7 @@ In installation order. OmmCMS installs only core and CMS starter data; storefron
 |---|---|
 | Locale resources | `cultures/{culture}/resources/*` |
 | Currencies, store | `core/currencies.json`, `core/cms/stores.json` |
-| Measures, countries and states | `core/measure-dimensions.json`, `core/measure-weights.json`, `core/countries.json` |
-| Delivery, quantity units | `core/delivery-times.json`, `core/quantity-units.json` |
+| Countries and states | `core/countries.json` |
 | Customer roles, admin address, system customers | `core/customer-roles.json`, `core/admin-address.json`, `core/system-customers.json` |
 | Email accounts, topics (with `slug` overrides) | `core/email-accounts.json`, `core/cms/topics.json` |
 | Settings (`$ref` values) | `core/settings.json`, `core/cms/settings.json` |

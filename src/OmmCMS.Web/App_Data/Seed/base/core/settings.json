@@ -5,9 +5,5 @@
   },
   "EmailAccountSettings": {
     "DefaultEmailAccountId": "$ref:EmailAccount:default"
-  },
-  "MeasureSettings": {
-    "BaseDimensionId": "$ref:MeasureDimension:inch",
-    "BaseWeightId": "$ref:MeasureWeight:lb"
   }
 }

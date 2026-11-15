@@ -22,32 +22,5 @@ public static partial class Permissions
             public const string Delete = "configuration.currency.delete";
             public const string EditExchangeRate = "configuration.currency.editexchangerate";
         }
-
-        public static class DeliveryTime
-        {
-            public const string Self = "configuration.deliverytime";
-            public const string Read = "configuration.deliverytime.read";
-            public const string Update = "configuration.deliverytime.update";
-            public const string Create = "configuration.deliverytime.create";
-            public const string Delete = "configuration.deliverytime.delete";
-        }
-
-        public static class Measure
-        {
-            public const string Self = "configuration.measure";
-            public const string Read = "configuration.measure.read";
-            public const string Update = "configuration.measure.update";
-            public const string Create = "configuration.measure.create";
-            public const string Delete = "configuration.measure.delete";
-        }
-
-        public static class CollectionGroup
-        {
-            public const string Self = "configuration.collectiongroup";
-            public const string Read = "configuration.collectiongroup.read";
-            public const string Update = "configuration.collectiongroup.update";
-            public const string Create = "configuration.collectiongroup.create";
-            public const string Delete = "configuration.collectiongroup.delete";
-        }
     }
 }

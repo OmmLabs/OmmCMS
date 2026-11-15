@@ -113,11 +113,7 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
         await PopulateAsync("PopulateLocaleResources", async () => await PopulateLocaleResources(_config.Language));
         _seedFactory = new SeedEntityFactory(_seedResolver, await SeedResources.TryLoadAsync(Context, _config.Language, CancelToken));
 
-        await PopulateFromSeedAsync("PopulateMeasureDimensions", InstallationSeedDescriptors.MeasureDimensions());
-        await PopulateFromSeedAsync("PopulateMeasureWeights", InstallationSeedDescriptors.MeasureWeights());
         await PopulateFromSeedAsync("PopulateCountriesAndStates", InstallationSeedDescriptors.Countries());
-        await PopulateFromSeedAsync("PopulateDeliveryTimes", InstallationSeedDescriptors.DeliveryTimes());
-        await PopulateFromSeedAsync("PopulateQuantityUnits", InstallationSeedDescriptors.QuantityUnits());
         await PopulateAsync("PopulateCustomersAndUsers", async () => await PopulateCustomersAndUsers(_config.DefaultUserName, _config.DefaultUserPassword));
         await PopulateFromSeedAsync("PopulateEmailAccounts", InstallationSeedDescriptors.EmailAccounts());
         await PopulateAsync("PopulateMessageTemplates", PopulateMessageTemplates);

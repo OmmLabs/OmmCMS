@@ -22,7 +22,6 @@ public partial class CommonRuleOptionsProvider : IRuleOptionsProvider
         {
             case KnownRuleOptionDataSourceNames.Country:
             case KnownRuleOptionDataSourceNames.Currency:
-            case KnownRuleOptionDataSourceNames.DeliveryTime:
                 return true;
             default:
                 return false;
@@ -57,19 +56,6 @@ public partial class CommonRuleOptionsProvider : IRuleOptionsProvider
                 result.AddOptions(context, currencies.Select(x => new RuleValueSelectListOption
                 {
                     Value = context.OptionById ? x.Id.ToString() : x.CurrencyCode,
-                    Text = x.GetLocalized(y => y.Name, context.Language, true, false)
-                }));
-                break;
-
-            case KnownRuleOptionDataSourceNames.DeliveryTime:
-                var deliveryTimes = await _db.DeliveryTimes
-                    .AsNoTracking()
-                    .OrderBy(x => x.DisplayOrder)
-                    .ToListAsync();
-
-                result.AddOptions(context, deliveryTimes.Select(x => new RuleValueSelectListOption
-                {
-                    Value = x.Id.ToString(),
                     Text = x.GetLocalized(y => y.Name, context.Language, true, false)
                 }));
                 break;

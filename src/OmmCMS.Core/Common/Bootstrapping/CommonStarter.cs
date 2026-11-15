@@ -17,11 +17,9 @@ internal sealed class CommonStarter : StarterBase
         builder.RegisterType<RoundingHelper>().As<IRoundingHelper>().InstancePerLifetimeScope();
         builder.RegisterType<AddressService>().As<IAddressService>().InstancePerLifetimeScope();
         builder.RegisterType<DateTimeHelper>().As<IDateTimeHelper>().InstancePerLifetimeScope();
-        builder.RegisterType<MeasureService>().As<IMeasureService>().InstancePerLifetimeScope();
         builder.RegisterType<GenericAttributeService>().As<IGenericAttributeService>().InstancePerLifetimeScope();
         builder.RegisterType<DefaultWebHelper>().As<IWebHelper>().InstancePerLifetimeScope();
         builder.RegisterType<PreviewModeCookie>().As<IPreviewModeCookie>().InstancePerLifetimeScope();
-        builder.RegisterType<CollectionGroupService>().As<ICollectionGroupService>().InstancePerLifetimeScope();
 
         // Rule options provider.
         builder.RegisterType<CommonRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();

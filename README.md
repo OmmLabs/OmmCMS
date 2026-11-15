@@ -58,6 +58,8 @@ Phases 716–730: removed the catalogue admin models, permissions, export previe
 
 Phases 731–750: removed the remaining catalogue entity model and database sets, including products, categories, manufacturers, mappings, bundles and attributes. Media folder tree support and reusable choice controls were relocated into the retained CMS framework. CMS topic routing and generic SEO/serialization/seeding tests were preserved; fresh-install checks require retired catalogue tables to be absent. Existing database upgrades from the historical commerce schema are unsupported.
 
+Phases 751–765: removed unused commerce directory records and seed data for delivery times, quantity units, weight/dimension conversion and collection groups, including their administration models, rules and diagnostics. General measurement values, common customer/country/currency data and CMS permissions remain.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

@@ -57,7 +57,6 @@ public class MaintenanceController : AdminController
     private readonly Lazy<IExportProfileService> _exportProfileService;
     private readonly Lazy<IImportProfileService> _importProfileService;
     private readonly Lazy<UpdateChecker> _updateChecker;
-    private readonly MeasureSettings _measureSettings;
     private readonly IHostApplicationLifetime _appLifetime;
     private readonly IMediaService _mediaService;
 
@@ -76,7 +75,6 @@ public class MaintenanceController : AdminController
         Lazy<IExportProfileService> exportProfileService,
         Lazy<IImportProfileService> importProfileService,
         Lazy<UpdateChecker> updateChecker,
-        MeasureSettings measureSettings,
         IHostApplicationLifetime appLifetime,
         IMediaService mediaService)
     {
@@ -94,7 +92,6 @@ public class MaintenanceController : AdminController
         _exportProfileService = exportProfileService;
         _importProfileService = importProfileService;
         _updateChecker = updateChecker;
-        _measureSettings = measureSettings;
         _appLifetime = appLifetime;
         _mediaService = mediaService;
     }
@@ -731,41 +728,6 @@ public class MaintenanceController : AdminController
             AddEntry(SystemWarningLevel.Fail, T("Admin.System.Warnings.PrimaryCurrency.NotSet"));
         }
 
-
-        // Base measure weight
-        // ====================================
-        var baseWeight = await _db.MeasureWeights.FindByIdAsync(_measureSettings.BaseWeightId, false);
-        if (baseWeight != null)
-        {
-            AddEntry(SystemWarningLevel.Pass, T("Admin.System.Warnings.DefaultWeight.Set"));
-
-            if (baseWeight.Ratio != 1)
-            {
-                AddEntry(SystemWarningLevel.Fail, T("Admin.System.Warnings.DefaultWeight.Ratio1"));
-            }
-        }
-        else
-        {
-            AddEntry(SystemWarningLevel.Fail, T("Admin.System.Warnings.DefaultWeight.NotSet"));
-        }
-
-
-        // Base dimension weight
-        // ====================================
-        var baseDimension = await _db.MeasureDimensions.FindByIdAsync(_measureSettings.BaseDimensionId, false);
-        if (baseDimension != null)
-        {
-            AddEntry(SystemWarningLevel.Pass, T("Admin.System.Warnings.DefaultDimension.Set"));
-
-            if (baseDimension.Ratio != 1)
-            {
-                AddEntry(SystemWarningLevel.Fail, T("Admin.System.Warnings.DefaultDimension.Ratio1"));
-            }
-        }
-        else
-        {
-            AddEntry(SystemWarningLevel.Fail, T("Admin.System.Warnings.DefaultDimension.NotSet"));
-        }
 
         // Incompatible modules
         // ====================================
