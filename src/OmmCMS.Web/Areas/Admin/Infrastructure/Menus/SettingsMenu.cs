@@ -71,33 +71,6 @@ public partial class SettingsMenu : MenuBase
             },
             new MenuItem
             {
-                Id = "order",
-                Text = T("Admin.Orders"),
-                Icon = "chart-up",
-                PermissionNames = perm,
-                ControllerName = "Order",
-                ActionName = "OrderSettings"
-            },
-            new MenuItem
-            {
-                Id = "finance",
-                Text = T("Common.Finance"),
-                Icon = "discount",
-                PermissionNames = perm,
-                ControllerName = "Tax",
-                ActionName = "FinanceSettings"
-            },
-            new MenuItem
-            {
-                Id = "reward-points",
-                Text = T("Account.RewardPoints"),
-                Icon = "trophy",
-                PermissionNames = perm,
-                ControllerName = "Customer",
-                ActionName = "RewardPointsSettings"
-            },
-            new MenuItem
-            {
                 Id = "icons",
                 Text = T("Admin.Configuration.Settings.Icons"),
                 Icon = "star",

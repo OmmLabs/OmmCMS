@@ -21,12 +21,6 @@ public class CustomerRoleModel : TabbableModel
     [LocalizedDisplay("*SystemName")]
     public string SystemName { get; set; }
 
-    [LocalizedDisplay("*MinOrderTotal")]
-    public decimal? OrderTotalMinimum { get; set; }
-
-    [LocalizedDisplay("*MaxOrderTotal")]
-    public decimal? OrderTotalMaximum { get; set; }
-
     [UIHint("RuleSets")]
     [AdditionalMetadata("multiple", true)]
     [AdditionalMetadata("scope", RuleScope.Customer)]
@@ -44,7 +38,5 @@ public partial class CustomerRoleValidator : AbstractValidator<CustomerRoleModel
     {
         RuleFor(x => x.Name).NotNull();
 
-        RuleFor(x => x.OrderTotalMaximum)
-            .GreaterThan(x => x.OrderTotalMinimum ?? 0);
     }
 }

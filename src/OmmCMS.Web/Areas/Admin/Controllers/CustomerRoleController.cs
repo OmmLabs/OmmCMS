@@ -28,7 +28,6 @@ public class CustomerRoleController : AdminController
     private readonly SmartDbContext _db;
     private readonly RoleManager<CustomerRole> _roleManager;
     private readonly IRuleService _ruleService;
-    private readonly ICurrencyService _currencyService;
     private readonly Lazy<ITaskStore> _taskStore;
     private readonly Lazy<ITaskScheduler> _taskScheduler;
     private readonly CustomerSettings _customerSettings;
@@ -37,7 +36,6 @@ public class CustomerRoleController : AdminController
         SmartDbContext db,
         RoleManager<CustomerRole> roleManager,
         IRuleService ruleService,
-        ICurrencyService currencyService,
         Lazy<ITaskStore> taskStore,
         Lazy<ITaskScheduler> taskScheduler,
         CustomerSettings customerSettings)
@@ -46,7 +44,6 @@ public class CustomerRoleController : AdminController
         _roleManager = roleManager;
         _taskStore = taskStore;
         _ruleService = ruleService;
-        _currencyService = currencyService;
         _taskScheduler = taskScheduler;
         _customerSettings = customerSettings;
     }
@@ -455,7 +452,6 @@ public class CustomerRoleController : AdminController
 
             ViewBag.ShowRuleApplyButton = showRuleApplyButton;
             ViewBag.PermissionTree = await Services.Permissions.GetPermissionTreeAsync(role, true);
-            ViewBag.PrimaryStoreCurrencyCode = _currencyService.PrimaryCurrency.CurrencyCode;
         }
 
         ViewBag.UsernamesEnabled = _customerSettings.SupportsUsernames();

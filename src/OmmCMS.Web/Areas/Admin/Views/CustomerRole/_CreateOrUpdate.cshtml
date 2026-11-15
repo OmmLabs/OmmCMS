@@ -1,7 +1,6 @@
 ﻿@model CustomerRoleModel
 
 @{
-    var primaryStoreCurrencyCode = (string)ViewBag.PrimaryStoreCurrencyCode;
     var permissionTree = (PermissionTree)ViewBag.PermissionTree;
 
     var roleMappingsViewData = new ViewDataDictionary(ViewData);
@@ -40,24 +39,6 @@
                 <div class="adminData">
                     <input asp-for="Active" />
                     <span asp-validation-for="Active"></span>
-                </div>
-            </div>
-            <div class="adminRow">
-                <div class="adminTitle">
-                    <smart-label asp-for="OrderTotalMinimum" />
-                </div>
-                <div class="adminData">
-                    <editor asp-for="OrderTotalMinimum" sm-postfix="@primaryStoreCurrencyCode" />
-                    <span asp-validation-for="OrderTotalMinimum"></span>
-                </div>
-            </div>
-            <div class="adminRow">
-                <div class="adminTitle">
-                    <smart-label asp-for="OrderTotalMaximum" />
-                </div>
-                <div class="adminData">
-                    <editor asp-for="OrderTotalMaximum" sm-postfix="@primaryStoreCurrencyCode" />
-                    <span asp-validation-for="OrderTotalMaximum"></span>
                 </div>
             </div>
             <div class="adminRow">

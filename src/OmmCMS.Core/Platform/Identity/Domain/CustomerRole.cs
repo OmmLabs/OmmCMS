@@ -11,8 +11,6 @@ internal class CustomerRoleMap : IEntityTypeConfiguration<CustomerRole>
 {
     public void Configure(EntityTypeBuilder<CustomerRole> builder)
     {
-        builder.Property(c => c.OrderTotalMinimum).HasPrecision(18, 2);
-        builder.Property(c => c.OrderTotalMaximum).HasPrecision(18, 2);
 
         builder.HasMany(c => c.RuleSets)
             .WithMany(c => c.CustomerRoles)
@@ -68,16 +66,6 @@ public partial class CustomerRole : EntityWithAttributes, IRulesContainer
     /// </summary>
     [StringLength(255)]
     public string SystemName { get; set; }
-
-    /// <summary>
-    /// Gets or sets a minimum order amount.
-    /// </summary>
-    public decimal? OrderTotalMinimum { get; set; }
-
-    /// <summary>
-    /// Gets or sets a maximum order amount.
-    /// </summary>
-    public decimal? OrderTotalMaximum { get; set; }
 
     private ICollection<PermissionRoleMapping> _permissionRoleMappings;
     /// <summary>

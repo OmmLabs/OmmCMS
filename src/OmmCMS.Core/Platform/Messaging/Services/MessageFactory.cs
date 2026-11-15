@@ -23,12 +23,6 @@ public partial class MessageFactory : IMessageFactory
 {
     const string LoremIpsum = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
 
-    private static readonly string[] _verifyOrderAgeTemplateNames =
-    [
-        MessageTemplateNames.OrderCompletedCustomer,
-        MessageTemplateNames.OrderCancelledCustomer,
-    ];
-
     private Dictionary<string, Func<Task<object>>> _testModelFactories;
 
     private readonly SmartDbContext _db;
@@ -42,10 +36,8 @@ public partial class MessageFactory : IMessageFactory
     private readonly IMediaService _mediaService;
     private readonly IEventPublisher _eventPublisher;
     private readonly INotifier _notifier;
-    private readonly IDateTimeHelper _dateTimeHelper;
     private readonly IStoreContext _storeContext;
     private readonly IWorkContext _workContext;
-    private readonly OrderSettings _orderSettings;
 
     public MessageFactory(
         SmartDbContext db,
@@ -59,10 +51,8 @@ public partial class MessageFactory : IMessageFactory
         IMediaService mediaService,
         IEventPublisher eventPublisher,
         INotifier notifier,
-        IDateTimeHelper dateTimeHelper,
         IStoreContext storeContext,
-        IWorkContext workContext,
-        OrderSettings orderSettings)
+        IWorkContext workContext)
     {
         _db = db;
         _templateEngine = templateEngine;
@@ -75,10 +65,8 @@ public partial class MessageFactory : IMessageFactory
         _mediaService = mediaService;
         _eventPublisher = eventPublisher;
         _notifier = notifier;
-        _dateTimeHelper = dateTimeHelper;
         _storeContext = storeContext;
         _workContext = workContext;
-        _orderSettings = orderSettings;
     }
 
     public Localizer T { get; set; } = NullLocalizer.Instance;
@@ -419,23 +407,6 @@ public partial class MessageFactory : IMessageFactory
 
     protected virtual bool CreateMessage(MessageContext ctx, IEnumerable<object> parts)
     {
-        // Check orders that are too old for message sending.
-        if (!ctx.TestMode
-            && _orderSettings.MaxMessageOrderAgeInDays > 0
-            && _verifyOrderAgeTemplateNames.Contains(ctx.MessageTemplateName))
-        {
-            Order order = parts.OfType<Order>().FirstOrDefault();
-            if (order != null
-                && order.OrderStatus >= OrderStatus.Complete
-                && order.CreatedOnUtc.AddDays(_orderSettings.MaxMessageOrderAgeInDays) < DateTime.UtcNow)
-            {
-                var createdOnStr = _dateTimeHelper.ConvertToUserTime(order.CreatedOnUtc, DateTimeKind.Utc).ToHumanizedString(false);
-                Logger.Info(T("Admin.MessageTemplate.OrderTooOldForMessageInfo", ctx.MessageTemplateName, order.Id, createdOnStr));
-
-                return false;
-            }
-        }
-
         return true;
     }
 
@@ -482,10 +453,8 @@ public partial class MessageFactory : IMessageFactory
         {
             { nameof(Product), () => GetRandomEntity<Product>(x => !x.Deleted && !x.IsSystemProduct && x.Visibility != ProductVisibility.Hidden && x.Published) },
             { nameof(Customer), () => GetRandomEntity<Customer>(x => !x.Deleted && !x.IsSystemAccount && !string.IsNullOrEmpty(x.Email)) },
-            { nameof(Order), () => GetRandomEntity<Order>(x => !x.Deleted) },
             { nameof(NewsletterSubscription), () => GetRandomEntity<NewsletterSubscription>(x => true) },
             { nameof(Campaign), () => GetRandomEntity<Campaign>(x => true) },
-            { nameof(OrderItem), () => GetRandomEntity<OrderItem>(x => !x.Order.Deleted && !x.Product.Deleted) },
             { nameof(WalletHistory), () => GetRandomEntity<WalletHistory>(x => true) }
         };
 
