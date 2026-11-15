@@ -1,8 +1,4 @@
-﻿using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
-using System.Text.Json.Nodes;
+﻿using System.Text.Json.Nodes;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Content.Menus;
@@ -10,7 +6,6 @@ using OmmCMS.Core.Content.Topics;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Logging;
 using OmmCMS.Core.Messaging;
-using OmmCMS.Core.Rules;
 using OmmCMS.Core.Stores;
 using OmmCMS.Scheduling;
 
@@ -36,8 +31,8 @@ internal static class InstallationSeedDescriptors
     public static SeedEntityDescriptor<QuantityUnit> QuantityUnits()
         => new SeedEntityDescriptor<QuantityUnit>("key").FromFiles("core/quantity-units.json");
 
-    public static SeedEntityDescriptor<CustomerRole> CustomerRoles(bool includeSamples)
-        => new SeedEntityDescriptor<CustomerRole>("systemName").FromFiles(WithSamples("customer-roles.json", includeSamples));
+    public static SeedEntityDescriptor<CustomerRole> CustomerRoles()
+        => new SeedEntityDescriptor<CustomerRole>("systemName").FromFiles("core/customer-roles.json");
 
     public static SeedEntityDescriptor<EmailAccount> EmailAccounts()
         => new SeedEntityDescriptor<EmailAccount>("key").FromFiles("core/email-accounts.json");
@@ -47,15 +42,6 @@ internal static class InstallationSeedDescriptors
 
     public static SeedEntityDescriptor<TaskDescriptor> TaskDescriptors()
         => new SeedEntityDescriptor<TaskDescriptor>("type").FromFiles("core/tasks.json");
-
-    public static SeedEntityDescriptor<ProductTemplate> ProductTemplates()
-        => new SeedEntityDescriptor<ProductTemplate>("viewPath").FromFiles("core/product-templates.json");
-
-    public static SeedEntityDescriptor<CategoryTemplate> CategoryTemplates()
-        => new SeedEntityDescriptor<CategoryTemplate>("viewPath").FromFiles("core/category-templates.json");
-
-    public static SeedEntityDescriptor<ManufacturerTemplate> ManufacturerTemplates()
-        => new SeedEntityDescriptor<ManufacturerTemplate>("viewPath").FromFiles("core/manufacturer-templates.json");
 
     /// <summary>
     /// Countries with their states. States can be referenced as "{countryKey}/{stateKey}", e.g. "DE/BW".
@@ -69,13 +55,12 @@ internal static class InstallationSeedDescriptors
     /// Topics. The seed-only field "slug" overrides the slug derived from the system name and is collected in <paramref name="slugs"/>.
     /// </summary>
     /// <param name="slugs">Receives slug overrides. Must compare by reference (<see cref="ReferenceEqualityComparer"/>).</param>
-    /// <param name="cmsPreview">Use the CMS starter data instead of the storefront defaults.</param>
-    public static SeedEntityDescriptor<Topic> Topics(IDictionary<Topic, string> slugs, bool cmsPreview = false)
+    public static SeedEntityDescriptor<Topic> Topics(IDictionary<Topic, string> slugs)
     {
         Guard.NotNull(slugs);
 
         return new SeedEntityDescriptor<Topic>("systemName")
-            .FromFiles(cmsPreview ? "core/cms/topics.json" : "core/topics.json")
+            .FromFiles("core/cms/topics.json")
             .Bind("slug", (topic, node, _) => slugs[topic] = node.GetValue<string>());
     }
 
@@ -83,13 +68,12 @@ internal static class InstallationSeedDescriptors
     /// The default store. URL and SSL are not seed data; they are taken from the current request.
     /// </summary>
     /// <param name="media">Creates a saved media file for a media reference.</param>
-    /// <param name="cmsPreview">Use the CMS starter data instead of the storefront defaults.</param>
-    public static SeedEntityDescriptor<Store> Stores(Func<JsonNode, MediaFile> media, bool cmsPreview = false)
+    public static SeedEntityDescriptor<Store> Stores(Func<JsonNode, MediaFile> media)
     {
         Guard.NotNull(media);
 
         return new SeedEntityDescriptor<Store>("key")
-            .FromFiles(cmsPreview ? "core/cms/stores.json" : "core/stores.json")
+            .FromFiles("core/cms/stores.json")
             .Reference<Currency>("defaultCurrency", (store, currency) => store.DefaultCurrencyId = currency.Id)
             .Reference<Currency>("primaryExchangeRateCurrency", (store, currency) => store.PrimaryExchangeRateCurrencyId = currency.Id)
             .Bind("logoMediaFile", (store, node, _) => store.LogoMediaFileId = media(node).Id);
@@ -109,27 +93,6 @@ internal static class InstallationSeedDescriptors
             });
 
     /// <summary>
-    /// Sample customers who write the sample product reviews. They are registered customers without a password,
-    /// so nobody can sign in with them. The names are collected here and stored as customer attributes later.
-    /// </summary>
-    public static SeedEntityDescriptor<Customer> SampleCustomers(IDictionary<Customer, string> firstNames, IDictionary<Customer, string> lastNames)
-    {
-        Guard.NotNull(firstNames);
-        Guard.NotNull(lastNames);
-
-        return new SeedEntityDescriptor<Customer>("key")
-            .FromFiles("samples/customers.json")
-            .Bind("firstName", (customer, node, _) => firstNames[customer] = node.GetValue<string>())
-            .Bind("lastName", (customer, node, _) => lastNames[customer] = node.GetValue<string>())
-            .OnCreated((customer, _) =>
-            {
-                customer.CustomerGuid = Guid.NewGuid();
-                customer.CreatedOnUtc = DateTime.UtcNow;
-                customer.LastActivityDateUtc = DateTime.UtcNow;
-            });
-    }
-
-    /// <summary>
     /// Address of the admin user.
     /// </summary>
     public static SeedEntityDescriptor<Address> AdminAddress()
@@ -140,97 +103,12 @@ internal static class InstallationSeedDescriptors
             .OnCreated((address, _) => address.CreatedOnUtc = DateTime.UtcNow);
 
     /// <summary>
-    /// Menus with their items. Titles may reference locale resources. The seed-only field "publishedWhen"
-    /// of an item sets "published" from a condition evaluated at installation time.
+    /// CMS menus with their items. Titles may reference locale resources.
     /// </summary>
-    /// <param name="condition">Evaluates a condition like "manufacturers" or "setting:CatalogSettings.CompareProductsEnabled".</param>
-    /// <param name="cmsPreview">Use the CMS starter data instead of the storefront defaults.</param>
-    public static SeedEntityDescriptor<MenuEntity> Menus(Func<string, bool> condition, bool cmsPreview = false)
-    {
-        Guard.NotNull(condition);
-
-        var items = new SeedEntityDescriptor<MenuItemEntity>("key")
-            .Bind("publishedWhen", (item, node, _) => item.Published = condition(node.GetValue<string>()));
-
-        return new SeedEntityDescriptor<MenuEntity>("systemName")
-            .FromFiles(cmsPreview ? "core/cms/menus.json" : "core/menus.json")
-            .Child("items", x => x.Items, items);
-    }
-
-    #region Samples
-
-    /// <summary>
-    /// Specification attributes with their options. Options can be referenced as "{attributeKey}/{optionKey}".
-    /// </summary>
-    public static SeedEntityDescriptor<SpecificationAttribute> SpecificationAttributes()
-        => new SeedEntityDescriptor<SpecificationAttribute>("key")
-            .FromFiles("samples/catalog/specification-attributes.json")
-            .Child("options", x => x.SpecificationAttributeOptions, new SeedEntityDescriptor<SpecificationAttributeOption>("key"));
-
-    public static SeedEntityDescriptor<ProductAttribute> ProductAttributes()
-        => new SeedEntityDescriptor<ProductAttribute>("alias").FromFiles("samples/catalog/product-attributes.json");
-
-    /// <summary>
-    /// Product attribute option sets with their options.
-    /// </summary>
-    public static SeedEntityDescriptor<ProductAttributeOptionsSet> ProductAttributeOptionsSets()
-        => new SeedEntityDescriptor<ProductAttributeOptionsSet>("key")
-            .FromFiles("samples/catalog/product-attribute-option-sets.json")
-            .Reference<ProductAttribute>("productAttribute", (set, attribute) => set.ProductAttributeId = attribute.Id)
-            .Child("options", x => x.ProductAttributeOptions, new SeedEntityDescriptor<ProductAttributeOption>("alias"));
-
-    /// <param name="aclRoles">Receives the customer roles of the ACL. The ACL records need the saved campaign ID.</param>
-    public static SeedEntityDescriptor<Campaign> Campaigns(IDictionary<Campaign, IReadOnlyList<CustomerRole>> aclRoles)
-    {
-        Guard.NotNull(aclRoles);
-
-        return new SeedEntityDescriptor<Campaign>("key")
-            .FromFiles("samples/campaigns.json")
-            .References<CustomerRole>("aclCustomerRoles", (campaign, roles) => aclRoles[campaign] = roles)
-            .OnCreated((campaign, _) => campaign.CreatedOnUtc = DateTime.UtcNow);
-    }
-
-    /// <summary>
-    /// Rule sets with their rules, and the customer roles they apply to.
-    /// </summary>
-    public static SeedEntityDescriptor<RuleSetEntity> RuleSets()
-        => new SeedEntityDescriptor<RuleSetEntity>("key")
-            .FromFiles("samples/rule-sets.json")
-            .Child("rules", x => x.Rules, new SeedEntityDescriptor<RuleEntity>("ruleType"))
-            .References<CustomerRole>("customerRoles", (ruleSet, roles) => roles.Each(ruleSet.CustomerRoles.Add));
-
-    /// <summary>
-    /// Categories with parent, picture, rule sets.
-    /// </summary>
-    /// <param name="media">Creates a media file from a media reference (path or { file, name }).</param>
-    public static SeedEntityDescriptor<Category> Categories(Func<JsonNode, MediaFile> media)
-    {
-        Guard.NotNull(media);
-
-        return new SeedEntityDescriptor<Category>("alias")
-            .FromFiles("samples/catalog/categories.json")
-            .Reference<Category>("parent", (category, parent) => category.Parent = parent)
-            .Bind("mediaFile", (category, node, _) => category.MediaFile = media(node))
-            .References<RuleSetEntity>("ruleSets", (category, ruleSets) => ruleSets.Each(category.RuleSets.Add));
-    }
-
-    /// <summary>
-    /// Manufacturers with picture.
-    /// </summary>
-    /// <param name="media">Creates a media file from a media reference (path or { file, name }).</param>
-    public static SeedEntityDescriptor<Manufacturer> Manufacturers(Func<JsonNode, MediaFile> media)
-    {
-        Guard.NotNull(media);
-
-        return new SeedEntityDescriptor<Manufacturer>("key")
-            .FromFiles("samples/catalog/manufacturers.json")
-            .Bind("mediaFile", (manufacturer, node, _) => manufacturer.MediaFile = media(node));
-    }
-
-    public static SeedEntityDescriptor<ProductTag> ProductTags()
-        => new SeedEntityDescriptor<ProductTag>("key").FromFiles("samples/catalog/product-tags.json");
-
-    #endregion
+    public static SeedEntityDescriptor<MenuEntity> Menus()
+        => new SeedEntityDescriptor<MenuEntity>("systemName")
+            .FromFiles("core/cms/menus.json")
+            .Child("items", x => x.Items, new SeedEntityDescriptor<MenuItemEntity>("key"));
 
     /// <summary>
     /// Parses a media reference: a path below the media folder, or { "file": path, "name": seoName }.
@@ -250,9 +128,4 @@ internal static class InstallationSeedDescriptors
         throw new SeedDataFormatException("A media reference must be a path or an object with \"file\" and optional \"name\".");
     }
 
-    /// <summary>
-    /// The core file, plus the samples file when sample data is installed.
-    /// </summary>
-    private static string[] WithSamples(string fileName, bool includeSamples)
-        => includeSamples ? [$"core/{fileName}", $"samples/{fileName}"] : [$"core/{fileName}"];
 }

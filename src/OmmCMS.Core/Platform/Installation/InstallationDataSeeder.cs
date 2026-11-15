@@ -2,7 +2,6 @@
 using Autofac;
 using Microsoft.AspNetCore.Http;
 using OmmCMS.Caching;
-using OmmCMS.Core.Catalog.Products.Utilities;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Configuration;
 using OmmCMS.Core.Content.Media;
@@ -126,38 +125,15 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
         await PopulateAsync("PopulateSettings", PopulateSettings);
         await PopulateFromSeedAsync("PopulateActivityLogTypes", InstallationSeedDescriptors.ActivityLogTypes());
         await PopulateAsync("PopulateCustomersAndUsers", async () => await HashDefaultCustomerPassword(_config.DefaultUserName, _config.DefaultUserPassword));
-        await PopulateFromSeedAsync("PopulateProductTemplates", InstallationSeedDescriptors.ProductTemplates());
-        await PopulateFromSeedAsync("PopulateCategoryTemplates", InstallationSeedDescriptors.CategoryTemplates());
-        await PopulateFromSeedAsync("PopulateManufacturerTemplates", InstallationSeedDescriptors.ManufacturerTemplates());
         await PopulateAsync("PopulateScheduleTasks", () =>
         {
             var tasks = CreateFromSeed(InstallationSeedDescriptors.TaskDescriptors());
-            if (_config.CmsPreview)
-            {
-                tasks.RemoveAll(x => x.Type is "UpdateExchangeRateTask" or "ProductRuleEvaluatorTask");
-            }
+            tasks.RemoveAll(x => x.Type is "UpdateExchangeRateTask" or "ProductRuleEvaluatorTask");
             return SaveRangeAsync(tasks);
         });
 
-        if (IncludeSamples)
-        {
-            Logger.Info("Seeding sample data");
-
-            _config.ProgressMessageCallback("Progress.CreatingSampleData");
-
-            await PopulateFromSeedAsync("PopulateSpecificationAttributes", InstallationSeedDescriptors.SpecificationAttributes());
-            await PopulateFromSeedAsync("PopulateProductAttributes", InstallationSeedDescriptors.ProductAttributes());
-            await PopulateFromSeedAsync("PopulateProductAttributeOptionsSets", InstallationSeedDescriptors.ProductAttributeOptionsSets());
-            await PopulateAsync("PopulateCampaigns", PopulateCampaigns);
-            await PopulateFromSeedAsync("PopulateRuleSets", InstallationSeedDescriptors.RuleSets());
-            await PopulateAsync("PopulateSampleCustomers", PopulateSampleCustomers);
-            await PopulateAsync("PopulateCategories", PopulateCategories);
-            await PopulateAsync("PopulateManufacturers", PopulateManufacturers);
-            await PopulateProductsFromSeedAsync();
-        }
-
-        // Menus come last, because some menu items are only published if sample data (e.g. manufacturers) exist.
-        await PopulateFromSeedAsync("PopulateMenus", InstallationSeedDescriptors.Menus(EvaluateSeedCondition, _config.CmsPreview));
+        // Menus come last, after the CMS content and settings.
+        await PopulateFromSeedAsync("PopulateMenus", InstallationSeedDescriptors.Menus());
 
         // Perf
         Context.DetachEntities<BaseEntity>();
@@ -165,7 +141,7 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
 
     #endregion
 
-    private bool IncludeSamples => _config.SeedSampleData && !_config.CmsPreview;
+    private const bool IncludeSamples = false;
 
     #region Populate
 
@@ -177,17 +153,17 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
 
     private async Task PopulateStores()
     {
-        var stores = CreateFromSeed(InstallationSeedDescriptors.Stores(CreateSampleMedia, _config.CmsPreview));
+        var stores = CreateFromSeed(InstallationSeedDescriptors.Stores(CreateSampleMedia));
 
         // URL and SSL of the store are taken from the installation request.
         var request = ApplicationContext.Services.Resolve<IHttpContextAccessor>().HttpContext?.Request;
         foreach (var store in stores)
         {
             store.Url = request == null
-                ? (_config.CmsPreview ? "http://localhost/" : "http://www.yourstore.com/")
+                ? "http://localhost/"
                 : request.Scheme + "://" + request.Host + request.PathBase.Value.EnsureEndsWith('/');
             store.SslEnabled = request?.IsHttps ?? false;
-            if (_config.CmsPreview && request != null)
+            if (request != null)
             {
                 store.Hosts = request.Host.Value;
             }
@@ -294,7 +270,7 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
 
     private async Task PopulateCustomersAndUsers(string defaultUserEmail, string defaultUserPassword)
     {
-        var customerRoles = CreateFromSeed(InstallationSeedDescriptors.CustomerRoles(IncludeSamples));
+        var customerRoles = CreateFromSeed(InstallationSeedDescriptors.CustomerRoles());
         await SaveRangeAsync(customerRoles);
 
         //admin user
@@ -358,30 +334,6 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
         }
     }
 
-    private async Task PopulateSampleCustomers()
-    {
-        var firstNames = new Dictionary<Customer, string>(ReferenceEqualityComparer.Instance);
-        var lastNames = new Dictionary<Customer, string>(ReferenceEqualityComparer.Instance);
-        var customers = CreateFromSeed(InstallationSeedDescriptors.SampleCustomers(firstNames, lastNames));
-
-        var registeredRole = await Context.CustomerRoles.FirstAsync(x => x.SystemName == SystemCustomerRoleNames.Registered);
-        foreach (var customer in customers)
-        {
-            customer.CustomerRoleMappings.Add(new CustomerRoleMapping { CustomerId = customer.Id, CustomerRoleId = registeredRole.Id });
-        }
-
-        await SaveRangeAsync(customers);
-
-        foreach (var customer in customers)
-        {
-            Context.GenericAttributes.AddRange(
-                new GenericAttribute { EntityId = customer.Id, Key = "FirstName", KeyGroup = nameof(Customer), Value = firstNames[customer] },
-                new GenericAttribute { EntityId = customer.Id, Key = "LastName", KeyGroup = nameof(Customer), Value = lastNames[customer] });
-        }
-
-        await Context.SaveChangesAsync();
-    }
-
     private async Task HashDefaultCustomerPassword(string defaultUserEmail, string defaultUserPassword)
     {
         var encryptor = new Encryptor(new SecuritySettings());
@@ -414,10 +366,7 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
         seedSettings.Remove(RawSettingsKey);
 
         ApplySeedSettings(settings, seedSettings);
-        if (_config.CmsPreview)
-        {
-            ApplySeedSettings(settings, _seedSource.LoadObject("core/cms/settings.json"));
-        }
+        ApplySeedSettings(settings, _seedSource.LoadObject("core/cms/settings.json"));
         foreach (var setting in settings)
         {
             Type settingType = setting.GetType();
@@ -518,64 +467,9 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
         }
     }
 
-    /// <summary>
-    /// Evaluates a seed condition, e.g. "manufacturers" or "setting:CatalogSettings.CompareProductsEnabled".
-    /// </summary>
-    private bool EvaluateSeedCondition(string condition)
-    {
-        if (condition.EqualsNoCase("manufacturers"))
-        {
-            return Context.Manufacturers.Any();
-        }
-
-        if (condition.StartsWith("setting:", StringComparison.OrdinalIgnoreCase))
-        {
-            // A missing setting counts as true, like before.
-            var name = condition["setting:".Length..];
-            var value = Context.Settings.Where(x => x.StoreId == 0 && x.Name == name).Select(x => x.Value).FirstOrDefault();
-            return value == null || value.Convert<bool>();
-        }
-
-        throw new SeedDataFormatException($"Unknown seed condition '{condition}'.");
-    }
-
     private async Task PopulateMessageTemplates()
     {
         await _messageTemplateService.ImportAllTemplatesAsync(_config.Language.LanguageCulture);
-    }
-
-    private async Task PopulateCampaigns()
-    {
-        // By reference: entity equality depends on the ID, which changes on save.
-        var aclRoles = new Dictionary<Campaign, IReadOnlyList<CustomerRole>>(ReferenceEqualityComparer.Instance);
-        var campaigns = CreateFromSeed(InstallationSeedDescriptors.Campaigns(aclRoles));
-        await SaveRangeAsync(campaigns);
-
-        foreach (var (campaign, roles) in aclRoles)
-        {
-            Context.AclRecords.AddRange(roles.Select(role => new AclRecord
-            {
-                EntityId = campaign.Id,
-                EntityName = nameof(Campaign),
-                CustomerRoleId = role.Id
-            }));
-        }
-
-        await Context.SaveChangesAsync();
-    }
-
-    private async Task PopulateCategories()
-    {
-        var categories = CreateFromSeed(InstallationSeedDescriptors.Categories(CreateSampleMedia));
-        await SaveRangeAsync(categories);
-        await PopulateUrlRecordsFor(categories, x => CreateUrlRecord(x, null, x.Name));
-    }
-
-    private async Task PopulateManufacturers()
-    {
-        var manufacturers = CreateFromSeed(InstallationSeedDescriptors.Manufacturers(CreateSampleMedia));
-        await SaveRangeAsync(manufacturers);
-        await PopulateUrlRecordsFor(manufacturers, x => CreateUrlRecord(x, null, x.Name));
     }
 
     /// <summary>
@@ -601,7 +495,7 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
     {
         // By reference: entity equality depends on the ID, which changes on save.
         var slugs = new Dictionary<Topic, string>(ReferenceEqualityComparer.Instance);
-        var topics = CreateFromSeed(InstallationSeedDescriptors.Topics(slugs, _config.CmsPreview));
+        var topics = CreateFromSeed(InstallationSeedDescriptors.Topics(slugs));
         await SaveRangeAsync(topics);
         await PopulateUrlRecordsFor(topics, x => CreateUrlRecord(x, slugs.GetValueOrDefault(x), x.SystemName));
     }

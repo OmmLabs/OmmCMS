@@ -1,11 +1,8 @@
 # Installation seed data
 
-This folder holds the data that the installer writes into a new shop database:
-mandatory data (currencies, countries, tax categories, settings, …) and the optional
-sample catalog (categories, manufacturers, products, …), each in all installable languages.
-
-The sample catalog itself (brands, SKUs, which product shows which feature) is described in
-[CATALOG.md](CATALOG.md).
+This folder holds the data that the installer writes into a new CMS database:
+mandatory data (currencies, countries, settings, …) and CMS starter pages and menus.
+The generic seed loader supports culture overlays; storefront sample data is not installed.
 
 It replaces the seed data that used to live in C# (`InvariantSeedData`, `EnUSSeedData`,
 `DeDESeedData` in `src/OmmCMS.Core/Platform/Installation`). C# only orchestrates the
@@ -248,7 +245,7 @@ Tests in `test/OmmCMS.Core.Tests/Platform/Installation`:
 | Test | Purpose |
 |---|---|
 | `Seeding/*Tests` | Unit tests of merger, data source, factory and resolver. |
-| `InstallationSeedingTests` | Runs the real installation seeder with these files for every culture against SQLite, with and without sample data, and checks a few general rules (unique SKUs, visible products have a category, internal links point to an existing slug). |
+| `InstallationSeedingTests` | Runs the real installation seeder for every culture against SQLite and verifies CMS-only starter content, even when the legacy sample request is supplied. |
 | `InstallationServiceLanguageTests` | Reads the installer and app languages from this folder. |
 
 The tests do not know concrete values or counts, so you can change seed data without changing a test.
@@ -256,24 +253,19 @@ They fail only if something is broken. Whether the data itself is right is a mat
 
 ## Data files
 
-In installation order. `core/` is always installed, `samples/` only with sample data.
+In installation order. OmmCMS installs only core and CMS starter data; storefront samples are no longer installed.
 
 | Area | Files |
 |---|---|
 | Locale resources | `cultures/{culture}/resources/*` |
-| Currencies, store | `core/currencies.json`, `core/stores.json` |
-| Measures, tax categories (with `rate`, `$aliases`), countries and states | `core/measure-dimensions.json`, `core/measure-weights.json`, `core/tax-categories.json`, `core/countries.json` |
+| Currencies, store | `core/currencies.json`, `core/cms/stores.json` |
+| Measures, countries and states | `core/measure-dimensions.json`, `core/measure-weights.json`, `core/countries.json` |
 | Delivery, quantity units | `core/delivery-times.json`, `core/quantity-units.json` |
-| Customer roles, admin address, system customers | `core/customer-roles.json` (+ `samples/`), `core/admin-address.json`, `core/system-customers.json` |
-| Email accounts, topics (with `slug` overrides) | `core/email-accounts.json`, `core/topics.json` |
-| Settings (`$ref` values) | `core/settings.json` |
-| Activity log types, templates, scheduled tasks | `core/activity-log-types.json`, `core/product-templates.json`, `core/category-templates.json`, `core/manufacturer-templates.json`, `core/tasks.json` |
-| Menus (`@resource` titles, `publishedWhen`) | `core/menus.json` |
-| Specification and product attributes, option sets | `samples/catalog/specification-attributes.json`, `product-attributes.json`, `product-attribute-option-sets.json` |
-| Sample customers (registered, no password) | `samples/customers.json` |
-| Campaign, rule sets | `samples/campaigns.json`, `samples/rule-sets.json` |
-| Categories and manufacturers (with pictures and slugs) | `samples/catalog/categories.json`, `samples/catalog/manufacturers.json` |
-| Product tags and products (pictures, specifications, tier prices, downloads, grouped and bundle products, variants, combinations) | `samples/catalog/product-tags.json`, `samples/catalog/products/*.json`, `cultures/{culture}/samples/catalog/attribute-value-names.json` |
+| Customer roles, admin address, system customers | `core/customer-roles.json`, `core/admin-address.json`, `core/system-customers.json` |
+| Email accounts, topics (with `slug` overrides) | `core/email-accounts.json`, `core/cms/topics.json` |
+| Settings (`$ref` values) | `core/settings.json`, `core/cms/settings.json` |
+| Activity log types, scheduled tasks | `core/activity-log-types.json`, `core/tasks.json` |
+| Menus (`@resource` titles) | `core/cms/menus.json` |
 
 Message templates are not part of this folder; they are imported from `App_Data/EmailTemplates`.
 Descriptors (files, keys, references) are defined in
@@ -281,8 +273,7 @@ Descriptors (files, keys, references) are defined in
 
 ## Rules for AI agents
 
-- When a new catalog feature should be visible in the demo shop, follow `CATALOG.md` (extend an existing product
-  first, keep the table there up to date).
+- Add CMS starter content to the `core/cms/` files; do not reintroduce catalogue samples.
 - Never translate or rename keys. They are referenced from other files and cultures.
 - Put translations only into `cultures/{culture}/…`. Base files are English.
 - Do not add a field to an overlay that is not in the base record unless the entity really

@@ -1,8 +1,0 @@
-// Key field: viewPath
-[
-  {
-    "name": "Default Product Template",
-    "viewPath": "Product",
-    "displayOrder": 10
-  }
-]

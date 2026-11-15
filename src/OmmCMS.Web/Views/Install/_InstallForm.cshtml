@@ -261,17 +261,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-9 offset-md-3">
-                                @if (cmsPreview)
-                                {
-                                    <p class="text-muted mb-0">Installs CMS starter pages without shop sample data.</p>
-                                }
-                                else
-                                {
-                                    <div class="form-check">
-                                        <input type="checkbox" asp-for="InstallSampleData" class="form-check-input remember" />
-                                        <label class="form-check-label" asp-for="InstallSampleData">@T("CreateSampleData")</label>
-                                    </div>
-                                }
+                                <p class="text-muted mb-0">Installs CMS starter pages without shop sample data.</p>
                             </div>
                         </div>
                     </fieldset>

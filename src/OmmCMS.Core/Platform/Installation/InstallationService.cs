@@ -110,11 +110,7 @@ public partial class InstallationService : IInstallationService
     {
         Guard.NotNull(model, nameof(model));
 
-        var cmsPreview = OmmCmsMode.IsEnabled(_appContext.Configuration);
-        if (cmsPreview)
-        {
-            model.InstallSampleData = false;
-        }
+        model.InstallSampleData = false;
 
         if (!TryBeginInstallation(model, out var result))
         {
@@ -250,7 +246,7 @@ public partial class InstallationService : IInstallationService
             {
                 DefaultUserName = model.AdminEmail,
                 DefaultUserPassword = model.AdminPassword,
-                CmsPreview = cmsPreview,
+                CmsPreview = true,
                 SeedSampleData = model.InstallSampleData,
                 Language = primaryLanguage,
                 StoreMediaInDB = model.MediaStorage == "db",

@@ -49,8 +49,7 @@ public class InstallController : Controller
 
     private void PrepareInstallForm()
     {
-        var cmsPreview = OmmCmsMode.IsEnabled(_appContext.Configuration);
-        ViewBag.CmsPreview = cmsPreview;
+        ViewBag.CmsPreview = true;
         var curLanguage = _installService.GetCurrentLanguage();
 
         var installLanguages = _installService.GetInstallationLanguages()

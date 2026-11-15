@@ -655,8 +655,14 @@ try:
             "Checkout/Cart",
             "Checkout/Orders/Domain/CheckoutProcess.cs",
             "Catalog/Products/Hooks/ProductBundleItemHook.cs",
+            "Platform/Installation/InstallationDataSeeder.Products.cs",
         ):
             assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
+        seed = Path("App_Data/Seed")
+        for seed_root in (repo / "src/OmmCMS.Web" / seed, root / seed):
+            assert not list(seed_root.glob("**/samples/catalog")), "Retired catalogue seed directory remains"
+            assert (seed_root / "base/core/cms/topics.json").exists(), "CMS starter topics missing"
+            assert (seed_root / "base/core/cms/menus.json").exists(), "CMS starter menus missing"
         for language in ("en", "de"):
             for name in ("GiftCard.Notification.xml", "ShipmentSent.CustomerNotification.xml", "ShipmentDelivered.CustomerNotification.xml", "Customer.NewOrderNote.xml"):
                 template = Path("App_Data/EmailTemplates") / language / name
