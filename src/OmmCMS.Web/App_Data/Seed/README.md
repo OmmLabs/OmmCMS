@@ -28,7 +28,7 @@ App_Data/Seed/
 └── media/                        Sample images and downloads
 ```
 
-`base/core/settings.json` is the only object file: `{ "TaxSettings": { "TaxDisplayType": "IncludingTax" } }`.
+`base/core/settings.json` is the only object file: `{ "SeoSettings": { "MetaTitle": "Example" } }`.
 It lists only values that differ from the defaults of the settings class. Values that hold
 the ID of a seed record are written as `"$ref:{EntityType}:{key}"`, e.g. `"$ref:Currency:EUR"`.
 Its overlay has the same shape and is merged field by field.

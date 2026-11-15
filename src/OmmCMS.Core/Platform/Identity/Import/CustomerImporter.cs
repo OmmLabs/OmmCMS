@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Checkout.Tax;
-using OmmCMS.Core.Common;
+﻿using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media;

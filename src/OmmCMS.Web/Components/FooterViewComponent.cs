@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Checkout.Tax;
-using OmmCMS.Core.Common.Configuration;
+﻿using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Content.Menus;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Theming;
@@ -16,7 +15,6 @@ public class FooterViewComponent : SmartViewComponent
     private readonly IDisplayHelper _displayHelper;
     private readonly ThemeSettings _themeSettings;
     private readonly CustomerSettings _customerSettings;
-    private readonly TaxSettings _taxSettings;
     private readonly SocialSettings _socialSettings;
     private readonly PrivacySettings _privacySettings;
 
@@ -26,7 +24,6 @@ public class FooterViewComponent : SmartViewComponent
         IDisplayHelper displayHelper,
         ThemeSettings themeSettings,
         CustomerSettings customerSettings,
-        TaxSettings taxSettings,
         SocialSettings socialSettings,
         PrivacySettings privacySettings)
     {
@@ -35,16 +32,13 @@ public class FooterViewComponent : SmartViewComponent
         _displayHelper = displayHelper;
         _themeSettings = themeSettings;
         _customerSettings = customerSettings;
-        _taxSettings = taxSettings;
         _socialSettings = socialSettings;
         _privacySettings = privacySettings;
     }
 
-    public async Task<IViewComponentResult> InvokeAsync()
+    public IViewComponentResult Invoke()
     {
         var store = Services.StoreContext.CurrentStore;
-        var taxDisplayType = await Services.WorkContext.GetTaxDisplayTypeAsync(Services.WorkContext.CurrentCustomer, store.Id);
-        var taxInfo = T(taxDisplayType == TaxDisplayType.IncludingTax ? "Tax.InclVAT" : "Tax.ExclVAT");
         var availableStoreThemes = !_themeSettings.AllowCustomerToSelectTheme
             ? []
             : _themeRegistry.GetThemeDescriptors()
@@ -61,7 +55,6 @@ public class FooterViewComponent : SmartViewComponent
         var model = new FooterModel
         {
             StoreName = store.Name,
-            ShowLegalInfo = _taxSettings.ShowLegalHintsInFooter,
             ShowThemeSelector = availableStoreThemes.Count > 1,
             HideNewsletterBlock = _customerSettings.HideNewsletterBlock,
             ShowSocialLinks = _socialSettings.ShowSocialLinksInFooter
@@ -83,16 +76,6 @@ public class FooterViewComponent : SmartViewComponent
             TryAddSocialLink(_socialSettings.TumblrLink, "tumblr", "Tumblr");
             TryAddSocialLink(_socialSettings.ElloLink, "ello", "Ello");
             TryAddSocialLink(_socialSettings.BehanceLink, "behance", "Behance");
-        }
-
-        var shippingInfoUrl = await Url.TopicAsync("ShippingInfo");
-        if (shippingInfoUrl.HasValue())
-        {
-            model.LegalInfo = T("Tax.LegalInfoFooter", taxInfo, shippingInfoUrl);
-        }
-        else
-        {
-            model.LegalInfo = T("Tax.LegalInfoFooter2", taxInfo);
         }
 
         if (_displayHelper.DisplayOmmCMSHint())

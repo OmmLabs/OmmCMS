@@ -473,7 +473,6 @@ public partial class ImportProfileService : IImportProfileService
         ["MetaKeywords"] = "Admin.Configuration.Seo.MetaKeywords",
         ["MetaTitle"] = "Admin.Configuration.Seo.MetaTitle",
         ["SeName"] = "Admin.Configuration.Seo.SeName",
-        ["TaxDisplayTypeId"] = "Admin.Customers.CustomerRoles.Fields.TaxDisplayType",
         ["MainPictureId"] = "FileUploader.MultiFiles.MainMediaFile",
         ["MediaFileId"] = "Common.Image",
         ["BillingAddressId"] = "Admin.Orders.Fields.BillingAddress",

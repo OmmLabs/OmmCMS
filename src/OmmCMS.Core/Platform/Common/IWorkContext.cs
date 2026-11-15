@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Checkout.Tax;
-using OmmCMS.Core.Common;
+﻿using OmmCMS.Core.Common;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Localization;
 
@@ -43,16 +42,6 @@ public interface IWorkContext
     /// Get or set current user working currency
     /// </summary>
     Currency WorkingCurrency { get; set; }
-
-    /// <summary>
-    /// Get or set current tax display type
-    /// </summary>
-    TaxDisplayType TaxDisplayType { get; set; }
-
-    /// <summary>
-    /// Gets the tax display type for a given customer
-    /// </summary>
-    Task<TaxDisplayType> GetTaxDisplayTypeAsync(Customer customer, int storeId);
 
     /// <summary>
     /// Gets or sets a value indicating whether we're in admin area

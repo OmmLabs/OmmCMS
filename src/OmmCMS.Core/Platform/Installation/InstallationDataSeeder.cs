@@ -3,7 +3,6 @@ using Autofac;
 using Microsoft.AspNetCore.Http;
 using OmmCMS.Caching;
 using OmmCMS.Core.Catalog.Products.Utilities;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Configuration;
 using OmmCMS.Core.Content.Media;

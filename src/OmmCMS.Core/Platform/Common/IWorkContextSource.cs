@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Checkout.Tax;
-using OmmCMS.Core.Common;
+﻿using OmmCMS.Core.Common;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Localization;
 
@@ -28,11 +27,6 @@ public interface IWorkContextSource
     /// Resolves the working currency for the given customer (uncached).
     /// </summary>
     Task<Currency> ResolveWorkingCurrencyAsync(Customer customer, bool forAdminArea);
-
-    /// <summary>
-    /// Resolves the tax display type for the given customer and store id (uncached).
-    /// </summary>
-    Task<TaxDisplayType> ResolveTaxDisplayTypeAsync(Customer customer, int storeId);
 
     /// <summary>
     /// Saves given customer attribute to database.

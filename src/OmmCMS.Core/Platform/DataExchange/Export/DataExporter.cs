@@ -12,7 +12,6 @@ using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Search;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Shipping;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;

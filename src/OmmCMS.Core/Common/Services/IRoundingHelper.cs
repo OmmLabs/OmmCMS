@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Checkout.Tax;
-
+﻿
 namespace OmmCMS.Core.Common.Services;
 
 /// <summary>
@@ -26,30 +25,24 @@ public partial interface IRoundingHelper
     decimal Round(decimal amount, int decimals, CurrencyMidpointRounding midpointRounding = CurrencyMidpointRounding.AwayFromZero);
 
     /// <summary>
-    /// Gets a value indicating whether rounding during shopping cart calculation is enabled.
+    /// Gets a value indicating whether currency rounding is enabled.
     /// </summary>
     /// <param name="currency">
     /// Currency. If <c>null</c>, currency will be obtained via <see cref="IWorkContext.WorkingCurrency"/>.
     /// </param>
-    /// <param name="taxDisplayType">
-    /// Tax display type. If <c>null</c>, type will be obtained via <see cref="IWorkContext.TaxDisplayType"/>.
-    /// </param>
     /// <returns></returns>
-    bool IsShoppingCartRoundingEnabled(Currency currency = null, TaxDisplayType? taxDisplayType = null);
+    bool IsCurrencyRoundingEnabled(Currency currency = null);
 
     /// <summary>
-    /// Rounds <paramref name="amount"/> if rounding during shopping cart calculation is enabled.
+    /// Rounds <paramref name="amount"/> if currency rounding is enabled.
     /// </summary>
     /// <param name="amount">Amount to round.</param>
     /// <param name="currency">
     /// Rounds <paramref name="amount"/> using <see cref="Currency.RoundNumDecimals"/> and <see cref="Currency.MidpointRounding"/>.
     /// If <c>null</c>, currency will be obtained via <see cref="IWorkContext.WorkingCurrency"/>.
     /// </param>
-    /// <param name="taxDisplayType">
-    /// Tax display type. If <c>null</c>, type will be obtained via <see cref="IWorkContext.TaxDisplayType"/>.
-    /// </param>
     /// <returns>Rounded amount if rounding is enabled for <paramref name="currency"/>, <paramref name="amount"/> otherwise.</returns>
-    decimal RoundIfEnabledFor(decimal amount, Currency currency = null, TaxDisplayType? taxDisplayType = null);
+    decimal RoundIfEnabledFor(decimal amount, Currency currency = null);
 
     /// <summary>
     /// Round amount up or down to the nearest multiple of denomination (cash rounding) if activated for currency.

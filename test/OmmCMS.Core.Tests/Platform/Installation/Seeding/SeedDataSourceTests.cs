@@ -195,14 +195,13 @@ public class SeedDataSourceTests
     [Test]
     public void LoadObject_merges_culture_overlay_field_by_field()
     {
-        WriteFile("base/core/settings.json", """{ "TaxSettings": { "TaxDisplayType": "ExcludingTax", "AllowCustomersToSelectTaxDisplayType": false }, "SeoSettings": { "MetaTitle": "Shop" } }""");
-        WriteFile("cultures/de-DE/core/settings.json", """{ "TaxSettings": { "AllowCustomersToSelectTaxDisplayType": true }, "OrderSettings": { "OrderListPageSize": 14 } }""");
+        WriteFile("base/core/settings.json", """{ "SeoSettings": { "MetaTitle": "Shop", "MetaDescription": "Initial" } }""");
+        WriteFile("cultures/de-DE/core/settings.json", """{ "SeoSettings": { "MetaDescription": "Updated" }, "OrderSettings": { "OrderListPageSize": 14 } }""");
 
         var settings = CreateSource().LoadObject("core/settings.json");
 
-        Assert.That((string)settings["TaxSettings"]["TaxDisplayType"], Is.EqualTo("ExcludingTax"));
-        Assert.That((bool)settings["TaxSettings"]["AllowCustomersToSelectTaxDisplayType"], Is.True);
         Assert.That((string)settings["SeoSettings"]["MetaTitle"], Is.EqualTo("Shop"));
+        Assert.That((string)settings["SeoSettings"]["MetaDescription"], Is.EqualTo("Updated"));
         Assert.That((int)settings["OrderSettings"]["OrderListPageSize"], Is.EqualTo(14));
     }
 

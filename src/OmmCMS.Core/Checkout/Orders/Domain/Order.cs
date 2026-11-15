@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Identity;
 
@@ -444,21 +443,6 @@ public partial class Order : EntityWithAttributes, IAuditable, ISoftDeletable
     {
         get => (ShippingStatus)ShippingStatusId;
         set => ShippingStatusId = (int)value;
-    }
-
-    /// <summary>
-    /// Gets or sets the customer tax display type identifier
-    /// </summary>
-    public virtual int CustomerTaxDisplayTypeId { get; set; }
-
-    /// <summary>
-    /// Gets or sets the customer tax display type
-    /// </summary>
-    [NotMapped]
-    public TaxDisplayType CustomerTaxDisplayType
-    {
-        get => (TaxDisplayType)CustomerTaxDisplayTypeId;
-        set => CustomerTaxDisplayTypeId = (int)value;
     }
 
     #endregion

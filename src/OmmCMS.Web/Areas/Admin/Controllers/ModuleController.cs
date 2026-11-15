@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Routing;
 using OmmCMS.Admin.Models.Modularity;
 using OmmCMS.Admin.Models.Stores;
 using OmmCMS.ComponentModel;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Security;

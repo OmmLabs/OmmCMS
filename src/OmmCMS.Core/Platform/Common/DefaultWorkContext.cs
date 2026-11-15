@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Identity;
@@ -14,30 +13,24 @@ public partial class DefaultWorkContext : IWorkContext
     private readonly IWorkContextSource _source;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IStoreContext _storeContext;
-    private readonly TaxSettings _taxSettings;
 
-    // KeyItem1 = CustomerId, KeyItem2 = StoreId
-    private readonly Dictionary<(int, int), TaxDisplayType> _taxDisplayTypes = new();
 
     private Customer _customer;
     private Language _language;
     private Currency _currency;
     private Customer _impersonator;
-    private TaxDisplayType? _taxDisplayType;
     private bool? _isAdminArea;
 
     public DefaultWorkContext(
         SmartDbContext db,
         IWorkContextSource source,
         IHttpContextAccessor httpContextAccessor,
-        IStoreContext storeContext,
-        TaxSettings taxSettings)
+        IStoreContext storeContext)
     {
         _db = db;
         _source = source;
         _httpContextAccessor = httpContextAccessor;
         _storeContext = storeContext;
-        _taxSettings = taxSettings;
     }
 
     public async Task InitializeAsync()
@@ -57,15 +50,11 @@ public partial class DefaultWorkContext : IWorkContext
             _currency = await _source.ResolveWorkingCurrencyAsync(_customer, IsAdminArea);
         }
 
-        if (_taxDisplayType == null)
-        {
-            _taxDisplayType = await GetTaxDisplayTypeAsync(_customer, _storeContext.CurrentStore.Id);
-        }
     }
 
     public bool IsInitialized
     {
-        get => _customer != null && _language != null && _currency != null && _taxDisplayType.HasValue;
+        get => _customer != null && _language != null && _currency != null;
     }
 
     public Customer CurrentCustomer
@@ -88,7 +77,6 @@ public partial class DefaultWorkContext : IWorkContext
                 // Reset all properties that depend on "_customer".
                 _language = null;
                 _currency = null;
-                _taxDisplayType = null;
             }
         }
     }
@@ -135,44 +123,6 @@ public partial class DefaultWorkContext : IWorkContext
                 _currency = value;
             }
         }
-    }
-
-    public TaxDisplayType TaxDisplayType
-    {
-        get
-        {
-            if (_taxDisplayType == null)
-            {
-                InitializeAsync().Await();
-            }
-
-            return _taxDisplayType.Value;
-        }
-        set
-        {
-            if (_taxSettings.AllowCustomersToSelectTaxDisplayType && CurrentCustomer.TaxDisplayTypeId != (int)value)
-            {
-                CurrentCustomer.TaxDisplayTypeId = (int)value;
-                _db.SaveChanges();
-            }
-
-            _taxDisplayTypes[(CurrentCustomer.Id, _storeContext.CurrentStore.Id)] = value;
-        }
-    }
-
-    public async Task<TaxDisplayType> GetTaxDisplayTypeAsync(Customer customer, int storeId)
-    {
-        Guard.NotNull(customer);
-
-        var key = (customer.Id, storeId);
-
-        if (!_taxDisplayTypes.TryGetValue(key, out var result))
-        {
-            result = await _source.ResolveTaxDisplayTypeAsync(customer, storeId);
-            _taxDisplayTypes[key] = result;
-        }
-
-        return result;
     }
 
     public bool IsAdminArea

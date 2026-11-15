@@ -221,8 +221,6 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
 
     public string TimeZoneId { get; set; }
 
-    public int TaxDisplayTypeId { get; set; }
-
     public DateTime? LastForumVisit { get; set; }
 
     public string LastUserAgent { get; set; }

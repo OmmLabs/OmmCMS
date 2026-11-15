@@ -3,8 +3,6 @@
 public partial class FooterModel : ModelBase
 {
     public string StoreName { get; set; }
-    public string LegalInfo { get; set; }
-    public bool ShowLegalInfo { get; set; }
     public bool ShowThemeSelector { get; set; }
     public string NewsletterEmail { get; set; }
     public string OmmCMSHint { get; set; }

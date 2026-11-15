@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common.Configuration;
 
 namespace OmmCMS.Core.Common.Services;
@@ -27,21 +26,18 @@ public partial class RoundingHelper : IRoundingHelper
         return decimal.Round(amount, decimals, Convert(midpointRounding));
     }
 
-    public virtual bool IsShoppingCartRoundingEnabled(Currency currency = null, TaxDisplayType? taxDisplayType = null)
+    public virtual bool IsCurrencyRoundingEnabled(Currency currency = null)
     {
         currency ??= _workContext.WorkingCurrency;
-        taxDisplayType ??= _workContext.TaxDisplayType;
 
-        return (currency.RoundOrderItemsEnabled ?? _currencySettings.RoundOrderItemsEnabled)
-            && (taxDisplayType == TaxDisplayType.IncludingTax || (taxDisplayType == TaxDisplayType.ExcludingTax && (currency.RoundNetPrices ?? _currencySettings.RoundNetPrices)));
+        return currency.RoundOrderItemsEnabled ?? _currencySettings.RoundOrderItemsEnabled;
     }
 
-    public virtual decimal RoundIfEnabledFor(decimal amount, Currency currency = null, TaxDisplayType? taxDisplayType = null)
+    public virtual decimal RoundIfEnabledFor(decimal amount, Currency currency = null)
     {
         currency ??= _workContext.WorkingCurrency;
-        taxDisplayType ??= _workContext.TaxDisplayType;
 
-        if (amount == 0m || !IsShoppingCartRoundingEnabled(currency, taxDisplayType))
+        if (amount == 0m || !IsCurrencyRoundingEnabled(currency))
         {
             return amount;
         }

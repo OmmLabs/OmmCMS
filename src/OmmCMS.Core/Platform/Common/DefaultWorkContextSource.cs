@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Configuration;
@@ -38,7 +37,6 @@ public class DefaultWorkContextSource : IWorkContextSource
     private readonly IStoreContext _storeContext;
     private readonly ICustomerService _customerService;
     private readonly Lazy<ICurrencyService> _currencyService;
-    private readonly TaxSettings _taxSettings;
     private readonly IUserAgent _userAgent;
     private readonly IWebHelper _webHelper;
     private readonly IOverloadProtector _overloadProtector;
@@ -51,7 +49,6 @@ public class DefaultWorkContextSource : IWorkContextSource
         IStoreContext storeContext,
         ICustomerService customerService,
         Lazy<ICurrencyService> currencyService,
-        TaxSettings taxSettings,
         IUserAgent userAgent,
         IWebHelper webHelper,
         IOverloadProtector overloadProtector,
@@ -62,7 +59,6 @@ public class DefaultWorkContextSource : IWorkContextSource
         _languageResolver = languageResolver;
         _storeContext = storeContext;
         _customerService = customerService;
-        _taxSettings = taxSettings;
         _currencyService = currencyService;
         _userAgent = userAgent;
         _webHelper = webHelper;
@@ -333,11 +329,6 @@ public class DefaultWorkContextSource : IWorkContextSource
 
         return currency;
     }
-
-    public virtual Task<TaxDisplayType> ResolveTaxDisplayTypeAsync(Customer customer, int storeId)
-        => Task.FromResult(_taxSettings.AllowCustomersToSelectTaxDisplayType && customer != null
-            ? (TaxDisplayType)customer.TaxDisplayTypeId
-            : _taxSettings.TaxDisplayType);
 
     public Task SaveCustomerAttribute(Customer customer, string name, int? value, bool async)
     {

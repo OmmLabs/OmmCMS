@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FluentValidation;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Security;

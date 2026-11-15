@@ -9,8 +9,5 @@
   },
   "SeoSettings": {
     "MetaTitle": "Mein Shop"
-  },
-  "TaxSettings": {
-    "TaxDisplayType": "IncludingTax"
   }
 }

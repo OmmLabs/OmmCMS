@@ -5,7 +5,6 @@ using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Products.Utilities;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Identity;

@@ -1,7 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using Autofac;
 using OmmCMS.Core.Checkout.Rules.Impl;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Data;

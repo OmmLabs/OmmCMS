@@ -3,7 +3,6 @@ using Autofac.Builder;
 using Humanizer;
 using Microsoft.Extensions.FileProviders;
 using OmmCMS.Core.AI;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media.Storage;
 using OmmCMS.Core.DataExchange;

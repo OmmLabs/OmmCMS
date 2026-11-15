@@ -5,7 +5,6 @@ using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Rules.Impl;
 using OmmCMS.Core.Checkout.Shipping;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Data;
@@ -135,10 +134,6 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
             .Select(x => new RuleValueSelectListOption { Value = x.Id.ToString(), Text = x.Name })
             .ToArray();
 
-        var taxDisplayTypes = ((TaxDisplayType[])Enum.GetValues(typeof(TaxDisplayType)))
-            .Select(x => new RuleValueSelectListOption { Value = ((int)x).ToString(), Text = _localizationService.GetLocalizedEnum(x) })
-            .ToArray();
-
         var shippingStatus = ((ShippingStatus[])Enum.GetValues(typeof(ShippingStatus)))
             .Select(x => new RuleValueSelectListOption { Value = ((int)x).ToString(), Text = _localizationService.GetLocalizedEnum(x) })
             .ToArray();
@@ -191,13 +186,6 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
                 DisplayName = T("Admin.Rules.FilterDescriptor.IsInCustomerRole"),
                 RuleType = RuleType.IntArray,
                 SelectList = new RemoteRuleValueSelectList("CustomerRole") { Multiple = true }
-            },
-            new FilterDescriptor<Customer, int>(x => x.TaxDisplayTypeId)
-            {
-                Name = "TaxDisplayType",
-                DisplayName = T("Admin.Rules.FilterDescriptor.TaxDisplayType"),
-                RuleType = RuleType.Int,
-                SelectList = new LocalRuleValueSelectList(taxDisplayTypes)
             },
             new FilterDescriptor<Customer, string>(x => x.TimeZoneId)
             {
