@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = T("Admin.Configuration.Countries").Value;
+    Assets.BodyAttributes.AppendCssClass("spa-layout");
+}
+
+<form id="countries">
+    <div class="section-header">
+        <div class="title">
+            <icon name="globe" />
+            @T("Admin.Configuration.Countries")
+        </div>
+    </div>
+</form>
+
+<partial name="_Grid.Countries" model="null" />

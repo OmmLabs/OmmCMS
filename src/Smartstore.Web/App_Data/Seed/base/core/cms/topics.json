@@ -1,0 +1,50 @@
+[
+  {
+    "systemName": "AboutUs",
+    "title": "About Us",
+    "body": "<p>Put your &quot;About Us&quot; information here. You can edit this in the admin site.</p>",
+    "slug": "about"
+  },
+  {
+    "systemName": "ConditionsOfUse",
+    "title": "Conditions of use",
+    "body": "<p>Put your conditions of use information here. You can edit this in the admin site.</p>"
+  },
+  {
+    "systemName": "ContactUs",
+    "title": "Contact us",
+    "body": "<p>Put your contact information here. You can edit this in the admin site.</p>",
+    "renderAsWidget": true,
+    "widgetWrapContent": false
+  },
+  {
+    "systemName": "HomePageText",
+    "title": "Welcome to OmmCMS",
+    "body": "<p>Your website starts here. Create pages, articles and menus in the administration area.</p>",
+    "renderAsWidget": true,
+    "widgetWrapContent": false
+  },
+  {
+    "systemName": "LoginRegistrationInfo",
+    "title": "About login / registration",
+    "body": "<p>Sign in to manage your profile and access your account.</p>",
+    "renderAsWidget": true,
+    "widgetWrapContent": false
+  },
+  {
+    "systemName": "PrivacyInfo",
+    "title": "Privacy policy",
+    "shortTitle": "Privacy",
+    "body": "<p><strong></strong></p>"
+  },
+  {
+    "systemName": "Imprint",
+    "title": "Imprint",
+    "body": "<p>Put your imprint information here. You can edit this in the admin site.</p>"
+  },
+  {
+    "systemName": "Disclaimer",
+    "title": "Disclaimer",
+    "body": "<p>Put your disclaimer information here. You can edit this in the admin site.</p>"
+  }
+]

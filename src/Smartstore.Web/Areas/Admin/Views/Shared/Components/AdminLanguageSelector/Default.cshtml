@@ -1,0 +1,47 @@
+﻿@if (ViewBag.AvailableLanguages.Count > 1)
+{
+    <form id="form-languageselector" sm-ajax="true" class="hide"
+          asp-action="LanguageSelected" asp-controller="Language" 
+          sm-oncomplete="onLanguageChangedRequestCompleted">
+        <input type="hidden" name="customerlanguage" id="customerlanguage" value="@ViewBag.CurrentLanguage.Id" />
+    </form>
+
+    <div class="dropdown-group">
+        <button type="button" class="dropdown-item" aria-haspopup="true" aria-expanded="false" aria-controls="language-selector">
+            <icon name="earth" class="icon-fw" />
+            @T("Admin.Configuration.Languages")
+            <img src='@Url.Content("~/images/flags/" + ViewBag.CurrentLanguage.FlagImageFileName)' class="dropdown-item-addon flex-shrink-0" alt="@ViewBag.CurrentLanguage.Name" />
+        </button>
+        <div id="language-selector" class="dropdown-menu">
+            @foreach (var language in ViewBag.AvailableLanguages)
+            {
+                <a href="javascript:void(0)" data-lang-id='@language.Id' class="dropdown-item" attr-class='(language.Id == ViewBag.CurrentLanguage.Id, "disabled")'>
+                    <img src='@Url.Content("~/images/flags/" + @language.FlagImageFileName)' alt="@language.Name" />
+                    @language.Name
+                </a>
+            }
+
+            <div class="dropdown-divider"></div>
+
+            <a asp-action="List" asp-controller="Language" class="dropdown-item manage-languages">
+                <icon name="gear" class="icon-fw" />
+                @T("Admin.Configuration.ManageLanguages")
+            </a>
+        </div>
+    </div>
+
+    <script sm-target-zone="scripts" data-origin="vc-language-selector">
+        $(function() {
+			$("#language-selector > .dropdown-item:not(.disabled, .manage-languages)").on('click', function () {
+                var el = $(this);
+                var langId = el.data("lang-id");
+                $("#customerlanguage").val(langId);
+                $("#form-languageselector").submit();
+            });
+        });
+
+        function onLanguageChangedRequestCompleted() {
+            location.reload();
+        }
+    </script>
+}

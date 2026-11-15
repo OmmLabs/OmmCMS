@@ -1,0 +1,67 @@
+﻿@model ShopBarModel
+
+@{
+    string accountUrl = Model.IsAuthenticated ? Url.Action("Info", "Customer") : Url.RouteUrl("Login", new { returnUrl = Context.Request.Query["returnUrl"].ToString() });
+    var offcanvasAttributes = new AttributeDictionary
+    {
+        ["data-toggle"] = "offcanvas",
+        ["data-autohide"] = "true",
+        ["data-fullscreen"] = "false",
+        ["data-disablescrolling"] = "true",
+        ["aria-expanded"] = "false"
+    };
+
+}
+
+<div class="shopbar-col shopbar-tools">
+
+    @*Hamburger Menu*@
+    <div class="shopbar-tool d-lg-none" id="shopbar-menu">
+        <a id="offcanvas-menu-opener" 
+           class="shopbar-button" 
+           href="#" 
+           attrs="offcanvasAttributes"
+           data-placement="start" 
+           data-target="#offcanvas-menu"
+           aria-controls="offcanvas-menu">
+            <span class="shopbar-button-icon" aria-hidden="true">
+                <icon name="bars" stroke-scale="0.85" />
+            </span>
+            <span class="shopbar-button-label-sm">
+                @T("Common.Menu")
+            </span>
+        </a>
+    </div>
+
+    <zone name="shopbar_tools_before" preview-style="max-width: 106px"></zone>
+
+    @*User*@
+    <div class="shopbar-tool d-lg-none" id="shopbar-user">
+        <a class="shopbar-button" href="@accountUrl" rel="nofollow">
+            <span class="shopbar-button-icon" aria-hidden="true">
+                <icon name="user" stroke-scale="0.85" />
+            </span>
+            <span class="shopbar-button-label-sm">
+                @T(Model.IsAuthenticated ? "Account.MyAccount" : "Account.Login")
+            </span>
+        </a>
+    </div>
+
+    <zone name="shopbar_tools_after" preview-style="max-width: 106px"></zone>
+</div>
+
+<widget target-zone="end" key="offcanvas-menu">
+    <aside id="offcanvas-menu" 
+           class="offcanvas offcanvas-shadow" 
+           data-blocker="true" 
+           data-overlay="true" 
+           aria-hidden="true" 
+           aria-labelledby="offcanvas-menu-opener" 
+           tabindex="-1">
+        <div class="offcanvas-content">
+            <div id="offcanvas-menu-container" data-url="@(Url.Action("OffCanvas", "Menu"))">
+                @*Ajax content will be rendered here*@
+            </div>
+        </div>
+    </aside>
+</widget>

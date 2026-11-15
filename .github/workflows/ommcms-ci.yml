@@ -1,0 +1,30 @@
+name: OmmCMS CI
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
+      DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+      DOTNET_ROLL_FORWARD: Major
+      MSBUILDTERMINALLOGGER: 'off'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet restore Smartstore.sln
+      - run: dotnet build Smartstore.sln -c Release --no-restore
+      - run: dotnet test Smartstore.sln -c Release --no-build --no-restore --logger trx
+      - run: dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release --no-build --no-restore -o "$RUNNER_TEMP/ommcms-smoke"
+      - name: Fresh CMS installation and regression checks
+        run: python3 .github/ommcms-smoke.py "$RUNNER_TEMP/ommcms-smoke" --editorial --trimmed --controllers-trimmed --public-controllers-trimmed --account-trimmed --admin-commerce-trimmed --residual-commerce-trimmed --presentation-trimmed --core-commerce-trimmed

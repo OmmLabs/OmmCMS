@@ -1,0 +1,34 @@
+﻿@model AccountDropdownModel
+
+<div sm-if="Model.IsAuthenticated" class="dropdown-menu" attr-class='(!WorkContext.WorkingLanguage.Rtl, "dropdown-menu-right")'>
+    <zone name="account_dropdown_before"></zone>
+
+    @foreach (var item in Model.MenuItems)
+    {
+        var isLogoutDivider = item.IsGroupHeader && item.Id.EqualsNoCase("logout-divider");
+        if (isLogoutDivider)
+        {
+            <zone name="account_dropdown_logout_divider_before"></zone>
+        }
+
+        <div sm-if="item.IsGroupHeader" class="dropdown-divider"></div>
+
+        if (isLogoutDivider)
+        {
+            <zone name="account_dropdown_logout_divider_after"></zone>
+        }
+
+        <a sm-if="!item.IsGroupHeader" href="@item.GenerateUrl(Url)" attrs="item.LinkHtmlAttributes">
+            <icon sm-if="item.Icon.HasValue()" name="@item.Icon" attr-class='@(item.IconClass.HasValue(), item.IconClass)' />
+            <span>@item.Text</span>
+            @if (item.BadgeText != null)
+            {
+                <span class="@BadgeExpression.ToCssClasses(item.BadgeStyle)" attrs="item.BadgeHtmlAttributes">
+                    @item.BadgeText
+                </span>
+            }
+        </a>
+    }
+
+    <zone name="account_dropdown_after"></zone>
+</div>

@@ -1,0 +1,176 @@
+﻿; (function ($, window, document, undefined) {
+
+    $(function () {
+
+        // Wire up responsive headings for ajax tabs.
+        // ------------------------------------------------------
+
+        $(document).on('click', '.tabbable .nav-toggler', function (e) {
+            let heading = $(this),
+                tabPane = heading.closest(".tab-pane"),
+                tabName = tabPane.attr("data-tab-name"),
+                navItem = heading.closest(".tabbable").find('.nav a[data-tab-name="' + tabName + '"]');
+
+            navItem.trigger("show.bs.tab");
+        });
+
+        // Tab strip smart auto selection
+        // ------------------------------------------------------
+
+        $(document).on('shown.bs.tab', '.tabs-autoselect ul.nav a[data-toggle=tab]', function (e) {
+            let tab = $(e.target),
+                strip = tab.closest('.tabbable'),
+                href = strip.data("tabselector-href"),
+                hash = tab.attr("href");
+
+            if (hash)
+                hash = hash.replace(/#/, "");
+
+            if (href) {
+                $.ajax({
+                    type: "POST",
+                    url: href,
+                    async: true,
+                    data: { navId: strip.attr('id'), tabId: hash, path: location.pathname + location.search },
+                    global: false
+                });
+            }
+        });
+
+
+        // Keep the newly selected content visible when switching a sticky side navigation.
+        $(document).on('shown.bs.tab', '.nav-sticky > .nav-item > a[data-toggle=tab]', function (e) {
+            const nav = $(this).closest('.nav-sticky');
+            if (!e.relatedTarget || nav.css('position') !== 'sticky') return;
+
+            const strip = nav.closest('.tabbable');
+            const scrollport = strip.parents().filter(function () {
+                return /^(auto|scroll|overlay)$/.test($(this).css('overflow-y'));
+            }).first();
+            const offset = parseFloat(nav.css('top')) || 0;
+            const top = scrollport.length ? scrollport[0].getBoundingClientRect().top : 0;
+            if (strip[0].getBoundingClientRect().top < top + offset) {
+                (scrollport.length ? scrollport : $(window)).scrollTo(strip, { offset: { top: -offset }, behavior: 'smooth' });
+            }
+        });
+
+
+        // AJAX tabs
+        // ------------------------------------------------------
+
+        $(document).on('show.bs.tab', '.nav a[data-ajax-url]', function (e) {
+            let newTab = $(e.target),
+                tabbable = newTab.closest('.tabbable'),
+                pane = tabbable.find(newTab.attr("href")),
+                url = newTab.data('ajax-url');
+
+            if (newTab.data("loaded") || !url)
+                return;
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                async: true,
+                global: false,
+                url: url,
+                beforeSend: function (xhr) {
+                    pane.html($("<div class='text-center mt-6'></div>").append(createCircularSpinner(48, true, 2)));
+                    getFunction(tabbable.data("ajax-onbegin"), ["tab", "pane", "xhr"]).apply(this, [newTab, pane, xhr]);
+                },
+                success: function (data, status, xhr) {
+                    pane.html(data);
+                    getFunction(tabbable.data("ajax-onsuccess"), ["tab", "pane", "data", "status", "xhr"]).apply(this, [newTab, pane, data, status, xhr]);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    pane.html('<div class="text-danger">Error while loading resource: ' + thrownError + '</div>');
+                    getFunction(tabbable.data("ajax-onfailure"), ["tab", "pane", "xhr", "ajaxOptions", "thrownError"]).apply(this, [newTab, pane, xhr, ajaxOptions, thrownError]);
+                },
+                complete: function (xhr, status) {
+                    newTab.data("loaded", true);
+                    var tabName = newTab.data('tab-name') || newTab.attr("href").replace(/#/, "");
+                    tabbable.append('<input type="hidden" class="loaded-tab-name" name="LoadedTabs" value="' + tabName + '" />');
+
+                    getFunction(tabbable.data("ajax-oncomplete"), ["tab", "pane", "xhr", "status"]).apply(this, [newTab, pane, xhr, status]);
+                }
+            });
+        });
+
+
+        // Adaptive tabs
+        // ------------------------------------------------------
+
+        $('.tab-adaptive > a.nav-link').each(function (i, el) {
+            let $el = $(el);
+            if ($el.is('.active')) {
+                initAdaptivePane(el);
+            }
+
+            $el.on('shown.bs.tab', function (e) {
+                initAdaptivePane(e.target);
+            });
+
+            $el.on('hidden.bs.tab', function (e) {
+                let currentTab = $(e.target);
+                let newTab = $(e.relatedTarget);
+
+                // Restore current tab height to what it was before
+                currentTab.css('height', '');
+
+                if (!newTab.is('.tab-adaptive')) {
+                    let tabContent = newTab.closest('.tabbable').find('.tab-content');
+
+                    // Restore .tab-content margin-bottom to what it was before
+                    // if the new tab is NOT adaptive.
+                    tabContent.css('margin-bottom', '');
+                }
+            });
+        });
+
+        function initAdaptivePane(el) {
+            let activeTab = $(el),
+                tabbable = activeTab.closest('.tabbable'),
+                pane = tabbable.find(activeTab.attr("href")),
+                contentPaddingBottom = parseFloat($('#content').css('padding-bottom'));
+
+            // Set .tab-content wrapper's margin-bottom to 0.
+            pane.parent().css('margin-bottom', '0');
+
+            function adaptPaneHeight() {
+                const rect = pane[0].getBoundingClientRect();
+                const viewportHeight = document.documentElement.clientHeight;
+                // Bootstrap fires shown.bs.tab as the incoming pane starts moving.
+                const translateY = parseFloat(getComputedStyle(pane[0]).translate?.split(' ')[1]) || 0;
+                pane.css('height', (viewportHeight - rect.top + translateY - contentPaddingBottom) + 'px');
+            }
+
+            if (!pane.data('is-height-adapted')) {
+                function refreshPaneHeight() {
+                    if (pane.is(':visible')) {
+                        adaptPaneHeight();
+                    }
+                }
+
+                $(window).on('resize', refreshPaneHeight);
+                pane.on('layout:refresh', refreshPaneHeight);
+            }
+
+            pane.data('is-height-adapted', true);
+
+            adaptPaneHeight();
+        }
+
+        function getFunction(code, argNames) {
+            var fn = window, parts = (code || "").split(".");
+            while (fn && parts.length) {
+                fn = fn[parts.shift()];
+            }
+            if (typeof (fn) === "function") {
+                return fn;
+            }
+            argNames.push(code);
+            return Function.constructor.apply(null, argNames);
+        }
+
+    });
+})(jQuery, this, document);
+

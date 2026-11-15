@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = T("Admin.Common.Stores").Value;
+
+    Assets.BodyAttributes.AppendCssClass("spa-layout");
+}
+
+<div class="section-header">
+    <div class="title">
+        <icon name="globe" />
+        <span>@ViewBag.Title</span>
+    </div>
+</div>
+
+<partial name="_Grid.Stores" model="null" />

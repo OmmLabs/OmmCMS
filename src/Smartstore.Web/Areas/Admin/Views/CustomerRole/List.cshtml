@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = T("Admin.Customers.CustomerRoles").Value;
+
+	Assets.BodyAttributes.AppendCssClass("spa-layout");
+}
+
+<div class="section-header">
+    <div class="title">
+        <icon name="user-group" />
+        <span>@ViewBag.Title</span>
+    </div>
+</div>
+
+<partial name="_Grid.CustomerRoles" model="null" />

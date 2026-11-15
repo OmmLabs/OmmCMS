@@ -1,0 +1,90 @@
+/// <reference path="references.scss" />
+
+// Image Gallery
+// ========================================
+
+#pd-gallery {
+    container: product-gallery / inline-size;
+}
+
+.gal-box {
+    position: relative; 
+    display: table; 
+    width: 100%; 
+    table-layout: fixed;
+}
+
+// Product viewports retain the existing square ratio and focus handling.
+.gal-box .gal-item-viewport {
+    block-size: 0;
+    padding-block-start: 100%;
+    outline: none !important;
+}
+
+.gal-box .gal-nav {
+    max-block-size: 560px;
+    opacity: 0;
+}
+
+.gal-box .gal-list { overflow: hidden; }
+
+.gal.slick-initialized,
+.gal-nav.gal-initialized {
+    --gal-item-display: flex;
+    --gal-image-display: inline-block;
+    opacity: 1;
+}
+
+.gal .gal-item-viewport.no-picture {
+    .gal-item-content { margin: 0 auto; }
+    &:before {
+        display: block;
+        content: attr(data-content);
+        position: absolute;
+        z-index: 1;
+        inset-inline-start: 0;
+        top: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        color: $gray-500;
+    }
+}
+
+
+.gal-nav-cell {
+    display: table-cell;
+    vertical-align: top;
+    padding-inline-end: 1rem;
+    max-height: 100%;
+    overflow: hidden;
+    width: 4.5rem;
+}
+
+.gal-cell {
+    display: table-cell; 
+    vertical-align: top;
+}
+
+// Use the available gallery width to switch between thumbnails and dots.
+@container product-gallery (width < 28rem) {
+    .gal-nav-cell { display: none !important; }
+}
+
+@container product-gallery (min-width: 28rem) {
+    .gal .slick-dots { display: none !important; }
+    .gal.slick-dotted.slick-slider { margin-bottom: 0 !important; }
+}
+
+@container product-gallery (min-width: 40rem) {
+    .gal-nav-cell { width: 5.5rem; }
+}
+
+.gal-nav-hidden {
+    display: none !important;
+}
+
+.slick-lazyload-error {
+    visibility: hidden;
+}

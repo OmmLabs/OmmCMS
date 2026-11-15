@@ -1,0 +1,47 @@
+/// <reference path="references.scss" />
+
+.text-expander {
+    display: block;
+    position: relative;
+    margin-bottom: 1.5rem;
+
+    // TODO: Remove these legacy variable fallbacks after external themes have
+    // migrated to the canonical custom properties.
+    --text-expander-collapsed-height: var(--text-expander-max-height, 230px);
+    --text-expander-fade-size: var(--text-expander-fade-height, var(--text-expander-height, #{($font-size-base * $line-height-base) * 3}));
+
+    .text-expander-toggle {
+        display: none;
+        margin-inline: auto;
+    }
+
+    .text-expander-viewport {
+        display: flow-root;
+    }
+
+    .text-expander-label-less {
+        display: none;
+    }
+
+    .text-expander-toggle[aria-expanded=true] {
+        .text-expander-label-more { display: none; }
+        .text-expander-label-less { display: inline; }
+    }
+
+    &.collapsed > .text-expander-viewport {
+        max-height: var(--text-expander-collapsed-height);
+        overflow: hidden;
+        mask-image: linear-gradient(
+            to bottom,
+            #000 calc(100% - var(--text-expander-fade-size)),
+            transparent 100%
+        );
+        mask-repeat: no-repeat;
+        mask-size: 100% 100%;
+    }
+
+    &.is-collapsible > .text-expander-toggle {
+        display: flex;
+        margin-block-start: $spacer * .5;
+    }
+}

@@ -1,0 +1,134 @@
+/// <reference path="references.scss" />
+
+.spinner-container {
+    // for centering the spinner
+    position: relative;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    --progress-track-color: #fff;
+    --progress-text-color: inherit;
+
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    display: none;
+}
+
+.spinner-container.active > .spinner,
+.spinner.active {
+    background-color: transparent;
+    border: none;
+    display: inline-block;
+}
+
+.spinner.spinner-boxed {
+    line-height: 1;
+    border-radius: 50%;
+    padding: 0.2em;
+    background-color: #fff !important;
+    box-shadow: 0px 3px 1px -2px rgba($black, 0.2), 
+                0px 2px 2px 0px rgba($black, 0.14), 
+                0px 1px 5px 0px rgba($black, 0.12);
+}
+
+.spinner-container.active {
+    display: flex;
+}
+
+.spinner svg {
+	transform-origin: 50% 50% 0;
+    animation: spinner-rotate 1.333s linear infinite;
+            
+     html.ie & {
+         animation: spinner-rotate-ie 2.5s linear infinite;
+     } 
+}
+
+.spinner .circle {
+	fill: transparent;
+	stroke: #ff9800;
+	stroke-linecap: round;
+	stroke-dasharray: 200.96;
+    stroke-dashoffset: 58px;
+    animation: spinner-dash 1.333s linear infinite;
+	
+     html.ie & {
+         stroke-dashoffset: 80px;
+     }       
+}
+
+.spinner-rainbow {
+    mask .circle {
+        stroke: #fff;
+    }
+
+    .spinner-color {
+        width: 64px;
+        height: 64px;
+        background: conic-gradient(#F7A833, #307ABE, #44B284, #64C1C7, #F7A833);
+    }
+}
+
+@keyframes spinner-dash {
+	0%      { stroke-dashoffset: 58px; } 
+    50%     { stroke-dashoffset: 200.96px; } 
+    100%    { stroke-dashoffset: 58px; }
+}
+@-webkit-keyframes spinner-dash {
+	0%      { stroke-dashoffset: 58px; } 
+    50%     { stroke-dashoffset: 200.96px; } 
+    100%    { stroke-dashoffset: 58px; }
+}
+
+@keyframes spinner-rotate {
+    50%     { transform: rotate(600deg); } 
+    100%    { transform: rotate(720deg); }
+}
+@-webkit-keyframes spinner-rotate {
+    50%     { transform: rotate(600deg); } 
+    100%    { transform: rotate(720deg); }
+}
+@keyframes spinner-rotate-ie {
+    50%     { transform: rotate(360deg); } 
+    100%    { transform: rotate(720deg); }
+}
+
+.spinner.white .circle {
+    stroke: #fff;
+    animation: spinner-dash 1.333s linear infinite, spinner-rotate 10.644s linear infinite;
+}
+
+.circular-progress {
+    .wrapper {
+        line-height: 0;
+        transform: rotate(-90deg);
+    }
+
+    .circle {
+        stroke: var(--primary);
+    }
+
+    .circle, svg {
+        animation: none;
+    }
+
+    .circle-below {
+        stroke: var(--progress-track-color);
+    } 
+    
+    .progress-text {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: var(--progress-text-size, 10px);
+        color: var(--progress-text-color, inherit);
+        line-height: 1;
+    }
+}

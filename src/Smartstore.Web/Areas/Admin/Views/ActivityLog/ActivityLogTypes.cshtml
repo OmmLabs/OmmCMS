@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = T("Admin.Configuration.ActivityLog.ActivityLogType").Value;
+    Assets.BodyAttributes.AppendCssClass("spa-layout");
+}
+
+<div class="section-header">
+    <div class="title">
+        <icon name="fire" />
+        @T("Admin.Configuration.ActivityLog.ActivityLogType")
+    </div>
+</div>
+
+<partial name="_Grid.ActivityLogTypes" model="null" />
