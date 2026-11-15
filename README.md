@@ -2,7 +2,7 @@
 
 An open-source, ASP.NET Core content management system in development by [OmmLabs](https://github.com/OmmLabs). OmmCMS builds on the Smartstore platform, retaining its content, administration and extension foundations while progressively separating e-commerce.
 
-**Status:** development preview, not a production release. OmmCMS is now CMS-only: the application enables the CMS profile automatically. Ten previously isolated commerce modules have been removed. The commerce database schema and shared services remain during the transition. The repository is no longer a supported storefront build.
+**Status:** development preview, not a production release. OmmCMS is now CMS-only: the application enables the CMS profile automatically. Ten previously isolated commerce modules, 18 commerce-only admin controllers and 110 standalone Razor files have been removed. The commerce database schema and shared services remain during the transition. The repository is no longer a supported storefront build.
 
 ## What the CMS profile provides
 
@@ -10,7 +10,7 @@ An open-source, ASP.NET Core content management system in development by [OmmLab
 - Account authentication, roles and permissions, localization, and theme infrastructure.
 - Content-focused public layout and administration navigation.
 - A starter website with Home, About and Contact pages; no sample shop catalog.
-- Commerce route isolation and physical removal of ten bundled commerce modules.
+- Commerce route isolation and physical removal of ten bundled commerce modules and 18 admin controllers.
 
 ## Try a fresh installation
 
@@ -19,7 +19,7 @@ Prerequisites: .NET 10 SDK, a supported database (SQLite for local evaluation, S
 ```bash
 git clone https://github.com/OmmLabs/OmmCMS.git
 cd OmmCMS
-git switch cms-module-extraction
+git switch cms-controller-extraction
 dotnet restore Smartstore.sln
 dotnet build Smartstore.sln -c Release --no-restore
 cd src/Smartstore.Web
@@ -41,7 +41,7 @@ Do not use an existing commerce database for this preview. This is not a databas
 dotnet test Smartstore.sln -c Release
 ```
 
-CI checks removed modules are absent from the source and publish artifact, runs the full test suite, and verifies a disposable SQLite fresh-install and authenticated editorial workflows. See [Phase 4](docs/ommcms/PHASE4_INSTALLATION.md) and [Phase 5](docs/ommcms/PHASE5_EDITORIAL_WORKFLOWS.md) for scope and limitations.
+CI checks removed modules and standalone commerce views are absent from source and publish output, verifies that extracted controller types are absent, runs the full test suite, and verifies a disposable SQLite fresh-install and authenticated editorial workflows. See [Phase 4](docs/ommcms/PHASE4_INSTALLATION.md) and [Phase 5](docs/ommcms/PHASE5_EDITORIAL_WORKFLOWS.md) for scope and limitations.
 
 ## Development roadmap
 
@@ -53,7 +53,8 @@ CI checks removed modules are absent from the source and publish artifact, runs 
 | 4 | [CMS installation and runtime cleanup](docs/ommcms/PHASE4_INSTALLATION.md) |
 | 5 | [Authenticated CMS editorial workflows](docs/ommcms/PHASE5_EDITORIAL_WORKFLOWS.md) |
 | 6 | [Physical commerce module extraction](docs/ommcms/PHASE6_MODULE_EXTRACTION.md) |
-| Next | Extract core commerce services, controllers and schema dependencies; build dedicated article taxonomy and editorial tools. |
+| 7 | [Physical admin commerce controller extraction](docs/ommcms/PHASE7_CONTROLLER_EXTRACTION.md) |
+| Next | Extract remaining public commerce surfaces and shared core services before reducing schema dependencies; build dedicated article taxonomy and editorial tools. |
 
 Source and project names retain their Smartstore names until the dependency extraction is complete.
 

@@ -47,15 +47,9 @@ public class OmmCmsCommerceIsolationTests
     [TestCase("Smartstore.Web.Controllers.DownloadController")]
     [TestCase("Smartstore.Web.Controllers.PdfController")]
     [TestCase("Smartstore.Web.Controllers.SearchController")]
-    [TestCase("Smartstore.Admin.Controllers.AffiliateController")]
-    [TestCase("Smartstore.Admin.Controllers.BarcodeTesterController")]
     [TestCase("Smartstore.Admin.Controllers.CampaignController")]
     [TestCase("Smartstore.Admin.Controllers.CategoryController")]
-    [TestCase("Smartstore.Admin.Controllers.CheckoutAttributeController")]
-    [TestCase("Smartstore.Admin.Controllers.CollectionGroupController")]
-    [TestCase("Smartstore.Admin.Controllers.DeliveryTimeController")]
     [TestCase("Smartstore.Admin.Controllers.DiscountController")]
-    [TestCase("Smartstore.Admin.Controllers.GiftCardController")]
     [TestCase("Smartstore.Admin.Controllers.ManufacturerController")]
     [TestCase("Smartstore.Admin.Controllers.MeasureController")]
     [TestCase("Smartstore.Admin.Controllers.OrderController")]
@@ -63,23 +57,34 @@ public class OmmCmsCommerceIsolationTests
     [TestCase("Smartstore.Admin.Controllers.ExportController")]
     [TestCase("Smartstore.Admin.Controllers.CurrencyController")]
     [TestCase("Smartstore.Controllers.PackagingController")]
-    [TestCase("Smartstore.Admin.Controllers.PaymentController")]
-    [TestCase("Smartstore.Admin.Controllers.PriceLabelController")]
-    [TestCase("Smartstore.Admin.Controllers.ProductAttributeController")]
     [TestCase("Smartstore.Admin.Controllers.ProductController")]
+    [TestCase("Smartstore.Admin.Controllers.SearchController")]
+    public void BlocksEveryActionOnCommerceOnlyController(string controllerType)
+    {
+        Assert.That(OmmCmsCommerceIsolation.IsBlocked(Action(controllerType)), Is.True);
+    }
+
+    [TestCase("Smartstore.Admin.Controllers.AffiliateController")]
+    [TestCase("Smartstore.Admin.Controllers.BarcodeTesterController")]
+    [TestCase("Smartstore.Admin.Controllers.CheckoutAttributeController")]
+    [TestCase("Smartstore.Admin.Controllers.CollectionGroupController")]
+    [TestCase("Smartstore.Admin.Controllers.DeliveryTimeController")]
+    [TestCase("Smartstore.Admin.Controllers.GiftCardController")]
+    [TestCase("Smartstore.Admin.Controllers.PriceLabelController")]
     [TestCase("Smartstore.Admin.Controllers.ProductReviewController")]
     [TestCase("Smartstore.Admin.Controllers.QuantityUnitController")]
     [TestCase("Smartstore.Admin.Controllers.RecurringPaymentController")]
     [TestCase("Smartstore.Admin.Controllers.ReturnCaseController")]
-    [TestCase("Smartstore.Admin.Controllers.SearchController")]
     [TestCase("Smartstore.Admin.Controllers.ShipmentController")]
     [TestCase("Smartstore.Admin.Controllers.ShippingController")]
+    [TestCase("Smartstore.Admin.Controllers.TaxController")]
+    [TestCase("Smartstore.Admin.Controllers.PaymentController")]
     [TestCase("Smartstore.Admin.Controllers.ShoppingCartController")]
     [TestCase("Smartstore.Admin.Controllers.SpecificationAttributeController")]
-    [TestCase("Smartstore.Admin.Controllers.TaxController")]
-    public void BlocksEveryActionOnCommerceOnlyController(string controllerType)
+    [TestCase("Smartstore.Admin.Controllers.ProductAttributeController")]
+    public void ExtractedAdminCommerceControllersAreAbsentFromAssembly(string controllerType)
     {
-        Assert.That(OmmCmsCommerceIsolation.IsBlocked(Action(controllerType)), Is.True);
+        Assert.That(typeof(OmmCmsCommerceIsolation).Assembly.GetType(controllerType), Is.Null);
     }
 
     [TestCase("Smartstore.Web.Controllers.CustomerController", "Orders")]

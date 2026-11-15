@@ -130,6 +130,12 @@ def editorial_workflows(password):
     })
     page = get_page("/admin/topic/create", admin, 'id="topic-form"')
     print("Authenticated admin access passed.")
+    if "--controllers-trimmed" in sys.argv:
+        for controller in ["Affiliate","BarcodeTester","CheckoutAttribute","CollectionGroup","DeliveryTime","GiftCard","PriceLabel","ProductReview","QuantityUnit","RecurringPayment","ReturnCase","Shipment","Shipping","Tax","Payment","ShoppingCart","SpecificationAttribute","ProductAttribute"]:
+            action = "index" if controller == "BarcodeTester" else "list"
+            path = f"/admin/{controller.lower()}/{action}"
+            assert request(path, client=admin)[0] == 404, f"Removed controller reachable: {path}"
+        print("Extracted admin commerce endpoints return HTTP 404.")
 
     key = "Phase5SmokeArticle"
     slug = "phase5-smoke-article"
@@ -255,7 +261,24 @@ def verify_trimmed_distribution():
     print(f"Trimmed distribution passed: {len(removed)} retired modules absent; {len(retained)} retained modules present.")
 
 
+def verify_trimmed_controllers():
+    names = ["Affiliate","BarcodeTester","CheckoutAttribute","CollectionGroup","DeliveryTime","GiftCard","PriceLabel","ProductReview","QuantityUnit","RecurringPayment","ReturnCase","Shipment","Shipping","Tax","Payment","ShoppingCart","SpecificationAttribute","ProductAttribute"]
+    source = Path(__file__).resolve().parent.parent / "src" / "Smartstore.Web" / "Areas" / "Admin"
+    for name in names:
+        assert not (source / "Controllers" / (name + "Controller.cs")).exists(), f"Retired controller remains: {name}"
+        if name != "Shipment":
+            assert not (source / "Views" / name).exists(), f"Retired source views remain: {name}"
+            assert not (root / "Areas" / "Admin" / "Views" / name).exists(), f"Retired published views remain: {name}"
+    for name in ("Create.cshtml", "Edit.cshtml", "List.cshtml", "PdfPackagingSlips.Print.cshtml"):
+        assert not (source / "Views" / "Shipment" / name).exists(), f"Retired shipment view remains: {name}"
+        assert not (root / "Areas" / "Admin" / "Views" / "Shipment" / name).exists(), f"Retired published shipment view remains: {name}"
+    assert (source / "Views" / "Shipment" / "_Grid.Shipments.cshtml").is_file(), "Shared order shipment grid missing"
+    print(f"Controller extraction passed: {len(names)} retired admin controllers and their standalone views absent.")
+
+
 try:
+    if "--controllers-trimmed" in sys.argv:
+        verify_trimmed_controllers()
     if "--trimmed" in sys.argv:
         verify_trimmed_distribution()
     start()
