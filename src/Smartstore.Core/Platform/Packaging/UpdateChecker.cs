@@ -78,9 +78,14 @@ public class UpdateChecker
 
             var noUpdateResult = new CheckUpdateResult { UpdateAvailable = false, LanguageCode = lang, CurrentVersion = curVersion };
 
+            if (string.IsNullOrWhiteSpace(_appContext.AppConfiguration.UpdateCheckUrl))
+            {
+                return noUpdateResult;
+            }
+
             try
             {
-                string url = $"https://dlm.smartstore.com/api/v1/apprelease/CheckUpdate?app=Smartstore&version={curVersion}&language={lang}";
+                string url = _appContext.AppConfiguration.UpdateCheckUrl.FormatInvariant(curVersion, lang);
                 var client = _httpClientFactory.CreateClient();
 
                 client.Timeout = TimeSpan.FromSeconds(3);

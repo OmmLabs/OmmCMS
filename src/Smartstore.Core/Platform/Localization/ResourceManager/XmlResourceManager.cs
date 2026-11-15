@@ -577,6 +577,11 @@ public partial class XmlResourceManager : IXmlResourceManager
 
     public async Task<ResourceSetsResponse> GetOnlineResourceSetsAsync(CancellationToken cancelToken = default)
     {
+        if (string.IsNullOrWhiteSpace(_appContext.AppConfiguration.TranslateCheckUrl))
+        {
+            return null;
+        }
+
         var client = _httpClientFactory.CreateClient();
         client.Timeout = TimeSpan.FromMilliseconds(10000);
         client.DefaultRequestHeaders.Accept.Clear();

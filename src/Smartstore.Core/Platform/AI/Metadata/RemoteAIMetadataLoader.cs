@@ -25,6 +25,11 @@ public class RemoteAIMetadataLoader : IRemoteAIMetadataLoader
     {
         Guard.NotNull(localMetadata);
 
+        if (string.IsNullOrWhiteSpace(_appContext.AppConfiguration.AIRemoteMetadataUrl))
+        {
+            return localMetadata;
+        }
+
         var cacheFile = GetCacheFile(localMetadata.ProviderId);
         var cached = await ReadCacheAsync(cacheFile, cancelToken);
 

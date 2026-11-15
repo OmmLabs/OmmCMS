@@ -45,7 +45,7 @@ public static class SmartstoreVersion
         //       a greater minor version.
     };
 
-    private const string HELP_BASEURL = "https://docs.smartstore.com/";
+    private const string HELP_BASEURL = "https://ommlabs.ommrudraksha.com/";
 
     static SmartstoreVersion()
     {
@@ -131,10 +131,7 @@ public static class SmartstoreVersion
     {
         Guard.NotEmpty(languageCode);
 
-        return PathUtility.Join(
-            HELP_BASEURL, 
-            GetUserGuideSpaceKey(languageCode), 
-            path);
+        return HELP_BASEURL;
     }
 
     public static string GetUserGuideSpaceKey(string languageCode)

@@ -11,7 +11,9 @@ public partial class SmartConfiguration
     public string ThemesBasePath { get; set; } = "/Themes";
     public string ModulesBasePath { get; set; } = "/Modules";
     public string TempDirectory { get; set; } = "/App_Data/_temp";
-    public string TranslateCheckUrl { get; set; } = "https://translate.smartstore.com/StringResource/CheckAvailableResources?version={0}";
+    public string TranslateCheckUrl { get; set; } = string.Empty;
+    public string UpdateCheckUrl { get; set; } = string.Empty;
+    public string AIRemoteMetadataUrl { get; set; } = string.Empty;
 
     /// <summary>
     /// Set this to "true" if the view engine should also try to resolve view files ending with {CurrentLanguage} (e.g.: MyView.de.cshtml > MyView.cshtml).

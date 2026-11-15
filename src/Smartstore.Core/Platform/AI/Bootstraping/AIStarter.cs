@@ -24,8 +24,10 @@ internal sealed class AIStarter : StarterBase
             })
             .ConfigureHttpClient(client =>
             {
-                //client.BaseAddress = new Uri("http://localhost:59318/");
-                client.BaseAddress = new Uri("https://smartstore.com/");
+                if (Uri.TryCreate(appContext.AppConfiguration.AIRemoteMetadataUrl, UriKind.Absolute, out var metadataUrl))
+                {
+                    client.BaseAddress = metadataUrl;
+                }
                 client.Timeout = TimeSpan.FromSeconds(2);
             });
     }
