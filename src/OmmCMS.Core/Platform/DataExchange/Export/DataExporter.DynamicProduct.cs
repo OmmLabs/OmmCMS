@@ -118,8 +118,6 @@ public partial class DataExporter
         result.ProductCategories = null;
         result.ProductManufacturers = null;
         result.ProductTags = null;
-        result.RelatedProducts = null;
-        result.CrossSellProducts = null;
         result.ProductSpecificationAttributes = null;
         result.ProductBundleItems = null;
         result.Name = localizedName;
@@ -199,8 +197,6 @@ public partial class DataExporter
         var productAttributes = await ctx.ProductBatchContext.Attributes.GetOrLoadAsync(product.Id);
         var specificationAttributes = await ctx.ProductBatchContext.SpecificationAttributes.GetOrLoadAsync(product.Id);
         var productTags = await ctx.ProductBatchContext.ProductTags.GetOrLoadAsync(product.Id);
-        var relatedProducts = await ctx.ProductBatchContext.RelatedProducts.GetOrLoadAsync(product.Id);
-        var crossSellProducts = await ctx.ProductBatchContext.CrossSellProducts.GetOrLoadAsync(product.Id);
         var selectedAttributes = combination?.AttributeSelection;
         var variantAttributeValues = combination?.AttributeSelection?.MaterializeProductVariantAttributeValues(productAttributes);
 
@@ -417,22 +413,6 @@ public partial class DataExporter
                 dyn.SeName = SlugUtility.Slugify(localizedName, _seoSettings);
                 dyn._Localized = GetLocalized(ctx, x, y => y.Name);
 
-                return dyn;
-            })
-            .ToList();
-
-        dynObject.RelatedProducts = relatedProducts
-            .Select(x =>
-            {
-                dynamic dyn = new DynamicEntity(x);
-                return dyn;
-            })
-            .ToList();
-
-        dynObject.CrossSellProducts = crossSellProducts
-            .Select(x =>
-            {
-                dynamic dyn = new DynamicEntity(x);
                 return dyn;
             })
             .ToList();

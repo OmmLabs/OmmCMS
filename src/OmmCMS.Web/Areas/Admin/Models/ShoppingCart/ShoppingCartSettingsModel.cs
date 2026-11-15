@@ -44,9 +44,6 @@ public class ShoppingCartSettingsModel : ILocalizedModel<ShoppingCartSettingsLoc
     [LocalizedDisplay("*ShowGiftCardBox")]
     public bool ShowGiftCardBox { get; set; }
 
-    [LocalizedDisplay("*CrossSellsNumber")]
-    public int CrossSellsNumber { get; set; }
-
     [LocalizedDisplay("*EmailWishlistEnabled")]
     public bool EmailWishlistEnabled { get; set; }
 
@@ -137,7 +134,6 @@ public partial class ShoppingCartSettingsValidator : SettingModelValidator<Shopp
     {
         RuleFor(x => x.MaximumShoppingCartItems).GreaterThan(0);
         RuleFor(x => x.MaximumWishlistItems).GreaterThan(0);
-        RuleFor(x => x.CrossSellsNumber).GreaterThanOrEqualTo(0);
         RuleFor(x => x.MaxQuantityInputDropdownItems).GreaterThanOrEqualTo(0);
     }
 }

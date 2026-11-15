@@ -2266,18 +2266,10 @@
 	<LocaleResource Name="Admin.Catalog.Products.Copy.Published.Hint">
 		<Value>Markieren, um ein Produkt zu veröffentlichen</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.CrossSells">
-		<Value>Checkout-Selling</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.CrossSells.AddNew">
-		<Value>Checkout-Selling-Produkt hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.CrossSells.Fields.Product">
-		<Value>Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.CrossSells.SaveBeforeEdit">
-		<Value>Sie müssen das Produkt speichern, bevor Sie Checkout-Selling-Produkte hinzufügen können.</Value>
-	</LocaleResource>
+
+
+
+
 	<LocaleResource Name="Admin.Catalog.Products.Deleted">
 		<Value>Das Produkt wurde erfolgreich gelöscht.</Value>
 	</LocaleResource>
@@ -3316,18 +3308,10 @@
 	<LocaleResource Name="Admin.Catalog.Products.RecycleBin.RestoreProductsResult">
 		<Value>Es wurden {0} von {1} Produkten erfolgreich wiederhergestellt.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.RelatedProducts">
-		<Value>Cross-Selling</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.RelatedProducts.AddNew">
-		<Value>Cross-Selling-Produkt hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.RelatedProducts.Fields.Product">
-		<Value>Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.RelatedProducts.SaveBeforeEdit">
-		<Value>Sie müssen das Produkt speichern, bevor Sie Cross-Selling-Produkte hinzufügen können.</Value>
-	</LocaleResource>
+
+
+
+
 	<LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes">
 		<Value>Spezifikationsattribute</Value>
 	</LocaleResource>
@@ -8151,12 +8135,8 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CheckoutProcess.Hint">
 		<Value>Legt die Art des Checkout mit den zu durchlaufenden Schritten fest.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CrossSellsNumber">
-		<Value>Anzahl der angezeigten Cross-Selling-Artikel</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CrossSellsNumber.Hint">
-		<Value>Legt die Anzahl der angezeigten CrossSelling Produkte fest. Die Eingabe von 0 (Null) blendet Cross-Selling aus.</Value>
-	</LocaleResource>
+
+
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CustomersCanChangePreferredPayment">
 		<Value>Kunden können Ihre bevorzugte Zahlungsart ändern</Value>
 	</LocaleResource>
@@ -19025,9 +19005,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Products.RecentlyViewedProducts">
 		<Value>Zuletzt angesehen</Value>
 	</LocaleResource>
-	<LocaleResource Name="Products.RelatedProducts">
-		<Value>Ähnliche Produkte</Value>
-	</LocaleResource>
+
 	<LocaleResource Name="Products.RequiredProductPriceInfo">
 		<Value>&lt;span&gt;+ {0} &lt;span title="{1}"&gt;{2}&lt;/span&gt;&lt;/span&gt;</Value>
 	</LocaleResource>
@@ -19685,9 +19663,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="ShoppingCart.ContinueShopping">
 		<Value>Weiter einkaufen</Value>
 	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.CrossSells">
-		<Value>Auf Grund Ihrer Auswahl könnten Sie auch an folgenden Produkten Interesse haben.</Value>
-	</LocaleResource>
+
 	<LocaleResource Name="ShoppingCart.CustomerEnteredPrice.RangeError">
 		<Value>Der Preis muss zwischen {0} und {1} liegen.</Value>
 	</LocaleResource>

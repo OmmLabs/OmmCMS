@@ -539,6 +539,10 @@ try:
             "Catalog/Products/Services/IStockSubscriptionService.cs",
             "Catalog/Products/Services/StockSubscriptionService.cs",
             "Catalog/Products/Extensions/BackInStockSubscriptionQueryExtensions.cs",
+            "Catalog/Products/Domain/RelatedProduct.cs",
+            "Catalog/Products/Domain/CrossSellProduct.cs",
+            "Catalog/Products/Extensions/RelatedProductQueryExtensions.cs",
+            "Catalog/Products/Extensions/CrossSellProductQueryExtensions.cs",
             "Catalog/Attributes/Modelling/IProductVariantQueryFactory.cs",
             "Catalog/Attributes/Modelling/ProductVariantQueryFactory.cs",
             "Catalog/Attributes/Modelling/ProductAttributeQueryModelBinder.cs",
@@ -593,6 +597,7 @@ try:
         assert rows("SELECT COUNT(*) FROM Category") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='BackInStockSubscription'") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Affiliate'") == [0]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('relatedproduct', 'relatedproducts', 'crosssellproduct', 'crosssellproducts')") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Customer') WHERE name='AffiliateId'") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name='AllowBackInStockSubscriptions'") == [0]
         topics = set(rows("SELECT SystemName FROM Topic"))

@@ -46,8 +46,6 @@ public class ProductBatchContext
     private LazyMultimap<ProductSpecificationAttribute> _specificationAttributes;
     private LazyMultimap<ProductSpecificationAttribute> _essentialSpecAttributes;
     private LazyMultimap<Download> _downloads;
-    private LazyMultimap<RelatedProduct> _relatedProducts;
-    private LazyMultimap<CrossSellProduct> _crossSellProducts;
 
     public ProductBatchContext(
         IEnumerable<Product> products,
@@ -172,16 +170,6 @@ public class ProductBatchContext
         get => _downloads ??= new LazyMultimap<Download>(LoadDownloads, _productIds);
     }
 
-    public LazyMultimap<RelatedProduct> RelatedProducts
-    {
-        get => _relatedProducts ??= new LazyMultimap<RelatedProduct>(LoadRelatedProducts, _productIds);
-    }
-
-    public LazyMultimap<CrossSellProduct> CrossSellProducts
-    {
-        get => _crossSellProducts ??= new LazyMultimap<CrossSellProduct>(LoadCrossSellProducts, _productIds);
-    }
-
     /// <summary>
     /// Adds more product identifiers. Enables the subsequent loading of products.
     /// </summary>
@@ -199,8 +187,6 @@ public class ProductBatchContext
         SpecificationAttributes.Collect(productIds);
         EssentialAttributes.Collect(productIds);
         Downloads.Collect(productIds);
-        RelatedProducts.Collect(productIds);
-        CrossSellProducts.Collect(productIds);
     }
 
     /// <summary>
@@ -226,8 +212,6 @@ public class ProductBatchContext
         _essentialSpecAttributes?.Clear();
         _productMediaFiles?.Clear();
         _downloads?.Clear();
-        _relatedProducts?.Clear();
-        _crossSellProducts?.Clear();
     }
 
     #region Protected factories
@@ -417,34 +401,6 @@ public class ProductBatchContext
             .ToListAsync();
 
         return downloads.ToMultimap(x => x.EntityId, x => x);
-    }
-
-    protected virtual async Task<Multimap<int, RelatedProduct>> LoadRelatedProducts(int[] ids)
-    {
-        var query =
-            from rp in _db.RelatedProducts.AsNoTracking()
-            join p in _db.Products.AsNoTracking() on rp.ProductId2 equals p.Id
-            where ids.Contains(rp.ProductId1) && (_includeHidden || p.Published)
-            orderby rp.DisplayOrder
-            select rp;
-
-        var relatedProducts = await query.ToListAsync();
-
-        return relatedProducts.ToMultimap(x => x.ProductId1, x => x);
-    }
-
-    protected virtual async Task<Multimap<int, CrossSellProduct>> LoadCrossSellProducts(int[] ids)
-    {
-        var query =
-            from csp in _db.CrossSellProducts
-            join p in _db.Products.AsNoTracking() on csp.ProductId2 equals p.Id
-            where ids.Contains(csp.ProductId1) && (_includeHidden || p.Published)
-            orderby csp.Id
-            select csp;
-
-        var crossSellProducts = await query.ToListAsync();
-
-        return crossSellProducts.ToMultimap(x => x.ProductId1, x => x);
     }
 
     #endregion

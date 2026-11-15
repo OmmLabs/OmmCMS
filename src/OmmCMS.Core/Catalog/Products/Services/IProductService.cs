@@ -33,15 +33,6 @@ public partial interface IProductService
     Task<Multimap<int, ProductTag>> GetProductTagsByProductIdsAsync(int[] productIds, bool includeHidden = false);
 
     /// <summary>
-    /// Gets cross-sell products by shopping cart.
-    /// </summary>
-    /// <param name="productIds">Product identifiers.</param>
-    /// <param name="numberOfProducts">Number of products to return.</param>
-    /// <param name="includeHidden">A value indicating whether to include hidden products.</param>
-    /// <returns>List of products.</returns>
-    Task<IList<Product>> GetCrossSellProductsByProductIdsAsync(int[] productIds, int numberOfProducts, bool includeHidden = false);
-
-    /// <summary>
     /// Applies the product review totals to <paramref name="products"/>. The caller is responsible for database commit.
     /// </summary>
     Task ApplyProductReviewTotalsAsync(IEnumerable<Product> products, CancellationToken cancelToken = default);
@@ -64,20 +55,6 @@ public partial interface IProductService
     /// <param name="quantity">The quantity to adjust.</param>
     /// <returns>Adjust inventory result.</returns>
     Task<AdjustInventoryResult> AdjustInventoryAsync(Product product, ProductVariantAttributeSelection selection, bool decrease, int quantity);
-
-    /// <summary>
-    /// Ensures the existence of all mutually related products.
-    /// </summary>
-    /// <param name="productId1">First product identifier.</param>
-    /// <returns>Number of related products added.</returns>
-    Task<int> EnsureMutuallyRelatedProductsAsync(int productId1);
-
-    /// <summary>
-    /// Ensures the existence of all mutually cross selling products.
-    /// </summary>
-    /// <param name="productId1">First product identifier.</param>
-    /// <returns>Number of cross sell products added.</returns>
-    Task<int> EnsureMutuallyCrossSellProductsAsync(int productId1);
 
     /// <summary>
     /// Creates a product batch context for fast retrieval (eager loading) of product navigation properties.

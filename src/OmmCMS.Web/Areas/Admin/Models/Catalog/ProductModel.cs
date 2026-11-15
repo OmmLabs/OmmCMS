@@ -356,49 +356,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
         public int DisplayOrder { get; set; }
     }
 
-    [LocalizedDisplay("Admin.Catalog.Products.")]
-    public class CrossSellProductModel : EntityModelBase
-    {
-        public int ProductId2 { get; set; }
-        public string EditUrl { get; set; }
-
-        [LocalizedDisplay("*CrossSells.Fields.Product")]
-        public string Product2Name { get; set; }
-
-        [LocalizedDisplay("*Fields.ProductType")]
-        public string ProductTypeName { get; set; }
-        public string ProductTypeLabelHint { get; set; }
-
-        [LocalizedDisplay("*Fields.Sku")]
-        public string Product2Sku { get; set; }
-
-        [LocalizedDisplay("*Fields.Published")]
-        public bool Product2Published { get; set; }
-    }
-
-    [LocalizedDisplay("Admin.Catalog.Products.")]
-    public class RelatedProductModel : EntityModelBase
-    {
-        public int ProductId2 { get; set; }
-        public string EditUrl { get; set; }
-
-        [LocalizedDisplay("*RelatedProducts.Fields.Product")]
-        public string Product2Name { get; set; }
-
-        [LocalizedDisplay("*Fields.ProductType")]
-        public string ProductTypeName { get; set; }
-        public string ProductTypeLabelHint { get; set; }
-
-        [LocalizedDisplay("Common.DisplayOrder")]
-        public int DisplayOrder { get; set; }
-
-        [LocalizedDisplay("*Fields.Sku")]
-        public string Product2Sku { get; set; }
-
-        [LocalizedDisplay("*Fields.Published")]
-        public bool Product2Published { get; set; }
-    }
-
     [LocalizedDisplay("Admin.Catalog.Products.Fields.")]
     public partial class AssociatedProductModel : EntityModelBase
     {

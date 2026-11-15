@@ -2323,21 +2323,11 @@
 	<LocaleResource Name="Admin.Catalog.Products.Copy.Published.Hint">
 		<Value>Check to mark a product as published.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.CrossSells">
-		<Value>Cross-sells</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.CrossSells.AddNew">
-		<Value>Add checkout-selling product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.CrossSells.Fields">
-		<Value>Product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.CrossSells.Fields.Product">
-		<Value>Product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.CrossSells.SaveBeforeEdit">
-		<Value>You need to save the product before you can add checkout-selling products for this product page.</Value>
-	</LocaleResource>
+
+
+
+
+
 	<LocaleResource Name="Admin.Catalog.Products.Deleted">
 		<Value>The product has been deleted successfully.</Value>
 	</LocaleResource>
@@ -3388,21 +3378,11 @@
 	<LocaleResource Name="Admin.Catalog.Products.RecycleBin.RestoreProductsResult">
 		<Value>{0} of {1} products were successfully restored.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.RelatedProducts">
-		<Value>Related products</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.RelatedProducts.AddNew">
-		<Value>Add cross-selling product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.RelatedProducts.Fields">
-		<Value>Display order</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.RelatedProducts.Fields.Product">
-		<Value>Product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.RelatedProducts.SaveBeforeEdit">
-		<Value>You need to save the product before you can add cross-selling products for this product page.</Value>
-	</LocaleResource>
+
+
+
+
+
 	<LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes">
 		<Value>Specification attributes</Value>
 	</LocaleResource>
@@ -8314,12 +8294,8 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CheckoutProcess.Hint">
 		<Value>Specifies the type of checkout with the steps to be processed.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CrossSellsNumber">
-		<Value>Number of 'Cross-Sells'</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CrossSellsNumber.Hint">
-		<Value>The number of 'Cross-Sells' to display on shopping cart page; 0 if you don't want to load cross-sells</Value>
-	</LocaleResource>
+
+
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CustomersCanChangePreferredPayment">
 		<Value>Customers can change their preferred payment method</Value>
 	</LocaleResource>
@@ -19369,9 +19345,7 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Products.RecentlyViewedProducts">
 		<Value>Recently viewed products</Value>
 	</LocaleResource>
-	<LocaleResource Name="Products.RelatedProducts">
-		<Value>Related products</Value>
-	</LocaleResource>
+
 	<LocaleResource Name="Products.RequiredProductPriceInfo">
 		<Value>&lt;span&gt;+ {0} &lt;span title="{1}"&gt;{2}&lt;/span&gt;&lt;/span&gt;</Value>
 	</LocaleResource>
@@ -20029,9 +20003,7 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="ShoppingCart.ContinueShopping">
 		<Value>Continue shopping</Value>
 	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.CrossSells">
-		<Value>Based on your selection, you may be interested in the following items</Value>
-	</LocaleResource>
+
 	<LocaleResource Name="ShoppingCart.CustomerEnteredPrice.RangeError">
 		<Value>The price must be from {0} to {1}</Value>
 	</LocaleResource>

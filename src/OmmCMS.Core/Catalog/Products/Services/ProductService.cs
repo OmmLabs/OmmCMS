@@ -145,45 +145,6 @@ public partial class ProductService : IProductService
         return map;
     }
 
-    public virtual async Task<IList<Product>> GetCrossSellProductsByProductIdsAsync(int[] productIds, int numberOfProducts, bool includeHidden = false)
-    {
-        Guard.NotNull(productIds);
-
-        var result = new List<Product>();
-
-        if (numberOfProducts == 0 || !productIds.Any())
-        {
-            return result;
-        }
-
-        var query =
-            from csp in _db.CrossSellProducts.AsNoTracking()
-            join p in _db.Products on csp.ProductId2 equals p.Id
-            where productIds.Contains(csp.ProductId1) && (includeHidden || p.Published)
-            orderby csp.Id
-            select csp;
-
-        var csItems = await query.ToListAsync();
-        var productIds1 = new HashSet<int>(csItems
-            .Select(x => x.ProductId2)
-            .Except(productIds));
-
-        if (productIds1.Any())
-        {
-            var productIds2 = productIds1.Take(numberOfProducts).ToArray();
-
-            var products = await _db.Products
-                .AsNoTracking()
-                .Where(x => productIds2.Contains(x.Id))
-                .SelectSummary()
-                .ToListAsync();
-
-            result.AddRange(products.OrderBySequence(productIds2));
-        }
-
-        return result;
-    }
-
     public virtual async Task ApplyProductReviewTotalsAsync(IEnumerable<Product> products, CancellationToken cancelToken = default)
     {
         if (products.IsNullOrEmpty())
@@ -354,127 +315,6 @@ public partial class ProductService : IProductService
         }
 
         return result;
-    }
-
-    public virtual async Task<int> EnsureMutuallyRelatedProductsAsync(int productId1)
-    {
-        var productQuery = _db.Products.ApplyStandardFilter(true);
-
-        var relatedProductIdsQuery =
-            from rp in _db.RelatedProducts
-            join p in productQuery on rp.ProductId2 equals p.Id
-            where rp.ProductId1 == productId1
-            orderby rp.DisplayOrder
-            select rp.ProductId2;
-
-        var productIds = await relatedProductIdsQuery.ToListAsync();
-
-        if (productIds.Count > 0 && !productIds.Any(x => x == productId1))
-        {
-            productIds.Add(productId1);
-        }
-        if (!productIds.Any())
-        {
-            return 0;
-        }
-
-        var query =
-            from rp in _db.RelatedProducts
-            join p in _db.Products on rp.ProductId2 equals p.Id
-            where productIds.Contains(rp.ProductId2)
-            select new { rp.ProductId1, rp.ProductId2 };
-
-        var allAssociatedIds = await query.ToListAsync();
-        var associatedIdsMap = allAssociatedIds.ToMultimap(x => x.ProductId2, x => x.ProductId1);
-        var displayOrders = new Dictionary<int, int>();
-
-        foreach (var id1 in productIds)
-        {
-            var associatedIds = associatedIdsMap.ContainsKey(id1)
-                ? associatedIdsMap[id1]
-                : new List<int>();
-
-            foreach (var id2 in productIds)
-            {
-                if (id1 != id2 && !associatedIds.Any(x => x == id2))
-                {
-                    if (!displayOrders.ContainsKey(id2))
-                    {
-                        displayOrders[id2] = await _db.RelatedProducts
-                            .Where(x => x.ProductId1 == id2)
-                            .OrderByDescending(x => x.DisplayOrder)
-                            .Select(x => x.DisplayOrder)
-                            .FirstOrDefaultAsync() + 1;
-                    }
-                    else
-                    {
-                        displayOrders[id2] = displayOrders[id2] + 1;
-                    }
-
-                    _db.RelatedProducts.Add(new RelatedProduct
-                    {
-                        ProductId1 = id2,
-                        ProductId2 = id1,
-                        DisplayOrder = displayOrders[id2]
-                    });
-                }
-            }
-        }
-
-        return await _db.SaveChangesAsync();
-    }
-
-    public virtual async Task<int> EnsureMutuallyCrossSellProductsAsync(int productId1)
-    {
-        var productQuery = _db.Products.ApplyStandardFilter(true);
-
-        var crossSellProductIdsQuery =
-            from csp in _db.CrossSellProducts
-            join p in productQuery on csp.ProductId2 equals p.Id
-            where csp.ProductId1 == productId1
-            orderby csp.Id
-            select csp.ProductId2;
-
-        var productIds = await crossSellProductIdsQuery.ToListAsync();
-
-        if (productIds.Count > 0 && !productIds.Any(x => x == productId1))
-        {
-            productIds.Add(productId1);
-        }
-        if (!productIds.Any())
-        {
-            return 0;
-        }
-
-        var query =
-            from csp in _db.CrossSellProducts
-            join p in _db.Products on csp.ProductId2 equals p.Id
-            where productIds.Contains(csp.ProductId2)
-            select new { csp.ProductId1, csp.ProductId2 };
-
-        var allAssociatedIds = await query.ToListAsync();
-        var associatedIdsMap = allAssociatedIds.ToMultimap(x => x.ProductId2, x => x.ProductId1);
-
-        foreach (var id1 in productIds)
-        {
-            var associatedIds = associatedIdsMap.ContainsKey(id1)
-                ? associatedIdsMap[id1]
-                : new List<int>();
-
-            foreach (var id2 in productIds)
-            {
-                if (id1 != id2 && !associatedIds.Any(x => x == id2))
-                {
-                    _db.CrossSellProducts.Add(new CrossSellProduct
-                    {
-                        ProductId1 = id2,
-                        ProductId2 = id1
-                    });
-                }
-            }
-        }
-
-        return await _db.SaveChangesAsync();
     }
 
     public virtual ProductBatchContext CreateProductBatchContext(
@@ -765,14 +605,6 @@ public partial class ProductService : IProductService
             _db.ProductReviewHelpfulness.RemoveRange(reviewHelpfulness);
             await _db.SaveChangesAsync(cancelToken);
         }
-
-        await _db.CrossSellProducts
-            .Where(x => productIds.Contains(x.ProductId1) || productIds.Contains(x.ProductId2))
-            .ExecuteDeleteAsync(cancelToken);
-
-        await _db.RelatedProducts
-            .Where(x => productIds.Contains(x.ProductId1) || productIds.Contains(x.ProductId2))
-            .ExecuteDeleteAsync(cancelToken);
 
         await _db.Downloads
             .Where(x => productIds.Contains(x.EntityId) && x.EntityName == entityName)
