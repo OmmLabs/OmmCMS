@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Runtime.CompilerServices;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog;
 using OmmCMS.Core.Data;
@@ -19,9 +18,7 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
     private readonly IWebHelper _webHelper;
     private readonly IProductAttributeMaterializer _productAttributeMaterializer;
     private readonly ILocalizationService _localizationService;
-    private readonly IPriceCalculationService _priceCalculationService;
     private readonly CatalogSettings _catalogSettings;
-    private readonly PriceSettings _priceSettings;
 
     public ProductAttributeFormatter(
         SmartDbContext db,
@@ -29,18 +26,14 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
         IWebHelper webHelper,
         IProductAttributeMaterializer productAttributeMaterializer,
         ILocalizationService localizationService,
-        IPriceCalculationService priceCalculationService,
-        CatalogSettings catalogSettings,
-        PriceSettings priceSettings)
+        CatalogSettings catalogSettings)
     {
         _db = db;
         _workContext = workContext;
         _webHelper = webHelper;
         _productAttributeMaterializer = productAttributeMaterializer;
         _localizationService = localizationService;
-        _priceCalculationService = priceCalculationService;
         _catalogSettings = catalogSettings;
-        _priceSettings = priceSettings;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -87,22 +80,12 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
             var language = _workContext.WorkingLanguage;
             var attributes = await _productAttributeMaterializer.MaterializeProductVariantAttributesAsync(selection);
 
-            // Key: ProductVariantAttributeValue.Id, value: calculated attribute price adjustment.
-            var priceAdjustments = options.IncludePrices && _priceSettings.ShowVariantCombinationPriceAdjustment
-                ? await _priceCalculationService.CalculateAttributePriceAdjustmentsAsync(product, selection, 1, _priceCalculationService.CreateDefaultOptions(false, customer, null, batchContext))
-                : new Dictionary<int, CalculatedPriceAdjustment>();
-
             foreach (var pva in attributes)
             {
-                if (TryGenerateVariantTokens(pva, selection, priceAdjustments, options, out var tokens))
+                if (TryGenerateVariantTokens(pva, selection, options, out var tokens))
                 {
                     foreach (var t in tokens)
                     {
-                        if (t.Price.HasValue())
-                        {
-                            t.Value += options.PriceFormatTemplate.FormatInvariant(t.Price);
-                        }
-
                         var formattedItem = options.FormatTemplate.FormatInvariant(t.Name, t.Value);
 
                         // Append formatted item to StringBuilder.
@@ -175,7 +158,6 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
     private bool TryGenerateVariantTokens(
         ProductVariantAttribute pva,
         ProductVariantAttributeSelection selection,
-        IDictionary<int, CalculatedPriceAdjustment> priceAdjustments,
         ProductAttributeFormatOptions options,
         out List<VariantToken> tokens)
     {
@@ -200,7 +182,6 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
                 {
                     var name = TryEncode(pva.ProductAttribute.GetLocalized(x => x.Name, language.Id));
                     var value = TryEncode(pvaValue.GetLocalized(x => x.Name, language.Id));
-                    string price = null;
 
                     if (options.IncludePrices)
                     {
@@ -211,20 +192,9 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
                             value = value + " × " + pvaValue.Quantity;
                         }
 
-                        if (priceAdjustments.TryGetValue(pvaValue.Id, out var adjustment))
-                        {
-                            if (adjustment.Price > 0)
-                            {
-                                price = $"+{adjustment.Price}";
-                            }
-                            else if (adjustment.Price < 0)
-                            {
-                                price = $"-{adjustment.Price * -1}";
-                            }
-                        }
                     }
 
-                    AddToken(tokens, name, value, price);
+                    AddToken(tokens, name, value);
                 }
             }
             else if (pva.AttributeControlType == AttributeControlType.MultilineTextbox)
@@ -284,15 +254,14 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
         }
     }
 
-    private static bool AddToken(List<VariantToken> tokens, string name, string value, string price = null)
+    private static bool AddToken(List<VariantToken> tokens, string name, string value)
     {
         if (name.HasValue() && value.HasValue())
         {
             tokens.Add(new()
             {
                 Name = name,
-                Value = value,
-                Price = price
+                Value = value
             });
 
             return true;
@@ -305,6 +274,5 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
     {
         public string Name { get; set; }
         public string Value { get; set; }
-        public string Price { get; set; }
     }
 }

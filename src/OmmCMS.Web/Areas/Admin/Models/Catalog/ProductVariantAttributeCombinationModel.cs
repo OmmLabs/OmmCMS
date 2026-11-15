@@ -50,12 +50,6 @@ public class ProductVariantAttributeCombinationModel : EntityModelBase
     [LocalizedDisplay("Admin.Catalog.Products.Fields.Height")]
     public decimal? Height { get; set; }
 
-    [LocalizedDisplay("Admin.Catalog.Products.Fields.BasePriceAmount")]
-    public decimal? BasePriceAmount { get; set; }
-
-    [LocalizedDisplay("Admin.Catalog.Products.Fields.BasePriceBaseAmount")]
-    public int? BasePriceBaseAmount { get; set; }
-
     [LocalizedDisplay("Common.IsActive")]
     public bool IsActive { get; set; }
 

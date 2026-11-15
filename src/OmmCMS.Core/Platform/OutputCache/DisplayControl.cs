@@ -5,7 +5,6 @@ using Autofac;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Content.Menus;

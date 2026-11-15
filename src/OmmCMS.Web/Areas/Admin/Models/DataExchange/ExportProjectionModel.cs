@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Catalog.Pricing;
-
+﻿
 namespace OmmCMS.Admin.Models.Export;
 
 [LocalizedDisplay("Admin.DataExchange.Export.Projection.")]
@@ -38,12 +37,6 @@ public class ExportProjectionModel
 
     [LocalizedDisplay("*CriticalCharacters")]
     public string[] CriticalCharacters { get; set; }
-
-    [LocalizedDisplay("*PriceType")]
-    public PriceDisplayType? PriceType { get; set; }
-
-    [LocalizedDisplay("*ConvertNetToGrossPrices")]
-    public bool ConvertNetToGrossPrices { get; set; }
 
     [LocalizedDisplay("*Brand")]
     public string Brand { get; set; }

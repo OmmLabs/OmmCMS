@@ -12,13 +12,10 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using NUnit.Framework;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Pricing;
-using OmmCMS.Core.Catalog.Pricing.Calculators;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media.Storage;
 using OmmCMS.Core.Data;
-using OmmCMS.Core.Tests.Catalog.Pricing.Calculators;
 using OmmCMS.Core.Tests.Common;
 using OmmCMS.Core.Tests.Content.Media.Storage;
 using OmmCMS.Core.Tests.Tax;
@@ -138,7 +135,7 @@ public abstract class ServiceTestBase
 
                 builder.RegisterInstance(genericAttributeServiceMock.Object).As<IGenericAttributeService>().SingleInstance();
 
-                // Register some dependencies which will be resolved by Autofac during obtaining PriceCalculators.
+                // Register some dependencies for tests using product attributes.
                 var productAttributeMaterializerMock = new Mock<IProductAttributeMaterializer>();
                 builder.RegisterInstance(productAttributeMaterializerMock.Object).As<IProductAttributeMaterializer>().SingleInstance();
             });
@@ -193,47 +190,4 @@ public abstract class ServiceTestBase
         //ModuleExplorer.ReferencedPlugins = plugins;
     }
 
-    protected List<Lazy<IPriceCalculator, PriceCalculatorMetadata>> GetPriceCalculators(
-        IPriceCalculatorFactory priceCalculatorFactory,
-        PriceSettings priceSettings)
-    {
-        var calculators = new List<Lazy<IPriceCalculator, PriceCalculatorMetadata>>();
-        var productMetadata = new PriceCalculatorMetadata { ValidTargets = CalculatorTargets.Product, Order = CalculatorOrdering.Default + 10 };
-
-        var attributePriceCalculator = new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
-            new AttributePriceCalculator(priceCalculatorFactory, DbContext), productMetadata);
-
-        var bundlePriceCalculator =
-            new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
-                new BundlePriceCalculator(priceCalculatorFactory, null),
-                new() { ValidTargets = CalculatorTargets.Bundle, Order = CalculatorOrdering.Early });
-
-        var groupedProductPriceCalculator =
-            new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
-                new GroupedProductPriceCalculator(null, priceCalculatorFactory, null),
-                new() { ValidTargets = CalculatorTargets.GroupedProduct, Order = CalculatorOrdering.Early });
-
-        var lowestPriceCalculator = new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
-            new LowestPriceCalculator(), productMetadata);
-
-        var preselectedPriceCalculator =
-            new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
-                new PreselectedPriceCalculator(null),
-                new() { ValidTargets = CalculatorTargets.Product, Order = CalculatorOrdering.Early + 1 });
-
-        // Custom calculator for additional charge.
-        var customCalculator = new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
-            new CustomAdditionalChargeCalculator(), new PriceCalculatorMetadata { ValidTargets = CalculatorTargets.Product, Order = CalculatorOrdering.Default });
-
-        calculators.AddRange(new[] {
-            attributePriceCalculator,
-            bundlePriceCalculator,
-            groupedProductPriceCalculator,
-            lowestPriceCalculator,
-            preselectedPriceCalculator,
-            customCalculator
-        });
-
-        return calculators;
-    }
 }

@@ -112,18 +112,6 @@ public partial class ProductVariantAttributeCombination : BaseEntity, IAttribute
     public decimal? Height { get; set; }
 
     /// <summary>
-    /// Gets or sets the amount of product per packing unit in the given measure unit 
-    /// (e.g. 250 ml shower gel: "0.25" if MeasureUnit = "liter" and BaseAmount = 1).
-    /// </summary>
-    public decimal? BasePriceAmount { get; set; }
-
-    /// <summary>
-    /// Gets or sets the reference value for the given measure unit 
-    /// (e.g. "1" liter. Formula: [BaseAmount] [MeasureUnit] = [SellingPrice] / [Amount]).
-    /// </summary>
-    public int? BasePriceBaseAmount { get; set; }
-
-    /// <summary>
     /// Gets or sets the assigned media file identifiers.
     /// </summary>
     [StringLength(1000)]

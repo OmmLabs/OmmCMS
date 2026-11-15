@@ -113,7 +113,6 @@
     "sku": "GF-1004",
     "taxCategory": "general",
     "price": 249.00,
-    "callForPrice": true,
     "deliveryTime": "7-working-days",
     "stockQuantity": 12,
     "categories": [ "Golf Accessories" ],

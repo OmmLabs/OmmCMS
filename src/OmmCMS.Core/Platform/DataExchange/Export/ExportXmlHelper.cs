@@ -4,7 +4,6 @@ using System.Xml;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Content.Media;
@@ -553,8 +552,6 @@ public class ExportXmlHelper : Disposable
             _writer.WriteStartElement(node);
         }
 
-        decimal? basePriceAmount = product.BasePriceAmount;
-        int? basePriceBaseAmount = product.BasePriceBaseAmount;
         decimal? lowestAttributeCombinationPrice = product.LowestAttributeCombinationPrice;
 
         _writer.WriteElementString(nameof(Product.Id), entity.Id.ToString());
@@ -615,13 +612,9 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.DisableBuyButton), entity.DisableBuyButton.ToString());
         _writer.WriteElementString(nameof(Product.DisableWishlistButton), entity.DisableWishlistButton.ToString());
         _writer.WriteElementString(nameof(Product.AvailableForPreOrder), entity.AvailableForPreOrder.ToString());
-        _writer.WriteElementString(nameof(Product.CallForPrice), entity.CallForPrice.ToString());
         // INFO: Export the entered price. Not "(decimal)product.Price" because it is the calculated price.
         _writer.WriteElementString(nameof(Product.Price), entity.Price.ToString(_culture));
         _writer.WriteElementString(nameof(Product.ProductCost), entity.ProductCost.ToString(_culture));
-        _writer.WriteElementString(nameof(Product.CustomerEntersPrice), entity.CustomerEntersPrice.ToString());
-        _writer.WriteElementString(nameof(Product.MinimumCustomerEnteredPrice), entity.MinimumCustomerEnteredPrice.ToString(_culture));
-        _writer.WriteElementString(nameof(Product.MaximumCustomerEnteredPrice), entity.MaximumCustomerEnteredPrice.ToString(_culture));
         _writer.WriteElementString(nameof(Product.MainPictureId), entity.MainPictureId?.ToString() ?? string.Empty);
         _writer.WriteElementString(nameof(Product.DisplayAllImagesNumber), entity.DisplayAllImagesNumber?.ToString() ?? string.Empty);
         _writer.WriteElementString(nameof(Product.Weight), ((decimal)product.Weight).ToString(_culture));
@@ -630,12 +623,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.Height), ((decimal)product.Height).ToString(_culture));
         _writer.WriteElementString(nameof(Product.AvailableStartDateTimeUtc), entity.AvailableStartDateTimeUtc?.ToString(_culture) ?? string.Empty);
         _writer.WriteElementString(nameof(Product.AvailableEndDateTimeUtc), entity.AvailableEndDateTimeUtc?.ToString(_culture) ?? string.Empty);
-        _writer.WriteElementString(nameof(Product.BasePriceEnabled), ((bool)product.BasePriceEnabled).ToString());
-        _writer.WriteElementString(nameof(Product.BasePriceMeasureUnit), (string)product.BasePriceMeasureUnit);
-        _writer.WriteElementString(nameof(Product.BasePriceAmount), basePriceAmount?.ToString(_culture) ?? string.Empty);
-        _writer.WriteElementString(nameof(Product.BasePriceBaseAmount), basePriceBaseAmount?.ToString() ?? string.Empty);
-        _writer.WriteElementString(nameof(Product.BasePriceHasValue), ((bool)product.BasePriceHasValue).ToString());
-        _writer.WriteElementString("BasePriceInfo", (string)product._BasePriceInfo);
         _writer.WriteElementString(nameof(Product.Visibility), ((int)entity.Visibility).ToString());
         _writer.WriteElementString(nameof(Product.Condition), ((int)entity.Condition).ToString());
         _writer.WriteElementString(nameof(Product.DisplayOrder), entity.DisplayOrder.ToString());
@@ -886,8 +873,6 @@ public class ExportXmlHelper : Disposable
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.Length), entityPvac.Length?.ToString(_culture) ?? string.Empty);
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.Width), entityPvac.Width?.ToString(_culture) ?? string.Empty);
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.Height), entityPvac.Height?.ToString(_culture) ?? string.Empty);
-                _writer.WriteElementString(nameof(ProductVariantAttributeCombination.BasePriceAmount), entityPvac.BasePriceAmount?.ToString(_culture) ?? string.Empty);
-                _writer.WriteElementString(nameof(ProductVariantAttributeCombination.BasePriceBaseAmount), entityPvac.BasePriceBaseAmount?.ToString() ?? string.Empty);
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.AssignedMediaFileIds), entityPvac.AssignedMediaFileIds);
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.IsActive), entityPvac.IsActive.ToString());
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.HashCode), entityPvac.HashCode.ToString());

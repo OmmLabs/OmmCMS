@@ -38,7 +38,7 @@ SKUs are `{prefix}{number}`, starting at 1001, e.g. `FN-1002`. Combinations appe
 | SKU | Product | Shows |
 |---|---|---|
 | FD-1001 | Extra virgin olive oil 500 ml | Base price per litre, reduced tax rate, specifications |
-| FD-1002 | Roasted coffee | Combinations with own SKU, price, base price and delivery time; picture per pack size (assigned to the combinations) |
+| FD-1002 | Roasted coffee | Combinations with own SKU, price and delivery time; picture per pack size (assigned to the combinations) |
 | FD-1004 | Mediterranean herb mix | Simple product, specification filters, low stock, new |
 | FD-1005 | Gourmet gift box | Bundle with per-item pricing and item discounts, new |
 | FD-1006 | Sea salt mill | Out of stock with back-in-stock notification |
@@ -48,7 +48,7 @@ SKUs are `{prefix}{number}`, starting at 1001, e.g. `FN-1002`. Combinations appe
 | GF-1001 | Golf balls | Pack size variant with price and weight adjustment, tier prices |
 | GF-1002 | Golf tees, 50 pieces | Quantity unit and minimum order quantity |
 | GF-1003 | Leather golf glove | Required variants without preselection (radio list and dropdown) |
-| GF-1004 | Laser rangefinder | Call for price |
+| GF-1004 | Laser rangefinder | Catalog sample |
 | GF-1005 | Golf starter set | Bundle with a fixed price |
 | GF-1006 | Lightweight stand bag | Low stock |
 | GF-1007 | Divot repair tool | Simple accessory, bundle item, new |

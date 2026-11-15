@@ -22,9 +22,6 @@ public partial class PerformanceSettingsModel : ModelBase
         [LocalizedDisplay("*MaxUnavailableAttributeCombinations")]
         public int MaxUnavailableAttributeCombinations { get; set; }
 
-        [LocalizedDisplay("*MaxVariantPriceCalculations")]
-        public int MaxVariantPriceCalculations { get; set; }
-
         [LocalizedDisplay("*UseResponseCompression")]
         public bool UseResponseCompression { get; set; }
 
@@ -87,7 +84,6 @@ public class PerformanceSettingsModelValidator : AbstractValidator<PerformanceSe
         {
             RuleFor(x => x.CacheSegmentSize).GreaterThan(0);
             RuleFor(x => x.MaxUnavailableAttributeCombinations).GreaterThan(0);
-            RuleFor(x => x.MaxVariantPriceCalculations).GreaterThan(0);
             RuleFor(x => x.MediaDupeDetectorMaxCacheSize).GreaterThan(0);
         }
     }

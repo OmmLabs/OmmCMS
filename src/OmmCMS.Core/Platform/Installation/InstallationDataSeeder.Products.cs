@@ -3,7 +3,6 @@ using System.Text.Json.Nodes;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Products.Utilities;
 using OmmCMS.Core.Checkout.Tax;

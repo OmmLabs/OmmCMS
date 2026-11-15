@@ -1,5 +1,4 @@
 ﻿using System.Xml.Serialization;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 
 namespace OmmCMS.Core.DataExchange;
@@ -70,16 +69,6 @@ public class ExportProjection
     /// Comma separated list of critical characters.
     /// </summary>
     public string CriticalCharacters { get; set; }
-
-    /// <summary>
-    /// The price type for calculating the product price.
-    /// </summary>
-    public PriceDisplayType? PriceType { get; set; }
-
-    /// <summary>
-    /// A value indicating whether to convert net to gross prices.
-    /// </summary>
-    public bool ConvertNetToGrossPrices { get; set; }
 
     /// <summary>
     /// Fallback for product brand.

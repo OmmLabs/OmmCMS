@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Catalog.Pricing;
-using OmmCMS.Core.Common;
+﻿using OmmCMS.Core.Common;
 
 namespace OmmCMS.Core.Data;
 

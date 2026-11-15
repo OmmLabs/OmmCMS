@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization;
@@ -319,7 +318,6 @@ public partial class ExportProfileService : AsyncDbSaveHook<ExportProfile>, IExp
                 {
                     RemoveCriticalCharacters = true,
                     CriticalCharacters = "¼,½,¾",
-                    PriceType = PriceDisplayType.PreSelectedPrice,
                     NoGroupedProducts = features.HasFlag(ExportFeatures.CanOmitGroupedProducts),
                     OnlyIndividuallyVisibleAssociated = true,
                     DescriptionMerging = ExportDescriptionMerging.Description

@@ -1,5 +1,4 @@
 ﻿using OmmCMS.Core;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Localization;

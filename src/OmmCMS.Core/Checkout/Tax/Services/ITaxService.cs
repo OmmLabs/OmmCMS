@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Catalog.Pricing;
-using OmmCMS.Core.Catalog.Products;
+﻿using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Localization;

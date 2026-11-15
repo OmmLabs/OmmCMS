@@ -2,7 +2,6 @@
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Products.Utilities;
 using OmmCMS.Core.Content.Media;
@@ -380,12 +379,8 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.DisableBuyButton);
                 row.SetProperty(context.Result, (x) => x.DisableWishlistButton);
                 row.SetProperty(context.Result, (x) => x.AvailableForPreOrder);
-                row.SetProperty(context.Result, (x) => x.CallForPrice);
                 row.SetProperty(context.Result, (x) => x.Price);
                 row.SetProperty(context.Result, (x) => x.ProductCost);
-                row.SetProperty(context.Result, (x) => x.CustomerEntersPrice);
-                row.SetProperty(context.Result, (x) => x.MinimumCustomerEnteredPrice);
-                row.SetProperty(context.Result, (x) => x.MaximumCustomerEnteredPrice, 1000);
                 // LowestAttributeCombinationPrice: see ProcessAttributeCombinationsAsync.
                 row.SetProperty(context.Result, (x) => x.Weight);
                 row.SetProperty(context.Result, (x) => x.Length);
@@ -394,10 +389,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.DisplayOrder);
                 row.SetProperty(context.Result, (x) => x.DeliveryTimeId);      // TODO: global scope
                 row.SetProperty(context.Result, (x) => x.QuantityUnitId);      // TODO: global scope
-                row.SetProperty(context.Result, (x) => x.BasePriceEnabled);
-                row.SetProperty(context.Result, (x) => x.BasePriceMeasureUnit);
-                row.SetProperty(context.Result, (x) => x.BasePriceAmount);
-                row.SetProperty(context.Result, (x) => x.BasePriceBaseAmount);
                 row.SetProperty(context.Result, (x) => x.BundleTitleText);
                 row.SetProperty(context.Result, (x) => x.BundlePerItemShipping);
                 row.SetProperty(context.Result, (x) => x.BundlePerItemPricing);
@@ -976,8 +967,6 @@ public class ProductImporter : EntityImporterBase
                     row.SetProperty(context.Result, (x) => x.Length);
                     row.SetProperty(context.Result, (x) => x.Width);
                     row.SetProperty(context.Result, (x) => x.Height);
-                    row.SetProperty(context.Result, (x) => x.BasePriceAmount);
-                    row.SetProperty(context.Result, (x) => x.BasePriceBaseAmount);
                     row.SetProperty(context.Result, (x) => x.AssignedMediaFileIds);
                     row.SetProperty(context.Result, (x) => x.IsActive, true);
                     row.SetProperty(context.Result, (x) => x.AllowOutOfStockOrders);

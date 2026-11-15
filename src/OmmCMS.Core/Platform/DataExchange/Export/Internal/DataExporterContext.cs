@@ -1,6 +1,5 @@
 ﻿using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Localization;
@@ -37,8 +36,6 @@ internal class DataExporterContext
     public ILogger Log { get; set; }
     public ExportExecuteContext ExecuteContext { get; set; }
     public DataExportResult Result { get; set; } = new();
-    public PriceCalculationOptions PriceCalculationOptions { get; set; }
-    public PriceCalculationOptions AttributeCombinationPriceCalcOptions { get; set; }
 
     /// <summary>
     /// All entity identifiers per export.

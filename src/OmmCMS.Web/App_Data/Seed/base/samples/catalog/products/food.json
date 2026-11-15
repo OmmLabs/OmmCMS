@@ -8,10 +8,6 @@
     "tags": [ "sustainable" ],
     "taxCategory": "food",
     "price": 12.90,
-    "basePriceEnabled": true,
-    "basePriceMeasureUnit": "l",
-    "basePriceAmount": 0.5,
-    "basePriceBaseAmount": 1,
     "deliveryTime": "available-and-ready-to-ship",
     "stockQuantity": 120,
     "displayStockAvailability": true,
@@ -37,10 +33,6 @@
     "tags": [ "bestseller" ],
     "taxCategory": "food",
     "price": 8.90,
-    "basePriceEnabled": true,
-    "basePriceMeasureUnit": "kg",
-    "basePriceAmount": 0.25,
-    "basePriceBaseAmount": 1,
     "deliveryTime": "available-and-ready-to-ship",
     "manageInventoryMethod": "ManageStockByAttributes",
     "categories": [ "Coffee and Tea" ],
@@ -82,32 +74,32 @@
     ],
     "combinations": [
       {
-        "sku": "FD-1002-250-W", "price": 8.90, "stockQuantity": 200, "basePriceAmount": 0.25, "basePriceBaseAmount": 1,
+        "sku": "FD-1002-250-W", "price": 8.90, "stockQuantity": 200,
         "pictures": [ "product/fd-1002.jpg" ],
         "attributes": { "pack-size": "pack-250g", "grind": "grind-whole" }
       },
       {
-        "sku": "FD-1002-250-E", "price": 8.90, "stockQuantity": 200, "basePriceAmount": 0.25, "basePriceBaseAmount": 1,
+        "sku": "FD-1002-250-E", "price": 8.90, "stockQuantity": 200,
         "pictures": [ "product/fd-1002.jpg" ],
         "attributes": { "pack-size": "pack-250g", "grind": "grind-espresso" }
       },
       {
-        "sku": "FD-1002-250-F", "price": 8.90, "stockQuantity": 200, "basePriceAmount": 0.25, "basePriceBaseAmount": 1,
+        "sku": "FD-1002-250-F", "price": 8.90, "stockQuantity": 200,
         "pictures": [ "product/fd-1002.jpg" ],
         "attributes": { "pack-size": "pack-250g", "grind": "grind-filter" }
       },
       {
-        "sku": "FD-1002-1000-W", "price": 29.90, "stockQuantity": 80, "basePriceAmount": 1, "basePriceBaseAmount": 1, "deliveryTime": "2-5-working-days",
+        "sku": "FD-1002-1000-W", "price": 29.90, "stockQuantity": 80, "deliveryTime": "2-5-working-days",
         "pictures": [ "product/fd-1002-1kg.jpg" ],
         "attributes": { "pack-size": "pack-1kg", "grind": "grind-whole" }
       },
       {
-        "sku": "FD-1002-1000-E", "price": 29.90, "stockQuantity": 80, "basePriceAmount": 1, "basePriceBaseAmount": 1, "deliveryTime": "2-5-working-days",
+        "sku": "FD-1002-1000-E", "price": 29.90, "stockQuantity": 80, "deliveryTime": "2-5-working-days",
         "pictures": [ "product/fd-1002-1kg.jpg" ],
         "attributes": { "pack-size": "pack-1kg", "grind": "grind-espresso" }
       },
       {
-        "sku": "FD-1002-1000-F", "price": 29.90, "stockQuantity": 80, "basePriceAmount": 1, "basePriceBaseAmount": 1, "deliveryTime": "2-5-working-days",
+        "sku": "FD-1002-1000-F", "price": 29.90, "stockQuantity": 80, "deliveryTime": "2-5-working-days",
         "pictures": [ "product/fd-1002-1kg.jpg" ],
         "attributes": { "pack-size": "pack-1kg", "grind": "grind-filter" }
       }
@@ -212,10 +204,6 @@
     "sku": "FD-1008",
     "taxCategory": "general",
     "price": 2.90,
-    "basePriceEnabled": true,
-    "basePriceMeasureUnit": "l",
-    "basePriceAmount": 0.75,
-    "basePriceBaseAmount": 1,
     "requiredProducts": [ "FD-1009" ],
     "automaticallyAddRequiredProducts": true,
     "deliveryTime": "available-and-ready-to-ship",

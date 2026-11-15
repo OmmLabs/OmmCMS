@@ -5,7 +5,6 @@ using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Brands.Rules;
 using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Catalog.Categories.Rules;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Products.Rules;
 using OmmCMS.Core.Catalog.Rules;
@@ -57,12 +56,6 @@ internal class CatalogStarter : StarterBase
         builder.RegisterType<CatalogSearchQueryAliasMapper>().As<ICatalogSearchQueryAliasMapper>().InstancePerLifetimeScope();
         builder.RegisterType<CatalogFacetUrlHelper>().As<IFacetUrlHelper>().InstancePerLifetimeScope();
 
-        // Pricing
-        builder.RegisterType<PriceCalculationService>().As<IPriceCalculationService>().InstancePerLifetimeScope();
-        builder.RegisterType<PriceCalculatorFactory>().As<IPriceCalculatorFactory>().InstancePerLifetimeScope();
-
-        DiscoverCalculators(builder, appContext);
-
         // Rules.
         builder.RegisterType<ProductRuleProvider>().As<IProductRuleProvider>().InstancePerLifetimeScope();
         builder.RegisterType<NullAttributeRuleProvider>().As<IAttributeRuleProvider>().InstancePerLifetimeScope();
@@ -76,32 +69,4 @@ internal class CatalogStarter : StarterBase
         builder.RegisterType<ProductTagRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
     }
 
-    private static void DiscoverCalculators(ContainerBuilder builder, IApplicationContext appContext)
-    {
-        var calculatorTypes = appContext.TypeScanner.FindTypes<IPriceCalculator>();
-
-        foreach (var calculatorType in calculatorTypes)
-        {
-            var usageAttribute = calculatorType.GetAttribute<CalculatorUsageAttribute>(true);
-
-            var registration = builder
-                .RegisterType(calculatorType)
-                .As<IPriceCalculator>()
-                .Keyed<IPriceCalculator>(calculatorType)
-                .InstancePerAttributedLifetime()
-                .WithMetadata<PriceCalculatorMetadata>(m =>
-                {
-                    m.For(em => em.CalculatorType, calculatorType);
-                    m.For(em => em.ValidTargets, usageAttribute?.ValidTargets ?? CalculatorTargets.All);
-                    m.For(em => em.Order, usageAttribute?.Order ?? CalculatorOrdering.Default);
-                });
-        }
-
-        // Register calculator resolve delegate
-        builder.Register<Func<Type, IPriceCalculator>>(c =>
-        {
-            var cc = c.Resolve<IComponentContext>();
-            return key => cc.ResolveKeyed<IPriceCalculator>(key);
-        });
-    }
 }

@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Localization;
@@ -586,11 +585,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     /// </summary>
     public bool AvailableForPreOrder { get; set; }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether to show "Call for price" label instead of the product price.
-    /// </summary>
-    public bool CallForPrice { get; set; }
-
     private decimal _price;
     /// <summary>
     /// Gets or sets the product regular price.
@@ -606,21 +600,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     /// Gets or sets the product cost.
     /// </summary>
     public decimal ProductCost { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether the customer can enter a price.
-    /// </summary>
-    public bool CustomerEntersPrice { get; set; }
-
-    /// <summary>
-    /// Gets or sets the minimum price entered by a customer.
-    /// </summary>
-    public decimal MinimumCustomerEnteredPrice { get; set; }
-
-    /// <summary>
-    /// Gets or sets the maximum price entered by a customer.
-    /// </summary>
-    public decimal MaximumCustomerEnteredPrice { get; set; }
 
     /// <summary>
     /// Gets or sets a value for the lowest attribute combination price.
@@ -809,47 +788,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
         get => _countryOfOrigin ?? LazyLoader?.Load(this, ref _countryOfOrigin);
         set => _countryOfOrigin = value;
     }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether base price quotation (PAnGV) is enabled.
-    /// </summary>
-    public bool BasePriceEnabled { get; set; }
-
-    /// <summary>
-    /// Gets or sets the measure unit for the base price (e.g. "kg", "g", "qm²" etc.).
-    /// </summary>
-    [StringLength(50)]
-    public string BasePriceMeasureUnit { get; set; }
-
-    private decimal? _basePriceAmount;
-    /// <summary>
-    /// Gets or sets the amount of product per packing unit in the given measure unit 
-    /// (e.g. 250 ml shower gel: "0.25" if MeasureUnit = "liter" and BaseAmount = 1).
-    /// </summary>
-    public decimal? BasePriceAmount
-    {
-        [DebuggerStepThrough]
-        get => this.GetMergedDataValue(nameof(BasePriceAmount), _basePriceAmount);
-        set => _basePriceAmount = value;
-    }
-
-    private int? _basePriceBaseAmount;
-    /// <summary>
-    /// Gets or sets the reference value for the given measure unit 
-    /// (e.g. "1" liter. Formula: [BaseAmount] [MeasureUnit] = [SellingPrice] / [Amount]).
-    /// </summary>
-    public int? BasePriceBaseAmount
-    {
-        [DebuggerStepThrough]
-        get => this.GetMergedDataValue(nameof(BasePriceBaseAmount), _basePriceBaseAmount);
-        set => _basePriceBaseAmount = value;
-    }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether the product has a base price.
-    /// </summary>
-    [NotMapped]
-    public bool BasePriceHasValue => BasePriceEnabled && BasePriceAmount.GetValueOrDefault() > 0 && BasePriceBaseAmount.GetValueOrDefault() > 0 && BasePriceMeasureUnit.HasValue();
 
     /// <summary>
     /// Gets or sets an optional title text of a product bundle.

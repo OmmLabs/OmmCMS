@@ -724,6 +724,8 @@ try:
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('tierprice', 'tierprices')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('pricelabel', 'pricelabels')") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('OldPrice', 'ComparePrice', 'ComparePriceLabelId')") == [0]
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('BasePriceEnabled', 'BasePriceMeasureUnit', 'BasePriceAmount', 'BasePriceBaseAmount', 'CallForPrice', 'CustomerEntersPrice', 'MinimumCustomerEnteredPrice', 'MaximumCustomerEnteredPrice')") == [0]
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('ProductVariantAttributeCombination') WHERE name IN ('BasePriceAmount', 'BasePriceBaseAmount')") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('ProductVariantAttributeCombination') WHERE name IN ('ComparePrice', 'OldPrice')") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('SpecialPrice', 'SpecialPriceStartDateTimeUtc', 'SpecialPriceEndDateTimeUtc')") == [0]
         assert rows("SELECT COUNT(*) FROM pragma_table_info('ProductBundleItem') WHERE name IN ('Discount', 'DiscountPercentage')") == [0]

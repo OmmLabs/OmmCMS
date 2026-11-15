@@ -8,7 +8,6 @@ using OmmCMS.Core.Catalog;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Search;
 using OmmCMS.Core.Checkout.Orders;
@@ -45,7 +44,6 @@ public partial class DataExporter : IDataExporter
     private readonly ICommonServices _services;
     private readonly IWorkContext _workContext;
     private readonly IExportProfileService _exportProfileService;
-    private readonly IPriceCalculationService _priceCalculationService;
     private readonly IProductService _productService;
     private readonly IProductAttributeMaterializer _productAttributeMaterializer;
     private readonly ICatalogSearchService _catalogSearchService;
@@ -61,12 +59,10 @@ public partial class DataExporter : IDataExporter
     private readonly IQueuedEmailService _queuedEmailService;
     private readonly Lazy<IUrlHelper> _urlHelper;
     private readonly ProductUrlHelper _productUrlHelper;
-    private readonly ITaxCalculator _taxCalculator;
     private readonly IProviderManager _providerManager;
     private readonly IHttpClientFactory _httpClientFactory;
 
     private readonly CatalogSettings _catalogSettings;
-    private readonly PriceSettings _priceSettings;
     private readonly MediaSettings _mediaSettings;
     private readonly SeoSettings _seoSettings;
     private readonly CustomerSettings _customerSettings;
@@ -77,7 +73,6 @@ public partial class DataExporter : IDataExporter
         ICommonServices services,
         IWorkContext workContext,
         IExportProfileService exportProfileService,
-        IPriceCalculationService priceCalculationService,
         IProductService productService,
         IProductAttributeMaterializer productAttributeMaterializer,
         ICatalogSearchService catalogSearchService,
@@ -93,11 +88,9 @@ public partial class DataExporter : IDataExporter
         IQueuedEmailService queuedEmailService,
         Lazy<IUrlHelper> urlHelper,
         ProductUrlHelper productUrlHelper,
-        ITaxCalculator taxCalculator,
         IProviderManager providerManager,
         IHttpClientFactory httpClientFactory,
         CatalogSettings catalogSettings,
-        PriceSettings priceSettings,
         MediaSettings mediaSettings,
         SeoSettings seoSettings,
         CustomerSettings customerSettings,
@@ -107,7 +100,6 @@ public partial class DataExporter : IDataExporter
         _services = services;
         _workContext = workContext;
         _exportProfileService = exportProfileService;
-        _priceCalculationService = priceCalculationService;
         _productService = productService;
         _productAttributeMaterializer = productAttributeMaterializer;
         _catalogSearchService = catalogSearchService;
@@ -123,12 +115,10 @@ public partial class DataExporter : IDataExporter
         _queuedEmailService = queuedEmailService;
         _urlHelper = urlHelper;
         _productUrlHelper = productUrlHelper;
-        _taxCalculator = taxCalculator;
         _providerManager = providerManager;
         _httpClientFactory = httpClientFactory;
 
         _catalogSettings = catalogSettings;
-        _priceSettings = priceSettings;
         _mediaSettings = mediaSettings;
         _seoSettings = seoSettings;
         _customerSettings = customerSettings;
@@ -1057,8 +1047,6 @@ public partial class DataExporter : IDataExporter
             {
                 // Load data behind navigation properties for current entities batch in one go.
                 ctx.ProductBatchContext = _productService.CreateProductBatchContext(entities, ctx.Store, null, includeHidden);
-                ctx.PriceCalculationOptions = await CreatePriceCalculationOptions(ctx.ProductBatchContext, ctx);
-                ctx.AttributeCombinationPriceCalcOptions = await CreatePriceCalculationOptions(ctx.ProductBatchContext, ctx, true);
                 ctx.AssociatedProductBatchContext = null;
 
                 var context = ctx.ProductBatchContext;
@@ -1121,7 +1109,6 @@ public partial class DataExporter : IDataExporter
                 var products = orderItems.Select(x => x.Product);
 
                 ctx.ProductBatchContext = _productService.CreateProductBatchContext(products, ctx.Store, null, includeHidden);
-                ctx.PriceCalculationOptions = await CreatePriceCalculationOptions(ctx.ProductBatchContext, ctx);
 
                 ctx.TranslationsPerPage[nameof(Product)] = await CreateTranslationCollection(nameof(Product), products);
                 ctx.UrlRecordsPerPage[nameof(Product)] = await CreateUrlRecordCollection(nameof(Product), products);
@@ -1484,40 +1471,6 @@ public partial class DataExporter : IDataExporter
 
             ctx.Log.Info($"Updated order status for {num} order(s).");
         }
-    }
-
-    private async Task<PriceCalculationOptions> CreatePriceCalculationOptions(ProductBatchContext batchContext, DataExporterContext ctx, bool forAttributeCombinations = false)
-    {
-        Guard.NotNull(batchContext);
-
-        var priceDisplay = ctx.Projection.PriceType ?? _priceSettings.PriceDisplayType;
-        var options = _priceCalculationService.CreateDefaultOptions(false, null, null, batchContext);
-
-        options.ApplyPreselectedAttributes = priceDisplay == PriceDisplayType.PreSelectedPrice;
-
-        if (forAttributeCombinations)
-        {
-            options.DetermineLowestPrice = false;
-            options.DeterminePreselectedPrice = false;
-        }
-        else
-        {
-            options.DetermineLowestPrice = priceDisplay == PriceDisplayType.LowestPrice;
-            options.DeterminePreselectedPrice = priceDisplay == PriceDisplayType.PreSelectedPrice;
-        }
-
-        if (ctx.Projection.ConvertNetToGrossPrices)
-        {
-            options.TaxInclusive = true;
-        }
-
-        if (ctx.Projection.StoreId.HasValue)
-        {
-            var taxSettings = await _services.SettingFactory.LoadSettingsAsync<TaxSettings>(ctx.Projection.StoreId.Value);
-            options.IsGrossPrice = taxSettings.PricesIncludeTax;
-        }
-
-        return options;
     }
 
     private DataExporterContext CreateExporterContext(DataExportRequest request, bool isPreview, CancellationToken cancelToken)

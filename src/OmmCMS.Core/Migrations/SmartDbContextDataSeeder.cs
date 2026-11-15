@@ -377,12 +377,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Specifies whether shopping cart rules calculate amounts as inclusive of or exclusive of tax. If not specified (default), the tax settings for the respective shopping cart or customer apply.",
             "Legt fest, ob Warenkorbregeln die Beträge inklusive oder exklusive Umsatzsteuer berechnen. Falls nicht festgelegt (Standard), gelten die Steuereinstellungen des jeweiligen Warenkorbs bzw. Kunden.");
 
-        builder.AddOrUpdate("Admin.Configuration.Settings.Performance.MaxVariantPriceCalculations",
-            "Maximum number of price calculations for color and image swatches",
-            "Maximale Anzahl an Preisberechnungen bei Farb- und Bildmustern",
-            "Maximum number of full price calculations for color and image swatches, provided that attribute combinations with fixed prices exist. If this limit is exceeded, the prices for swatches are hidden.",
-            "Maximale Anzahl vollständiger Preisberechnungen bei Farb- und Bildmustern, sofern Attributkombinationen mit festen Preisen existieren. Bei Überschreitung dieser Grenze werden die Preise für Farb- und Bildmuster ausgeblendet.");
-
         builder.AddOrUpdate("Admin.Configuration.Settings.CustomerUser.CustomerFormFields.Description",
             "Manage form fields that are displayed during registration. In order to ensure the address transfer from the registration form, it is necessary that the following fields are activated and filled in by the customer:<ul class=\"mb-0\"><li>First name</li><li>Last name</li><li>Email</li><li>and all fields that are selected as required in the tab <b>Addresses</b></li></ul>",
             "Sie können Formularfelder verwalten, die während der Registrierung angezeigt werden. Um die Adressübergabe aus dem Registrierungsformular zu gewährleisten, müssen folgende Felder aktiviert und vom Kunden ausgefüllt sein:<ul class=\"mb-0\"><li>Vorname</li><li>Nachname</li><li>E-Mail</li><li>und alle Felder die im Tab <b>Adressen</b> als erforderlich ausgewählt sind</li></ul>");

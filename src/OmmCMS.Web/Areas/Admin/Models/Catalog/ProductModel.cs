@@ -192,20 +192,8 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
     [LocalizedDisplay("*AvailableForPreOrder")]
     public bool AvailableForPreOrder { get; set; }
 
-    [LocalizedDisplay("*CallForPrice")]
-    public bool CallForPrice { get; set; }
-
     [LocalizedDisplay("*ProductCost")]
     public decimal? ProductCost { get; set; }
-
-    [LocalizedDisplay("*CustomerEntersPrice")]
-    public bool CustomerEntersPrice { get; set; }
-
-    [LocalizedDisplay("*MinimumCustomerEnteredPrice")]
-    public decimal? MinimumCustomerEnteredPrice { get; set; }
-
-    [LocalizedDisplay("*MaximumCustomerEnteredPrice")]
-    public decimal? MaximumCustomerEnteredPrice { get; set; }
 
     [LocalizedDisplay("*BundleTitleText")]
     public string BundleTitleText { get; set; }
@@ -259,19 +247,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
     public int? DisplayAllImagesNumber { get; set; }
 
     public AddProductSpecificationAttributeModel AddSpecificationAttributeModel { get; set; } = new();
-
-    //BasePrice
-    [LocalizedDisplay("*BasePriceEnabled")]
-    public bool BasePriceEnabled { get; set; }
-
-    [LocalizedDisplay("*BasePriceMeasureUnit")]
-    public string BasePriceMeasureUnit { get; set; }
-
-    [LocalizedDisplay("*BasePriceAmount")]
-    public decimal? BasePriceAmount { get; set; }
-
-    [LocalizedDisplay("*BasePriceBaseAmount")]
-    public int? BasePriceBaseAmount { get; set; }
 
     [LocalizedDisplay("*QuantityUnit")]
     public int? QuantityUnitId { get; set; }
@@ -641,20 +616,6 @@ public partial class ProductModelValidator : SmartValidator<ProductModel>
                 // Associate item errors with the AllowedQuantities field.
                 .OverrideIndexer((_, _, _, _) => string.Empty)
                 .GreaterThan(0);
-        });
-
-        // validate PAnGV
-        When(x => x.BasePriceEnabled && x.IsTabLoaded("Price"), () =>
-        {
-            RuleFor(x => x.Price).NotEmpty();
-
-            RuleFor(x => x.BasePriceMeasureUnit).NotEmpty().WithMessage(T("Admin.Catalog.Products.Fields.BasePriceMeasureUnit.Required"));
-            RuleFor(x => x.BasePriceBaseAmount)
-                .NotEmpty().WithMessage(T("Admin.Catalog.Products.Fields.BasePriceBaseAmount.Required"))
-                .GreaterThan(0).WithMessage(T("Admin.Catalog.Products.Fields.BasePriceBaseAmount.Required"));
-            RuleFor(x => x.BasePriceAmount)
-                .NotEmpty().WithMessage(T("Admin.Catalog.Products.Fields.BasePriceAmount.Required"))
-                .GreaterThan(0).WithMessage(T("Admin.Catalog.Products.Fields.BasePriceAmount.Required"));
         });
 
         When(x => x.IsTabLoaded("Downloads"), () =>

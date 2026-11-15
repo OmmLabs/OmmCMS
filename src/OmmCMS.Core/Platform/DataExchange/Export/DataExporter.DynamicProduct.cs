@@ -1,6 +1,5 @@
 ﻿using System.Web;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Content.Media;
@@ -92,7 +91,7 @@ public partial class DataExporter
     /// Creates an expando object with the most important general properties of a product such as the name and description.
     /// This method is used for entities where products are to be exported as related data, e.g. order items.
     /// </summary>
-    private async Task<dynamic> ToDynamic(Product product, DataExporterContext ctx, string seName = null, Money? price = null)
+    private async Task<dynamic> ToDynamic(Product product, DataExporterContext ctx, string seName = null)
     {
         if (product == null)
         {
@@ -133,23 +132,6 @@ public partial class DataExporter
             result._ProductTemplateViewPath = ctx.ProductTemplates.ContainsKey(product.ProductTemplateId)
                 ? ctx.ProductTemplates[product.ProductTemplateId]
                 : string.Empty;
-
-            if (product.BasePriceHasValue && product.BasePriceAmount != 0)
-            {
-                if (price == null)
-                {
-                    var calculationOptions = _priceCalculationService.CreateDefaultOptions(false, null, null, ctx.ProductBatchContext);
-                    var productPrice = await _priceCalculationService.CalculatePriceAsync(new PriceCalculationContext(product, calculationOptions));
-
-                    price = productPrice.FinalPrice;
-                }
-
-                result._BasePriceInfo = _priceCalculationService.GetBasePriceInfo(product, price.Value, null, null, false, false);
-            }
-            else
-            {
-                result._BasePriceInfo = string.Empty;
-            }
 
             result.DeliveryTime = ctx.DeliveryTimes.TryGetValue(product.DeliveryTimeId ?? 0, out var deliveryTime)
                 ? ToDynamic(deliveryTime, ctx)
@@ -225,20 +207,13 @@ public partial class DataExporter
                 .ToDictionaryAsync(x => x.Id, x => x);
         }
 
-        // Price calculation.
-        var calculationOptions = combination != null ? ctx.AttributeCombinationPriceCalcOptions : ctx.PriceCalculationOptions;
-        var calculationContext = new PriceCalculationContext(product, calculationOptions);
-        calculationContext.AddSelectedAttributes(combination?.AttributeSelection, product.Id);
-        var price = await _priceCalculationService.CalculatePriceAsync(calculationContext);
-
-        dynamic dynObject = await ToDynamic(product, ctx, productContext.SeName, price.FinalPrice);
+        dynamic dynObject = await ToDynamic(product, ctx, productContext.SeName);
         dynObject._IsParent = isParent;
         dynObject._CategoryName = null;
         dynObject._CategoryPath = null;
         dynObject._AttributeCombinationValues = null;
         dynObject._AttributeCombinationId = 0;
-        dynObject._Price = price;
-        dynObject.Price = price.FinalPrice.Amount;
+        dynObject.Price = product.Price;
 
         if (combination != null)
         {

@@ -2,7 +2,6 @@
 using System.Net.Http;
 using Moq;
 using NUnit.Framework;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Configuration;

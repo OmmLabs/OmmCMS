@@ -55,10 +55,6 @@ public static partial class ProductExtensions
         if (combination.Height.HasValue)
             values.Add(nameof(Product.Height), combination.Height.Value);
 
-        if (combination.BasePriceAmount.HasValue)
-            values.Add(nameof(Product.BasePriceAmount), combination.BasePriceAmount);
-        if (combination.BasePriceBaseAmount.HasValue)
-            values.Add(nameof(Product.BasePriceBaseAmount), combination.BasePriceBaseAmount);
     }
 
     /// <summary>

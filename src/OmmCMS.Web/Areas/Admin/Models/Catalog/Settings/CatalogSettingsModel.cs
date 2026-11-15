@@ -286,7 +286,6 @@ public class CatalogSettingsModel
 
     #endregion
 
-    public PriceSettingsModel PriceSettings { get; set; } = new();
 }
 
 public partial class CatalogSettingsValidator : SettingModelValidator<CatalogSettingsModel, CatalogSettings>

@@ -3,7 +3,6 @@ using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common;

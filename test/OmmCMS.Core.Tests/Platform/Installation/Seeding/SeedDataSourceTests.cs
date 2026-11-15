@@ -226,15 +226,15 @@ public class SeedDataSourceTests
     [Test]
     public void LoadObject_applies_sample_overlay_only_with_sample_data()
     {
-        WriteFile("base/core/settings.json", """{ "PriceSettings": { "DisplayTextForZeroPrices": "true" } }""");
-        WriteFile("base/samples/core/settings.json", """{ "PriceSettings": { "PriceDisplayType": "PreSelectedPrice" } }""");
+        WriteFile("base/core/settings.json", """{ "CatalogSettings": { "ShowProductSku": "true" } }""");
+        WriteFile("base/samples/core/settings.json", """{ "CatalogSettings": { "LabelAsNewForMaxDays": "30" } }""");
 
         var withSamples = new SeedDataSource(new LocalFileSystem(_root), "de-DE") { IncludeSamples = true }.LoadObject("core/settings.json");
-        Assert.That((string)withSamples["PriceSettings"]["PriceDisplayType"], Is.EqualTo("PreSelectedPrice"));
-        Assert.That((string)withSamples["PriceSettings"]["DisplayTextForZeroPrices"], Is.EqualTo("true"));
+        Assert.That((string)withSamples["CatalogSettings"]["LabelAsNewForMaxDays"], Is.EqualTo("30"));
+        Assert.That((string)withSamples["CatalogSettings"]["ShowProductSku"], Is.EqualTo("true"));
 
         var withoutSamples = CreateSource().LoadObject("core/settings.json");
-        Assert.That(withoutSamples["PriceSettings"]["PriceDisplayType"], Is.Null);
+        Assert.That(withoutSamples["CatalogSettings"]["LabelAsNewForMaxDays"], Is.Null);
     }
 
     [Test]
