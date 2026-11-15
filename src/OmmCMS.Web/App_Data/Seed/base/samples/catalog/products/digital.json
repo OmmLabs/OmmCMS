@@ -13,7 +13,6 @@
     "unlimitedDownloads": true,
     "downloadActivationType": "WhenOrderIsPaid",
     "isEsd": true,
-    "isShippingEnabled": false,
 
     "categories": [ "E-Books" ],
     "manufacturers": [ "pixelmoor" ],
@@ -41,7 +40,6 @@
     "hasUserAgreement": true,
     "userAgreementText": "@file",
     "isEsd": true,
-    "isShippingEnabled": false,
 
     "createdOnUtc": "@now-5d",
     "categories": [ "Software" ],

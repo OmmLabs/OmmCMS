@@ -91,16 +91,6 @@ public class ExportProjection
     public string ShippingTime { get; set; }
 
     /// <summary>
-    /// Fallback for shipping costs.
-    /// </summary>
-    public decimal? ShippingCosts { get; set; }
-
-    /// <summary>
-    /// Free shipping threshold.
-    /// </summary>
-    public decimal? FreeShippingThreshold { get; set; }
-
-    /// <summary>
     /// A value indicating whether to export attribute combinations as products.
     /// </summary>
     public bool AttributeCombinationAsProduct { get; set; }

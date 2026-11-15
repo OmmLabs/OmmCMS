@@ -1,7 +1,6 @@
 {
   "productType": "SimpleProduct",
   "productTemplate": "Product",
-  "isShippingEnabled": true,
 
 
   "published": true,

@@ -116,11 +116,6 @@ public enum ExportFeatures
     OffersShippingTimeFallback = 1 << 8,
 
     /// <summary>
-    /// A value indicating whether to offer option to enter a shipping costs fallback and a free shipping threshold.
-    /// </summary>
-    OffersShippingCostsFallback = 1 << 9,
-
-    /// <summary>
     /// A value indicating whether to not automatically send a completion email.
     /// </summary>
     CanOmitCompletionMail = 1 << 10,

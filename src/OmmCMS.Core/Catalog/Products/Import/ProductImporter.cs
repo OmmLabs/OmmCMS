@@ -340,7 +340,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.MetaTitle);
                 row.SetProperty(context.Result, (x) => x.Published, true);
                 row.SetProperty(context.Result, (x) => x.WithdrawalPeriodDays);
-                row.SetProperty(context.Result, (x) => x.AllowWithdrawalBeforeShipping);
                 row.SetProperty(context.Result, (x) => x.Sku);
                 row.SetProperty(context.Result, (x) => x.ManufacturerPartNumber);
                 row.SetProperty(context.Result, (x) => x.Gtin);
@@ -354,9 +353,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.SampleDownloadId, null, ImportUtility.ZeroToNull);    // TODO: global scope
                 row.SetProperty(context.Result, (x) => x.HasUserAgreement);
                 row.SetProperty(context.Result, (x) => x.UserAgreementText);
-                row.SetProperty(context.Result, (x) => x.IsShippingEnabled, true);
-                row.SetProperty(context.Result, (x) => x.IsFreeShipping);
-                row.SetProperty(context.Result, (x) => x.AdditionalShippingCharge);
                 row.SetProperty(context.Result, (x) => x.IsEsd);
                 row.SetProperty(context.Result, (x) => x.IsTaxExempt);
                 row.SetProperty(context.Result, (x) => x.TaxCategoryId, 1);    // TODO: global scope
@@ -371,7 +367,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.DeliveryTimeId);      // TODO: global scope
                 row.SetProperty(context.Result, (x) => x.QuantityUnitId);      // TODO: global scope
                 row.SetProperty(context.Result, (x) => x.BundleTitleText);
-                row.SetProperty(context.Result, (x) => x.BundlePerItemShipping);
                 row.SetProperty(context.Result, (x) => x.BundlePerItemPricing);
                 row.SetProperty(context.Result, (x) => x.BundlePerItemShoppingCart);
                 row.SetProperty(context.Result, (x) => x.DisplayAllImagesNumber);

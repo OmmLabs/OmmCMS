@@ -8,7 +8,6 @@
     "tags": [ "sustainable" ],
     "taxCategory": "tax-free",
     "price": 5.00,
-    "isShippingEnabled": false,
 
     "categories": [ "Vouchers" ],
     "pictures": [

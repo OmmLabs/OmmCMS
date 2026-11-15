@@ -361,22 +361,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     public string UserAgreementText { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the product is ship enabled.
-    /// </summary>
-    [Column("IsShipEnabled")]
-    public bool IsShippingEnabled { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether the product has free shipping.
-    /// </summary>
-    public bool IsFreeShipping { get; set; }
-
-    /// <summary>
-    /// Gets or sets the additional shipping charge.
-    /// </summary>
-    public decimal AdditionalShippingCharge { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether the product is marked as tax exempt.
     /// </summary>
     public bool IsTaxExempt { get; set; }
@@ -495,16 +479,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     public int? WithdrawalPeriodDays { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the product can be withdrawn before shipping,
-    /// even if it is otherwise not eligible for withdrawal.
-    /// </summary>
-    /// <remarks>
-    /// Only effective in accordance with the Withdrawal module if the effective withdrawal period is 0
-    /// and <see cref="IsShippingEnabled"/> is <c>true</c>.
-    /// </remarks>
-    public bool? AllowWithdrawalBeforeShipping { get; set; }
-
-    /// <summary>
     /// Gets or sets the duration of the product's durability guarantee in years.
     /// </summary>
     /// <remarks>Only effective in accordance with Warranty module.</remarks>
@@ -602,11 +576,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     [StringLength(400)]
     [LocalizedProperty]
     public string BundleTitleText { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether per item shipping of bundle items is enabled.
-    /// </summary>
-    public bool BundlePerItemShipping { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether per item pricing of bundle items is enabled.

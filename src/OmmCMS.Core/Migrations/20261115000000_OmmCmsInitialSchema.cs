@@ -123,24 +123,6 @@ internal sealed class OmmCmsInitialSchema : Migration, ILocaleResourcesProvider
 
         builder.AddOrUpdate("Common.CompletedOn", "Completed on", "Abgeschlossen am");
 
-        builder.AddOrUpdate("Admin.Catalog.Products.Fields.AllowWithdrawalBeforeShipping",
-            "Allow withdrawal before shipping",
-            "Widerruf vor Versand erlauben",
-            "Specifies whether this product can still be withdrawn before it has been shipped if it is otherwise excluded from withdrawal (withdrawal period 0)."
-            + " This setting applies only to items eligible for shipping.",
-            "Legt fest, ob dieser Artikel noch widerrufen werden kann, bevor er versendet wurde, obwohl er ansonsten vom Widerruf ausgeschlossen ist (Widerrufsfrist 0)."
-            + " Diese Einstellung gilt ausschließlich für versandfähige Artikel.");
-
-        builder.AddOrUpdate("Admin.Catalog.Categories.Fields.AllowWithdrawalBeforeShipping",
-            "Allow withdrawal before shipping",
-            "Widerruf vor Versand erlauben",
-            "Specifies whether products in this category can still be withdrawn before they have been shipped if they are otherwise excluded from withdrawal (withdrawal period 0)."
-            + " A product setting takes precedence. For multiple categories, \"No\" takes precedence over \"Yes\"."
-            + " This setting applies only to items eligible for shipping.",
-            "Legt fest, ob Artikel dieser Warengruppe noch widerrufen werden können, bevor sie versendet wurden, obwohl sie ansonsten vom Widerruf ausgeschlossen sind (Widerrufsfrist 0)."
-            + " Eine Einstellung am Artikel hat Vorrang. Bei mehreren Warengruppen gilt \"Nein\" vor \"Ja\"."
-            + " Diese Einstellung gilt ausschließlich für versandfähige Artikel.");
-
         builder.AddOrUpdate("Admin.Orders.Products.WithdrawalWaiver",
             "Withdrawal waiver",
             "Widerrufsverzicht",

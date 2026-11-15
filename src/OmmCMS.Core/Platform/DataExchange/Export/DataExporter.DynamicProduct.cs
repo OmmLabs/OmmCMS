@@ -498,14 +498,6 @@ public partial class DataExporter
             dynObject._ShippingTime = deliveryTime != null ? (string)deliveryTime.Name : ctx.Projection.ShippingTime;
         }
 
-        if (ctx.Supports(ExportFeatures.OffersShippingCostsFallback))
-        {
-            dynObject._FreeShippingThreshold = ctx.Projection.FreeShippingThreshold;
-
-            dynObject._ShippingCosts = product.IsFreeShipping || (ctx.Projection.FreeShippingThreshold.HasValue && (decimal)dynObject.Price >= ctx.Projection.FreeShippingThreshold.Value)
-                ? decimal.Zero
-                : ctx.Projection.ShippingCosts;
-        }
     }
 
     /// <summary>

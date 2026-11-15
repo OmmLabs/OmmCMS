@@ -227,7 +227,6 @@
     "taxCategory": "general",
     "price": 0.25,
     "visibility": "ProductPage",
-    "isShippingEnabled": false,
 
     "pictures": [
       { "file": "product/fd-1009.jpg", "name": "bottle-deposit" }

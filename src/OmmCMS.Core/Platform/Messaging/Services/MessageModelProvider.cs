@@ -512,7 +512,6 @@ public partial class MessageModelProvider : IMessageModelProvider
 
         var quantityUnit = await _db.QuantityUnits.FindByIdAsync(part.QuantityUnitId ?? 0, false);
         var deliveryTime = await _db.DeliveryTimes.FindByIdAsync(part.DeliveryTimeId ?? 0, false);
-        var additionalShippingCharge = currencyService.ConvertToWorkingCurrency(part.AdditionalShippingCharge).WithSymbol(false);
 
         var slug = await part.GetActiveSlugAsync(messageContext.Language.Id);
         var productUrl = await productUrlHelper.GetProductPathAsync(part.Id, slug, attrSelection);
@@ -526,7 +525,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             { "Sku", catalogSettings.ShowProductSku ? part.Sku : null },
             { "Name", name },
             { "Description", part.GetLocalized(x => x.ShortDescription, messageContext.Language).Value.NullEmpty() },
-            { "AdditionalShippingCharge", additionalShippingCharge },
             { "Url", url },
             { "Thumbnail", await CreateModelPartAsync(file, messageContext, url, mediaSettings.MessageProductThumbPictureSize, new Size(50, 50), name) },
             { "ThumbnailLg", await CreateModelPartAsync (file, messageContext, url, mediaSettings.ProductThumbPictureSize, new Size(120, 120), name) },
@@ -534,7 +532,7 @@ public partial class MessageModelProvider : IMessageModelProvider
             { "QtyUnit", null }
         };
 
-        if (part.IsShippingEnabled && catalogSettings.DeliveryTimesInProductDetail != DeliveryTimesPresentation.None)
+        if (catalogSettings.DeliveryTimesInProductDetail != DeliveryTimesPresentation.None)
         {
             if (deliveryTime is DeliveryTime dt)
             {

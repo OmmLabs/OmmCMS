@@ -407,20 +407,6 @@ public partial class ProductRuleProvider : RuleProviderBase, IProductRuleProvide
                 RuleType = RuleType.Boolean,
                 Operators = [RuleOperator.IsEqualTo]
             },
-            new SearchFilterDescriptor<bool>((ctx, x) => ctx.Query.ShipEnabledOnly(x))
-            {
-                Name = "ShipEnabled",
-                DisplayName = T("Admin.Catalog.Products.Fields.IsShipEnabled"),
-                RuleType = RuleType.Boolean,
-                Operators = [RuleOperator.IsEqualTo]
-            },
-            new SearchFilterDescriptor<bool>((ctx, x) => ctx.Query.FreeShippingOnly(x))
-            {
-                Name = "FreeShipping",
-                DisplayName = T("Admin.Catalog.Products.Fields.IsFreeShipping"),
-                RuleType = RuleType.Boolean,
-                Operators = [RuleOperator.IsEqualTo]
-            },
             new SearchFilterDescriptor<bool>((ctx, x) => ctx.Query.TaxExemptOnly(x))
             {
                 Name = "TaxExempt",

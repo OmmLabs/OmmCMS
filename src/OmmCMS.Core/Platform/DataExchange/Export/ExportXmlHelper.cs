@@ -396,7 +396,6 @@ public class ExportXmlHelper : Disposable
             _writer.WriteElementString(nameof(Category.Published), entity.Published.ToString());
             _writer.WriteElementString(nameof(Category.IgnoreInMenus), entity.IgnoreInMenus.ToString());
             _writer.WriteElementString(nameof(Category.WithdrawalPeriodDays), entity.WithdrawalPeriodDays?.ToString() ?? string.Empty);
-            _writer.WriteElementString(nameof(Category.AllowWithdrawalBeforeShipping), entity.AllowWithdrawalBeforeShipping?.ToString() ?? string.Empty);
             _writer.WriteElementString(nameof(Category.Deleted), entity.Deleted.ToString());
             _writer.WriteElementString(nameof(Category.DisplayOrder), entity.DisplayOrder.ToString());
             _writer.WriteElementString(nameof(Category.CreatedOnUtc), entity.CreatedOnUtc.ToString(_culture));
@@ -506,7 +505,6 @@ public class ExportXmlHelper : Disposable
                 _writer.WriteStartElement("CustomerRole");
                 _writer.WriteElementString(nameof(CustomerRole.Id), entityRole.Id.ToString());
                 _writer.WriteElementString(nameof(CustomerRole.Name), (string)role.Name);
-                _writer.WriteElementString(nameof(CustomerRole.FreeShipping), entityRole.FreeShipping.ToString());
                 _writer.WriteElementString(nameof(CustomerRole.TaxExempt), entityRole.TaxExempt.ToString());
                 _writer.WriteElementString(nameof(CustomerRole.TaxDisplayType), entityRole.TaxDisplayType?.ToString() ?? string.Empty);
                 _writer.WriteElementString(nameof(CustomerRole.Active), entityRole.Active.ToString());
@@ -586,9 +584,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.SampleDownloadId), entity.SampleDownloadId?.ToString() ?? string.Empty);
         _writer.WriteElementString(nameof(Product.HasUserAgreement), entity.HasUserAgreement.ToString());
         _writer.WriteElementString(nameof(Product.UserAgreementText), entity.UserAgreementText);
-        _writer.WriteElementString(nameof(Product.IsShippingEnabled), entity.IsShippingEnabled.ToString());
-        _writer.WriteElementString(nameof(Product.IsFreeShipping), entity.IsFreeShipping.ToString());
-        _writer.WriteElementString(nameof(Product.AdditionalShippingCharge), entity.AdditionalShippingCharge.ToString(_culture));
         _writer.WriteElementString(nameof(Product.IsTaxExempt), entity.IsTaxExempt.ToString());
         _writer.WriteElementString(nameof(Product.TaxCategoryId), entity.TaxCategoryId.ToString());
         // INFO: Export the entered price. Not "(decimal)product.Price" because it is the calculated price.
@@ -606,11 +601,9 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.Condition), ((int)entity.Condition).ToString());
         _writer.WriteElementString(nameof(Product.DisplayOrder), entity.DisplayOrder.ToString());
         _writer.WriteElementString(nameof(Product.WithdrawalPeriodDays), entity.WithdrawalPeriodDays?.ToString() ?? string.Empty);
-        _writer.WriteElementString(nameof(Product.AllowWithdrawalBeforeShipping), entity.AllowWithdrawalBeforeShipping?.ToString() ?? string.Empty);
         _writer.WriteElementString(nameof(Product.IsSystemProduct), entity.IsSystemProduct.ToString());
         _writer.WriteElementString(nameof(Product.BundleTitleText), entity.BundleTitleText);
         _writer.WriteElementString(nameof(Product.BundlePerItemPricing), entity.BundlePerItemPricing.ToString());
-        _writer.WriteElementString(nameof(Product.BundlePerItemShipping), entity.BundlePerItemShipping.ToString());
         _writer.WriteElementString(nameof(Product.BundlePerItemShoppingCart), entity.BundlePerItemShoppingCart.ToString());
         _writer.WriteElementString(nameof(Product.LowestAttributeCombinationPrice), lowestAttributeCombinationPrice?.ToString(_culture) ?? string.Empty);
         _writer.WriteElementString(nameof(Product.AttributeCombinationRequired), entity.AttributeCombinationRequired.ToString());

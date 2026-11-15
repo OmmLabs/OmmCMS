@@ -469,7 +469,6 @@ public partial class ImportProfileService : IImportProfileService
         ["BirthDate"] = "Admin.Customers.Customers.Fields.DateOfBirth",
         ["Salutation"] = "Address.Fields.Salutation",
         ["VisibleIndividually"] = "Admin.Catalog.Products.Fields.Visibility",
-        ["IsShippingEnabled"] = "Admin.Catalog.Products.Fields.IsShipEnabled",
         ["MetaDescription"] = "Admin.Configuration.Seo.MetaDescription",
         ["MetaKeywords"] = "Admin.Configuration.Seo.MetaKeywords",
         ["MetaTitle"] = "Admin.Configuration.Seo.MetaTitle",

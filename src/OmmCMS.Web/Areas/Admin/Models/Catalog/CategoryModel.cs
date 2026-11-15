@@ -100,9 +100,6 @@ public class CategoryModel : TabbableModel, ILocalizedModel<CategoryLocalizedMod
     [LocalizedDisplay("*WithdrawalPeriodDays")]
     public int? WithdrawalPeriodDays { get; set; }
 
-    [LocalizedDisplay("*AllowWithdrawalBeforeShipping")]
-    public bool? AllowWithdrawalBeforeShipping { get; set; }
-
     [LocalizedDisplay("*Deleted")]
     public bool Deleted { get; set; }
 

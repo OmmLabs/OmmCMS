@@ -116,15 +116,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
     [UIHint("Html")]
     public string AddChangelog { get; set; }
 
-    [LocalizedDisplay("*IsShipEnabled")]
-    public bool IsShippingEnabled { get; set; }
-
-    [LocalizedDisplay("*IsFreeShipping")]
-    public bool IsFreeShipping { get; set; }
-
-    [LocalizedDisplay("*AdditionalShippingCharge")]
-    public decimal? AdditionalShippingCharge { get; set; }
-
     [LocalizedDisplay("*IsEsd")]
     public bool IsEsd { get; set; }
 
@@ -148,9 +139,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
 
     [LocalizedDisplay("*BundlePerItemPricing")]
     public bool BundlePerItemPricing { get; set; }
-
-    [LocalizedDisplay("*BundlePerItemShipping")]
-    public bool BundlePerItemShipping { get; set; }
 
     [LocalizedDisplay("*BundlePerItemShoppingCart")]
     public bool BundlePerItemShoppingCart { get; set; }
@@ -201,9 +189,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
 
     [LocalizedDisplay("*WithdrawalPeriodDays")]
     public int? WithdrawalPeriodDays { get; set; }
-
-    [LocalizedDisplay("*AllowWithdrawalBeforeShipping")]
-    public bool? AllowWithdrawalBeforeShipping { get; set; }
 
     public string ProductSelectCheckboxClass { get; set; }
     public bool IsSystemProduct { get; set; }

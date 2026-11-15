@@ -50,12 +50,6 @@ public class ExportProjectionModel
     [LocalizedDisplay("*ShippingTime")]
     public string ShippingTime { get; set; }
 
-    [LocalizedDisplay("*ShippingCosts")]
-    public decimal? ShippingCosts { get; set; }
-
-    [LocalizedDisplay("*FreeShippingThreshold")]
-    public decimal? FreeShippingThreshold { get; set; }
-
     [LocalizedDisplay("*AttributeCombinationAsProduct")]
     public bool AttributeCombinationAsProduct { get; set; }
 
