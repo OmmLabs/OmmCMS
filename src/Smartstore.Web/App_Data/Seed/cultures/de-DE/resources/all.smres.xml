@@ -4637,7 +4637,7 @@
 		<Value>Verfügbare Sprachen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Languages.AvailableLanguages.Note">
-		<Value>Klicken Sie auf &lt;b class="fwm"&gt;Download&lt;/b&gt;, um eine neue Sprache mit allen lokalisierten Ressourcen zu installieren. Auf &lt;a class="fwm" href="https://translate.smartstore.com/" target="_blank"&gt;translate.smartstore.com&lt;/a&gt; finden Sie weitere Details zu verfügbaren Ressourcen.</Value>
+		<Value>Online-Sprachdownloads benötigen einen konfigurierten OmmCMS-Übersetzungsdienst. Alternativ können Sie lokale Ressourcendateien importieren.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Languages.CheckAvailableLanguagesFailed">
 		<Value>Bei der Suche nach weiteren verfügbaren Sprachen trat ein Fehler auf.</Value>
@@ -4739,7 +4739,7 @@
 		<Value>Lokalisierte Ressourcen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Languages.NoAvailableLanguagesFound">
-		<Value>Es wurden keine weiteren verfügbaren Sprachen für Version {0} gefunden. Auf &lt;a href="https://translate.smartstore.com/" target="_blank"&gt;translate.smartstore.com&lt;/a&gt; finden Sie weitere Details zu verfügbaren Ressourcen.</Value>
+		<Value>Für Version {0} sind keine weiteren Sprachen über den konfigurierten Übersetzungsdienst verfügbar.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Languages.NumberOfTranslatedResources">
 		<Value>{0} von {1}</Value>
@@ -8086,7 +8086,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Legt zusätzlich zu durchsuchende Felder fest. Der Produktname wird grundsätzlich immer durchsucht.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.SearchFieldsNote">
-		<Value>In der Standardsuche können die Felder Name, SKU und Kurzbeschreibung durchsucht werden. Für weitere Felder ist ein Such-Plugin wie etwa das MegaSearch-Plugin aus der &lt;a href='https://smartstore.com/en/editions-prices' target='_blank'&gt;Premium Edition&lt;/a&gt; notwendig.</Value>
+		<Value>Weitere Suchfelder erfordern eine geeignete Sucherweiterung.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.SearchMode">
 		<Value>Suchmodus</Value>
@@ -11056,7 +11056,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Der Systemname des Exportprofils.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.SystemProfileNote">
-		<Value>Die folgende Liste enthält Systemprofile, die von Plugins wie bspw. dem &lt;a href='http://community.smartstore.com/index.php?/files/file/85-smartstorenet-common-export-providers/' target='_blank'&gt;Datenexporte Plugin&lt;/a&gt; bereitgestellt werden. Sie können Systemprofile nach Belieben anpassen, aber keine Neuen erstellen. Für diese Profile stehen außerdem zusätzliche Aktions-Buttons zur Verfügung. Sie finden diese über den entsprechenden Listen, wie z.B. der Produkt- oder Auftragsliste.</Value>
+		<Value>Systemprofile werden von installierten Erweiterungen bereitgestellt. Sie können sie anpassen, aber keine neuen Systemprofile erstellen.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.SystemProfilesTitle">
 		<Value>Systemprofile</Value>

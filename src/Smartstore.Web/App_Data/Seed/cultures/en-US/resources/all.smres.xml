@@ -4760,7 +4760,7 @@
 		<Value>Available Languages</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Languages.AvailableLanguages.Note">
-		<Value>Click &lt;b class="fwm"&gt;Download&lt;/b&gt; to install a new language including all localized resources. On &lt;a class="fwm" href="https://translate.smartstore.com/" target="_blank"&gt;translate.smartstore.com&lt;/a&gt; you will find more details about available resources.</Value>
+		<Value>Online language downloads require a configured OmmCMS translation service. You can import local resource files instead.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Languages.CheckAvailableLanguagesFailed">
 		<Value>An error occurred while checking for other available languages.</Value>
@@ -4865,7 +4865,7 @@
 		<Value>Localization</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Languages.NoAvailableLanguagesFound">
-		<Value>There were no other available languages found for version {0}. On &lt;a href="https://translate.smartstore.com/" target="_blank"&gt;translate.smartstore.com&lt;/a&gt; you will find more details about available resources.</Value>
+		<Value>No additional languages are available from the configured translation service for version {0}.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Languages.NumberOfTranslatedResources">
 		<Value>{0} of {1}</Value>
@@ -8252,7 +8252,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Specifies additional search fields. The product name is always searched.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.SearchFieldsNote">
-		<Value>The Name, SKU and Short Description fields can be searched in the standard search. Other fields require a search plugin such as the MegaSearch plugin from &lt;a href='https://smartstore.com/en/editions-prices' target='_blank'&gt;Premium Edition&lt;/a&gt;.</Value>
+		<Value>Additional search fields require a suitable search extension.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.SearchMode">
 		<Value>Search mode</Value>
@@ -9083,13 +9083,13 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Desktop store theme</Value>
 	</LocaleResource>
 	<LocaleResource Name="admin.configuration.themes.option.defaultdesktoptheme.hint">
-		<Value>The public store theme for desktops. You can download themes from the extensions page at www.SmartStore.com</Value>
+		<Value>The public website theme for desktops.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Themes.Option.DefaultMobileTheme">
 		<Value>Mobile store theme</Value>
 	</LocaleResource>
 	<LocaleResource Name="admin.configuration.themes.option.defaultmobiletheme.hint">
-		<Value>The public store theme for mobile devices. You can download themes from the extensions page at www.SmartStore.com .</Value>
+		<Value>The public website theme for mobile devices.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Themes.Option.MobileDevicesSupported">
 		<Value>Mobile devices supported</Value>
@@ -11294,7 +11294,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>The system name of the export profile.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.SystemProfileNote">
-		<Value>The following list contains system profiles, which are provided by plugins such as the &lt;a href='http://community.smartstore.com/index.php?/files/file/85-smartstorenet-common-export-providers/' target='_blank'&gt;Data Export Plugin&lt;/a&gt;. You can customize system profiles as desired, but cannot create new ones. These profiles also add additional action buttons. You will find these above data lists, such as the product or order list.</Value>
+		<Value>System profiles are supplied by installed extensions. You can customize them but cannot create new system profiles.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.SystemProfilesTitle">
 		<Value>System profiles</Value>
