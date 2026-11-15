@@ -91,7 +91,7 @@ public class IdentityController : PublicController
         var model = new LoginModel
         {
             CustomerLoginType = _customerSettings.CustomerLoginType,
-            CheckoutAsGuest = checkoutAsGuest.GetValueOrDefault(),
+            CheckoutAsGuest = !OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration) && checkoutAsGuest.GetValueOrDefault(),
         };
 
         ViewBag.ReturnUrl = Url.IsLocalUrl(returnUrl) ? returnUrl : Url.Content("~/");
@@ -139,7 +139,10 @@ public class IdentityController : PublicController
                 {
                     await Services.EventPublisher.PublishAsync(new CustomerSignedInEvent { Customer = customer });
 
-                    await _shoppingCartService.MigrateCartAsync(Services.WorkContext.CurrentCustomer, customer);
+                    if (!OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration))
+                    {
+                        await _shoppingCartService.MigrateCartAsync(Services.WorkContext.CurrentCustomer, customer);
+                    }
 
                     Services.ActivityLogger.LogActivity(KnownActivityLogTypes.PublicStoreLogin, T("ActivityLog.PublicStore.Login"), customer);
 
@@ -763,7 +766,7 @@ public class IdentityController : PublicController
         customer.ClientIdent = null;
 
         // Add reward points for customer registration (if enabled).
-        if (_rewardPointsSettings.Enabled && _rewardPointsSettings.PointsForRegistration > 0)
+        if (!OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration) && _rewardPointsSettings.Enabled && _rewardPointsSettings.PointsForRegistration > 0)
         {
             customer.AddRewardPointsHistoryEntry(_rewardPointsSettings.PointsForRegistration, T("RewardPoints.Message.RegisteredAsCustomer"));
         }
@@ -1024,7 +1027,10 @@ public class IdentityController : PublicController
 
     private async Task FinalizeLoginAsync(Customer guest, Customer registered, bool logActivity)
     {
-        await _shoppingCartService.MigrateCartAsync(guest, registered);
+        if (!OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration))
+        {
+            await _shoppingCartService.MigrateCartAsync(guest, registered);
+        }
         await Services.EventPublisher.PublishAsync(new CustomerSignedInEvent { Customer = registered });
 
         if (logActivity)

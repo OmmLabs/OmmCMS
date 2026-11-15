@@ -36,6 +36,9 @@ public class MenuController : AdminController
 
     #region Utilities
 
+    private bool IsAllowedMenuProvider(string providerName)
+        => !OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration) || !string.Equals(providerName, "catalog", StringComparison.OrdinalIgnoreCase);
+
     private async Task PrepareModelAsync(MenuEntityModel model, MenuEntity entity)
     {
         var templateNames = new[] { "LinkList", "ListGroup", "Dropdown", "Navbar" };
@@ -54,6 +57,7 @@ public class MenuController : AdminController
             .ToList();
 
         model.AllProviders = _menuItemProviders.Values
+            .Where(x => IsAllowedMenuProvider(x.Metadata.ProviderName))
             .Select(x => new SelectListItem
             {
                 Text = T("Providers.MenuItems.FriendlyName." + x.Metadata.ProviderName),
@@ -369,6 +373,11 @@ public class MenuController : AdminController
     [Permission(Permissions.Cms.Menu.Update)]
     public async Task<IActionResult> CreateItem(string providerName, int menuId, int parentItemId)
     {
+        if (!IsAllowedMenuProvider(providerName))
+        {
+            return NotFound();
+        }
+
         var menu = await _db.Menus.FindByIdAsync(menuId);
         if (menu == null)
         {
@@ -394,6 +403,11 @@ public class MenuController : AdminController
     [Permission(Permissions.Cms.Menu.Update)]
     public async Task<IActionResult> CreateItem(MenuItemModel itemModel, bool continueEditing)
     {
+        if (!IsAllowedMenuProvider(itemModel.ProviderName))
+        {
+            return NotFound();
+        }
+
         if (ModelState.IsValid)
         {
             itemModel.ParentItemId ??= 0;
@@ -452,6 +466,11 @@ public class MenuController : AdminController
     [Permission(Permissions.Cms.Menu.Update)]
     public async Task<IActionResult> EditItem(MenuItemModel itemModel, bool continueEditing)
     {
+        if (!IsAllowedMenuProvider(itemModel.ProviderName))
+        {
+            return NotFound();
+        }
+
         var item = await _db.MenuItems.FindByIdAsync(itemModel.Id);
         if (item == null)
         {

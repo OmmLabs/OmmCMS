@@ -6,7 +6,7 @@ An open-source, ASP.NET Core content management system in development by [OmmLab
 
 ## What the CMS profile provides
 
-- Website pages (topics), blog, news, menus, media library and SEO tools.
+- Website pages and articles (using Topics), menus, media uploads and SEO tools. A dedicated blog/news publishing system is planned.
 - Account authentication, roles and permissions, localization, and theme infrastructure.
 - Content-focused public layout and administration navigation.
 - A starter website with Home, About and Contact pages; no sample shop catalog.
@@ -19,7 +19,7 @@ Prerequisites: .NET 10 SDK, a supported database (SQLite for local evaluation, S
 ```bash
 git clone https://github.com/OmmLabs/OmmCMS.git
 cd OmmCMS
-git switch cms-installation
+git switch cms-editorial-workflows
 dotnet restore Smartstore.sln
 dotnet build Smartstore.sln -c Release --no-restore
 cd src/Smartstore.Web
@@ -41,7 +41,7 @@ Do not use an existing commerce database for this preview. This is not a databas
 dotnet test Smartstore.sln -c Release
 ```
 
-CI also defines a disposable SQLite fresh-install smoke test for the CMS installation branch. See [Phase 4](docs/ommcms/PHASE4_INSTALLATION.md) for its scope and current limitations.
+CI defines a disposable SQLite fresh-install smoke test and authenticated editorial workflow checks. See [Phase 4](docs/ommcms/PHASE4_INSTALLATION.md) and [Phase 5](docs/ommcms/PHASE5_EDITORIAL_WORKFLOWS.md) for scope and limitations.
 
 ## Development roadmap
 
@@ -51,7 +51,8 @@ CI also defines a disposable SQLite fresh-install smoke test for the CMS install
 | 2 | [CMS administration navigation](docs/ommcms/PHASE2_ADMIN_NAVIGATION.md) |
 | 3 | [Commerce isolation](docs/ommcms/PHASE3_COMMERCE_ISOLATION.md) |
 | 4 | [CMS installation and runtime cleanup](docs/ommcms/PHASE4_INSTALLATION.md) |
-| Next | Validate CMS workflows, then remove commerce service and schema dependencies in small, tested steps. |
+| 5 | [Authenticated CMS editorial workflows](docs/ommcms/PHASE5_EDITORIAL_WORKFLOWS.md) |
+| Next | Extract commerce service and schema dependencies; build dedicated article taxonomy and editorial tools. |
 
 Source and project names retain their Smartstore names until the dependency extraction is complete.
 
