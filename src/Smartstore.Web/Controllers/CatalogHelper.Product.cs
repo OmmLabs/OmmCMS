@@ -163,7 +163,7 @@ public partial class CatalogHelper
                 PictureSize = _mediaSettings.ProductDetailsPictureSize,
                 HotlineTelephoneNumber = _contactDataSettings.HotlineTelephoneNumber.NullEmpty(),
                 CanonicalUrl = _seoSettings.CanonicalUrlsEnabled ? _urlHelper.RouteUrl("Product", new { seName }, _httpRequest.Scheme) : null,
-                UpdateUrl = _urlHelper.Action(nameof(ProductController.UpdateProductDetails), "Product", new
+                UpdateUrl = _urlHelper.Action("UpdateProductDetails", "Product", new
                 {
                     itemType,
                     productId = product.Id,

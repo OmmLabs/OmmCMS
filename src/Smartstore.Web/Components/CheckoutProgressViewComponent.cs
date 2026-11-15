@@ -20,7 +20,7 @@ public class CheckoutProgressViewComponent(ICheckoutFactory checkoutFactory) : S
 
     public IViewComponentResult Invoke(string action, string controller = "Checkout", string area = null)
     {
-        var isCartPage = action.EqualsNoCase(nameof(ShoppingCartController.Cart)) && controller.EqualsNoCase("ShoppingCart");
+        var isCartPage = action.EqualsNoCase("Cart") && controller.EqualsNoCase("ShoppingCart");
         var steps = _checkoutFactory.GetCheckoutSteps();
         var currentStep = _checkoutFactory.GetCheckoutStep(action, controller, area);
         var currentMetadata = currentStep?.Handler?.Metadata;
