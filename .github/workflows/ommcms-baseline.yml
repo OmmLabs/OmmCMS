@@ -5,6 +5,7 @@ on:
     branches:
       - cms-baseline
       - cms-shell
+      - cms-admin-navigation
   workflow_dispatch:
 
 permissions:
