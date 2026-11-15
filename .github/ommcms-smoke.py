@@ -215,7 +215,7 @@ def editorial_workflows(password):
     media_url = urllib.parse.urljoin(base + "/", media["url"])
     assert urllib.parse.urlsplit(media_url).netloc == urllib.parse.urlsplit(base).netloc
     with anonymous.open(media_url, timeout=30) as response:
-        assert response.status == 200 and response.read().startswith(b"\\x89PNG"), "Uploaded image not publicly readable"
+        assert response.status == 200 and response.read().startswith(png[:8]), "Uploaded image not publicly readable"
     print("Authenticated media upload and public retrieval passed.")
 
     # Check actual theme settings and configuration UI, then persist a different bundled theme.
