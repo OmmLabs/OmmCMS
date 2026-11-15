@@ -25,49 +25,6 @@ public class AdminDashboardLayoutProvider : IDashboardLayoutProvider
             GridAutoRows = "auto",
             Widgets =
             [
-                new DashboardWidgetInstance("incomplete-orders", IncompleteOrdersDashboardWidget.SystemName)
-                {
-                    Order = 100,
-                    Positions =
-                    [
-                        At(DashboardBreakpoint.Xs, 0, 0, 12),
-                        At(DashboardBreakpoint.Lg, 0, 0, 10)
-                    ]
-                },
-                new DashboardWidgetInstance("orders", OrdersDashboardWidget.SystemName)
-                {
-                    Order = 200,
-                    Positions =
-                    [
-                        At(DashboardBreakpoint.Xs, 0, 1, 12),
-                        At(DashboardBreakpoint.Lg, 0, 1, 10),
-                        At(DashboardBreakpoint.Xxl, 0, 1, 7)
-                    ]
-                },
-                new DashboardWidgetInstance("bestsellers", BestsellersDashboardWidget.SystemName)
-                {
-                    Order = 300,
-                    Policy = new() { AllowConfigure = true },
-                    Positions =
-                    [
-                        At(DashboardBreakpoint.Xs, 0, 2, 12),
-                        At(DashboardBreakpoint.Md, 0, 2, 6),
-                        At(DashboardBreakpoint.Lg, 0, 2, 4),
-                        At(DashboardBreakpoint.Xxl, 7, 1, 3)
-                    ]
-                },
-                new DashboardWidgetInstance("top-customers", TopCustomersDashboardWidget.SystemName)
-                {
-                    Order = 400,
-                    Policy = new() { AllowConfigure = true },
-                    Positions =
-                    [
-                        At(DashboardBreakpoint.Xs, 0, 3, 12),
-                        At(DashboardBreakpoint.Md, 6, 2, 6),
-                        At(DashboardBreakpoint.Lg, 4, 2, 6),
-                        At(DashboardBreakpoint.Xxl, 0, 2, 3)
-                    ]
-                },
                 new DashboardWidgetInstance("registered-customers", RegisteredCustomersDashboardWidget.SystemName)
                 {
                     Order = 500,

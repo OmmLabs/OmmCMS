@@ -159,34 +159,4 @@ public static partial class OrderItemQueryExtensions
 
         return productIdsQuery2;
     }
-
-    /// <summary>
-    /// Applies a selection for bestsellers report.
-    /// </summary>
-    /// <param name="query">Order item query to select report from.</param>
-    /// <param name="sorting">Sorting setting to define Bestsellers report type.</param>
-    /// <returns>Query of bestsellers report.</returns>
-    public static IQueryable<BestsellersReportLine> SelectAsBestsellersReportLine(this IQueryable<OrderItem> query, ReportSorting sorting = ReportSorting.ByQuantityDesc)
-    {
-        Guard.NotNull(query);
-
-        var selector = query
-            .GroupBy(x => x.ProductId)
-            .Select(x => new BestsellersReportLine
-            {
-                ProductId = x.Key,
-                TotalAmount = x.Sum(x => x.PriceExclTax),
-                TotalQuantity = x.Sum(x => x.Quantity)
-            });
-
-        selector = sorting switch
-        {
-            ReportSorting.ByAmountAsc => selector.OrderBy(x => x.TotalAmount),
-            ReportSorting.ByAmountDesc => selector.OrderByDescending(x => x.TotalAmount),
-            ReportSorting.ByQuantityAsc => selector.OrderBy(x => x.TotalQuantity).ThenByDescending(x => x.TotalAmount),
-            _ => selector.OrderByDescending(x => x.TotalQuantity).ThenByDescending(x => x.TotalAmount),
-        };
-
-        return selector;
-    }
 }

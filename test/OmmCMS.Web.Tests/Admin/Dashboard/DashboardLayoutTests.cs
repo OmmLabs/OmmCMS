@@ -51,8 +51,101 @@ public sealed class DashboardLayoutTests
     [Test]
     public void Insertion_Uses_First_Fitting_Hole_At_Each_Breakpoint()
     {
-        var layout = new AdminDashboardLayoutProvider().GetDefaultLayout();
-        layout.Widgets.Remove(GetInstance(layout, TopCustomersDashboardWidget.SystemName));
+        var layout = new DashboardLayout("test")
+        {
+            Widgets =
+            [
+                new DashboardWidgetInstance("incomplete-orders", "IncompleteOrdersDashboardWidget")
+                {
+                    Order = 100,
+                    Positions =
+                    [
+                        At(DashboardBreakpoint.Xs, 0, 0, 12),
+                        At(DashboardBreakpoint.Lg, 0, 0, 10)
+                    ]
+                },
+                new DashboardWidgetInstance("orders", "OrdersDashboardWidget")
+                {
+                    Order = 200,
+                    Positions =
+                    [
+                        At(DashboardBreakpoint.Xs, 0, 1, 12),
+                        At(DashboardBreakpoint.Lg, 0, 1, 10),
+                        At(DashboardBreakpoint.Xxl, 0, 1, 7)
+                    ]
+                },
+                new DashboardWidgetInstance("bestsellers", "BestsellersDashboardWidget")
+                {
+                    Order = 300,
+                    Policy = new() { AllowConfigure = true },
+                    Positions =
+                    [
+                        At(DashboardBreakpoint.Xs, 0, 2, 12),
+                        At(DashboardBreakpoint.Md, 0, 2, 6),
+                        At(DashboardBreakpoint.Lg, 0, 2, 4),
+                        At(DashboardBreakpoint.Xxl, 7, 1, 3)
+                    ]
+                },
+                new DashboardWidgetInstance("top-customers", "TopCustomersDashboardWidget")
+                {
+                    Order = 400,
+                    Policy = new() { AllowConfigure = true },
+                    Positions =
+                    [
+                        At(DashboardBreakpoint.Xs, 0, 3, 12),
+                        At(DashboardBreakpoint.Md, 6, 2, 6),
+                        At(DashboardBreakpoint.Lg, 4, 2, 6),
+                        At(DashboardBreakpoint.Xxl, 0, 2, 3)
+                    ]
+                },
+                new DashboardWidgetInstance("registered-customers", "RegisteredCustomersDashboardWidget")
+                {
+                    Order = 500,
+                    Positions =
+                    [
+                        At(DashboardBreakpoint.Xs, 0, 4, 12),
+                        At(DashboardBreakpoint.Md, 0, 3, 12),
+                        At(DashboardBreakpoint.Lg, 0, 3, 10),
+                        At(DashboardBreakpoint.Xxl, 3, 2, 7)
+                    ]
+                },
+                new DashboardWidgetInstance("latest-orders", "LatestOrdersDashboardWidget")
+                {
+                    Order = 600,
+                    Policy = new() { AllowConfigure = true },
+                    Positions =
+                    [
+                        At(DashboardBreakpoint.Xs, 0, 5, 12),
+                        At(DashboardBreakpoint.Md, 0, 4, 12),
+                        At(DashboardBreakpoint.Lg, 0, 4, 10),
+                        At(DashboardBreakpoint.Xxl, 0, 3, 6)
+                    ]
+                },
+                new DashboardWidgetInstance("store-report", "StoreReportDashboardWidget")
+                {
+                    Order = 700,
+                    Positions =
+                    [
+                        At(DashboardBreakpoint.Xs, 0, 6, 12),
+                        At(DashboardBreakpoint.Md, 0, 5, 12),
+                        At(DashboardBreakpoint.Lg, 0, 5, 10),
+                        At(DashboardBreakpoint.Xxl, 6, 3, 4)
+                    ]
+                },
+                new DashboardWidgetInstance("news-feed", NewsFeedDashboardWidget.SystemName)
+                {
+                    Order = 800,
+                    Positions =
+                    [
+                        At(DashboardBreakpoint.Xs, 0, 7, 12),
+                        At(DashboardBreakpoint.Md, 0, 6, 12),
+                        At(DashboardBreakpoint.Lg, 10, 0, 2, 6),
+                        At(DashboardBreakpoint.Xxl, 10, 0, 2, 4)
+                    ]
+                }
+            ]
+        };
+        layout.Widgets.Remove(GetInstance(layout, "TopCustomersDashboardWidget"));
         var positions = DashboardEditorMapper.GetInsertionPositions(layout, new DashboardWidgetSize(6));
         Assert.Multiple(() =>
         {
@@ -65,6 +158,9 @@ public sealed class DashboardLayoutTests
             Assert.That(positions.Where(x => x.Breakpoint >= DashboardBreakpoint.Lg).All(x => x.Column + x.Size.ColumnSpan <= 10), Is.True);
         });
     }
+
+    private static DashboardWidgetPosition At(DashboardBreakpoint breakpoint, int column, int row, int columnSpan, int? rowSpan = 1)
+        => new() { Breakpoint = breakpoint, Column = column, Row = row, Size = new DashboardWidgetSize(columnSpan, rowSpan) };
 
     [TestCase(1, 0, 4)]
     [TestCase(2, 2, 0)]

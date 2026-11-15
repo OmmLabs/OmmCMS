@@ -241,57 +241,6 @@ public static class OrderQueryExtensions
     }
 
     /// <summary>
-    /// Selects <see cref="OrderDataPoint"/> from query.
-    /// </summary>
-    /// <param name="query">Order query from which to select.</param>
-    /// <returns><see cref="IQueryable"/> of <see cref="OrderDataPoint"/>.</returns>
-    public static IQueryable<OrderDataPoint> SelectAsOrderDataPoint(this IQueryable<Order> query)
-    {
-        Guard.NotNull(query);
-
-        return query.Select(x => new OrderDataPoint
-        {
-            CreatedOn = x.CreatedOnUtc,
-            OrderTotal = x.OrderTotal,
-            OrderStatusId = x.OrderStatusId,
-            PaymentStatusId = x.PaymentStatusId,
-            ShippingStatusId = x.ShippingStatusId
-        });
-    }
-
-    /// <summary>
-    /// Groups orders by <see cref="Order.CustomerId"/> and selects <see cref="TopCustomerReportLine"/> from <paramref name="query"/>.
-    /// </summary>
-    /// <param name="query">Order query.</param>
-    /// <param name="sorting"><see cref="ReportSorting"/> to apply.</param>
-    /// <returns><see cref="TopCustomerReportLine"/> query.</returns>
-    public static IQueryable<TopCustomerReportLine> SelectAsTopCustomerReportLine(this IQueryable<Order> query,
-        ReportSorting sorting = ReportSorting.ByQuantityDesc)
-    {
-        Guard.NotNull(query);
-
-        var groupedQuery =
-            from o in query
-            group o by o.CustomerId into grp
-            select new TopCustomerReportLine
-            {
-                CustomerId = grp.Key,
-                OrderTotal = grp.Sum(x => x.OrderTotal),
-                OrderCount = grp.Count()
-            };
-
-        groupedQuery = sorting switch
-        {
-            ReportSorting.ByAmountAsc => groupedQuery.OrderBy(x => x.OrderTotal),
-            ReportSorting.ByAmountDesc => groupedQuery.OrderByDescending(x => x.OrderTotal),
-            ReportSorting.ByQuantityAsc => groupedQuery.OrderBy(x => x.OrderCount).ThenByDescending(x => x.OrderTotal),
-            _ => groupedQuery.OrderByDescending(x => x.OrderCount).ThenByDescending(x => x.OrderTotal),
-        };
-
-        return groupedQuery;
-    }
-
-    /// <summary>
     /// Gets orders product costs async.
     /// </summary>
     /// <param name="query">Orders query.</param>
@@ -323,7 +272,7 @@ public static class OrderQueryExtensions
     /// Selects customer authorized orders from query.
     /// </summary>
     /// <param name="query">Order query from which to select.</param>
-    /// <returns><see cref="IQueryable"/> of <see cref="OrderDataPoint"/>.</returns>
+    /// <returns><see cref="IQueryable"/> of <see cref="Order"/>.</returns>
     public static IQueryable<Order> ApplyCustomerFilter(this IQueryable<Order> query, int[] authorizedStoreIds)
     {
         Guard.NotNull(query);
