@@ -1,7 +1,4 @@
 ﻿using OmmCMS.Collections;
-using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Content.Topics;
 using OmmCMS.Core.Data;
 using OmmCMS.Data.Hooks;
@@ -33,7 +30,7 @@ internal class ImageOffloaderHook : AsyncDbSaveHook<BaseEntity>
         }
 
         var t = entry.EntityType;
-        return t == typeof(Product) || t == typeof(Category) || t == typeof(Manufacturer) || t == typeof(Topic);
+        return t == typeof(Topic);
     }
 
     public override Task<HookResult> OnBeforeSaveAsync(IHookedEntity entry, CancellationToken cancelToken)
@@ -54,8 +51,7 @@ internal class ImageOffloaderHook : AsyncDbSaveHook<BaseEntity>
         }
         else if (entry.InitialState == EntityState.Modified)
         {
-            var entityType = entry.EntityType;
-            var isModified = entry.IsPropertyModified(GetDescriptionPropName(entityType));
+            var isModified = entry.IsPropertyModified(nameof(Topic.Body));
 
             if (isModified)
             {
@@ -88,7 +84,7 @@ internal class ImageOffloaderHook : AsyncDbSaveHook<BaseEntity>
             if (_toProcess.Contains(entry.Entity))
             {
                 // Get the property name of the entities long HTML description.
-                var propName = GetDescriptionPropName(entry.EntityType);
+                var propName = nameof(Topic.Body);
 
                 // Get the HTML
                 var entityProperty = entry.Entry.Property(propName);
@@ -130,31 +126,5 @@ internal class ImageOffloaderHook : AsyncDbSaveHook<BaseEntity>
         }
     }
 
-    private static string GetDescriptionPropName(Type entityType)
-    {
-        if (entityType == typeof(Product))
-        {
-            return nameof(Product.FullDescription);
-        }
-        else if (entityType == typeof(Topic))
-        {
-            return nameof(Topic.Body);
-        }
-        else
-        {
-            // Category or Manufacturer
-            return nameof(Category.Description);
-        }
-    }
-
-    private static string GetEntityTag(BaseEntity entity)
-    {
-        return entity switch
-        {
-            Product x => "p" + x.Id.ToStringInvariant(),
-            Category x => "c" + x.Id.ToStringInvariant(),
-            Manufacturer x => "m" + x.Id.ToStringInvariant(),
-            _ => "t" + entity.Id.ToStringInvariant()
-        };
-    }
+    private static string GetEntityTag(BaseEntity entity) => "t" + entity.Id.ToStringInvariant();
 }

@@ -13,8 +13,6 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Hosting;
 using OmmCMS.Admin.Models.Maintenance;
 using OmmCMS.ComponentModel;
-using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media;
@@ -61,7 +59,6 @@ public class MaintenanceController : AdminController
     private readonly Lazy<UpdateChecker> _updateChecker;
     private readonly MeasureSettings _measureSettings;
     private readonly IHostApplicationLifetime _appLifetime;
-    private readonly AsyncRunner _asyncRunner;
     private readonly IMediaService _mediaService;
 
     public MaintenanceController(
@@ -81,7 +78,6 @@ public class MaintenanceController : AdminController
         Lazy<UpdateChecker> updateChecker,
         MeasureSettings measureSettings,
         IHostApplicationLifetime appLifetime,
-        AsyncRunner asyncRunner,
         IMediaService mediaService)
     {
         _db = db;
@@ -100,7 +96,6 @@ public class MaintenanceController : AdminController
         _updateChecker = updateChecker;
         _measureSettings = measureSettings;
         _appLifetime = appLifetime;
-        _asyncRunner = asyncRunner;
         _mediaService = mediaService;
     }
 
@@ -319,7 +314,6 @@ public class MaintenanceController : AdminController
     [Permission(Permissions.System.Maintenance.Execute)]
     public async Task<IActionResult> OffloadEmbeddedImages(int take = 200)
     {
-        //var result = await ProductPictureHelper.OffloadEmbeddedImages(_db, _mediaService.Value, take);
         var result = await _imageOffloader.Value.BatchOffloadEmbeddedImagesAsync(take);
 
         var message = result.ToString();
@@ -349,45 +343,6 @@ public class MaintenanceController : AdminController
     {
         var numProcessed = await _mediaService.EnsureMetadataResolvedAsync(folderName);
         return Content($"{numProcessed} files have been processed.");
-    }
-
-    [MaintenanceAction]
-    [Permission(Permissions.System.Maintenance.Execute)]
-    public async Task<string> RebuildTreePaths()
-    {
-        var numRebuilt = await CategoryService.RebuidTreePathsAsync(_db, _asyncRunner.AppShutdownCancellationToken);
-        return T("Admin.System.Maintenance.TreePaths.PathCount", numRebuilt);
-    }
-
-    [MaintenanceAction]
-    [Permission(Permissions.System.Maintenance.Execute)]
-    public IActionResult CreateAttributeCombinationHashCodes(bool force = false)
-    {
-        _ = _asyncRunner.RunTask((scope, ct, state) => CreateAttributeCombinationHashCodesInternal((bool)state, scope, ct), force);
-
-        NotifyInfo(T("Admin.System.ScheduleTasks.RunNow.Progress"));
-
-        return RedirectToAction(nameof(Warnings));
-    }
-
-    private static async Task CreateAttributeCombinationHashCodesInternal(bool force, ILifetimeScope scope, CancellationToken cancelToken)
-    {
-        var db = scope.Resolve<SmartDbContext>();
-        var logger = scope.Resolve<ILogger>();
-
-        try
-        {
-            var migrator = new AttributesMigrator(db, logger);
-            _ = await migrator.CreateAttributeCombinationHashCodesAsync(force, cancelToken);
-        }
-        catch (Exception ex)
-        {
-            logger.Error(ex);
-        }
-        finally
-        {
-            scope.Resolve<IProductAttributeMaterializer>().ClearCachedAttributes();
-        }
     }
 
     #endregion
@@ -849,19 +804,6 @@ public class MaintenanceController : AdminController
         if (filePermissionsOk)
         {
             AddEntry(SystemWarningLevel.Pass, T("Admin.System.Warnings.FilePermission.OK"));
-        }
-
-        // Hash code of product attribute combinations
-        // ====================================
-        var missingHashCodes = await _db.ProductVariantAttributeCombinations.CountAsync(x => x.HashCode == 0);
-        if (missingHashCodes > 0)
-        {
-            var msg = T("Admin.System.Warnings.AttributeCombinationHashCodes.Missing", missingHashCodes.ToString("N0"), Url.Action(nameof(CreateAttributeCombinationHashCodes)));
-            AddEntry(SystemWarningLevel.Fail, msg);
-        }
-        else
-        {
-            AddEntry(SystemWarningLevel.Pass, T("Admin.System.Warnings.AttributeCombinationHashCodes.OK"));
         }
 
         return View(model);

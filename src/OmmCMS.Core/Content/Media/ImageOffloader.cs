@@ -16,9 +16,6 @@ public partial class ImageOffloader : IImageOffloder
 
     private enum TypeCase
     {
-        Product,
-        Category,
-        Brand,
         Topic
     }
 
@@ -95,21 +92,8 @@ public partial class ImageOffloader : IImageOffloder
                     saver = (id, html) => ApplyFilter(_db.Topics, id).ExecuteUpdate(x => x.SetProperty(p => p.Body, p => html));
                     entityTagBuilder = id => "t" + id.ToStringInvariant();
                     break;
-                case TypeCase.Category:
-                    loader = chunk => ApplyFilter(_db.Categories, chunk).Select(x => new EntityStub { Id = x.Id, Html = x.Description }).ToList();
-                    saver = (id, html) => ApplyFilter(_db.Categories, id).ExecuteUpdate(x => x.SetProperty(p => p.Description, p => html));
-                    entityTagBuilder = id => "c" + id.ToStringInvariant();
-                    break;
-                case TypeCase.Brand:
-                    loader = chunk => ApplyFilter(_db.Manufacturers, chunk).Select(x => new EntityStub { Id = x.Id, Html = x.Description }).ToList();
-                    saver = (id, html) => ApplyFilter(_db.Manufacturers, id).ExecuteUpdate(x => x.SetProperty(p => p.Description, p => html));
-                    entityTagBuilder = id => "m" + id.ToStringInvariant();
-                    break;
                 default:
-                    loader = chunk => ApplyFilter(_db.Products, chunk).Select(x => new EntityStub { Id = x.Id, Html = x.FullDescription }).ToList();
-                    saver = (id, html) => ApplyFilter(_db.Products, id).ExecuteUpdate(x => x.SetProperty(p => p.FullDescription, p => html));
-                    entityTagBuilder = id => "p" + id.ToStringInvariant();
-                    break;
+                    throw new InvalidOperationException("Unsupported content type for image offloading.");
             }
 
             foreach (var chunk in ids.Chunk(10))
@@ -214,39 +198,6 @@ public partial class ImageOffloader : IImageOffloder
         if (count > 0)
         {
             col = map[TypeCase.Topic];
-            col.AddRange(ids);
-            took += col.Count;
-        }
-
-        var q2 = _db.Categories.IgnoreQueryFilters().Where(x => x.Description.Contains(Base64Fragment)).OrderBy(x => x.Id).Select(x => x.Id);
-        count += await q2.CountAsync();
-        totalCount += count;
-        if (count > 0 && took < take)
-        {
-            ids = await q2.ToPagedList(0, take - took).LoadAsync();
-            col = map[TypeCase.Category];
-            col.AddRange(ids);
-            took += col.Count;
-        }
-
-        var q3 = _db.Manufacturers.IgnoreQueryFilters().Where(x => x.Description.Contains(Base64Fragment)).OrderBy(x => x.Id).Select(x => x.Id);
-        count += await q3.CountAsync();
-        totalCount += count;
-        if (count > 0 && took < take)
-        {
-            ids = await q3.ToPagedList(0, take - took).LoadAsync();
-            col = map[TypeCase.Brand];
-            col.AddRange(ids);
-            took += col.Count;
-        }
-
-        var q4 = _db.Products.IgnoreQueryFilters().Where(x => x.FullDescription.Contains(Base64Fragment)).OrderBy(x => x.Id).Select(x => x.Id);
-        count += await q4.CountAsync();
-        totalCount += count;
-        if (count > 0 && took < take)
-        {
-            ids = await q4.ToPagedList(0, take - took).LoadAsync();
-            col = map[TypeCase.Product];
             col.AddRange(ids);
             took += col.Count;
         }

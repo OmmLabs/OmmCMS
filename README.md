@@ -46,6 +46,8 @@ Phases 646–653: removed catalogue sitemap publishers, their SEO settings, admi
 
 Phases 654–662: removed product messaging models, thumbnail selection, template test models, product sharing and question dispatch, wishlist sharing and obsolete order notification templates. Customer identity, contact and newsletter messages are retained.
 
+Phases 663–670: detached automatic and batch embedded-image extraction from catalogue entities while retaining CMS topics; removed category tree and product attribute hash maintenance actions, warnings, and the unused attribute migration utility.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License
