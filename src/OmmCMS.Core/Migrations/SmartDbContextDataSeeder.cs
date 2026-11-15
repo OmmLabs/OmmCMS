@@ -247,12 +247,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
         builder.AddOrUpdate(prefix + "CheckListPrices", "Check when displaying list prices…", "Bei Listenpreisen prüfen…");
         builder.AddOrUpdate(prefix + "ValidateDiscountLimitationsInLists", "Discount usage limits", "Rabatt-Nutzungsgrenzen");
         builder.AddOrUpdate(prefix + "ValidateDiscountRulesInLists", "Cart rules for discounts", "Warenkorbregeln von Rabatten");
-        builder.AddOrUpdate(prefix + "ValidateDiscountGiftCardsInLists",
-            "Gift cards in the cart",
-            "Geschenkgutscheine im Warenkorb",
-            "Checks for gift card products in the cart. The current implementation only rejects discounts on the order total or subtotal when gift cards are present. Regular product list price calculation processes product, category and manufacturer discounts, so this check currently has no effect there. This does not refer to redeemed coupon codes.",
-            "Prüft auf Geschenkgutschein-Produkte im Warenkorb. Der vorhandene Code schließt dabei nur Rabatte auf die Bestell- oder Zwischensumme aus. Da die normale Produktlistenberechnung Produkt-, Warengruppen- und Markenrabatte verarbeitet, hat diese Prüfung dort derzeit keine Wirkung. Gemeint sind keine eingelösten Rabattcodes.");
-
         builder.AddOrUpdate(prefix + "IgnoreDiscounts",
             "Disable discounts",
             "Rabatte deaktivieren",
@@ -560,7 +554,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             prefix + "Fields.Width.Hint",
             prefix + "Fields.Height.Hint",
             prefix + "Groups.RequiredProducts",
-            prefix + "Groups.GiftCard",
             prefix + "Groups.Subscription",
             prefix + "Availability.From",
             prefix + "Availability.To");
@@ -580,8 +573,8 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
         builder.AddOrUpdate(prefix + "Groups.Taxes", "Taxes", "Steuern");
         builder.AddOrUpdate(prefix + "Groups.SalesOptions", "Sales options", "Verkaufsoptionen");
         builder.AddOrUpdate(prefix + "Groups.SalesOptions.Info",
-            "Specify whether additional items must be ordered with this product or whether it is sold as a gift card. Enable an option to show its settings.",
-            "Hier legen Sie fest, ob zum Produkt weitere Artikel mitbestellt werden müssen oder ob es als Geschenkgutschein verkauft wird. Aktivieren Sie eine Option, um die zugehörigen Einstellungen einzublenden.");
+            "Specify whether additional items must be ordered with this product. Enable the option to show its settings.",
+            "Hier legen Sie fest, ob zum Produkt weitere Artikel mitbestellt werden müssen. Aktivieren Sie die Option, um die zugehörigen Einstellungen einzublenden.");
         builder.AddOrUpdate(prefix + "Groups.Shipping", "Shipping, dimensions and units", "Versand, Maße und Einheiten");
         builder.AddOrUpdate(prefix + "Groups.Shipping.Info",
             "The quantity unit specifies how product quantities are labeled in the shop, for example as pieces, packs or pairs. It appears alongside the quantity when ordering and in the cart. Weight and dimensions can affect shipping costs, depending on the shipping provider, and are displayed on the product page when the corresponding catalog settings are enabled.",
@@ -622,11 +615,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "IDs der erforderlichen Produkte",
             "Select the products that must be ordered together with this product. Ensure they are available to customers; otherwise, this product cannot be added to the cart. Avoid circular dependencies.",
             "Wählen Sie die Produkte aus, die zusammen mit diesem Produkt bestellt werden müssen. Stellen Sie sicher, dass sie für Kunden verfügbar sind; andernfalls kann auch dieses Produkt nicht in den Warenkorb gelegt werden. Vermeiden Sie zirkuläre Abhängigkeiten.");
-        builder.AddOrUpdate(prefix + "Fields.IsGiftCard",
-            "Sell as a gift card",
-            "Als Geschenkgutschein verkaufen",
-            "A gift card is created when this product is ordered. The gift card type determines whether it is virtual or physical.",
-            "Bei Bestellung dieses Produkts wird ein Geschenkgutschein erstellt. Der Gutscheintyp legt fest, ob es sich um einen virtuellen oder physischen Gutschein handelt.");
         builder.AddOrUpdate(prefix + "Fields.IsShipEnabled",
             "Shipping required",
             "Versand erforderlich",

@@ -9,7 +9,7 @@ namespace OmmCMS.Core.Catalog.Attributes;
 public partial interface IProductAttributeFormatter
 {
     /// <summary>
-    /// Formats product and gift card attributes.
+    /// Formats product attributes.
     /// </summary>
     /// <param name="selection">Attribute selection.</param>
     /// <param name="product">Product entity.</param>
@@ -25,7 +25,7 @@ public partial interface IProductAttributeFormatter
         ProductBatchContext batchContext = null);
 
     /// <summary>
-    /// Formats product and gift card attributes.
+    /// Formats product attributes.
     /// </summary>
     /// <param name="selection">Attribute selection.</param>
     /// <param name="product">Product entity.</param>
@@ -34,7 +34,6 @@ public partial interface IProductAttributeFormatter
     /// <param name="htmlEncode">A value indicating whether to HTML encode values.</param>
     /// <param name="includePrices">A value indicating whether to include prices.</param>
     /// <param name="includeProductAttributes">A value indicating whether to include product attributes.</param>
-    /// <param name="includeGiftCardAttributes">A value indicating whether to include gift card attributes.</param>
     /// <param name="includeHyperlinks">A value indicating whether to include HTML hyperlinks.</param>
     /// <param name="batchContext">The product batch context. For example used to load all products of a shopping cart in one go. Will be created internally if <c>null</c>.</param>
     /// <returns>Formatted attributes.</returns>
@@ -48,7 +47,6 @@ public partial interface IProductAttributeFormatter
         bool htmlEncode = true,
         bool includePrices = true,
         bool includeProductAttributes = true,
-        bool includeGiftCardAttributes = true,
         bool includeHyperlinks = true,
         ProductBatchContext batchContext = null);
 

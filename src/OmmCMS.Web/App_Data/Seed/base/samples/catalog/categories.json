@@ -68,7 +68,7 @@
   {
     "name": "Vouchers",
     "alias": "Vouchers",
-    "description": "<p>Gift vouchers with a fixed value or an amount of the customer's choice, plus a donation product.</p>",
+    "description": "<p>A sample donation product with an amount of the customer's choice.</p>",
     "icon": "gift-card",
     "mediaFile": { "file": "category/vouchers.jpg", "name": "vouchers" },
     "showOnHomePage": true,

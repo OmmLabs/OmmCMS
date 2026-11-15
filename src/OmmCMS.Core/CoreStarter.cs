@@ -19,7 +19,6 @@ using Autofac;
 using OmmCMS.Bootstrapping;
 using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Data.Migrations;
@@ -113,7 +112,6 @@ internal class CoreStarter : StarterBase
     {
         TypeConverterFactory.Providers.Insert(0, new ProductBundleItemOrderDataConverterProvider());
         TypeConverterFactory.Providers.Insert(0, new ShippingOptionConverterProvider());
-        TypeConverterFactory.Providers.Insert(0, new GiftCardCouponCodeConverterProvider());
     }
 
     public override void ConfigureContainer(ContainerBuilder builder, IApplicationContext appContext)

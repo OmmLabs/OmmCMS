@@ -147,12 +147,6 @@ public class PriceSettings : ISettings
     public bool ValidateDiscountRulesInLists { get; set; }
 
     /// <summary>
-    /// <c>true</c> to check the shopping cart for the existence of gift cards when validating discounts in product lists.
-    /// In this case no discount is applied because the customer could earn money through that.
-    /// </summary>
-    public bool ValidateDiscountGiftCardsInLists { get; set; }
-
-    /// <summary>
     /// <c>true</c> to initially apply the price range format (e.g. "from {0}") in product details.
     /// </summary>
     public bool ApplyPriceRangeFormatInProductDetails { get; set; }

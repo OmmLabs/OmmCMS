@@ -234,18 +234,9 @@ public partial class DiscountService : AsyncDbSaveHook<Discount>, IDiscountServi
             return Cached(false);
         }
 
-        var checkGiftCard = flags.HasFlag(DiscountValidationFlags.GiftCards) &&
-            (discount.DiscountType == DiscountType.AssignedToOrderTotal || discount.DiscountType == DiscountType.AssignedToOrderSubTotal);
-
-        var cart = checkGiftCard || flags.HasFlag(DiscountValidationFlags.CartRules)
+        var cart = flags.HasFlag(DiscountValidationFlags.CartRules)
             ? await _cartService.Value.GetCartAsync(customer, ShoppingCartType.ShoppingCart, store.Id)
             : null;
-
-        // Do not to apply discounts if there are gift cards in the cart because the customer could "earn" money through that.
-        if (checkGiftCard && cart.Items.Any(x => x.Item?.Product?.IsGiftCard ?? false))
-        {
-            return Cached(false);
-        }
 
         // Rules.
         if (flags.HasFlag(DiscountValidationFlags.CartRules))

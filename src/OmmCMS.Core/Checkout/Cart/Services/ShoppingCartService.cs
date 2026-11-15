@@ -140,12 +140,6 @@ public partial class ShoppingCartService : IShoppingCartService
                 ctx.BundleItemId,
                 false);
 
-            if (ctx.Product.IsGiftCard)
-            {
-                var giftCardInfo = ctx.VariantQuery.GetGiftCardInfo(ctx.Product.Id, ctx.BundleItemId);
-                selection.AddGiftCardInfo(giftCardInfo);
-            }
-
             ctx.RawAttributes = selection.AsJson();
         }
 
@@ -647,24 +641,8 @@ public partial class ShoppingCartService : IShoppingCartService
         foreach (var cartItem in filteredCart)
         {
             var item = cartItem.Item;
-            var giftCardInfoSame = true;
             var customerEnteredPricesEqual = true;
             var attributesEqual = item.AttributeSelection == selection;
-
-            if (item.Product.IsGiftCard)
-            {
-                var info1 = item.AttributeSelection?.GetGiftCardInfo();
-                var info2 = selection?.GetGiftCardInfo();
-
-                if (info1 != null && info2 != null)
-                {
-                    // INFO: in this context, we only compare the name of recipient and sender.
-                    if (!info1.RecipientName.EqualsNoCase(info2.RecipientName) || !info1.SenderName.EqualsNoCase(info2.SenderName))
-                    {
-                        giftCardInfoSame = false;
-                    }
-                }
-            }
 
             // Products with CustomerEntersPrice are equal if the price is the same.
             // But a system product may only be placed once in the shopping cart.
@@ -674,7 +652,7 @@ public partial class ShoppingCartService : IShoppingCartService
                 customerEnteredPricesEqual = _roundingHelper.Round(item.CustomerEnteredPrice, currency) == _roundingHelper.Round(customerEnteredPrice.Value.Amount, currency);
             }
 
-            if (attributesEqual && giftCardInfoSame && customerEnteredPricesEqual)
+            if (attributesEqual && customerEnteredPricesEqual)
             {
                 return cartItem;
             }

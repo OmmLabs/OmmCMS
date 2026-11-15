@@ -41,9 +41,6 @@ public class ShoppingCartSettingsModel : ILocalizedModel<ShoppingCartSettingsLoc
     [LocalizedDisplay("*ShowDiscountBox")]
     public bool ShowDiscountBox { get; set; }
 
-    [LocalizedDisplay("*ShowGiftCardBox")]
-    public bool ShowGiftCardBox { get; set; }
-
     [LocalizedDisplay("*EmailWishlistEnabled")]
     public bool EmailWishlistEnabled { get; set; }
 

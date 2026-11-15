@@ -404,7 +404,6 @@ public static class CustomerExtensions
         if (flags.HasFlag(CheckoutDataResetFlags.CouponCodes))
         {
             ga.DiscountCouponCode = null;
-            ga.RawGiftCardCouponCodes = null;
         }
 
         if (flags.HasFlag(CheckoutDataResetFlags.CheckoutAttributes))

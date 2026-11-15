@@ -71,11 +71,6 @@ public class ShoppingCartSettings : ISettings
     /// </summary>
     public bool ShowDiscountBox { get; set; } = true;
 
-    /// <summary>
-    /// Gets or sets a value indicating whether to show gift card box on shopping cart page
-    /// </summary>
-    public bool ShowGiftCardBox { get; set; } = true;
-
     #region Checkout
 
     /// <summary>

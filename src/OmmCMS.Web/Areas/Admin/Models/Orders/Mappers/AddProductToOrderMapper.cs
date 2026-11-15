@@ -105,8 +105,6 @@ internal class AddProductToOrderMapper : IMapper<AddOrderProductModel, MapperRes
             .OrderBy(x => x.DisplayOrder)
             .ToList();
 
-        var giftCardInfo = product.IsGiftCard ? query.GetGiftCardInfo(product.Id, 0) : null;
-
         var linkedProducts = new Dictionary<int, Product>();
         var linkedProductIds = attributes
             .SelectMany(x => x.ProductVariantAttributeValues)
@@ -207,14 +205,11 @@ internal class AddProductToOrderMapper : IMapper<AddOrderProductModel, MapperRes
 
         model.Name = product.GetLocalized(x => x.Name);
         model.ProductType = product.ProductType;
-        model.GiftCard.IsGiftCard = product.IsGiftCard;
-        model.GiftCard.GiftCardType = product.GiftCardType;
         model.Quantity = from.Quantity;
         model.ShowUpdateTotals = order.OrderStatusId <= (int)OrderStatus.Pending;
         model.AdjustInventory = from.AdjustInventory;
 
         var (selection, _) = await _productAttributeMaterializer.CreateAttributeSelectionAsync(query, attributes, product.Id, 0);
-        selection.AddGiftCardInfo(giftCardInfo);
 
         if (isEdit)
         {
@@ -252,6 +247,5 @@ internal class AddProductToOrderMapper : IMapper<AddOrderProductModel, MapperRes
         data.Order = order;
         data.Product = product;
         data.Selection = selection;
-        data.GiftCardInfo = giftCardInfo;
     }
 }

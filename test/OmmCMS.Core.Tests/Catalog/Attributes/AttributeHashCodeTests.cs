@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Utilities;
 
 namespace OmmCMS.Core.Tests.Catalog;
@@ -44,14 +43,12 @@ public class AttributeHashCodeTests : ServiceTestBase
     [TestCase()]
     [TestCase(true)]
     [TestCase(false, true)]
-    [TestCase(false, false, true)]
-    [TestCase(false, true, true)]
+    [TestCase(true, true)]
     public void Can_create_attribute_selection_hashcode(
-        bool includeGiftCard = false,
         bool reverseAttributeOrder = false,
         bool reverseValueOrder = false)
     {
-        var hashCode = CreateAttributeSelection(TestNumber, includeGiftCard, reverseAttributeOrder, reverseValueOrder).GetHashCode();
+        var hashCode = CreateAttributeSelection(TestNumber, reverseAttributeOrder, reverseValueOrder).GetHashCode();
 
         Assert.Multiple(() =>
         {
@@ -63,14 +60,12 @@ public class AttributeHashCodeTests : ServiceTestBase
     [TestCase()]
     [TestCase(true)]
     [TestCase(false, true)]
-    [TestCase(false, false, true)]
-    [TestCase(false, true, true)]
+    [TestCase(true, true)]
     public void Can_create_attribute_combination_hashcode(
-        bool includeGiftCard = false,
         bool reverseAttributeOrder = false,
         bool reverseValueOrder = false)
     {
-        var pvac = CreateAttributeCombination(TestNumber, includeGiftCard, reverseAttributeOrder, reverseValueOrder);
+        var pvac = CreateAttributeCombination(TestNumber, reverseAttributeOrder, reverseValueOrder);
 
         Assert.Multiple(() =>
         {
@@ -115,15 +110,13 @@ public class AttributeHashCodeTests : ServiceTestBase
     [TestCase()]
     [TestCase(true)]
     [TestCase(false, true)]
-    [TestCase(false, false, true)]
-    [TestCase(false, true, true)]
+    [TestCase(true, true)]
     public async Task Can_find_attribute_combination_by_hashcode(
-        bool includeGiftCard = false,
         bool reverseAttributeOrder = false,
         bool reverseValueOrder = false)
     {
-        var hashCode1 = CreateAttributeSelection(TestNumber, includeGiftCard, reverseAttributeOrder, reverseValueOrder).GetHashCode();
-        var hashCode2 = CreateAttributeSelection(null, includeGiftCard, reverseAttributeOrder, reverseValueOrder).GetHashCode();
+        var hashCode1 = CreateAttributeSelection(TestNumber, reverseAttributeOrder, reverseValueOrder).GetHashCode();
+        var hashCode2 = CreateAttributeSelection(null, reverseAttributeOrder, reverseValueOrder).GetHashCode();
         Assert.That(hashCode1, Is.Not.EqualTo(0));
         Assert.That(hashCode2, Is.Not.EqualTo(0));
 
@@ -160,7 +153,6 @@ public class AttributeHashCodeTests : ServiceTestBase
 
     private static ProductVariantAttributeSelection CreateAttributeSelection(
         int? anyNumber = null,
-        bool includeGiftCard = false,
         bool reverseAttributeOrder = false,
         bool reverseValueOrder = false)
     {
@@ -191,30 +183,17 @@ public class AttributeHashCodeTests : ServiceTestBase
         //    selection.AddAttributeValue(num + 3, Path.GetRandomFileName().Replace(".", string.Empty));
         //}
 
-        if (includeGiftCard)
-        {
-            selection.AddGiftCardInfo(new GiftCardInfo
-            {
-                RecipientName = "John Doe",
-                RecipientEmail = "jdow@web.com",
-                SenderName = "me",
-                SenderEmail = "me@web.com",
-                Message = "Hello world!"
-            });
-        }
-
         return selection;
     }
 
     private static ProductVariantAttributeCombination CreateAttributeCombination(
         int? anyNumber = null,
-        bool includeGiftCard = false,
         bool reverseAttributeOrder = false,
         bool reverseValueOrder = false,
         bool asJson = true)
     {
         var num = anyNumber ?? CommonHelper.GenerateRandomInteger(RandomNumberOffset, int.MaxValue - 100);
-        var selection = CreateAttributeSelection(num, includeGiftCard, reverseAttributeOrder, reverseValueOrder);
+        var selection = CreateAttributeSelection(num, reverseAttributeOrder, reverseValueOrder);
 
         return new()
         {

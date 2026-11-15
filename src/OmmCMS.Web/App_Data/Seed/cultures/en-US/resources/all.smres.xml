@@ -471,9 +471,6 @@
 	<LocaleResource Name="ActivityLog.AddNewDiscount">
 		<Value>Added a new discount ('{0}')</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.AddNewGiftCard">
-		<Value>Added a new gift card ('{0}')</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.AddNewManufacturer">
 		<Value>Added a new manufacturer ('{0}')</Value>
 	</LocaleResource>
@@ -506,9 +503,6 @@
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteDiscount">
 		<Value>Deleted a discount ('{0}')</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.DeleteGiftCard">
-		<Value>Deleted a gift card ('{0}')</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteManufacturer">
 		<Value>Deleted a manufacturer ('{0}')</Value>
@@ -548,9 +542,6 @@
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.EditDiscount">
 		<Value>Edited a discount ('{0}')</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.EditGiftCard">
-		<Value>Edited a gift card ('{0}')</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.EditManufacturer">
 		<Value>Edited a manufacturer ('{0}')</Value>
@@ -2424,12 +2415,6 @@
 	<LocaleResource Name="Admin.Catalog.Products.Fields.FullDescription.Hint">
 		<Value>The full description of the product.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.GiftCardType">
-		<Value>Gift card type</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.GiftCardType.Hint">
-		<Value>Select gift card type. WARNING: not recommended to change in production environment.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.GTIN">
 		<Value>GTIN / EAN</Value>
 	</LocaleResource>
@@ -2498,12 +2483,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.IsFreeShipping.Hint">
 		<Value>Check the box if this product comes with FREE shipping.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.IsGiftCard">
-		<Value>Is gift card</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.IsGiftCard.Hint">
-		<Value>Check the box if this product is a gift card.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.IsShipEnabled">
 		<Value>Shipping enabled</Value>
@@ -7626,12 +7605,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Price.ShowVariantCombinationPriceAdjustment.Hint">
 		<Value>Specifies whether variant combination price adjustments should be displayed.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Price.ValidateDiscountGiftCardsInLists">
-		<Value>Check cart for gift cards when validating discounts in product lists</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Price.ValidateDiscountGiftCardsInLists.Hint">
-		<Value>Specifies whether to check the shopping cart for the existence of gift cards when validating discounts in product lists. In case of gift cards no discount is applied because the customer could earn money through that. Enabling this option may reduce the performance.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Price.ValidateDiscountLimitationsInLists">
 		<Value>Validate discount limitations in product lists</Value>
 	</LocaleResource>
@@ -8130,12 +8103,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowEssentialAttributesInMiniShoppingCart">
 		<Value>Show essential features in mini-shopping cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowGiftCardBox">
-		<Value>Show gift card box</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowGiftCardBox.Hint">
-		<Value>Check the box if you want the gift card coupon box to be displayed on shopping cart page</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowLinkedAttributeValueQuantity">
 		<Value>Show quantity of linked product</Value>
@@ -16328,12 +16295,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Enums.FacetTemplateHint.NumericRange">
 		<Value>Numeric range</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.GiftCardType.Physical">
-		<Value>Physical</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.GiftCardType.Virtual">
-		<Value>Virtual</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.GridColumnSpan.Max2Cols">
 		<Value>Always 2 (mobile &amp; desktop) -not recommended</Value>
 	</LocaleResource>
@@ -17205,18 +17166,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Gdpr.DeletedText">
 		<Value>Deleted</Value>
-	</LocaleResource>
-	<LocaleResource Name="GiftCardAttribute.For.Physical">
-		<Value>For</Value>
-	</LocaleResource>
-	<LocaleResource Name="GiftCardAttribute.For.Virtual">
-		<Value>For</Value>
-	</LocaleResource>
-	<LocaleResource Name="GiftCardAttribute.From.Physical">
-		<Value>From</Value>
-	</LocaleResource>
-	<LocaleResource Name="GiftCardAttribute.From.Virtual">
-		<Value>From</Value>
 	</LocaleResource>
 	<LocaleResource Name="HomePage">
 		<Value>Home page</Value>
@@ -18598,21 +18547,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Products.Free">
 		<Value>Free</Value>
 	</LocaleResource>
-	<LocaleResource Name="Products.GiftCard.Message">
-		<Value>Message</Value>
-	</LocaleResource>
-	<LocaleResource Name="Products.GiftCard.RecipientEmail">
-		<Value>Recipient's Email</Value>
-	</LocaleResource>
-	<LocaleResource Name="Products.GiftCard.RecipientName">
-		<Value>Recipient's Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Products.GiftCard.SenderEmail">
-		<Value>Your Email</Value>
-	</LocaleResource>
-	<LocaleResource Name="Products.GiftCard.SenderName">
-		<Value>Your Name</Value>
-	</LocaleResource>
 	<LocaleResource Name="Products.GTIN">
 		<Value>GTIN</Value>
 	</LocaleResource>
@@ -19326,24 +19260,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="ShoppingCart.FileUploaded">
 		<Value>Your file successfully uploaded!</Value>
 	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode">
-		<Value>I have a gift card</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.Applied">
-		<Value>The gift card code was applied</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.Button">
-		<Value>Add gift card</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.Removed">
-		<Value>The gift card code has been removed</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.Tooltip">
-		<Value>Enter gift card code</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.WrongGiftCard">
-		<Value>The coupon code you entered couldn't be applied to your order</Value>
-	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.IsDisabled">
 		<Value>The shopping cart is disabled.</Value>
 	</LocaleResource>
@@ -19470,12 +19386,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="ShoppingCart.QuantityShouldPositive">
 		<Value>Quantity should be positive</Value>
 	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.RecipientEmailError">
-		<Value>Enter valid recipient email</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.RecipientNameError">
-		<Value>Enter valid recipient name</Value>
-	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.Remove">
 		<Value>Remove</Value>
 	</LocaleResource>
@@ -19503,12 +19413,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="ShoppingCart.SelectAttribute">
 		<Value>Please select &lt;b class="fwm"&gt;{0}&lt;/b&gt;.</Value>
 	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.SenderEmailError">
-		<Value>Enter valid sender email</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.SenderNameError">
-		<Value>Enter valid sender name</Value>
-	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.ShippingInfoLink">
 		<Value>For a complete listing of all shipping costs please click &lt;a href="{0}"&gt;here&lt;/a&gt;.</Value>
 	</LocaleResource>
@@ -19526,12 +19430,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.Totals.CreditBalance">
 		<Value>Credit balance</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.Totals.GiftCardInfo">
-		<Value>Gift Card ({0})</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.Totals.GiftCardInfo.Remaining">
-		<Value>{0} remaining</Value>
 	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.Totals.OrderTotal">
 		<Value>Total</Value>

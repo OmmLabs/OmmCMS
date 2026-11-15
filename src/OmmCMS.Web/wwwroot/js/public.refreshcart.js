@@ -102,9 +102,6 @@ $(function () {
                     if (!_.isEmpty(response.discountHtml)) {
                         $('.cart-action-coupon').replaceWith(response.discountHtml);
                     }
-                    if (!_.isEmpty(response.giftCardHtml)) {
-                        $('.cart-action-giftcard').replaceWith(response.giftCardHtml);
-                    }
                     if (!_.isEmpty(response.rewardPointsHtml)) {
                         $('.cart-action-rewardpoints').replaceWith(response.rewardPointsHtml);
                     }

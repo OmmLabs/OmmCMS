@@ -121,7 +121,6 @@ public partial class ShoppingCart : IEquatable<ShoppingCart>
             .Add(CartType)
             .Add(Customer.Id)
             .Add(attributes?.DiscountCouponCode)
-            .Add(attributes?.RawGiftCardCouponCodes)
             .Add(attributes?.RawCheckoutAttributes)
             .Add(attributes?.VatNumber)
             .Add(attributes?.UseRewardPointsDuringCheckout)

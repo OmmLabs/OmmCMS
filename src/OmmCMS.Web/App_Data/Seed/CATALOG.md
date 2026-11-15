@@ -65,8 +65,6 @@ SKUs are `{prefix}{number}`, starting at 1001, e.g. `FN-1002`. Combinations appe
 | FN-1007 | LED bulb | Required by the floor lamp, added to the cart automatically |
 | DG-1001 | E-book | Download after payment, sample download, reduced tax rate |
 | DG-1003 | Photo software | Download with licence agreement, download limit and expiry, file version |
-| GC-1001 | Gift card | Virtual gift card, amount as combination price |
-| GC-1002 | Gift card with amount of your choice | Price entered by the customer |
 | GC-1003 | Donation | Price entered by the customer, tax-free, no shipping |
 
 Across the remaining catalog sample data: delivery times, stock levels, specifications,
@@ -86,4 +84,4 @@ Some products also show features of optional modules. Their texts say so in a se
    derives most of them, see `InstallationDataSeeder.Products.cs`.
 5. Run the seed tests and update the table above.
 
-All pictures are final images (brand logos `media/brand/*.png`, category images `media/category/*.jpg` as text-free scenes without products, so that they do not repeat the product pictures in lists, `media/product/fd-*.jpg`, `gf-*.jpg`, `fs-*.jpg`, `fn-*.jpg`, `dg-*.jpg`, `gc-*.jpg`). Pictures with printed text exist once per language: the e-book cover (`dg-1001.jpg`, `dg-1001-de.jpg`) and the gift cards (`gc-1001-25.jpg` and `gc-1001-25-de.jpg`, …); the de-DE overlay sets the German ones, including the pictures of the combinations of the gift card.
+All pictures are final images (brand logos `media/brand/*.png`, category images `media/category/*.jpg` as text-free scenes without products, so that they do not repeat the product pictures in lists, `media/product/fd-*.jpg`, `gf-*.jpg`, `fs-*.jpg`, `fn-*.jpg`, `dg-*.jpg`, `gc-*.jpg`). Pictures with printed text exist once per language: the e-book cover (`dg-1001.jpg`, `dg-1001-de.jpg`); the de-DE overlay sets the German one.

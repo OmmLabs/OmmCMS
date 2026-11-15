@@ -348,8 +348,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.Sku);
                 row.SetProperty(context.Result, (x) => x.ManufacturerPartNumber);
                 row.SetProperty(context.Result, (x) => x.Gtin);
-                row.SetProperty(context.Result, (x) => x.IsGiftCard);
-                row.SetProperty(context.Result, (x) => x.GiftCardTypeId);
                 row.SetProperty(context.Result, (x) => x.RequireOtherProducts);
                 row.SetProperty(context.Result, (x) => x.RequiredProductIds);   // TODO: global scope
                 row.SetProperty(context.Result, (x) => x.AutomaticallyAddRequiredProducts);

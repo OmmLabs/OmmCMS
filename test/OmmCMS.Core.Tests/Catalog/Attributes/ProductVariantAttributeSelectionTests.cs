@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Test.Common;
 
 namespace OmmCMS.Core.Tests.Catalog;
@@ -31,7 +30,7 @@ public class ProductVariantAttributeSelectionTests
     [Test]
     public void Ensure_no_object_types_in_attribute_selection_json()
     {
-        var source = CreateSelection(false);
+        var source = CreateSelection();
         var json = source.AsJson();
         var expectedJson = """{"Attributes":[{"Key":123,"Value":[11,12,13]},{"Key":987,"Value":[36]},{"Key":375,"Value":["Any text."]}]}""";
 
@@ -112,35 +111,15 @@ public class ProductVariantAttributeSelectionTests
             Assert.That(textValue.First().ToString(), Is.EqualTo("Any text."));
         }
 
-        var giftCard = selection.GetGiftCardInfo();
-
-        using (Assert.EnterMultipleScope())
-        {
-            Assert.That(giftCard, Is.Not.Null);
-            Assert.That(giftCard.RecipientName == "John Doe" && giftCard.RecipientEmail == "jdow@web.com", Is.True);
-            Assert.That(giftCard.Message, Is.Not.Empty);
-        }
     }
 
-    private static ProductVariantAttributeSelection CreateSelection(bool addGiftCardInfo = true)
+    private static ProductVariantAttributeSelection CreateSelection()
     {
         var selection = new ProductVariantAttributeSelection(null);
 
         selection.AddAttribute(123, [11, 12, 13]);
         selection.AddAttribute(987, [36]);
         selection.AddAttributeValue(375, "Any text.");
-
-        if (addGiftCardInfo)
-        {
-            selection.AddGiftCardInfo(new GiftCardInfo
-            {
-                RecipientName = "John Doe",
-                RecipientEmail = "jdow@web.com",
-                SenderName = "me",
-                SenderEmail = "me@web.com",
-                Message = "Hello world!"
-            });
-        }
 
         return selection;
     }

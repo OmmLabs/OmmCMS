@@ -2,7 +2,6 @@
 using FluentValidation;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Web.Rendering.Choices;
 
@@ -42,10 +41,6 @@ public partial class AddOrderProductModel : ModelBase
     public bool UpdateTotals { get; set; }
     public bool ShowUpdateTotals { get; set; }
 
-    public string GiftCardFieldPrefix
-        => GiftCardQueryItem.CreateKey(ProductId, 0, null);
-
-    public GiftCardModel GiftCard { get; set; } = new();
     public List<ProductVariantAttributeModel> ProductVariantAttributes { get; set; } = [];
 
     public partial class ProductVariantAttributeModel : ChoiceModel
@@ -78,28 +73,6 @@ public partial class AddOrderProductModel : ModelBase
         }
     }
 
-    [LocalizedDisplay("Products.GiftCard.")]
-    public class GiftCardModel : ModelBase
-    {
-        public bool IsGiftCard { get; set; }
-        public GiftCardType GiftCardType { get; set; }
-
-        [LocalizedDisplay("*RecipientName")]
-        public string RecipientName { get; set; }
-
-        [LocalizedDisplay("*RecipientEmail")]
-        public string RecipientEmail { get; set; }
-
-        [LocalizedDisplay("*SenderName")]
-        public string SenderName { get; set; }
-
-        [LocalizedDisplay("*SenderEmail")]
-        public string SenderEmail { get; set; }
-
-        [UIHint("Textarea"), AdditionalMetadata("rows", 4)]
-        [LocalizedDisplay("*Message")]
-        public string Message { get; set; }
-    }
 }
 
 record class AddOrderProductData
@@ -107,7 +80,6 @@ record class AddOrderProductData
     public Order Order { get; set; }
     public Product Product { get; set; }
     public ProductVariantAttributeSelection Selection { get; set; }
-    public GiftCardInfo GiftCardInfo { get; set; }
 }
 
 public partial class AddOrderProductModelValidator : SmartValidator<AddOrderProductModel>
@@ -118,4 +90,3 @@ public partial class AddOrderProductModelValidator : SmartValidator<AddOrderProd
         RuleFor(x => x.TaxRate).GreaterThanOrEqualTo(0);
     }
 }
-

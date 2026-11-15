@@ -10,7 +10,6 @@ using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Localization;
@@ -299,26 +298,6 @@ public partial class Product : EntityWithDiscounts, IAuditable, ISoftDeletable, 
         [DebuggerStepThrough]
         get => this.GetMergedDataValue(nameof(Gtin), _gtin);
         set => _gtin = value;
-    }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether the product is a gift card.
-    /// </summary>
-    public bool IsGiftCard { get; set; }
-
-    /// <summary>
-    /// Gets or sets the gift card type identifier.
-    /// </summary>
-    public int GiftCardTypeId { get; set; }
-
-    /// <summary>
-    /// Gets or sets the gift card type.
-    /// </summary>
-    [NotMapped]
-    public GiftCardType GiftCardType
-    {
-        get => (GiftCardType)GiftCardTypeId;
-        set => GiftCardTypeId = (int)value;
     }
 
     /// <summary>

@@ -71,12 +71,6 @@ public enum DiscountValidationFlags
     DiscountLimitations = 1 << 0,
 
     /// <summary>
-    /// Checks the shopping cart for the existence of gift cards.
-    /// No discount is applied if the cart contains gift cards because the customer could earn money through that.
-    /// </summary>
-    GiftCards = 1 << 1,
-
-    /// <summary>
     /// Validates cart rules.
     /// </summary>
     CartRules = 1 << 2,
@@ -84,5 +78,5 @@ public enum DiscountValidationFlags
     /// <summary>
     /// Validates all discount requirements.
     /// </summary>
-    All = DiscountLimitations | GiftCards | CartRules
+    All = DiscountLimitations | CartRules
 }

@@ -2,7 +2,6 @@
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Catalog.Rules;
 using OmmCMS.Core.Checkout.Attributes;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Identity;
@@ -200,8 +199,6 @@ public partial class ShoppingCartValidator : IShoppingCartValidator
         await ValidateProductAsync(cartItem, cartItems, warnings, ctx.StoreId);
         await this.ValidateProductAttributesAsync(cartItem, cartItems, warnings);
 
-        ValidateGiftCardInfo(cartItem.Product, cartItem.AttributeSelection, warnings);
-
         // Bundle and bundle items (child items) warnings.
         if (ctx.BundleItem != null || !ctx.ChildItems.IsNullOrEmpty())
         {
@@ -235,52 +232,6 @@ public partial class ShoppingCartValidator : IShoppingCartValidator
         }
 
         return isValid;
-    }
-
-    public virtual bool ValidateGiftCardInfo(Product product, ProductVariantAttributeSelection selection, IList<string> warnings)
-    {
-        Guard.NotNull(product);
-        Guard.NotNull(selection);
-        Guard.NotNull(warnings);
-
-        if (!product.IsGiftCard)
-        {
-            return true;
-        }
-
-        var currentWarnings = new List<string>();
-        var giftCardInfo = selection.GetGiftCardInfo();
-        var recipientName = giftCardInfo?.RecipientName;
-        var recipientEmail = giftCardInfo?.RecipientEmail;
-        var senderName = giftCardInfo?.SenderName;
-        var senderEmail = giftCardInfo?.SenderEmail;
-
-        if (recipientName.IsEmpty())
-        {
-            currentWarnings.Add(T("ShoppingCart.RecipientNameError"));
-        }
-
-        if (senderName.IsEmpty())
-        {
-            currentWarnings.Add(T("ShoppingCart.SenderNameError"));
-        }
-
-        if (product.GiftCardType == GiftCardType.Virtual)
-        {
-            if (!recipientEmail.IsEmail())
-            {
-                currentWarnings.Add(T("ShoppingCart.RecipientEmailError"));
-            }
-
-            if (!senderEmail.IsEmail())
-            {
-                currentWarnings.Add(T("ShoppingCart.SenderEmailError"));
-            }
-        }
-
-        warnings.AddRange(currentWarnings);
-
-        return currentWarnings.Count == 0;
     }
 
     public virtual async Task<bool> ValidateProductAsync(

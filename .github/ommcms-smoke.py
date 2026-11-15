@@ -586,6 +586,10 @@ try:
             "Checkout/GiftCards/Services/GiftCardService.cs",
             "Checkout/GiftCards/Services/IGiftCardService.cs",
             "Checkout/Rules/Impl/GiftCardRule.cs",
+            "Checkout/GiftCards/Domain/GiftCardCouponCodeConverter.cs",
+            "Checkout/GiftCards/Domain/GiftCardQueryItem.cs",
+            "Checkout/GiftCards/Domain/GiftCardInfo.cs",
+            "Checkout/GiftCards/Domain/GiftCardType.cs",
         ):
             assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
         for language in ("en", "de"):
@@ -652,6 +656,7 @@ try:
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Order') WHERE name='SubscriptionTransactionId'") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('giftcard', 'giftcards', 'giftcardusagehistory', 'giftcardusagehistories')") == [0]
         assert rows("SELECT COUNT(*) FROM MessageTemplate WHERE Name = 'GiftCard.Notification'") == [0]
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('IsGiftCard', 'GiftCardTypeId')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name)='newslettersubscription'") == [1]
         topics = set(rows("SELECT SystemName FROM Topic"))
         assert {"HomePageText", "AboutUs", "ContactUs"} <= topics

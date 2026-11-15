@@ -14,8 +14,7 @@ public record ProductAttributeFormatOptions
     {
         ItemSeparator = ", ",
         IncludePrices = false,
-        IncludeHyperlinks = false,
-        IncludeGiftCardAttributes = false
+        IncludeHyperlinks = false
     };
 
     /// <summary>
@@ -56,11 +55,6 @@ public record ProductAttributeFormatOptions
     /// A value indicating whether to include product attributes. Default = true.
     /// </summary>
     public bool IncludeProductAttributes { get; init; } = true;
-
-    /// <summary>
-    /// A value indicating whether to include gift card attributes. Default = true.
-    /// </summary>
-    public bool IncludeGiftCardAttributes { get; init; } = true;
 
     /// <summary>
     /// A value indicating whether to include HTML hyperlinks. Default = true.

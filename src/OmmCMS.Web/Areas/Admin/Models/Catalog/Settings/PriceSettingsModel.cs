@@ -89,9 +89,6 @@ public class PriceSettingsModel : ModelBase
     [LocalizedDisplay("*ValidateDiscountRulesInLists")]
     public bool ValidateDiscountRulesInLists { get; set; }
 
-    [LocalizedDisplay("*ValidateDiscountGiftCardsInLists")]
-    public bool ValidateDiscountGiftCardsInLists { get; set; }
-
     [LocalizedDisplay("*ApplyPriceRangeFormatInProductDetails")]
     public bool ApplyPriceRangeFormatInProductDetails { get; set; }
 

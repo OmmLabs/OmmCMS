@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using OmmCMS.Core.Checkout.Attributes;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common;
@@ -87,35 +86,6 @@ public class CustomerAttributeCollection : GenericAttributeCollection<Customer>
     {
         get => Get<string>(SystemCustomerAttributeNames.DiscountCouponCode);
         set => Set(SystemCustomerAttributeNames.DiscountCouponCode, value);
-    }
-
-    private IEnumerable<GiftCardCouponCode> _giftCardCouponCodes;
-
-    /// <summary>
-    /// Gets or sets the entered gift card coupon codes entered on the shopping cart page.
-    /// <seealso cref="RawGiftCardCouponCodes"/>.
-    /// </summary>
-    public IEnumerable<GiftCardCouponCode> GiftCardCouponCodes
-    {
-        get => _giftCardCouponCodes ??= (RawGiftCardCouponCodes.Convert<List<GiftCardCouponCode>>() ?? Enumerable.Empty<GiftCardCouponCode>());
-        set
-        {
-            Set(SystemCustomerAttributeNames.GiftCardCouponCodes, value.Convert<string>());
-            _giftCardCouponCodes = null;
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets the JSON formatted checkout attributes as a string.
-    /// </summary>
-    public string RawGiftCardCouponCodes
-    {
-        get => Get<string>(SystemCustomerAttributeNames.GiftCardCouponCodes);
-        set
-        {
-            Set(SystemCustomerAttributeNames.GiftCardCouponCodes, value);
-            _giftCardCouponCodes = null;
-        }
     }
 
     private CheckoutAttributeSelection _checkoutAttributes;

@@ -471,9 +471,6 @@
 	<LocaleResource Name="ActivityLog.AddNewDiscount">
 		<Value>Neuer Rabatt ('{0}') hinzugefügt</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.AddNewGiftCard">
-		<Value>Neuer Geschenkgutschein ('{0}') hinzugefügt</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.AddNewManufacturer">
 		<Value>Neuer Hersteller ('{0}') hinzugefügt</Value>
 	</LocaleResource>
@@ -506,9 +503,6 @@
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteDiscount">
 		<Value>Rabatt ('{0}') gelöscht</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.DeleteGiftCard">
-		<Value>Geschenkgutschein ('{0}') gelöscht</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteManufacturer">
 		<Value>Hersteller ('{0}') gelöscht</Value>
@@ -548,9 +542,6 @@
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.EditDiscount">
 		<Value>Rabatt ('{0}') bearbeitet</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.EditGiftCard">
-		<Value>Geschenkgutschein ('{0}') bearbeitet</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.EditManufacturer">
 		<Value>Hersteller ('{0}') bearbeitet</Value>
@@ -2369,12 +2360,6 @@
 	<LocaleResource Name="Admin.Catalog.Products.Fields.FullDescription.Hint">
 		<Value>Vollständige Beschreibung des Produktes</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.GiftCardType">
-		<Value>Gutschein-Typ</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.GiftCardType.Hint">
-		<Value>Der Typ des Gutscheins. WARNUNG: Eine Wert-Änderung während des Echtbetriebes ist nicht empfohlen.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.GTIN">
 		<Value>GTIN / EAN</Value>
 	</LocaleResource>
@@ -2443,12 +2428,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.IsFreeShipping.Hint">
 		<Value>Legt fest, ob dieses Produkt versondkostenfrei geliefert wird.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.IsGiftCard">
-		<Value>Ist Geschenkgutschein</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Catalog.Products.Fields.IsGiftCard.Hint">
-		<Value>Legt fest, ob dies ein Geschenkgutschein ist.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Catalog.Products.Fields.IsShipEnabled">
 		<Value>Versand erforderlich</Value>
@@ -7471,12 +7450,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Price.ShowVariantCombinationPriceAdjustment.Hint">
 		<Value>Bestimmt, ob Mehr- und Minderpreise bei Variant-Kombinationen angezeigt werden.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Price.ValidateDiscountGiftCardsInLists">
-		<Value>Prüfe den Warenkorb auf Gutscheine bei der Rabattvalidierung in Produktlisten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Price.ValidateDiscountGiftCardsInLists.Hint">
-		<Value>Legt fest, ob bei der Rabattvalidierung in Produktlisten der Warenkorb auf vorhandene Gutscheine überprüft werden soll. Bei Gutscheinen wird kein Rabatt gewährt, weil der Kunde damit Geld verdienen könnte. Die Aktivierung dieser Option kann die Performance beeinträchtigen.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Price.ValidateDiscountLimitationsInLists">
 		<Value>Prüfe die Rabattgültigkeit in Produktlisten</Value>
 	</LocaleResource>
@@ -7977,12 +7950,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowEssentialAttributesInMiniShoppingCart">
 		<Value>Wesentliche Merkmale im Mini-Warenkorb anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowGiftCardBox">
-		<Value>Zeige die Geschenkgutschein-Box im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowGiftCardBox.Hint">
-		<Value>Zeigt die Geschenkgutschein-Box im Warenkorb an</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowLinkedAttributeValueQuantity">
 		<Value>Menge verknüpfter Produkte anzeigen</Value>
@@ -16004,12 +15971,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Enums.FacetTemplateHint.NumericRange">
 		<Value>Numerischer Bereich</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.GiftCardType.Physical">
-		<Value>Physisch</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.GiftCardType.Virtual">
-		<Value>Virtuell</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.GridColumnSpan.Max2Cols">
 		<Value>Immer 2 (Mobil &amp; Desktop) - nicht empfohlen</Value>
 	</LocaleResource>
@@ -16880,18 +16841,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Gdpr.DeletedText">
 		<Value>Gelöscht</Value>
-	</LocaleResource>
-	<LocaleResource Name="GiftCardAttribute.For.Physical">
-		<Value>Für</Value>
-	</LocaleResource>
-	<LocaleResource Name="GiftCardAttribute.For.Virtual">
-		<Value>Für</Value>
-	</LocaleResource>
-	<LocaleResource Name="GiftCardAttribute.From.Physical">
-		<Value>Von</Value>
-	</LocaleResource>
-	<LocaleResource Name="GiftCardAttribute.From.Virtual">
-		<Value>Von</Value>
 	</LocaleResource>
 	<LocaleResource Name="HomePage">
 		<Value>Startseite</Value>
@@ -18273,21 +18222,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Products.Free">
 		<Value>Kostenlos</Value>
 	</LocaleResource>
-	<LocaleResource Name="Products.GiftCard.Message">
-		<Value>Nachricht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Products.GiftCard.RecipientEmail">
-		<Value>E-Mail-Adresse des Empfängers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Products.GiftCard.RecipientName">
-		<Value>Name des Empfängers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Products.GiftCard.SenderEmail">
-		<Value>Ihre E-Mail-Adresse</Value>
-	</LocaleResource>
-	<LocaleResource Name="Products.GiftCard.SenderName">
-		<Value>Ihr Name</Value>
-	</LocaleResource>
 	<LocaleResource Name="Products.GTIN">
 		<Value>EAN / GTIN</Value>
 	</LocaleResource>
@@ -19001,24 +18935,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="ShoppingCart.FileUploaded">
 		<Value>Die Datei wurde erfolgreich hochgeladen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode">
-		<Value>Ich habe einen Gutschein</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.Applied">
-		<Value>Der Geschenkgutschein wurde angewendet.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.Button">
-		<Value>Anwenden</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.Removed">
-		<Value>Der Geschenkgutschein wurde entfernt</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.Tooltip">
-		<Value>Geschenkgutschein-Nummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.GiftCardCouponCode.WrongGiftCard">
-		<Value>Die eingegebene Nummer des Geschenkgutscheines konnte nicht angewendet werden.</Value>
-	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.IsDisabled">
 		<Value>Der Warenkorb ist deaktiviert.</Value>
 	</LocaleResource>
@@ -19145,12 +19061,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="ShoppingCart.QuantityShouldPositive">
 		<Value>Die Bestellmenge darf nicht negativ sein.</Value>
 	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.RecipientEmailError">
-		<Value>Geben Sie eine gültige Empfänger-E-Mail-Adresse ein.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.RecipientNameError">
-		<Value>Geben Sie einen gültigen Empfänger-Namen ein.</Value>
-	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.Remove">
 		<Value>Entfernen</Value>
 	</LocaleResource>
@@ -19178,12 +19088,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="ShoppingCart.SelectAttribute">
 		<Value>Bitte &lt;b class="fwm"&gt;{0}&lt;/b&gt; auswählen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.SenderEmailError">
-		<Value>Geben Sie eine gültige Absender-E-Mail-Adresse ein.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.SenderNameError">
-		<Value>Geben Sie einen gültigen Absender-Namen ein.</Value>
-	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.ShippingInfoLink">
 		<Value>Eine vollständige Liste aller Versandkosten finden Sie &lt;a href="{0}"&gt;hier&lt;/a&gt;.</Value>
 	</LocaleResource>
@@ -19201,12 +19105,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.Totals.CreditBalance">
 		<Value>Guthaben</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.Totals.GiftCardInfo">
-		<Value>Geschenkgutschein &lt;br&gt; ({0})</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShoppingCart.Totals.GiftCardInfo.Remaining">
-		<Value>{0} verbleibend</Value>
 	</LocaleResource>
 	<LocaleResource Name="ShoppingCart.Totals.OrderTotal">
 		<Value>Gesamt</Value>

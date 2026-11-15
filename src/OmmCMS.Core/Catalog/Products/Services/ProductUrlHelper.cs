@@ -74,12 +74,6 @@ public partial class ProductUrlHelper
             }
         }
 
-        // Gift cards.
-        foreach (var item in query.GiftCards)
-        {
-            qs.Add(item.ToString(), item.Value);
-        }
-
         // Variants.
         foreach (var item in query.Variants)
         {

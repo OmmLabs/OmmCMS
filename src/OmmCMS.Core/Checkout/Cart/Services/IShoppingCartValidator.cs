@@ -42,7 +42,7 @@ public interface IShoppingCartValidator
         bool validateRequiredProducts = false);
 
     /// <summary>
-    /// Validates add to cart item for product errors, attribute selection errors, gift card info errors, missing required products, bundle item and child items errors.
+    /// Validates add to cart item for product errors, attribute selection errors, missing required products, bundle item and child items errors.
     /// </summary>
     /// <param name="ctx">Context object containing all the information about the item and context for adding it to the shopping cart.</param>
     /// <param name="cartItems">Shopping cart items of customer to validate.</param>
@@ -57,14 +57,6 @@ public interface IShoppingCartValidator
     /// <param name="warnings">List of errors as string.</param>
     /// <returns><c>True</c> when respective shopping cart limit is not exceeded, otherwise <c>false</c>.</returns>
     bool ValidateItemsMaximumCartQuantity(ShoppingCartType cartType, int cartItemsCount, IList<string> warnings);
-
-    /// <summary>
-    /// Validates cart item for <see cref="GiftCards.GiftCardInfo"/>.
-    /// </summary>
-    /// <param name="product">Product.</param>
-    /// <param name="selection">Selected product attributes.</param>
-    /// <param name="warnings">List of warnings.</param>
-    bool ValidateGiftCardInfo(Product product, ProductVariantAttributeSelection selection, IList<string> warnings);
 
     /// <summary>
     /// Validates product settings, authorization and availability.

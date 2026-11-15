@@ -63,12 +63,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
     [LocalizedDisplay("*CountryOfOriginId")]
     public int? CountryOfOriginId { get; set; }
 
-    [LocalizedDisplay("*IsGiftCard")]
-    public bool IsGiftCard { get; set; }
-
-    [LocalizedDisplay("*GiftCardType")]
-    public int GiftCardTypeId { get; set; }
-
     [LocalizedDisplay("*RequireOtherProducts")]
     public bool RequireOtherProducts { get; set; }
 

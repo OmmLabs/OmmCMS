@@ -3,7 +3,6 @@ using System.Runtime.CompilerServices;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Checkout.Cart;
-using OmmCMS.Core.Checkout.GiftCards;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Localization;
@@ -53,7 +52,6 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
         bool htmlEncode = true,
         bool includePrices = true,
         bool includeProductAttributes = true,
-        bool includeGiftCardAttributes = true,
         bool includeHyperlinks = true,
         ProductBatchContext batchContext = null)
     {
@@ -63,7 +61,6 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
             HtmlEncode = htmlEncode,
             IncludePrices = includePrices,
             IncludeProductAttributes = includeProductAttributes,
-            IncludeGiftCardAttributes = includeGiftCardAttributes,
             IncludeHyperlinks = includeHyperlinks
         };
 
@@ -115,29 +112,7 @@ public partial class ProductAttributeFormatter : IProductAttributeFormatter
             }
         }
 
-        if (options.IncludeGiftCardAttributes && product.IsGiftCard)
-        {
-            var gci = selection.GetGiftCardInfo();
-            if (gci != null)
-            {
-                var cardType = product.GiftCardType.ToString();
-
-                // Sender
-                var senderName = TryEncode(_localizationService.GetResource($"GiftCardAttribute.From.{cardType}"));
-                var senderValue = TryEncode(product.GiftCardType == GiftCardType.Physical ? gci.SenderName : $"{gci.SenderName} <{gci.SenderEmail}>");
-                sb.Grow(options.FormatTemplate.FormatInvariant(senderName, senderValue), options.ItemSeparator);
-
-                // Recipient
-                var recipientName = TryEncode(_localizationService.GetResource($"GiftCardAttribute.For.{cardType}"));
-                var recipientValue = TryEncode(product.GiftCardType == GiftCardType.Physical ? gci.RecipientName : $"{gci.RecipientName} <{gci.RecipientEmail}>");
-                sb.Grow(options.FormatTemplate.FormatInvariant(recipientName, recipientValue), options.ItemSeparator);
-            }
-        }
-
         return sb.ToString();
-
-        string TryEncode(string input)
-            => options.HtmlEncode ? input.HtmlEncode() : input;
     }
 
     public virtual string FormatSpecificationAttributes(

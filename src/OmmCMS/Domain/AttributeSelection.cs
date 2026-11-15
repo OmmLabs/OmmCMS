@@ -325,26 +325,26 @@ public abstract class AttributeSelection : IEquatable<AttributeSelection>
     #region Custom attributes
 
     /// <summary>
-    /// Converts an XElement (XML) or JsonObject (JSON) object into a desired custom attribute value instance (e.g. GiftCardInfo).
+    /// Converts an XElement (XML) or JsonObject (JSON) object into a desired custom attribute value instance (e.g. a custom value).
     /// This method is called when deserializing the raw attributes string.
     /// </summary>
-    /// <param name="attributeName">The name of the custom attribute, e.g. GiftCardInfo.</param>
+    /// <param name="attributeName">The name of the custom attribute, e.g. a custom value.</param>
     /// <param name="value">An XElement object if the raw data is XML serialized or an JsonObject object if it is JSON serialized.</param>
-    /// <returns>The converted custom attribute value, e.g. a GiftCardInfo instance.</returns>
+    /// <returns>The converted custom attribute value, e.g. a custom value instance.</returns>
     protected virtual object ToCustomAttributeValue(string attributeName, object value)
         => null;
 
     /// <summary>
     /// Converts a custom attribute to an XElement node for XML serialization.
     /// </summary>
-    /// <param name="value">A custom attribute value, e.g. a GiftCardInfo instance.</param>
+    /// <param name="value">A custom attribute value, e.g. a custom value instance.</param>
     protected virtual XElement ToCustomAttributeElement(object value)
         => null;
 
     /// <summary>
     /// Gets custom attribute values for a given custom attribute name.
     /// </summary>
-    /// <param name="attributeName">Custom attribute name (e.g. GiftCardInfo).</param>
+    /// <param name="attributeName">Custom attribute name (e.g. a custom value).</param>
     /// <returns>List of of custom attribute values.</returns>
     /// <remarks>Custom attributes are included in the serialization\deserialization
     /// but ignored when <see cref="AttributeSelection2"/> is checked for equality.</remarks>
@@ -361,7 +361,7 @@ public abstract class AttributeSelection : IEquatable<AttributeSelection>
     /// <summary>
     /// Adds a custom attribute value.
     /// </summary>
-    /// <param name="attributeName">Custom attribute name (e.g. GiftCardInfo).</param>
+    /// <param name="attributeName">Custom attribute name (e.g. a custom value).</param>
     /// <param name="value">Custom attribute value.</param>
     /// <remarks>Custom attributes are included in the serialization\deserialization
     /// but ignored when <see cref="AttributeSelection2"/> is checked for equality.</remarks>
@@ -379,7 +379,7 @@ public abstract class AttributeSelection : IEquatable<AttributeSelection>
     /// <summary>
     /// Removes a custom attribute and all its values.
     /// </summary>
-    /// <param name="attributeName">Custom attribute name (e.g. GiftCardInfo).</param>
+    /// <param name="attributeName">Custom attribute name (e.g. a custom value).</param>
     protected void RemoveCustomAttribute(string attributeName)
     {
         Guard.NotEmpty(attributeName);
@@ -408,7 +408,7 @@ public abstract class AttributeSelection : IEquatable<AttributeSelection>
     /// <remarks>
     /// For the hash code to work when stored in the database, the attribute selection must contain list types only!
     /// That means no plain text or date values.
-    /// <see cref="AllAttributes.CustomAttributes"/> (like gift card data) are always ignored when creating the hash code.
+    /// <see cref="AllAttributes.CustomAttributes"/> are always ignored when creating the hash code.
     /// See also IProductAttributeMaterializer.FindAttributeCombinationAsync (it only includes list type attributes).
     /// </remarks>
     public override int GetHashCode()

@@ -646,8 +646,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.Sku), (string)product.Sku);
         _writer.WriteElementString(nameof(Product.ManufacturerPartNumber), (string)product.ManufacturerPartNumber);
         _writer.WriteElementString(nameof(Product.Gtin), (string)product.Gtin);
-        _writer.WriteElementString(nameof(Product.IsGiftCard), entity.IsGiftCard.ToString());
-        _writer.WriteElementString(nameof(Product.GiftCardTypeId), entity.GiftCardTypeId.ToString());
         _writer.WriteElementString(nameof(Product.RequireOtherProducts), entity.RequireOtherProducts.ToString());
         _writer.WriteElementString(nameof(Product.RequiredProductIds), entity.RequiredProductIds);
         _writer.WriteElementString(nameof(Product.AutomaticallyAddRequiredProducts), entity.AutomaticallyAddRequiredProducts.ToString());

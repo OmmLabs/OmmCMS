@@ -117,7 +117,7 @@ public class DiscountServiceTests : ServiceTestBase
             LastActivityDateUtc = new DateTime(2010, 01, 02)
         };
 
-        var validationFlags = DiscountValidationFlags.DiscountLimitations | DiscountValidationFlags.GiftCards;
+        var validationFlags = DiscountValidationFlags.DiscountLimitations;
         var result1 = await _discountService.IsDiscountValidAsync(discount, customer, flags: validationFlags);
         result1.ShouldEqual(true);
     }
@@ -193,7 +193,7 @@ public class DiscountServiceTests : ServiceTestBase
             DiscountLimitation = DiscountLimitationType.Unlimited
         };
 
-        var validationFlags = DiscountValidationFlags.DiscountLimitations | DiscountValidationFlags.GiftCards;
+        var validationFlags = DiscountValidationFlags.DiscountLimitations;
 
         var result1 = await _discountService.IsDiscountValidAsync(discount1, customer, flags: validationFlags);
         result1.ShouldEqual(true);
