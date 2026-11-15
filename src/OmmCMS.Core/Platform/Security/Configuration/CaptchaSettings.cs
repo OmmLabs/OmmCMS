@@ -33,9 +33,6 @@ public class CaptchaSettings : ISettings
     public bool ShowOnRegistrationPage => IsActiveTarget(Targets.Registration);
     public bool ShowOnPasswordRecoveryPage => IsActiveTarget(Targets.PasswordRecovery);
     public bool ShowOnContactUsPage => IsActiveTarget(Targets.ContactUs);
-    public bool ShowOnEmailWishlistToFriendPage => IsActiveTarget(Targets.ShareWishlist);
-    public bool ShowOnEmailProductToFriendPage => IsActiveTarget(Targets.ShareProduct);
-    public bool ShowOnAskQuestionPage => IsActiveTarget(Targets.ProductInquiry);
     public bool ShowOnBlogCommentPage => IsActiveTarget(Targets.BlogComment);
     public bool ShowOnNewsCommentPage => IsActiveTarget(Targets.NewsComment);
     public bool ShowOnForumPage => IsActiveTarget(Targets.Forum);
@@ -53,13 +50,9 @@ public class CaptchaSettings : ISettings
         public const string Registration = "Registration";
         public const string PasswordRecovery = "PasswordRecovery";
         public const string ContactUs = "ContactUs";
-        public const string ShareWishlist = "ShareWishlist";
-        public const string ShareProduct = "ShareProduct";
-        public const string ProductInquiry = "ProductInquiry";
         public const string BlogComment = "BlogComment";
         public const string NewsComment = "NewsComment";
         public const string Forum = "Forum";
-        public const string Withdrawal = "Withdrawal";
 
         public static readonly IReadOnlyList<string> All =
         [
@@ -67,13 +60,9 @@ public class CaptchaSettings : ISettings
             Registration,
             PasswordRecovery,
             ContactUs,
-            ShareWishlist,
-            ShareProduct,
-            ProductInquiry,
             BlogComment,
             NewsComment,
-            Forum,
-            Withdrawal
+            Forum
         ];
 
         public static IDictionary<string, string> GetLegacySettingNames()
@@ -84,9 +73,6 @@ public class CaptchaSettings : ISettings
                 [nameof(ShowOnRegistrationPage)] = Registration,
                 [nameof(ShowOnPasswordRecoveryPage)] = PasswordRecovery,
                 [nameof(ShowOnContactUsPage)] = ContactUs,
-                [nameof(ShowOnEmailWishlistToFriendPage)] = ShareWishlist,
-                [nameof(ShowOnEmailProductToFriendPage)] = ShareProduct,
-                [nameof(ShowOnAskQuestionPage)] = ProductInquiry,
                 [nameof(ShowOnBlogCommentPage)] = BlogComment,
                 [nameof(ShowOnNewsCommentPage)] = NewsComment,
                 [nameof(ShowOnForumPage)] = Forum,
@@ -102,13 +88,9 @@ public class CaptchaSettings : ISettings
                 [Registration] = ResPrefix + "Registration",
                 [PasswordRecovery] = ResPrefix + "PasswordRecovery",
                 [ContactUs] = ResPrefix + "ContactUs",
-                [ShareWishlist] = ResPrefix + "ShareWishlist",
-                [ShareProduct] = ResPrefix + "ShareProduct",
-                [ProductInquiry] = ResPrefix + "ProductInquiry",
                 [BlogComment] = ResPrefix + "BlogComment",
                 [NewsComment] = ResPrefix + "NewsComment",
-                [Forum] = ResPrefix + "Forum",
-                [Withdrawal] = ResPrefix + "Withdrawal"
+                [Forum] = ResPrefix + "Forum"
             };
         }
     }

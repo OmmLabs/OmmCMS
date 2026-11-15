@@ -236,6 +236,7 @@ OmmCMS.Admin.Rules = (function () {
             url: root.data('url-updaterules'),
             data: {
                 scope: root.data('scope'),
+                ruleSetId: root.find('.ruleset').first().data('ruleset-id'),
                 entityId: root.data('entity-id'),
                 ruleData
             },

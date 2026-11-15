@@ -6,10 +6,8 @@
     var scopes = ViewBag.Scopes as List<ExtendedSelectListItem>;
 
     var assignedToCustomerRoles = ViewBag.AssignedToCustomerRoles as List<RuleSetAssignedToEntityModel>;
-    var assignedToCategories = ViewBag.AssignedToCategories as List<RuleSetAssignedToEntityModel>;
 
     string customerRoleSelector(RuleSetAssignedToEntityModel x) => $"<a href='{Url.Action("Edit", "CustomerRole", new { id = x.Id })}'>{x.Name.HtmlEncode()}</a>";
-    string categorySelector(RuleSetAssignedToEntityModel x) => $"<a href='{Url.Action("Edit", "Category", new { id = x.Id })}'>{x.Name.HtmlEncode()}</a>";
 }
 
 <div asp-validation-summary="ModelOnly"></div>
@@ -76,14 +74,6 @@
         </div>
         <div class="adminData form-control-plaintext wide">
             @Html.Raw(string.Join(" · ", assignedToCustomerRoles.Select(customerRoleSelector)))
-        </div>
-    </div>
-    <div sm-if="assignedToCategories?.Any() ?? false" class="adminRow">
-        <div class="adminTitle">
-            @Html.SmartLabel("AssignedToCategories", T("Admin.Rules.RuleSet.AssignedObjects", T("Admin.Catalog.Categories")), T("Admin.Rules.RuleSet.AssignedObjects.Hint"))
-        </div>
-        <div class="adminData form-control-plaintext wide">
-            @Html.Raw(string.Join(" · ", assignedToCategories.Select(categorySelector)))
         </div>
     </div>
     <div sm-if="Model.Id == 0" class="adminRow">

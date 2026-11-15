@@ -351,6 +351,7 @@ def verify_residual_extraction():
 def verify_presentation_extraction():
     repo = Path(__file__).resolve().parent.parent
     for path in [
+        "src/OmmCMS.Web/Areas/Admin/Views/Rule/_Grid.Preview.Product.cshtml",
         "src/OmmCMS.Core/Catalog/Products/Services/IProductCloner.cs",
         "src/OmmCMS.Core/Catalog/Products/Services/IProductCompareService.cs",
         "src/OmmCMS.Core/Catalog/Products/Services/IRecentlyViewedProductsService.cs",

@@ -14,7 +14,7 @@
             <span>@ViewBag.Title</span>
         </div>
         <div class="options">
-			@if (Model.Id != 0 && (Model.Scope == RuleScope.Customer || Model.Scope == RuleScope.Product))
+			@if (Model.Id != 0 && Model.Scope == RuleScope.Customer)
 			{
 				<a id="btn-preview-ruleset" asp-action="Preview" asp-route-id="@Model.Id" class="btn btn-secondary">
 					<icon name="eye" />

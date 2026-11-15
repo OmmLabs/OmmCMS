@@ -1,6 +1,5 @@
 ﻿
 using System.Text.Json.Serialization;
-using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Rules;
 using OmmCMS.Core.Rules.Rendering;
 
@@ -13,7 +12,6 @@ public class RuleCommand
 
     /// <summary>
     /// Identifier of the related entity.
-    /// <see cref="ProductVariantAttribute.Id"/> if <see cref="Scope"/> == <see cref="RuleScope.ProductAttribute"/>.
     /// </summary>
     [JsonPropertyName("entityId")]
     public int? EntityId { get; set; }

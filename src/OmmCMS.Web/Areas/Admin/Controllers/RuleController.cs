@@ -1,14 +1,8 @@
 ﻿using System.Globalization;
 using System.Text.Json;
-using OmmCMS.Admin.Models.Catalog;
 using OmmCMS.Admin.Models.Customers;
 using OmmCMS.Admin.Models.Rules;
 using OmmCMS.ComponentModel;
-using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Catalog.Rules;
-using OmmCMS.Core.Checkout.Rules;
-using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Identity.Rules;
 using OmmCMS.Core.Localization;
@@ -31,7 +25,6 @@ public class RuleController : AdminController
     private readonly IRuleService _ruleService;
     private readonly IRuleProviderFactory _ruleProviderFactory;
     private readonly IEnumerable<IRuleOptionsProvider> _ruleOptionsProviders;
-    private readonly AdminAreaSettings _adminAreaSettings;
     private readonly CustomerSettings _customerSettings;
 
     public RuleController(
@@ -39,14 +32,12 @@ public class RuleController : AdminController
         IRuleService ruleService,
         IRuleProviderFactory ruleProviderFactory,
         IEnumerable<IRuleOptionsProvider> ruleOptionsProviders,
-        AdminAreaSettings adminAreaSettings,
         CustomerSettings customerSettings)
     {
         _db = db;
         _ruleService = ruleService;
         _ruleProviderFactory = ruleProviderFactory;
         _ruleOptionsProviders = ruleOptionsProviders;
-        _adminAreaSettings = adminAreaSettings;
         _customerSettings = customerSettings;
     }
 
@@ -60,7 +51,7 @@ public class RuleController : AdminController
     {
         var ruleSets = await _db.RuleSets
             .AsNoTracking()
-            .ApplyStandardFilter(scope, false, true)
+            .ApplyStandardFilter(RuleScope.Customer, false, true)
             .ToListAsync();
 
         var selectedArr = selectedIds.ToIntArray();
@@ -75,7 +66,7 @@ public class RuleController : AdminController
                 Selected = selectedArr.Contains(x.Id),
                 UrlTitle = x.Id == -1 ? string.Empty : T("Admin.Rules.OpenRuleSet").Value,
                 Url = x.Id == -1
-                    ? Url.Action("Create", "Rule", new { scope, area = "Admin" })
+                    ? Url.Action("Create", "Rule", new { scope = RuleScope.Customer, area = "Admin" })
                     : Url.Action("Edit", "Rule", new { id = x.Id, area = "Admin" })
             })
             .ToList();
@@ -91,14 +82,7 @@ public class RuleController : AdminController
     [Permission(Permissions.System.Rule.Read)]
     public IActionResult List()
     {
-        return View(new RuleListModel());
-    }
-
-    [Permission(Permissions.System.Rule.Read)]
-    public IActionResult CartRules()
-    {
-        var model = CreateListModel(RuleScope.Cart);
-        return View(nameof(List), model);
+        return View(CreateListModel(RuleScope.Customer));
     }
 
     [Permission(Permissions.System.Rule.Read)]
@@ -109,37 +93,15 @@ public class RuleController : AdminController
     }
 
     [Permission(Permissions.System.Rule.Read)]
-    public IActionResult ProductRules()
-    {
-        var model = CreateListModel(RuleScope.Product);
-        return View(nameof(List), model);
-    }
-
-    [Permission(Permissions.System.Rule.Read)]
     public async Task<IActionResult> RuleSetList(GridCommand command, RuleScope? scope)
     {
-        TempData["RuleScope"] = scope;
-
-        switch (scope)
-        {
-            case RuleScope.Cart:
-                TempData["ReturnUrl"] = Url.Action(nameof(CartRules));
-                break;
-            case RuleScope.Customer:
-                TempData["ReturnUrl"] = Url.Action(nameof(CustomerRules));
-                break;
-            case RuleScope.Product:
-                TempData["ReturnUrl"] = Url.Action(nameof(ProductRules));
-                break;
-            default:
-                TempData.Remove("ReturnUrl");
-                break;
-        }
+        TempData["RuleScope"] = RuleScope.Customer;
+        TempData["ReturnUrl"] = Url.Action(nameof(CustomerRules));
 
         var mapper = MapperFactory.GetMapper<RuleSetEntity, RuleSetModel>();
         var ruleSets = await _db.RuleSets
             .AsNoTracking()
-            .ApplyStandardFilter(scope, false, true)
+            .ApplyStandardFilter(RuleScope.Customer, false, true)
             .ApplyGridCommand(command)
             .ToPagedList(command)
             .LoadAsync();
@@ -174,7 +136,7 @@ public class RuleController : AdminController
 
         if (ids.Any())
         {
-            var ruleSets = await _db.RuleSets.GetManyAsync(ids, true);
+            var ruleSets = await _db.RuleSets.AsTracking().Where(x => ids.Contains(x.Id) && x.Scope == RuleScope.Customer).ToListAsync();
             _db.RuleSets.RemoveRange(ruleSets);
 
             await _db.SaveChangesAsync();
@@ -189,7 +151,7 @@ public class RuleController : AdminController
     {
         TempData.TryGetAndConvertValue<RuleScope?>("RuleScope", out var scope);
 
-        var model = new RuleSetModel();
+        var model = new RuleSetModel { Scope = RuleScope.Customer };
         await PrepareModel(model, null, scope);
 
         TempData.TryGetValueAs<string>("ReturnUrl", out var returnUrl);
@@ -202,8 +164,10 @@ public class RuleController : AdminController
     [Permission(Permissions.System.Rule.Create)]
     public async Task<IActionResult> Create(RuleSetModel model, bool continueEditing)
     {
+        model.Scope = RuleScope.Customer;
         if (!ModelState.IsValid)
         {
+            await PrepareModel(model, null, RuleScope.Customer);
             return View(model);
         }
 
@@ -225,7 +189,7 @@ public class RuleController : AdminController
         var ruleSet = await _db.RuleSets
             .Include(x => x.Rules)
             .FindByIdAsync(id);
-        if (ruleSet == null)
+        if (ruleSet == null || ruleSet.Scope != RuleScope.Customer)
         {
             return NotFound();
         }
@@ -246,11 +210,12 @@ public class RuleController : AdminController
         var ruleSet = await _db.RuleSets
             .Include(x => x.Rules)
             .FindByIdAsync(model.Id);
-        if (ruleSet == null)
+        if (ruleSet == null || ruleSet.Scope != RuleScope.Customer)
         {
             return NotFound();
         }
 
+        model.Scope = RuleScope.Customer;
         await MapperFactory.MapAsync(model, ruleSet);
 
         if (model.RawRuleData.HasValue())
@@ -280,7 +245,7 @@ public class RuleController : AdminController
     public async Task<IActionResult> Delete(int id)
     {
         var ruleSet = await _db.RuleSets.FindByIdAsync(id);
-        if (ruleSet == null)
+        if (ruleSet == null || ruleSet.Scope != RuleScope.Customer)
         {
             return NotFound();
         }
@@ -299,7 +264,7 @@ public class RuleController : AdminController
         var ruleSet = await _db.RuleSets
             .Include(x => x.Rules)
             .FindByIdAsync(id);
-        if (ruleSet == null || ruleSet.IsSubGroup)
+        if (ruleSet == null || ruleSet.IsSubGroup || ruleSet.Scope != RuleScope.Customer)
         {
             return NotFound();
         }
@@ -308,7 +273,6 @@ public class RuleController : AdminController
 
         ViewData["IsSingleStoreMode"] = Services.StoreContext.IsSingleStoreMode();
         ViewData["UsernamesEnabled"] = _customerSettings.SupportsUsernames();
-        ViewData["DisplayProductPictures"] = _adminAreaSettings.DisplayProductPictures;
 
         return View(model);
     }
@@ -320,7 +284,7 @@ public class RuleController : AdminController
         var ruleSet = await _db.RuleSets
             .Include(x => x.Rules)
             .FindByIdAsync(id);
-        if (ruleSet == null || ruleSet.IsSubGroup)
+        if (ruleSet == null || ruleSet.IsSubGroup || ruleSet.Scope != RuleScope.Customer)
         {
             return NotFound();
         }
@@ -357,19 +321,6 @@ public class RuleController : AdminController
 
             return new JsonResult(model);
         }
-        else if (ruleSet.Scope == RuleScope.Product)
-        {
-            var expression = await _ruleService.CreateExpressionGroupAsync(ruleSet, provider, true) as SearchFilterExpression;
-            var searchResult = await ((IProductRuleProvider)provider).SearchAsync([expression], command.Page - 1, command.PageSize);
-            var hits = await searchResult.GetHitsAsync();
-            var rows = await hits.MapAsync(Services.MediaService);
-
-            return new JsonResult(new GridModel<ProductOverviewModel>
-            {
-                Total = searchResult.TotalHitsCount,
-                Rows = rows
-            });
-        }
 
         return new JsonResult(null);
     }
@@ -378,11 +329,6 @@ public class RuleController : AdminController
     [Permission(Permissions.System.Rule.Create)]
     public async Task<IActionResult> AddRule(RuleCommand command)
     {
-        if (await IsProductAttributeRuleSetMissing(command))
-        {
-            command.RuleSetId = await CreateProductAttributeRuleSet(command);
-        }
-
         var provider = await GetProvider(null, command);
         var descriptors = await provider.GetRuleDescriptorsAsync();
         var descriptor = descriptors.FindDescriptor(command.RuleType);
@@ -441,8 +387,8 @@ public class RuleController : AdminController
     [Permission(Permissions.System.Rule.Delete)]
     public async Task<IActionResult> DeleteRule(RuleCommand command)
     {
-        var rule = await _db.Rules.FindByIdAsync(command.RuleId);
-        if (rule == null)
+        var rule = await _db.Rules.Include(x => x.RuleSet).FindByIdAsync(command.RuleId);
+        if (rule == null || rule.RuleSet.Scope != RuleScope.Customer)
         {
             NotifyError(T("Admin.Rules.NotFound", command.RuleId));
             return Json(new { Success = false });
@@ -459,23 +405,11 @@ public class RuleController : AdminController
     [Permission(Permissions.System.Rule.Update)]
     public async Task<IActionResult> ChangeOperator(RuleCommand command)
     {
-        if (await IsProductAttributeRuleSetMissing(command))
-        {
-            NotifyWarning(T("Admin.Rules.AddRuleWarning"));
-            return Json(new { Success = false });
-        }
-
         var andOp = command.Op.EqualsNoCase("and");
         var ruleSet = await _db.RuleSets.FindByIdAsync(command.RuleSetId);
-        if (ruleSet == null)
+        if (ruleSet == null || ruleSet.Scope != RuleScope.Customer)
         {
             NotifyError(T("Admin.Rules.GroupNotFound", command.RuleSetId));
-            return Json(new { Success = false });
-        }
-
-        if (ruleSet.Scope == RuleScope.Product && !andOp)
-        {
-            NotifyError(T("Admin.Rules.OperatorNotSupported"));
             return Json(new { Success = false });
         }
 
@@ -490,18 +424,13 @@ public class RuleController : AdminController
     [Permission(Permissions.System.Rule.Create)]
     public async Task<IActionResult> AddGroup(RuleCommand command)
     {
-        if (await IsProductAttributeRuleSetMissing(command))
-        {
-            command.RuleSetId = await CreateProductAttributeRuleSet(command);
-        }
-
         var provider = await GetProvider(null, command);
 
         var group = new RuleSetEntity
         {
             IsActive = true,
             IsSubGroup = true,
-            Scope = command.Scope
+            Scope = RuleScope.Customer
         };
 
         // RuleSet ID required.
@@ -529,11 +458,11 @@ public class RuleController : AdminController
     [Permission(Permissions.System.Rule.Delete)]
     public async Task<IActionResult> DeleteGroup(RuleCommand command)
     {
-        var refRule = await _db.Rules.FindByIdAsync(command.RuleId);
+        var refRule = await _db.Rules.Include(x => x.RuleSet).FindByIdAsync(command.RuleId);
         var ruleSetId = refRule?.Value?.ToInt() ?? 0;
 
         var group = await _db.RuleSets.FindByIdAsync(ruleSetId);
-        if (group == null)
+        if (group == null || refRule == null || group.Scope != RuleScope.Customer || refRule.RuleSet.Scope != RuleScope.Customer)
         {
             NotifyError(T("Admin.Rules.GroupNotFound", ruleSetId));
             return Json(new { Success = false });
@@ -567,29 +496,12 @@ public class RuleController : AdminController
 
             switch (ruleSet.Scope)
             {
-                case RuleScope.Cart:
-                {
-                    var customer = Services.WorkContext.CurrentCustomer;
-                    var expression = await _ruleService.CreateExpressionGroupAsync(ruleSet, provider, true) as RuleExpression;
-                    var match = await ((ICartRuleProvider)provider).RuleMatchesAsync([expression], LogicalRuleOperator.Or);
-
-                    message = T(match ? "Admin.Rules.Execute.MatchCart" : "Admin.Rules.Execute.DoesNotMatchCart", customer.Username.NullEmpty() ?? customer.Email);
-                }
-                break;
                 case RuleScope.Customer:
                 {
                     var expression = await _ruleService.CreateExpressionGroupAsync(ruleSet, provider, true) as FilterExpression;
                     var result = ((ITargetGroupService)provider).ProcessFilter([expression], LogicalRuleOperator.And, 0, 1);
 
                     message = T("Admin.Rules.Execute.MatchCustomers", result.TotalCount.ToString("N0"));
-                }
-                break;
-                case RuleScope.Product:
-                {
-                    var expression = await _ruleService.CreateExpressionGroupAsync(ruleSet, provider, true) as SearchFilterExpression;
-                    var result = await ((IProductRuleProvider)provider).SearchAsync([expression], 0, 1);
-
-                    message = T("Admin.Rules.Execute.MatchProducts", result.TotalHitsCount.ToString("N0"));
                 }
                 break;
             }
@@ -688,64 +600,23 @@ public class RuleController : AdminController
 
         switch (scope)
         {
-            case RuleScope.Cart:
-                model.ScopeName = T("Common.CartRules");
-                break;
             case RuleScope.Customer:
                 model.ScopeName = T("Common.CustomerRules");
-                break;
-            case RuleScope.Product:
-                model.ScopeName = T("Common.ProductRules");
                 break;
         }
 
         return model;
     }
 
-    private async Task<bool> IsProductAttributeRuleSetMissing(RuleCommand command)
-    {
-        return command.Scope == RuleScope.ProductAttribute
-            && (command.RuleSetId == 0 || !await _db.RuleSets.AnyAsync(x => x.Id == command.RuleSetId));
-    }
-
-    private async Task<int> CreateProductAttributeRuleSet(RuleCommand command)
-    {
-        var attributeId = Guard.NotZero(command.EntityId ?? 0);
-
-        var existingRuleSetId = await _db.RuleSets
-            .Where(x => x.ProductVariantAttributeId == attributeId && x.Scope == RuleScope.ProductAttribute && !x.IsSubGroup)
-            .Select(x => x.Id)
-            .FirstOrDefaultAsync();
-
-        if (existingRuleSetId == 0)
-        {
-            var ruleSet = new RuleSetEntity
-            {
-                Scope = RuleScope.ProductAttribute,
-                IsActive = true,
-                IsSubGroup = false,
-                LogicalOperator = LogicalRuleOperator.And,
-                ProductVariantAttributeId = attributeId
-            };
-
-            _db.Add(ruleSet);
-            await _db.SaveChangesAsync();
-
-            return ruleSet.Id;
-        }
-
-        return existingRuleSetId;
-    }
-
     private async Task PrepareModel(RuleSetModel model, RuleSetEntity ruleSet, RuleScope? scope = null)
     {
-        var scopes = (ruleSet?.Scope ?? scope ?? RuleScope.Cart).ToSelectList();
+        var scopes = RuleScope.Customer.ToSelectList();
 
         ViewBag.Scopes = scopes
             .Select(x =>
             {
                 var ruleScope = (RuleScope)x.Value.ToInt();
-                if (ruleScope >= RuleScope.ProductAttribute)
+                if (ruleScope != RuleScope.Customer)
                 {
                     return null;
                 }
@@ -777,47 +648,17 @@ public class RuleController : AdminController
                 .Select(x => new RuleSetAssignedToEntityModel { Id = x.Id, Name = x.Name })
                 .ToList();
 
-            ViewBag.AssignedToCategories = ruleSet.Categories
-                .Select(x => new RuleSetAssignedToEntityModel { Id = x.Id, Name = x.GetLocalized(y => y.Name) })
-                .ToList();
-
         }
     }
 
     private async Task<IRuleProvider> GetProvider(RuleSetEntity ruleSet, RuleCommand command = null)
     {
-        var scope = ruleSet?.Scope ?? command?.Scope ?? RuleScope.Cart;
-
-        if (scope == RuleScope.ProductAttribute)
+        ruleSet ??= command == null ? null : await _db.RuleSets.FindByIdAsync(command.RuleSetId);
+        if (ruleSet == null || ruleSet.Scope != RuleScope.Customer)
         {
-            int productId;
-            List<ProductVariantAttribute> attributes = null;
-
-            if (ruleSet != null)
-            {
-                await _db.LoadReferenceAsync(ruleSet, x => x.ProductVariantAttribute);
-                productId = ruleSet.ProductVariantAttribute.ProductId;
-            }
-            else
-            {
-                var attributeId = Guard.NotZero(command?.EntityId ?? 0);
-                productId = await _db.ProductVariantAttributes.Where(x => x.Id == attributeId).Select(x => x.ProductId).FirstOrDefaultAsync();
-
-                attributes = await _db.ProductVariantAttributes
-                    .AsNoTracking()
-                    .Include(x => x.ProductAttribute)
-                    .Include(x => x.ProductVariantAttributeValues)
-                    .Where(x => x.ProductId == productId && x.Id != attributeId)
-                    .OrderBy(x => x.DisplayOrder)
-                    .ToListAsync();
-            }
-
-            return _ruleProviderFactory.GetProvider(scope, new AttributeRuleProviderContext(productId)
-            {
-                Attributes = attributes
-            });
+            throw new InvalidOperationException("Only customer rule sets are supported by the CMS rule editor.");
         }
 
-        return _ruleProviderFactory.GetProvider(scope);
+        return _ruleProviderFactory.GetProvider(RuleScope.Customer);
     }
 }

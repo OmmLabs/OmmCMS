@@ -126,7 +126,7 @@ public partial class RuleService : IRuleService
         }
 
         var rules = await _db.Rules
-            .Where(x => ruleIds.Contains(x.Id))
+            .Where(x => ruleIds.Contains(x.Id) && x.RuleSet.Scope == provider.Scope)
             .ToDictionaryAsync(x => x.Id);
         if (rules.Count == 0)
         {

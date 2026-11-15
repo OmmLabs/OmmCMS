@@ -48,6 +48,8 @@ Phases 654–662: removed product messaging models, thumbnail selection, templat
 
 Phases 663–670: detached automatic and batch embedded-image extraction from catalogue entities while retaining CMS topics; removed category tree and product attribute hash maintenance actions, warnings, and the unused attribute migration utility.
 
+Phases 671–679: constrained the administration rule editor to customer groups, removed product/cart/attribute rule presentation and obsolete commerce CAPTCHA targets, and retained customer rule editing, grouping, preview and execution. Legacy rule persistence identifiers are unchanged.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License
