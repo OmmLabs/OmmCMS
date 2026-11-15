@@ -1,5 +1,4 @@
 ﻿using OmmCMS.Admin.Models.Common;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Topics;
 using OmmCMS.Core.Identity;
@@ -191,11 +190,7 @@ public class GenericAttributeController : AdminController
 
     private static (string ReadPermission, string UpdatePermission) GetPermissionNames(string entityName)
     {
-        if (entityName.EqualsNoCase(nameof(Order)))
-        {
-            return (Permissions.Order.Read, Permissions.Order.Update);
-        }
-        else if (entityName.EqualsNoCase(nameof(Topic)))
+        if (entityName.EqualsNoCase(nameof(Topic)))
         {
             return (Permissions.Cms.Topic.Read, Permissions.Cms.Topic.Update);
         }

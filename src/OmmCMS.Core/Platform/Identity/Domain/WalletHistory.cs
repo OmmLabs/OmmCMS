@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using OmmCMS.Core.Checkout.Orders;
 
 namespace OmmCMS.Core.Identity;
 
@@ -28,21 +27,6 @@ public partial class WalletHistory : BaseEntity
     {
         get => _customer ?? LazyLoader.Load(this, ref _customer);
         set => _customer = value;
-    }
-
-    /// <summary>
-    /// Gets or sets the order identifier.
-    /// </summary>
-    public int? OrderId { get; set; }
-
-    private Order _order;
-    /// <summary>
-    /// Gets or sets the order.
-    /// </summary>
-    public Order Order
-    {
-        get => _order ?? LazyLoader.Load(this, ref _order);
-        set => _order = value;
     }
 
     /// <summary>

@@ -277,7 +277,6 @@ public partial class CustomerService : ICustomerService
         var query =
             from c in _db.Customers.IgnoreQueryFilters()
             where c.Username == null && c.Email == null && !c.IsSystemAccount
-                && !_db.Orders.IgnoreQueryFilters().Any(o => o.CustomerId == c.Id)
                 && !_db.CustomerContent.IgnoreQueryFilters().Any(cc => cc.CustomerId == c.Id)
             select c;
 

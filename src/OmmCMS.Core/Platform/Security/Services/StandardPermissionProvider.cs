@@ -26,7 +26,6 @@ public partial class StandardPermissionProvider : IPermissionProvider
                 {
                     new PermissionRecord { SystemName = Permissions.Catalog.Self },
                     new PermissionRecord { SystemName = Permissions.Customer.Self },
-                    new PermissionRecord { SystemName = Permissions.Order.Self },
                     new PermissionRecord { SystemName = Permissions.Promotion.Self },
                     new PermissionRecord { SystemName = Permissions.Cms.Self },
                     new PermissionRecord { SystemName = Permissions.Configuration.Self },

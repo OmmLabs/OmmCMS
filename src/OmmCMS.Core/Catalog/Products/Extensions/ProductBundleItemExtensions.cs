@@ -40,47 +40,4 @@ public static partial class ProductBundleItemExtensions
 
         return null;
     }
-
-    /// <summary>
-    /// Gets a <see cref="ProductBundleItemOrderData"/> for a given <see cref="ProductBundleItem"/>.
-    /// </summary>
-    /// <param name="bundleItem">Bundle item.</param>
-    /// <param name="priceWithDiscount">The price with discount.</param>
-    /// <param name="rawAttributes">The raw attributes string in XML or JSON format.</param>
-    /// <param name="attributesInfo">A localized and formatted description of selected attributes.</param>
-    /// <param name="essentialSpecAttributesInfo">A localized, formatted information of essential specification attributes.</param>
-    /// <returns><see cref="ProductBundleItemOrderData"/>.</returns>
-    public static ProductBundleItemOrderData ToOrderData(
-        this ProductBundleItem bundleItem,
-        decimal priceWithDiscount = decimal.Zero,
-        string rawAttributes = null,
-        string attributesInfo = null,
-        string essentialSpecAttributesInfo = null)
-    {
-        if (bundleItem == null)
-        {
-            return null;
-        }
-
-        string bundleItemName = bundleItem.GetLocalized(x => x.Name);
-
-        var bundleData = new ProductBundleItemOrderData
-        {
-            BundleItemId = bundleItem.Id,
-            ProductId = bundleItem.ProductId,
-            Sku = bundleItem.Product.Sku,
-            ProductName = bundleItemName ?? bundleItem.Product.GetLocalized(x => x.Name),
-            ProductSeName = bundleItem.Product.GetActiveSlug(),
-            VisibleIndividually = bundleItem.Product.Visibility != ProductVisibility.Hidden,
-            Quantity = bundleItem.Quantity,
-            DisplayOrder = bundleItem.DisplayOrder,
-            PriceWithDiscount = priceWithDiscount,
-            RawAttributes = rawAttributes,
-            AttributesInfo = attributesInfo,
-            EssentialSpecAttributesInfo = essentialSpecAttributesInfo,
-            PerItemShoppingCart = bundleItem.BundleProduct.BundlePerItemShoppingCart
-        };
-
-        return bundleData;
-    }
 }

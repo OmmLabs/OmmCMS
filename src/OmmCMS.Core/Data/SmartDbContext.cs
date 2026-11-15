@@ -17,7 +17,7 @@ public abstract class DbSaveHook<TEntity> : DbSaveHook<SmartDbContext, TEntity>
 {
 }
 
-[CheckTables("Customer", "Order", "Product", "QueuedEmailAttachment", "ExportProfile")]
+[CheckTables("Customer", "Topic", "Product", "QueuedEmailAttachment", "ExportProfile")]
 public partial class SmartDbContext : HookingDbContext
 {
     public SmartDbContext(DbContextOptions<SmartDbContext> options)

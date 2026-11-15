@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Sockets;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization;
@@ -59,22 +58,6 @@ public partial class GdprTool : IGdprTool
             if (attributes.Entities.Count != 0)
             {
                 model["Attributes"] = await _messageModelProvider.CreateModelPartAsync(attributes.Entities, true);
-            }
-
-            // Order history
-            var orders = customer.Orders;
-            if (orders.Count != 0)
-            {
-                ignoreMemberNames =
-                [
-                    "Disclaimer", "ConditionsOfUse", "Url", "CheckoutAttributes",
-                    "Items.DownloadUrl",
-                    "Items.Product.Description", "Items.Product.Url", "Items.Product.Thumbnail", "Items.Product.ThumbnailLg",
-                    "Items.BundleItems.Product.Description", "Items.BundleItems.Product.Url", "Items.BundleItems.Product.Thumbnail", "Items.BundleItems.Product.ThumbnailLg",
-                    "Billing.NameLine", "Billing.StreetLine", "Billing.CityLine", "Billing.CountryLine",
-                    "Shipping.NameLine", "Shipping.StreetLine", "Shipping.CityLine", "Shipping.CountryLine"
-                ];
-                model["Orders"] = await orders.SelectAwait(x => _messageModelProvider.CreateModelPartAsync(x, true, ignoreMemberNames)).ToListAsync();
             }
 
             // Wallet
@@ -146,13 +129,6 @@ public partial class GdprTool : IGdprTool
         {
             AnonymizeData(item, x => x.IpAddress, IdentifierDataType.IpAddress, language);
         }
-
-        //// Anonymize Order IPs
-        //// TBD: Don't! Doesn't feel right because of fraud detection etc.
-        //foreach (var order in customer.Orders)
-        //{
-        //	AnonymizeData(order, x => x.CustomerIp, IdentifierDataType.IpAddress, language);
-        //}
 
         await _eventPublisher.PublishAsync(new CustomerAnonymizedEvent(this, customer, language, pseudomyzeContent));
 

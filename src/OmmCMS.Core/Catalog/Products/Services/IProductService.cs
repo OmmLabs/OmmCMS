@@ -1,6 +1,5 @@
 ﻿using OmmCMS.Collections;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Stores;

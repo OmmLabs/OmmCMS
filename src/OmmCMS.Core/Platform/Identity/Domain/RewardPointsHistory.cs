@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using OmmCMS.Core.Checkout.Orders;
 
 namespace OmmCMS.Core.Identity;
 
@@ -50,12 +49,4 @@ public class RewardPointsHistory : BaseEntity
     /// Gets or sets the date of instance creation.
     /// </summary>
     public DateTime CreatedOnUtc { get; set; }
-
-    [Column("UsedWithOrder_Id")]
-    public int? UsedWithOrderId { get; set; }
-
-    /// <summary>
-    /// Gets or sets the order for which points were redeemed as a payment.
-    /// </summary>
-    public Order UsedWithOrder { get; set; }
 }

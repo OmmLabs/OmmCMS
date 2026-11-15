@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media;
@@ -114,11 +113,6 @@ public partial class MessageModelHelper
             utcDate.Value,
             TimeZoneInfo.Utc,
             _dateTimeHelper.GetCustomerTimeZone(messageContext.Customer));
-    }
-
-    public Money FormatPrice(decimal price, Order order, MessageContext messageContext)
-    {
-        return FormatPrice(price, order.CustomerCurrencyCode, messageContext, order.CurrencyRate);
     }
 
     public Money FormatPrice(decimal price, MessageContext messageContext, decimal exchangeRate = 1)

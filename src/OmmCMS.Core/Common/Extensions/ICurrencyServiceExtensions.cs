@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Checkout.Orders;
-using OmmCMS.Core.Common;
+﻿using OmmCMS.Core.Common;
 using OmmCMS.Core.Common.Services;
 
 namespace OmmCMS;
@@ -59,8 +58,8 @@ public static partial class ICurrencyServiceExtensions
     /// Typically used when converting money amounts of orders at the rate that was applied at the time the order was placed.
     /// </summary>
     /// <param name="amount">The source amount to exchange (should be in <see cref="ICurrencyService.PrimaryCurrency"/>).</param>
-    /// <param name="exchangeRate">The currency exchange rate, e.g. <see cref="Order.CurrencyRate"/>.</param>
-    /// <param name="currencyCodeOrObj">Target currency as string code (e.g. <see cref="Order.CustomerCurrencyCode"/>) or an actual <see cref="Currency"/> instance.</param>
+    /// <param name="exchangeRate">The currency exchange rate, used for conversion.</param>
+    /// <param name="currencyCodeOrObj">Target currency as string code or an actual <see cref="Currency"/> instance.</param>
     /// <param name="displayCurrency">A value indicating whether to display the currency symbol/code.</param>
     /// <returns>The exchanged amount.</returns>
     public static Money ConvertToExchangeRate(this ICurrencyService service,

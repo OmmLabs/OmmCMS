@@ -5,7 +5,6 @@ using OmmCMS.Collections;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Brands;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Content.Menus;
 using OmmCMS.Core.Data;
@@ -305,19 +304,6 @@ public partial class ProductService : IProductService
         if (productIds.IsNullOrEmpty())
         {
             return result;
-        }
-
-        // INFO: never ever delete products with assigned order items. Relationship has a cascade delete rule (dangerous).
-        var excludeProductIds = await _db.OrderItems
-            .Where(x => productIds.Contains(x.ProductId))
-            .Select(x => x.ProductId)
-            .Distinct()
-            .ToArrayAsync(cancelToken);
-
-        if (excludeProductIds.Length > 0)
-        {
-            productIds = productIds.Except(excludeProductIds).ToArray();
-            result.SkippedRecords = excludeProductIds.Length;
         }
 
         foreach (var productIdsChunk in productIds.Chunk(50))

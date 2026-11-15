@@ -110,7 +110,6 @@ internal class CoreStarter : StarterBase
 
     internal static void RegisterTypeConverters()
     {
-        TypeConverterFactory.Providers.Insert(0, new ProductBundleItemOrderDataConverterProvider());
     }
 
     public override void ConfigureContainer(ContainerBuilder builder, IApplicationContext appContext)

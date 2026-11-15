@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Stores;
 
@@ -304,16 +303,6 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
         protected set => _customerRoleMappings = value;
     }
 
-    private ICollection<Order> _orders;
-    /// <summary>
-    /// Gets or sets orders
-    /// </summary>        
-    public ICollection<Order> Orders
-    {
-        get => _orders ?? LazyLoader.Load(this, ref _orders) ?? (_orders ??= new HashSet<Order>());
-        protected internal set => _orders = value;
-    }
-
     private ICollection<RewardPointsHistory> _rewardPointsHistory;
     /// <summary>
     /// Gets or sets the reward points history.
@@ -388,12 +377,10 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
     /// </summary>
     /// <param name="points">Points to add.</param>
     /// <param name="message">Optional message.</param>
-    /// <param name="usedWithOrder">Order for which the points were used.</param>
     /// <param name="usedAmount">Used amount.</param>
     public void AddRewardPointsHistoryEntry(
         int points,
         string message = "",
-        Order usedWithOrder = null,
         decimal usedAmount = 0M)
     {
         var newPointsBalance = GetRewardPointsBalance() + points;
@@ -401,7 +388,6 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
         RewardPointsHistory.Add(new RewardPointsHistory
         {
             Customer = this,
-            UsedWithOrder = usedWithOrder,
             Points = points,
             PointsBalance = newPointsBalance,
             UsedAmount = usedAmount,

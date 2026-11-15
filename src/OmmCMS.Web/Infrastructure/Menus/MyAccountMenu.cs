@@ -1,5 +1,4 @@
 ﻿using OmmCMS.Collections;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Configuration;
 using OmmCMS.Core.Content.Menus;
 using OmmCMS.Core.Identity;

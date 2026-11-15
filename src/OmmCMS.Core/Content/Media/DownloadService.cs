@@ -1,5 +1,4 @@
 ﻿using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Data;
 
@@ -30,40 +29,6 @@ public partial class DownloadService : IDownloadService
         await _db.SaveChangesAsync();
 
         return file;
-    }
-
-    public virtual bool IsDownloadAllowed(OrderItem orderItem)
-    {
-        var order = orderItem?.Order;
-        var product = orderItem?.Product;
-
-        if (order == null
-            || order.Deleted
-            || order.OrderStatus == OrderStatus.Cancelled
-            || product == null
-            || !product.IsDownload)
-        {
-            return false;
-        }
-
-        // Check payment status
-        if (product.DownloadActivationType == DownloadActivationType.WhenOrderIsPaid
-            && order.PaymentStatus == PaymentStatus.Paid
-            && order.PaidDateUtc.HasValue)
-        {
-            return CheckExpiration(order.PaidDateUtc.Value);
-        }
-        else if (product.DownloadActivationType == DownloadActivationType.Manually && orderItem.IsDownloadActivated)
-        {
-            return CheckExpiration(order.CreatedOnUtc);
-        }
-
-        return false;
-
-        bool CheckExpiration(DateTime date)
-        {
-            return product.DownloadExpirationDays == null || date.AddDays(product.DownloadExpirationDays.Value) > DateTime.UtcNow;
-        }
     }
 
     public virtual Stream OpenDownloadStream(Download download)

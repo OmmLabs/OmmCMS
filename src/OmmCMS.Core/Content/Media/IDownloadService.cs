@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Checkout.Orders;
-
+﻿
 namespace OmmCMS.Core.Content.Media;
 
 /// <summary>
@@ -17,13 +16,6 @@ public interface IDownloadService
     Task<MediaFileInfo> InsertDownloadAsync(Download download, Stream stream, string fileName);
 
     /// <summary>
-    /// Gets a value indicating whether download is allowed for given <paramref name="orderItem"/>.
-    /// </summary>
-    /// <param name="orderItem">Order item to check</param>
-    /// <returns>True if download is allowed; otherwise, false.</returns>
-    bool IsDownloadAllowed(OrderItem orderItem);
-
-    /// <summary>
     /// Opens the download file's stream for reading.
     /// </summary>
     Stream OpenDownloadStream(Download download);
@@ -32,12 +24,4 @@ public interface IDownloadService
     /// Opens the download file's stream for reading.
     /// </summary>
     Task<Stream> OpenDownloadStreamAsync(Download download);
-}
-
-public static class IDownloadServiceExtensions
-{
-    public static bool IsLicenseDownloadAllowed(this IDownloadService service, OrderItem orderItem)
-    {
-        return service.IsDownloadAllowed(orderItem) && orderItem?.LicenseDownloadId > 0;
-    }
 }

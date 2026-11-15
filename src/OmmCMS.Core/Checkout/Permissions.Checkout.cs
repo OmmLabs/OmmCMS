@@ -2,17 +2,6 @@
 
 public static partial class Permissions
 {
-    public static class Order
-    {
-        public const string Self = "order";
-        public const string Read = "order.read";
-        public const string Update = "order.update";
-        public const string Create = "order.create";
-        public const string Delete = "order.delete";
-        public const string EditItem = "order.editorderitem";
-
-    }
-
     public static partial class Promotion
     {
         public const string Self = "promotion";

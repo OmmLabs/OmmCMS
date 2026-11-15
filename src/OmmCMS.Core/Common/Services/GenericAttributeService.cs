@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Checkout.Orders;
-using OmmCMS.Core.Data;
+﻿using OmmCMS.Core.Data;
 using OmmCMS.Core.Stores;
 using OmmCMS.Data.Hooks;
 using OmmCMS.Events;

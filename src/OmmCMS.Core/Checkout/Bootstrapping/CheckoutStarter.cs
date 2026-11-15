@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Rules;
 using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Identity.Rules;
