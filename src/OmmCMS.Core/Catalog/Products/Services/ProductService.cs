@@ -28,10 +28,7 @@ public partial class ProductService : IProductService
     private readonly ICacheManager _cache;
     private readonly IComponentContext _componentContext;
     private readonly Lazy<IProductTagService> _productTagService;
-    private readonly IProductAttributeMaterializer _productAttributeMaterializer;
     private readonly IUrlService _urlService;
-    private readonly IMessageFactory _messageFactory;
-    private readonly LocalizationSettings _localizationSettings;
 
     public ProductService(
         SmartDbContext db,
@@ -41,10 +38,7 @@ public partial class ProductService : IProductService
         ICacheManager cache,
         IComponentContext componentContext,
         Lazy<IProductTagService> productTagService,
-        IProductAttributeMaterializer productAttributeMaterializer,
-        IUrlService urlService,
-        IMessageFactory messageFactory,
-        LocalizationSettings localizationSettings)
+        IUrlService urlService)
     {
         _db = db;
         _workContext = workContext;
@@ -53,10 +47,7 @@ public partial class ProductService : IProductService
         _cache = cache;
         _componentContext = componentContext;
         _productTagService = productTagService;
-        _productAttributeMaterializer = productAttributeMaterializer;
         _urlService = urlService;
-        _messageFactory = messageFactory;
-        _localizationSettings = localizationSettings;
     }
 
     public ILogger Logger { get; set; } = NullLogger.Instance;
@@ -142,145 +133,6 @@ public partial class ProductService : IProductService
         }
 
         return map;
-    }
-
-    public virtual async Task<AdjustInventoryResult> AdjustInventoryAsync(OrderItem orderItem, bool decrease, int quantity)
-    {
-        Guard.NotNull(orderItem);
-
-        await _db.LoadReferenceAsync(orderItem, x => x.Product, false);
-
-        if (orderItem.Product.ProductType == ProductType.BundledProduct && orderItem.Product.BundlePerItemShoppingCart)
-        {
-            if (orderItem.BundleData.HasValue())
-            {
-                var bundleData = orderItem.GetBundleData();
-                if (bundleData.Count > 0)
-                {
-                    var productIds = bundleData.ToDistinctArray(x => x.ProductId);
-                    var products = await _db.Products
-                        .Where(x => productIds.Contains(x.Id))
-                        .ToListAsync();
-
-                    var productsDic = products.ToDictionary(x => x.Id);
-
-                    foreach (var item in bundleData)
-                    {
-                        if (productsDic.TryGetValue(item.ProductId, out var product))
-                        {
-                            await AdjustInventoryAsync(product, item.AttributeSelection, decrease, quantity * item.Quantity);
-                        }
-                    }
-                }
-            }
-
-            return new AdjustInventoryResult();
-        }
-        else
-        {
-            return await AdjustInventoryAsync(orderItem.Product, orderItem.AttributeSelection, decrease, quantity);
-        }
-    }
-
-    public virtual async Task<AdjustInventoryResult> AdjustInventoryAsync(Product product, ProductVariantAttributeSelection selection, bool decrease, int quantity)
-    {
-        Guard.NotNull(product);
-
-        var result = new AdjustInventoryResult();
-
-        switch (product.ManageInventoryMethod)
-        {
-            case ManageInventoryMethod.ManageStock:
-            {
-                result.StockQuantityOld = product.StockQuantity;
-
-                result.StockQuantityNew = decrease
-                    ? product.StockQuantity - quantity
-                    : product.StockQuantity + quantity;
-
-                var newPublished = product.Published;
-                var newDisableBuyButton = product.DisableBuyButton;
-                var newDisableWishlistButton = product.DisableWishlistButton;
-
-                // Check if the minimum quantity is reached.
-                switch (product.LowStockActivity)
-                {
-                    case LowStockActivity.DisableBuyButton:
-                        newDisableBuyButton = product.MinStockQuantity >= result.StockQuantityNew;
-                        newDisableWishlistButton = product.MinStockQuantity >= result.StockQuantityNew;
-                        break;
-                    case LowStockActivity.Unpublish:
-                        newPublished = product.MinStockQuantity < result.StockQuantityNew;
-                        break;
-                }
-
-                product.StockQuantity = result.StockQuantityNew;
-                product.DisableBuyButton = newDisableBuyButton;
-                product.DisableWishlistButton = newDisableWishlistButton;
-                product.Published = newPublished;
-
-                // INFO: Force change detection if this is called after a batch commit of the ProductImporter.
-                _db.TryChangeState(product, EfState.Modified);
-
-                // SaveChanges is not necessary because SendQuantityBelowStoreOwnerNotificationAsync
-                // does not reload anything that has been changed in the meantime.
-
-                if (decrease
-                    && result.StockQuantityOld != result.StockQuantityNew
-                    && product.NotifyAdminForQuantityBelow > result.StockQuantityNew)
-                {
-                    await _messageFactory.SendQuantityBelowStoreOwnerNotificationAsync(product, _localizationSettings.DefaultAdminLanguageId);
-                }
-            }
-            break;
-            case ManageInventoryMethod.ManageStockByAttributes:
-            {
-                var combination = await _productAttributeMaterializer.FindAttributeCombinationAsync(product.Id, selection);
-                if (combination != null)
-                {
-                    _db.TryChangeState(combination, EfState.Unchanged);
-
-                    result.StockQuantityOld = combination.StockQuantity;
-
-                    result.StockQuantityNew = decrease
-                        ? combination.StockQuantity - quantity
-                        : combination.StockQuantity + quantity;
-
-                    combination.StockQuantity = result.StockQuantityNew;
-                }
-            }
-            break;
-            case ManageInventoryMethod.DontManageStock:
-            default:
-                // Do nothing.
-                break;
-        }
-
-        if (selection != null)
-        {
-            var attributeValues = await _productAttributeMaterializer.MaterializeProductVariantAttributeValuesAsync(selection);
-
-            var productLinkageValues = attributeValues
-                .Where(x => x.ValueType == ProductVariantAttributeValueType.ProductLinkage)
-                .ToList();
-
-            foreach (var chunk in productLinkageValues.Chunk(100))
-            {
-                var linkedProductIds = chunk.Select(x => x.LinkedProductId).Distinct().ToArray();
-                var linkedProducts = await _db.Products.GetManyAsync(linkedProductIds, true);
-                var linkedProductsDic = linkedProducts.ToDictionarySafe(x => x.Id);
-
-                foreach (var value in chunk)
-                {
-                    if (linkedProductsDic.TryGetValue(value.LinkedProductId, out var linkedProduct))
-                    {
-                        await AdjustInventoryAsync(linkedProduct, null, decrease, quantity * value.Quantity);
-                    }
-                }
-            }
-        }
-
-        return result;
     }
 
     public virtual ProductBatchContext CreateProductBatchContext(

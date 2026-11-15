@@ -33,25 +33,6 @@ public partial interface IProductService
     Task<Multimap<int, ProductTag>> GetProductTagsByProductIdsAsync(int[] productIds, bool includeHidden = false);
 
     /// <summary>
-    /// Adjusts product inventory. The caller is responsible for database commit.
-    /// </summary>
-    /// <param name="orderItem">Order item.</param>
-    /// <param name="decrease">A value indicating whether to increase or descrease product stock quantity.</param>
-    /// <param name="quantity">The quantity to adjust.</param>
-    /// <returns>Adjust inventory result.</returns>
-    Task<AdjustInventoryResult> AdjustInventoryAsync(OrderItem orderItem, bool decrease, int quantity);
-
-    /// <summary>
-    /// Adjusts product inventory. The caller is responsible for database commit.
-    /// </summary>
-    /// <param name="product">Product entity.</param>
-    /// <param name="selection">Selected attributes.</param>
-    /// <param name="decrease">A value indicating whether to increase or descrease product stock quantity.</param>
-    /// <param name="quantity">The quantity to adjust.</param>
-    /// <returns>Adjust inventory result.</returns>
-    Task<AdjustInventoryResult> AdjustInventoryAsync(Product product, ProductVariantAttributeSelection selection, bool decrease, int quantity);
-
-    /// <summary>
     /// Creates a product batch context for fast retrieval (eager loading) of product navigation properties.
     /// </summary>
     /// <param name="products">Products. <c>null</c> to lazy load data if required.</param>

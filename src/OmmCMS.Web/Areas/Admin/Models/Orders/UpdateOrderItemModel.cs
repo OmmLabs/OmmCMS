@@ -9,8 +9,6 @@ public class UpdateOrderItemModel : EntityModelBase
     public bool ShowUpdateRewardPoints { get; set; }
     public bool ShowUpdateTotals { get; set; }
 
-    [LocalizedDisplay("*AdjustInventory")]
-    public bool AdjustInventory { get; set; } = true;
 
     [LocalizedDisplay("*UpdateRewardPoints")]
     public bool UpdateRewardPoints { get; set; }

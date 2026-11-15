@@ -90,21 +90,4 @@ public static partial class CatalogMessageFactoryExtensions
             product,
             model);
     }
-
-    /// <summary>
-    /// Sends a "quantity below" notification to a store owner.
-    /// </summary>
-    /// <param name="factory">Message factory.</param>
-    /// <param name="product">Product.</param>
-    /// <param name="languageId">Language identifier.</param>
-    /// <returns>Create message result.</returns>
-    public static Task<CreateMessageResult> SendQuantityBelowStoreOwnerNotificationAsync(this IMessageFactory factory, Product product, int languageId = 0)
-    {
-        Guard.NotNull(product);
-
-        return factory.CreateMessageAsync(
-            MessageContext.Create(MessageTemplateNames.QuantityBelowStoreOwner, languageId),
-            true,
-            product);
-    }
 }

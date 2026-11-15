@@ -9,18 +9,14 @@ namespace OmmCMS.Core.Catalog.Products;
 internal class ProductHook : AsyncDbSaveHook<Product>
 {
     private readonly SmartDbContext _db;
-    private readonly Lazy<IProductService> _productService;
 
-    private readonly HashSet<BaseEntity> _toAdjustInventory = new();
     private readonly HashSet<int> _oldSampleDownloadIds = new();
     private string _hookErrorMessage;
 
     public ProductHook(
-        SmartDbContext db,
-        Lazy<IProductService> productService)
+        SmartDbContext db)
     {
         _db = db;
-        _productService = productService;
     }
 
     protected override Task<HookResult> OnInsertedAsync(Product entity, IHookedEntity entry, CancellationToken cancelToken)
@@ -34,21 +30,6 @@ internal class ProductHook : AsyncDbSaveHook<Product>
     {
         if (entry.State == EState.Modified && entry.Entity is Product p)
         {
-            if (p.ManageInventoryMethod == ManageInventoryMethod.ManageStock)
-            {
-                var prop = entry.Entry.Property(nameof(Product.StockQuantity));
-                if (prop?.CurrentValue != null && prop?.OriginalValue != null)
-                {
-                    var stockQuantityInDatabase = (int)prop.OriginalValue;
-                    var newStockQuantity = (int)prop.CurrentValue;
-
-                    if (newStockQuantity != stockQuantityInDatabase)
-                    {
-                        _toAdjustInventory.Add(entry.Entity);
-                    }
-                }
-            }
-
             var sampleDownloadIdProp = entry.Entry.Property(nameof(Product.SampleDownloadId));
             var oldDownloadId = sampleDownloadIdProp.OriginalValue != null ? (int)sampleDownloadIdProp.OriginalValue : 0;
             var newDownloadId = sampleDownloadIdProp.CurrentValue != null ? (int)sampleDownloadIdProp.CurrentValue : 0;
@@ -126,17 +107,6 @@ internal class ProductHook : AsyncDbSaveHook<Product>
             await _db.Downloads
                 .Where(x => _oldSampleDownloadIds.Contains(x.Id))
                 .ExecuteUpdateAsync(x => x.SetProperty(d => d.IsTransient, d => true), cancelToken);
-        }
-
-        if (_toAdjustInventory.Count > 0)
-        {
-            foreach (var entity in _toAdjustInventory)
-            {
-                await _productService.Value.AdjustInventoryAsync(entity as Product, null, true, 0);
-            }
-
-            await _db.SaveChangesAsync(cancelToken);
-            _toAdjustInventory.Clear();
         }
     }
 }
