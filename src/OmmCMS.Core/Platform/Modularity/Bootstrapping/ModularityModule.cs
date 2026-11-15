@@ -3,7 +3,6 @@ using Autofac.Builder;
 using Humanizer;
 using Microsoft.Extensions.FileProviders;
 using OmmCMS.Core.AI;
-using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media.Storage;
@@ -138,7 +137,6 @@ public sealed class ModularityModule : Module
             // Register specific provider type.
             RegisterAsSpecificProvider<ITaxProvider>(type, systemName, registration);
             RegisterAsSpecificProvider<IExchangeRateProvider>(type, systemName, registration);
-            RegisterAsSpecificProvider<IShippingRateComputationMethod>(type, systemName, registration);
             RegisterAsSpecificProvider<IActivatableWidget>(type, systemName, registration);
             RegisterAsSpecificProvider<IExportProvider>(type, systemName, registration);
             RegisterAsSpecificProvider<IOutputCacheProvider>(type, systemName, registration);
@@ -275,10 +273,6 @@ public sealed class ModularityModule : Module
         else if (typeof(IExchangeRateProvider).IsAssignableFrom(implType))
         {
             return "Payment";
-        }
-        else if (typeof(IShippingRateComputationMethod).IsAssignableFrom(implType))
-        {
-            return "Shipping";
         }
         //else if (typeof(IExternalAuthenticationMethod).IsAssignableFrom(implType))
         //{

@@ -421,12 +421,6 @@ public static class CustomerExtensions
             ga.Set(SystemCustomerAttributeNames.UseCreditBalanceDuringCheckout, decimal.Zero, storeId);
         }
 
-        if (flags.HasFlag(CheckoutDataResetFlags.ShippingMethod))
-        {
-            ga.Set<string?>(SystemCustomerAttributeNames.SelectedShippingOption, null, storeId);
-            ga.Set<string?>(SystemCustomerAttributeNames.OfferedShippingOptions, null, storeId);
-        }
-
         if (flags.HasFlag(CheckoutDataResetFlags.CheckoutOrderData))
         {
             ga.Set<string?>(SystemCustomerAttributeNames.CheckoutOrderData, null, storeId);

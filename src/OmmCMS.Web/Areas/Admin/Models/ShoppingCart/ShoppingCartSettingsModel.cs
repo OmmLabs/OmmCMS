@@ -83,12 +83,6 @@ public class ShoppingCartSettingsModel : ILocalizedModel<ShoppingCartSettingsLoc
     [LocalizedDisplay("*QuickCheckoutEnabled")]
     public bool QuickCheckoutEnabled { get; set; }
 
-    [LocalizedDisplay("*CustomersCanChangePreferredShipping")]
-    public bool CustomersCanChangePreferredShipping { get; set; }
-
-    [LocalizedDisplay("*CustomersCanChangePreferredPayment")]
-    public bool CustomersCanChangePreferredPayment { get; set; }
-
     [LocalizedDisplay("*ShowSecondBuyButtonBelowCart")]
     public bool ShowSecondBuyButtonBelowCart { get; set; }
 

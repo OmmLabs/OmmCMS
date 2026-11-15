@@ -34,8 +34,8 @@ the ID of a seed record are written as `"$ref:{EntityType}:{key}"`, e.g. `"$ref:
 Its overlay has the same shape and is merged field by field.
 
 Settings that do not belong to a settings class, e.g. because their key contains an entity ID, go into the
-special object `"SettingKeys"`. Placeholders `{$ref:{EntityType}:{key}}` in a key are replaced by the ID:
-`{ "SettingKeys": { "ShippingRateComputationMethod.FixedRate.Rate.ShippingMethodId{$ref:ShippingMethod:by-ground}": 4.90 } }`.
+special object `"SettingKeys"`. Placeholders `{$ref:{EntityType}:{key}}` in a key are replaced by the ID,
+for example `{$ref:Currency:EUR}`.
 
 - **Base files** are JSON **arrays** of records.
 - **Overlay files** are JSON **objects** and live under the same relative path as their
@@ -132,8 +132,7 @@ They have the same format as culture overlays. Order, lowest first:
 base/core  →  base/samples/core  →  cultures/{culture}/core  →  cultures/{culture}/samples/core
 ```
 
-Examples: the demo shop's catalog settings and price display, shipping as default shipping method with a
-shipping rate, and the tax categories of the demo catalog.
+Examples: the demo catalog settings, price display, and tax categories.
 
 ## Long texts (`@file`)
 
@@ -264,7 +263,7 @@ In installation order. `core/` is always installed, `samples/` only with sample 
 | Locale resources | `cultures/{culture}/resources/*` |
 | Currencies, store | `core/currencies.json`, `core/stores.json` |
 | Measures, tax categories (with `rate`, `$aliases`), countries and states | `core/measure-dimensions.json`, `core/measure-weights.json`, `core/tax-categories.json`, `core/countries.json` |
-| Shipping, delivery, quantity units | `core/shipping-methods.json`, `core/delivery-times.json`, `core/quantity-units.json` |
+| Delivery, quantity units | `core/delivery-times.json`, `core/quantity-units.json` |
 | Customer roles, admin address, system customers | `core/customer-roles.json` (+ `samples/`), `core/admin-address.json`, `core/system-customers.json` |
 | Email accounts, topics (with `slug` overrides), price labels | `core/email-accounts.json`, `core/topics.json`, `core/price-labels.json` |
 | Settings (`$ref` values) | `core/settings.json` |

@@ -31,16 +31,6 @@ public static partial class Permissions
 
     public static partial class Configuration
     {
-        public static class Shipping
-        {
-            public const string Self = "configuration.shipping";
-            public const string Read = "configuration.shipping.read";
-            public const string Update = "configuration.shipping.update";
-            public const string Create = "configuration.shipping.create";
-            public const string Delete = "configuration.shipping.delete";
-            public const string Activate = "configuration.shipping.activate";
-        }
-
         public static class Tax
         {
             public const string Self = "configuration.tax";

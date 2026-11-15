@@ -180,7 +180,6 @@ public abstract class ServiceTestBase
     private void InitProviders()
     {
         _providerManager.RegisterProvider("FixedTaxRateTest", new FixedRateTestTaxProvider());
-        _providerManager.RegisterProvider("FixedRateTestShippingRateComputationMethod", new FixedRateTestShippingRateComputationMethod());
         _providerManager.RegisterProvider("CurrencyExchange.TestProvider", new TestExchangeRateProvider());
         _providerManager.RegisterProvider(DatabaseMediaStorageProvider.SystemName, new TestDatabaseMediaStorageProvider());
     }

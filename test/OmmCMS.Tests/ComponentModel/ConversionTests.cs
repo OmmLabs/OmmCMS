@@ -9,7 +9,6 @@ using NUnit.Framework;
 using OmmCMS.ComponentModel;
 using OmmCMS.ComponentModel.TypeConverters;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Net.Mail;
 using OmmCMS.Test.Common;
 
@@ -193,54 +192,6 @@ public class ConversionTests
         arr4.ShouldBe<float[]>();
         Assert.That(list5, Has.Count.EqualTo(5));
         Assert.That(list5[3], Is.EqualTo("4"));
-    }
-
-    [Test]
-    public void CanConvertShippingOptions()
-    {
-        TypeConverterFactory.Providers.Insert(0, new ShippingOptionConverterProvider());
-
-        var shippingOption = new ShippingOption
-        {
-            ShippingMethodId = 2,
-            Name = "Name",
-            Description = "Desc",
-            Rate = 1,
-            ShippingRateComputationMethodSystemName = "SystemName"
-        };
-        var soStr = shippingOption.Convert<string>();
-        Assert.That(soStr, Is.Not.Empty);
-
-        var arr = (new[] { shippingOption.Convert<string>() }).Convert<ShippingOption[]>();
-        arr.ShouldBe<ShippingOption[]>();
-        Assert.That(arr, Has.Length.EqualTo(1));
-        Assert.That(arr[0].Name, Is.EqualTo("Name"));
-
-        shippingOption = soStr.Convert<ShippingOption>();
-        Assert.That(shippingOption, Is.Not.Null);
-        Assert.That(shippingOption.ShippingMethodId, Is.EqualTo(2));
-        Assert.That(shippingOption.Name, Is.EqualTo("Name"));
-        Assert.That(shippingOption.Description, Is.EqualTo("Desc"));
-        Assert.That(shippingOption.Rate, Is.EqualTo(1));
-        Assert.That(shippingOption.ShippingRateComputationMethodSystemName, Is.EqualTo("SystemName"));
-
-        var shippingOptions = new List<ShippingOption>
-        {
-            new() { ShippingMethodId = 1, Name = "Name1", Description = "Desc1" },
-            new() { ShippingMethodId = 2, Name = "Name2", Description = "Desc2" }
-        };
-        soStr = shippingOptions.Convert<string>();
-        Assert.That(soStr, Is.Not.Empty);
-
-        shippingOptions = soStr.Convert<List<ShippingOption>>();
-        Assert.That(shippingOptions, Has.Count.EqualTo(2));
-        Assert.That(shippingOptions[1].ShippingMethodId, Is.EqualTo(2));
-        Assert.That(shippingOptions[1].Description, Is.EqualTo("Desc2"));
-
-        var shippingOptions2 = soStr.Convert<IList<ShippingOption>>();
-        Assert.That(shippingOptions2, Has.Count.EqualTo(2));
-        Assert.That(shippingOptions[1].ShippingMethodId, Is.EqualTo(2));
-        Assert.That(shippingOptions2.First().Description, Is.EqualTo("Desc1"));
     }
 
     [Test]

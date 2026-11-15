@@ -4,7 +4,6 @@ using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Rules;
 using OmmCMS.Core.Checkout.Shipping;
-using OmmCMS.Core.Checkout.Shipping.Rules;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Identity.Rules;
 using OmmCMS.Core.Rules;
@@ -32,7 +31,6 @@ internal sealed class CheckoutStarter : StarterBase
         builder.RegisterType<CheckoutAttributeFormatter>().As<ICheckoutAttributeFormatter>().InstancePerLifetimeScope();
         builder.RegisterType<ShoppingCartValidator>().As<IShoppingCartValidator>().InstancePerLifetimeScope();
         builder.RegisterType<ShoppingCartService>().As<IShoppingCartService>().InstancePerLifetimeScope();
-        builder.RegisterType<ShippingService>().As<IShippingService>().InstancePerLifetimeScope();
         builder.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
         builder.RegisterType<TaxService>().As<ITaxService>().InstancePerLifetimeScope();
         builder.RegisterType<TaxCalculator>().As<ITaxCalculator>().InstancePerLifetimeScope();
@@ -48,8 +46,6 @@ internal sealed class CheckoutStarter : StarterBase
 
         // Rule options provider.
         builder.RegisterType<AuthenticationMethodRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
-        builder.RegisterType<ShippingRateComputationMethodRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
-        builder.RegisterType<ShippingMethodRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
     }
 
 }

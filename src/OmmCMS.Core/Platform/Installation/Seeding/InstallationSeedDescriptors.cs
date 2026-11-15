@@ -4,7 +4,6 @@ using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Catalog.Pricing;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Checkout.Tax;
 using System.Text.Json.Nodes;
 using OmmCMS.Core.Common;
@@ -42,9 +41,6 @@ internal static class InstallationSeedDescriptors
 
     public static SeedEntityDescriptor<PriceLabel> PriceLabels()
         => new SeedEntityDescriptor<PriceLabel>("key").FromFiles("core/price-labels.json");
-
-    public static SeedEntityDescriptor<ShippingMethod> ShippingMethods()
-        => new SeedEntityDescriptor<ShippingMethod>("key").FromFiles("core/shipping-methods.json");
 
     public static SeedEntityDescriptor<CustomerRole> CustomerRoles(bool includeSamples)
         => new SeedEntityDescriptor<CustomerRole>("systemName").FromFiles(WithSamples("customer-roles.json", includeSamples));
@@ -217,13 +213,12 @@ internal static class InstallationSeedDescriptors
     }
 
     /// <summary>
-    /// Rule sets with their rules, and the shipping methods and customer roles they apply to.
+    /// Rule sets with their rules, and the customer roles they apply to.
     /// </summary>
     public static SeedEntityDescriptor<RuleSetEntity> RuleSets()
         => new SeedEntityDescriptor<RuleSetEntity>("key")
             .FromFiles("samples/rule-sets.json")
             .Child("rules", x => x.Rules, new SeedEntityDescriptor<RuleEntity>("ruleType"))
-            .References<ShippingMethod>("shippingMethods", (ruleSet, methods) => methods.Each(ruleSet.ShippingMethods.Add))
             .References<CustomerRole>("customerRoles", (ruleSet, roles) => roles.Each(ruleSet.CustomerRoles.Add));
 
     public static SeedEntityDescriptor<Discount> Discounts()

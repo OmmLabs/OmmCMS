@@ -6,7 +6,6 @@ using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Catalog.Discounts;
 using OmmCMS.Core.Checkout.Attributes;
-using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Identity;
 using OmmCMS.Data.Caching;
 
@@ -116,16 +115,6 @@ public partial class RuleSetEntity : EntityWithAttributes, IAuditable
     {
         get => _checkoutAttributes ?? LazyLoader.Load(this, ref _checkoutAttributes) ?? (_checkoutAttributes ??= new HashSet<CheckoutAttribute>());
         protected set => _checkoutAttributes = value;
-    }
-
-    private ICollection<ShippingMethod> _shippingMethods;
-    /// <summary>
-    /// Gets or sets assigned shipping methods.
-    /// </summary>
-    public ICollection<ShippingMethod> ShippingMethods
-    {
-        get => _shippingMethods ?? LazyLoader.Load(this, ref _shippingMethods) ?? (_shippingMethods ??= new HashSet<ShippingMethod>());
-        protected set => _shippingMethods = value;
     }
 
     private ICollection<CustomerRole> _customerRoles;

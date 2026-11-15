@@ -147,16 +147,15 @@ public enum CheckoutDataResetFlags
     CouponCodes = 1 << 0,
     CheckoutAttributes = 1 << 1,
     RewardPoints = 1 << 2,
-    ShippingMethod = 1 << 3,
     CreditBalance = 1 << 5,
     CheckoutOrderData = 1 << 6,
 
     /// <summary>
-    /// The data reset by default when the checkout starts over: shipping method.
+    /// No checkout data is reset by default.
     /// </summary>
-    Default = ShippingMethod,
+    Default = None,
 
-    All = CouponCodes | CheckoutAttributes | RewardPoints | ShippingMethod | CreditBalance | CheckoutOrderData
+    All = CouponCodes | CheckoutAttributes | RewardPoints | CreditBalance | CheckoutOrderData
 }
 
 /// <summary>

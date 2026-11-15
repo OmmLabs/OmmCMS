@@ -18,6 +18,5 @@ public partial class SmartDbContext
     public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
     public DbSet<Shipment> Shipments { get; set; }
     public DbSet<ShipmentItem> ShipmentItems { get; set; }
-    public DbSet<ShippingMethod> ShippingMethods { get; set; }
     public DbSet<ReturnCase> ReturnCases { get; set; }
 }

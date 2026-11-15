@@ -219,9 +219,6 @@
 	<LocaleResource Name="Account.Fields.Phone">
 		<Value>Telefon</Value>
 	</LocaleResource>
-	<LocaleResource Name="Account.Fields.PreferredShippingMethod">
-		<Value>Bevorzugte Versandart</Value>
-	</LocaleResource>
 	<LocaleResource Name="Account.Fields.Signature">
 		<Value>Signatur</Value>
 	</LocaleResource>
@@ -7634,86 +7631,17 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Configuration.Settings.Search.WildcardSearchNote">
 		<Value>Der Wildcard-Modus kann bei einer großen Anzahl an Objekten die Suche verlangsamen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping">
-		<Value>Versand-Einstellungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.CalculateShippingAtCheckout">
-		<Value>Versandkosten während des Checkouts berechnen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.CalculateShippingAtCheckout.Hint">
-		<Value>Legt fest, ob Versandkosten auf der Warenkorbseite angezeigt werden, solange der Kunde noch keine Lieferanschrift eingegeben hat. Wenn aktiviert, erscheint stattdessen ein Hinweis, dass die Berechnung erst beim Checkout erfolgt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.ChargeOnlyHighestProductShippingSurcharge">
-		<Value>Nur den höchsten Transportzuschlag berechnen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.ChargeOnlyHighestProductShippingSurcharge.Hint">
-		<Value>Bestimmt ob bei der Berechnung der Versandkosten nur der höchste Transportzuschlag von Produkten berücksichtigt wird.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Shipping.DeliveryOnWorkweekDaysOnly">
 		<Value>Lieferungen nur an Werktagen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Shipping.DeliveryOnWorkweekDaysOnly.Hint">
 		<Value>Legt fest, ob Lieferungen nur an Werktagen stattfinden.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.DisplayShipmentEventsToCustomers">
-		<Value>Versandereignisse anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.DisplayShipmentEventsToCustomers.Hint">
-		<Value>Zeigt den Versand-Status auf der Versanddetails-Seite an, sofern von der Versandkosten-Modul unterstützt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.EstimateShippingEnabled">
-		<Value>Schätzung der Versandkosten aktivieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.EstimateShippingEnabled.Hint">
-		<Value>Benutzer können die Versandkosten schätzen lassen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingCountryIds">
-		<Value>Länder mit kostenlosem Versand</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingCountryIds.Hint">
-		<Value>Legt die Lieferländer fest, für die der kostenlose Versand aktiviert ist. Wird hier kein Land angegeben, ist der kostenlose Versand für alle Länder aktiv (Standardeinstellung).</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingOverXEnabled">
-		<Value>Kostenloser Versand ab Bestellwert aktivieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingOverXEnabled.Hint">
-		<Value>Legt fest, ob der Versand einer Bestellung ab einem bestimmtem Bestellwert kostenlos ist. </Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingOverXIncludingTax">
-		<Value>Berechne Bestellwert inkl. Steuer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingOverXIncludingTax.Hint">
-		<Value>Der Bestellwert für den kostenlosen Versand wird inkl. Steuer berechnet.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingOverXValue">
-		<Value>Kostenloser Versand ab</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingOverXValue.Hint">
-		<Value>Bei allen Bestellungen mit einem Bestellwert größer als dieser Wert entfallen die Versandkosten.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.ShippingOriginAddress">
-		<Value>Versand erfolgt ab</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.ShippingOriginAddress.Hint">
-		<Value>Versand erfolgt ab bzw. Artikelstandort.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.SkipShippingIfSingleOption">
-		<Value>Versandartauswahl nur anzeigen, wenn mehr als eine Versandart zur Verfügung steht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.SkipShippingIfSingleOption.Hint">
-		<Value>Legt fest, ob die Versandartauswahl nur im Checkout-Prozess angezeigt wird, wenn mehr als eine Versandart zur Verfügung steht</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Shipping.TodayShipmentHour">
 		<Value>Bis x Uhr bestellt, heute verschickt</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Shipping.TodayShipmentHour.Hint">
 		<Value>Legt die Stunde fest, bis zu der die Bestellung noch am selben Tag verschickt wird.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.UseShippingOriginIfShippingAddressMissing">
-		<Value>Artikelstandort bestimmt Versandkosten bei fehlender Versandanschrift</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.UseShippingOriginIfShippingAddressMissing.Hint">
-		<Value>Legt fest, dass die Versandkosten des Ortes verwendet werden, von dem aus der Versand erfolgt (gemäß "Versand erfolgt ab"), sofern der Kunde den Checkout noch nie durchlaufen hat und seine Lieferanschrift unbekannt ist.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart">
 		<Value>Warenkorb-Einstellungen</Value>
@@ -7756,12 +7684,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 
 
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CustomersCanChangePreferredPayment">
-		<Value>Kunden können Ihre bevorzugte Zahlungsart ändern</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CustomersCanChangePreferredShipping">
-		<Value>Kunden können Ihre bevorzugte Versandart ändern</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.DeliveryTimesInShoppingCart">
 		<Value>Darstellung von Lieferzeiten</Value>
 	</LocaleResource>
@@ -8100,72 +8022,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.VatRequired.Hint">
 		<Value>Legt fest, ob Kunden bei der Registrierung eine Steuernummer angeben müssen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping">
-		<Value>Versand</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.CannotActivateShippingRateComputationMethod">
-		<Value>Das Plugin erlaubt keine Aktivierung dieser Berechnungsmethode für Versandkosten.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods">
-		<Value>Versandarten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Added">
-		<Value>Die neue Versandart wurde hinzugefügt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.AddNew">
-		<Value>Neue Versandart hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Deleted">
-		<Value>Die Versandart wurde gelöscht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.EditMethodDetails">
-		<Value>Details der Versandart bearbeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.Description">
-		<Value>Beschreibung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.Description.Hint">
-		<Value>Beschreibung der Versandart eingeben.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.DisplayOrder.Hint">
-		<Value>Die Anzeigereihenfolge der Versandarten. 1 bedeutet der Anfang der Liste.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.IgnoreCharges">
-		<Value>Keine zusätzlichen Kosten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.IgnoreCharges.Hint">
-		<Value>Bei Auswahl dieser Versandmethode sollen keine zusätzlichen Kosten berechnet werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.Name">
-		<Value>Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.Name.Hint">
-		<Value>Name der Versandart.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.Requirements">
-		<Value>Voraussetzungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.Requirements.Hint">
-		<Value>Legt Voraussetzungen für die Verfügbarkeit der Versandart fest. Die Versandart wird angeboten, wenn eine der ausgewählten Regeln erfüllt ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.NoMethodsLoaded">
-		<Value>Es konnten keine Versandarten geladen werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.RestrictionNote">
-		<Value>Es wurden keine Möglichkeiten zur Einschränkung von Versandarten gefunden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Updated">
-		<Value>Die Versandart wurde erfolgreich bearbeitet.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Providers">
-		<Value>Berechnungsmethoden für Versandkosten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Providers.Configure">
-		<Value>Konfigurieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Providers.Fields.DisplayOrder">
-		<Value>Reihenfolge</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.SMSProviders">
 		<Value>SMS-Anbieter</Value>
@@ -12550,9 +12406,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartProductCount">
 		<Value>Anzahl der Produkte</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartWeightRule">
-		<Value>Gewicht aller Produkte im Warenkorb</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Company">
 		<Value>Firma</Value>
 	</LocaleResource>
@@ -12681,12 +12534,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingEu">
 		<Value>Lieferland in EU</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingMethod">
-		<Value>Versandart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingRateComputationMethod">
-		<Value>Berechnungsmethode für Versandkosten</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingStatus">
 		<Value>Lieferstatus</Value>
@@ -13815,9 +13662,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.PrimaryCurrency.Set">
 		<Value>Die Hauptwährung für den Shop wurde festgelegt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Warnings.Shipping.OnlyOneOffline">
-		<Value>Es wird empfohlen, nur eine Versandkosten-Offline-Berechnungsmethode zu benutzen.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.SitemapReachable.MethodNotAllowed">
 		<Value>Die Erreichbarkeit der Sitemap konnte nicht überprüft werden.</Value>

@@ -399,27 +399,6 @@ public partial class MessageModelProvider
 
         var trackingUrl = part.TrackingUrl;
 
-        if (trackingUrl.IsEmpty() && part.TrackingNumber.HasValue() && part.Order.ShippingRateComputationMethodSystemName.HasValue())
-        {
-            // Try to get URL from tracker.
-            var srcm = _services.Resolve<IShippingService>()
-                .LoadEnabledShippingProviders(systemName: part.Order.ShippingRateComputationMethodSystemName)
-                .FirstOrDefault();
-
-            if (srcm != null)
-            {
-                var tracker = srcm.Value.ShipmentTracker;
-                if (tracker != null)
-                {
-                    var shippingSettings = await _services.SettingFactory.LoadSettingsAsync<ShippingSettings>(part.Order.StoreId);
-                    if (srcm.IsShippingProviderEnabled(shippingSettings))
-                    {
-                        trackingUrl = tracker.GetUrl(part.TrackingNumber);
-                    }
-                }
-            }
-        }
-
         var m = new Dictionary<string, object>
         {
             { "Id", part.Id },

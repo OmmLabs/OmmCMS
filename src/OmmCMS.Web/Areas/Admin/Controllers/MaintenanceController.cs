@@ -15,7 +15,6 @@ using OmmCMS.Admin.Models.Maintenance;
 using OmmCMS.ComponentModel;
 using OmmCMS.Core.Catalog.Attributes;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media;
@@ -57,7 +56,6 @@ public class MaintenanceController : AdminController
     private readonly Lazy<IImageOffloder> _imageOffloader;
     private readonly Lazy<IFilePermissionChecker> _filePermissionChecker;
     private readonly Lazy<ICurrencyService> _currencyService;
-    private readonly Lazy<IShippingService> _shippingService;
     private readonly Lazy<IExportProfileService> _exportProfileService;
     private readonly Lazy<IImportProfileService> _importProfileService;
     private readonly Lazy<UpdateChecker> _updateChecker;
@@ -78,7 +76,6 @@ public class MaintenanceController : AdminController
         Lazy<IImageOffloder> imageOffloader,
         Lazy<IFilePermissionChecker> filePermissionChecker,
         Lazy<ICurrencyService> currencyService,
-        Lazy<IShippingService> shippingService,
         Lazy<IExportProfileService> exportProfileService,
         Lazy<IImportProfileService> importProfileService,
         Lazy<UpdateChecker> updateChecker,
@@ -98,7 +95,6 @@ public class MaintenanceController : AdminController
         _imageOffloader = imageOffloader;
         _filePermissionChecker = filePermissionChecker;
         _currencyService = currencyService;
-        _shippingService = shippingService;
         _exportProfileService = exportProfileService;
         _importProfileService = importProfileService;
         _updateChecker = updateChecker;
@@ -816,24 +812,6 @@ public class MaintenanceController : AdminController
         else
         {
             AddEntry(SystemWarningLevel.Fail, T("Admin.System.Warnings.DefaultDimension.NotSet"));
-        }
-
-        // Shipping rate coputation methods
-        // ====================================
-        int numActiveShippingMethods = 0;
-        try
-        {
-            numActiveShippingMethods = _shippingService.Value.LoadEnabledShippingProviders()
-                .Where(x => x.Value.ShippingRateComputationMethodType == ShippingRateComputationMethodType.Offline)
-                .Count();
-        }
-        catch
-        {
-        }
-
-        if (numActiveShippingMethods > 1)
-        {
-            AddEntry(SystemWarningLevel.Warning, T("Admin.System.Warnings.Shipping.OnlyOneOffline"));
         }
 
         // Incompatible modules

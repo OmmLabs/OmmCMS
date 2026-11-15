@@ -15,8 +15,5 @@
   "MediaSettings": {
     "DefaultImageQuality": 95,
     "JpegColorType": "YCbCrRatio444"
-  },
-  "SettingKeys": {
-    "ShippingRateComputationMethod.FixedRate.Rate.ShippingMethodId{$ref:ShippingMethod:by-ground}": 4.90
   }
 }

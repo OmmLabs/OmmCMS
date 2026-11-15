@@ -85,16 +85,6 @@ public class ShoppingCartSettings : ISettings
     public bool QuickCheckoutEnabled { get; set; } = true;
 
     /// <summary>
-    /// Gets or sets a value indicating whether customers can change their preferred shipping method.
-    /// </summary>
-    public bool CustomersCanChangePreferredShipping { get; set; } = true;
-
-    /// <summary>
-    /// Gets or sets a value indicating whether customers can change their preferred payment method.
-    /// </summary>
-    public bool CustomersCanChangePreferredPayment { get; set; } = true;
-
-    /// <summary>
     /// Gets or sets a value indicating whether to show a comment box on shopping cart page
     /// </summary>
     public bool ShowCommentBox { get; set; } = true;

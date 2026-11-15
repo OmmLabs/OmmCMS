@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using OmmCMS.Core.Checkout.Attributes;
-using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common;
 
 namespace OmmCMS.Core.Identity;
@@ -283,39 +282,6 @@ public class CustomerAttributeCollection : GenericAttributeCollection<Customer>
     }
 
     /// <summary>
-    /// Gets or sets the customer's preferred shipping method. It is preselected in the checkout if Quick Checkout is activated.
-    /// </summary>
-    /// <remarks>
-    /// Only the shipping method can be preselected, not the shipping rate computation method.
-    /// So <see cref="ShippingOption.ShippingRateComputationMethodSystemName"/> is therefore usually <c>null</c> here. 
-    /// The shipping rate computation method is only selected in the checkout because a shopping cart and a shipping address are required.
-    /// </remarks>
-    public ShippingOption PreferredShippingOption
-    {
-        get
-        {
-            var rawOption = Get<string>(SystemCustomerAttributeNames.PreferredShippingOption, CurrentStoreId);
-            return rawOption.HasValue() ? JsonSerializer.Deserialize<ShippingOption>(rawOption) : null;
-        }
-        set
-        {
-            string rawOption = null;
-            var methodId = value?.ShippingMethodId ?? 0;
-
-            if (methodId != 0)
-            {
-                rawOption = JsonSerializer.Serialize(new ShippingOption
-                {
-                    ShippingMethodId = methodId,
-                    ShippingRateComputationMethodSystemName = value?.ShippingRateComputationMethodSystemName
-                });
-            }
-
-            Set(SystemCustomerAttributeNames.PreferredShippingOption, rawOption, CurrentStoreId);
-        }
-    }
-
-    /// <summary>
     /// Gets or sets a value indicating whether the customer has chosen to use his reward points in checkout.
     /// </summary>
     public bool UseRewardPointsDuringCheckout
@@ -331,25 +297,6 @@ public class CustomerAttributeCollection : GenericAttributeCollection<Customer>
     {
         get => Get<decimal>(SystemCustomerAttributeNames.UseCreditBalanceDuringCheckout, CurrentStoreId);
         set => Set(SystemCustomerAttributeNames.UseCreditBalanceDuringCheckout, value, CurrentStoreId);
-    }
-
-    /// <summary>
-    /// Gets or sets the shipping option selected by the customer in checkout.
-    /// </summary>
-    public ShippingOption SelectedShippingOption
-    {
-        get => Get<ShippingOption>(SystemCustomerAttributeNames.SelectedShippingOption, CurrentStoreId);
-        set => Set(SystemCustomerAttributeNames.SelectedShippingOption, value, CurrentStoreId);
-    }
-
-    /// <summary>
-    /// Gets or sets all shipping options offered to the customer in checkout.
-    /// For performance reasons, these are saved as an attribute.
-    /// </summary>
-    public List<ShippingOption> OfferedShippingOptions
-    {
-        get => Get<List<ShippingOption>>(SystemCustomerAttributeNames.OfferedShippingOptions, CurrentStoreId);
-        set => Set(SystemCustomerAttributeNames.OfferedShippingOptions, value, CurrentStoreId);
     }
 
     /// <summary>

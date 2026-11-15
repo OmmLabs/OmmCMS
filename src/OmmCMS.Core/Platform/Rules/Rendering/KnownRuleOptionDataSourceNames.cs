@@ -12,8 +12,6 @@ public static partial class KnownRuleOptionDataSourceNames
     public const string AuthenticationMethod = "AuthenticationMethod";
     public const string Product = "Product";
     public const string ProductTag = "ProductTag";
-    public const string ShippingMethod = "ShippingMethod";
-    public const string ShippingRateComputationMethod = "ShippingRateComputationMethod";
 
     public const string CartRule = "CartRule";
     public const string TargetGroup = "TargetGroup";

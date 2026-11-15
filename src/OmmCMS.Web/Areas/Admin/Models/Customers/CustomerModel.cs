@@ -136,8 +136,6 @@ public class CustomerModel : TabbableModel
         }
     }
 
-    [LocalizedDisplay("Account.Fields.PreferredShippingMethod")]
-    public int? PreferredShippingMethodId { get; set; }
 
 
     [LocalizedDisplay("Common.CreatedOn")]

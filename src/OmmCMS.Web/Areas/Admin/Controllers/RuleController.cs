@@ -778,10 +778,6 @@ public class RuleController : AdminController
                 .Select(x => new RuleSetAssignedToEntityModel { Id = x.Id, Name = x.Name.NullEmpty() ?? x.Id.ToString() })
                 .ToList();
 
-            ViewBag.AssignedToShippingMethods = ruleSet.ShippingMethods
-                .Select(x => new RuleSetAssignedToEntityModel { Id = x.Id, Name = x.GetLocalized(y => y.Name) })
-                .ToList();
-
             ViewBag.AssignedToCustomerRoles = ruleSet.CustomerRoles
                 .Select(x => new RuleSetAssignedToEntityModel { Id = x.Id, Name = x.Name })
                 .ToList();

@@ -14,7 +14,6 @@ namespace OmmCMS.Core.Checkout.Rules;
 
 public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
 {
-    private readonly SmartDbContext _db;
     private readonly IComponentContext _componentContext;
     private readonly IRuleService _ruleService;
     private readonly ICurrencyService _currencyService;
@@ -22,21 +21,17 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
     private readonly IStoreContext _storeContext;
     private readonly IShoppingCartService _shoppingCartService;
     private readonly ILocalizationService _localizationService;
-    private readonly MeasureSettings _measureSettings;
 
     public CartRuleProvider(
-        SmartDbContext db,
         IComponentContext componentContext,
         IRuleService ruleService,
         ICurrencyService currencyService,
         IWorkContext workContext,
         IStoreContext storeContext,
         IShoppingCartService shoppingCartService,
-        ILocalizationService localizationService,
-        MeasureSettings measureSettings)
+        ILocalizationService localizationService)
         : base(RuleScope.Cart)
     {
-        _db = db;
         _componentContext = componentContext;
         _ruleService = ruleService;
         _currencyService = currencyService;
@@ -44,7 +39,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
         _storeContext = storeContext;
         _shoppingCartService = shoppingCartService;
         _localizationService = localizationService;
-        _measureSettings = measureSettings;
     }
 
     public Localizer T { get; set; } = NullLocalizer.Instance;
@@ -200,7 +194,7 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
         return result;
     }
 
-    protected override async Task<IEnumerable<RuleDescriptor>> LoadDescriptorsAsync()
+    protected override Task<IEnumerable<RuleDescriptor>> LoadDescriptorsAsync()
     {
         var language = _workContext.WorkingLanguage;
         var currencyCode = _currencyService.PrimaryCurrency.CurrencyCode;
@@ -213,8 +207,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
             .Select(x => new RuleValueSelectListOption { Value = ((int)x).ToStringInvariant(), Text = _localizationService.GetLocalizedEnum(x) })
             .ToArray();
 
-        var baseWeight = await _db.MeasureWeights.FindByIdAsync(_measureSettings.BaseWeightId, false);
-        var baseWeightName = baseWeight?.GetLocalized(x => x.Name) ?? string.Empty;
 
         var cartItemQuantity = new CartRuleDescriptor
         {
@@ -299,14 +291,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
 
             new()
             {
-                Name = "CartShippingMethod",
-                DisplayName = T("Admin.Rules.FilterDescriptor.ShippingMethod"),
-                RuleType = RuleType.IntArray,
-                ProcessorType = typeof(ShippingMethodRule),
-                SelectList = new RemoteRuleValueSelectList(KnownRuleOptionDataSourceNames.ShippingMethod) { Multiple = true }
-            },
-            new()
-            {
                 Name = "CartDiscount",
                 DisplayName = T("Admin.Rules.FilterDescriptor.DiscountApplied"),
                 RuleType = RuleType.Boolean,
@@ -338,15 +322,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
                 SelectList = new RemoteRuleValueSelectList(KnownRuleOptionDataSourceNames.CartRule),
             },
 
-            new()
-            {
-                Name = "CartWeightRule",
-                DisplayName = T("Admin.Rules.FilterDescriptor.CartWeightRule"),
-                GroupKey = "ShoppingCart",
-                RuleType = RuleType.Money,
-                ProcessorType = typeof(CartWeightRule),
-                Metadata = { ["postfix"] = baseWeightName }
-            },
             new()
             {
                 Name = "CartProductCount",
@@ -634,9 +609,9 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
         };
 
         descriptors
-            .Where(x => x.RuleType == RuleType.Money && x.ProcessorType != typeof(CartWeightRule))
+            .Where(x => x.RuleType == RuleType.Money)
             .Each(x => x.Metadata["postfix"] = currencyCode);
 
-        return descriptors.Cast<RuleDescriptor>();
+        return Task.FromResult(descriptors.Cast<RuleDescriptor>());
     }
 }

@@ -98,15 +98,6 @@ public partial class SettingsMenu : MenuBase
             },
             new MenuItem
             {
-                Id = "shipping",
-                Text = T("Admin.Configuration.Shipping"),
-                Icon = "truck",
-                PermissionNames = perm,
-                ControllerName = "Shipping",
-                ActionName = "ShippingSettings"
-            },
-            new MenuItem
-            {
                 Id = "reward-points",
                 Text = T("Account.RewardPoints"),
                 Icon = "trophy",

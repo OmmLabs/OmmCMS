@@ -219,9 +219,6 @@
 	<LocaleResource Name="Account.Fields.Phone">
 		<Value>Phone</Value>
 	</LocaleResource>
-	<LocaleResource Name="Account.Fields.PreferredShippingMethod">
-		<Value>Preferred shipping method</Value>
-	</LocaleResource>
 	<LocaleResource Name="Account.Fields.Signature">
 		<Value>Signature</Value>
 	</LocaleResource>
@@ -7784,86 +7781,17 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Configuration.Settings.Search.WildcardSearchNote">
 		<Value>The wildcard mode can slow down the search for a large number of objects.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping">
-		<Value>Shipping settings</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.CalculateShippingAtCheckout">
-		<Value>Calculate shipping costs during checkout</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.CalculateShippingAtCheckout.Hint">
-		<Value>Specifies whether shipping costs are displayed on the shopping cart page as long as the customer has not yet entered a shipping address. If activated, a note appears instead that the calculation will only take place at checkout.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.ChargeOnlyHighestProductShippingSurcharge">
-		<Value>Charge the highest shipping surcharge only</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.ChargeOnlyHighestProductShippingSurcharge.Hint">
-		<Value>Specifies  whether to charge only the highest additional shipping surcharge of products.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Shipping.DeliveryOnWorkweekDaysOnly">
 		<Value>Delivery on workweek days only</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Shipping.DeliveryOnWorkweekDaysOnly.Hint">
 		<Value>Specifies whether delivery takes place only on workweek days.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.DisplayShipmentEventsToCustomers">
-		<Value>Display shipment events</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.DisplayShipmentEventsToCustomers.Hint">
-		<Value>Check the box if you want your customers to see shipment events on their shipment details pages (if supported by your shipping rate computation method).</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.EstimateShippingEnabled">
-		<Value>Estimate shipping enabled</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.EstimateShippingEnabled.Hint">
-		<Value>Check the box to allow customers to estimate shipping on shopping cart page</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingCountryIds">
-		<Value>Countries with free shipping</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingCountryIds.Hint">
-		<Value>Specifies the shipping countries for which free shipping is enabled. Free shipping is enabled for all countries if none are specified here (default).</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingOverXEnabled">
-		<Value>Free shipping over 'X'</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingOverXEnabled.Hint">
-		<Value>Check the box to enable free shipping for all orders over 'X'. Set the value for X below.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingOverXIncludingTax">
-		<Value>Calculate 'X' including tax</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingOverXIncludingTax.Hint">
-		<Value>Check the box to calculate 'X' value including tax; otherwise excluding tax.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingOverXValue">
-		<Value>Value of 'X'</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.FreeShippingOverXValue.Hint">
-		<Value>All orders with a total greater than the value of 'X' will qualify for free shipping.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.ShippingOriginAddress">
-		<Value>Shipping Origin</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.ShippingOriginAddress.Hint">
-		<Value>Shipping origin address</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.SkipShippingIfSingleOption">
-		<Value>Display shipping options during checkout process only if more then one option is available</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.SkipShippingIfSingleOption.Hint">
-		<Value>Display shipping options during the checkout process only if more then one shipping option is available.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Shipping.TodayShipmentHour">
 		<Value>Order before x o'clock for same day shipment</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Shipping.TodayShipmentHour.Hint">
 		<Value>Specifies the hour by which the order will be shipped the same day.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.UseShippingOriginIfShippingAddressMissing">
-		<Value>Shipping origin determines shipping costs if shipping address is missing</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.UseShippingOriginIfShippingAddressMissing.Hint">
-		<Value>Specifies that if the customer has never checked out and the shipping address is unknown, the shipping cost from the location where the order was shipped (according to "Shipping Origin") will be used.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart">
 		<Value>Shopping cart settings</Value>
@@ -7906,12 +7834,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 
 
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CustomersCanChangePreferredPayment">
-		<Value>Customers can change their preferred payment method</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CustomersCanChangePreferredShipping">
-		<Value>Customers can change their preferred shipping method</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.DeliveryTimesInShoppingCart">
 		<Value>Presentation of delivery times</Value>
 	</LocaleResource>
@@ -8250,78 +8172,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.VatRequired.Hint">
 		<Value>Specifies whether customers must enter a VAT identification number.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping">
-		<Value>Shipping</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.CannotActivateShippingRateComputationMethod">
-		<Value>Activating this shipping rate computation method is forbidden by the plugin.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods">
-		<Value>Shipping methods</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Added">
-		<Value>The new shipping method has been added successfully.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.AddNew">
-		<Value>Add a new shipping method</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Deleted">
-		<Value>The shipping method has been deleted successfully.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.EditMethodDetails">
-		<Value>Edit shipping method details</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields">
-		<Value>Description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.Description">
-		<Value>Description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.Description.Hint">
-		<Value>Enter shipping method description.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.DisplayOrder.Hint">
-		<Value>The display order of this shipping method. 1 represents the top of the list.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.IgnoreCharges">
-		<Value>No additional charges</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.IgnoreCharges.Hint">
-		<Value>No additional charges are to be calculated when selecting this shipping method.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.Name">
-		<Value>Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.Name.Hint">
-		<Value>Enter shipping method name.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.Requirements">
-		<Value>Requirements</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Fields.Requirements.Hint">
-		<Value>Specifies requirements for the availability of the shipping method. The shipping method is offered if one of the selected rules is fulfilled.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.NoMethodsLoaded">
-		<Value>No shipping methods could be loaded.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.RestrictionNote">
-		<Value>There were no possibilities found to restrict shipping methods.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Methods.Updated">
-		<Value>The shipping method has been updated successfully.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Providers">
-		<Value>Shipping rate computation methods</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Providers.Configure">
-		<Value>Configure</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Providers.Fields">
-		<Value>Display order</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Shipping.Providers.Fields.DisplayOrder">
-		<Value>Display order</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.SMSProviders">
 		<Value>SMS providers</Value>
@@ -12817,9 +12667,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartProductCount">
 		<Value>Number of products</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartWeightRule">
-		<Value>Weight of all products in cart</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Company">
 		<Value>Company</Value>
 	</LocaleResource>
@@ -12948,12 +12795,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingEu">
 		<Value>Shipping country in EU</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingMethod">
-		<Value>Shipping method</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingRateComputationMethod">
-		<Value>Shipping rate computation method</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingStatus">
 		<Value>Shipping status</Value>
@@ -14121,12 +13962,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.PrimaryCurrency.Set">
 		<Value>Primary store currency is set</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Warnings.Shipping">
-		<Value>Only one offline shipping rate computation method is recommended to use</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Warnings.Shipping.OnlyOneOffline">
-		<Value>Only one offline shipping rate computation method is recommended to use</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.SitemapReachable.MethodNotAllowed">
 		<Value>The reachability of the sitemap could not be validated.</Value>

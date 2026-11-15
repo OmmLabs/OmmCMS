@@ -67,16 +67,6 @@ internal class CustomerHook : AsyncDbSaveHook<Customer>
                         }
                     }
 
-                    if (entry.Entry.TryGetModifiedProperty(nameof(customer.ShippingAddressId), out object shippingAddressId)
-                        && customer.ShippingAddressId != (int?)shippingAddressId)
-                    {
-                        // Quick-Checkout: Reset selected shipping data to let ShippingMethodHandler
-                        // apply the correct shipping costs based on changed shipping address.
-                        var ga = customer.GenericAttributes;
-                        ga.SelectedShippingOption = null;
-                        ga.PreferredShippingOption = null;
-                        ga.OfferedShippingOptions = null;
-                    }
                 }
             }
             else
