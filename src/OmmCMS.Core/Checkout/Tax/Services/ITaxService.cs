@@ -77,13 +77,4 @@ public partial interface ITaxService
         PricingTarget target = PricingTarget.Product,
         Language language = null);
 
-    /// <summary>
-    /// Checks whether the customer has a EU VAT exemption (the European Union value added tax).
-    /// </summary>
-    /// <param name="customer">Customer for VAT exemption.</param>
-    /// <param name="address">Address to check. Gets tax address of customer if <c>null</c>.</param>
-    /// <returns>
-    /// <c>True</c> if customer is VAT exempted, <c>False</c> if customer is not VAT exempted.
-    /// </returns>
-    Task<bool> IsVatExemptAsync(Customer customer, Address address = null);
 }

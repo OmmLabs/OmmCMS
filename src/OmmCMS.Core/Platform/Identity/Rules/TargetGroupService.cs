@@ -135,10 +135,6 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
             .Select(x => new RuleValueSelectListOption { Value = x.Id.ToString(), Text = x.Name })
             .ToArray();
 
-        var vatNumberStatus = ((VatNumberStatus[])Enum.GetValues(typeof(VatNumberStatus)))
-            .Select(x => new RuleValueSelectListOption { Value = ((int)x).ToString(), Text = _localizationService.GetLocalizedEnum(x) })
-            .ToArray();
-
         var taxDisplayTypes = ((TaxDisplayType[])Enum.GetValues(typeof(TaxDisplayType)))
             .Select(x => new RuleValueSelectListOption { Value = ((int)x).ToString(), Text = _localizationService.GetLocalizedEnum(x) })
             .ToArray();
@@ -195,13 +191,6 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
                 DisplayName = T("Admin.Rules.FilterDescriptor.IsInCustomerRole"),
                 RuleType = RuleType.IntArray,
                 SelectList = new RemoteRuleValueSelectList("CustomerRole") { Multiple = true }
-            },
-            new FilterDescriptor<Customer, int>(x => x.VatNumberStatusId)
-            {
-                Name = "VatNumberStatus",
-                DisplayName = T("Admin.Rules.FilterDescriptor.VatNumberStatus"),
-                RuleType = RuleType.Int,
-                SelectList = new LocalRuleValueSelectList(vatNumberStatus)
             },
             new FilterDescriptor<Customer, int>(x => x.TaxDisplayTypeId)
             {

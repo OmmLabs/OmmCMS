@@ -45,15 +45,6 @@ public partial class FinanceSettingsModel : ModelBase
         [LocalizedDisplay("*DefaultTaxAddress")]
         public AddressModel DefaultTaxAddress { get; set; } = new();
 
-        [LocalizedDisplay("*EuVatEnabled")]
-        public bool EuVatEnabled { get; set; }
-
-        [LocalizedDisplay("*EuVatShopCountry")]
-        public int EuVatShopCountryId { get; set; }
-
-        [LocalizedDisplay("*EuVatAllowVatExemption")]
-        public bool EuVatAllowVatExemption { get; set; }
-
     }
 
     [LocalizedDisplay("Admin.Configuration.Settings.Currency.")]

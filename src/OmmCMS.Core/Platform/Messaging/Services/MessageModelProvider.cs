@@ -562,7 +562,6 @@ public partial class MessageModelProvider : IMessageModelProvider
         var email = part.FindEmail();
         var pwdRecoveryToken = part.GenericAttributes.PasswordRecoveryToken;
         var accountActivationToken = part.GenericAttributes.AccountActivationToken;
-        var customerVatStatus = (VatNumberStatus)part.VatNumberStatusId;
 
         var m = new Dictionary<string, object>
         {
@@ -575,8 +574,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             ["LastLoginOn"] = _helper.ToUserDate(part.LastLoginDateUtc, messageContext),
             ["LastActivityOn"] = _helper.ToUserDate(part.LastActivityDateUtc, messageContext),
             ["FullName"] = MessageModelHelper.GetDisplayNameForCustomer(part).NullEmpty(),
-            ["VatNumber"] = part.GenericAttributes.VatNumber,
-            ["VatNumberStatus"] = customerVatStatus.GetLocalizedEnum(messageContext.Language.Id).NullEmpty(),
             ["CustomerNumber"] = part.CustomerNumber.NullEmpty(),
             ["IsRegistered"] = part.IsRegistered(),
 

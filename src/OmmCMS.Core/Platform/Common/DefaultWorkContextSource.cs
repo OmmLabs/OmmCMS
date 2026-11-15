@@ -49,7 +49,6 @@ public class DefaultWorkContextSource : AsyncDbSaveHook<BaseEntity>, IWorkContex
     private readonly ILanguageResolver _languageResolver;
     private readonly IStoreContext _storeContext;
     private readonly ICustomerService _customerService;
-    private readonly Lazy<ITaxService> _taxService;
     private readonly Lazy<ICurrencyService> _currencyService;
     private readonly TaxSettings _taxSettings;
     private readonly ICacheManager _cache;
@@ -64,7 +63,6 @@ public class DefaultWorkContextSource : AsyncDbSaveHook<BaseEntity>, IWorkContex
         ILanguageResolver languageResolver,
         IStoreContext storeContext,
         ICustomerService customerService,
-        Lazy<ITaxService> taxService,
         Lazy<ICurrencyService> currencyService,
         TaxSettings taxSettings,
         ICacheManager cache,
@@ -79,7 +77,6 @@ public class DefaultWorkContextSource : AsyncDbSaveHook<BaseEntity>, IWorkContex
         _storeContext = storeContext;
         _customerService = customerService;
         _taxSettings = taxSettings;
-        _taxService = taxService;
         _currencyService = currencyService;
         _userAgent = userAgent;
         _cache = cache;
@@ -380,14 +377,6 @@ public class DefaultWorkContextSource : AsyncDbSaveHook<BaseEntity>, IWorkContex
         if (_taxSettings.AllowCustomersToSelectTaxDisplayType && customer != null)
         {
             taxDisplayTypeId = customer.TaxDisplayTypeId;
-        }
-
-        if (taxDisplayTypeId == null && _taxSettings.EuVatEnabled)
-        {
-            if (customer != null && await _taxService.Value.IsVatExemptAsync(customer))
-            {
-                taxDisplayTypeId = (int)TaxDisplayType.ExcludingTax;
-            }
         }
 
         if (taxDisplayTypeId == null)

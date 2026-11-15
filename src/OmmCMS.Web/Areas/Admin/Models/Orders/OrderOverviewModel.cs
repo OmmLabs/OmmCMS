@@ -30,9 +30,6 @@ public class OrderOverviewModel : TabbableModel
     [LocalizedDisplay("*CustomerEmail")]
     public string CustomerEmail { get; set; }
 
-    [LocalizedDisplay("*VatNumber")]
-    public string VatNumber { get; set; }
-
     [LocalizedDisplay("*OrderTotal")]
     public string OrderTotalString { get; set; }
 

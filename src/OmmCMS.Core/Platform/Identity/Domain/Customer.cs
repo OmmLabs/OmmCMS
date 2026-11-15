@@ -219,8 +219,6 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
 
     public string Gender { get; set; }
 
-    public int VatNumberStatusId { get; set; }
-
     public string TimeZoneId { get; set; }
 
     public int TaxDisplayTypeId { get; set; }

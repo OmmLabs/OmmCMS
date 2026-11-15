@@ -21,7 +21,6 @@ public partial class DataExporter
 {
     private readonly static string[] _orderCustomerAttributes =
     [
-        SystemCustomerAttributeNames.VatNumber,
         SystemCustomerAttributeNames.ImpersonatedCustomerId
     ];
 

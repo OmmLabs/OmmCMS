@@ -43,35 +43,3 @@ public enum TaxBasedOn
     /// </summary>
     DefaultAddress = 3
 }
-
-/// <summary>
-/// Represents the VAT number status.
-/// </summary>
-public enum VatNumberStatus
-{
-    /// <summary>
-    /// Unknown.
-    /// </summary>
-    Unknown = 0,
-
-    /// <summary>
-    /// Empty.
-    /// </summary>
-    Empty = 10,
-
-    /// <summary>
-    /// Valid.
-    /// </summary>
-    Valid = 20,
-
-    /// <summary>
-    /// Invalid.
-    /// </summary>
-    Invalid = 30,
-
-    /// <summary>
-    /// This indicates that the service used to check the status is temporarily unavailable,
-    /// possibly due to maintenance or an overload.
-    /// </summary>
-    ServiceUnavailable
-}

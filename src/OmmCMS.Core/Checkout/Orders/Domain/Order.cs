@@ -105,12 +105,6 @@ public partial class Order : EntityWithAttributes, IAuditable, ISoftDeletable
     public decimal CurrencyRate { get; set; }
 
     /// <summary>
-    /// Gets or sets the VAT number (the European Union Value Added Tax)
-    /// </summary>
-    [StringLength(400)]
-    public string VatNumber { get; set; }
-
-    /// <summary>
     /// Gets or sets the order subtotal (incl tax)
     /// </summary>
     public decimal OrderSubtotalInclTax { get; set; }

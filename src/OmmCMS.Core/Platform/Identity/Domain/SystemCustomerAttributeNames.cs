@@ -11,7 +11,6 @@ public static partial class SystemCustomerAttributeNames
     public static string CountryId => "CountryId";
     public static string Phone => "Phone";
     public static string Fax => "Fax";
-    public static string VatNumber => "VatNumber";
 
     // Other attributes
     public static string AvatarPictureId => "AvatarPictureId";

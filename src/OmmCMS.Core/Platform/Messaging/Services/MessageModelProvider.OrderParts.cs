@@ -32,7 +32,6 @@ public partial class MessageModelProvider
             nameof(part.ShippingStatus),
             nameof(part.CustomerTaxDisplayType),
             nameof(part.TaxRatesDictionary),
-            nameof(part.VatNumber),
             nameof(part.CustomerIp),
             nameof(part.CardType),
             nameof(part.CardName),

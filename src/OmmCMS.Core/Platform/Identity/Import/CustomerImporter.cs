@@ -21,7 +21,6 @@ public class CustomerImporter : EntityImporterBase
     private readonly IMediaImporter _mediaImporter;
     private readonly IGenericAttributeService _genericAttributeService;
     private readonly CustomerSettings _customerSettings;
-    private readonly TaxSettings _taxSettings;
     private readonly PrivacySettings _privacySettings;
     private readonly DateTimeSettings _dateTimeSettings;
 
@@ -33,7 +32,6 @@ public class CustomerImporter : EntityImporterBase
         IGenericAttributeService genericAttributeService,
         SeoSettings seoSettings,
         CustomerSettings customerSettings,
-        TaxSettings taxSettings,
         PrivacySettings privacySettings,
         DateTimeSettings dateTimeSettings)
         : base(services, storeMappingService, urlService, seoSettings)
@@ -41,7 +39,6 @@ public class CustomerImporter : EntityImporterBase
         _mediaImporter = mediaImporter;
         _genericAttributeService = genericAttributeService;
         _customerSettings = customerSettings;
-        _taxSettings = taxSettings;
         _privacySettings = privacySettings;
         _dateTimeSettings = dateTimeSettings;
     }
@@ -273,8 +270,6 @@ public class CustomerImporter : EntityImporterBase
             row.SetProperty(context.Result, (x) => x.CreatedOnUtc, context.UtcNow);
             row.SetProperty(context.Result, (x) => x.LastActivityDateUtc, context.UtcNow);
 
-            if (_taxSettings.EuVatEnabled)
-                row.SetProperty(context.Result, (x) => x.VatNumberStatusId);
 
             if (_dateTimeSettings.AllowCustomersToSetTimeZone)
                 row.SetProperty(context.Result, (x) => x.TimeZoneId);
@@ -389,8 +384,6 @@ public class CustomerImporter : EntityImporterBase
     {
         foreach (var row in batch)
         {
-            if (_taxSettings.EuVatEnabled)
-                SetGenericAttribute<string>(SystemCustomerAttributeNames.VatNumber, row);
 
             if (_customerSettings.StreetAddressEnabled)
                 SetGenericAttribute<string>(SystemCustomerAttributeNames.StreetAddress, row);

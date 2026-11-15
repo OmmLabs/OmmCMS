@@ -11,8 +11,6 @@
     "MetaTitle": "Mein Shop"
   },
   "TaxSettings": {
-    "EuVatEnabled": true,
-    "EuVatShopCountryId": "$ref:Country:DE",
     "TaxBasedOn": "ShippingAddress",
     "TaxDisplayType": "IncludingTax"
   }

@@ -66,19 +66,4 @@ public class TaxSettings : ISettings
     /// </summary>
     public bool ShowLegalHintsInFooter { get; set; } = true;
 
-    /// <summary>
-    /// Gets or sets a value indicating whether EU VAT (Eupore Union Value Added Tax) is enabled
-    /// </summary>
-    public bool EuVatEnabled { get; set; }
-
-    /// <summary>
-    /// Gets or sets a shop country identifier
-    /// </summary>
-    public int EuVatShopCountryId { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether this store will exempt eligible VAT-registered customers from VAT
-    /// </summary>
-    public bool EuVatAllowVatExemption { get; set; } = true;
-
 }

@@ -198,10 +198,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
             .Select(x => new RuleValueSelectListOption { Value = x.Id.ToString(), Text = x.Name })
             .ToArray();
 
-        var vatNumberStatus = Enum.GetValues<VatNumberStatus>()
-            .Select(x => new RuleValueSelectListOption { Value = ((int)x).ToStringInvariant(), Text = _localizationService.GetLocalizedEnum(x) })
-            .ToArray();
-
 
         var descriptors = new List<CartRuleDescriptor>
         {
@@ -267,15 +263,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
                 ProcessorType = typeof(CustomerRoleRule),
                 SelectList = new RemoteRuleValueSelectList(KnownRuleOptionDataSourceNames.CustomerRole) { Multiple = true },
                 IsComparingSequences = true
-            },
-            new()
-            {
-                Name = "CustomerVatNumberStatus",
-                DisplayName = T("Admin.Rules.FilterDescriptor.VatNumberStatus"),
-                GroupKey = "Common.Entity.Customer",
-                RuleType = RuleType.IntArray,
-                ProcessorType = typeof(CustomerVatNumberStatusRule),
-                SelectList = new LocalRuleValueSelectList(vatNumberStatus) { Multiple = true }
             },
             new()
             {

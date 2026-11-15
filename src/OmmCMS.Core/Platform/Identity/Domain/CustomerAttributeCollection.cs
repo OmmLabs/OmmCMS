@@ -66,12 +66,6 @@ public class CustomerAttributeCollection : GenericAttributeCollection<Customer>
         set => Set(SystemCustomerAttributeNames.Fax, value);
     }
 
-    public string VatNumber
-    {
-        get => Get<string>(SystemCustomerAttributeNames.VatNumber);
-        set => Set(SystemCustomerAttributeNames.VatNumber, value.TrimSafe());
-    }
-
     #endregion
 
     #region Other attributes

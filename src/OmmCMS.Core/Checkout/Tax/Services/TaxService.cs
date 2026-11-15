@@ -118,36 +118,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
         return await activeTaxProvider.Value.GetTaxRateAsync(request);
     }
 
-    public virtual async Task<bool> IsVatExemptAsync(Customer customer, Address address = null)
-    {
-        if (!_taxSettings.EuVatEnabled || customer is null)
-        {
-            return false;
-        }
-
-        address ??= await GetTaxAddressAsync(customer);
-        if (address?.Country is null)
-        {
-            return false;
-        }
-
-        if (!address.Country.SubjectToVat)
-        {
-            // VAT not chargeable if shipping outside VAT zone.
-            return true;
-        }
-
-        // VAT not chargeable if address, customer and config meet our VAT exemption requirements:
-        // returns true if this customer is VAT exempt because they are shipping within the EU but outside our shop country, 
-        // they have supplied a validated VAT number and the shop is configured to allow VAT exemption.
-        if (address.CountryId == _taxSettings.EuVatShopCountryId)
-        {
-            return false;
-        }
-
-        return customer.VatNumberStatusId == (int)VatNumberStatus.Valid && _taxSettings.EuVatAllowVatExemption;
-    }
-
     public virtual string GetTaxFormat(
         bool? displayTaxSuffix = null,
         bool? priceIncludesTax = null,
