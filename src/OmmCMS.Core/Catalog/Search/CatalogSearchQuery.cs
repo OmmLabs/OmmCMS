@@ -38,8 +38,6 @@ public sealed class KnownFilterNames : IHideObjectMembers
     public readonly string Visibility = "visibility";
     public readonly string ShowOnHomepage = "showonhomepage";
     public readonly string IsDownload = "download";
-    public readonly string IsTaxExempt = "taxexempt";
-    public readonly string IsEsd = "esd";
     public readonly string TypeId = "typeid";
     public readonly string StoreId = "storeid";
     public readonly string AvailableStart = "availablestart";
@@ -417,16 +415,6 @@ public partial class CatalogSearchQuery : SearchQuery<CatalogSearchQuery>, IClon
     public CatalogSearchQuery DownloadOnly(bool value)
     {
         return WithFilter(SearchFilter.ByField(KnownFilters.IsDownload, value).Mandatory().ExactMatch().NotAnalyzed());
-    }
-
-    public CatalogSearchQuery TaxExemptOnly(bool value)
-    {
-        return WithFilter(SearchFilter.ByField(KnownFilters.IsTaxExempt, value).Mandatory().ExactMatch().NotAnalyzed());
-    }
-
-    public CatalogSearchQuery EsdOnly(bool value)
-    {
-        return WithFilter(SearchFilter.ByField(KnownFilters.IsEsd, value).Mandatory().ExactMatch().NotAnalyzed());
     }
 
     public CatalogSearchQuery PriceBetween(

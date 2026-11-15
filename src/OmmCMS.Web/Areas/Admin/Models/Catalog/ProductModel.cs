@@ -116,9 +116,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
     [UIHint("Html")]
     public string AddChangelog { get; set; }
 
-    [LocalizedDisplay("*IsEsd")]
-    public bool IsEsd { get; set; }
-
     [LocalizedDisplay("*TaxCategory")]
     public int? TaxCategoryId { get; set; }
 

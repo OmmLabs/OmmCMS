@@ -361,7 +361,7 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
     /// Gets tax address of customer.
     /// </summary>
     /// <param name="customer">Customer of tax address.</param>
-    /// <param name="product">The related product is used for caching and ESD check. Can be <c>null</c>.</param>
+    /// <param name="product">The related product. Can be <c>null</c>.</param>
     /// <remarks>
     /// Tries to get customer address from cached addresses before accessing database.
     /// </remarks>
@@ -372,19 +372,14 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
     {
         Guard.NotNull(customer);
 
-        var productIsEsd = product?.IsEsd ?? false;
-        var cacheKey = new TaxAddressKey(customer.Id, productIsEsd);
+        var cacheKey = new TaxAddressKey(customer.Id);
 
         if (_cachedTaxAddresses.TryGetValue(cacheKey, out var address))
             return address;
 
-        // According to the EU VAT regulations for electronic services from 2015,            
-        // VAT must be charged in the EU country from which the customer originates (BILLING address).
-        // In addition, the origin of the IP addresses should also be checked for verification.
         var basedOn = _taxSettings.TaxBasedOn;
 
-        if ((_taxSettings.EuVatEnabled && productIsEsd && IsEuConsumer(customer)) ||
-            (basedOn == TaxBasedOn.ShippingAddress && customer.ShippingAddress == null))
+        if (basedOn == TaxBasedOn.ShippingAddress && customer.ShippingAddress == null)
         {
             basedOn = TaxBasedOn.BillingAddress;
         }
@@ -408,6 +403,6 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
 
     #endregion
 
-    record TaxAddressKey(int CustomerId, bool ProductIsEsd);
+    record TaxAddressKey(int CustomerId);
     record TaxRateCacheKey(int CustomerId, int TaxCategoryId, int VariantId);
 }

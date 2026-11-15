@@ -12,7 +12,6 @@
     "sampleDownload": "download/demo-ebook-preview.pdf",
     "unlimitedDownloads": true,
     "downloadActivationType": "WhenOrderIsPaid",
-    "isEsd": true,
 
     "categories": [ "E-Books" ],
     "manufacturers": [ "pixelmoor" ],
@@ -39,7 +38,6 @@
     "downloadActivationType": "WhenOrderIsPaid",
     "hasUserAgreement": true,
     "userAgreementText": "@file",
-    "isEsd": true,
 
     "createdOnUtc": "@now-5d",
     "categories": [ "Software" ],

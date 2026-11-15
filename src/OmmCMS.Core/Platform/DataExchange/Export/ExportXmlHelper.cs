@@ -608,8 +608,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.LowestAttributeCombinationPrice), lowestAttributeCombinationPrice?.ToString(_culture) ?? string.Empty);
         _writer.WriteElementString(nameof(Product.AttributeCombinationRequired), entity.AttributeCombinationRequired.ToString());
         _writer.WriteElementString(nameof(Product.AttributeChoiceBehaviour), ((int)entity.AttributeChoiceBehaviour).ToString());
-        _writer.WriteElementString(nameof(Product.IsEsd), entity.IsEsd.ToString());
-        _writer.WriteElementString(nameof(Product.CustomsTariffNumber), entity.CustomsTariffNumber);
 
         WriteLocalized(product);
         WriteDeliveryTime(product.DeliveryTime, nameof(Product.DeliveryTime));

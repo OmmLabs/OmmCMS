@@ -353,7 +353,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.SampleDownloadId, null, ImportUtility.ZeroToNull);    // TODO: global scope
                 row.SetProperty(context.Result, (x) => x.HasUserAgreement);
                 row.SetProperty(context.Result, (x) => x.UserAgreementText);
-                row.SetProperty(context.Result, (x) => x.IsEsd);
                 row.SetProperty(context.Result, (x) => x.IsTaxExempt);
                 row.SetProperty(context.Result, (x) => x.TaxCategoryId, 1);    // TODO: global scope
                 row.SetProperty(context.Result, (x) => x.Price);
@@ -375,7 +374,6 @@ public class ProductImporter : EntityImporterBase
                 // With new entities, "LimitedToStores" is an implicit field, meaning
                 // it has to be set to true by code if it's absent but "StoreIds" exists.
                 row.SetProperty(context.Result, (x) => x.LimitedToStores, !row.GetDataValue<List<int>>("StoreIds").IsNullOrEmpty());
-                row.SetProperty(context.Result, (x) => x.CustomsTariffNumber);
                 row.SetProperty(context.Result, (x) => x.CountryOfOriginId);
                 row.SetProperty(context.Result, (x) => x.AttributeCombinationRequired);
 

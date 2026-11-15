@@ -44,9 +44,6 @@ public class ProductOverviewModel : TabbableModel
     [LocalizedDisplay("*GTIN")]
     public string Gtin { get; set; }
 
-    [LocalizedDisplay("*CustomsTariffNumber")]
-    public string CustomsTariffNumber { get; set; }
-
     [LocalizedDisplay("*IsTaxExempt")]
     public bool IsTaxExempt { get; set; }
 

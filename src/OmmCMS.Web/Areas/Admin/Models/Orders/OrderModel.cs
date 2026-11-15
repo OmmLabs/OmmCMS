@@ -196,7 +196,6 @@ public partial class OrderModel : EditOrderModel
         public bool IsDownloadActivated { get; set; }
         public int? LicenseDownloadId { get; set; }
 
-        public bool IsEsd { get; set; }
         public DateTime? WithdrawalWaiverAcceptedOn { get; set; }
 
         public bool BundlePerItemPricing { get; set; }

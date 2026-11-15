@@ -511,11 +511,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Steuerkategorie",
             "Select the product's tax category. The tax provider determines the applicable rate based on this category and the tax address.",
             "Wählen Sie die Steuerkategorie des Produkts. Der Steueranbieter ermittelt daraus und anhand der Steueradresse den anzuwendenden Steuersatz.");
-        builder.AddOrUpdate(prefix + "Fields.IsEsd",
-            "Electronically supplied service",
-            "Elektronisch erbrachte Dienstleistung",
-            "When EU VAT handling is enabled, the billing address is used as the tax address for EU consumers. This setting does not enable downloadable products.",
-            "Bei aktivierter EU-Umsatzsteuerbehandlung wird für EU-Verbraucher die Rechnungsadresse als Steueradresse verwendet. Diese Einstellung aktiviert keine Downloadbereitstellung.");
         builder.AddOrUpdate(prefix + "Fields.IsShipEnabled",
             "Shipping required",
             "Versand erforderlich",

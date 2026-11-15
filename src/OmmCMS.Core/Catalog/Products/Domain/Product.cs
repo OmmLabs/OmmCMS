@@ -366,12 +366,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     public bool IsTaxExempt { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the product is an electronic service
-    /// bound to EU VAT regulations for digital goods.
-    /// </summary>
-    public bool IsEsd { get; set; }
-
-    /// <summary>
     /// Gets or sets the tax category identifier.
     /// </summary>
     public int TaxCategoryId { get; set; }
@@ -548,12 +542,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
         get => _quantityUnit ?? LazyLoader?.Load(this, ref _quantityUnit);
         set => _quantityUnit = value;
     }
-
-    /// <summary>
-    /// Gets or sets the customs tariff number.
-    /// </summary>
-    [StringLength(30)]
-    public string CustomsTariffNumber { get; set; }
 
     /// <summary>
     /// Gets or sets the country of origin identifier.

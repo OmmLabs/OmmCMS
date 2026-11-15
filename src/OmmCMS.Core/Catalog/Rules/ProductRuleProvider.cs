@@ -407,20 +407,6 @@ public partial class ProductRuleProvider : RuleProviderBase, IProductRuleProvide
                 RuleType = RuleType.Boolean,
                 Operators = [RuleOperator.IsEqualTo]
             },
-            new SearchFilterDescriptor<bool>((ctx, x) => ctx.Query.TaxExemptOnly(x))
-            {
-                Name = "TaxExempt",
-                DisplayName = T("Admin.Catalog.Products.Fields.IsTaxExempt"),
-                RuleType = RuleType.Boolean,
-                Operators = [RuleOperator.IsEqualTo]
-            },
-            new SearchFilterDescriptor<bool>((ctx, x) => ctx.Query.EsdOnly(x))
-            {
-                Name = "Esd",
-                DisplayName = T("Admin.Catalog.Products.Fields.IsEsd"),
-                RuleType = RuleType.Boolean,
-                Operators = [RuleOperator.IsEqualTo]
-            }
         };
 
         return descriptors.Cast<RuleDescriptor>();

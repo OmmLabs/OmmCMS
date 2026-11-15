@@ -48,14 +48,6 @@ public class CatalogSearchQueryVisitor : LinqSearchQueryVisitor<Product, Catalog
         {
             return ApplySimpleMemberExpression(x => x.IsDownload, filter, query);
         }
-        else if (fieldName == names.IsTaxExempt)
-        {
-            return ApplySimpleMemberExpression(x => x.IsTaxExempt, filter, query);
-        }
-        else if (fieldName == names.IsEsd)
-        {
-            return ApplySimpleMemberExpression(x => x.IsEsd, filter, query);
-        }
         else if (fieldName == names.DeliveryId)
         {
             var deliverTimeIds = filter.GetTermsArray<int>();
