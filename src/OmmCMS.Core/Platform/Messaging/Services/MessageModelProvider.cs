@@ -582,10 +582,6 @@ public partial class MessageModelProvider : IMessageModelProvider
         var accountActivationToken = part.GenericAttributes.AccountActivationToken;
         var customerVatStatus = (VatNumberStatus)part.VatNumberStatusId;
 
-        int rewardPointsBalance = part.GetRewardPointsBalance();
-        var rewardPointsAmountBase = _services.Resolve<IOrderCalculationService>().ConvertRewardPointsToAmount(rewardPointsBalance);
-        var rewardPointsAmount = _services.Resolve<ICurrencyService>().ConvertFromPrimaryCurrency(rewardPointsAmountBase.Amount, _services.WorkContext.WorkingCurrency);
-
         var m = new Dictionary<string, object>
         {
             ["Id"] = part.Id,
@@ -616,13 +612,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             // Addresses
             ["BillingAddress"] = await CreateModelPartAsync(part.BillingAddress ?? new Address(), messageContext),
             ["ShippingAddress"] = part.ShippingAddress == null ? null : await CreateModelPartAsync(part.ShippingAddress, messageContext),
-
-            // Reward Points
-            ["RewardPointsAmount"] = rewardPointsAmount.Amount,
-            ["RewardPointsBalance"] = _helper.FormatPrice(rewardPointsAmount.Amount, messageContext),
-            ["RewardPointsHistory"] = part.RewardPointsHistory.Count > 0
-                ? await part.RewardPointsHistory.SelectAwait(async x => await CreateModelPartAsync(x, messageContext)).ToListAsync()
-                : null,
         };
 
         await _helper.PublishModelPartCreatedEventAsync(part, m);
@@ -770,26 +759,6 @@ public partial class MessageModelProvider : IMessageModelProvider
         m["StreetLine"] = MessageModelHelper.GetValidValues(street1, street2);
         m["CityLine"] = MessageModelHelper.GetValidValues(zip, city);
         m["CountryLine"] = MessageModelHelper.GetValidValues(country, state);
-
-        await _helper.PublishModelPartCreatedEventAsync(part, m);
-
-        return m;
-    }
-
-    protected virtual async Task<object> CreateModelPartAsync(RewardPointsHistory part, MessageContext messageContext)
-    {
-        Guard.NotNull(messageContext);
-        Guard.NotNull(part);
-
-        var m = new Dictionary<string, object>
-        {
-            { "Id", part.Id },
-            { "CreatedOn", _helper.ToUserDate(part.CreatedOnUtc, messageContext) },
-            { "Message", part.Message.NullEmpty() },
-            { "Points", part.Points },
-            { "PointsBalance", part.PointsBalance },
-            { "UsedAmount", part.UsedAmount }
-        };
 
         await _helper.PublishModelPartCreatedEventAsync(part, m);
 

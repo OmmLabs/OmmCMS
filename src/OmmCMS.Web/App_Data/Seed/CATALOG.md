@@ -69,11 +69,9 @@ SKUs are `{prefix}{number}`, starting at 1001, e.g. `FN-1002`. Combinations appe
 | GC-1002 | Gift card with amount of your choice | Price entered by the customer |
 | GC-1003 | Donation | Price entered by the customer, tax-free, no shipping |
 
-Across the catalog: reviews with different ratings, delivery times, stock levels, specifications for
-filtering (essential ones are also shown in the checkout), product tags, category icons (concept names of the public icon kit) and badges, a sale category,
-a product discount, a category discount, a coupon code (`WELCOME10`) and free shipping from a cart subtotal.
-
-Related products ("similar products" on the product page) and cross-sell products (suggestions in the shopping cart) are set on FD-1001, FD-1002, FD-1004, FD-1005, FD-1007, GF-1001, GF-1002, FS-1001, FS-1002, FS-1004 (related products) and additionally FN-1001 (cross-sell: the floor lamp; furniture has no related products because they do not fit the feature). Example: the olive oil lists the herb mix, the sea salt mill and the gourmet gift box as related products and suggests the mill in the cart (the cookies are only a related product, because they cannot be put into the cart yet); the rain jacket suggests the beanie and the scarf.
+Across the remaining catalog sample data: delivery times, stock levels, specifications,
+product tags, category icons (concept names of the public icon kit) and badges, a sale category,
+a product discount and a category discount.
 
 Some products also show features of optional modules. Their texts say so in a separate paragraph
 ("The plugin <strong>…</strong> …"), and the module seeds its own data during the installation.

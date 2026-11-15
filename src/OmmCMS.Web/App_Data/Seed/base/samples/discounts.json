@@ -17,24 +17,5 @@
     "discountPercentage": 20,
     "startDateUtc": "@now-7d",
     "endDateUtc": "@now+1M"
-  },
-  {
-    "key": "welcome-10",
-    "name": "Welcome discount: 10% with coupon code WELCOME10",
-    "discountType": "AssignedToOrderSubTotal",
-    "usePercentage": true,
-    "discountPercentage": 10,
-    "requiresCouponCode": true,
-    "couponCode": "WELCOME10"
-  },
-  {
-    "key": "free-shipping-50",
-    "name": "Free shipping from 50",
-    "discountType": "AssignedToShipping",
-    "usePercentage": true,
-    "discountPercentage": 100,
-    "ruleSets": [
-      "cart-subtotal-50"
-    ]
   }
 ]

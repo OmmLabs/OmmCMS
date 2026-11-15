@@ -245,8 +245,7 @@ public class NewsletterSubscriptionService : AsyncDbSaveHook<NewsletterSubscript
 
         var customerQuery = _db.Customers
             .AsSplitQuery()
-            .IncludeCustomerRoles()
-            .Include(x => x.RewardPointsHistory);
+            .IncludeCustomerRoles();
 
         var query =
             from ns in _db.NewsletterSubscriptions

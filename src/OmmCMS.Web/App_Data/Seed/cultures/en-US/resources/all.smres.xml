@@ -13108,12 +13108,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartProductCount">
 		<Value>Number of products</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartSubtotal">
-		<Value>Subtotal amount of cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartTotal">
-		<Value>Total amount of cart</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartWeightRule">
 		<Value>Weight of all products in cart</Value>
 	</LocaleResource>

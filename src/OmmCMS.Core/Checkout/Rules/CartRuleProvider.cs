@@ -355,22 +355,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
 
             new()
             {
-                Name = "CartTotal",
-                DisplayName = T("Admin.Rules.FilterDescriptor.CartTotal"),
-                GroupKey = "ShoppingCart",
-                RuleType = RuleType.Money,
-                ProcessorType = typeof(CartTotalRule)
-            },
-            new()
-            {
-                Name = "CartSubtotal",
-                DisplayName = T("Admin.Rules.FilterDescriptor.CartSubtotal"),
-                GroupKey = "ShoppingCart",
-                RuleType = RuleType.Money,
-                ProcessorType = typeof(CartSubtotalRule)
-            },
-            new()
-            {
                 Name = "CartWeightRule",
                 DisplayName = T("Admin.Rules.FilterDescriptor.CartWeightRule"),
                 GroupKey = "ShoppingCart",

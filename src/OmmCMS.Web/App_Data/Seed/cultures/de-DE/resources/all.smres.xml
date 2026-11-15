@@ -12832,12 +12832,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartProductCount">
 		<Value>Anzahl der Produkte</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartSubtotal">
-		<Value>Zwischensumme des Warenkorbes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartTotal">
-		<Value>Gesamtbetrag des Warenkorbes</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.CartWeightRule">
 		<Value>Gewicht aller Produkte im Warenkorb</Value>
 	</LocaleResource>
