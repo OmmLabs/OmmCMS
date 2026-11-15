@@ -67,8 +67,9 @@ public class SeedReferenceResolverTests
         resolver.Add("standard", new MediaTag { Id = 4 });
         resolver.AddAliases<MediaTag>(new Dictionary<string, string> { ["apparel"] = "standard" });
 
-        Assert.That(resolver.GetId("taxcategory", "STANDARD"), Is.EqualTo(4));
+        Assert.That(resolver.GetId("mediatag", "STANDARD"), Is.EqualTo(4));
         Assert.That(resolver.GetId("MediaTag", "apparel"), Is.EqualTo(4));
+        Assert.Throws<SeedDataFormatException>(() => resolver.GetId("taxcategory", "STANDARD"));
         Assert.Throws<SeedDataFormatException>(() => resolver.GetId("Currency", "EUR"));
         Assert.Throws<SeedDataFormatException>(() => resolver.GetId("MediaTag", "missing"));
     }
