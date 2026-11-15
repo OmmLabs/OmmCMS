@@ -60,6 +60,10 @@ Phases 731–750: removed the remaining catalogue entity model and database sets
 
 Phases 751–765: removed unused commerce directory records and seed data for delivery times, quantity units, weight/dimension conversion and collection groups, including their administration models, rules and diagnostics. General measurement values, common customer/country/currency data and CMS permissions remain.
 
+Phase 766: fixed core compilation after commerce extraction.
+
+Phases 767–775: removed the product detail JavaScript bundle, unused catalogue editor and tax provider model, retired product and recurring-payment email templates, obsolete order email layout, and the product-specific DevTools example. Publish checks guard the retired assets; general developer tooling and CMS navigation remain.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

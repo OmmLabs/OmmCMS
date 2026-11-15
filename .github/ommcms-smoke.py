@@ -686,7 +686,7 @@ try:
             assert (seed_root / "base/core/cms/topics.json").exists(), "CMS starter topics missing"
             assert (seed_root / "base/core/cms/menus.json").exists(), "CMS starter menus missing"
         for language in ("en", "de"):
-            for name in ("GiftCard.Notification.xml", "ShipmentSent.CustomerNotification.xml", "ShipmentDelivered.CustomerNotification.xml", "Customer.NewOrderNote.xml"):
+            for name in ("GiftCard.Notification.xml", "ShipmentSent.CustomerNotification.xml", "ShipmentDelivered.CustomerNotification.xml", "Customer.NewOrderNote.xml", "Product.ProductReview.xml", "RecurringPaymentCancelled.StoreOwnerNotification.xml"):
                 template = Path("App_Data/EmailTemplates") / language / name
                 assert not (repo / "src/OmmCMS.Web" / template).exists(), f"Retired template remains: {template}"
                 assert not (root / template).exists(), f"Retired template was published: {template}"
@@ -694,7 +694,7 @@ try:
         assert not (repo / "src/OmmCMS.Web" / cart_template).exists()
         assert not (root / cart_template).exists()
         assert not (repo / "src/OmmCMS.Web/Areas/Admin/Models/ShoppingCart").exists()
-        for path in ("wwwroot/js/public.refreshcart.js", "wwwroot/js/public.offcanvas-cart.js", "Themes/Flex/wwwroot/_cart.scss"):
+        for path in ("wwwroot/js/public.refreshcart.js", "wwwroot/js/public.offcanvas-cart.js", "Themes/Flex/wwwroot/_cart.scss", "wwwroot/js/public.product.js", "Areas/Admin/Views/Menu/EditorTemplates/MenuItem.Catalog.cshtml", "Themes/Flex/Views/Shared/EmailTemplates/order.liquid"):
             assert not (repo / "src/OmmCMS.Web" / path).exists(), f"Retired cart asset remains: {path}"
             assert not (root / path).exists(), f"Retired cart asset published: {path}"
         print("Core commerce source extraction passed.")

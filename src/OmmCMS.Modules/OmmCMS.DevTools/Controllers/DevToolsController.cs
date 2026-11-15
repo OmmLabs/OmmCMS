@@ -93,15 +93,4 @@ public class DevToolsController(IIconCache iconCache, IIconKitService iconKits, 
         return RedirectToAction(nameof(Configure));
     }
 
-    [AuthorizeAdmin]
-    public IActionResult ProductEditTab(int productId)
-    {
-        var model = new BackendExtensionModel
-        {
-            Welcome = "Hello world!"
-        };
-
-        ViewData.TemplateInfo.HtmlFieldPrefix = "CustomProperties[DevTools]";
-        return View(model);
-    }
 }

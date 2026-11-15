@@ -104,10 +104,9 @@ internal class PublicBundles : IBundleProvider
             js + "ommcms.accessibility.js",
             js + "ommcms.accessibility.plugins.js",
             js + "ommcms.accessibility.focustrap.js",
-            // Shop
+            // Public website
             js + "public.common.js",
             js + "public.search.js",
-            js + "public.offcanvas-menu.js",
-            js + "public.product.js"));
+            js + "public.offcanvas-menu.js"));
     }
 }
