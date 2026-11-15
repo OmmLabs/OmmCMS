@@ -464,7 +464,6 @@ public class CustomerController : AdminController
                 LastIpAddress = x.LastIpAddress,
                 DateOfBirth = x.BirthDate.HasValue ? dtHelper.ConvertToUserTime(x.BirthDate.Value, DateTimeKind.Utc) : null,
                 Gender = x.Gender,
-                VatNumber = x.GenericAttributes.VatNumber
             })
             .ToList();
 

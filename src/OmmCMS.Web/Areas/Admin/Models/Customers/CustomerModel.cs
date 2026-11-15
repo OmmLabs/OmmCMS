@@ -110,31 +110,6 @@ public class CustomerModel : TabbableModel
     public string TimeZoneId { get; set; }
     public bool AllowCustomersToSetTimeZone { get; set; }
 
-    public bool DisplayVatNumber { get; set; }
-
-    [LocalizedDisplay("*VatNumber")]
-    public string VatNumber { get; set; }
-
-    [LocalizedDisplay("*VatNumberStatus")]
-    public VatNumberStatus VatNumberStatus { get; set; }
-
-    public string VatNumberStatusClass
-    {
-        get
-        {
-            return VatNumberStatus switch
-            {
-                VatNumberStatus.Empty => "text-muted",
-                VatNumberStatus.Valid => "text-success",
-                VatNumberStatus.ServiceUnavailable => "text-warning",
-                VatNumberStatus.Invalid => "text-danger",
-                _ => string.Empty,
-            };
-        }
-    }
-
-
-
     [LocalizedDisplay("Common.CreatedOn")]
     public DateTime CreatedOn { get; set; }
 

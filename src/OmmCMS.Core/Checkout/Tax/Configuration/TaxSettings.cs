@@ -91,8 +91,4 @@ public class TaxSettings : ISettings
     /// </summary>
     public bool EuVatEmailAdminWhenNewVatSubmitted { get; set; }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether a VAT-ID is required
-    /// </summary>
-    public bool VatRequired { get; set; }
 }

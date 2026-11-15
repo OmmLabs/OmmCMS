@@ -112,7 +112,7 @@
                     </div>
                 </fieldset>
 
-                <fieldset sm-if="Model.CompanyEnabled || Model.DisplayVatNumber" class="content-group">
+                <fieldset sm-if="Model.CompanyEnabled" class="content-group">
                     <legend><span>@T("Account.CompanyDetails")</span></legend>
 
                     <div sm-if="Model.CompanyEnabled" class="form-group row">
@@ -123,21 +123,6 @@
                         </div>
                     </div>
 
-                    <div sm-if="Model.DisplayVatNumber" class="form-group row">
-                        <label id="vat-number-label" asp-for="VatNumber" class="col-md-3 col-form-label" attr-class='(Model.VatRequired, "required")'></label>
-                        <div class="col-md-9">
-                            <div class="input-group">
-                                <input asp-for="VatNumber" 
-                                       sm-required="Model.VatRequired" 
-                                       class="remember" 
-                                       aria-labelledby="vat-number-label vat-number-status" 
-                                       aria-describedby="vat-number-note" />
-                                <div sm-if="Model.VatNumberStatusNote.HasValue()" class="input-group-append"><span class="input-group-text">@Model.VatNumberStatusNote</span></div>
-                            </div>
-                            <span asp-validation-for="VatNumber"></span>
-                            <small id="vat-number-note" class="form-text text-muted vat-note">@T("Account.Fields.VatNumber.Note")</small>
-                        </div>
-                    </div>
 
                 </fieldset>
 

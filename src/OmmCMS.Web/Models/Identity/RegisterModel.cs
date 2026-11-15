@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FluentValidation;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Localization;
 
@@ -115,19 +114,14 @@ public partial class RegisterModel : ModelBase
     public string TimeZoneId { get; set; }
     public bool AllowCustomersToSetTimeZone { get; set; }
 
-    // EU VAT.
-    [LocalizedDisplay("*VatNumber")]
-    public string VatNumber { get; set; }
-    public string VatNumberStatusNote { get; set; }
-    public bool DisplayVatNumber { get; set; }
-    public bool VatRequired { get; set; }
+
 
     public bool DisplayCaptcha { get; set; }
 }
 
 public class RegisterModelValidator : SmartValidator<RegisterModel>
 {
-    public RegisterModelValidator(Localizer T, CustomerSettings customerSettings, TaxSettings taxSettings)
+    public RegisterModelValidator(Localizer T, CustomerSettings customerSettings)
     {
         RuleFor(x => x.Email).NotEmpty().EmailAddressStrict();
         RuleFor(x => x.Password).NotEmpty();
@@ -182,10 +176,6 @@ public class RegisterModelValidator : SmartValidator<RegisterModel>
         if (customerSettings.FaxRequired && customerSettings.FaxEnabled)
         {
             RuleFor(x => x.Fax).NotEmpty();
-        }
-        if (taxSettings.EuVatEnabled && taxSettings.VatRequired)
-        {
-            RuleFor(x => x.VatNumber).NotEmpty();
         }
     }
 }

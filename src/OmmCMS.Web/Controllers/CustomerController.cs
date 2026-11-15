@@ -10,7 +10,6 @@ using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Checkout.Orders;
 using OmmCMS.Core.Checkout.Payment;
 using OmmCMS.Core.Checkout.Shipping;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Media;
@@ -32,7 +31,6 @@ public class CustomerController : PublicController
 {
     private readonly SmartDbContext _db;
     private readonly INewsletterSubscriptionService _newsletterSubscriptionService;
-    private readonly ITaxService _taxService;
     private readonly IMediaService _mediaService;
     private readonly IMessageFactory _messageFactory;
     private readonly UserManager<Customer> _userManager;
@@ -42,13 +40,11 @@ public class CustomerController : PublicController
     private readonly IDateTimeHelper _dateTimeHelper;
     private readonly DateTimeSettings _dateTimeSettings;
     private readonly CustomerSettings _customerSettings;
-    private readonly TaxSettings _taxSettings;
     private readonly LocalizationSettings _localizationSettings;
 
     public CustomerController(
         SmartDbContext db,
         INewsletterSubscriptionService newsletterSubscriptionService,
-        ITaxService taxService,
         IMediaService mediaService,
         IMessageFactory messageFactory,
         UserManager<Customer> userManager,
@@ -58,12 +54,10 @@ public class CustomerController : PublicController
         IDateTimeHelper dateTimeHelper,
         DateTimeSettings dateTimeSettings,
         CustomerSettings customerSettings,
-        TaxSettings taxSettings,
         LocalizationSettings localizationSettings)
     {
         _db = db;
         _newsletterSubscriptionService = newsletterSubscriptionService;
-        _taxService = taxService;
         _mediaService = mediaService;
         _messageFactory = messageFactory;
         _userManager = userManager;
@@ -73,7 +67,6 @@ public class CustomerController : PublicController
         _dateTimeHelper = dateTimeHelper;
         _dateTimeSettings = dateTimeSettings;
         _customerSettings = customerSettings;
-        _taxSettings = taxSettings;
         _localizationSettings = localizationSettings;
     }
 
@@ -162,25 +155,6 @@ public class CustomerController : PublicController
             {
                 customer.FirstName = model.FirstName;
                 customer.LastName = model.LastName;
-
-                // VAT number.
-                if (_taxSettings.EuVatEnabled)
-                {
-                    var prevVatNumber = customer.GenericAttributes.VatNumber;
-                    customer.GenericAttributes.VatNumber = model.VatNumber;
-
-                    if (prevVatNumber != model.VatNumber)
-                    {
-                        var vatCheckResult = await _taxService.GetVatNumberStatusAsync(model.VatNumber);
-                        customer.VatNumberStatusId = (int)vatCheckResult.Status;
-
-                        // Send VAT number admin notification.
-                        if (model.VatNumber.HasValue() && _taxSettings.EuVatEmailAdminWhenNewVatSubmitted)
-                        {
-                            await _messageFactory.SendNewVatSubmittedStoreOwnerNotificationAsync(customer, model.VatNumber, vatCheckResult.Address, _localizationSettings.DefaultAdminLanguageId);
-                        }
-                    }
-                }
 
                 // Customer number.
                 if (_customerSettings.CustomerNumberMethod != CustomerNumberMethod.Disabled)
@@ -621,7 +595,6 @@ public class CustomerController : PublicController
             model.Email = customer.Email;
             model.Username = customer.Username;
             model.DateOfBirth = customer.BirthDate;
-            model.VatNumber = customer.GenericAttributes.VatNumber;
             model.StreetAddress = customer.GenericAttributes.StreetAddress;
             model.StreetAddress2 = customer.GenericAttributes.StreetAddress2;
             model.City = customer.GenericAttributes.City;
@@ -652,8 +625,6 @@ public class CustomerController : PublicController
 
         model.FirstNameRequired = _customerSettings.FirstNameRequired;
         model.LastNameRequired = _customerSettings.LastNameRequired;
-        model.DisplayVatNumber = _taxSettings.EuVatEnabled;
-        model.VatNumberStatusNote = ((VatNumberStatus)customer.VatNumberStatusId).GetLocalizedEnum(language.Id);
         model.GenderEnabled = _customerSettings.GenderEnabled;
         model.TitleEnabled = _customerSettings.TitleEnabled;
         model.DateOfBirthEnabled = _customerSettings.DateOfBirthEnabled;

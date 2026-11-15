@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OmmCMS.ComponentModel;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Identity;
@@ -27,7 +26,6 @@ public class IdentityController : PublicController
     private readonly UserManager<Customer> _userManager;
     private readonly SignInManager<Customer> _signInManager;
     private readonly RoleManager<CustomerRole> _roleManager;
-    private readonly ITaxService _taxService;
     private readonly IAddressService _addressService;
     private readonly INewsletterSubscriptionService _newsletterSubscriptionService;
     private readonly IMessageFactory _messageFactory;
@@ -36,7 +34,6 @@ public class IdentityController : PublicController
     private readonly CustomerSettings _customerSettings;
     private readonly CaptchaSettings _captchaSettings;
     private readonly DateTimeSettings _dateTimeSettings;
-    private readonly TaxSettings _taxSettings;
     private readonly LocalizationSettings _localizationSettings;
 
     public IdentityController(
@@ -44,7 +41,6 @@ public class IdentityController : PublicController
         UserManager<Customer> userManager,
         SignInManager<Customer> signInManager,
         RoleManager<CustomerRole> roleManager,
-        ITaxService taxService,
         IAddressService addressService,
         INewsletterSubscriptionService newsletterSubscriptionService,
         IMessageFactory messageFactory,
@@ -53,14 +49,12 @@ public class IdentityController : PublicController
         CustomerSettings customerSettings,
         CaptchaSettings captchaSettings,
         DateTimeSettings dateTimeSettings,
-        TaxSettings taxSettings,
         LocalizationSettings localizationSettings)
     {
         _db = db;
         _userManager = userManager;
         _signInManager = signInManager;
         _roleManager = roleManager;
-        _taxService = taxService;
         _addressService = addressService;
         _newsletterSubscriptionService = newsletterSubscriptionService;
         _messageFactory = messageFactory;
@@ -69,7 +63,6 @@ public class IdentityController : PublicController
         _customerSettings = customerSettings;
         _captchaSettings = captchaSettings;
         _dateTimeSettings = dateTimeSettings;
-        _taxSettings = taxSettings;
         _localizationSettings = localizationSettings;
     }
 
@@ -721,8 +714,6 @@ public class IdentityController : PublicController
     private async Task PrepareRegisterModelAsync(RegisterModel model)
     {
         model.AllowCustomersToSetTimeZone = _dateTimeSettings.AllowCustomersToSetTimeZone;
-        model.DisplayVatNumber = _taxSettings.EuVatEnabled;
-        model.VatRequired = _taxSettings.VatRequired;
 
         MiniMapper.Map(_customerSettings, model);
 
@@ -856,21 +847,6 @@ public class IdentityController : PublicController
         if (_dateTimeSettings.AllowCustomersToSetTimeZone)
         {
             customer.TimeZoneId = model.TimeZoneId;
-        }
-
-        // VAT number
-        if (_taxSettings.EuVatEnabled)
-        {
-            customer.GenericAttributes.VatNumber = model.VatNumber;
-
-            var vatCheckResult = await _taxService.GetVatNumberStatusAsync(model.VatNumber);
-            customer.VatNumberStatusId = (int)vatCheckResult.Status;
-
-            // Send VAT number admin notification.
-            if (model.VatNumber.HasValue() && _taxSettings.EuVatEmailAdminWhenNewVatSubmitted)
-            {
-                await _messageFactory.SendNewVatSubmittedStoreOwnerNotificationAsync(customer, model.VatNumber, vatCheckResult.Address, _localizationSettings.DefaultAdminLanguageId);
-            }
         }
 
         // Form fields

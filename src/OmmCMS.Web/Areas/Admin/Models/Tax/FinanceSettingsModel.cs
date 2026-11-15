@@ -60,8 +60,6 @@ public partial class FinanceSettingsModel : ModelBase
         [LocalizedDisplay("*EuVatEmailAdminWhenNewVatSubmitted")]
         public bool EuVatEmailAdminWhenNewVatSubmitted { get; set; }
 
-        [LocalizedDisplay("*VatRequired")]
-        public bool VatRequired { get; set; } = false;
     }
 
     [LocalizedDisplay("Admin.Configuration.Settings.Currency.")]
