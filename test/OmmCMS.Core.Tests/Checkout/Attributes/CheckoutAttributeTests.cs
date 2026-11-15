@@ -150,7 +150,6 @@ public class CheckoutAttributeTests : ServiceTestBase
         using (Assert.EnterMultipleScope())
         {
             Assert.That(context.Customer, Is.SameAs(_cart.Customer));
-            Assert.That(context.ShoppingCart, Is.SameAs(_cart));
             Assert.That(context.Store, Is.SameAs(_store));
         }
     }

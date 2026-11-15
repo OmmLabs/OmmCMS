@@ -72,15 +72,11 @@ public class DiscountServiceTests : ServiceTestBase
         var ruleProviderFactoryMock = new Mock<IRuleProviderFactory>();
         ruleProviderFactoryMock.Setup(x => x.GetProvider(RuleScope.Cart, null)).Returns(cartRuleProviderMock.Object);
 
-        var cartServiceMock = new Mock<IShoppingCartService>();
-        cartServiceMock.Setup(x => x.GetCartAsync(null, ShoppingCartType.ShoppingCart, 0, true)).Returns(Task.FromResult<ShoppingCart>(null));
-
         _discountService = new DiscountService(
             DbContext,
             NullRequestCache.Instance,
             _storeContext,
-            ruleProviderFactoryMock.Object,
-            new Lazy<IShoppingCartService>(cartServiceMock.Object));
+            ruleProviderFactoryMock.Object);
     }
 
     [Test]

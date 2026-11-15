@@ -78,7 +78,6 @@ public partial class CheckoutAttributeMaterializer : ICheckoutAttributeMateriali
             void contextAction(CartRuleContext context)
             {
                 context.Customer = cart.Customer;
-                context.ShoppingCart = cart;
 
                 if (storeId > 0 && storeId != context.Store.Id)
                 {

@@ -107,11 +107,6 @@ internal class PublicBundles : IBundleProvider
             // Shop
             js + "public.common.js",
             js + "public.search.js",
-            // INFO: (mh) (core) Offcanvas cart is rendered by widget & not available on document loaded.
-            //                   So it must either be rewritten so it can be initialized on request or widgets must be rendered before scripts are injected. 
-            //                   The second solution might be preferable as I don't know how many other places are affected by this.
-            // TODO: (mh) (core) Uncomment when this problem is solved.
-            //js + "public.offcanvas-cart.js",
             js + "public.offcanvas-menu.js",
             js + "public.product.js"));
     }

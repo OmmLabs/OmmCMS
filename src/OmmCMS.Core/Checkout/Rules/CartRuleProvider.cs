@@ -1,6 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
 using Autofac;
-using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Checkout.Rules.Impl;
 using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common.Configuration;
@@ -19,7 +18,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
     private readonly ICurrencyService _currencyService;
     private readonly IWorkContext _workContext;
     private readonly IStoreContext _storeContext;
-    private readonly IShoppingCartService _shoppingCartService;
     private readonly ILocalizationService _localizationService;
 
     public CartRuleProvider(
@@ -28,7 +26,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
         ICurrencyService currencyService,
         IWorkContext workContext,
         IStoreContext storeContext,
-        IShoppingCartService shoppingCartService,
         ILocalizationService localizationService)
         : base(RuleScope.Cart)
     {
@@ -37,7 +34,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
         _currencyService = currencyService;
         _workContext = workContext;
         _storeContext = storeContext;
-        _shoppingCartService = shoppingCartService;
         _localizationService = localizationService;
     }
 
@@ -176,8 +172,7 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
         {
             Customer = _workContext.CurrentCustomer,
             Store = _storeContext.CurrentStore,
-            WorkContext = _workContext,
-            ShoppingCartService = _shoppingCartService
+            WorkContext = _workContext
         };
 
         if (contextAction != null)
@@ -260,22 +255,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
             },
             new()
             {
-                Name = "ProductInWishlist",
-                DisplayName = T("Admin.Rules.FilterDescriptor.ProductOnWishlist"),
-                RuleType = RuleType.IntArray,
-                ProcessorType = typeof(ProductOnWishlistRule),
-                SelectList = new RemoteRuleValueSelectList(KnownRuleOptionDataSourceNames.Product) { Multiple = true },
-                IsComparingSequences = true
-            },
-            new()
-            {
-                Name = "RewardPointsBalance",
-                DisplayName = T("Admin.Rules.FilterDescriptor.RewardPointsBalance"),
-                RuleType = RuleType.Int,
-                ProcessorType = typeof(RewardPointsBalanceRule)
-            },
-            new()
-            {
                 Name = "RuleSet",
                 DisplayName = T("Admin.Rules.FilterDescriptor.RuleSet"),
                 RuleType = RuleType.Int,
@@ -285,42 +264,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
             },
 
 
-            new()
-            {
-                Name = "CartOrderCount",
-                DisplayName = T("Admin.Rules.FilterDescriptor.OrderCount"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.Int,
-                ProcessorType = typeof(OrderCountRule)
-            },
-            new()
-            {
-                Name = "CartSpentAmount",
-                DisplayName = T("Admin.Rules.FilterDescriptor.SpentAmount"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.Money,
-                ProcessorType = typeof(SpentAmountRule)
-            },
-            new()
-            {
-                Name = "CartPurchasedProduct",
-                DisplayName = T("Admin.Rules.FilterDescriptor.PurchasedProduct"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.IntArray,
-                ProcessorType = typeof(PurchasedProductRule),
-                SelectList = new RemoteRuleValueSelectList(KnownRuleOptionDataSourceNames.Product) { Multiple = true },
-                IsComparingSequences = true
-            },
-            new()
-            {
-                Name = "CartPurchasedFromManufacturer",
-                DisplayName = T("Admin.Rules.FilterDescriptor.PurchasedFromManufacturer"),
-                GroupKey = "Admin.Orders",
-                RuleType = RuleType.IntArray,
-                ProcessorType = typeof(PurchasedFromManufacturerRule),
-                SelectList = new RemoteRuleValueSelectList(KnownRuleOptionDataSourceNames.Manufacturer) { Multiple = true },
-                IsComparingSequences = true
-            },
 
             new()
             {
@@ -368,56 +311,6 @@ public class CartRuleProvider : RuleProviderBase, ICartRuleProvider
                 ProcessorType = typeof(CustomerNewsletterSubscriptionRule)
             },
 
-            new()
-            {
-                Name = "CartBillingCountry",
-                DisplayName = T("Admin.Rules.FilterDescriptor.BillingCountry"),
-                GroupKey = "Common.Entity.Addresses",
-                RuleType = RuleType.IntArray,
-                ProcessorType = typeof(BillingCountryRule),
-                SelectList = new RemoteRuleValueSelectList(KnownRuleOptionDataSourceNames.Country) { Multiple = true }
-            },
-            new()
-            {
-                Name = "CartBillingEu",
-                DisplayName = T("Admin.Rules.FilterDescriptor.BillingEu"),
-                GroupKey = "Common.Entity.Addresses",
-                RuleType = RuleType.Boolean,
-                ProcessorType = typeof(BillingEuRule),
-            },
-            new()
-            {
-                Name = "CartBillingCompany",
-                DisplayName = T("Admin.Rules.FilterDescriptor.BillingCompany"),
-                GroupKey = "Common.Entity.Addresses",
-                RuleType = RuleType.Boolean,
-                ProcessorType = typeof(BillingCompanyRule),
-            },
-            new()
-            {
-                Name = "CartShippingCountry",
-                DisplayName = T("Admin.Rules.FilterDescriptor.ShippingCountry"),
-                GroupKey = "Common.Entity.Addresses",
-                RuleType = RuleType.IntArray,
-                ProcessorType = typeof(ShippingCountryRule),
-                SelectList = new RemoteRuleValueSelectList(KnownRuleOptionDataSourceNames.Country) { Multiple = true }
-            },
-            new()
-            {
-                Name = "CartShippingEu",
-                DisplayName = T("Admin.Rules.FilterDescriptor.ShippingEu"),
-                GroupKey = "Common.Entity.Addresses",
-                RuleType = RuleType.Boolean,
-                ProcessorType = typeof(ShippingEuRule),
-            },
-            new()
-            {
-                Name = "CartShippingCompany",
-                DisplayName = T("Admin.Rules.FilterDescriptor.ShippingCompany"),
-                GroupKey = "Common.Entity.Addresses",
-                RuleType = RuleType.Boolean,
-                ProcessorType = typeof(ShippingCompanyRule),
-            },
 
             new()
             {

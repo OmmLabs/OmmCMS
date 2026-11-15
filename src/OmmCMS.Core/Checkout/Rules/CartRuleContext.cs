@@ -1,5 +1,4 @@
-﻿using OmmCMS.Core.Checkout.Cart;
-using OmmCMS.Core.Identity;
+﻿using OmmCMS.Core.Identity;
 using OmmCMS.Core.Stores;
 
 namespace OmmCMS.Core.Checkout.Rules;
@@ -8,7 +7,6 @@ public class CartRuleContext
 {
     private readonly Func<object> _sessionKeyBuilder;
     private object _sessionKey;
-    private ShoppingCart _cart;
 
     internal CartRuleContext(Func<object> sessionKeyBuilder)
     {
@@ -16,19 +14,9 @@ public class CartRuleContext
     }
 
     public IWorkContext WorkContext { get; init; }
-    public IShoppingCartService ShoppingCartService { get; init; }
 
     public Customer Customer { get; set; }
     public Store Store { get; set; }
-
-    /// <summary>
-    /// Gets or sets the current shopping cart for the <see cref="Customer"/>, containing only active cart items.
-    /// </summary>
-    public ShoppingCart ShoppingCart
-    {
-        get => _cart ??= ShoppingCartService.GetCartAsync(Customer, storeId: Store.Id).Await();
-        set => _cart = value;
-    }
 
     public object SessionKey
         => _sessionKey ??= _sessionKeyBuilder?.Invoke() ?? 0;

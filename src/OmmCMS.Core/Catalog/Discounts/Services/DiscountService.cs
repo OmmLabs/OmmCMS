@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using OmmCMS.Caching;
 using OmmCMS.Collections;
-using OmmCMS.Core.Checkout.Cart;
 using OmmCMS.Core.Checkout.Rules;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Identity;
@@ -22,7 +21,6 @@ public partial class DiscountService : AsyncDbSaveHook<Discount>, IDiscountServi
     private readonly IRequestCache _requestCache;
     private readonly IStoreContext _storeContext;
     private readonly ICartRuleProvider _cartRuleProvider;
-    private readonly Lazy<IShoppingCartService> _cartService;
     private readonly Dictionary<DiscountKey, bool> _discountValidityCache = [];
     private readonly Multimap<string, int> _relatedEntityIds = new(items => new HashSet<int>(items));
 
@@ -30,14 +28,12 @@ public partial class DiscountService : AsyncDbSaveHook<Discount>, IDiscountServi
         SmartDbContext db,
         IRequestCache requestCache,
         IStoreContext storeContext,
-        IRuleProviderFactory ruleProviderFactory,
-        Lazy<IShoppingCartService> cartService)
+        IRuleProviderFactory ruleProviderFactory)
     {
         _db = db;
         _requestCache = requestCache;
         _storeContext = storeContext;
         _cartRuleProvider = ruleProviderFactory.GetProvider<ICartRuleProvider>(RuleScope.Cart);
-        _cartService = cartService;
     }
 
     #region Hook
@@ -234,10 +230,6 @@ public partial class DiscountService : AsyncDbSaveHook<Discount>, IDiscountServi
             return Cached(false);
         }
 
-        var cart = flags.HasFlag(DiscountValidationFlags.CartRules)
-            ? await _cartService.Value.GetCartAsync(customer, ShoppingCartType.ShoppingCart, store.Id)
-            : null;
-
         // Rules.
         if (flags.HasFlag(DiscountValidationFlags.CartRules))
         {
@@ -247,7 +239,6 @@ public partial class DiscountService : AsyncDbSaveHook<Discount>, IDiscountServi
             {
                 context.Customer = customer;
                 context.Store = store;
-                context.ShoppingCart = cart;
             }
 
             if (!await _cartRuleProvider.RuleMatchesAsync(discount, contextAction: contextAction))

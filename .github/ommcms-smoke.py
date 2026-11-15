@@ -618,6 +618,17 @@ try:
             "Common/Services/DeliveryTimeService.cs",
             "Common/Services/IDeliveryTimeService.cs",
             "Checkout/Rules/Impl/Cart",
+            "Checkout/Rules/Impl/Addresses",
+            "Checkout/Rules/Impl/ProductOnWishlistRule.cs",
+            "Checkout/Rules/Impl/RewardPointsBalanceRule.cs",
+            "Checkout/Rules/Impl/OrderCountRule.cs",
+            "Checkout/Rules/Impl/SpentAmountRule.cs",
+            "Checkout/Rules/Impl/PurchasedProductRule.cs",
+            "Checkout/Rules/Impl/PurchasedFromManufacturerRule.cs",
+            "Checkout/Cart/Services",
+            "Checkout/Cart/Extensions/IShoppingCartValidatorExtensions.cs",
+            "Checkout/Cart/Domain/AddToCartContext.cs",
+            "Checkout/Cart/Events/MigrateShoppingCartEvent.cs",
         ):
             assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
         for language in ("en", "de"):
@@ -628,6 +639,10 @@ try:
         cart_template = Path("Areas/Admin/Views/Rule/ValueTemplates/CartItemQuantity.cshtml")
         assert not (repo / "src/OmmCMS.Web" / cart_template).exists()
         assert not (root / cart_template).exists()
+        assert not (repo / "src/OmmCMS.Web/Areas/Admin/Models/ShoppingCart").exists()
+        for path in ("wwwroot/js/public.refreshcart.js", "wwwroot/js/public.offcanvas-cart.js", "Themes/Flex/wwwroot/_cart.scss"):
+            assert not (repo / "src/OmmCMS.Web" / path).exists(), f"Retired cart asset remains: {path}"
+            assert not (root / path).exists(), f"Retired cart asset published: {path}"
         print("Core commerce source extraction passed.")
     if "--presentation-trimmed" in sys.argv:
         verify_presentation_extraction()

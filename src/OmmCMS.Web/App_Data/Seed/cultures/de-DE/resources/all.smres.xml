@@ -12043,14 +12043,8 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.AvailableByDate">
 		<Value>Nach Datum verfügbar</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.BillingCompany">
-		<Value>Rechnung an Firma</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.BillingCountry">
 		<Value>Rechnungsland</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.BillingEu">
-		<Value>Rechnungsland in EU</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.BirthDate">
 		<Value>Tage seit dem Geburtsdatum</Value>
@@ -12133,9 +12127,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.OperatingSystem">
 		<Value>Betriebssystem</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.OrderCount">
-		<Value>Anzahl der Aufträge</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.OrderInStore">
 		<Value>Bestellungen im Shop</Value>
 	</LocaleResource>
@@ -12151,38 +12142,17 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.PaymentStatus">
 		<Value>Zahlungsstatus</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductOnWishlist">
-		<Value>Produkt auf der Wunschliste</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.PurchasedFromManufacturer">
-		<Value>Gekauft von Hersteller</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.PurchasedProduct">
-		<Value>Gekauftes Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.RewardPointsBalance">
-		<Value>Anzahl der Bonuspunkte</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.RuleSet">
 		<Value>Anderer Regelsatz</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Salutation">
 		<Value>Anrede</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingCompany">
-		<Value>Lieferung an Firma</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingCountry">
 		<Value>Lieferland</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingEu">
-		<Value>Lieferland in EU</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingStatus">
 		<Value>Lieferstatus</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.SpentAmount">
-		<Value>Ausgegebener Betrag</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Store">
 		<Value>Shop</Value>

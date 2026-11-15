@@ -12298,14 +12298,8 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.AvailableByDate">
 		<Value>Available by date</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.BillingCompany">
-		<Value>Billing to company</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.BillingCountry">
 		<Value>Billing country</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.BillingEu">
-		<Value>Billing country in EU</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.BirthDate">
 		<Value>Days since date of birth</Value>
@@ -12388,9 +12382,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.OperatingSystem">
 		<Value>Operating system</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.OrderCount">
-		<Value>Number of orders</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.OrderInStore">
 		<Value>Orders in store</Value>
 	</LocaleResource>
@@ -12406,38 +12397,17 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.PaymentStatus">
 		<Value>Payment status</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ProductOnWishlist">
-		<Value>Product on wishlist</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.PurchasedFromManufacturer">
-		<Value>Purchased from manufacturer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.PurchasedProduct">
-		<Value>Purchased product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.RewardPointsBalance">
-		<Value>Number of reward points</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.RuleSet">
 		<Value>Other rule set</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Salutation">
 		<Value>Salutation</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingCompany">
-		<Value>Shipping to company</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingCountry">
 		<Value>Shipping country</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingEu">
-		<Value>Shipping country in EU</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingStatus">
 		<Value>Shipping status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.SpentAmount">
-		<Value>Amount spent</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Store">
 		<Value>Store</Value>
