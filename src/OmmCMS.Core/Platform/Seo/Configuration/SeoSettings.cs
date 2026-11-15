@@ -187,9 +187,6 @@ public class SeoSettings : ISettings
     /// </summary>
     public bool XmlSitemapIncludesAlternateLinks { get; set; } = true;
 
-    public bool XmlSitemapIncludesCategories { get; set; } = true;
-    public bool XmlSitemapIncludesManufacturers { get; set; } = true;
-    public bool XmlSitemapIncludesProducts { get; set; } = true;
     public bool XmlSitemapIncludesTopics { get; set; } = true;
     public bool XmlSitemapIncludesBlog { get; set; } = true;
     public bool XmlSitemapIncludesNews { get; set; } = true;

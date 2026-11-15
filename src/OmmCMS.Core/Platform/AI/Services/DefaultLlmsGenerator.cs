@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OmmCMS.Core.Catalog;
-using OmmCMS.Core.Catalog.Categories;
+using OmmCMS.Core.Content.Topics;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Content.Menus;
@@ -18,14 +17,12 @@ public class DefaultLlmsGenerator : ILlmsGenerator
     private readonly SmartDbContext _db;
     private readonly IStoreContext _storeContext;
     private readonly IWorkContext _workContext;
-    private readonly ICategoryService _categoryService;
     private readonly IAddressService _addressService;
     private readonly Lazy<IUrlHelper> _urlHelper;
     private readonly CompanyInformationSettings _companyInfoSettings;
     private readonly ContactDataSettings _contactSettings;
     private readonly HomePageSettings _homepageSettings;
     private readonly SocialSettings _socialSettings;
-    private readonly CatalogSettings _catalogSettings;
 
     protected IUrlHelper Url => _urlHelper.Value;
 
@@ -33,26 +30,22 @@ public class DefaultLlmsGenerator : ILlmsGenerator
         SmartDbContext db,
         IStoreContext storeContext,
         IWorkContext workContext,
-        ICategoryService categoryService,
         IAddressService addressService,
         Lazy<IUrlHelper> urlHelper,
         CompanyInformationSettings companyInfoSettings,
         ContactDataSettings contactSettings,
         HomePageSettings homepageSettings,
-        SocialSettings socialSettings,
-        CatalogSettings catalogSettings)
+        SocialSettings socialSettings)
     {
         _db = db;
         _storeContext = storeContext;
         _workContext = workContext;
-        _categoryService = categoryService;
         _addressService = addressService;
         _urlHelper = urlHelper;
         _companyInfoSettings = companyInfoSettings;
         _contactSettings = contactSettings;
         _homepageSettings = homepageSettings;
         _socialSettings = socialSettings;
-        _catalogSettings = catalogSettings;
     }
 
     public async Task GenerateLlms(TextWriter writer, HttpRequest httpRequest)
@@ -61,7 +54,7 @@ public class DefaultLlmsGenerator : ILlmsGenerator
         Guard.NotNull(httpRequest);
 
         await GenerateMetadata(writer, httpRequest);
-        await GenerateMainCategories(writer, httpRequest);
+        await GenerateContentPages(writer, httpRequest);
         await GenerateLinks(writer, httpRequest);
     }
 
@@ -107,32 +100,28 @@ public class DefaultLlmsGenerator : ILlmsGenerator
         writer.WriteLine();
     }
 
-    protected virtual async Task GenerateMainCategories(TextWriter writer, HttpRequest httpRequest)
+    protected virtual async Task GenerateContentPages(TextWriter writer, HttpRequest httpRequest)
     {
         var store = _storeContext.CurrentStore;
-        var baseUrl = store.GetBaseUrl();
+        var baseUrl = new Uri(store.GetBaseUrl());
+        var topics = await _db.Topics.AsNoTracking()
+            .Where(x => !x.RenderAsWidget && !x.IsPasswordProtected && !x.SubjectToAcl && x.IncludeInSitemap)
+            .ApplyStandardFilter(storeId: store.Id)
+            .ToListAsync(httpRequest.HttpContext.RequestAborted);
 
-        var categoryTree = await _categoryService.GetCategoryTreeAsync(storeId: store.Id);
-        var rootChildren = categoryTree?.Children;
+        if (topics.Count == 0)
+            return;
 
-        if (rootChildren != null && rootChildren.Count > 0)
+        writer.WriteLine("## Content pages");
+        foreach (var topic in topics)
         {
-            var languageId = _workContext.WorkingLanguage?.Id;
-
-            writer.WriteLine("## Main product categories");
-            foreach (var node in rootChildren)
+            var link = await Url.TopicAsync(topic.SystemName);
+            if (link.HasValue() && link != "#")
             {
-                var category = node.Value;
-                var name = languageId.HasValue
-                    ? category.GetLocalized(x => x.Name, languageId.Value)
-                    : category.Name;
-                var url = Url.RouteUrl("Category", new { SeName = category.GetActiveSlug() }, httpRequest.Scheme);
-
-                WriteLink(writer, name, url.HasValue() ? new Uri(new Uri(baseUrl), url).ToString() : null);
+                WriteLink(writer, topic.GetLocalized(x => x.Title), new Uri(baseUrl, link).ToString());
             }
-
-            writer.WriteLine();
         }
+        writer.WriteLine();
     }
 
     protected virtual async Task GenerateLinks(TextWriter writer, HttpRequest httpRequest)
@@ -145,14 +134,7 @@ public class DefaultLlmsGenerator : ILlmsGenerator
         writer.WriteLine("## Discovery Links");
         WriteLink(writer, "Sitemap", baseUrl + "sitemap.xml");
 
-        if (_catalogSettings.RecentlyAddedProductsEnabled && _catalogSettings.RecentlyAddedProductsNumber > 0)
-        {
-            WriteLink(writer, "Recently added products", Url.RouteUrl("RecentlyAddedProductsRSS", null, scheme));
-        }
-
         WriteLink(writer, "Contact & Support", Url.RouteUrl("ContactUs", null, scheme));
-        WriteLink(writer, "Brands", Url.RouteUrl("ManufacturerList", null, scheme));
-        WriteLink(writer, "Shipping & Delivery Info", new Uri(new Uri(baseUrl), await Url.TopicAsync("ShippingInfo")).ToString());
         WriteLink(writer, "Privacy Policy", new Uri(new Uri(baseUrl), await Url.TopicAsync("PrivacyInfo")).ToString());
 
         WriteLink(writer, "Facebook", social.FacebookLink);

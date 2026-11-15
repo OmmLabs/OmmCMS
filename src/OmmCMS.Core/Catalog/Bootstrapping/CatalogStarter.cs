@@ -13,7 +13,6 @@ using OmmCMS.Core.Catalog.Search.Modelling;
 using OmmCMS.Core.Rules.Rendering;
 using OmmCMS.Core.Search;
 using OmmCMS.Core.Search.Facets;
-using OmmCMS.Core.Seo;
 using OmmCMS.Engine.Builders;
 
 namespace OmmCMS.Core.Bootstrapping;
@@ -27,12 +26,10 @@ internal class CatalogStarter : StarterBase
 
         builder.RegisterType<CategoryService>()
             .As<ICategoryService>()
-            .As<IXmlSitemapPublisher>()
             .InstancePerLifetimeScope();
 
         builder.RegisterType<ManufacturerService>()
             .As<IManufacturerService>()
-            .As<IXmlSitemapPublisher>()
             .InstancePerLifetimeScope();
 
         builder.RegisterType<ProductAttributeMaterializer>().As<IProductAttributeMaterializer>().InstancePerLifetimeScope();
@@ -45,7 +42,7 @@ internal class CatalogStarter : StarterBase
             .As<LinqSearchQueryVisitor<Product, CatalogSearchQuery, CatalogSearchQueryContext>>()
             .SingleInstance();
 
-        builder.RegisterType<CatalogSearchService>().As<ICatalogSearchService>().As<IXmlSitemapPublisher>().InstancePerLifetimeScope();
+        builder.RegisterType<CatalogSearchService>().As<ICatalogSearchService>().InstancePerLifetimeScope();
         builder.RegisterType<LinqCatalogSearchService>().Named<ICatalogSearchService>("linq").InstancePerLifetimeScope();
         builder.RegisterType<CatalogSearchQueryFactory>().As<ICatalogSearchQueryFactory>().InstancePerLifetimeScope();
         builder.RegisterType<CatalogSearchQueryAliasMapper>().As<ICatalogSearchQueryAliasMapper>().InstancePerLifetimeScope();

@@ -150,20 +150,11 @@ public partial class GeneralCommonSettingsModel : ModelBase
         [LocalizedDisplay("*XmlSitemapIncludesBlog")]
         public bool XmlSitemapIncludesBlog { get; set; }
 
-        [LocalizedDisplay("*XmlSitemapIncludesCategories")]
-        public bool XmlSitemapIncludesCategories { get; set; }
-
         [LocalizedDisplay("*XmlSitemapIncludesForum")]
         public bool XmlSitemapIncludesForum { get; set; }
 
-        [LocalizedDisplay("*XmlSitemapIncludesManufacturers")]
-        public bool XmlSitemapIncludesManufacturers { get; set; }
-
         [LocalizedDisplay("*XmlSitemapIncludesNews")]
         public bool XmlSitemapIncludesNews { get; set; }
-
-        [LocalizedDisplay("*XmlSitemapIncludesProducts")]
-        public bool XmlSitemapIncludesProducts { get; set; }
 
         [LocalizedDisplay("*XmlSitemapIncludesTopics")]
         public bool XmlSitemapIncludesTopics { get; set; }

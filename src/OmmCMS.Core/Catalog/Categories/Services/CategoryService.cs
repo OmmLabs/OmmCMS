@@ -14,7 +14,7 @@ using OmmCMS.Utilities;
 
 namespace OmmCMS.Core.Catalog.Categories;
 
-public partial class CategoryService : ICategoryService, IXmlSitemapPublisher
+public partial class CategoryService : ICategoryService
 {
     internal static TimeSpan CategoryTreeCacheDuration = TimeSpan.FromHours(6);
 
@@ -553,43 +553,5 @@ public partial class CategoryService : ICategoryService, IXmlSitemapPublisher
             parentNode.Append(newNode);
             AddChildTreeNodes(newNode, node.Id, nodeMap);
         }
-    }
-
-    public XmlSitemapProvider PublishXmlSitemap(XmlSitemapBuildContext context)
-    {
-        if (!context.LoadSettings<SeoSettings>().XmlSitemapIncludesCategories)
-        {
-            return null;
-        }
-
-        var customerRoleIds = _workContext.CurrentCustomer.GetRoleIds();
-
-        var query = _db.Categories
-            .AsNoTracking()
-            .ApplyStandardFilter(false, customerRoleIds, context.RequestStoreId);
-
-        return new CategoryXmlSitemapResult { Query = query };
-    }
-
-    class CategoryXmlSitemapResult : XmlSitemapProvider
-    {
-        public IQueryable<Category> Query { get; set; }
-
-        public override async Task<int> GetTotalCountAsync()
-        {
-            return await Query.CountAsync();
-        }
-
-        public override async IAsyncEnumerable<NamedEntity> EnlistAsync([EnumeratorCancellation] CancellationToken cancelToken = default)
-        {
-            var categories = await Query.Select(x => new { x.Id, x.UpdatedOnUtc }).ToListAsync(cancelToken);
-
-            foreach (var x in categories)
-            {
-                yield return new NamedEntity { EntityName = nameof(Category), Id = x.Id, LastMod = x.UpdatedOnUtc };
-            }
-        }
-
-        public override int Order => int.MinValue;
     }
 }

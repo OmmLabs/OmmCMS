@@ -42,6 +42,8 @@ Phases 621–627: extracted the product, category and manufacturer import engine
 
 Phases 628–645: extracted catalogue export queries, data segmenters, batch contexts, dynamic projections, XML output, provider options, filters and admin models; removed product, category and manufacturer media import adapters while preserving generic media import and customer avatars. Customer and newsletter export identifiers remain unchanged, and retired providers are rejected before running.
 
+Phases 646–653: removed catalogue sitemap publishers, their SEO settings, administrator controls and seed values. The LLM discovery directory lists public, published CMS topics rather than catalogue categories and storefront links.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

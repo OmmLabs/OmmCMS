@@ -11,7 +11,7 @@ using OmmCMS.Diagnostics;
 
 namespace OmmCMS.Core.Catalog.Search;
 
-public partial class CatalogSearchService : SearchServiceBase, ICatalogSearchService, IXmlSitemapPublisher
+public partial class CatalogSearchService : SearchServiceBase, ICatalogSearchService
 {
     private readonly SmartDbContext _db;
     private readonly ICommonServices _services;
@@ -226,57 +226,4 @@ public partial class CatalogSearchService : SearchServiceBase, ICatalogSearchSer
     {
         return _currencyService.ConvertToWorkingCurrency(price).ToString();
     }
-
-    #region XML Sitemap
-
-    public XmlSitemapProvider PublishXmlSitemap(XmlSitemapBuildContext context)
-    {
-        if (!context.LoadSettings<SeoSettings>().XmlSitemapIncludesProducts)
-        {
-            return null;
-        }
-
-        var searchQuery = new CatalogSearchQuery()
-            .VisibleOnly(_services.WorkContext.CurrentCustomer)
-            .WithVisibility(ProductVisibility.Full)
-            .HasStoreId(context.RequestStoreId);
-
-        var query = PrepareQuery(searchQuery);
-
-        return new ProductXmlSitemapResult { Query = query, Context = context };
-    }
-
-    class ProductXmlSitemapResult : XmlSitemapProvider
-    {
-        public IQueryable<Product> Query { get; set; }
-        public XmlSitemapBuildContext Context { get; set; }
-
-        public override async Task<int> GetTotalCountAsync()
-        {
-            return await Query.CountAsync();
-        }
-
-        public override async IAsyncEnumerable<NamedEntity> EnlistAsync([EnumeratorCancellation] CancellationToken cancelToken = default)
-        {
-            var entityName = nameof(Product);
-            var pager = Query.ToFastPager(Context.MaximumNodeCount);
-
-            while ((await pager.ReadNextPageAsync(x => new { x.Id, x.UpdatedOnUtc }, x => x.Id, cancelToken)).Out(out var products))
-            {
-                if (Context.CancellationToken.IsCancellationRequested)
-                {
-                    break;
-                }
-
-                foreach (var product in products)
-                {
-                    yield return new NamedEntity { EntityName = entityName, Id = product.Id, LastMod = product.UpdatedOnUtc };
-                }
-            }
-        }
-
-        public override int Order => int.MaxValue;
-    }
-
-    #endregion
 }
