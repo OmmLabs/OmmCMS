@@ -1,3 +1,4 @@
+using System.IO;
 using System.Xml;
 using NUnit.Framework;
 
@@ -48,6 +49,23 @@ public class OmmCmsAdminSitemapTests
         {
             Assert.That(xml.SelectSingleNode($"//siteMapNode[@id='{id}']"), Is.Null, $"Commerce node {id} should not appear.");
         }
+    }
+
+    [Test]
+    public void CmsSitemapIsIncludedInPublishOutput()
+    {
+        var xml = LoadCmsSitemap();
+        Assert.That(xml.DocumentElement, Is.Not.Null);
+
+        var root = new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
+        while (root != null && !File.Exists(Path.Combine(root.FullName, "Smartstore.sln")))
+        {
+            root = root.Parent;
+        }
+
+        Assert.That(root, Is.Not.Null);
+        var project = File.ReadAllText(Path.Combine(root!.FullName, "src", "Smartstore.Web", "Smartstore.Web.csproj"));
+        Assert.That(project, Does.Contain("Areas\\Admin\\ommcms-sitemap.xml"), "The CMS sitemap must be published with the web application.");
     }
 
     [Test]
