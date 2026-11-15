@@ -34,7 +34,7 @@ jobs:
         run: python3 .github/ommcms-smoke.py "$RUNNER_TEMP/ommcms-smoke" --editorial --trimmed --controllers-trimmed --public-controllers-trimmed --account-trimmed --admin-commerce-trimmed --residual-commerce-trimmed --presentation-trimmed --core-commerce-trimmed
       - name: Publish validated rename to main
         run: |
-          git rm -- .github/rename-ommcms.py .github/workflows/ommcms-rename.yml
+          git rm -- .github/rename-ommcms.py .github/workflows/ommcms-rename.yml .github/ommcms-sixlabors.lic
           git config user.name 'OmmLabs'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git diff --cached --stat | tail -1

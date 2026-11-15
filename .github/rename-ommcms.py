@@ -108,9 +108,48 @@ for directory in sorted(old_directories, key=lambda p: len(p.parts), reverse=Tru
 icon = pathlib.Path("src/OmmCMS.Web/App_Data/Icons/system/fill/icons/ommcms.svg")
 icon.write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" stroke="currentColor" stroke-width="8"/></svg>\n', encoding="utf-8")
 
+# OmmCMS does not support proprietary Smartstore modules or their activation service.
+# Remove the upstream commercial-module UI/API rather than emulating license checks.
+admin = pathlib.Path("src/OmmCMS.Web/Areas/Admin")
+controller = admin / "Controllers/ModuleController.cs"
+source = controller.read_text(encoding="utf-8-sig")
+source = source.replace("using Smartstore.Licensing;\n", "").replace("using OmmCMS.Utilities.Html;\n", "")
+source = source.replace("            // License label\n            await PrepareLicenseLabelModelAsync(model.LicenseLabel, descriptor);\n", "")
+assert source.count("    #region Licensing") == 1
+source = source.split("    #region Licensing")[0].rstrip() + "\n}\n"
+controller.write_text(source, encoding="utf-8-sig")
+model = admin / "Models/Modularity/ModuleModel.cs"
+model.write_text(model.read_text(encoding="utf-8-sig").replace("    public LicenseLabelModel LicenseLabel { get; set; } = new();\n", ""), encoding="utf-8-sig")
+view = admin / "Views/Module/List.cshtml"
+source = view.read_text(encoding="utf-8-sig")
+patterns = [
+    r'<modal id="module-licence-modal".*?</modal>\s*',
+    r'(?ms)^\s*// Licence module.*?(?=^\s*\$\(\x27#btnRefresh\x27\)\.click)',
+    r'<!-- License badge -->\s*<div class="license-label">.*?</div>\s*',
+    r'<a sm-if="module\.LicenseLabel\.LicenseUrl\.HasValue\(\)".*?</a>\s*',
+]
+for pattern in patterns:
+    source, count = re.subn(pattern, "", source, flags=re.DOTALL)
+    assert count == 1, (pattern, count)
+view.write_text(source, encoding="utf-8-sig")
+project = pathlib.Path("src/OmmCMS.Web.Common/OmmCMS.Web.Common.csproj")
+source = project.read_text(encoding="utf-8-sig")
+source, count = re.subn(r'(?m)^\s*<PackageReference Include="Smartstore\.Licensing"[^\n]*\n', "\n", source)
+assert count == 1
+project.write_text(source, encoding="utf-8-sig")
+removed = [
+    admin / "Models/Modularity/LicenseModuleModel.cs",
+    admin / "Views/Module/LicenseModule.cshtml",
+    admin / "Views/Module/Partials/LicenseLabel.cshtml",
+]
+for path in removed:
+    path.unlink()
+license_path = pathlib.Path("src/OmmCMS/sixlabors.lic")
+license_path.write_bytes(pathlib.Path(".github/ommcms-sixlabors.lic").read_bytes())
+
 # Force-add exactly the renamed tracked paths, even if they live under build ignore rules.
 subprocess.run(["git", "add", "-u"], check=True)
-destinations = [str(target) for source, target in moves.items() if source != target]
+destinations = [str(target) for source, target in moves.items() if source != target and target.is_file()]
 for offset in range(0, len(destinations), 100):
     subprocess.run(["git", "add", "-f", "--", *destinations[offset:offset + 100]], check=True)
 print(f"OmmCMS identity migration: {changed} text files updated, {renamed} tracked files renamed")
