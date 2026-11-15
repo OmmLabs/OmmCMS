@@ -39,18 +39,7 @@ public class OmmCmsCommerceIsolationTests
     }
 
     [TestCase("Smartstore.Web.Controllers.PdfController")]
-    [TestCase("Smartstore.Admin.Controllers.CampaignController")]
-    [TestCase("Smartstore.Admin.Controllers.CategoryController")]
-    [TestCase("Smartstore.Admin.Controllers.DiscountController")]
-    [TestCase("Smartstore.Admin.Controllers.ManufacturerController")]
-    [TestCase("Smartstore.Admin.Controllers.MeasureController")]
-    [TestCase("Smartstore.Admin.Controllers.OrderController")]
-    [TestCase("Smartstore.Admin.Controllers.ImportController")]
-    [TestCase("Smartstore.Admin.Controllers.ExportController")]
-    [TestCase("Smartstore.Admin.Controllers.CurrencyController")]
     [TestCase("Smartstore.Controllers.PackagingController")]
-    [TestCase("Smartstore.Admin.Controllers.ProductController")]
-    [TestCase("Smartstore.Admin.Controllers.SearchController")]
     public void BlocksEveryActionOnCommerceOnlyController(string controllerType)
     {
         Assert.That(OmmCmsCommerceIsolation.IsBlocked(Action(controllerType)), Is.True);
@@ -82,6 +71,17 @@ public class OmmCmsCommerceIsolationTests
     [TestCase("Smartstore.Web.Controllers.ReturnCaseController")]
     [TestCase("Smartstore.Web.Controllers.SearchController")]
     [TestCase("Smartstore.Web.Controllers.ShoppingCartController")]
+    [TestCase("Smartstore.Admin.Controllers.CampaignController")]
+    [TestCase("Smartstore.Admin.Controllers.CategoryController")]
+    [TestCase("Smartstore.Admin.Controllers.CurrencyController")]
+    [TestCase("Smartstore.Admin.Controllers.DiscountController")]
+    [TestCase("Smartstore.Admin.Controllers.ExportController")]
+    [TestCase("Smartstore.Admin.Controllers.ImportController")]
+    [TestCase("Smartstore.Admin.Controllers.ManufacturerController")]
+    [TestCase("Smartstore.Admin.Controllers.MeasureController")]
+    [TestCase("Smartstore.Admin.Controllers.OrderController")]
+    [TestCase("Smartstore.Admin.Controllers.ProductController")]
+    [TestCase("Smartstore.Admin.Controllers.SearchController")]
     public void ExtractedCommerceControllersAreAbsentFromAssembly(string controllerType)
     {
         Assert.That(typeof(OmmCmsCommerceIsolation).Assembly.GetType(controllerType), Is.Null);
@@ -159,13 +159,14 @@ public class OmmCmsCommerceIsolationTests
         Assert.That(OmmCmsCommerceIsolation.IsBlocked(Action(controllerType, action)), Is.False);
     }
 
-    [TestCase("/admin/product/edit/1", "POST", "Smartstore.Admin.Controllers.ProductController")]
-    public async Task SelectedCommerceEndpointReturns404WithoutInvokingDownstream(string path, string verb, string controller)
+    [TestCase("/pdf/receiptheader", "GET", "Smartstore.Web.Controllers.PdfController", "ReceiptHeader")]
+    [TestCase("/admin/customer/getcartlist", "POST", "Smartstore.Admin.Controllers.CustomerController", "GetCartList")]
+    public async Task SelectedCommerceEndpointReturns404WithoutInvokingDownstream(string path, string verb, string controller, string method)
     {
         var context = new DefaultHttpContext();
         context.Request.Path = path;
         context.Request.Method = verb;
-        context.SetEndpoint(new Endpoint(_ => Task.CompletedTask, new EndpointMetadataCollection(Action(controller)), null));
+        context.SetEndpoint(new Endpoint(_ => Task.CompletedTask, new EndpointMetadataCollection(Action(controller, method)), null));
         var called = false;
 
         await OmmCmsCommerceIsolation.InvokeAsync(context, _ =>
