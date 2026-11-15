@@ -1,0 +1,137 @@
+using System.Xml;
+using OmmCMS.Caching;
+using OmmCMS.Collections;
+using OmmCMS.Core.Content.Menus;
+using OmmCMS.Web.Rendering;
+
+namespace OmmCMS.Admin.Infrastructure.Menus;
+
+public partial class AdminMenu : MenuBase
+{
+    public override string Name => "Admin";
+
+    public override bool ApplyPermissions => true;
+
+    private bool IsCmsPreviewEnabled
+        => bool.TryParse(Services.ApplicationContext.Configuration["OmmCMS:PreviewShell"], out var enabled) && enabled;
+
+    protected override string GetCacheKey()
+    {
+        // A CMS preview must never reuse a cached storefront admin menu.
+        var cacheKey = "{0}-{1}-{2}".FormatInvariant(
+            Services.WorkContext.WorkingLanguage.Id,
+            Services.WorkContext.CurrentCustomer.GetRolesIdent(),
+            IsCmsPreviewEnabled ? "cms" : "store");
+
+        return cacheKey;
+    }
+
+    protected override Task<TreeNode<MenuItem>> BuildAsync(CacheEntryOptions cacheEntryOptions)
+    {
+        var contentRoot = Services.ApplicationContext.ContentRoot;
+        var file = contentRoot.GetFile(IsCmsPreviewEnabled
+            ? "/Areas/Admin/ommcms-sitemap.xml"
+            : "/Areas/Admin/sitemap.xml");
+        var xmlSitemap = new XmlDocument();
+        xmlSitemap.Load(file.PhysicalPath);
+
+        var rootNode = ConvertXmlNodeToMenuItemNode(xmlSitemap.DocumentElement.FirstChild as XmlElement);
+        return Task.FromResult(rootNode);
+    }
+
+    protected override Task OnMenuBuilt(TreeNode<MenuItem> root)
+    {
+        // Keep "Manage Plugins" and its separator ahead of contributed plugin entries.
+        var modulesNode = root.SelectNodeById("modules");
+        var sepNode = root.SelectNodeById("modules-sep-1");
+        var manageNode = root.SelectNodeById("modules-manage");
+
+        var pluginNodes = modulesNode.Children
+            .Where(x => x != manageNode && x != sepNode)
+            .OrderBy(x => x.GetItemText(T), StringComparer.CurrentCultureIgnoreCase)
+            .ToArray();
+
+        foreach (var node in pluginNodes)
+        {
+            modulesNode.Append(node);
+        }
+
+        if (sepNode != null)
+        {
+            modulesNode.Prepend(sepNode);
+        }
+
+        if (manageNode != null)
+        {
+            modulesNode.Prepend(manageNode);
+        }
+
+        foreach (var item in modulesNode.Flatten(false))
+        {
+            if (item != manageNode?.Value)
+            {
+                item.LinkHtmlAttributes.AppendCssClass("fwn");
+            }
+        }
+
+        return Task.CompletedTask;
+    }
+
+    protected virtual TreeNode<MenuItem> ConvertXmlNodeToMenuItemNode(XmlElement node)
+    {
+        var id = node.GetAttribute("id");
+        var routeName = node.GetAttribute("routeName");
+        var controller = node.GetAttribute("controller");
+        var action = node.GetAttribute("action");
+        var url = node.GetAttribute("url");
+        var icon = node.GetAttribute("icon").NullEmpty();
+
+        var item = new MenuItem
+        {
+            Id = id,
+            Text = node.GetAttribute("title").NullEmpty(),
+            PermissionNames = node.GetAttribute("permissionNames").NullEmpty(),
+            ResKey = node.GetAttribute("resKey").NullEmpty(),
+            IconClass = node.GetAttribute("iconClass").NullEmpty(),
+            ImageUrl = node.GetAttribute("imageUrl").NullEmpty()
+        };
+
+        var root = new TreeNode<MenuItem>(item, id);
+
+        item.Icon = icon;
+
+        if (node.HasAttribute("isGroupHeader"))
+        {
+            item.IsGroupHeader = node.GetAttribute("isGroupHeader").ToBool();
+        }
+
+        if (routeName.HasValue())
+        {
+            item.RouteName = routeName;
+        }
+        else if (action.HasValue() && controller.HasValue())
+        {
+            item.ActionName = action;
+            item.ControllerName = controller;
+
+        }
+        else if (url.HasValue())
+        {
+            item.Url = url;
+        }
+
+        if (node.HasAttribute("area"))
+        {
+            item.RouteValues["area"] = node.GetAttribute("area");
+        }
+
+        // Iterate children recursively.
+        foreach (var childNode in node.ChildNodes.OfType<XmlElement>())
+        {
+            var childTreeNode = ConvertXmlNodeToMenuItemNode(childNode);
+            root.Append(childTreeNode);
+        }
+
+        return root;
+    }
+}

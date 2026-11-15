@@ -2,9 +2,9 @@
 
 - Work directly on `main`; keep changes focused and validated.
 - OmmCMS is a CMS, not a storefront. Preserve content publishing, SEO, menus, themes, media, identity and extension infrastructure.
-- The solution is `OmmCMS.sln`. Internal assembly, namespace and project-file identities are retained for compatibility until the dedicated rename milestone.
+- The solution is `OmmCMS.sln`. All first-party projects, assemblies, namespaces and paths use the OmmCMS identity. Preserve third-party package names and upstream licence attribution.
 - Use .NET 10. Run restore, release build, tests and the disposable SQLite smoke test defined in `.github/workflows/ommcms-ci.yml`.
-- Never modify generated module output under `src/Smartstore.Web/Modules/`; source is under `src/Smartstore.Modules/`.
+- Never modify generated module output under `src/OmmCMS.Web/Modules/`; source is under `src/OmmCMS.Modules/`.
 - Preserve existing licence notices, copyright, XML documentation and source formatting; use English in code and comments.
 - Use constructor injection, preserve lazy initialization, guard arguments, and use asynchronous IO.
 - Database changes use FluentMigrator, never EF Core migrations. Do not change production databases as part of extraction.

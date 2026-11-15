@@ -20,11 +20,11 @@ Install the .NET 10 SDK, clone this repository and run:
 ```bash
 dotnet restore OmmCMS.sln
 dotnet build OmmCMS.sln -c Release --no-restore
-cd src/Smartstore.Web
+cd src/OmmCMS.Web
 dotnet run -c Release --no-build --no-launch-profile --urls http://localhost:5080
 ```
 
-Open http://localhost:5080/install. Use a fresh database (SQLite is recommended for local evaluation), complete the installer and visit `/admin` to manage content. The initial OmmCMS schema is created directly by the installer and recorded as one core migration. Older Smartstore and OmmCMS preview databases are not supported for in-place upgrade; use a fresh database.
+Open http://localhost:5080/install. Use a fresh database (SQLite is recommended for local evaluation), complete the installer and visit `/admin` to manage content. The initial OmmCMS schema is created directly by the installer and recorded as one core migration. Older upstream and OmmCMS preview databases are not supported for in-place upgrade; use a fresh database.
 
 ## Development
 
@@ -32,7 +32,7 @@ Work takes place on `main`. Run `dotnet test OmmCMS.sln -c Release` before chang
 
 CI publishes a disposable application and checks a fresh SQLite installation, editorial workflows and retired commerce endpoints.
 
-Completed: CMS shell, administration, installation, content workflows and phases 1–13 of commerce extraction. Next: remove the remaining coupled commerce services, then reduce the database schema and complete internal namespace and assembly renaming.
+Completed: CMS shell, administration, installation, content workflows and phases 1–13 of commerce extraction. Next: remove the remaining coupled commerce services, then reduce the database schema and complete dependency removal.
 
 Report security issues privately to the maintainers; do not publish sensitive details.
 

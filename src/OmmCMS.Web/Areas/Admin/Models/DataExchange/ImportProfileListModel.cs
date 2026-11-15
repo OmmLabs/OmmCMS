@@ -1,0 +1,11 @@
+﻿using OmmCMS.Core.DataExchange;
+
+namespace OmmCMS.Admin.Models.Import;
+
+public partial class ImportProfileListModel : EntityModelBase
+{
+    [LocalizedDisplay("Admin.Common.Entity")]
+    public ImportEntityType EntityType { get; set; }
+
+    public List<ImportProfileModel> Profiles { get; set; } = new();
+}

@@ -1,0 +1,20 @@
+﻿@inherits RazorPage<TModel>
+
+@using System
+@using System.Globalization
+@using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Mvc.Razor;
+@using Humanizer
+@using OmmCMS
+@using OmmCMS.Web
+@using OmmCMS.Core.Installation
+
+@removeTagHelper OmmCMS.Web.TagHelpers.*, OmmCMS.Web.Common
+@addTagHelper OmmCMS.Web.TagHelpers.Shared.AjaxFormTagHelper, OmmCMS.Web.Common
+@addTagHelper OmmCMS.Web.TagHelpers.Shared.ZoneTagHelper, OmmCMS.Web.Common
+@addTagHelper OmmCMS.Web.TagHelpers.Shared.HtmlZoneTagHelper, OmmCMS.Web.Common
+@addTagHelper OmmCMS.Web.TagHelpers.Shared.WidgetTagHelper, OmmCMS.Web.Common
+@addTagHelper OmmCMS.Web.TagHelpers.Shared.HtmlWidgetTagHelper, OmmCMS.Web.Common
+@addTagHelper OmmCMS.Web.TagHelpers.Shared.InputPasswordTagHelper, OmmCMS.Web.Common
+@addTagHelper OmmCMS.Web.TagHelpers.Shared.IconTagHelper, OmmCMS.Web.Common
+@addTagHelper OmmCMS.Web.TagHelpers.Shared.AttributesTagHelper, OmmCMS.Web.Common

@@ -1,0 +1,6 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<Import Project="..\OmmCMS.Build\OmmCMS.Common.props" />
+	<Import Project="..\OmmCMS.Build\OmmCMS.Module.props" />
+	
+</Project>

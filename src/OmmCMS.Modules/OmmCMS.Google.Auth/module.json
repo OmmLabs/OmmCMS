@@ -1,0 +1,15 @@
+{
+  "$schema": "../module.schema.json",
+  "Group": "Security",
+  "SystemName": "OmmCMS.Google.Auth",
+  "FriendlyName": "Google Authentication",
+  "Description": "Enables login with Google account.",
+  "Version": "6.4.0",
+  "MinAppVersion": "6.4.0",
+  "Author": "SmartStore AG",
+  "Order": 1,
+  "ResourceRootKey": "Plugins.OmmCMS.Google.Auth",
+  "PrivateReferences": [
+    "Microsoft.AspNetCore.Authentication.Google"
+  ]
+}

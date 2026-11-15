@@ -1,4 +1,4 @@
 # Preserve Unix line endings for the optional Linux PDF setup script.
-/src/Smartstore.Web/Infrastructure/install-wkhtmltopdf.sh text eol=lf
+/src/OmmCMS.Web/Infrastructure/install-wkhtmltopdf.sh text eol=lf
 /.github/*.sh text eol=lf
 /.github/*.py text eol=lf

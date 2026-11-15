@@ -1,0 +1,1 @@
+﻿This folder contains tests for OmmCMS.Web.Common project

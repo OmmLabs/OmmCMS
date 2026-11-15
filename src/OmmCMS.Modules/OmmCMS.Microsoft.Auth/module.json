@@ -1,0 +1,15 @@
+{
+  "$schema": "../module.schema.json",
+  "Group": "Security",
+  "SystemName": "OmmCMS.Microsoft.Auth",
+  "FriendlyName": "Microsoft Authentication",
+  "Description": "Enables login with Microsoft account.",
+  "Version": "6.4.0",
+  "MinAppVersion": "6.4.0",
+  "Author": "SmartStore AG",
+  "Order": 1,
+  "ResourceRootKey": "Plugins.OmmCMS.Microsoft.Auth",
+  "PrivateReferences": [
+    "Microsoft.AspNetCore.Authentication.MicrosoftAccount"
+  ]
+}

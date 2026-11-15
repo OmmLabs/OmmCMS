@@ -15,7 +15,7 @@ import urllib.request
 import uuid
 
 root = Path(sys.argv[1]).resolve()
-assert (root / "Smartstore.Web.dll").is_file(), "Use a published application"
+assert (root / "OmmCMS.Web.dll").is_file(), "Use a published application"
 database = root / "App_Data" / "Tenants" / "Default" / "ommcms-smoke.db"
 assert not database.exists(), "Smoke test needs a new database"
 base = "http://127.0.0.1:5087"
@@ -46,7 +46,7 @@ def request(path, data=None, timeout=30, client=anonymous, headers=None):
 def start():
     global process
     with log.open("a", encoding="utf-8") as output:
-        process = subprocess.Popen(["dotnet", "Smartstore.Web.dll"], cwd=root,
+        process = subprocess.Popen(["dotnet", "OmmCMS.Web.dll"], cwd=root,
                                    env=env, stdout=output, stderr=subprocess.STDOUT)
 
 
@@ -274,19 +274,19 @@ def editorial_workflows(password):
 
 
 def verify_trimmed_distribution():
-    removed = ["Smartstore.AmazonPay","Smartstore.OfflinePayment","Smartstore.PayPal","Smartstore.Stripe","Smartstore.Shipping","Smartstore.ShippingByWeight","Smartstore.Tax","Smartstore.Google.MerchantCenter","Smartstore.Clickatell","Smartstore.WebApi"]
-    retained = ["Smartstore.Apple.Auth", "Smartstore.Facebook.Auth", "Smartstore.Google.Auth",
-                "Smartstore.Microsoft.Auth", "Smartstore.Twitter.Auth", "Smartstore.DevTools",
-                "Smartstore.Google.Analytics"]
+    removed = ["OmmCMS.AmazonPay","OmmCMS.OfflinePayment","OmmCMS.PayPal","OmmCMS.Stripe","OmmCMS.Shipping","OmmCMS.ShippingByWeight","OmmCMS.Tax","OmmCMS.Google.MerchantCenter","OmmCMS.Clickatell","OmmCMS.WebApi"]
+    retained = ["OmmCMS.Apple.Auth", "OmmCMS.Facebook.Auth", "OmmCMS.Google.Auth",
+                "OmmCMS.Microsoft.Auth", "OmmCMS.Twitter.Auth", "OmmCMS.DevTools",
+                "OmmCMS.Google.Analytics"]
     repo = Path(__file__).resolve().parent.parent
-    module_sources = repo / "src" / "Smartstore.Modules"
+    module_sources = repo / "src" / "OmmCMS.Modules"
     modules = root / "Modules"
     solution = (repo / "OmmCMS.sln").read_text(encoding="utf-8-sig")
     for name in removed:
         assert not (module_sources / name).exists(), f"Retired source remains: {name}"
         assert not (modules / name).exists(), f"Retired module is in publish output: {name}"
         assert f'{name}.csproj' not in solution, f"Retired project is in solution: {name}"
-    assert not (repo / "tools" / "Smartstore.WebApi.Client").exists(), "Obsolete API client remains"
+    assert not (repo / "tools" / "OmmCMS.WebApi.Client").exists(), "Obsolete API client remains"
     for name in retained:
         assert (modules / name / "module.json").is_file(), f"Retained module is absent: {name}"
     print(f"Trimmed distribution passed: {len(removed)} retired modules absent; {len(retained)} retained modules present.")
@@ -294,7 +294,7 @@ def verify_trimmed_distribution():
 
 def verify_trimmed_controllers():
     names = ["Affiliate","BarcodeTester","CheckoutAttribute","CollectionGroup","DeliveryTime","GiftCard","PriceLabel","ProductReview","QuantityUnit","RecurringPayment","ReturnCase","Shipment","Shipping","Tax","Payment","ShoppingCart","SpecificationAttribute","ProductAttribute"]
-    source = Path(__file__).resolve().parent.parent / "src" / "Smartstore.Web" / "Areas" / "Admin"
+    source = Path(__file__).resolve().parent.parent / "src" / "OmmCMS.Web" / "Areas" / "Admin"
     for name in names:
         assert not (source / "Controllers" / (name + "Controller.cs")).exists(), f"Retired controller remains: {name}"
         if name != "Shipment":
@@ -311,7 +311,7 @@ def verify_trimmed_controllers():
 
 
 def verify_public_controllers():
-    source = Path(__file__).resolve().parent.parent / "src" / "Smartstore.Web"
+    source = Path(__file__).resolve().parent.parent / "src" / "OmmCMS.Web"
     for name in ["Catalog","Checkout","Download","Order","Product","ReturnCase","Search","ShoppingCart"]:
         assert not (source / "Controllers" / (name + "Controller.cs")).exists(), f"Retired public controller remains: {name}"
     for path in ["Views/Catalog/CategoryTemplate.ProductsInGridOrLines.cshtml","Views/Catalog/CompareProducts.cshtml","Views/Catalog/ManufacturerAll.cshtml","Views/Catalog/ManufacturerTemplate.ProductsInGridOrLines.cshtml","Views/Catalog/ProductTagsAll.cshtml","Views/Catalog/ProductsByTag.cshtml","Views/Catalog/RecentlyAddedProducts.cshtml","Views/Catalog/RecentlyViewedProducts.cshtml","Views/Checkout/BillingAddress.cshtml","Views/Checkout/Completed.cshtml","Views/Checkout/Confirm.cshtml","Views/Checkout/PaymentMethod.cshtml","Views/Checkout/ShippingAddress.cshtml","Views/Checkout/ShippingMethod.cshtml","Views/Checkout/Terminal.Confirm.cshtml","Views/Order/Details.cshtml","Views/Order/ShipmentDetails.cshtml","Views/Product/AskQuestion.cshtml","Views/Product/BackInStockSubscribePopup.cshtml","Views/Product/EmailAFriend.cshtml","Views/Product/Product.cshtml","Views/Product/Reviews.cshtml","Views/ReturnCase/ReturnCase.cshtml","Views/Search/Search.cshtml","Views/ShoppingCart/Cart.cshtml","Views/ShoppingCart/EmailWishlist.cshtml","Views/ShoppingCart/Wishlist.cshtml"]:
@@ -322,15 +322,15 @@ def verify_public_controllers():
 
 def verify_account_extraction():
     repo = Path(__file__).resolve().parent.parent
-    for path in ["src/Smartstore.Modules/Smartstore.DevTools/Controllers/MyCheckoutController.cs","src/Smartstore.Modules/Smartstore.DevTools/Views/MyCheckout/MyBillingAddress.cshtml","src/Smartstore.Modules/Smartstore.Google.Analytics/Filters/CheckoutFilter.cs","src/Smartstore.Web/Models/Customers/CustomerDownloadableProductsModel.cs","src/Smartstore.Web/Models/Customers/CustomerOrderListModel.cs","src/Smartstore.Web/Models/Customers/CustomerReturnCasesModel.cs","src/Smartstore.Web/Models/Customers/CustomerRewardPointsModel.cs","src/Smartstore.Web/Models/Customers/CustomerStockSubscriptionsModel.cs","src/Smartstore.Web/Views/Customer/DownloadableProducts.cshtml","src/Smartstore.Web/Views/Customer/Orders.cshtml","src/Smartstore.Web/Views/Customer/Partials/RecurringPayments.cshtml","src/Smartstore.Web/Views/Customer/ReturnCases.cshtml","src/Smartstore.Web/Views/Customer/RewardPoints.cshtml","src/Smartstore.Web/Views/Customer/StockSubscriptions.cshtml","src/Smartstore.Web/Views/Customer/UserAgreement.cshtml","src/Smartstore.Modules/Smartstore.DevTools/Filters/Samples/SampleCheckoutFilter.cs"]:
+    for path in ["src/OmmCMS.Modules/OmmCMS.DevTools/Controllers/MyCheckoutController.cs","src/OmmCMS.Modules/OmmCMS.DevTools/Views/MyCheckout/MyBillingAddress.cshtml","src/OmmCMS.Modules/OmmCMS.Google.Analytics/Filters/CheckoutFilter.cs","src/OmmCMS.Web/Models/Customers/CustomerDownloadableProductsModel.cs","src/OmmCMS.Web/Models/Customers/CustomerOrderListModel.cs","src/OmmCMS.Web/Models/Customers/CustomerReturnCasesModel.cs","src/OmmCMS.Web/Models/Customers/CustomerRewardPointsModel.cs","src/OmmCMS.Web/Models/Customers/CustomerStockSubscriptionsModel.cs","src/OmmCMS.Web/Views/Customer/DownloadableProducts.cshtml","src/OmmCMS.Web/Views/Customer/Orders.cshtml","src/OmmCMS.Web/Views/Customer/Partials/RecurringPayments.cshtml","src/OmmCMS.Web/Views/Customer/ReturnCases.cshtml","src/OmmCMS.Web/Views/Customer/RewardPoints.cshtml","src/OmmCMS.Web/Views/Customer/StockSubscriptions.cshtml","src/OmmCMS.Web/Views/Customer/UserAgreement.cshtml","src/OmmCMS.Modules/OmmCMS.DevTools/Filters/Samples/SampleCheckoutFilter.cs"]:
         assert not (repo / path).exists(), f"Retired account source remains: {path}"
-        if path.startswith("src/Smartstore.Web/Views/"):
-            assert not (root / path.removeprefix("src/Smartstore.Web/")).exists(), f"Retired account view was published: {path}"
+        if path.startswith("src/OmmCMS.Web/Views/"):
+            assert not (root / path.removeprefix("src/OmmCMS.Web/")).exists(), f"Retired account view was published: {path}"
     print("Account dependency source and publish extraction passed.")
 
 
 def verify_remaining_admin_extraction():
-    source = Path(__file__).resolve().parent.parent / "src" / "Smartstore.Web" / "Areas" / "Admin"
+    source = Path(__file__).resolve().parent.parent / "src" / "OmmCMS.Web" / "Areas" / "Admin"
     for path in ["Controllers/CampaignController.cs","Controllers/CategoryController.cs","Controllers/CurrencyController.cs","Controllers/DiscountController.cs","Controllers/ExportController.cs","Controllers/ImportController.cs","Controllers/ManufacturerController.cs","Controllers/MeasureController.cs","Controllers/OrderController.cs","Controllers/ProductController.AssignableProducts.cs","Controllers/ProductController.Attributes.cs","Controllers/ProductController.Grid.cs","Controllers/ProductController.RecycleBin.cs","Controllers/ProductController.Settings.cs","Controllers/ProductController.cs","Controllers/SearchController.cs","Views/Campaign/Create.cshtml","Views/Campaign/Edit.cshtml","Views/Campaign/List.cshtml","Views/Campaign/_CreateOrUpdate.cshtml","Views/Campaign/_Grid.Campaigns.cshtml","Views/Category/Create.cshtml","Views/Category/Edit.cshtml","Views/Category/EditorTemplates/CategoryProduct.cshtml","Views/Category/List.cshtml","Views/Category/Tree.cshtml","Views/Category/_CreateOrUpdate.cshtml","Views/Category/_DeleteCategoryDialog.cshtml","Views/Category/_Grid.Categories.Search.cshtml","Views/Category/_Grid.Categories.cshtml","Views/Category/_Grid.ProductCategories.cshtml","Views/Category/_ViewImports.cshtml","Views/Currency/Create.cshtml","Views/Currency/Edit.cshtml","Views/Currency/List.cshtml","Views/Currency/_CreateOrUpdate.cshtml","Views/Currency/_Grid.Currencies.cshtml","Views/Currency/_Grid.LiveRates.cshtml","Views/Discount/Create.cshtml","Views/Discount/Edit.cshtml","Views/Discount/List.cshtml","Views/Discount/_CreateOrUpdate.cshtml","Views/Discount/_Grid.DiscountUsageHistory.cshtml","Views/Discount/_Grid.Discounts.Search.cshtml","Views/Discount/_Grid.Discounts.cshtml","Views/Discount/_ViewImports.cshtml","Views/Export/Create.cshtml","Views/Export/CreateDeployment.cshtml","Views/Export/Edit.cshtml","Views/Export/EditDeployment.cshtml","Views/Export/List.cshtml","Views/Export/Preview.cshtml","Views/Export/ProfileFileCount.cshtml","Views/Export/ProfileFileDetails.cshtml","Views/Export/_CreateOrUpdate.Deployment.cshtml","Views/Export/_Grid.Preview.Category.cshtml","Views/Export/_Grid.Preview.Customer.cshtml","Views/Export/_Grid.Preview.Manufacturer.cshtml","Views/Export/_Grid.Preview.NewsLetterSubscription.cshtml","Views/Export/_Grid.Preview.Order.cshtml","Views/Export/_Grid.Preview.Product.cshtml","Views/Export/_Grid.Preview.ShoppingCartItem.cshtml","Views/Export/_ProfileList.cshtml","Views/Export/_ResolveTokensExample.cshtml","Views/Export/_Tab.Deployment.cshtml","Views/Export/_Tab.Filter.cshtml","Views/Export/_Tab.Projection.cshtml","Views/Export/_ViewImports.cshtml","Views/Import/DataExchangeSettings.cshtml","Views/Import/Edit.cshtml","Views/Import/List.cshtml","Views/Import/ProfileImportResult.cshtml","Views/Import/_ColumnMappings.cshtml","Views/Import/_CsvConfiguration.cshtml","Views/Import/_Update.cshtml","Views/Import/_ViewImports.cshtml","Views/Manufacturer/Create.cshtml","Views/Manufacturer/Edit.cshtml","Views/Manufacturer/EditorTemplates/ManufacturerProduct.cshtml","Views/Manufacturer/List.cshtml","Views/Manufacturer/_CreateOrUpdate.cshtml","Views/Manufacturer/_Grid.Manufacturers.Search.cshtml","Views/Manufacturer/_Grid.Manufacturers.cshtml","Views/Manufacturer/_Grid.ProductManufacturers.cshtml","Views/Manufacturer/_ViewImports.cshtml","Views/Measure/CreateDimensionPopup.cshtml","Views/Measure/CreateWeightPopup.cshtml","Views/Measure/Dimensions.cshtml","Views/Measure/EditDimensionPopup.cshtml","Views/Measure/EditWeightPopup.cshtml","Views/Measure/Weights.cshtml","Views/Measure/_CreateOrUpdateDimension.cshtml","Views/Measure/_CreateOrUpdateWeight.cshtml","Views/Measure/_Grid.MeasureDimension.cshtml","Views/Measure/_Grid.MeasureWeight.cshtml","Views/Order/AddProductToOrder.cshtml","Views/Order/AddressEdit.cshtml","Views/Order/BestsellersReport.cshtml","Views/Order/Edit.cshtml","Views/Order/Grids/_Grid.Bestsellers.Search.cshtml","Views/Order/Grids/_Grid.Bestsellers.cshtml","Views/Order/Grids/_Grid.NeverSold.Search.cshtml","Views/Order/Grids/_Grid.NeverSold.cshtml","Views/Order/Grids/_Grid.OrderNotes.cshtml","Views/Order/Grids/_Grid.Orders.Search.cshtml","Views/Order/Grids/_Grid.Orders.cshtml","Views/Order/List.cshtml","Views/Order/NeverSoldReport.cshtml","Views/Order/OrderSettings.cshtml","Views/Order/PartiallyRefundOrderPopup.cshtml","Views/Order/UploadLicenseFilePopup.cshtml","Views/Order/_AddProductToOrder.Attributes.cshtml","Views/Order/_AddProductToOrder.GiftCardInfo.cshtml","Views/Order/_AddProductToOrder.Prices.cshtml","Views/Order/_Edit.BillingAndShipment.cshtml","Views/Order/_Edit.Info.cshtml","Views/Order/_Edit.OrderTotals.cshtml","Views/Order/_Edit.Payment.cshtml","Views/Order/_Edit.Products.cshtml","Views/Order/_UpdateOrderItemDialog.cshtml","Views/Order/_ViewImports.cshtml","Views/Product/AttributeCombinationCreatePopup.cshtml","Views/Product/AttributeCombinationEditPopup.cshtml","Views/Product/BundleItemEditPopup.cshtml","Views/Product/CatalogSettings.cshtml","Views/Product/Create.cshtml","Views/Product/DeletedProductDetails.cshtml","Views/Product/Edit.cshtml","Views/Product/EditAttributeValues.cshtml","Views/Product/EditGroupedProductConfiguration.cshtml","Views/Product/EditProductTag.cshtml","Views/Product/EditorTemplates/AttributeControlType.cshtml","Views/Product/EditorTemplates/ProductAttribute.cshtml","Views/Product/EditorTemplates/ProductCategory.cshtml","Views/Product/EditorTemplates/ProductManufacturer.cshtml","Views/Product/EditorTemplates/TierPriceCalculationMethod.cshtml","Views/Product/EditorTemplates/TierPriceCustomer.cshtml","Views/Product/EditorTemplates/TierPriceStore.cshtml","Views/Product/Grids/_Grid.AssociatedProducts.cshtml","Views/Product/Grids/_Grid.AttributeCombinations.cshtml","Views/Product/Grids/_Grid.AttributeValues.cshtml","Views/Product/Grids/_Grid.BundleItems.cshtml","Views/Product/Grids/_Grid.Categories.cshtml","Views/Product/Grids/_Grid.CrossSellProducts.cshtml","Views/Product/Grids/_Grid.DeletedProducts.Search.cshtml","Views/Product/Grids/_Grid.DeletedProducts.cshtml","Views/Product/Grids/_Grid.LowStockReport.cshtml","Views/Product/Grids/_Grid.Manufacturers.cshtml","Views/Product/Grids/_Grid.ProductTags.Search.cshtml","Views/Product/Grids/_Grid.ProductTags.cshtml","Views/Product/Grids/_Grid.ProductVariantAttribute.cshtml","Views/Product/Grids/_Grid.Products.Search.cshtml","Views/Product/Grids/_Grid.Products.cshtml","Views/Product/Grids/_Grid.RelatedProducts.cshtml","Views/Product/Grids/_Grid.SpecificationAttributes.cshtml","Views/Product/Grids/_Grid.TierPrices.cshtml","Views/Product/List.cshtml","Views/Product/LowStockReport.cshtml","Views/Product/Partials/GroupedProductSettings.cshtml","Views/Product/Partials/PriceSettings.cshtml","Views/Product/ProductAttributeSwatchEditPopup.cshtml","Views/Product/ProductAttributeValueCreatePopup.cshtml","Views/Product/ProductAttributeValueEditPopup.cshtml","Views/Product/ProductTags.cshtml","Views/Product/RecycleBin.cshtml","Views/Product/_CopyAttributeOptionsDialog.cshtml","Views/Product/_CopyProductDialog.cshtml","Views/Product/_Create.SaveFirst.cshtml","Views/Product/_CreateOrUpdate.AssociatedProducts.cshtml","Views/Product/_CreateOrUpdate.Attributes.cshtml","Views/Product/_CreateOrUpdate.BundleItems.cshtml","Views/Product/_CreateOrUpdate.Categories.cshtml","Views/Product/_CreateOrUpdate.Downloads.cshtml","Views/Product/_CreateOrUpdate.Info.cshtml","Views/Product/_CreateOrUpdate.Inventory.cshtml","Views/Product/_CreateOrUpdate.Manufacturers.cshtml","Views/Product/_CreateOrUpdate.Orders.cshtml","Views/Product/_CreateOrUpdate.Pictures.cshtml","Views/Product/_CreateOrUpdate.Price.cshtml","Views/Product/_CreateOrUpdate.Promotion.cshtml","Views/Product/_CreateOrUpdate.SEO.cshtml","Views/Product/_CreateOrUpdate.SpecificationAttributes.cshtml","Views/Product/_CreateOrUpdate.cshtml","Views/Product/_CreateOrUpdateAttributeCombinationPopup.cshtml","Views/Product/_CreateOrUpdateProductAttributeValue.cshtml","Views/Product/_CreateOrUpdateProductTag.cshtml","Views/Product/_ProductAttributes.cshtml","Views/Product/_RestoreProductDialog.cshtml","Views/Product/_ViewImports.cshtml","Views/Search/SearchCommonFacet.cshtml","Views/Search/SearchSettings.cshtml","Views/Shipment/_Grid.Shipments.Search.cshtml","Views/Shipment/_Grid.Shipments.cshtml","Views/Shipment/_ViewImports.cshtml","Views/Customer/Grids/_Grid.RewardPoints.cshtml","Views/Customer/Grids/_Grid.ShoppingCart.cshtml","Views/Customer/Grids/_Grid.Wishlist.cshtml"]:
         assert not (source / path).exists(), f"Retired admin source remains: {path}"
         if path.startswith("Views/"):
@@ -341,194 +341,194 @@ def verify_remaining_admin_extraction():
 
 def verify_residual_extraction():
     repo = Path(__file__).resolve().parent.parent
-    for path in ["src/Smartstore.Web/Components/CheckoutProgressViewComponent.cs","src/Smartstore.Web/Components/CrossSellProductsViewComponent.cs","src/Smartstore.Web/Components/CurrencySelectorViewComponent.cs","src/Smartstore.Web/Components/HomeBestsellersViewComponent.cs","src/Smartstore.Web/Components/HomeBrandsViewComponent.cs","src/Smartstore.Web/Components/HomeCategoriesViewComponent.cs","src/Smartstore.Web/Components/HomeProductsViewComponent.cs","src/Smartstore.Web/Components/OffCanvasCartViewComponent.cs","src/Smartstore.Web/Components/OrderSummaryViewComponent.cs","src/Smartstore.Web/Components/OrderTotalsViewComponent.cs","src/Smartstore.Web/Components/PopularProductTagsViewComponent.cs","src/Smartstore.Web/Components/RecentlyViewedProductsViewComponent.cs","src/Smartstore.Web/Views/Shared/Components/CheckoutProgress/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/CrossSellProducts/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/CurrencySelector/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/HomeBestSellers/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/HomeBrands/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/HomeCategories/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/HomeProducts/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/OffCanvasCart/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/OrderSummary/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/OrderTotals/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/OrderTotals/OrderTotalOnly.cshtml","src/Smartstore.Web/Views/Shared/Components/PopularProductTags/Default.cshtml","src/Smartstore.Web/Views/Shared/Components/RecentlyViewedProducts/Default.cshtml","src/Smartstore.Web/Models/Checkout/CheckoutProgressModel.cs","src/Smartstore.Web/Models/ShoppingCart/OffCanvasCartModel.cs","src/Smartstore.Web/Models/ShoppingCart/OrderTotalsModel.cs","src/Smartstore.Web/Models/Catalog/PopularProductTagsModel.cs","src/Smartstore.Web/Views/Menu/OffCanvas.Brands.cshtml","src/Smartstore.Web/Views/Checkout/Partials/CheckoutOrderTotals.cshtml","src/Smartstore.Web/Views/Checkout/Partials/ConfirmDetails.cshtml","src/Smartstore.Web/Views/Checkout/Partials/Terminal.ConfirmDetails.cshtml","src/Smartstore.Modules/Smartstore.Google.Analytics/Events.cs","src/Smartstore.Web/Areas/Admin/Models/Customers/RewardPointsSettingsModel.cs","src/Smartstore.Web/Areas/Admin/Models/Customers/TopCustomersReportModel.cs","src/Smartstore.Web/Areas/Admin/Views/Customer/Grids/_Grid.BestCustomers.Search.cshtml","src/Smartstore.Web/Areas/Admin/Views/Customer/Grids/_Grid.BestCustomers.cshtml","src/Smartstore.Web/Areas/Admin/Views/Customer/Reports.cshtml","src/Smartstore.Web/Areas/Admin/Views/Customer/RewardPointsSettings.cshtml"]:
+    for path in ["src/OmmCMS.Web/Components/CheckoutProgressViewComponent.cs","src/OmmCMS.Web/Components/CrossSellProductsViewComponent.cs","src/OmmCMS.Web/Components/CurrencySelectorViewComponent.cs","src/OmmCMS.Web/Components/HomeBestsellersViewComponent.cs","src/OmmCMS.Web/Components/HomeBrandsViewComponent.cs","src/OmmCMS.Web/Components/HomeCategoriesViewComponent.cs","src/OmmCMS.Web/Components/HomeProductsViewComponent.cs","src/OmmCMS.Web/Components/OffCanvasCartViewComponent.cs","src/OmmCMS.Web/Components/OrderSummaryViewComponent.cs","src/OmmCMS.Web/Components/OrderTotalsViewComponent.cs","src/OmmCMS.Web/Components/PopularProductTagsViewComponent.cs","src/OmmCMS.Web/Components/RecentlyViewedProductsViewComponent.cs","src/OmmCMS.Web/Views/Shared/Components/CheckoutProgress/Default.cshtml","src/OmmCMS.Web/Views/Shared/Components/CrossSellProducts/Default.cshtml","src/OmmCMS.Web/Views/Shared/Components/CurrencySelector/Default.cshtml","src/OmmCMS.Web/Views/Shared/Components/HomeBestSellers/Default.cshtml","src/OmmCMS.Web/Views/Shared/Components/HomeBrands/Default.cshtml","src/OmmCMS.Web/Views/Shared/Components/HomeCategories/Default.cshtml","src/OmmCMS.Web/Views/Shared/Components/HomeProducts/Default.cshtml","src/OmmCMS.Web/Views/Shared/Components/OffCanvasCart/Default.cshtml","src/OmmCMS.Web/Views/Shared/Components/OrderSummary/Default.cshtml","src/OmmCMS.Web/Views/Shared/Components/OrderTotals/Default.cshtml","src/OmmCMS.Web/Views/Shared/Components/OrderTotals/OrderTotalOnly.cshtml","src/OmmCMS.Web/Views/Shared/Components/PopularProductTags/Default.cshtml","src/OmmCMS.Web/Views/Shared/Components/RecentlyViewedProducts/Default.cshtml","src/OmmCMS.Web/Models/Checkout/CheckoutProgressModel.cs","src/OmmCMS.Web/Models/ShoppingCart/OffCanvasCartModel.cs","src/OmmCMS.Web/Models/ShoppingCart/OrderTotalsModel.cs","src/OmmCMS.Web/Models/Catalog/PopularProductTagsModel.cs","src/OmmCMS.Web/Views/Menu/OffCanvas.Brands.cshtml","src/OmmCMS.Web/Views/Checkout/Partials/CheckoutOrderTotals.cshtml","src/OmmCMS.Web/Views/Checkout/Partials/ConfirmDetails.cshtml","src/OmmCMS.Web/Views/Checkout/Partials/Terminal.ConfirmDetails.cshtml","src/OmmCMS.Modules/OmmCMS.Google.Analytics/Events.cs","src/OmmCMS.Web/Areas/Admin/Models/Customers/RewardPointsSettingsModel.cs","src/OmmCMS.Web/Areas/Admin/Models/Customers/TopCustomersReportModel.cs","src/OmmCMS.Web/Areas/Admin/Views/Customer/Grids/_Grid.BestCustomers.Search.cshtml","src/OmmCMS.Web/Areas/Admin/Views/Customer/Grids/_Grid.BestCustomers.cshtml","src/OmmCMS.Web/Areas/Admin/Views/Customer/Reports.cshtml","src/OmmCMS.Web/Areas/Admin/Views/Customer/RewardPointsSettings.cshtml"]:
         assert not (repo / path).exists(), f"Retired source remains: {path}"
-        if path.startswith("src/Smartstore.Web/") and path.endswith(".cshtml"):
-            assert not (root / path.removeprefix("src/Smartstore.Web/")).exists(), f"Retired view published: {path}"
+        if path.startswith("src/OmmCMS.Web/") and path.endswith(".cshtml"):
+            assert not (root / path.removeprefix("src/OmmCMS.Web/")).exists(), f"Retired view published: {path}"
     print("Residual commerce source and publish extraction passed.")
 
 
 def verify_presentation_extraction():
     repo = Path(__file__).resolve().parent.parent
     for path in [
-        "src/Smartstore.Core/Catalog/Products/Services/IProductCloner.cs",
-        "src/Smartstore.Core/Catalog/Products/Services/IProductCompareService.cs",
-        "src/Smartstore.Core/Catalog/Products/Services/IRecentlyViewedProductsService.cs",
-        "src/Smartstore.Core/Catalog/Products/Services/ProductCloner.cs",
-        "src/Smartstore.Core/Catalog/Products/Services/ProductCompareService.cs",
-        "src/Smartstore.Core/Catalog/Products/Services/RecentlyViewedProductsService.cs",
-        "src/Smartstore.Modules/Smartstore.DevTools/Filters/Samples/SampleProductDetailActionFilter.cs",
-        "src/Smartstore.Modules/Smartstore.DevTools/Filters/Samples/SampleResultFilter.cs",
-        "src/Smartstore.Web.Common/Models/Pdf/Mappers/PdfReceiptMapper.cs",
-        "src/Smartstore.Web.Common/Models/Pdf/PdfReceiptSectionModel.cs",
-        "src/Smartstore.Web.Common/Models/Pdf/PdfSectionVariables.cs",
-        "src/Smartstore.Web/Components/FacetGroupViewComponent.cs",
-        "src/Smartstore.Web/Components/SearchBoxViewComponent.cs",
-        "src/Smartstore.Web/Controllers/CatalogHelper.Price.cs",
-        "src/Smartstore.Web/Controllers/CatalogHelper.Product.cs",
-        "src/Smartstore.Web/Controllers/CatalogHelper.ProductSummary.cs",
-        "src/Smartstore.Web/Controllers/CatalogHelper.cs",
-        "src/Smartstore.Web/Controllers/OrderHelper.cs",
-        "src/Smartstore.Web/Controllers/PdfController.cs",
-        "src/Smartstore.Web/Models/Catalog/BackInStockSubscribeModel.cs",
-        "src/Smartstore.Web/Models/Catalog/BrandModel.cs",
-        "src/Smartstore.Web/Models/Catalog/BrandNavigationModel.cs",
-        "src/Smartstore.Web/Models/Catalog/BrandOverviewModel.cs",
-        "src/Smartstore.Web/Models/Catalog/CategoryModel.cs",
-        "src/Smartstore.Web/Models/Catalog/CategorySummaryModel.cs",
-        "src/Smartstore.Web/Models/Catalog/DeliveryTimeModel.cs",
-        "src/Smartstore.Web/Models/Catalog/Extensions/JsonLdExtensions.cs",
-        "src/Smartstore.Web/Models/Catalog/GroupedProductModel.cs",
-        "src/Smartstore.Web/Models/Catalog/IQuantityInput.cs",
-        "src/Smartstore.Web/Models/Catalog/Mappers/BrandMetaPropertyMapper.cs",
-        "src/Smartstore.Web/Models/Catalog/Mappers/CategoryMetaPropertyMapper.cs",
-        "src/Smartstore.Web/Models/Catalog/Mappers/ProductMetaPropertyMapper.cs",
-        "src/Smartstore.Web/Models/Catalog/Mappers/ProductQuantityInputMapper.cs",
-        "src/Smartstore.Web/Models/Catalog/Mappers/QuantityInputMapperBase.cs",
-        "src/Smartstore.Web/Models/Catalog/PriceModel.cs",
-        "src/Smartstore.Web/Models/Catalog/ProductAskQuestionModel.cs",
-        "src/Smartstore.Web/Models/Catalog/ProductDetailsModel.cs",
-        "src/Smartstore.Web/Models/Catalog/ProductDetailsModelContext.cs",
-        "src/Smartstore.Web/Models/Catalog/ProductEmailAFriendModel.cs",
-        "src/Smartstore.Web/Models/Catalog/ProductReviewsModel.cs",
-        "src/Smartstore.Web/Models/Catalog/ProductSpecificationModel.cs",
-        "src/Smartstore.Web/Models/Catalog/ProductSummaryItemModel.cs",
-        "src/Smartstore.Web/Models/Catalog/ProductSummaryModel.cs",
-        "src/Smartstore.Web/Models/Catalog/ProductTagModel.cs",
-        "src/Smartstore.Web/Models/Catalog/ProductsByTagModel.cs",
-        "src/Smartstore.Web/Models/Checkout/CheckoutAddressModel.cs",
-        "src/Smartstore.Web/Models/Checkout/CheckoutCompletedModel.cs",
-        "src/Smartstore.Web/Models/Checkout/CheckoutConfirmModel.cs",
-        "src/Smartstore.Web/Models/Checkout/CheckoutModelBase.cs",
-        "src/Smartstore.Web/Models/Checkout/CheckoutPaymentMethodModel.cs",
-        "src/Smartstore.Web/Models/Checkout/CheckoutRefreshModel.cs",
-        "src/Smartstore.Web/Models/Checkout/CheckoutShippingMethodModel.cs",
-        "src/Smartstore.Web/Models/Checkout/Mappers/CheckoutAddressMapper.cs",
-        "src/Smartstore.Web/Models/Checkout/Mappers/CheckoutConfirmMapper.cs",
-        "src/Smartstore.Web/Models/Checkout/Mappers/CheckoutPaymentMethodMapper.cs",
-        "src/Smartstore.Web/Models/Checkout/Mappers/CheckoutShippingMethodMapper.cs",
-        "src/Smartstore.Web/Models/Orders/AddReturnCaseModel.cs",
-        "src/Smartstore.Web/Models/Orders/Mappers/ReturnCaseItemsMapper.cs",
-        "src/Smartstore.Web/Models/Orders/OrderDetailsModel.cs",
-        "src/Smartstore.Web/Models/Orders/ReturnCaseItemsModel.cs",
-        "src/Smartstore.Web/Models/Orders/ReturnCaseModel.cs",
-        "src/Smartstore.Web/Models/Orders/ShipmentDetailsModel.cs",
-        "src/Smartstore.Web/Models/Search/ISearchResultModel.cs",
-        "src/Smartstore.Web/Models/Search/SearchResultModel.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/ButtonPaymentMethodModel.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/CartModelBase.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/EstimateShippingModel.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/Mappers/CartItemImageMapper.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/Mappers/CartItemMapperBase.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/Mappers/CartItemQuantityInputMapper.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/Mappers/CartItemSorter.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/Mappers/CartMapperBase.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/Mappers/MiniShoppingCartMapper.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/Mappers/ShoppingCartItemMapper.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/Mappers/ShoppingCartMapper.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/Mappers/WishlistItemMapper.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/Mappers/WishlistMapper.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/MiniShoppingCartModel.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/ShoppingCartModel.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/UpdateCartItemModel.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/WishlistEmailAFriendModel.cs",
-        "src/Smartstore.Web/Models/ShoppingCart/WishlistModel.cs",
-        "src/Smartstore.Web/Views/Catalog/Partials/OffCanvasCompare.cshtml",
-        "src/Smartstore.Web/Views/Checkout/Partials/AddAddressButton.cshtml",
-        "src/Smartstore.Web/Views/Checkout/Partials/AddressScript.cshtml",
-        "src/Smartstore.Web/Views/Checkout/Partials/ConfirmScript.cshtml",
-        "src/Smartstore.Web/Views/Checkout/Partials/OrderReviewData.cshtml",
-        "src/Smartstore.Web/Views/Checkout/Partials/PaymentMethodList.cshtml",
-        "src/Smartstore.Web/Views/Checkout/Partials/ShippingAddressDiffers.cshtml",
-        "src/Smartstore.Web/Views/Checkout/Partials/ShippingMethodList.cshtml",
-        "src/Smartstore.Web/Views/Order/Details.Print.cshtml",
-        "src/Smartstore.Web/Views/Pdf/ReceiptFooter.cshtml",
-        "src/Smartstore.Web/Views/Pdf/ReceiptHeader.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.AlsoPurchased.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.AssociatedProduct.Header.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.AssociatedProduct.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.AssociatedProducts.Search.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.AssociatedProducts.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Attrs.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.AvailablePaymentMethods.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Bundle.Items.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Bundle.Price.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Bundle.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.CustomerPrice.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.GiftCard.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Info.Mobile.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Info.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Media.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Offer.Actions.Misc.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Offer.Actions.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Offer.Price.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Offer.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.RelatedProducts.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.ReviewSummary.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Reviews.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Specs.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.StockInfo.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Tabs.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Tags.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.TierPrices.cshtml",
-        "src/Smartstore.Web/Views/Product/Partials/Product.Variants.cshtml",
-        "src/Smartstore.Web/Views/Search/Partials/InstantSearch.HitGroup.cshtml",
-        "src/Smartstore.Web/Views/Search/Partials/InstantSearch.TopProducts.cshtml",
-        "src/Smartstore.Web/Views/Search/Partials/InstantSearch.cshtml",
-        "src/Smartstore.Web/Views/Shared/Components/FacetGroup/MultiSelect.cshtml",
-        "src/Smartstore.Web/Views/Shared/Components/FacetGroup/Price.cshtml",
-        "src/Smartstore.Web/Views/Shared/Components/FacetGroup/Rating.cshtml",
-        "src/Smartstore.Web/Views/Shared/Components/FacetGroup/SingleSelect.cshtml",
-        "src/Smartstore.Web/Views/Shared/Components/SearchBox/Default.cshtml",
-        "src/Smartstore.Web/Views/Shared/EditorTemplates/QtyInput.cshtml",
-        "src/Smartstore.Web/Views/Shared/Layouts/_Checkout.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/CartItem.BundleItems.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/CartItem.Details.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/CartItem.Price.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/CartItems.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/CartPaymentButtons.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/CartWarnings.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Product.List.FilterSort.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Product.List.Item.Brand.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Product.List.Item.Buttons.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Product.List.Item.Delivery.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Product.List.Item.Price.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Product.List.Item.Rating.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Product.List.Item.Variants.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Product.List.Item.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Product.List.Pager.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Product.List.ViewMode.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Product.List.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/ReturnCase.Infos.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/ReturnCase.Items.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Search.ActiveFilters.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/Search.Filters.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/SearchResultHitsCount.cshtml",
-        "src/Smartstore.Web/Views/Shared/Partials/_CommentBox.cshtml",
-        "src/Smartstore.Web/Views/ShoppingCart/Partials/EstimateShipping.cshtml",
-        "src/Smartstore.Web/Views/ShoppingCart/Partials/OffCanvasShoppingCart.Items.cshtml",
-        "src/Smartstore.Web/Views/ShoppingCart/Partials/OffCanvasShoppingCart.cshtml",
-        "src/Smartstore.Web/Views/ShoppingCart/Partials/OffCanvasWishlist.Items.cshtml",
-        "src/Smartstore.Web/Views/ShoppingCart/Partials/OffCanvasWishlist.cshtml",
-        "src/Smartstore.Web/Views/ShoppingCart/Partials/WishlistItems.cshtml",
-        "src/Smartstore.Web/Views/ShoppingCart/Partials/_CheckoutAttributes.cshtml",
-        "src/Smartstore.Web/Views/ShoppingCart/Partials/_DiscountBox.cshtml",
-        "src/Smartstore.Web/Views/ShoppingCart/Partials/_GiftCardBox.cshtml",
-        "src/Smartstore.Web/Views/ShoppingCart/Partials/_RewardPointsBox.cshtml",
-        "src/Smartstore.Web/Views/ShoppingCart/_ViewImports.cshtml",
-        "test/Smartstore.Web.Tests/Web/CartItemSorterTests.cs",
-        "test/Smartstore.Web.Tests/Web/CatalogHelperPriceTests.cs",
-        "src/Smartstore.Web.Common/Models/Catalog/IListActions.cs",
-        "src/Smartstore.Web.Common/Models/Search/SearchBoxModel.cs",
-        "src/Smartstore.Modules/Smartstore.DevTools/Components/CustomFacetViewComponent.cs",
-        "src/Smartstore.Modules/Smartstore.DevTools/Services/CustomFacetTemplateSelector.cs",
-        "src/Smartstore.Modules/Smartstore.DevTools/Views/Shared/Components/CustomFacet/Default.cshtml",
-        "src/Smartstore.Core/Catalog/Attributes/Services/IProductAttributeService.cs",
-        "src/Smartstore.Core/Catalog/Attributes/Services/ProductAttributeService.cs",
+        "src/OmmCMS.Core/Catalog/Products/Services/IProductCloner.cs",
+        "src/OmmCMS.Core/Catalog/Products/Services/IProductCompareService.cs",
+        "src/OmmCMS.Core/Catalog/Products/Services/IRecentlyViewedProductsService.cs",
+        "src/OmmCMS.Core/Catalog/Products/Services/ProductCloner.cs",
+        "src/OmmCMS.Core/Catalog/Products/Services/ProductCompareService.cs",
+        "src/OmmCMS.Core/Catalog/Products/Services/RecentlyViewedProductsService.cs",
+        "src/OmmCMS.Modules/OmmCMS.DevTools/Filters/Samples/SampleProductDetailActionFilter.cs",
+        "src/OmmCMS.Modules/OmmCMS.DevTools/Filters/Samples/SampleResultFilter.cs",
+        "src/OmmCMS.Web.Common/Models/Pdf/Mappers/PdfReceiptMapper.cs",
+        "src/OmmCMS.Web.Common/Models/Pdf/PdfReceiptSectionModel.cs",
+        "src/OmmCMS.Web.Common/Models/Pdf/PdfSectionVariables.cs",
+        "src/OmmCMS.Web/Components/FacetGroupViewComponent.cs",
+        "src/OmmCMS.Web/Components/SearchBoxViewComponent.cs",
+        "src/OmmCMS.Web/Controllers/CatalogHelper.Price.cs",
+        "src/OmmCMS.Web/Controllers/CatalogHelper.Product.cs",
+        "src/OmmCMS.Web/Controllers/CatalogHelper.ProductSummary.cs",
+        "src/OmmCMS.Web/Controllers/CatalogHelper.cs",
+        "src/OmmCMS.Web/Controllers/OrderHelper.cs",
+        "src/OmmCMS.Web/Controllers/PdfController.cs",
+        "src/OmmCMS.Web/Models/Catalog/BackInStockSubscribeModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/BrandModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/BrandNavigationModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/BrandOverviewModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/CategoryModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/CategorySummaryModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/DeliveryTimeModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/Extensions/JsonLdExtensions.cs",
+        "src/OmmCMS.Web/Models/Catalog/GroupedProductModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/IQuantityInput.cs",
+        "src/OmmCMS.Web/Models/Catalog/Mappers/BrandMetaPropertyMapper.cs",
+        "src/OmmCMS.Web/Models/Catalog/Mappers/CategoryMetaPropertyMapper.cs",
+        "src/OmmCMS.Web/Models/Catalog/Mappers/ProductMetaPropertyMapper.cs",
+        "src/OmmCMS.Web/Models/Catalog/Mappers/ProductQuantityInputMapper.cs",
+        "src/OmmCMS.Web/Models/Catalog/Mappers/QuantityInputMapperBase.cs",
+        "src/OmmCMS.Web/Models/Catalog/PriceModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/ProductAskQuestionModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/ProductDetailsModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/ProductDetailsModelContext.cs",
+        "src/OmmCMS.Web/Models/Catalog/ProductEmailAFriendModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/ProductReviewsModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/ProductSpecificationModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/ProductSummaryItemModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/ProductSummaryModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/ProductTagModel.cs",
+        "src/OmmCMS.Web/Models/Catalog/ProductsByTagModel.cs",
+        "src/OmmCMS.Web/Models/Checkout/CheckoutAddressModel.cs",
+        "src/OmmCMS.Web/Models/Checkout/CheckoutCompletedModel.cs",
+        "src/OmmCMS.Web/Models/Checkout/CheckoutConfirmModel.cs",
+        "src/OmmCMS.Web/Models/Checkout/CheckoutModelBase.cs",
+        "src/OmmCMS.Web/Models/Checkout/CheckoutPaymentMethodModel.cs",
+        "src/OmmCMS.Web/Models/Checkout/CheckoutRefreshModel.cs",
+        "src/OmmCMS.Web/Models/Checkout/CheckoutShippingMethodModel.cs",
+        "src/OmmCMS.Web/Models/Checkout/Mappers/CheckoutAddressMapper.cs",
+        "src/OmmCMS.Web/Models/Checkout/Mappers/CheckoutConfirmMapper.cs",
+        "src/OmmCMS.Web/Models/Checkout/Mappers/CheckoutPaymentMethodMapper.cs",
+        "src/OmmCMS.Web/Models/Checkout/Mappers/CheckoutShippingMethodMapper.cs",
+        "src/OmmCMS.Web/Models/Orders/AddReturnCaseModel.cs",
+        "src/OmmCMS.Web/Models/Orders/Mappers/ReturnCaseItemsMapper.cs",
+        "src/OmmCMS.Web/Models/Orders/OrderDetailsModel.cs",
+        "src/OmmCMS.Web/Models/Orders/ReturnCaseItemsModel.cs",
+        "src/OmmCMS.Web/Models/Orders/ReturnCaseModel.cs",
+        "src/OmmCMS.Web/Models/Orders/ShipmentDetailsModel.cs",
+        "src/OmmCMS.Web/Models/Search/ISearchResultModel.cs",
+        "src/OmmCMS.Web/Models/Search/SearchResultModel.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/ButtonPaymentMethodModel.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/CartModelBase.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/EstimateShippingModel.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/Mappers/CartItemImageMapper.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/Mappers/CartItemMapperBase.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/Mappers/CartItemQuantityInputMapper.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/Mappers/CartItemSorter.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/Mappers/CartMapperBase.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/Mappers/MiniShoppingCartMapper.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/Mappers/ShoppingCartItemMapper.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/Mappers/ShoppingCartMapper.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/Mappers/WishlistItemMapper.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/Mappers/WishlistMapper.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/MiniShoppingCartModel.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/ShoppingCartModel.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/UpdateCartItemModel.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/WishlistEmailAFriendModel.cs",
+        "src/OmmCMS.Web/Models/ShoppingCart/WishlistModel.cs",
+        "src/OmmCMS.Web/Views/Catalog/Partials/OffCanvasCompare.cshtml",
+        "src/OmmCMS.Web/Views/Checkout/Partials/AddAddressButton.cshtml",
+        "src/OmmCMS.Web/Views/Checkout/Partials/AddressScript.cshtml",
+        "src/OmmCMS.Web/Views/Checkout/Partials/ConfirmScript.cshtml",
+        "src/OmmCMS.Web/Views/Checkout/Partials/OrderReviewData.cshtml",
+        "src/OmmCMS.Web/Views/Checkout/Partials/PaymentMethodList.cshtml",
+        "src/OmmCMS.Web/Views/Checkout/Partials/ShippingAddressDiffers.cshtml",
+        "src/OmmCMS.Web/Views/Checkout/Partials/ShippingMethodList.cshtml",
+        "src/OmmCMS.Web/Views/Order/Details.Print.cshtml",
+        "src/OmmCMS.Web/Views/Pdf/ReceiptFooter.cshtml",
+        "src/OmmCMS.Web/Views/Pdf/ReceiptHeader.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.AlsoPurchased.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.AssociatedProduct.Header.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.AssociatedProduct.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.AssociatedProducts.Search.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.AssociatedProducts.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Attrs.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.AvailablePaymentMethods.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Bundle.Items.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Bundle.Price.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Bundle.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.CustomerPrice.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.GiftCard.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Info.Mobile.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Info.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Media.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Offer.Actions.Misc.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Offer.Actions.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Offer.Price.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Offer.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.RelatedProducts.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.ReviewSummary.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Reviews.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Specs.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.StockInfo.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Tabs.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Tags.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.TierPrices.cshtml",
+        "src/OmmCMS.Web/Views/Product/Partials/Product.Variants.cshtml",
+        "src/OmmCMS.Web/Views/Search/Partials/InstantSearch.HitGroup.cshtml",
+        "src/OmmCMS.Web/Views/Search/Partials/InstantSearch.TopProducts.cshtml",
+        "src/OmmCMS.Web/Views/Search/Partials/InstantSearch.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Components/FacetGroup/MultiSelect.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Components/FacetGroup/Price.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Components/FacetGroup/Rating.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Components/FacetGroup/SingleSelect.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Components/SearchBox/Default.cshtml",
+        "src/OmmCMS.Web/Views/Shared/EditorTemplates/QtyInput.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Layouts/_Checkout.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/CartItem.BundleItems.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/CartItem.Details.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/CartItem.Price.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/CartItems.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/CartPaymentButtons.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/CartWarnings.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Product.List.FilterSort.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Product.List.Item.Brand.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Product.List.Item.Buttons.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Product.List.Item.Delivery.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Product.List.Item.Price.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Product.List.Item.Rating.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Product.List.Item.Variants.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Product.List.Item.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Product.List.Pager.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Product.List.ViewMode.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Product.List.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/ReturnCase.Infos.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/ReturnCase.Items.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Search.ActiveFilters.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/Search.Filters.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/SearchResultHitsCount.cshtml",
+        "src/OmmCMS.Web/Views/Shared/Partials/_CommentBox.cshtml",
+        "src/OmmCMS.Web/Views/ShoppingCart/Partials/EstimateShipping.cshtml",
+        "src/OmmCMS.Web/Views/ShoppingCart/Partials/OffCanvasShoppingCart.Items.cshtml",
+        "src/OmmCMS.Web/Views/ShoppingCart/Partials/OffCanvasShoppingCart.cshtml",
+        "src/OmmCMS.Web/Views/ShoppingCart/Partials/OffCanvasWishlist.Items.cshtml",
+        "src/OmmCMS.Web/Views/ShoppingCart/Partials/OffCanvasWishlist.cshtml",
+        "src/OmmCMS.Web/Views/ShoppingCart/Partials/WishlistItems.cshtml",
+        "src/OmmCMS.Web/Views/ShoppingCart/Partials/_CheckoutAttributes.cshtml",
+        "src/OmmCMS.Web/Views/ShoppingCart/Partials/_DiscountBox.cshtml",
+        "src/OmmCMS.Web/Views/ShoppingCart/Partials/_GiftCardBox.cshtml",
+        "src/OmmCMS.Web/Views/ShoppingCart/Partials/_RewardPointsBox.cshtml",
+        "src/OmmCMS.Web/Views/ShoppingCart/_ViewImports.cshtml",
+        "test/OmmCMS.Web.Tests/Web/CartItemSorterTests.cs",
+        "test/OmmCMS.Web.Tests/Web/CatalogHelperPriceTests.cs",
+        "src/OmmCMS.Web.Common/Models/Catalog/IListActions.cs",
+        "src/OmmCMS.Web.Common/Models/Search/SearchBoxModel.cs",
+        "src/OmmCMS.Modules/OmmCMS.DevTools/Components/CustomFacetViewComponent.cs",
+        "src/OmmCMS.Modules/OmmCMS.DevTools/Services/CustomFacetTemplateSelector.cs",
+        "src/OmmCMS.Modules/OmmCMS.DevTools/Views/Shared/Components/CustomFacet/Default.cshtml",
+        "src/OmmCMS.Core/Catalog/Attributes/Services/IProductAttributeService.cs",
+        "src/OmmCMS.Core/Catalog/Attributes/Services/ProductAttributeService.cs",
     ]:
         assert not (repo / path).exists(), f"Retired source remains: {path}"
-        if path.startswith("src/Smartstore.Web/") and path.endswith(".cshtml"):
-            assert not (root / path.removeprefix("src/Smartstore.Web/")).exists(), f"Retired view published: {path}"
+        if path.startswith("src/OmmCMS.Web/") and path.endswith(".cshtml"):
+            assert not (root / path.removeprefix("src/OmmCMS.Web/")).exists(), f"Retired view published: {path}"
     print("Commerce presentation and detached core services extraction passed.")
 
 
@@ -543,7 +543,7 @@ try:
             "Catalog/Attributes/Modelling/ProductVariantQueryFactory.cs",
             "Catalog/Attributes/Modelling/ProductAttributeQueryModelBinder.cs",
         ):
-            assert not (repo / "src/Smartstore.Core" / path).exists(), f"Retired core source remains: {path}"
+            assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
         print("Core stock notification and storefront variant binding extraction passed.")
     if "--presentation-trimmed" in sys.argv:
         verify_presentation_extraction()
