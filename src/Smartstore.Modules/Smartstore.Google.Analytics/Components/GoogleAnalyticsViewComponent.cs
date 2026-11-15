@@ -1,7 +1,10 @@
 ﻿using DouglasCrockford.JsMin;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Smartstore.Core.Identity;
+using Smartstore.Core.Widgets;
 using Smartstore.Google.Analytics.Services;
 using Smartstore.Web.Components;
 
