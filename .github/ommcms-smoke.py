@@ -654,6 +654,8 @@ try:
             "Checkout/Attributes/Services",
             "Checkout/Attributes",
             "Checkout/Cart",
+            "Checkout",
+            "Catalog/Rules",
             "Checkout/Orders/Domain/CheckoutProcess.cs",
             "Catalog/Products/Hooks/ProductBundleItemHook.cs",
             "Platform/Installation/InstallationDataSeeder.Products.cs",

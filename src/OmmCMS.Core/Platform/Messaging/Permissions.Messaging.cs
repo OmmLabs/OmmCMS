@@ -4,6 +4,8 @@ public static partial class Permissions
 {
     public static partial class Promotion
     {
+        public const string Self = "promotion";
+
         public static class Campaign
         {
             public const string Self = "promotion.campaign";

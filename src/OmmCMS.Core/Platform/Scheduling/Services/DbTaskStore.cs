@@ -2,7 +2,6 @@
 using Polly;
 using Polly.Retry;
 using OmmCMS.Caching.Tasks;
-using OmmCMS.Core.Catalog.Rules;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
 using OmmCMS.Core.Common.Tasks;
@@ -28,7 +27,6 @@ public partial class DbTaskStore : Disposable, ITaskStore
         { nameof(DataExportTask), "OmmCMS.Services.DataExchange.Export.DataExportTask, OmmCMS.Services" },
         { nameof(DataImportTask), "OmmCMS.Services.DataExchange.Import.DataImportTask, OmmCMS.Services" },
         { nameof(TargetGroupEvaluatorTask), "OmmCMS.Services.Customers.TargetGroupEvaluatorTask, OmmCMS.Services" },
-        { nameof(ProductRuleEvaluatorTask), "OmmCMS.Services.Catalog.ProductRuleEvaluatorTask, OmmCMS.Services" },
         { nameof(RebuildXmlSitemapTask), "OmmCMS.Services.Seo.RebuildXmlSitemapTask, OmmCMS.Services" },
         { nameof(UpdateExchangeRateTask), "OmmCMS.Services.Directory.UpdateExchangeRateTask, OmmCMS.Services" },
         { nameof(ClearCacheTask), "OmmCMS.Services.Caching.ClearCacheTask, OmmCMS.Services" },

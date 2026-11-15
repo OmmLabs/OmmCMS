@@ -50,6 +50,8 @@ Phases 663–670: detached automatic and batch embedded-image extraction from ca
 
 Phases 671–679: constrained the administration rule editor to customer groups, removed product/cart/attribute rule presentation and obsolete commerce CAPTCHA targets, and retained customer rule editing, grouping, preview and execution. Legacy rule persistence identifiers are unchanged.
 
+Phases 680–690: removed checkout and catalogue rule implementations, scheduled product rule evaluation and obsolete tax permissions; retained customer device filters, authentication rule options and messaging permissions.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

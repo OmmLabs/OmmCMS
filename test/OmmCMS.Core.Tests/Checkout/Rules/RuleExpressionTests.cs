@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using OmmCMS.Core.Checkout.Rules;
 using OmmCMS.Core.Rules;
 
 namespace OmmCMS.Core.Tests.Rules;

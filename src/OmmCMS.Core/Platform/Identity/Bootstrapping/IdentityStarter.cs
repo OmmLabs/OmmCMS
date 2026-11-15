@@ -89,6 +89,7 @@ internal sealed class IdentityStarter : StarterBase
         // Rules.
         builder.RegisterType<TargetGroupService>().As<ITargetGroupService>().InstancePerLifetimeScope();
         builder.RegisterType<CustomerRoleRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
+        builder.RegisterType<AuthenticationMethodRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
     }
 
     public override void BuildPipeline(RequestPipelineBuilder builder)

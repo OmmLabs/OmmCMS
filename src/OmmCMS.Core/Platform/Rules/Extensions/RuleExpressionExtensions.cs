@@ -1,6 +1,4 @@
-﻿using OmmCMS.Core.Rules;
-
-namespace OmmCMS.Core.Checkout.Rules;
+namespace OmmCMS.Core.Rules;
 
 public static partial class RuleExpressionExtensions
 {
@@ -61,7 +59,7 @@ public static partial class RuleExpressionExtensions
 
         if (expression.Operator == RuleOperator.IsEqualTo || expression.Operator == RuleOperator.IsNotEqualTo)
         {
-            if (values.TryGetNonEnumeratedCount(out var leftCount))
+            if (!values.TryGetNonEnumeratedCount(out var leftCount))
             {
                 leftCount = values.Count();
             }

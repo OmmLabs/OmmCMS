@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 
 using OmmCMS.Collections;
-using OmmCMS.Core.Checkout.Rules.Impl;
+using OmmCMS.Core.Web;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Rules;
@@ -13,14 +13,17 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
 {
     private readonly SmartDbContext _db;
     private readonly IRuleService _ruleService;
+    private readonly IUserAgentParser _userAgentParser;
 
     public TargetGroupService(
         SmartDbContext db,
-        IRuleService ruleService)
+        IRuleService ruleService,
+        IUserAgentParser userAgentParser)
         : base(RuleScope.Customer)
     {
         _db = db;
         _ruleService = ruleService;
+        _userAgentParser = userAgentParser;
     }
 
     public Localizer T { get; set; } = NullLocalizer.Instance;
@@ -175,7 +178,8 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
                 Name = "LastDeviceFamily",
                 DisplayName = T("Admin.Rules.FilterDescriptor.LastDeviceFamily"),
                 RuleType = RuleType.StringArray,
-                SelectList = new LocalRuleValueSelectList(DeviceRule.GetDefaultOptions()) { Multiple = true }
+                SelectList = new LocalRuleValueSelectList(_userAgentParser.GetDetectableDevices()
+                    .Select(x => new RuleValueSelectListOption { Value = x, Text = x }).ToArray()) { Multiple = true }
             },
             new FilterDescriptor<Customer, int?>(x => x.BillingAddress != null ? x.BillingAddress.CountryId : 0)
             {

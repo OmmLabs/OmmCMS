@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Catalog.Rules;
 
 namespace OmmCMS.Core.Catalog.Categories;
 
@@ -77,7 +76,7 @@ public partial class ProductCategory : BaseEntity, IDisplayOrder
     /// <c>False</c> by default (recommended).
     /// </summary>
     /// <remarks>
-    /// System mappings are automatically added and deleted (!) by <see cref="ProductRuleEvaluatorTask"/>.
+    /// Legacy system-generated mappings.
     /// </remarks>
     public bool IsSystemMapping { get; set; }
 }

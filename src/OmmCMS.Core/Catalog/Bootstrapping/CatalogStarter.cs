@@ -1,16 +1,10 @@
 ﻿using Autofac;
 using OmmCMS.Core.Catalog.Attributes;
-using OmmCMS.Core.Catalog.Attributes.Rules;
 using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Brands.Rules;
 using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Categories.Rules;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Catalog.Products.Rules;
-using OmmCMS.Core.Catalog.Rules;
 using OmmCMS.Core.Catalog.Search;
 using OmmCMS.Core.Catalog.Search.Modelling;
-using OmmCMS.Core.Rules.Rendering;
 using OmmCMS.Core.Search;
 using OmmCMS.Core.Search.Facets;
 using OmmCMS.Engine.Builders;
@@ -48,17 +42,6 @@ internal class CatalogStarter : StarterBase
         builder.RegisterType<CatalogSearchQueryAliasMapper>().As<ICatalogSearchQueryAliasMapper>().InstancePerLifetimeScope();
         builder.RegisterType<CatalogFacetUrlHelper>().As<IFacetUrlHelper>().InstancePerLifetimeScope();
 
-        // Rules.
-        builder.RegisterType<ProductRuleProvider>().As<IProductRuleProvider>().InstancePerLifetimeScope();
-        builder.RegisterType<NullAttributeRuleProvider>().As<IAttributeRuleProvider>().InstancePerLifetimeScope();
-
-        // Rule options provider.
-        builder.RegisterType<ProductVariantAttributeValueRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
-        builder.RegisterType<SpecificationAttributeOptionRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
-        builder.RegisterType<ManufacturerRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
-        builder.RegisterType<CategoryRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
-        builder.RegisterType<ProductRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
-        builder.RegisterType<ProductTagRuleOptionsProvider>().As<IRuleOptionsProvider>().InstancePerLifetimeScope();
     }
 
 }
