@@ -162,8 +162,6 @@
     "tags": [ "outdoor" ],
     "taxCategory": "general",
     "price": 79.90,
-    "comparePrice": 119.00,
-    "comparePriceLabel": "msrp",
     "deliveryTime": "available-and-ready-to-ship",
     "stockQuantity": 2,
     "displayStockAvailability": true,

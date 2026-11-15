@@ -47,34 +47,6 @@ public class PriceSettings : ISettings
     #region New
 
     /// <summary>
-    /// The system default id of PriceLabel entity for product compare prices.
-    /// Takes effect when a product does not override the ComparePrice label.
-    /// </summary>
-    public int? DefaultComparePriceLabelId { get; set; }
-
-    /// <summary>
-    /// The system default id of PriceLabel entity to use for the crossed out regular price.
-    /// Takes effect when there is an offer or a discount has been applied to a product.
-    /// </summary>
-    public int? DefaultRegularPriceLabelId { get; set; }
-
-    /// <summary>
-    /// If TRUE, the MSRP will be displayed in product detail even if there is already an offer or a discount.
-    /// In this case the MSRP will appear as another crossed out price alongside the discounted price.
-    /// </summary>
-    public bool AlwaysDisplayRetailPrice { get; set; } = true;
-
-    /// <summary>
-    /// <c>true</c> to display the compare price label's short name in product lists.
-    /// </summary>
-    public bool ShowPriceLabelInLists { get; set; } = true;
-
-    /// <summary>
-    /// If TRUE, displays price saving even if the reference price is the retail price only.
-    /// </summary>
-    public bool ShowRetailPriceSaving { get; set; } = true;
-
-    /// <summary>
     /// <c>true</c> to initially apply the price range format (e.g. "from {0}") in product details.
     /// </summary>
     public bool ApplyPriceRangeFormatInProductDetails { get; set; }

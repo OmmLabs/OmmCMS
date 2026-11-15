@@ -27,7 +27,6 @@ public class PreselectedPriceCalculator : IPriceCalculator
             if (combination.IsActive && combination.Price.HasValue)
             {
                 context.FinalPrice = combination.Price.Value;
-                context.RegularPrice = combination.Price.Value;
                 context.AppliedAttributeCombination = combination;
             }
 
@@ -78,7 +77,6 @@ public class PreselectedPriceCalculator : IPriceCalculator
             if ((selectedCombination?.IsActive ?? false) && selectedCombination.Price.HasValue)
             {
                 context.FinalPrice = selectedCombination.Price.Value;
-                context.RegularPrice = selectedCombination.Price.Value;
                 context.AppliedAttributeCombination = selectedCombination;
 
                 // That comes too late because regular price has already been passed to child CalculatorContext:

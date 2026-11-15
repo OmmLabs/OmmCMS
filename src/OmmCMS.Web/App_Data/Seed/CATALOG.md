@@ -50,7 +50,7 @@ SKUs are `{prefix}{number}`, starting at 1001, e.g. `FN-1002`. Combinations appe
 | GF-1003 | Leather golf glove | Required variants without preselection (radio list and dropdown) |
 | GF-1004 | Laser rangefinder | Call for price |
 | GF-1005 | Golf starter set | Bundle with a fixed price |
-| GF-1006 | Lightweight stand bag | Compare price with price label, low stock |
+| GF-1006 | Lightweight stand bag | Low stock |
 | GF-1007 | Divot repair tool | Simple accessory, bundle item, new |
 | FS-1001 | Rain jacket | Colour swatches with pictures, combinations, greying out sold-out combinations |
 | FS-1002 | Ribbed knit sweater | Multicolour swatches, swatch sizes and aspect ratio, radio buttons for the material (no colour, so that it is not mistaken for the colour attribute) with a surcharge |

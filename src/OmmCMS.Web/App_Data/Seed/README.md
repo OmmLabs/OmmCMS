@@ -265,7 +265,7 @@ In installation order. `core/` is always installed, `samples/` only with sample 
 | Measures, tax categories (with `rate`, `$aliases`), countries and states | `core/measure-dimensions.json`, `core/measure-weights.json`, `core/tax-categories.json`, `core/countries.json` |
 | Delivery, quantity units | `core/delivery-times.json`, `core/quantity-units.json` |
 | Customer roles, admin address, system customers | `core/customer-roles.json` (+ `samples/`), `core/admin-address.json`, `core/system-customers.json` |
-| Email accounts, topics (with `slug` overrides), price labels | `core/email-accounts.json`, `core/topics.json`, `core/price-labels.json` |
+| Email accounts, topics (with `slug` overrides) | `core/email-accounts.json`, `core/topics.json` |
 | Settings (`$ref` values) | `core/settings.json` |
 | Activity log types, templates, scheduled tasks | `core/activity-log-types.json`, `core/product-templates.json`, `core/category-templates.json`, `core/manufacturer-templates.json`, `core/tasks.json` |
 | Menus (`@resource` titles, `publishedWhen`) | `core/menus.json` |

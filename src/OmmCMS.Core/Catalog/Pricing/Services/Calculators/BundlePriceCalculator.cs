@@ -38,7 +38,6 @@ public class BundlePriceCalculator : PriceCalculator
             await EnsureBundleItemsAreLoaded(product, context);
 
             context.FinalPrice = decimal.Zero;
-            context.RegularPrice = decimal.Zero;
 
             foreach (var bundleItem in context.BundleItems)
             {
@@ -54,7 +53,6 @@ public class BundlePriceCalculator : PriceCalculator
 
                 // Add price of part to root final price (unit price * contained quantity in this bundle).
                 context.FinalPrice += decimal.Multiply(childCalculation.FinalPrice, bundleItem.Quantity);
-                context.RegularPrice += decimal.Multiply(childCalculation.RegularPrice, bundleItem.Quantity);
             }
         }
         else

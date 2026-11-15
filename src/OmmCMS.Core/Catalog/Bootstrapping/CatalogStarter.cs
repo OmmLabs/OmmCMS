@@ -60,7 +60,6 @@ internal class CatalogStarter : StarterBase
         // Pricing
         builder.RegisterType<PriceCalculationService>().As<IPriceCalculationService>().InstancePerLifetimeScope();
         builder.RegisterType<PriceCalculatorFactory>().As<IPriceCalculatorFactory>().InstancePerLifetimeScope();
-        builder.RegisterType<PriceLabelService>().As<IPriceLabelService>().InstancePerLifetimeScope();
 
         DiscoverCalculators(builder, appContext);
 

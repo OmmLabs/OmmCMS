@@ -24,7 +24,6 @@ public partial class PriceCalculationService : IPriceCalculationService
     private readonly ITaxService _taxService;
     private readonly ICurrencyService _currencyService;
     private readonly IRoundingHelper _roundingHelper;
-    private readonly IPriceLabelService _priceLabelService;
     private readonly PriceSettings _priceSettings;
     private readonly CurrencySettings _currencySettings;
     private readonly TaxSettings _taxSettings;
@@ -41,7 +40,6 @@ public partial class PriceCalculationService : IPriceCalculationService
         ITaxService taxService,
         ICurrencyService currencyService,
         IRoundingHelper roundingHelper,
-        IPriceLabelService priceLabelService,
         PriceSettings priceSettings,
         CurrencySettings currencySettings,
         TaxSettings taxSettings)
@@ -56,7 +54,6 @@ public partial class PriceCalculationService : IPriceCalculationService
         _taxService = taxService;
         _currencyService = currencyService;
         _roundingHelper = roundingHelper;
-        _priceLabelService = priceLabelService;
         _priceSettings = priceSettings;
         _currencySettings = currencySettings;
         _taxSettings = taxSettings;
@@ -236,61 +233,6 @@ public partial class PriceCalculationService : IPriceCalculationService
         return calculatorContext;
     }
 
-    protected virtual void DetectComparePrices(CalculatorContext context, CalculatedPrice result, TaxRate taxRate)
-    {
-        var product = context.Product;
-        var retailPrice = (decimal?)null;
-        var hasComparePrice = product.ComparePrice > 0;
-
-        PriceLabel comparePriceLabel = null;
-
-        if (hasComparePrice)
-        {
-            comparePriceLabel = _priceLabelService.GetComparePriceLabel(product);
-            if (comparePriceLabel.IsRetailPrice && product.ComparePrice > product.Price)
-            {
-                if (product.ProductType != ProductType.BundledProduct || !product.BundlePerItemPricing)
-                {
-                    // A bundle with computed item pricing cannot have a retail price
-                    retailPrice = product.ComparePrice;
-                    result.RetailPriceLabel = comparePriceLabel;
-                    result.RetailPrice = ConvertAmount(product.ComparePrice, context, taxRate, false, out _);
-                }
-            }
-        }
-
-        if (hasComparePrice && product.ComparePrice > context.FinalPrice && retailPrice == null)
-        {
-            // A compare price which is NOT the retail price is the regular price
-            result.RegularPriceLabel = comparePriceLabel;
-            result.RegularPrice = ConvertAmount(product.ComparePrice, context, taxRate, false, out _);
-            return;
-        }
-
-        var regularPrice = GetRegularPrice(context);
-        if (regularPrice != null && regularPrice != retailPrice && regularPrice > context.FinalPrice)
-        {
-            // Apply regular price if it's not the retail price and greater than the final price.
-            result.RegularPriceLabel = _priceLabelService.GetRegularPriceLabel(product);
-            result.RegularPrice = ConvertAmount(regularPrice, context, taxRate, false, out _);
-        }
-    }
-
-    protected virtual decimal? GetRegularPrice(CalculatorContext context)
-    {
-        var product = context.Product;
-        var regularPrice = (decimal?)null;
-        var hasComparePrice = product.ComparePrice > 0;
-        var price = context.RegularPrice;
-
-        if (regularPrice == null && hasComparePrice && product.ComparePrice > price)
-        {
-            regularPrice = product.ComparePrice;
-        }
-
-        return regularPrice;
-    }
-
     protected virtual async Task<CalculatedPrice> CreateCalculatedPrice(CalculatorContext context, Product product, int subtotalQuantity = 1)
     {
         var options = context.Options;
@@ -321,21 +263,6 @@ public partial class PriceCalculationService : IPriceCalculationService
             var adjustment = x.RawPriceAdjustment;
             x.Price = ConvertPriceAdjustment(adjustment, context, taxRate);
         });
-
-        // Detect retail & regular price.
-        DetectComparePrices(context, result, taxRate);
-
-        // Saving price.
-        var savingPrice = result.RegularPrice ?? result.RetailPrice ?? Money.Zero;
-        var hasSaving = savingPrice > 0 && result.FinalPrice < savingPrice;
-
-        result.Saving = new()
-        {
-            HasSaving = hasSaving,
-            SavingPrice = savingPrice,
-            SavingPercent = hasSaving ? (float)((savingPrice - result.FinalPrice) / savingPrice) * 100 : 0f,
-            SavingAmount = hasSaving ? (savingPrice - result.FinalPrice).WithPostFormat(null) : null
-        };
 
         // In product lists, show the base price of the preselected attribute combination (instead of the base price set on product level).
         var ac = context.AppliedAttributeCombination;

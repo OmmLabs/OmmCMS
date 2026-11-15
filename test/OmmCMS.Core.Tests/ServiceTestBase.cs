@@ -201,7 +201,7 @@ public abstract class ServiceTestBase
         var productMetadata = new PriceCalculatorMetadata { ValidTargets = CalculatorTargets.Product, Order = CalculatorOrdering.Default + 10 };
 
         var attributePriceCalculator = new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
-            new AttributePriceCalculator(priceCalculatorFactory, DbContext, priceSettings), productMetadata);
+            new AttributePriceCalculator(priceCalculatorFactory, DbContext), productMetadata);
 
         var bundlePriceCalculator =
             new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>

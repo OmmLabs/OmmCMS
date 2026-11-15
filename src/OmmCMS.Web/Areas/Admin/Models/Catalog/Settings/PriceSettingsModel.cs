@@ -33,21 +33,6 @@ public class PriceSettingsModel : ModelBase
 
     #region New
 
-    [LocalizedDisplay("*DefaultComparePriceLabelId")]
-    public int? DefaultComparePriceLabelId { get; set; }
-
-    [LocalizedDisplay("*DefaultRegularPriceLabelId")]
-    public int? DefaultRegularPriceLabelId { get; set; }
-
-    [LocalizedDisplay("*AlwaysDisplayRetailPrice")]
-    public bool AlwaysDisplayRetailPrice { get; set; }
-
-    [LocalizedDisplay("*ShowPriceLabelInLists")]
-    public bool ShowPriceLabelInLists { get; set; }
-
-    [LocalizedDisplay("*ShowRetailPriceSaving")]
-    public bool ShowRetailPriceSaving { get; set; }
-
     [LocalizedDisplay("*ApplyPriceRangeFormatInProductDetails")]
     public bool ApplyPriceRangeFormatInProductDetails { get; set; }
 

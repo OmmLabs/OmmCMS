@@ -41,15 +41,6 @@ public static partial class Permissions
             public const string Delete = "configuration.measure.delete";
         }
 
-        public static class PriceLabel
-        {
-            public const string Self = "configuration.pricelabel";
-            public const string Read = "configuration.pricelabel.read";
-            public const string Update = "configuration.pricelabel.update";
-            public const string Create = "configuration.pricelabel.create";
-            public const string Delete = "configuration.pricelabel.delete";
-        }
-
         public static class CollectionGroup
         {
             public const string Self = "configuration.collectiongroup";

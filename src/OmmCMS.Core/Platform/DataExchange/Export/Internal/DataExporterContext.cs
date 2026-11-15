@@ -67,7 +67,6 @@ internal class DataExporterContext
 
     public Dictionary<int, DeliveryTime> DeliveryTimes { get; set; } = [];
     public Dictionary<int, QuantityUnit> QuantityUnits { get; set; } = [];
-    public Dictionary<int, PriceLabel> PriceLabels { get; set; } = [];
     public Dictionary<int, Store> Stores { get; set; } = [];
     public Dictionary<int, Language> Languages { get; set; } = [];
     public Dictionary<int, Country> Countries { get; set; } = [];

@@ -242,7 +242,6 @@ public partial class InstallationDataSeeder
             .Reference<TaxCategory>("taxCategory", (product, taxCategory) => product.TaxCategoryId = taxCategory.Id)
             .Reference<DeliveryTime>("deliveryTime", (product, deliveryTime) => product.DeliveryTimeId = deliveryTime.Id)
             .Reference<QuantityUnit>("quantityUnit", (product, unit) => product.QuantityUnitId = unit.Id)
-            .Reference<PriceLabel>("comparePriceLabel", (product, label) => product.ComparePriceLabelId = label.Id)
             .Bind("categories", (product, node, _) => ForEachAssignment(node, "category", (key, assignment) =>
                 product.ProductCategories.Add(new ProductCategory
                 {

@@ -15,7 +15,6 @@ public class CalculatorContext : PriceCalculationContext
     {
         PricingType = pricingType;
         FinalPrice = finalPrice;
-        RegularPrice = finalPrice;
     }
 
     /// <summary>
@@ -31,14 +30,8 @@ public class CalculatorContext : PriceCalculationContext
     public decimal FinalPrice { get; set; }
 
     /// <summary>
-    /// Pipeline emitted candidate for the regular price (unit price).
-    /// The actual regular price is determined later in <see cref="PriceCalculationService.GetRegularPrice(CalculatorContext)"/>.
-    /// </summary>
-    public decimal RegularPrice { get; set; }
-
-    /// <summary>
     /// A value indicating whether the price has a range, which is mostly the case if the lowest price
-    /// was determined or any tier price was applied.
+    /// was determined.
     /// </summary>
     public bool HasPriceRange { get; set; }
 

@@ -90,7 +90,6 @@ public class PriceCalculationServiceTests : ServiceTestBase
 
         _roundingHelper = new RoundingHelper(_workContext, _currencySettings);
 
-        var priceLabelService = new Mock<IPriceLabelService>();
 
         // INFO: no mocking here to use real implementation.
         _taxCalculator = new TaxCalculator(DbContext, _workContext, _roundingHelper, _taxService, _taxSettings);
@@ -111,7 +110,6 @@ public class PriceCalculationServiceTests : ServiceTestBase
             _taxService,
             _currencyService,
             _roundingHelper,
-            priceLabelService.Object,
             _priceSettings,
             _currencySettings,
             _taxSettings);

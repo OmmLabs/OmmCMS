@@ -163,10 +163,6 @@ public partial class DataExporter
                 ? ToDynamic(countryOfOrigin, ctx)
                 : null;
 
-            result.ComparePriceLabel = ctx.PriceLabels.TryGetValue(product.ComparePriceLabelId ?? 0, out var priceLabel)
-                ? ToDynamic(product.ComparePriceLabel, ctx)
-                : null;
-
             result._Localized = GetLocalized(ctx, product,
                 x => x.Name,
                 x => x.ShortDescription,

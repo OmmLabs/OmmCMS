@@ -276,34 +276,6 @@ public class ExportXmlHelper : Disposable
         }
     }
 
-    public void WritePriceLabel(dynamic priceLabel, string node)
-    {
-        if (priceLabel == null)
-            return;
-
-        PriceLabel entity = priceLabel.Entity;
-
-        if (node.HasValue())
-        {
-            _writer.WriteStartElement(node);
-        }
-
-        _writer.WriteElementString(nameof(PriceLabel.Id), entity.Id.ToString());
-        _writer.WriteElementString(nameof(PriceLabel.ShortName), (string)priceLabel.ShortName);
-        _writer.WriteElementString(nameof(PriceLabel.Name), (string)priceLabel.Name);
-        _writer.WriteElementString(nameof(PriceLabel.Description), (string)priceLabel.Description);
-        _writer.WriteElementString(nameof(PriceLabel.IsRetailPrice), entity.IsRetailPrice.ToString());
-        _writer.WriteElementString(nameof(PriceLabel.DisplayShortNameInLists), entity.DisplayShortNameInLists.ToString());
-        _writer.WriteElementString(nameof(PriceLabel.DisplayOrder), entity.DisplayOrder.ToString());
-
-        WriteLocalized(priceLabel);
-
-        if (node.HasValue())
-        {
-            _writer.WriteEndElement();
-        }
-    }
-
     public void WriteDeliveryTime(dynamic deliveryTime, string node)
     {
         if (deliveryTime == null)
@@ -646,7 +618,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.CallForPrice), entity.CallForPrice.ToString());
         // INFO: Export the entered price. Not "(decimal)product.Price" because it is the calculated price.
         _writer.WriteElementString(nameof(Product.Price), entity.Price.ToString(_culture));
-        _writer.WriteElementString(nameof(Product.ComparePrice), entity.ComparePrice.ToString(_culture));
         _writer.WriteElementString(nameof(Product.ProductCost), entity.ProductCost.ToString(_culture));
         _writer.WriteElementString(nameof(Product.CustomerEntersPrice), entity.CustomerEntersPrice.ToString());
         _writer.WriteElementString(nameof(Product.MinimumCustomerEnteredPrice), entity.MinimumCustomerEnteredPrice.ToString(_culture));
@@ -682,7 +653,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.CustomsTariffNumber), entity.CustomsTariffNumber);
 
         WriteLocalized(product);
-        WritePriceLabel(product.ComparePriceLabel, nameof(Product.ComparePriceLabel));
         WriteDeliveryTime(product.DeliveryTime, nameof(Product.DeliveryTime));
         WriteQuantityUnit(product.QuantityUnit, nameof(Product.QuantityUnit));
         WriteCountry(product.CountryOfOrigin, nameof(Product.CountryOfOrigin));
@@ -912,7 +882,6 @@ public class ExportXmlHelper : Disposable
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.ManufacturerPartNumber), entityPvac.ManufacturerPartNumber);
 
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.Price), entityPvac.Price?.ToString(_culture) ?? string.Empty);
-                _writer.WriteElementString(nameof(ProductVariantAttributeCombination.ComparePrice), entityPvac.ComparePrice?.ToString(_culture) ?? string.Empty);
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.Weight), entityPvac.Weight?.ToString(_culture) ?? string.Empty);
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.Length), entityPvac.Length?.ToString(_culture) ?? string.Empty);
                 _writer.WriteElementString(nameof(ProductVariantAttributeCombination.Width), entityPvac.Width?.ToString(_culture) ?? string.Empty);

@@ -125,7 +125,6 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
         await PopulateFromSeedAsync("PopulateEmailAccounts", InstallationSeedDescriptors.EmailAccounts());
         await PopulateAsync("PopulateMessageTemplates", PopulateMessageTemplates);
         await PopulateAsync("PopulateTopics", PopulateTopics);
-        await PopulateFromSeedAsync("PopulatePriceLabels", InstallationSeedDescriptors.PriceLabels());
         await PopulateAsync("PopulateSettings", PopulateSettings);
         await PopulateFromSeedAsync("PopulateActivityLogTypes", InstallationSeedDescriptors.ActivityLogTypes());
         await PopulateAsync("PopulateCustomersAndUsers", async () => await HashDefaultCustomerPassword(_config.DefaultUserName, _config.DefaultUserPassword));

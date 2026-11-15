@@ -38,9 +38,6 @@ internal static class InstallationSeedDescriptors
     public static SeedEntityDescriptor<QuantityUnit> QuantityUnits()
         => new SeedEntityDescriptor<QuantityUnit>("key").FromFiles("core/quantity-units.json");
 
-    public static SeedEntityDescriptor<PriceLabel> PriceLabels()
-        => new SeedEntityDescriptor<PriceLabel>("key").FromFiles("core/price-labels.json");
-
     public static SeedEntityDescriptor<CustomerRole> CustomerRoles(bool includeSamples)
         => new SeedEntityDescriptor<CustomerRole>("systemName").FromFiles(WithSamples("customer-roles.json", includeSamples));
 

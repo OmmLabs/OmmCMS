@@ -13,13 +13,11 @@ namespace OmmCMS.Core.Catalog.Pricing.Calculators;
 public class AttributePriceCalculator : PriceCalculator
 {
     private readonly SmartDbContext _db;
-    private readonly PriceSettings _priceSettings;
 
-    public AttributePriceCalculator(IPriceCalculatorFactory calculatorFactory, SmartDbContext db, PriceSettings priceSettings)
+    public AttributePriceCalculator(IPriceCalculatorFactory calculatorFactory, SmartDbContext db)
         : base(calculatorFactory)
     {
         _db = db;
-        _priceSettings = priceSettings;
     }
 
     public override async Task CalculateAsync(CalculatorContext context, CalculatorDelegate next)
@@ -91,7 +89,6 @@ public class AttributePriceCalculator : PriceCalculator
                 if (hasSelectedValues)
                 {
                     context.FinalPrice += adjustment;
-                    context.RegularPrice += adjustment;
                     context.AdditionalCharge += adjustment;
                 }
 

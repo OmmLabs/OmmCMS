@@ -92,11 +92,6 @@ public partial class ProductVariantAttributeCombination : BaseEntity, IAttribute
     public decimal? Price { get; set; }
 
     /// <summary>
-    /// Gets or sets the compare price.
-    /// </summary>
-    public decimal? ComparePrice { get; set; }
-
-    /// <summary>
     /// Gets or sets the weight.
     /// </summary>
     public decimal? Weight { get; set; }

@@ -229,9 +229,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
     [LocalizedDisplay("*AttributeCombinationRequired")]
     public bool AttributeCombinationRequired { get; set; }
 
-    [LocalizedDisplay("*ComparePriceLabelId")]
-    public int? ComparePriceLabelId { get; set; }
-
     public string PrimaryStoreCurrencyCode { get; set; }
     public string BaseDimensionIn { get; set; }
     public string BaseWeightIn { get; set; }

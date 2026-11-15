@@ -358,7 +358,6 @@ public partial class DataExporter : IDataExporter
         {
             ctx.DeliveryTimes = await _db.DeliveryTimes.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x, ct);
             ctx.QuantityUnits = await _db.QuantityUnits.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x, ct);
-            ctx.PriceLabels = await _db.PriceLabels.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x, ct);
             ctx.ProductTemplates = await _db.ProductTemplates.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x.ViewPath, ct);
             ctx.CategoryTemplates = await _db.CategoryTemplates.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x.ViewPath, ct);
             ctx.ManufacturerTemplates = await _db.ManufacturerTemplates.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x.ViewPath, ct);
@@ -572,7 +571,6 @@ public partial class DataExporter : IDataExporter
             ctx.Languages.Clear();
             ctx.QuantityUnits.Clear();
             ctx.DeliveryTimes.Clear();
-            ctx.PriceLabels.Clear();
             ctx.Stores.Clear();
             ctx.Translations.Clear();
             ctx.UrlRecords.Clear();

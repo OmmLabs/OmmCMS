@@ -9,9 +9,5 @@
   "MeasureSettings": {
     "BaseDimensionId": "$ref:MeasureDimension:inch",
     "BaseWeightId": "$ref:MeasureWeight:lb"
-  },
-  "PriceSettings": {
-    "DefaultComparePriceLabelId": "$ref:PriceLabel:msrp",
-    "DefaultRegularPriceLabelId": "$ref:PriceLabel:lowest"
   }
 }

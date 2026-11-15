@@ -46,11 +46,6 @@ internal class ProductMap : IEntityTypeConfiguration<Product>
             .HasForeignKey(c => c.CountryOfOriginId)
             .OnDelete(DeleteBehavior.SetNull);
 
-        builder.HasOne(c => c.ComparePriceLabel)
-            .WithMany()
-            .HasForeignKey(c => c.ComparePriceLabelId)
-            .OnDelete(DeleteBehavior.SetNull);
-
         builder.Property(c => c.GroupedProductConfiguration)
             .HasConversion(new GroupedProductConfigurationConverter());
 
@@ -605,34 +600,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
         [DebuggerStepThrough]
         get => this.GetMergedDataValue(nameof(Price), _price);
         set => _price = value;
-    }
-
-    private decimal _comparePrice;
-    /// <summary>
-    /// Gets or sets the compare price, e.g. the retail price.
-    /// </summary>
-    [Column("OldPrice")]
-    public decimal ComparePrice
-    {
-        [DebuggerStepThrough]
-        get => this.GetMergedDataValue(nameof(ComparePrice), _comparePrice);
-        set => _comparePrice = value;
-    }
-
-    /// <summary>
-    /// Gets or sets the label id for <see cref="ComparePrice"/>. 
-    /// A value set here overwrites the system default <see cref="PriceSettings.DefaultComparePriceLabelId"/>.
-    /// </summary>
-    public int? ComparePriceLabelId { get; set; }
-
-    private PriceLabel _comparePriceLabel;
-    /// <summary>
-    /// Gets or sets the compare price label.
-    /// </summary>
-    public PriceLabel ComparePriceLabel
-    {
-        get => _comparePriceLabel ?? LazyLoader?.Load(this, ref _comparePriceLabel);
-        set => _comparePriceLabel = value;
     }
 
     /// <summary>

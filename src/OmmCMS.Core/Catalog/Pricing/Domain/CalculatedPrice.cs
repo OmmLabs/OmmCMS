@@ -50,30 +50,6 @@ public class CalculatedPrice : ICloneable<CalculatedPrice>
     public Money FinalPrice { get; set; }
 
     /// <summary>
-    /// The regular unit price of the input <see cref="Product"/> in the target currency, 
-    /// usually <see cref="Product.Price"/> or <see cref="Product.ComparePrice"/>.
-    /// </summary>
-    public Money? RegularPrice { get; set; }
-
-    /// <summary>
-    /// The regular price label.
-    /// </summary>
-    public PriceLabel? RegularPriceLabel { get; set; }
-
-    /// <summary>
-    /// The retail unit price (MSRP) of the input <see cref="Product"/>.
-    /// A retail price is given if <see cref="Product.ComparePrice"/> is not 0
-    /// and <see cref="Product.ComparePriceLabelId"/> referes to an MSRP label.
-    /// </summary>
-    public Money? RetailPrice { get; set; }
-
-    /// <summary>
-    /// The retail price label if the <see cref="Product.ComparePrice"/> is not 0
-    /// and <see cref="Product.ComparePriceLabelId"/> referes to an MSRP label.
-    /// </summary>
-    public PriceLabel? RetailPriceLabel { get; set; }
-
-    /// <summary>
     /// A value indicating whether the price has a range, which is mostly the case if the lowest price
     /// was determined.
     /// </summary>
@@ -101,12 +77,6 @@ public class CalculatedPrice : ICloneable<CalculatedPrice>
     /// Tax for <see cref="FinalPrice"/>.
     /// </summary>
     public Tax? Tax { get; set; }
-
-    /// <summary>
-    /// Gets or sets a price saving in relation to <see cref="FinalPrice"/>.
-    /// The saving results from the applied discounts, if any, otherwise from the difference to the <see cref="Product.ComparePrice"/>.
-    /// </summary>
-    public PriceSaving Saving { get; set; }
 
     /// <inheritdoc/>
     public CalculatedPrice Clone()

@@ -64,9 +64,6 @@ public class ProductOverviewModel : TabbableModel
     [LocalizedDisplay("*Price")]
     public decimal Price { get; set; }
 
-    [LocalizedDisplay("*ComparePrice")]
-    public decimal? ComparePrice { get; set; }
-
     [LocalizedDisplay("*Weight")]
     public decimal? Weight { get; set; }
 
