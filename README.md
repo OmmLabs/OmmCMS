@@ -36,6 +36,8 @@ Completed: CMS shell, administration, installation, content workflows and phases
 
 Phases 606–615: CMS-only installation is now unconditional; catalogue templates, product and category samples, sample customer and campaign initialization, shop installer controls, and associated seed descriptors are extracted. The SQLite installation regression tests now require CMS content regardless of the legacy sample request. Next: remaining catalogue export/import, search and persistence dependencies.
 
+Phases 616–620: removed bundled storefront brand, category, product and downloadable demo media and the obsolete catalogue sample guide; the publish smoke test guards against their return.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

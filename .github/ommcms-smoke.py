@@ -661,6 +661,8 @@ try:
         seed = Path("App_Data/Seed")
         for seed_root in (repo / "src/OmmCMS.Web" / seed, root / seed):
             assert not list(seed_root.glob("**/samples/catalog")), "Retired catalogue seed directory remains"
+            for name in ("brand", "category", "product", "download"):
+                assert not (seed_root / "media" / name).exists(), f"Retired demo media remains: {name}"
             assert (seed_root / "base/core/cms/topics.json").exists(), "CMS starter topics missing"
             assert (seed_root / "base/core/cms/menus.json").exists(), "CMS starter menus missing"
         for language in ("en", "de"):

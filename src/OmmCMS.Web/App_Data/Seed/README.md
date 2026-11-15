@@ -13,16 +13,14 @@ installation (`InstallationDataSeeder`) and wires up database IDs; all data live
 ```
 App_Data/Seed/
 ├── base/                         Base data, English, valid for every language
-│   ├── core/                     Mandatory data
-│   └── samples/                  Sample data (only installed on request)
+│   └── core/                     Mandatory data and CMS starter content
 ├── cultures/
 │   └── {culture}/                e.g. de-DE
 │       ├── culture.json          Makes the culture installable (see below)
 │       ├── installation.xml      UI texts of the installer (optional)
 │       ├── resources/            Locale resources (*.smres.xml, head.txt), see below
-│       ├── core/…                Overlays: same relative paths as in base/
-│       └── samples/…
-└── media/                        Sample images and downloads
+│       └── core/…                Overlays: same relative paths as in base/
+└── media/                        Optional installation media
 ```
 
 `base/core/settings.json` is the only object file: `{ "SeoSettings": { "MetaTitle": "Example" } }`.
