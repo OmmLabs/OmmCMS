@@ -70,7 +70,7 @@
 
 	<!-- Copy publishable files in Modules directory -->
 	<ItemGroup>
-        <None Include="Modules\**" Exclude="Modules\**\*.pdb; Modules\**\runtimes\**; Modules\**\refs\**" CopyToPublishDirectory="PreserveNewest">
+        <None Include="Modules\**" Exclude="Modules\**\*.pdb; Modules\**\runtimes\**; Modules\**\refs\**; Modules\Smartstore.AmazonPay\**; Modules\Smartstore.OfflinePayment\**; Modules\Smartstore.PayPal\**; Modules\Smartstore.Stripe\**; Modules\Smartstore.Shipping\**; Modules\Smartstore.ShippingByWeight\**; Modules\Smartstore.Tax\**; Modules\Smartstore.Google.MerchantCenter\**; Modules\Smartstore.Clickatell\**; Modules\Smartstore.WebApi\**" CopyToPublishDirectory="PreserveNewest">
             <Visible>false</Visible>
         </None>
 	</ItemGroup>

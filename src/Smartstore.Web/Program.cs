@@ -56,7 +56,9 @@ var configuration = (IConfiguration)builder.Configuration
     .AddJsonFile("Config/connections.json", optional: true, reloadOnChange: true)
     .AddJsonFile($"Config/connections.{environmentName}.json", optional: true)
     .AddJsonFile("Config/usersettings.json", optional: true, reloadOnChange: true)
-    .AddJsonFile($"Config/usersettings.{environmentName}.json", optional: true);
+    .AddJsonFile($"Config/usersettings.{environmentName}.json", optional: true)
+    // Commerce modules are no longer shipped. Keep the CMS profile active even with older user settings.
+    .AddInMemoryCollection(new Dictionary<string, string> { ["OmmCMS:PreviewShell"] = "true" });
 
 // Setup Serilog logging
 Log.Logger = SetupSerilog(configuration);

@@ -9,6 +9,7 @@ on:
       - cms-commerce-isolation
       - cms-installation
       - cms-editorial-workflows
+      - cms-module-extraction
   workflow_dispatch:
 
 permissions:
@@ -50,11 +51,11 @@ jobs:
         run: dotnet test Smartstore.sln -c Release --no-build --no-restore --logger trx
 
       - name: Publish disposable CMS application
-        if: github.ref_name == 'cms-installation' || github.ref_name == 'cms-editorial-workflows'
+        if: github.ref_name == 'cms-installation' || github.ref_name == 'cms-editorial-workflows' || github.ref_name == 'cms-module-extraction'
         run: dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release --no-build --no-restore -o "$RUNNER_TEMP/ommcms-smoke"
 
       - name: Fresh CMS installation smoke test (SQLite)
-        if: github.ref_name == 'cms-installation' || github.ref_name == 'cms-editorial-workflows'
-        run: python3 .github/ommcms-smoke.py "$RUNNER_TEMP/ommcms-smoke" --editorial
+        if: github.ref_name == 'cms-installation' || github.ref_name == 'cms-editorial-workflows' || github.ref_name == 'cms-module-extraction'
+        run: python3 .github/ommcms-smoke.py "$RUNNER_TEMP/ommcms-smoke" --editorial --trimmed
 
 # No package push, external deployment or production database access.

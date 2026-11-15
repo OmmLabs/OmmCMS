@@ -19,8 +19,9 @@ assert (root / "Smartstore.Web.dll").is_file(), "Use a published application"
 database = root / "App_Data" / "Tenants" / "Default" / "ommcms-smoke.db"
 assert not database.exists(), "Smoke test needs a new database"
 base = "http://127.0.0.1:5087"
-env = dict(os.environ, ASPNETCORE_URLS=base, ASPNETCORE_ENVIRONMENT="Production",
-           OmmCMS__PreviewShell="true")
+env = dict(os.environ, ASPNETCORE_URLS=base, ASPNETCORE_ENVIRONMENT="Production")
+# An old false setting must not reactivate commerce in the trimmed distribution.
+env["OmmCMS__PreviewShell"] = "false" if "--trimmed" in sys.argv else "true"
 log = root / "ommcms-smoke.log"
 process = None
 
@@ -235,7 +236,28 @@ def editorial_workflows(password):
     print("Theme configuration and theme switch passed.")
 
 
+def verify_trimmed_distribution():
+    removed = ["Smartstore.AmazonPay","Smartstore.OfflinePayment","Smartstore.PayPal","Smartstore.Stripe","Smartstore.Shipping","Smartstore.ShippingByWeight","Smartstore.Tax","Smartstore.Google.MerchantCenter","Smartstore.Clickatell","Smartstore.WebApi"]
+    retained = ["Smartstore.Apple.Auth", "Smartstore.Facebook.Auth", "Smartstore.Google.Auth",
+                "Smartstore.Microsoft.Auth", "Smartstore.Twitter.Auth", "Smartstore.DevTools",
+                "Smartstore.Google.Analytics"]
+    repo = Path(__file__).resolve().parent.parent
+    module_sources = repo / "src" / "Smartstore.Modules"
+    modules = root / "Modules"
+    solution = (repo / "Smartstore.sln").read_text(encoding="utf-8-sig")
+    for name in removed:
+        assert not (module_sources / name).exists(), f"Retired source remains: {name}"
+        assert not (modules / name).exists(), f"Retired module is in publish output: {name}"
+        assert f'"{name}"' not in solution, f"Retired project is in solution: {name}"
+    assert not (repo / "tools" / "Smartstore.WebApi.Client").exists(), "Obsolete API client remains"
+    for name in retained:
+        assert (modules / name / "module.json").is_file(), f"Retained module is absent: {name}"
+    print(f"Trimmed distribution passed: {len(removed)} retired modules absent; {len(retained)} retained modules present.")
+
+
 try:
+    if "--trimmed" in sys.argv:
+        verify_trimmed_distribution()
     start()
     page = wait_for("/install?noAutoInstall=true")
     assert "OmmCMS" in page, "CMS installer branding missing"

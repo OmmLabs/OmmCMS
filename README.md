@@ -2,7 +2,7 @@
 
 An open-source, ASP.NET Core content management system in development by [OmmLabs](https://github.com/OmmLabs). OmmCMS builds on the Smartstore platform, retaining its content, administration and extension foundations while progressively separating e-commerce.
 
-**Status:** development preview, not a production release. The CMS profile is opt-in and the original Smartstore behavior remains the default. The commerce database schema and shared services remain during the transition.
+**Status:** development preview, not a production release. OmmCMS is now CMS-only: the application enables the CMS profile automatically. Ten previously isolated commerce modules have been removed. The commerce database schema and shared services remain during the transition. The repository is no longer a supported storefront build.
 
 ## What the CMS profile provides
 
@@ -10,7 +10,7 @@ An open-source, ASP.NET Core content management system in development by [OmmLab
 - Account authentication, roles and permissions, localization, and theme infrastructure.
 - Content-focused public layout and administration navigation.
 - A starter website with Home, About and Contact pages; no sample shop catalog.
-- Commerce route isolation and exclusion of selected bundled commerce modules.
+- Commerce route isolation and physical removal of ten bundled commerce modules.
 
 ## Try a fresh installation
 
@@ -19,18 +19,18 @@ Prerequisites: .NET 10 SDK, a supported database (SQLite for local evaluation, S
 ```bash
 git clone https://github.com/OmmLabs/OmmCMS.git
 cd OmmCMS
-git switch cms-editorial-workflows
+git switch cms-module-extraction
 dotnet restore Smartstore.sln
 dotnet build Smartstore.sln -c Release --no-restore
 cd src/Smartstore.Web
-OmmCMS__PreviewShell=true ASPNETCORE_URLS=http://localhost:5080 dotnet run -c Release --no-build --no-launch-profile
+ASPNETCORE_URLS=http://localhost:5080 dotnet run -c Release --no-build --no-launch-profile
 ```
 
-On Windows PowerShell, set `$env:OmmCMS__PreviewShell = "true"` and `$env:ASPNETCORE_URLS = "http://localhost:5080"` before running the same dotnet command.
+On Windows PowerShell, set `$env:ASPNETCORE_URLS = "http://localhost:5080"` before running the same dotnet command.
 
 1. Open http://localhost:5080/install.
 2. Use a new database and create a strong administrator password. SQLite is recommended for the preview.
-3. Complete installation and restart as directed by the installer. Keep the CMS environment variable enabled on every launch.
+3. Complete installation and restart as directed by the installer. The CMS profile is automatically enabled.
 4. Open the website and its administration area at `/admin`. Edit starter pages, menus and legal text before publishing.
 
 Do not use an existing commerce database for this preview. This is not a database migration or a shop-to-CMS conversion tool.
@@ -41,7 +41,7 @@ Do not use an existing commerce database for this preview. This is not a databas
 dotnet test Smartstore.sln -c Release
 ```
 
-CI defines a disposable SQLite fresh-install smoke test and authenticated editorial workflow checks. See [Phase 4](docs/ommcms/PHASE4_INSTALLATION.md) and [Phase 5](docs/ommcms/PHASE5_EDITORIAL_WORKFLOWS.md) for scope and limitations.
+CI checks removed modules are absent from the source and publish artifact, runs the full test suite, and verifies a disposable SQLite fresh-install and authenticated editorial workflows. See [Phase 4](docs/ommcms/PHASE4_INSTALLATION.md) and [Phase 5](docs/ommcms/PHASE5_EDITORIAL_WORKFLOWS.md) for scope and limitations.
 
 ## Development roadmap
 
@@ -52,7 +52,8 @@ CI defines a disposable SQLite fresh-install smoke test and authenticated editor
 | 3 | [Commerce isolation](docs/ommcms/PHASE3_COMMERCE_ISOLATION.md) |
 | 4 | [CMS installation and runtime cleanup](docs/ommcms/PHASE4_INSTALLATION.md) |
 | 5 | [Authenticated CMS editorial workflows](docs/ommcms/PHASE5_EDITORIAL_WORKFLOWS.md) |
-| Next | Extract commerce service and schema dependencies; build dedicated article taxonomy and editorial tools. |
+| 6 | [Physical commerce module extraction](docs/ommcms/PHASE6_MODULE_EXTRACTION.md) |
+| Next | Extract core commerce services, controllers and schema dependencies; build dedicated article taxonomy and editorial tools. |
 
 Source and project names retain their Smartstore names until the dependency extraction is complete.
 
