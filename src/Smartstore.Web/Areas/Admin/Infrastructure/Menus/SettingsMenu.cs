@@ -11,9 +11,11 @@ public partial class SettingsMenu : MenuBase
 
     protected override string GetCacheKey()
     {
-        var cacheKey = "{0}-{1}".FormatInvariant(
+        var cmsPreview = bool.TryParse(Services.ApplicationContext.Configuration["OmmCMS:PreviewShell"], out var enabled) && enabled;
+        var cacheKey = "{0}-{1}-{2}".FormatInvariant(
             Services.WorkContext.WorkingLanguage.Id,
-            Services.WorkContext.CurrentCustomer.GetRolesIdent());
+            Services.WorkContext.CurrentCustomer.GetRolesIdent(),
+            cmsPreview ? "cms" : "store");
 
         return cacheKey;
     }
@@ -168,6 +170,24 @@ public partial class SettingsMenu : MenuBase
                 ActionName = "AllSettings"
             }
         ]);
+
+        // CMS preview only filters the settings navigation, not the underlying commerce endpoints.
+        if (bool.TryParse(Services.ApplicationContext.Configuration["OmmCMS:PreviewShell"], out var cmsEnabled) && cmsEnabled)
+        {
+            var commerceSettingIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "catalog", "cart", "order", "payment", "finance", "shipping",
+                "reward-points", "dataexchange", "all"
+            };
+
+            foreach (var child in root.Children)
+            {
+                if (commerceSettingIds.Contains(child.Value.Id))
+                {
+                    child.Value.Visible = false;
+                }
+            }
+        }
 
         // Add area = "Admin" to all items in one go.
         foreach (var item in root.Children)
