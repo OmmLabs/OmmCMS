@@ -18,6 +18,8 @@ using Smartstore.Engine.Modularity;
 using Smartstore.IO;
 using Smartstore.Threading;
 
+using Smartstore.Engine;
+
 namespace Smartstore.Core.Installation;
 
 public partial class InstallationService : IInstallationService
@@ -107,6 +109,12 @@ public partial class InstallationService : IInstallationService
     public virtual async Task<InstallationResult> InstallAsync(InstallationModel model, ILifetimeScope scope, CancellationToken cancelToken = default)
     {
         Guard.NotNull(model, nameof(model));
+
+        var cmsPreview = OmmCmsMode.IsEnabled(_appContext.Configuration);
+        if (cmsPreview)
+        {
+            model.InstallSampleData = false;
+        }
 
         if (!TryBeginInstallation(model, out var result))
         {
@@ -242,6 +250,7 @@ public partial class InstallationService : IInstallationService
             {
                 DefaultUserName = model.AdminEmail,
                 DefaultUserPassword = model.AdminPassword,
+                CmsPreview = cmsPreview,
                 SeedSampleData = model.InstallSampleData,
                 Language = primaryLanguage,
                 StoreMediaInDB = model.MediaStorage == "db",

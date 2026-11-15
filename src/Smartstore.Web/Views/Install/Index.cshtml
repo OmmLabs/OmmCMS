@@ -4,6 +4,7 @@
 
 @{
     Layout = null;
+    var cmsPreview = ViewBag.CmsPreview == true;
 
     var installResult = ViewBag.InstallResult as InstallationResult;
     var wasRunning = installResult != null;
@@ -20,14 +21,14 @@
 <html lang="@InstallService.GetCurrentLanguage().Code">
 <head>
     <meta charset="utf-8">
-    <title>@T("Title")</title>
+    <title>@(cmsPreview ? "OmmCMS installation" : T("Title"))</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta property="sm:root" content="@Url.Content("~/")" />
 
     <script>
         window.Res = {
             "Common.Notification": "@T("Common.Notification")",
-            "Common.StartShop": "@T("Common.StartShop")",
+            "Common.StartShop": "@(cmsPreview ? "Open website" : T("Common.StartShop"))",
             "Installing": "@T("Installing")",
             "RestartInstallation": "@T("RestartInstallation")",
             "ConfirmInstall": "@T("ConfirmInstall")",

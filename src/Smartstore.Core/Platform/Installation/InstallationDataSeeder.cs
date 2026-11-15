@@ -103,7 +103,7 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
             new LocalFileSystem(PathUtility.Join(ApplicationContext.AppDataRoot.Root, SeedDataSource.AppDataFolder)),
             _config.Language.LanguageCulture)
         {
-            IncludeSamples = _config.SeedSampleData
+            IncludeSamples = IncludeSamples
         };
         _seedFactory = new SeedEntityFactory(_seedResolver);
 
@@ -133,9 +133,17 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
         await PopulateFromSeedAsync("PopulateProductTemplates", InstallationSeedDescriptors.ProductTemplates());
         await PopulateFromSeedAsync("PopulateCategoryTemplates", InstallationSeedDescriptors.CategoryTemplates());
         await PopulateFromSeedAsync("PopulateManufacturerTemplates", InstallationSeedDescriptors.ManufacturerTemplates());
-        await PopulateFromSeedAsync("PopulateScheduleTasks", InstallationSeedDescriptors.TaskDescriptors());
+        await PopulateAsync("PopulateScheduleTasks", () =>
+        {
+            var tasks = CreateFromSeed(InstallationSeedDescriptors.TaskDescriptors());
+            if (_config.CmsPreview)
+            {
+                tasks.RemoveAll(x => x.Type is "UpdateExchangeRateTask" or "ProductRuleEvaluatorTask");
+            }
+            return SaveRangeAsync(tasks);
+        });
 
-        if (_config.SeedSampleData)
+        if (IncludeSamples)
         {
             Logger.Info("Seeding sample data");
 
@@ -154,13 +162,15 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
         }
 
         // Menus come last, because some menu items are only published if sample data (e.g. manufacturers) exist.
-        await PopulateFromSeedAsync("PopulateMenus", InstallationSeedDescriptors.Menus(EvaluateSeedCondition));
+        await PopulateFromSeedAsync("PopulateMenus", InstallationSeedDescriptors.Menus(EvaluateSeedCondition, _config.CmsPreview));
 
         // Perf
         Context.DetachEntities<BaseEntity>();
     }
 
     #endregion
+
+    private bool IncludeSamples => _config.SeedSampleData && !_config.CmsPreview;
 
     #region Populate
 
@@ -172,16 +182,20 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
 
     private async Task PopulateStores()
     {
-        var stores = CreateFromSeed(InstallationSeedDescriptors.Stores(CreateSampleMedia));
+        var stores = CreateFromSeed(InstallationSeedDescriptors.Stores(CreateSampleMedia, _config.CmsPreview));
 
         // URL and SSL of the store are taken from the installation request.
         var request = ApplicationContext.Services.Resolve<IHttpContextAccessor>().HttpContext?.Request;
         foreach (var store in stores)
         {
             store.Url = request == null
-                ? "http://www.yourstore.com/"
+                ? (_config.CmsPreview ? "http://localhost/" : "http://www.yourstore.com/")
                 : request.Scheme + "://" + request.Host + request.PathBase.Value.EnsureEndsWith('/');
             store.SslEnabled = request?.IsHttps ?? false;
+            if (_config.CmsPreview && request != null)
+            {
+                store.Hosts = request.Host.Value;
+            }
         }
 
         await SaveRangeAsync(stores);
@@ -305,7 +319,7 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
 
     private async Task PopulateCustomersAndUsers(string defaultUserEmail, string defaultUserPassword)
     {
-        var customerRoles = CreateFromSeed(InstallationSeedDescriptors.CustomerRoles(_config.SeedSampleData));
+        var customerRoles = CreateFromSeed(InstallationSeedDescriptors.CustomerRoles(IncludeSamples));
         await SaveRangeAsync(customerRoles);
 
         //admin user
@@ -425,6 +439,10 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
         seedSettings.Remove(RawSettingsKey);
 
         ApplySeedSettings(settings, seedSettings);
+        if (_config.CmsPreview)
+        {
+            ApplySeedSettings(settings, _seedSource.LoadObject("core/cms/settings.json"));
+        }
         foreach (var setting in settings)
         {
             Type settingType = setting.GetType();
@@ -608,7 +626,7 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
     {
         // By reference: entity equality depends on the ID, which changes on save.
         var slugs = new Dictionary<Topic, string>(ReferenceEqualityComparer.Instance);
-        var topics = CreateFromSeed(InstallationSeedDescriptors.Topics(slugs));
+        var topics = CreateFromSeed(InstallationSeedDescriptors.Topics(slugs, _config.CmsPreview));
         await SaveRangeAsync(topics);
         await PopulateUrlRecordsFor(topics, x => CreateUrlRecord(x, slugs.GetValueOrDefault(x), x.SystemName));
     }

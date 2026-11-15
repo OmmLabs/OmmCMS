@@ -1,5 +1,6 @@
 ﻿@inject Smartstore.IconKit.IIconAreaResolver IconAreaResolver
 @inject Smartstore.IconKit.IIconKitService IconKits
+@inject Microsoft.Extensions.Configuration.IConfiguration OmmCmsConfiguration
 @{ var iconManifestUrl = IconKits.GetManifestUrl(); }
 @using Smartstore.Core;
 
@@ -10,7 +11,7 @@
     {
         adminPageTitle = ViewBag.Title + " / ";
     }
-    adminPageTitle += T("Admin.PageTitle").Value;
+    adminPageTitle += Smartstore.Engine.OmmCmsMode.IsEnabled(OmmCmsConfiguration) ? "OmmCMS Admin" : T("Admin.PageTitle").Value;
 }
 <!DOCTYPE html>
 <html sm-language-attributes-for="WorkContext.WorkingLanguage" class="not-ready loading" data-pnotify-firstpos1="0">

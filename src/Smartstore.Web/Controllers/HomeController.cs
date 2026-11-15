@@ -23,6 +23,8 @@ using Smartstore.Net.Mail;
 using Smartstore.Utilities.Html;
 using Smartstore.Web.Models.Common;
 
+using Smartstore.Engine;
+
 namespace Smartstore.Web.Controllers;
 
 public class HomeController : PublicController
@@ -205,7 +207,11 @@ public class HomeController : PublicController
         builder.WebSite
             .Prop("@id", storeUrl + "#website")
             .Prop("name", store.Name)
-            .Prop("url", store.Url)
-            .Obj("potentialAction", searchAction);
+            .Prop("url", store.Url);
+
+        if (!OmmCmsMode.IsEnabled(Services.ApplicationContext.Configuration))
+        {
+            builder.WebSite.Obj("potentialAction", searchAction);
+        }
     }
 }

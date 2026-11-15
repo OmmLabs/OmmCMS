@@ -9,6 +9,8 @@ using Smartstore.Json;
 using Smartstore.Threading;
 using Smartstore.Utilities;
 
+using Smartstore.Engine;
+
 namespace Smartstore.Web.Controllers;
 
 public class InstallController : Controller
@@ -47,6 +49,8 @@ public class InstallController : Controller
 
     private void PrepareInstallForm()
     {
+        var cmsPreview = OmmCmsMode.IsEnabled(_appContext.Configuration);
+        ViewBag.CmsPreview = cmsPreview;
         var curLanguage = _installService.GetCurrentLanguage();
 
         var installLanguages = _installService.GetInstallationLanguages()
@@ -86,10 +90,10 @@ public class InstallController : Controller
         var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
         var dataProviders = new List<SelectListItem>
         {
-            new SelectListItem { Value = "mysql", Text = T("UseMySql"), Selected = !isWindows },
-            new SelectListItem { Value = "sqlserver", Text = T("UseSqlServer"), Selected = isWindows },
+            new SelectListItem { Value = "mysql", Text = T("UseMySql"), Selected = !cmsPreview && !isWindows },
+            new SelectListItem { Value = "sqlserver", Text = T("UseSqlServer"), Selected = !cmsPreview && isWindows },
             new SelectListItem { Value = "postgresql", Text = T("UsePostgreSql"), Selected = false },
-            new SelectListItem { Value = "sqlite", Text = T("UseSqlite"), Selected = false }
+            new SelectListItem { Value = "sqlite", Text = T("UseSqlite"), Selected = cmsPreview }
         };
 
         ViewBag.AvailableInstallationLanguages = installLanguages;

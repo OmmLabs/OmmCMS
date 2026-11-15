@@ -1,0 +1,140 @@
+[
+  {
+    "systemName": "Main",
+    "isSystemMenu": true,
+    "template": "Navbar",
+    "title": "Main menu",
+    "items": [
+      {
+        "key": "Homepage",
+        "providerName": "route",
+        "model": "{\"routename\":\"Homepage\"}",
+        "title": "Home",
+        "displayOrder": 1
+      },
+      {
+        "key": "topic:AboutUs",
+        "providerName": "entity",
+        "model": "topic:AboutUs",
+        "displayOrder": 2
+      },
+      {
+        "key": "ContactUs",
+        "providerName": "route",
+        "model": "{\"routename\":\"ContactUs\"}",
+        "title": "@resource:ContactUs",
+        "displayOrder": 3
+      }
+    ]
+  },
+  {
+    "systemName": "FooterInformation",
+    "isSystemMenu": true,
+    "template": "LinkList",
+    "title": "Footer - {@resource:Footer.Info}",
+    "items": [
+      {
+        "key": "topic:AboutUs",
+        "providerName": "entity",
+        "model": "topic:AboutUs",
+        "displayOrder": 1
+      },
+      {
+        "key": "ContactUs",
+        "providerName": "route",
+        "model": "{\"routename\":\"ContactUs\"}",
+        "title": "@resource:ContactUs",
+        "displayOrder": 2
+      }
+    ]
+  },
+  {
+    "systemName": "FooterService",
+    "isSystemMenu": true,
+    "template": "LinkList",
+    "title": "Footer - {@resource:Footer.Service}",
+    "items": [
+      {
+        "key": "ContactUs",
+        "providerName": "route",
+        "model": "{\"routename\":\"ContactUs\"}",
+        "title": "@resource:ContactUs",
+        "displayOrder": 1
+      },
+      {
+        "key": "CookieManager",
+        "providerName": "route",
+        "model": "{\"routename\":\"CookieManager\"}",
+        "title": "Cookie Manager",
+        "displayOrder": 4,
+        "noFollow": true,
+        "cssClass": "cookie-manager"
+      }
+    ]
+  },
+  {
+    "systemName": "FooterCompany",
+    "isSystemMenu": true,
+    "template": "LinkList",
+    "title": "Footer - {@resource:Footer.Company}",
+    "items": [
+      {
+        "key": "topic:AboutUs",
+        "providerName": "entity",
+        "model": "topic:AboutUs",
+        "displayOrder": 1
+      },
+      {
+        "key": "topic:Imprint",
+        "providerName": "entity",
+        "model": "topic:Imprint",
+        "displayOrder": 2
+      },
+      {
+        "key": "topic:Disclaimer",
+        "providerName": "entity",
+        "model": "topic:Disclaimer",
+        "displayOrder": 3
+      },
+      {
+        "key": "topic:PrivacyInfo",
+        "providerName": "entity",
+        "model": "topic:PrivacyInfo",
+        "displayOrder": 4
+      },
+      {
+        "key": "topic:ConditionsOfUse",
+        "providerName": "entity",
+        "model": "topic:ConditionsOfUse",
+        "displayOrder": 5
+      }
+    ]
+  },
+  {
+    "systemName": "HelpAndService",
+    "isSystemMenu": true,
+    "template": "Dropdown",
+    "title": "@resource:Footer.Service",
+    "items": [
+      {
+        "key": "topic:AboutUs",
+        "providerName": "entity",
+        "model": "topic:AboutUs",
+        "displayOrder": 5,
+        "beginGroup": true
+      },
+      {
+        "key": "topic:Disclaimer",
+        "providerName": "entity",
+        "model": "topic:Disclaimer",
+        "displayOrder": 6
+      },
+      {
+        "key": "topic:ConditionsOfUse",
+        "providerName": "entity",
+        "model": "topic:ConditionsOfUse",
+        "displayOrder": 8
+      }
+    ]
+  }
+]

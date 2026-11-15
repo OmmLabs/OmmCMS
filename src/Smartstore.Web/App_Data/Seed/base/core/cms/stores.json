@@ -1,0 +1,9 @@
+[
+  {
+    "key": "default",
+    "name": "OmmCMS",
+    "displayOrder": 1,
+    "defaultCurrency": "USD",
+    "primaryExchangeRateCurrency": "USD"
+  }
+]

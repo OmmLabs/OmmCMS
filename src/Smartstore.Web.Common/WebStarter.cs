@@ -219,7 +219,10 @@ internal class WebStarter : StarterBase
         builder.Configure(StarterOrdering.EarlyMiddleware, app =>
         {
             app.UseSession();
-            app.UseCheckoutState();
+            if (!OmmCmsMode.IsEnabled(appContext.Configuration))
+            {
+                app.UseCheckoutState();
+            }
         });
     }
 

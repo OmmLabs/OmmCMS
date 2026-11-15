@@ -62,6 +62,31 @@ public partial class InstallationSeedingTests
         }
     }
 
+    [TestCaseSource(nameof(Cultures))]
+    public async Task Cms_mode_seeds_content_without_commerce(SeedCulture culture)
+    {
+        using var harness = await SeedingHarness.SeedAsync(culture, seedSampleData: true, cmsPreview: true);
+        var db = harness.Db;
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(db.Stores.Select(x => x.Name).Single(), Is.EqualTo("OmmCMS"));
+            Assert.That(db.Products.Any(), Is.False);
+            Assert.That(db.Categories.Any(), Is.False);
+            var topics = db.Set<Smartstore.Core.Content.Topics.Topic>().Select(x => x.SystemName).ToList();
+            Assert.That(topics, Does.Contain("HomePageText"));
+            Assert.That(topics, Does.Contain("AboutUs"));
+            Assert.That(topics, Does.Not.Contain("ShippingInfo"));
+            Assert.That(topics, Does.Not.Contain("PaymentInfo"));
+            Assert.That(topics, Does.Not.Contain("CheckoutAsGuestOrRegister"));
+            Assert.That(db.Set<Smartstore.Core.Content.Menus.MenuItemEntity>().Any(x => x.ProviderName == "catalog"), Is.False);
+            var tasks = db.Set<Smartstore.Scheduling.TaskDescriptor>().Select(x => x.Type).ToList();
+            Assert.That(tasks, Does.Contain("QueuedMessagesSendTask"));
+            Assert.That(tasks, Does.Not.Contain("ProductRuleEvaluatorTask"));
+            Assert.That(tasks, Does.Not.Contain("UpdateExchangeRateTask"));
+        }
+    }
+
     private static List<string> DuplicateSkus(SmartDbContext db)
     {
         var productSkus = db.Products.AsNoTracking().Select(x => x.Sku).ToList();

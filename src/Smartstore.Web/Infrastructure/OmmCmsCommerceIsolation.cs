@@ -59,7 +59,7 @@ public static class OmmCmsCommerceIsolation
 
     private static readonly HashSet<string> _patchEntities = new(StringComparer.OrdinalIgnoreCase)
     {
-        "Topic", "Menu", "MenuItem", "MediaFile", "MediaFolder", "Language", "Store",
+        "Topic", "Menu", "MenuItem", "MenuRecord", "MenuItemRecord", "MediaFile", "MediaFolder", "Language", "Store",
         "Customer", "CustomerRole", "UrlRecord", "EmailAccount", "MessageTemplate"
     };
 

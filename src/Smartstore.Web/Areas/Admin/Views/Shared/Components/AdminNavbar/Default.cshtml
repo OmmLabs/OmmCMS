@@ -1,7 +1,10 @@
 ﻿@using Smartstore.Core.Stores;
 @using Smartstore.Core.Packaging;
 
+@inject Microsoft.Extensions.Configuration.IConfiguration OmmCmsConfiguration
+
 @{
+    var cmsPreview = Smartstore.Engine.OmmCmsMode.IsEnabled(OmmCmsConfiguration);
     var currentCustomer = this.WorkContext.CurrentCustomer;
     var currentLanguage = this.WorkContext.WorkingLanguage;
     var stores = ((ICollection<Store>)ViewBag.Stores) ?? new List<Store>();
@@ -9,23 +12,38 @@
     string communityUrl = (currentLanguageCode == "de" ?
         "http://community.smartstore.com" :
         "http://community.smartstore.com/index.php?/&k=880ea6a14ea49e853634fbdc5015a024&setlanguage=1&cal_id=&langid=1");
-    string docsUrl = Display.GenerateHelpUrl("");
+    string docsUrl = cmsPreview ? "https://github.com/OmmLabs/OmmCMS" : Display.GenerateHelpUrl("");
+    if (cmsPreview)
+    {
+        communityUrl = "https://github.com/OmmLabs/OmmCMS/issues";
+    }
     var checkUpdateResult = ViewBag.CheckUpdateResult as CheckUpdateResult;
     string expandSidebarLabel = T("Admin.Header.ExpandNavigation");
     string collapseSidebarLabel = T("Admin.Header.CollapseNavigation");
     string collapseSidebarText = T("Admin.Header.CollapseNavigation.Short");
 }
 
-<link sm-target-zone="head_links" as="image" rel="preload" href="~/images/smartstore.svg" />
+@if (!cmsPreview)
+{
+    <link sm-target-zone="head_links" as="image" rel="preload" href="~/images/smartstore.svg" />
+}
 
 <nav id="navbar" class="navbar navbar-slide navbar-expand navbar-sidebar" data-submenu-back-label="@T("Common.Back")" data-expand-label="@expandSidebarLabel" data-collapse-label="@collapseSidebarLabel">
     <a class="navbar-brand" asp-action="Index" asp-controller="Home" asp-area="Admin">
-        <span class="navbar-brand-symbol">
-            <img src="~/images/smartstore.svg" alt="Smartstore" width="140" height="25" />
-        </span>
-        <span class="navbar-brand-wordmark" aria-hidden="true">
-            <img src="~/images/smartstore.svg" alt="" width="140" height="25" />
-        </span>
+        @if (cmsPreview)
+        {
+            <span class="navbar-brand-symbol font-weight-bold">O</span>
+            <span class="navbar-brand-wordmark font-weight-bold" aria-hidden="true">OmmCMS</span>
+        }
+        else
+        {
+            <span class="navbar-brand-symbol">
+                <img src="~/images/smartstore.svg" alt="Smartstore" width="140" height="25" />
+            </span>
+            <span class="navbar-brand-wordmark" aria-hidden="true">
+                <img src="~/images/smartstore.svg" alt="" width="140" height="25" />
+            </span>
+        }
     </a>
 
     <div id="navbar-menu" class="navbar-collapse">

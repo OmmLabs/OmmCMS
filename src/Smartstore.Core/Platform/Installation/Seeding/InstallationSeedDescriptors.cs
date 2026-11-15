@@ -95,12 +95,13 @@ internal static class InstallationSeedDescriptors
     /// Topics. The seed-only field "slug" overrides the slug derived from the system name and is collected in <paramref name="slugs"/>.
     /// </summary>
     /// <param name="slugs">Receives slug overrides. Must compare by reference (<see cref="ReferenceEqualityComparer"/>).</param>
-    public static SeedEntityDescriptor<Topic> Topics(IDictionary<Topic, string> slugs)
+    /// <param name="cmsPreview">Use the CMS starter data instead of the storefront defaults.</param>
+    public static SeedEntityDescriptor<Topic> Topics(IDictionary<Topic, string> slugs, bool cmsPreview = false)
     {
         Guard.NotNull(slugs);
 
         return new SeedEntityDescriptor<Topic>("systemName")
-            .FromFiles("core/topics.json")
+            .FromFiles(cmsPreview ? "core/cms/topics.json" : "core/topics.json")
             .Bind("slug", (topic, node, _) => slugs[topic] = node.GetValue<string>());
     }
 
@@ -108,12 +109,13 @@ internal static class InstallationSeedDescriptors
     /// The default store. URL and SSL are not seed data; they are taken from the current request.
     /// </summary>
     /// <param name="media">Creates a saved media file for a media reference.</param>
-    public static SeedEntityDescriptor<Store> Stores(Func<JsonNode, MediaFile> media)
+    /// <param name="cmsPreview">Use the CMS starter data instead of the storefront defaults.</param>
+    public static SeedEntityDescriptor<Store> Stores(Func<JsonNode, MediaFile> media, bool cmsPreview = false)
     {
         Guard.NotNull(media);
 
         return new SeedEntityDescriptor<Store>("key")
-            .FromFiles("core/stores.json")
+            .FromFiles(cmsPreview ? "core/cms/stores.json" : "core/stores.json")
             .Reference<Currency>("defaultCurrency", (store, currency) => store.DefaultCurrencyId = currency.Id)
             .Reference<Currency>("primaryExchangeRateCurrency", (store, currency) => store.PrimaryExchangeRateCurrencyId = currency.Id)
             .Bind("logoMediaFile", (store, node, _) => store.LogoMediaFileId = media(node).Id);
@@ -168,7 +170,8 @@ internal static class InstallationSeedDescriptors
     /// of an item sets "published" from a condition evaluated at installation time.
     /// </summary>
     /// <param name="condition">Evaluates a condition like "manufacturers" or "setting:CatalogSettings.CompareProductsEnabled".</param>
-    public static SeedEntityDescriptor<MenuEntity> Menus(Func<string, bool> condition)
+    /// <param name="cmsPreview">Use the CMS starter data instead of the storefront defaults.</param>
+    public static SeedEntityDescriptor<MenuEntity> Menus(Func<string, bool> condition, bool cmsPreview = false)
     {
         Guard.NotNull(condition);
 
@@ -176,7 +179,7 @@ internal static class InstallationSeedDescriptors
             .Bind("publishedWhen", (item, node, _) => item.Published = condition(node.GetValue<string>()));
 
         return new SeedEntityDescriptor<MenuEntity>("systemName")
-            .FromFiles("core/menus.json")
+            .FromFiles(cmsPreview ? "core/cms/menus.json" : "core/menus.json")
             .Child("items", x => x.Items, items);
     }
 

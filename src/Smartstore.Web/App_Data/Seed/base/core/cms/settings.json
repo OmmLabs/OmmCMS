@@ -1,0 +1,17 @@
+{
+  "PaymentSettings": {
+    "ActivePaymentMethodSystemNames": []
+  },
+  "SeoSettings": {
+    "MetaTitle": "OmmCMS",
+    "MetaDescription": "A content-managed website",
+    "XmlSitemapIncludesCategories": false,
+    "XmlSitemapIncludesProducts": false,
+    "XmlSitemapIncludesManufacturers": false,
+    "XmlSitemapIncludesTopics": true
+  },
+  "HomePageSettings": {
+    "MetaTitle": "OmmCMS",
+    "MetaDescription": "Your website starts here."
+  }
+}

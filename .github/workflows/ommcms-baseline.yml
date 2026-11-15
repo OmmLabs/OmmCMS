@@ -7,6 +7,7 @@ on:
       - cms-shell
       - cms-admin-navigation
       - cms-commerce-isolation
+      - cms-installation
   workflow_dispatch:
 
 permissions:
@@ -47,5 +48,12 @@ jobs:
       - name: Run existing tests
         run: dotnet test Smartstore.sln -c Release --no-build --no-restore --logger trx
 
-# This workflow intentionally performs no publish, package push,
-# deployment, database migration or modification to the upstream main branch.
+      - name: Publish disposable CMS application
+        if: github.ref_name == 'cms-installation'
+        run: dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release --no-build --no-restore -o "$RUNNER_TEMP/ommcms-smoke"
+
+      - name: Fresh CMS installation smoke test (SQLite)
+        if: github.ref_name == 'cms-installation'
+        run: python3 .github/ommcms-smoke.py "$RUNNER_TEMP/ommcms-smoke"
+
+# No package push, external deployment or production database access.
