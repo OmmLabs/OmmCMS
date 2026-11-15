@@ -607,12 +607,23 @@ try:
             "Checkout/Shipping/Tracking/IShipmentTracker.cs",
             "Checkout/Rules/Impl/ShippingMethodRule.cs",
             "Checkout/Rules/Impl/Cart/CartWeightRule.cs",
+            "Checkout/Shipping/Domain/Shipment.cs",
+            "Checkout/Shipping/Domain/ShipmentItem.cs",
+            "Checkout/Shipping/Hooks/ShipmentHook.cs",
+            "Checkout/Shipping/Configuration/ShippingSettings.cs",
+            "Checkout/Orders/Domain/ReturnCase.cs",
+            "Checkout/Orders/Domain/OrderNote.cs",
+            "Checkout/Orders/Hooks/ReturnCaseHook.cs",
+            "Checkout/Orders/Hooks/OrderNoteHook.cs",
+            "Common/Services/DeliveryTimeService.cs",
+            "Common/Services/IDeliveryTimeService.cs",
         ):
             assert not (repo / "src/OmmCMS.Core" / path).exists(), f"Retired core source remains: {path}"
         for language in ("en", "de"):
-            template = Path("App_Data/EmailTemplates") / language / "GiftCard.Notification.xml"
-            assert not (repo / "src/OmmCMS.Web" / template).exists(), f"Retired template remains: {template}"
-            assert not (root / template).exists(), f"Retired template was published: {template}"
+            for name in ("GiftCard.Notification.xml", "ShipmentSent.CustomerNotification.xml", "ShipmentDelivered.CustomerNotification.xml", "Customer.NewOrderNote.xml"):
+                template = Path("App_Data/EmailTemplates") / language / name
+                assert not (repo / "src/OmmCMS.Web" / template).exists(), f"Retired template remains: {template}"
+                assert not (root / template).exists(), f"Retired template was published: {template}"
         print("Core commerce source extraction passed.")
     if "--presentation-trimmed" in sys.argv:
         verify_presentation_extraction()
@@ -676,6 +687,8 @@ try:
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Product') WHERE name IN ('IsGiftCard', 'GiftCardTypeId')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('paymentmethod', 'paymentmethods', 'ruleset_paymentmethod_mapping')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('shippingmethod', 'shippingmethods', 'ruleset_shippingmethod_mapping')") == [0]
+        assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name) IN ('shipment', 'shipments', 'shipmentitem', 'shipmentitems', 'returncase', 'returncases', 'ordernote', 'ordernotes')") == [0]
+        assert rows("SELECT COUNT(*) FROM MessageTemplate WHERE Name IN ('ShipmentSent.CustomerNotification', 'ShipmentDelivered.CustomerNotification', 'Customer.NewOrderNote')") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND lower(name)='newslettersubscription'") == [1]
         topics = set(rows("SELECT SystemName FROM Topic"))
         assert {"HomePageText", "AboutUs", "ContactUs"} <= topics

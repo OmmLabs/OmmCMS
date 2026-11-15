@@ -25,12 +25,8 @@ public partial class MessageFactory : IMessageFactory
 
     private static readonly string[] _verifyOrderAgeTemplateNames =
     [
-        MessageTemplateNames.ShipmentSentCustomer,
-        MessageTemplateNames.ShipmentDeliveredCustomer,
         MessageTemplateNames.OrderCompletedCustomer,
         MessageTemplateNames.OrderCancelledCustomer,
-        MessageTemplateNames.OrderNoteAddedCustomer,
-        MessageTemplateNames.ReturnCaseStatusChangedCustomer
     ];
 
     private Dictionary<string, Func<Task<object>>> _testModelFactories;
@@ -487,11 +483,8 @@ public partial class MessageFactory : IMessageFactory
             { nameof(Product), () => GetRandomEntity<Product>(x => !x.Deleted && !x.IsSystemProduct && x.Visibility != ProductVisibility.Hidden && x.Published) },
             { nameof(Customer), () => GetRandomEntity<Customer>(x => !x.Deleted && !x.IsSystemAccount && !string.IsNullOrEmpty(x.Email)) },
             { nameof(Order), () => GetRandomEntity<Order>(x => !x.Deleted) },
-            { nameof(Shipment), () => GetRandomEntity<Shipment>(x => !x.Order.Deleted) },
-            { nameof(OrderNote), () => GetRandomEntity<OrderNote>(x => !x.Order.Deleted) },
             { nameof(NewsletterSubscription), () => GetRandomEntity<NewsletterSubscription>(x => true) },
             { nameof(Campaign), () => GetRandomEntity<Campaign>(x => true) },
-            { nameof(ReturnCase), () => GetRandomEntity<ReturnCase>(x => true) },
             { nameof(OrderItem), () => GetRandomEntity<OrderItem>(x => !x.Order.Deleted && !x.Product.Deleted) },
             { nameof(WalletHistory), () => GetRandomEntity<WalletHistory>(x => true) }
         };

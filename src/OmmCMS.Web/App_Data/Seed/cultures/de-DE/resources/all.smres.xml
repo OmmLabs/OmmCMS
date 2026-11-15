@@ -7096,12 +7096,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Order.MultipleOrderTotalRestrictionsExpandRange.Hint">
 		<Value>Legt fest, ob mehrfache Bestellwertbeschränkungen durch Kundengruppenzuordnungen den erlaubten Bestellwertbereich erweitern.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.NumberOfDaysReturnRequestAvailable">
-		<Value>Erlaubter Zeitraum für Retourenanträge (in Tagen)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.NumberOfDaysReturnRequestAvailable.Hint">
-		<Value>Die Anzahl der Tage nach Abschluss der Bestellung, während der Kunden Retourenanträge einreichen können. Dies gilt nur für Retourenanträge im Rahmen des RMA-Verfahrens und nicht für den gesetzlichen Widerruf. Der Wert 0 bedeutet "unbegrenzt".</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Order.OnePageCheckoutEnabled">
 		<Value>OnePageCheckout aktiviert</Value>
 	</LocaleResource>
@@ -7122,27 +7116,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Order.OrderTotalRestrictionType.Hint">
 		<Value>Bestimmt, ob mehrfache Bestellwertbeschränkungen durch Kundengruppenzuordnungen kumuliert werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestActions">
-		<Value>Gewünschte Aktion für Retoure</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestActions.Hint">
-		<Value>Eine kommaseparierte Liste von Aktionen, aus denen der Benutzer wählen kann, wenn er einen Retourenantrag übermittelt. Beispiel: "Ersatz", "Gutschein" usw. Dies wird nicht für den gesetzlichen Widerruf verwendet.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestReasons">
-		<Value>Retourengründe</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestReasons.Hint">
-		<Value>Eine kommaseparierte Liste von Retourengründen, die der Benutzer auswählen kann, wenn er einen Retourenantrag übermittelt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestsDescription1">
-		<Value>Über das Retourensystem können Kunden die Rücksendung von Artikeln beantragen. Im Gegensatz zum Widerruf ist eine Retoure nur für abgeschlossene Aufträge möglich.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestsEnabled">
-		<Value>Retourenanträge aktiviert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestSettings">
-		<Value>Retouren</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance">
 		<Value>Leistung</Value>
@@ -7631,18 +7604,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Configuration.Settings.Search.WildcardSearchNote">
 		<Value>Der Wildcard-Modus kann bei einer großen Anzahl an Objekten die Suche verlangsamen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.DeliveryOnWorkweekDaysOnly">
-		<Value>Lieferungen nur an Werktagen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.DeliveryOnWorkweekDaysOnly.Hint">
-		<Value>Legt fest, ob Lieferungen nur an Werktagen stattfinden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.TodayShipmentHour">
-		<Value>Bis x Uhr bestellt, heute verschickt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.TodayShipmentHour.Hint">
-		<Value>Legt die Stunde fest, bis zu der die Bestellung noch am selben Tag verschickt wird.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart">
 		<Value>Warenkorb-Einstellungen</Value>
 	</LocaleResource>
@@ -7873,12 +7834,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.AllowCustomersToSelectTaxDisplayType.Hint">
 		<Value>Legt fest, ob Kunden die Preisanzeige in brutto/netto ändern können.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.AuxiliaryServicesTaxingType">
-		<Value>Besteuerung von Nebenleistungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.AuxiliaryServicesTaxingType.Hint">
-		<Value>Legt fest, wie die Mehrwertsteuer auf Nebenleistungen (wie z.B. Versandkosten und Zahlartgebühren) berechnet werden soll.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.DefaultTaxAddress">
 		<Value>Standard-Steuer-Anschrift</Value>
 	</LocaleResource>
@@ -7939,47 +7894,11 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.HideZeroTax.Hint">
 		<Value>Bestimmt, ob Null-Steuerbeträge in der Auftragszusammenfassung ausgeblendet werden sollen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.PaymentMethodAdditionalFeeIncludesTax">
-		<Value>Zahlartgebühr enthält Mehrwertsteuer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.PaymentMethodAdditionalFeeIncludesTax.Hint">
-		<Value>Legt fest, ob die Zahlartgebühr mehrwertsteuerpflichtig ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.PaymentMethodAdditionalFeeIsTaxable">
-		<Value>Zahlartgebühr mehrwertsteuerpflichtig</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.PaymentMethodAdditionalFeeIsTaxable.Hint">
-		<Value>Legt fest, ob Zahlartgebühr mehrwertsteuerpflichtig ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.PaymentMethodAdditionalFeeTaxClass">
-		<Value>Mehrwertsteuersatz für Zahlartgebühr</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.PaymentMethodAdditionalFeeTaxClass.Hint">
-		<Value>Legt den Mehrwertsteuersatz für die Zahlartgebühr fest.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.PricesIncludeTax">
 		<Value>Preise inkl. Mehrwertsteuer</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.PricesIncludeTax.Hint">
 		<Value>Preise inklusive Mehrwertsteuer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShippingIsTaxable">
-		<Value>Mehrwertsteuer auf Versandkosten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShippingIsTaxable.Hint">
-		<Value>Legt fest, ob Versandkosten mehrwertsteuerflichtig sind.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShippingPriceIncludesTax">
-		<Value>Versandkosten enthalten Mehrwertsteuer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShippingPriceIncludesTax.Hint">
-		<Value>Versandkosten enthalten Mehrwertsteuer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShippingTaxClass">
-		<Value>Mehrwertsteuersatz für Versandkosten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShippingTaxClass.Hint">
-		<Value>Mehrwertsteuersatz für Versandkosten</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShowLegalHintsInFooter">
 		<Value>Steuerhinweis im Footer anzeigen</Value>
@@ -10870,12 +10789,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.OrderNotice.RefundAmountError">
 		<Value>Der zu erstattende Betrag muss größer 0 sein.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.ShipmentDelivered">
-		<Value>Ware wurde ausgeliefert (Shipment ID: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.ShipmentSent">
-		<Value>Lieferung "{0}" wurde versendet</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Orders">
 		<Value>Aufträge</Value>
 	</LocaleResource>
@@ -11428,33 +11341,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Orders.OrderItem.AutoUpdate.UpdateTotals.Hint">
 		<Value>Legt fest, ob die Auftragssummen angepasst werden sollen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes">
-		<Value>Auftragsnotizen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.AddButton">
-		<Value>Notiz zum Auftrag hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.AddTitle">
-		<Value>Notiz zum Auftrag hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields.AddOrderNoteDisplayToCustomer.Hint">
-		<Value>Legt fest, ob die Notiz für den Benutzer sichtbar ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields.AddOrderNoteMessage.Hint">
-		<Value>Eine Nachricht oder Notiz zu diesem Auftrag erstellen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields.DisplayToCustomer">
-		<Value>Für den Benutzer sichtbar</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields.DisplayToCustomer.Hint">
-		<Value>Legt fest, ob die Notiz für den Benutzer sichtbar ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields.Note">
-		<Value>Notiz</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields.Note.Hint">
-		<Value>Die Nachricht oder Notiz zu diesem Auftrag.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Overall">
 		<Value>Aufträge insgesamt</Value>
 	</LocaleResource>
@@ -11598,126 +11484,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Shipment">
 		<Value>Lieferung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments">
-		<Value>Lieferungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Added">
-		<Value>Die neue Sendung wurde erfolgreich hinzugefügt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.AddNew">
-		<Value>Sendung hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.AddNew.Title">
-		<Value>Eine neue Sendung zu Auftrag #{0} hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.BackToOrder">
-		<Value>Zurück zu den Auftragsdetails</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Carrier">
-		<Value>Versand erfolgt über</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Carrier.Hint">
-		<Value>Legt den Namen des Transportunternehmens fest, z.B. DHL, Hermes, DPD oder UPS.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Deleted">
-		<Value>Die Sendung wurde erfolgreich gelöscht.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.DeliveryDate">
-		<Value>Lieferdatum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.DeliveryDate.Button">
-		<Value>Als geliefert markieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.DeliveryDate.Hint">
-		<Value>Das Datum, an dem die Sendung geliefert wurde.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.DeliveryDate.NotYet">
-		<Value>Noch nicht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.ID">
-		<Value>Sendung #</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.List">
-		<Value>Sendungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.List.TrackingNumber">
-		<Value>Tracking-Nummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.List.TrackingNumber.Hint">
-		<Value>Nach einer Tracking\Fracht-Nummer suchen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.NoProductsSelected">
-		<Value>Keine Produkte ausgewählt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.OrderID">
-		<Value>Auftragsnummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.PrintPackagingSlip">
-		<Value>Versandaufkleber drucken</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.PrintPackagingSlip.All">
-		<Value>Versandaufkleber drucken (alle)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.PrintPackagingSlip.Selected">
-		<Value>Versandaufkleber drucken (ausgewählte)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products">
-		<Value>Versandte Produkte</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.ItemDimensions">
-		<Value>Produktabmessungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.ItemWeight">
-		<Value>Produktgewicht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.ProductName">
-		<Value>Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.QtyOrdered">
-		<Value>Bestellmenge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.QtyShipped">
-		<Value>Liefermenge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.QtyToShip">
-		<Value>Menge zu liefern</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.SKU">
-		<Value>Artikelnummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.ShippedDate">
-		<Value>Versanddatum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.ShippedDate.Button">
-		<Value>Als versendet markieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.ShippedDate.Hint">
-		<Value>Das Datum, an dem die Sendung versandt wurde</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.ShippedDate.NotYet">
-		<Value>Noch nicht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.TotalWeight">
-		<Value>Gesamtgewicht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.TotalWeight.Hint">
-		<Value>Gesamtgewicht der Sendung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.TrackingNumber">
-		<Value>Tracking-Nummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.TrackingNumber.Hint">
-		<Value>Legt die Tracking-Nummer zur Sendungsverfolgung fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.TrackingUrl">
-		<Value>Tracking-URL</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.TrackingUrl.Hint">
-		<Value>Legt die URL zur Sendungsverfolgung fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.ViewDetails">
-		<Value>Sendungsdetails anzeigen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.ShippingInfo">
 		<Value>Versandinformation</Value>
@@ -12229,93 +11995,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Report.Yesterday">
 		<Value>Gestern</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests">
-		<Value>Widerrufe und Retouren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Accept">
-		<Value>Akzeptieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Accept.Caption">
-		<Value>Retoure genehmigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.EditReturnRequestDetails">
-		<Value>Retoure bearbeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Customer">
-		<Value>Kunde</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Customer.Hint">
-		<Value>Benutzerinformation</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.CustomerComments">
-		<Value>Benutzerkommentar</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.CustomerComments.Hint">
-		<Value>Eingegebene Benutzerkommentare</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.ID">
-		<Value>ID</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.ID.Hint">
-		<Value>ID des Widerrufs bzw. der Retoure</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Order">
-		<Value>Auftrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Order.Hint">
-		<Value>Auftragsinformation.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Product">
-		<Value>Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Product.Hint">
-		<Value>Produktinformation.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Quantity">
-		<Value>Menge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Quantity.Hint">
-		<Value>Anzahl der zurückzusendenden Artikel</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.ReasonForReturn">
-		<Value>Rücksendegrund</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.ReasonForReturn.Hint">
-		<Value>Der Rücksendegrund.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.RequestedAction">
-		<Value>Angeforderte Aktion</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.RequestedAction.Hint">
-		<Value>Die angeforderte Aktion.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.RequestedActionUpdatedOnUtc">
-		<Value>Letzte Aktualisierung der angeforderten Aktion</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.RequestedActionUpdatedOnUtc.Hint">
-		<Value>Datum, an dem die angeforderte Aktion zuletzt geändert wurde.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.StaffNotes">
-		<Value>Mitarbeiternotizen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.StaffNotes.Hint">
-		<Value>Mitarbeiternotizen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Status">
-		<Value>Status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.MaxRefundAmount">
-		<Value>Maximaler Erstattungsbetrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.MaxRefundAmount.Hint">
-		<Value>Der maximale Betrag, der für diesen Retourenartikel erstattet werden kann.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Notified">
-		<Value>Der Benutzer wurde benachrichtigt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.NotifyCustomer">
-		<Value>Benutzer über Änderung des Status benachrichtigen</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.AddCondition">
 		<Value>Regel hinzufügen</Value>
 	</LocaleResource>
@@ -12513,9 +12192,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.PurchasedProduct">
 		<Value>Gekauftes Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ReturnRequestCount">
-		<Value>Anzahl Rücksendeaufträge</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.RewardPointsBalance">
 		<Value>Anzahl der Bonuspunkte</Value>
@@ -15425,18 +15101,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Enums.AttributeControlType.TextBox">
 		<Value>Textbox</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.AuxiliaryServicesTaxType.HighestCartAmount">
-		<Value>Höchster Wert im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.AuxiliaryServicesTaxType.HighestTaxRate">
-		<Value>Höchste Steuerrate im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.AuxiliaryServicesTaxType.ProRata">
-		<Value>Anteilig gemäß der Hauptleistung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.AuxiliaryServicesTaxType.SpecifiedTaxCategory">
-		<Value>Festgelegte Steuerklasse</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.BackorderMode.AllowQtyBelow0">
 		<Value>Menge kleiner als 0 zulassen</Value>
 	</LocaleResource>
@@ -15997,12 +15661,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Enums.RelatedEntityType.TierPrice">
 		<Value>Staffelpreis</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ReturnCaseKind.Return">
-		<Value>Retoure</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ReturnCaseKind.Withdrawal">
-		<Value>Widerruf</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.ReturnRequestStatus.Cancelled">
 		<Value>Abgebrochen</Value>
@@ -18207,78 +17865,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Providers.MenuItems.FriendlyName.Route">
 		<Value>Route</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.Case">
-		<Value>Fall {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.CaseNo">
-		<Value>Fall Nr.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.CertainItems">
-		<Value>Bestimmte Artikel</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.Complete">
-		<Value>Abgeschlossen</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.ConvertedWithdrawal">
-		<Value>Der Widerruf wurde in eine Retoure umgewandelt. Status: &lt;b&gt;{0}&lt;/b&gt;.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.EntireOrder">
-		<Value>Gesamte Bestellung</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep">
-		<Value>Nächster Schritt</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.Cancelled">
-		<Value>Es ist keine weitere Aktion erforderlich.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.ItemsRefunded">
-		<Value>Die Erstattung wurde veranlasst.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.ItemsRepaired">
-		<Value>Wir senden Ihnen die reparierten Artikel zurück.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.Pending">
-		<Value>Bitte senden Sie die Artikel zurück.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.Received">
-		<Value>Wir bearbeiten Ihre Rücksendung.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.RequestRejected">
-		<Value>Es ist keine weitere Aktion erforderlich.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.ReturnAuthorized">
-		<Value>Wir veranlassen die weitere Bearbeitung.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.Open">
-		<Value>Offen</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.OrderWithdrawn">
-		<Value>Die Bestellung wurde widerrufen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.ReceivedWithdrawal">
-		<Value>Widerruf eingegangen</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.ReturnItemExists">
-		<Value>Für diesen Artikel liegen Retouren vor.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.StartProcessing">
-		<Value>Verarbeitung starten</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.StartProcessing.Hint">
-		<Value>Wandelt den Widerruf in eine Retoure zur weiteren Bearbeitung um.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.WithdrawalItemExists">
-		<Value>Für diesen Artikel wurde ein Widerruf eingereicht.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.WithdrawalQuantity">
-		<Value>Widerrufsmenge</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.WithdrawEntireOrder">
-		<Value>Ich möchte die gesamte Bestellung stornieren:</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.WithdrawItems">
-		<Value>Ich möchte folgende Artikel stornieren:</Value>
 	</LocaleResource>
 	<LocaleResource Name="ReturnRequests.Comments">
 		<Value>Kommentare</Value>

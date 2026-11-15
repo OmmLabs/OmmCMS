@@ -40,20 +40,6 @@ public static partial class OrderExtensions
         return order.OrderStatus != OrderStatus.Cancelled;
     }
 
-    [Obsolete("Use 'SmartDbContext.OrderNotes.Add' to add order notes.")]
-    public static void AddOrderNote(this Order order, string note, bool displayToCustomer = false)
-    {
-        if (order != null && note.HasValue())
-        {
-            order.OrderNotes.Add(new OrderNote
-            {
-                Note = note,
-                DisplayToCustomer = displayToCustomer,
-                CreatedOnUtc = DateTime.UtcNow
-            });
-        }
-    }
-
     #region Payment
 
     /// <summary>

@@ -228,15 +228,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             case Address x:
                 modelPart = await CreateModelPartAsync(x, messageContext);
                 break;
-            case Shipment x:
-                modelPart = await CreateModelPartAsync(x, messageContext);
-                break;
-            case OrderNote x:
-                modelPart = await CreateModelPartAsync(x, messageContext);
-                break;
-            case ReturnCase x:
-                modelPart = await CreateModelPartAsync(x, messageContext);
-                break;
             case NewsletterSubscription x:
                 modelPart = await CreateModelPartAsync(x, messageContext);
                 break;

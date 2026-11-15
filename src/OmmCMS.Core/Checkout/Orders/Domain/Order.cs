@@ -411,7 +411,6 @@ public partial class Order : EntityWithAttributes, IAuditable, ISoftDeletable
     /// <summary>
     /// Gets or sets a value indicating whether a new payment notification arrived.
     /// Set this to <c>true</c> if a new IPN, webhook notification or payment provider message arrived.
-    /// Use an <see cref="OrderNote"/> to save the notification.
     /// </summary>
     public bool HasNewPaymentNotification { get; set; }
 
@@ -539,16 +538,6 @@ public partial class Order : EntityWithAttributes, IAuditable, ISoftDeletable
         protected set => _discountUsageHistory = value;
     }
 
-    private ICollection<OrderNote> _orderNotes;
-    /// <summary>
-    /// Gets or sets order notes
-    /// </summary>
-    public ICollection<OrderNote> OrderNotes
-    {
-        get => _orderNotes ?? LazyLoader.Load(this, ref _orderNotes) ?? (_orderNotes ??= new HashSet<OrderNote>());
-        protected set => _orderNotes = value;
-    }
-
     private ICollection<OrderItem> _orderItems;
     /// <summary>
     /// Gets or sets order items
@@ -557,16 +546,6 @@ public partial class Order : EntityWithAttributes, IAuditable, ISoftDeletable
     {
         get => _orderItems ?? LazyLoader.Load(this, ref _orderItems) ?? (_orderItems ??= new HashSet<OrderItem>());
         protected internal set => _orderItems = value;
-    }
-
-    private ICollection<Shipment> _shipments;
-    /// <summary>
-    /// Gets or sets shipments
-    /// </summary>
-    public ICollection<Shipment> Shipments
-    {
-        get => _shipments ?? LazyLoader.Load(this, ref _shipments) ?? (_shipments ??= new HashSet<Shipment>());
-        protected set => _shipments = value;
     }
 
     #endregion

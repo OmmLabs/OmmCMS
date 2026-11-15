@@ -229,11 +229,7 @@ public partial class TaxService : AsyncDbSaveHook<TaxCategory>, ITaxService
         PricingTarget target = PricingTarget.Product,
         Language language = null)
     {
-        displayTaxSuffix ??= target == PricingTarget.Product
-            ? _taxSettings.DisplayTaxSuffix
-            : (target == PricingTarget.ShippingCharge
-                ? _taxSettings.DisplayTaxSuffix && _taxSettings.ShippingIsTaxable
-                : _taxSettings.DisplayTaxSuffix && _taxSettings.PaymentMethodAdditionalFeeIsTaxable);
+        displayTaxSuffix ??= _taxSettings.DisplayTaxSuffix;
 
         if (displayTaxSuffix == true)
         {

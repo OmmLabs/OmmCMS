@@ -196,14 +196,14 @@ public class SeedDataSourceTests
     public void LoadObject_merges_culture_overlay_field_by_field()
     {
         WriteFile("base/core/settings.json", """{ "TaxSettings": { "TaxBasedOn": "BillingAddress", "EuVatEnabled": false }, "SeoSettings": { "MetaTitle": "Shop" } }""");
-        WriteFile("cultures/de-DE/core/settings.json", """{ "TaxSettings": { "EuVatEnabled": true }, "OrderSettings": { "NumberOfDaysReturnRequestAvailable": 14 } }""");
+        WriteFile("cultures/de-DE/core/settings.json", """{ "TaxSettings": { "EuVatEnabled": true }, "OrderSettings": { "OrderListPageSize": 14 } }""");
 
         var settings = CreateSource().LoadObject("core/settings.json");
 
         Assert.That((string)settings["TaxSettings"]["TaxBasedOn"], Is.EqualTo("BillingAddress"));
         Assert.That((bool)settings["TaxSettings"]["EuVatEnabled"], Is.True);
         Assert.That((string)settings["SeoSettings"]["MetaTitle"], Is.EqualTo("Shop"));
-        Assert.That((int)settings["OrderSettings"]["NumberOfDaysReturnRequestAvailable"], Is.EqualTo(14));
+        Assert.That((int)settings["OrderSettings"]["OrderListPageSize"], Is.EqualTo(14));
     }
 
     [Test]

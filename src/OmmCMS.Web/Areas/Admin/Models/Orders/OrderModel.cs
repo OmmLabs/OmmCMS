@@ -126,33 +126,6 @@ public partial class OrderModel : EditOrderModel
         public string Value { get; set; }
     }
 
-    public class ReturnCaseModel : EntityModelBase
-    {
-        public ReturnCaseKind Kind { get; set; }
-        public int Quantity { get; set; }
-        public ReturnCaseStatus Status { get; set; }
-        public string StatusString { get; set; }
-        public string StatusLabel
-        {
-            get
-            {
-                if (Status >= ReturnCaseStatus.RequestRejected)
-                    return "warning";
-
-                if (Status >= ReturnCaseStatus.ReturnAuthorized)
-                    return "success";
-
-                if (Status == ReturnCaseStatus.Received)
-                    return "info";
-
-                if (Status == ReturnCaseStatus.Pending)
-                    return "danger";
-
-                return "light";
-            }
-        }
-    }
-
     public class RefundModel : EntityModelBase
     {
         [LocalizedDisplay("Admin.Orders.Fields.PartialRefund.AmountToRefund")]
@@ -172,22 +145,6 @@ public partial class OrderModel : EditOrderModel
         public int DisplayOrder { get; set; }
         public string PriceWithDiscount { get; set; }
         public string AttributesInfo { get; set; }
-    }
-
-    [LocalizedDisplay("Admin.Orders.OrderNotes.Fields.")]
-    public class OrderNote : EntityModelBase
-    {
-        public int OrderId { get; set; }
-
-        [LocalizedDisplay("*DisplayToCustomer")]
-        public bool DisplayToCustomer { get; set; }
-
-        [UIHint("Textarea"), AdditionalMetadata("rows", 4)]
-        [LocalizedDisplay("*Note")]
-        public string Note { get; set; }
-
-        [LocalizedDisplay("Common.CreatedOn")]
-        public DateTime CreatedOn { get; set; }
     }
 
     public class UploadLicenseModel : ModelBase
@@ -249,10 +206,7 @@ public partial class OrderModel : EditOrderModel
         public bool BundlePerItemShoppingCart { get; set; }
 
         public List<BundleItemModel> BundleItems { get; set; } = [];
-        public List<ReturnCaseModel> ReturnCases { get; set; } = [];
 
-        public bool CanReturnItems
-            => ReturnCases.IsNullOrEmpty() || ReturnCases.Sum(x => x.Quantity) < Quantity;
     }
 
     public class DiscountInfoModel : EntityModelBase

@@ -40,10 +40,8 @@ public static class OrderQueryExtensions
     /// Includes the customer graph for eager loading.
     /// </summary>
     /// <param name="includeRewardPoints">A value indicating whether to include redeemed reward points and customer's reward points history.</param>
-    /// <param name="includeReturnCases">A value indicating whether to include customer's return cases.</param>
     public static IIncludableQueryable<Order, CustomerRole> IncludeCustomer(this IQueryable<Order> query,
-        bool includeRewardPoints = false,
-        bool includeReturnCases = false)
+        bool includeRewardPoints = false)
     {
         Guard.NotNull(query);
 
@@ -52,11 +50,6 @@ public static class OrderQueryExtensions
             query = query
                 .Include(x => x.RedeemedRewardPointsEntry)
                 .Include(x => x.Customer.RewardPointsHistory);
-        }
-
-        if (includeReturnCases)
-        {
-            query = query.Include(x => x.Customer.ReturnCases);
         }
 
         return query
@@ -77,20 +70,6 @@ public static class OrderQueryExtensions
             .AsSplitQuery()
             .Include(x => x.OrderItems)
             .ThenInclude(x => x.Product);
-    }
-
-    /// <summary>
-    /// Includes the shipments graph for eager loading.
-    /// </summary>
-    public static IIncludableQueryable<Order, ICollection<ShipmentItem>> IncludeShipments(this IQueryable<Order> query)
-    {
-        Guard.NotNull(query);
-
-        return query
-            .AsSplitQuery()
-            .Include(x => x.ShippingAddress)
-            .Include(x => x.Shipments)
-            .ThenInclude(x => x.ShipmentItems);
     }
 
 

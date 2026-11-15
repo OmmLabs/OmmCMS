@@ -96,11 +96,6 @@
     "enabled": true
   },
   {
-    "systemKeyword": "DeleteReturnCase",
-    "name": "Delete a return",
-    "enabled": true
-  },
-  {
     "systemKeyword": "DeleteSetting",
     "name": "Delete a setting",
     "enabled": true
@@ -158,11 +153,6 @@
   {
     "systemKeyword": "EditPromotionProviders",
     "name": "Edit promotion providers",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "EditReturnCase",
-    "name": "Edit a return",
     "enabled": true
   },
   {

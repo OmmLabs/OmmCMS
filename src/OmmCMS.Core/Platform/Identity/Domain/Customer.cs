@@ -354,16 +354,6 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
         protected set => _walletHistory = value;
     }
 
-    private ICollection<ReturnCase> _returnCases;
-    /// <summary>
-    /// Gets or sets the return cases.
-    /// </summary>
-    public ICollection<ReturnCase> ReturnCases
-    {
-        get => _returnCases ?? LazyLoader.Load(this, ref _returnCases) ?? (_returnCases ??= new HashSet<ReturnCase>());
-        protected set => _returnCases = value;
-    }
-
     #endregion
 
     #region Utils

@@ -141,16 +141,6 @@ internal sealed class OmmCmsInitialSchema : Migration, ILocaleResourcesProvider
             + " Eine Einstellung am Artikel hat Vorrang. Bei mehreren Warengruppen gilt \"Nein\" vor \"Ja\"."
             + " Diese Einstellung gilt ausschließlich für versandfähige Artikel.");
 
-        builder.AddOrUpdate("Admin.ReturnRequests.GoDirectlyToReturnCase",
-            "Search by case number",
-            "Nach Fallnummer suchen",
-            "Opens the edit page for the withdrawal or return with the specified ID directly.",
-            "Öffnet direkt die Bearbeitungsseite des Widerrufs bzw. der Retoure mit der angegebenen ID.");
-
-        builder.AddOrUpdate("Admin.ReturnRequests.NotFound",
-            "A withdrawal or return with ID {0} could not be found.",
-            "Ein Widerruf oder eine Retoure mit der ID {0} konnte nicht gefunden werden.");
-
         builder.AddOrUpdate("Admin.Catalog.Attributes.CheckoutAttributes.Fields.Requirements",
             "Requirements",
             "Voraussetzungen",

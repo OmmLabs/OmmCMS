@@ -27,8 +27,7 @@ public interface IMessageModelProvider
     /// Adds a template specific model part to the template model.
     ///	The passed object instance (<paramref name="part"/>) will be converted to a special type which the underlying <see cref="ITemplateEngine"/> can handle.
     /// <para>
-    ///		Supported types are: Order, Product, Address, Shipment, OrderNote, 
-    ///		ReturnCase, <see cref="NewsletterSubscription"/>, <see cref="Campaign"/>,
+    ///		Supported types are: Order, Product, Address, <see cref="NewsletterSubscription"/>, <see cref="Campaign"/>,
     ///		BlogComment, NewsComment, ForumTopic, ForumPost, Forum, PrivateMessage.
     /// </para>
     /// <para>
@@ -52,8 +51,7 @@ public interface IMessageModelProvider
     /// <summary>
     /// Creates a serializable model object for the passed entity/object.
     /// <para>
-    ///		Supported types are: Order, Product, Address, Shipment, OrderNote, 
-    ///		ReturnCase, <see cref="NewsletterSubscription"/>, <see cref="Campaign"/>,
+    ///		Supported types are: Order, Product, Address, <see cref="NewsletterSubscription"/>, <see cref="Campaign"/>,
     ///		BlogComment, NewsComment, ForumTopic, ForumPost, Forum, PrivateMessage.
     /// </para>
     /// <para>

@@ -20,11 +20,6 @@ public class PdfSettings : ISettings
     public bool LetterPageSizeEnabled { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to render order notes in PDf reports.
-    /// </summary>
-    public bool RenderOrderNotes { get; set; } = true;
-
-    /// <summary>
     /// Gets or sets a value indicating whether to attach the order PDF to 'Order Placed (customer)' email.
     /// </summary>
     public bool AttachOrderPdfToOrderPlacedEmail { get; set; }

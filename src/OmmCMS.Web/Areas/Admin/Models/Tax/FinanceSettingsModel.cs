@@ -45,27 +45,6 @@ public partial class FinanceSettingsModel : ModelBase
         [LocalizedDisplay("*DefaultTaxAddress")]
         public AddressModel DefaultTaxAddress { get; set; } = new();
 
-        [LocalizedDisplay("*ShippingIsTaxable")]
-        public bool ShippingIsTaxable { get; set; }
-
-        [LocalizedDisplay("*ShippingPriceIncludesTax")]
-        public bool ShippingPriceIncludesTax { get; set; }
-
-        [LocalizedDisplay("*ShippingTaxClass")]
-        public int ShippingTaxClassId { get; set; }
-
-        [LocalizedDisplay("*PaymentMethodAdditionalFeeIsTaxable")]
-        public bool PaymentMethodAdditionalFeeIsTaxable { get; set; }
-
-        [LocalizedDisplay("*PaymentMethodAdditionalFeeIncludesTax")]
-        public bool PaymentMethodAdditionalFeeIncludesTax { get; set; }
-
-        [LocalizedDisplay("*PaymentMethodAdditionalFeeTaxClass")]
-        public int PaymentMethodAdditionalFeeTaxClassId { get; set; }
-
-        [LocalizedDisplay("*AuxiliaryServicesTaxingType")]
-        public AuxiliaryServicesTaxType AuxiliaryServicesTaxingType { get; set; }
-
         [LocalizedDisplay("*EuVatEnabled")]
         public bool EuVatEnabled { get; set; }
 

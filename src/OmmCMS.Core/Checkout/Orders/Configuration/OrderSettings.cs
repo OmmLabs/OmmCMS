@@ -38,50 +38,6 @@ public class OrderSettings : ISettings
     public bool DisableOrderCompletedPage { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to enable return requests.
-    /// </summary>
-    public bool ReturnRequestsEnabled { get; set; } = true;
-
-    /// <summary>
-    /// Gets or sets a list of return request reasons.
-    /// </summary>
-    [LocalizedProperty]
-    public string ReturnRequestReasons { get; set; } = """
-        [
-            "Wrong item received",
-            "Wrong size or variant ordered",
-            "Item does not meet expectations",
-            "Item does not match the description",
-            "Item is faulty or defective",
-            "Item arrived damaged",
-            "Delivery is incomplete",
-            "Ordered by mistake",
-            "Other"
-        ]
-        """;
-
-    /// <summary>
-    /// Gets or sets a list of return request actions.
-    /// </summary>
-    [LocalizedProperty]
-    public string ReturnRequestActions { get; set; } = """
-        [
-            "Refund to original payment method",
-            "Replacement shipment",
-            "Exchange for another item",
-            "Repair",
-            "Store credit / voucher",
-            "Other"
-        ]
-        """;
-
-    /// <summary>
-    /// Gets or sets a number of days that the return request link will be available for customers after placing an order.
-    /// The value 0 means "unlimited".
-    /// </summary>
-    public int NumberOfDaysReturnRequestAvailable { get; set; } = 365;
-
-    /// <summary>
     /// Gets or sets an order placement interval in seconds (prevent 2 orders being placed within an X seconds time frame).
     /// </summary>
     public int MinimumOrderPlacementInterval { get; set; } = 30;
@@ -95,11 +51,6 @@ public class OrderSettings : ISettings
     /// Gets or sets the page size of the order list.
     /// </summary>
     public int OrderListPageSize { get; set; } = 10;
-
-    /// <summary>
-    /// Gets or sets the page size of the return case list.
-    /// </summary>
-    public int ReturnCaseListPageSize { get; set; } = 10;
 
     /// <summary>
     /// Gets or sets the maximum order age in days up to which to create and send messages.

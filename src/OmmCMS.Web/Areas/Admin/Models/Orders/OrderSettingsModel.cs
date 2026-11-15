@@ -28,22 +28,6 @@ public class OrderSettingsModel : TabbableModel, ILocalizedModel<OrderSettingsLo
     [LocalizedDisplay("*DisableOrderCompletedPage")]
     public bool DisableOrderCompletedPage { get; set; }
 
-    [LocalizedDisplay("*ReturnRequestsEnabled")]
-    public bool ReturnRequestsEnabled { get; set; }
-
-    [LocalizedDisplay("*ReturnRequestReasons")]
-    [UIHint("EditableList"), AdditionalMetadata("sortable", true)]
-    [TypeConverter(typeof(JsonTypeConverter<string[]>))]
-    public string[] ReturnRequestReasons { get; set; } = [];
-
-    [LocalizedDisplay("*ReturnRequestActions")]
-    [UIHint("EditableList"), AdditionalMetadata("sortable", true)]
-    [TypeConverter(typeof(JsonTypeConverter<string[]>))]
-    public string[] ReturnRequestActions { get; set; } = [];
-
-    [LocalizedDisplay("*NumberOfDaysReturnRequestAvailable")]
-    public int NumberOfDaysReturnRequestAvailable { get; set; }
-
     [LocalizedDisplay("*MaxMessageOrderAgeInDays")]
     public int MaxMessageOrderAgeInDays { get; set; }
 
@@ -68,15 +52,6 @@ public class OrderSettingsLocalizedModel : ILocalizedLocaleModel
 {
     public int LanguageId { get; set; }
 
-    [LocalizedDisplay("*ReturnRequestReasons")]
-    [UIHint("EditableList"), AdditionalMetadata("sortable", true)]
-    [TypeConverter(typeof(JsonTypeConverter<string[]>))]
-    public string[] ReturnRequestReasons { get; set; } = [];
-
-    [LocalizedDisplay("*ReturnRequestActions")]
-    [UIHint("EditableList"), AdditionalMetadata("sortable", true)]
-    [TypeConverter(typeof(JsonTypeConverter<string[]>))]
-    public string[] ReturnRequestActions { get; set; } = [];
 }
 
 public partial class OrderSettingsValidator : SettingModelValidator<OrderSettingsModel, OrderSettings>
@@ -87,7 +62,6 @@ public partial class OrderSettingsValidator : SettingModelValidator<OrderSetting
         RuleFor(x => x.OrderTotalMaximum).GreaterThan(x => x.OrderTotalMinimum ?? 0);
         RuleFor(x => x.OrderTotalMinimum).GreaterThan(0);
         RuleFor(x => x.OrderIdent).GreaterThan(0);
-        RuleFor(x => x.NumberOfDaysReturnRequestAvailable).GreaterThanOrEqualTo(0);
         RuleFor(x => x.MaxMessageOrderAgeInDays).GreaterThanOrEqualTo(0);
     }
 }

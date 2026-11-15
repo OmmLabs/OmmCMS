@@ -40,9 +40,7 @@ public partial class DataExporter
         var customers = await ctx.OrderBatchContext.Customers.GetOrLoadAsync(order.CustomerId);
         var customer = customers.FirstOrDefault(x => x.Id == order.CustomerId);
         var orderItems = await ctx.OrderBatchContext.OrderItems.GetOrLoadAsync(order.Id);
-        var shipments = await ctx.OrderBatchContext.Shipments.GetOrLoadAsync(order.Id);
 
-        await _genericAttributeService.PrefetchAttributesAsync(nameof(Shipment), shipments.ToDistinctArray(x => x.Id));
 
         dynamic dynObject = ToDynamic(order, ctx);
 
@@ -88,10 +86,6 @@ public partial class DataExporter
         dynObject.OrderItems = await orderItems
             .SelectAwait(async x => await ToDynamic(x, ctx))
             .ToListAsync();
-
-        dynObject.Shipments = shipments
-            .Select(x => ToDynamic(x, ctx))
-            .ToList();
 
         result.Add(dynObject);
 
@@ -674,7 +668,6 @@ public partial class DataExporter
         result.Customer = null;
         result.BillingAddress = null;
         result.ShippingAddress = null;
-        result.Shipments = null;
 
         result.Store = ctx.Stores.ContainsKey(order.StoreId)
             ? DataExporter.ToDynamic(ctx.Stores[order.StoreId])
@@ -699,30 +692,6 @@ public partial class DataExporter
 
         dynamic result = new DynamicEntity(orderItem);
         result.Product = await ToDynamic(orderItem.Product, ctx);
-
-        return result;
-    }
-
-    private static dynamic ToDynamic(Shipment shipment, DataExporterContext ctx)
-    {
-        if (shipment == null)
-        {
-            return null;
-        }
-
-        dynamic result = new DynamicEntity(shipment);
-
-        result.ShipmentItems = shipment.ShipmentItems
-            .Select(x =>
-            {
-                dynamic exp = new DynamicEntity(x);
-                return exp;
-            })
-            .ToList();
-
-        result._GenericAttributes = shipment.GenericAttributes.UnderlyingEntities
-            .Select(x => CreateDynamic(x))
-            .ToList();
 
         return result;
     }

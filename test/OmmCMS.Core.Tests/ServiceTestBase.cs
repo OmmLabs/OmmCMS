@@ -22,7 +22,6 @@ using OmmCMS.Core.Data;
 using OmmCMS.Core.Tests.Catalog.Pricing.Calculators;
 using OmmCMS.Core.Tests.Common;
 using OmmCMS.Core.Tests.Content.Media.Storage;
-using OmmCMS.Core.Tests.Shipping;
 using OmmCMS.Core.Tests.Tax;
 using OmmCMS.Data;
 using OmmCMS.Data.Providers;

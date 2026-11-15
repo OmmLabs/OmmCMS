@@ -1,10 +1,8 @@
-using System.Text.Json;
 using OmmCMS.Core.Catalog;
 using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Configuration;
 using OmmCMS.Core.Theming;
 using OmmCMS.Data.Migrations;
-using OmmCMS.Json;
 using OmmCMS.Utilities;
 
 namespace OmmCMS.Core.Data.Migrations;
@@ -18,7 +16,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
     {
         await context.MigrateLocaleResourcesAsync(MigrateLocaleResources);
         await MigrateSettingsAsync(context, cancelToken);
-        await MigrateMessageTemplatesAsync(context, cancelToken);
     }
 
     public async Task MigrateSettingsAsync(SmartDbContext context, CancellationToken cancelToken = default)
@@ -46,16 +43,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             await context.SaveChangesAsync(cancelToken);
         }
 
-        await context.Settings
-            .Where(x => x.Name == "OrderSettings.ReturnRequestReasons" || x.Name == "OrderSettings.ReturnRequestActions")
-            .Where(x => x.Value != null && x.Value.Trim() != "" && !x.Value.TrimStart().StartsWith("["))
-            .ForEachAsync(x => x.Value = JsonSerializer.Serialize(x.Value.SplitSafe(','), SmartJsonOptions.Default), cancelToken);
-        await context.LocalizedProperties
-            .Where(x => x.LocaleKeyGroup == "OrderSettings" && (x.LocaleKey == "ReturnRequestReasons" || x.LocaleKey == "ReturnRequestActions"))
-            .Where(x => x.LocaleValue != null && x.LocaleValue.Trim() != "" && !x.LocaleValue.TrimStart().StartsWith("["))
-            .ForEachAsync(x => x.LocaleValue = JsonSerializer.Serialize(x.LocaleValue.SplitSafe(','), SmartJsonOptions.Default), cancelToken);
-        await context.SaveChangesAsync(cancelToken);
-
         async Task MigrateLegalInfo(List<Setting> oldSettings, string newName)
         {
             if (oldSettings.Count == 0)
@@ -80,29 +67,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             }
 
             settings.RemoveRange(oldSettings);
-        }
-    }
-
-    public async Task MigrateMessageTemplatesAsync(SmartDbContext context, CancellationToken cancelToken = default)
-    {
-        var save = false;
-        var withdrawalTemplates = await context.MessageTemplates
-            .Where(x => x.Name == "Withdrawal.CustomerNotification" || x.Name == "Withdrawal.MerchantNotification" || x.Name == "Withdrawal.ProceedLink")
-            .ToListAsync(cancelToken);
-
-        foreach (var template in withdrawalTemplates)
-        {
-            var modelNames = template.ModelTypes.SplitSafe(',').Distinct().ToArray();
-            if (!modelNames.Contains("Order"))
-            {
-                template.ModelTypes = template.ModelTypes.Grow("Order", ", ");
-                save = true;
-            }
-        }
-
-        if (save)
-        {
-            await context.SaveChangesAsync(cancelToken);
         }
     }
 
@@ -383,18 +347,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Seitenbeschreibungen",
             "Keeps category and manufacturer descriptions visible from page 2 onwards and when filters are active.",
             "Zeigt Beschreibungen von Warengruppen und Marken auch ab Seite 2 der Produktliste und bei aktiven Filtern an.");
-
-        builder.AddOrUpdate("Admin.Configuration.Settings.Order.ReturnRequestReasons",
-            "Available return reasons",
-            "Retourengründe",
-            "Specify the reasons customers can select when submitting a return request. Add a separate entry for each reason.",
-            "Legen Sie die Gründe fest, die Kunden bei einem Retourenantrag auswählen können. Fügen Sie für jeden Grund einen eigenen Eintrag hinzu.");
-
-        builder.AddOrUpdate("Admin.Configuration.Settings.Order.ReturnRequestActions",
-            "Available return actions",
-            "Gewünschte Aktion für Retoure",
-            "Specify the actions customers can select when submitting a return request. Add a separate entry for each action. These actions are not used for legal withdrawal.",
-            "Legen Sie die Aktionen fest, die Kunden bei einem Retourenantrag auswählen können. Fügen Sie für jede Aktion einen eigenen Eintrag hinzu. Diese Aktionen werden nicht für den gesetzlichen Widerruf verwendet.");
 
         builder.AddOrUpdate(prefix + "DefaultPageSizeOptions",
             "Page size options",
@@ -943,20 +895,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
         builder.AddOrUpdate("Admin.Common.TaxCalculator.NoCalculation",
             "An automatic gross-to-net conversion is not possible (e.g. due to varying tax rates).",
             "Eine automatische Brutto-/Netto-Umrechnung ist nicht möglich (z.B. aufgrund unterschiedlicher Steuersätze).");
-
-        builder.AddOrUpdate("ReturnCase.WithdrawEntireOrder",
-            "I want to withdraw the contract for the entire order:",
-            "Ich möchte den Vertrag für die gesamte Bestellung widerrufen:");
-        builder.AddOrUpdate("ReturnCase.WithdrawItems",
-            "I want to withdraw the contract for the following items:",
-            "Ich möchte den Vertrag für die folgenden Artikel widerrufen:");
-
-        builder.AddOrUpdate("ReturnCase.ReturnEntireOrder",
-            "I want to return the entire order:",
-            "Ich möchte die gesamte Bestellung zurücksenden:");
-        builder.AddOrUpdate("ReturnCase.ReturnItems",
-            "I want to return the following items:",
-            "Ich möchte die folgenden Artikel zurücksenden:");
 
         builder.AddOrUpdate("Order.PlaceOrderError",
             "The order could not be completed due to an unexpected error. Customer ID: {0}.",

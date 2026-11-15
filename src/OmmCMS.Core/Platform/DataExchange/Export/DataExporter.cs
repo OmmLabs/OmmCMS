@@ -1059,7 +1059,7 @@ public partial class DataExporter : IDataExporter
             if (ctx.OrderBatchContext != null)
             {
                 Detach(x => x is Order || x is Address || x is GenericAttribute || x is Customer ||
-                    x is OrderItem || x is RewardPointsHistory || x is Shipment || x is ProductVariantAttributeCombination);
+                    x is OrderItem || x is RewardPointsHistory || x is ProductVariantAttributeCombination);
 
                 ctx.OrderBatchContext.Clear();
             }

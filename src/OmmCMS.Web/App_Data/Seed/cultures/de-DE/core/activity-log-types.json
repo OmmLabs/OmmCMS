@@ -56,9 +56,6 @@
   "DeleteProductAttribute": {
     "name": "Produktattribut gelöscht"
   },
-  "DeleteReturnCase": {
-    "name": "Retoure gelöscht"
-  },
   "DeleteSetting": {
     "name": "Einstellung gelöscht"
   },
@@ -94,9 +91,6 @@
   },
   "EditPromotionProviders": {
     "name": "Promotion-Provider bearbeiten"
-  },
-  "EditReturnCase": {
-    "name": "Retoure bearbeitet"
   },
   "EditSettings": {
     "name": "Einstellungen bearbeitet"

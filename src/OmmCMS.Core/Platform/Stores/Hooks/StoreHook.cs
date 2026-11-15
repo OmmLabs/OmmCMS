@@ -91,7 +91,7 @@ internal class StoreHook : AsyncDbSaveHook<Store>
         }
 
         // Cascade delete entities referenced by deleted stores which would be unused/unproductive after their deletion.
-        // Do not delete sales entities like ReturnCase.
+        // Preserve remaining historical sales entities.
         await _db.Settings
             .Where(x => deletedStoreIds.Contains(x.StoreId))
             .ExecuteDeleteAsync(cancelToken);

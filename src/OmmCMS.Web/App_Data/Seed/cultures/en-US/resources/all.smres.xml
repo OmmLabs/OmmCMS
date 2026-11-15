@@ -7248,12 +7248,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Order.MultipleOrderTotalRestrictionsExpandRange.Hint">
 		<Value>Specifies whether multiple order total restrictions through customer group assignments extend the allowed order value range.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.NumberOfDaysReturnRequestAvailable">
-		<Value>Allowed period for return requests (in days)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.NumberOfDaysReturnRequestAvailable.Hint">
-		<Value>The number of days after order completion during which customers can submit return requests. This applies to RMA return requests only and not to legal withdrawal. The value 0 means "unlimited".</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Order.OnePageCheckoutEnabled">
 		<Value>Use one page checkout</Value>
 	</LocaleResource>
@@ -7274,27 +7268,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Order.OrderTotalRestrictionType.Hint">
 		<Value>Determines whether multiple order total restrictions are cumulated by customer group assignments.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestActions">
-		<Value>Available return actions</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestActions.Hint">
-		<Value>A comma-separated list of the actions that a customer will be able to select when submitting a return request. This is not used for legal withdrawal.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestReasons">
-		<Value>Return reasons</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestReasons.Hint">
-		<Value>A comma-separated list of reasons a customer will be able to choose when submitting a return request.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestsDescription1">
-		<Value>Customers can use the returns system to request the return of items. Unlike withdrawal, returns are only possible for completed orders.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestsEnabled">
-		<Value>Return requests enabled</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ReturnRequestSettings">
-		<Value>Returns</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance">
 		<Value>Performance</Value>
@@ -7781,18 +7754,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Configuration.Settings.Search.WildcardSearchNote">
 		<Value>The wildcard mode can slow down the search for a large number of objects.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.DeliveryOnWorkweekDaysOnly">
-		<Value>Delivery on workweek days only</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.DeliveryOnWorkweekDaysOnly.Hint">
-		<Value>Specifies whether delivery takes place only on workweek days.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.TodayShipmentHour">
-		<Value>Order before x o'clock for same day shipment</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Shipping.TodayShipmentHour.Hint">
-		<Value>Specifies the hour by which the order will be shipped the same day.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart">
 		<Value>Shopping cart settings</Value>
 	</LocaleResource>
@@ -8023,12 +7984,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.AllowCustomersToSelectTaxDisplayType.Hint">
 		<Value>A value indicating whether customers are allowed to select tax display type.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.AuxiliaryServicesTaxingType">
-		<Value>Taxing of auxiliary services</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.AuxiliaryServicesTaxingType.Hint">
-		<Value>Specifies how to calculate the tax amount for auxiliary services like shipping and payment fees.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.DefaultTaxAddress">
 		<Value>Default tax address</Value>
 	</LocaleResource>
@@ -8089,47 +8044,11 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.HideZeroTax.Hint">
 		<Value>A value indicating whether to hide zero tax in order summary.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.PaymentMethodAdditionalFeeIncludesTax">
-		<Value>Payment method additional fee includes tax</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.PaymentMethodAdditionalFeeIncludesTax.Hint">
-		<Value>A value indicating whether payment method additional fee includes tax.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.PaymentMethodAdditionalFeeIsTaxable">
-		<Value>Payment method additional fee is taxable</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.PaymentMethodAdditionalFeeIsTaxable.Hint">
-		<Value>A value indicating whether payment method additional fee is taxable.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.PaymentMethodAdditionalFeeTaxClass">
-		<Value>Payment method additional fee tax class</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.PaymentMethodAdditionalFeeTaxClass.Hint">
-		<Value>Select tax class used for payment method additional fee tax calculation.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.PricesIncludeTax">
 		<Value>Prices include tax</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.PricesIncludeTax.Hint">
 		<Value>A value indicating whether entered prices include tax.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShippingIsTaxable">
-		<Value>Shipping is taxable</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShippingIsTaxable.Hint">
-		<Value>A value indicating whether shipping is taxable.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShippingPriceIncludesTax">
-		<Value>Shipping price includes tax</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShippingPriceIncludesTax.Hint">
-		<Value>A value indicating whether shipping price includes tax.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShippingTaxClass">
-		<Value>Shipping tax class</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShippingTaxClass.Hint">
-		<Value>Select tax class used for shipping tax calculation.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Tax.ShowLegalHintsInFooter">
 		<Value>Show legal information in footer.</Value>
@@ -11095,12 +11014,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.OrderNotice.RefundAmountError">
 		<Value>The amount to be refunded must be greater than 0.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.ShipmentDelivered">
-		<Value>Shipment# {0} has been delivered</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.ShipmentSent">
-		<Value>Shipment# {0} has been sent</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Orders">
 		<Value>Orders</Value>
 	</LocaleResource>
@@ -11665,36 +11578,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Orders.OrderItem.AutoUpdate.UpdateTotals.Hint">
 		<Value>Determines whether to update the order totals.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes">
-		<Value>Order notes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.AddButton">
-		<Value>Add order note</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.AddTitle">
-		<Value>Add order note</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields">
-		<Value>Display to customer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields.AddOrderNoteDisplayToCustomer.Hint">
-		<Value>A value indicating whether to display this order note to a customer.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields.AddOrderNoteMessage.Hint">
-		<Value>Enter this order note message.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields.DisplayToCustomer">
-		<Value>Display to customer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields.DisplayToCustomer.Hint">
-		<Value>A value indicating whether to display this order note to a customer.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields.Note">
-		<Value>Note</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.OrderNotes.Fields.Note.Hint">
-		<Value>The message or note to this order.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Overall">
 		<Value>Orders overall</Value>
 	</LocaleResource>
@@ -11844,126 +11727,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.Shipment">
 		<Value>Shipment</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments">
-		<Value>Shipments</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Added">
-		<Value>The new shipment has been added successfully.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.AddNew">
-		<Value>Add shipment</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.AddNew.Title">
-		<Value>Add a new shipment to order #{0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.BackToOrder">
-		<Value>back to order details</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Carrier">
-		<Value>Shipping is carried out by</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Carrier.Hint">
-		<Value>Specifies the name of the carrier, e.g. DHL, Fedex, UPS or USPS.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Deleted">
-		<Value>The shipment has been deleted successfully.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.DeliveryDate">
-		<Value>Date delivered</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.DeliveryDate.Button">
-		<Value>Set as delivered</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.DeliveryDate.Hint">
-		<Value>The date this shipment was delivered.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.DeliveryDate.NotYet">
-		<Value>Not yet</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.ID">
-		<Value>Shipment #</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.List">
-		<Value>Shipments</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.List.TrackingNumber">
-		<Value>Tracking number</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.List.TrackingNumber.Hint">
-		<Value>Search by a specific tracking number.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.NoProductsSelected">
-		<Value>No products selected</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.OrderID">
-		<Value>Order #</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.PrintPackagingSlip">
-		<Value>Print packaging slip</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.PrintPackagingSlip.All">
-		<Value>Print packaging slips (all)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.PrintPackagingSlip.Selected">
-		<Value>Print packaging slips (selected)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products">
-		<Value>Products in shipment</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.ItemDimensions">
-		<Value>Item dimensions</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.ItemWeight">
-		<Value>Item weight</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.ProductName">
-		<Value>Product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.QtyOrdered">
-		<Value>Qty ordered</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.QtyShipped">
-		<Value>Qty shipped</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.QtyToShip">
-		<Value>Qty to ship</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.Products.SKU">
-		<Value>SKU</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.ShippedDate">
-		<Value>Date shipped</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.ShippedDate.Button">
-		<Value>Set as shipped</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.ShippedDate.Hint">
-		<Value>The date this shipment was shipped.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.ShippedDate.NotYet">
-		<Value>Not yet</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.TotalWeight">
-		<Value>Total weight</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.TotalWeight.Hint">
-		<Value>Shipment total weight.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.TrackingNumber">
-		<Value>Tracking number</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.TrackingNumber.Hint">
-		<Value>Specifies the tracking number for tracking the shipment.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.TrackingUrl">
-		<Value>Tracking URL</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.TrackingUrl.Hint">
-		<Value>Specifies the URL for tracking the shipment.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Orders.Shipments.ViewDetails">
-		<Value>View shipment details</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Orders.ShippingInfo">
 		<Value>Shipping info</Value>
@@ -12487,96 +12250,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Report.Yesterday">
 		<Value>Yesterday</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests">
-		<Value>Withdrawals and Returns</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Accept">
-		<Value>Accept</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Accept.Caption">
-		<Value>Accept the return</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.EditReturnRequestDetails">
-		<Value>Edit return request</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields">
-		<Value>Date</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Customer">
-		<Value>Customer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Customer.Hint">
-		<Value>Customer information.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.CustomerComments">
-		<Value>Customer comments</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.CustomerComments.Hint">
-		<Value>Entered customer comments</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.ID">
-		<Value>ID</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.ID.Hint">
-		<Value>ID of the withdrawal or return</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Order">
-		<Value>Order</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Order.Hint">
-		<Value>Order information.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Product">
-		<Value>Product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Product.Hint">
-		<Value>Product information.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Quantity">
-		<Value>Quantity</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Quantity.Hint">
-		<Value>Number of items to be returned</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.ReasonForReturn">
-		<Value>Reason for return</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.ReasonForReturn.Hint">
-		<Value>Chosen reason for return.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.RequestedAction">
-		<Value>Requested action</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.RequestedAction.Hint">
-		<Value>Chosen requested action.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.RequestedActionUpdatedOnUtc">
-		<Value>Last update of requested action</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.RequestedActionUpdatedOnUtc.Hint">
-		<Value>Date when the requested action was updated the last time.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.StaffNotes">
-		<Value>Staff notes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.StaffNotes.Hint">
-		<Value>Entered staff comments</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Fields.Status">
-		<Value>Return request status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.MaxRefundAmount">
-		<Value>Maximum refund amount</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.MaxRefundAmount.Hint">
-		<Value>The maximum amount that can be refunded for this item.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.Notified">
-		<Value>The customer has been notified successfully.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ReturnRequests.NotifyCustomer">
-		<Value>Notify customer about status change</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.AddCondition">
 		<Value>Add rule</Value>
 	</LocaleResource>
@@ -12774,9 +12447,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.PurchasedProduct">
 		<Value>Purchased product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ReturnRequestCount">
-		<Value>Number of return requests</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.RewardPointsBalance">
 		<Value>Number of reward points</Value>
@@ -15734,18 +15404,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Enums.AttributeControlType.TextBox">
 		<Value>Textbox</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.AuxiliaryServicesTaxType.HighestCartAmount">
-		<Value>Highest amount in cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.AuxiliaryServicesTaxType.HighestTaxRate">
-		<Value>Highest tax rate in cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.AuxiliaryServicesTaxType.ProRata">
-		<Value>Pro rata in accordance with main service</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.AuxiliaryServicesTaxType.SpecifiedTaxCategory">
-		<Value>Specified tax category</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.BackorderMode.AllowQtyBelow0">
 		<Value>Allow quantity below 0</Value>
 	</LocaleResource>
@@ -16306,12 +15964,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Enums.RelatedEntityType.TierPrice">
 		<Value>Tier price</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ReturnCaseKind.Return">
-		<Value>Return</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ReturnCaseKind.Withdrawal">
-		<Value>Withdrawal</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.ReturnRequestStatus.Cancelled">
 		<Value>Cancelled</Value>
@@ -18517,78 +18169,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Providers.MenuItems.FriendlyName.Route">
 		<Value>Route</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.Case">
-		<Value>Case {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.CaseNo">
-		<Value>Case no.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.CertainItems">
-		<Value>Certain items</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.Complete">
-		<Value>Completed</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.ConvertedWithdrawal">
-		<Value>The withdrawal has been converted to a return. Status: &lt;b&gt;{0}&lt;/b&gt;.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.EntireOrder">
-		<Value>Entire order</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep">
-		<Value>Next step</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.Cancelled">
-		<Value>No further action is required.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.ItemsRefunded">
-		<Value>The refund has been processed.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.ItemsRepaired">
-		<Value>We will send the repaired items back to you.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.Pending">
-		<Value>Please return the items.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.Received">
-		<Value>We are processing your return.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.RequestRejected">
-		<Value>No further action is required.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.NextStep.ReturnAuthorized">
-		<Value>We will continue processing your request.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.Open">
-		<Value>Open</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.OrderWithdrawn">
-		<Value>The order has been withdrawn.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.ReceivedWithdrawal">
-		<Value>Received withdrawal</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.ReturnItemExists">
-		<Value>There are returns for this item.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.StartProcessing">
-		<Value>Start processing</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.StartProcessing.Hint">
-		<Value>Converts the withdrawal into a return for further processing.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.WithdrawalItemExists">
-		<Value>A withdrawal request has been submitted for this item.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.WithdrawalQuantity">
-		<Value>Withdrawal quantity</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.WithdrawEntireOrder">
-		<Value>I would like to withdraw the entire order:</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnCase.WithdrawItems">
-		<Value>I would like to withdraw the following items:</Value>
 	</LocaleResource>
 	<LocaleResource Name="ReturnRequests.Comments">
 		<Value>Comments</Value>

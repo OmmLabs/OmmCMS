@@ -78,13 +78,6 @@ public partial class GdprTool : IGdprTool
                 model["Orders"] = await orders.SelectAwait(x => _messageModelProvider.CreateModelPartAsync(x, true, ignoreMemberNames)).ToListAsync();
             }
 
-            // Return cases
-            var returnCases = customer.ReturnCases;
-            if (returnCases.Count != 0)
-            {
-                model["ReturnCases"] = await returnCases.SelectAwait(x => _messageModelProvider.CreateModelPartAsync(x, true, "Url")).ToListAsync();
-            }
-
             // Wallet
             var walletHistory = customer.WalletHistory;
             if (walletHistory.Count != 0)
@@ -174,20 +167,6 @@ public partial class GdprTool : IGdprTool
         // Now it is safe to delete shopping cart & wishlist
         await _db.ShoppingCartItems
             .ApplyExpiredCartItemsFilter(DateTime.UtcNow, customer)
-            .ExecuteDeleteAsync();
-
-        // Delete completed return cases.
-        // INFO: Do not use "RemoveRange" above. May cause a "DbUpdateConcurrencyException".
-        var rcCompleteStatuses = new int[]
-        {
-            (int)ReturnCaseStatus.ItemsRepaired,
-            (int)ReturnCaseStatus.ItemsRefunded,
-            (int)ReturnCaseStatus.RequestRejected,
-            (int)ReturnCaseStatus.Cancelled
-        };
-
-        await _db.ReturnCases
-            .Where(x => x.CustomerId == customer.Id && x.Kind == ReturnCaseKind.Return && rcCompleteStatuses.Contains(x.ReturnCaseStatusId))
             .ExecuteDeleteAsync();
 
         // Log

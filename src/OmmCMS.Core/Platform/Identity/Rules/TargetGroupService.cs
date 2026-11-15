@@ -249,13 +249,6 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
                 RuleType = RuleType.IntArray,
                 SelectList = new RemoteRuleValueSelectList("Country") { Multiple = true }
             },
-            new FilterDescriptor<Customer, int>(x => x.ReturnCases.Count)
-            {
-                Name = "ReturnRequestCount",
-                DisplayName = T("Admin.Rules.FilterDescriptor.ReturnRequestCount"),
-                RuleType = RuleType.Int
-            },
-
             new FilterDescriptor<Customer, int?>(x => EF.Functions.DateDiffDay(x.LastActivityDateUtc, DateTime.UtcNow))
             {
                 Name = "LastActivityDays",

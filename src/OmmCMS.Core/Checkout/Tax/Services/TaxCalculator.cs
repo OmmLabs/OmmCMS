@@ -69,38 +69,6 @@ public class TaxCalculator : ITaxCalculator
         return await CalculateTaxAsync(null, attributeValue.PriceAdjustment, _taxSettings.PricesIncludeTax, attribute.TaxCategoryId, inclusive, customer, currency);
     }
 
-    public virtual Task<Tax> CalculateShippingTaxAsync(
-        decimal price,
-        bool? inclusive = null,
-        int? taxCategoryId = null,
-        Customer customer = null,
-        Currency currency = null)
-    {
-        if (!_taxSettings.ShippingIsTaxable)
-        {
-            return Task.FromResult(CreateTax(TaxRate.Zero, 0m, price, true, true, currency));
-        }
-
-        taxCategoryId ??= _taxSettings.ShippingTaxClassId;
-        return CalculateTaxAsync(null, price, _taxSettings.ShippingPriceIncludesTax, taxCategoryId.Value, inclusive, customer, currency);
-    }
-
-    public virtual Task<Tax> CalculatePaymentFeeTaxAsync(
-        decimal price,
-        bool? inclusive = null,
-        int? taxCategoryId = null,
-        Customer customer = null,
-        Currency currency = null)
-    {
-        if (!_taxSettings.PaymentMethodAdditionalFeeIsTaxable)
-        {
-            return Task.FromResult(CreateTax(TaxRate.Zero, 0m, price, true, true, currency));
-        }
-
-        taxCategoryId ??= _taxSettings.PaymentMethodAdditionalFeeTaxClassId;
-        return CalculateTaxAsync(null, price, _taxSettings.PaymentMethodAdditionalFeeIncludesTax, taxCategoryId.Value, inclusive, customer, currency);
-    }
-
     protected virtual async Task<Tax> CalculateTaxAsync(
         Product product,
         decimal price,

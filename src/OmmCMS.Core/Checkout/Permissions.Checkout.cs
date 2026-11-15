@@ -10,17 +10,7 @@ public static partial class Permissions
         public const string Create = "order.create";
         public const string Delete = "order.delete";
         public const string EditItem = "order.editorderitem";
-        public const string EditShipment = "order.editshipment";
 
-        public static class ReturnCase
-        {
-            public const string Self = "order.returncase";
-            public const string Read = "order.returncase.read";
-            public const string Update = "order.returncase.update";
-            public const string Create = "order.returncase.create";
-            public const string Delete = "order.returncase.delete";
-            public const string Accept = "order.returncase.accept";
-        }
     }
 
     public static partial class Promotion

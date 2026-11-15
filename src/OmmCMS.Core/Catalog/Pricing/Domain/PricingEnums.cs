@@ -26,17 +26,7 @@ public enum PricingTarget
     /// <summary>
     /// Pricing target is a product
     /// </summary>
-    Product,
-
-    /// <summary>
-    /// Pricing target is a shipping method charge
-    /// </summary>
-    ShippingCharge,
-
-    /// <summary>
-    /// Pricing target is a payment method fee.
-    /// </summary>
-    PaymentFee
+    Product
 }
 
 /// <summary>

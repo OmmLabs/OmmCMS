@@ -12,7 +12,6 @@ public enum CheckoutRequirements
 
     All = BillingAddress | Shipping | Payment
 }
-
 /// <summary>
 /// Represents an order status.
 /// </summary>
@@ -37,61 +36,4 @@ public enum OrderStatus
     /// Cancelled
     /// </summary>
     Cancelled = 40
-}
-
-/// <summary>
-/// Represents a return request status.
-/// </summary>
-public enum ReturnCaseStatus
-{
-    /// <summary>
-    /// Pending.
-    /// </summary>
-    Pending = 0,
-
-    /// <summary>
-    /// Item(s) received.
-    /// </summary>
-    Received = 10,
-
-    /// <summary>
-    /// Return accepted.
-    /// </summary>
-    ReturnAuthorized = 20,
-
-    /// <summary>
-    /// Item(s) repaired.
-    /// </summary>
-    ItemsRepaired = 30,
-
-    /// <summary>
-    /// Item(s) refunded.
-    /// </summary>
-    ItemsRefunded = 40,
-
-    /// <summary>
-    /// Request rejected.
-    /// </summary>
-    RequestRejected = 50,
-
-    /// <summary>
-    /// Cancelled.
-    /// </summary>
-    Cancelled = 60
-}
-
-/// <summary>
-/// Represents the kind of a return case.
-/// </summary>
-public enum ReturnCaseKind
-{
-    /// <summary>
-    /// Return Merchandise Authorization (RMA).
-    /// </summary>
-    Return = 0,
-
-    /// <summary>
-    /// Legal online withdrawal (revocation) of a contract/order.
-    /// </summary>
-    Withdrawal
 }

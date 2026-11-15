@@ -67,41 +67,6 @@ public class TaxSettings : ISettings
     public bool ShowLegalHintsInFooter { get; set; } = true;
 
     /// <summary>
-    /// Gets or sets a value indicating whether shipping price is taxable
-    /// </summary>
-    public bool ShippingIsTaxable { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether shipping price incudes tax
-    /// </summary>
-    public bool ShippingPriceIncludesTax { get; set; } = true;
-
-    /// <summary>
-    /// Gets or sets a value indicating the shipping tax class identifier
-    /// </summary>
-    public int ShippingTaxClassId { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether payment method additional fee is taxable
-    /// </summary>
-    public bool PaymentMethodAdditionalFeeIsTaxable { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether payment method additional fee incudes tax
-    /// </summary>
-    public bool PaymentMethodAdditionalFeeIncludesTax { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating the payment method additional fee tax class identifier
-    /// </summary>
-    public int PaymentMethodAdditionalFeeTaxClassId { get; set; }
-
-    /// <summary>
-    /// Taxing type for auxiliary services like shipping and payment fees
-    /// </summary>
-    public AuxiliaryServicesTaxType AuxiliaryServicesTaxingType { get; set; } = AuxiliaryServicesTaxType.SpecifiedTaxCategory;
-
-    /// <summary>
     /// Gets or sets a value indicating whether EU VAT (Eupore Union Value Added Tax) is enabled
     /// </summary>
     public bool EuVatEnabled { get; set; }

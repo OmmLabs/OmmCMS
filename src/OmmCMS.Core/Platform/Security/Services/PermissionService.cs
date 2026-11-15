@@ -33,8 +33,6 @@ public partial class PermissionService : AsyncDbSaveHook<CustomerRole>, IPermiss
         { "role", "Admin.Customers.CustomerRoles" },
         { "order", "Admin.Orders" },
         { "notify", "Common.Notify" },
-        { "returncase", "Admin.ReturnRequests" },
-        { "accept", "Admin.ReturnRequests.Accept" },
         { "promotion", "Admin.Catalog.Products.Promotion" },
         { "campaign", "Admin.Promotions.Campaigns" },
         { "discount", "Admin.Promotions.Discounts" },

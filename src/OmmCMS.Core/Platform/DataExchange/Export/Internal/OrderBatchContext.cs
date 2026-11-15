@@ -1,6 +1,5 @@
 ﻿using OmmCMS.Collections;
 using OmmCMS.Core.Checkout.Orders;
-using OmmCMS.Core.Checkout.Shipping;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Identity;
@@ -20,7 +19,6 @@ internal class OrderBatchContext
     private LazyMultimap<RewardPointsHistory> _rewardPointsHistories;
     private LazyMultimap<Address> _addresses;
     private LazyMultimap<OrderItem> _orderItems;
-    private LazyMultimap<Shipment> _shipments;
 
     public OrderBatchContext(IEnumerable<Order> orders, ICommonServices services)
     {
@@ -69,11 +67,6 @@ internal class OrderBatchContext
         get => _orderItems ??= new LazyMultimap<OrderItem>(LoadOrderItems, _orderIds);
     }
 
-    public LazyMultimap<Shipment> Shipments
-    {
-        get => _shipments ??= new LazyMultimap<Shipment>(LoadShipments, _orderIds);
-    }
-
     public virtual void Clear()
     {
         _customers?.Clear();
@@ -81,7 +74,6 @@ internal class OrderBatchContext
         _rewardPointsHistories?.Clear();
         _addresses?.Clear();
         _orderItems?.Clear();
-        _shipments?.Clear();
 
         _orderIds?.Clear();
         _customerIds?.Clear();
@@ -143,17 +135,6 @@ internal class OrderBatchContext
             .ToListAsync();
 
         return orderItems.ToMultimap(x => x.OrderId, x => x);
-    }
-
-    protected virtual async Task<Multimap<int, Shipment>> LoadShipments(int[] orderIds)
-    {
-        var shipments = await _db.Shipments
-            .AsNoTracking()
-            .Include(x => x.ShipmentItems)
-            .ApplyOrderFilter(orderIds)
-            .ToListAsync();
-
-        return shipments.ToMultimap(x => x.OrderId, x => x);
     }
 
     #endregion
