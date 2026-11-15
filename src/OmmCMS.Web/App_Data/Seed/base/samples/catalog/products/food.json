@@ -160,8 +160,8 @@
       { "specificationAttributeOption": "occasion/gift", "allowFiltering": true, "showOnProductPage": true, "displayOrder": 1 }
     ],
     "bundleItems": [
-      { "product": "FD-1001", "quantity": 1, "discount": 25, "discountPercentage": true, "visible": true, "published": true, "displayOrder": 1 },
-      { "product": "FD-1004", "quantity": 2, "discount": 25, "discountPercentage": true, "visible": true, "published": true, "displayOrder": 2 }
+      { "product": "FD-1001", "quantity": 1, "visible": true, "published": true, "displayOrder": 1 },
+      { "product": "FD-1004", "quantity": 2, "visible": true, "published": true, "displayOrder": 2 }
     ]
   },
   {

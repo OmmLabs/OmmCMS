@@ -29,15 +29,6 @@ public class PriceSettingsModel : ModelBase
     [LocalizedDisplay("*DisplayTextForZeroPrices")]
     public bool DisplayTextForZeroPrices { get; set; }
 
-    [LocalizedDisplay("*IgnoreDiscounts")]
-    public bool IgnoreDiscounts { get; set; }
-
-    [LocalizedDisplay("*ApplyPercentageDiscountOnTierPrice")]
-    public bool ApplyPercentageDiscountOnTierPrice { get; set; }
-
-    [LocalizedDisplay("*ApplyTierPricePercentageToAttributePriceAdjustments")]
-    public bool ApplyTierPricePercentageToAttributePriceAdjustments { get; set; }
-
     #endregion
 
     #region New
@@ -83,23 +74,11 @@ public class PriceSettingsModel : ModelBase
     [LocalizedDisplay("*ShowRetailPriceSaving")]
     public bool ShowRetailPriceSaving { get; set; }
 
-    [LocalizedDisplay("*ValidateDiscountLimitationsInLists")]
-    public bool ValidateDiscountLimitationsInLists { get; set; }
-
-    [LocalizedDisplay("*ValidateDiscountRulesInLists")]
-    public bool ValidateDiscountRulesInLists { get; set; }
-
     [LocalizedDisplay("*ApplyPriceRangeFormatInProductDetails")]
     public bool ApplyPriceRangeFormatInProductDetails { get; set; }
 
     [LocalizedDisplay("*ShowRequiredProductPricesWithMainProduct")]
     public bool ShowRequiredProductPricesWithMainProduct { get; set; }
-
-    [LocalizedDisplay("*IgnoreProductDiscountsForSpecialPrices")]
-    public bool IgnoreProductDiscountsForSpecialPrices { get; set; }
-
-    [LocalizedDisplay("*ApplyDiscountsOfLinkedProducts")]
-    public bool ApplyDiscountsOfLinkedProducts { get; set; }
 
     [LocalizedDisplay("*RulesCalculateIncludingTax")]
     public bool? RulesCalculateIncludingTax { get; set; }

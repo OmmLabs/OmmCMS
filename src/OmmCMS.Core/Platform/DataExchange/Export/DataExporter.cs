@@ -935,7 +935,6 @@ public partial class DataExporter : IDataExporter
             case ExportEntityType.Product:
                 types =
                 [
-                    RelatedEntityType.TierPrice,
                     RelatedEntityType.ProductVariantAttributeValue,
                     RelatedEntityType.ProductVariantAttributeCombination
                 ];
@@ -982,14 +981,13 @@ public partial class DataExporter : IDataExporter
         try
         {
             ctx.AssociatedProductBatchContext?.Clear();
-            ctx.ProductBatchContextWithoutFilters?.Clear();
 
             if (ctx.ProductBatchContext != null)
             {
                 Detach(x => x is Product || x is ProductVariantAttributeCombination || x is ProductVariantAttribute || x is ProductVariantAttributeValue ||
                     x is ProductAttribute || x is ProductBundleItem || x is ProductBundleItemAttributeFilter || x is ProductCategory || x is ProductManufacturer ||
                     x is Category || x is Manufacturer || x is ProductMediaFile || x is ProductTag || x is ProductSpecificationAttribute || x is SpecificationAttributeOption ||
-                    x is SpecificationAttribute || x is TierPrice || x is DeliveryTime || x is QuantityUnit || x is Download ||
+                    x is SpecificationAttribute || x is DeliveryTime || x is QuantityUnit || x is Download ||
                     x is MediaFile || x is MediaStorage || x is GenericAttribute || x is UrlRecord);
 
                 ctx.ProductBatchContext.Clear();
@@ -1061,7 +1059,6 @@ public partial class DataExporter : IDataExporter
             {
                 // Load data behind navigation properties for current entities batch in one go.
                 ctx.ProductBatchContext = _productService.CreateProductBatchContext(entities, ctx.Store, null, includeHidden);
-                ctx.ProductBatchContextWithoutFilters = new ProductBatchContext(entities, _db, _services.Container, null, null, includeHidden);
                 ctx.PriceCalculationOptions = await CreatePriceCalculationOptions(ctx.ProductBatchContext, ctx);
                 ctx.AttributeCombinationPriceCalcOptions = await CreatePriceCalculationOptions(ctx.ProductBatchContext, ctx, true);
                 ctx.AssociatedProductBatchContext = null;

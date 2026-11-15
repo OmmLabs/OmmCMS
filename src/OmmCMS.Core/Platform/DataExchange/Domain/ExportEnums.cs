@@ -18,8 +18,7 @@ public enum ExportEntityType
 /// </summary>
 public enum RelatedEntityType
 {
-    TierPrice = 0,
-    ProductVariantAttributeValue,
+    ProductVariantAttributeValue = 1,
     ProductVariantAttributeCombination
 }
 

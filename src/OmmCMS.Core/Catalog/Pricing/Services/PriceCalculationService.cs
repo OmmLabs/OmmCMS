@@ -87,9 +87,6 @@ public partial class PriceCalculationService : IPriceCalculationService
         {
             IsGrossPrice = _taxSettings.PricesIncludeTax,
             TaxInclusive = taxInclusive,
-            IgnorePercentageDiscountOnTierPrices = !_priceSettings.ApplyPercentageDiscountOnTierPrice,
-            IgnorePercentageTierPricesOnAttributePriceAdjustments = !_priceSettings.ApplyTierPricePercentageToAttributePriceAdjustments,
-            IgnoreDiscounts = forListing && priceDisplay == PriceDisplayType.PriceWithoutDiscountsAndAttributes,
             DetermineLowestPrice = forListing && priceDisplay == PriceDisplayType.LowestPrice,
             DeterminePreselectedPrice = determinePreselectedPrice,
             ApplyPreselectedAttributes = determinePreselectedPrice,
@@ -244,7 +241,7 @@ public partial class PriceCalculationService : IPriceCalculationService
         var product = context.Product;
         var retailPrice = (decimal?)null;
         var hasComparePrice = product.ComparePrice > 0;
-        var hasDiscount = context.DiscountAmount > 0 || context.AppliedTierPrice != null || (context.OfferPrice.HasValue && context.OfferPrice < product.Price);
+        var hasDiscount = context.DiscountAmount > 0 || (context.OfferPrice.HasValue && context.OfferPrice < product.Price);
 
         PriceLabel comparePriceLabel = null;
 
@@ -286,16 +283,15 @@ public partial class PriceCalculationService : IPriceCalculationService
         var regularPrice = (decimal?)null;
         var hasComparePrice = product.ComparePrice > 0;
         var hasOfferPrice = context.OfferPrice.HasValue;
-        var hasTierPrice = context.AppliedTierPrice != null;
         var price = context.RegularPrice;
 
-        if (hasOfferPrice && _priceSettings.OfferPriceReplacesRegularPrice && !hasTierPrice)
+        if (hasOfferPrice && _priceSettings.OfferPriceReplacesRegularPrice)
         {
-            // Hide regular price, unless there is a tier price (higher priority).
+            // Hide regular price.
             return null;
         }
 
-        if (context.DiscountAmount > 0 || hasTierPrice)
+        if (context.DiscountAmount > 0)
         {
             if (hasOfferPrice)
             {

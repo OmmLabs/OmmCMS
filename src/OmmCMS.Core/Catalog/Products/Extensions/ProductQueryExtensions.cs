@@ -227,7 +227,6 @@ public static partial class ProductQueryExtensions
     /////     <item><see cref="Product.ProductSpecificationAttributes"/>, then <see cref="ProductSpecificationAttribute.SpecificationAttributeOption"/>, then <see cref="SpecificationAttributeOption.SpecificationAttribute"/></item>
     /////     <item><see cref="Product.ProductVariantAttributes"/>, then <see cref="ProductVariantAttribute.ProductAttribute"/> and <see cref="ProductVariantAttribute.ProductVariantAttributeValues"/></item>
     /////     <item><see cref="Product.ProductVariantAttributeCombinations"/>, then <see cref="ProductVariantAttributeCombination.DeliveryTime"/></item>
-    /////     <item><see cref="Product.TierPrices"/> (sorted by <see cref="TierPrice.Quantity"/>)</item>
     /////     <item>Published <see cref="Product.ProductBundleItems"/> (sorted by <see cref="ProductBundleItem.DisplayOrder"/>), then <see cref="ProductBundleItem.BundleProduct"/></item>
     ///// </list>
     ///// </summary>
@@ -258,8 +257,6 @@ public static partial class ProductQueryExtensions
     //            .ThenInclude(x => x.QuantityUnit)
     //        .Include(x => x.ProductVariantAttributeCombinations)
     //            .ThenInclude(x => x.DeliveryTime)
-    //        .Include(x => x.TierPrices
-    //            .OrderBy(x => x.Quantity))
     //        .Include(x => x.ProductBundleItems
     //            .Where(y => y.Published)
     //            .OrderBy(y => y.DisplayOrder));

@@ -110,26 +110,6 @@ public class PriceCalculationOptions : ICloneable<PriceCalculationOptions>
     public bool IgnoreOfferPrice { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether tier prices should be ignored during price calculation.
-    /// </summary>
-    public bool IgnoreTierPrices { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether percentage discounts on tier prices should be ignored during price calculation.
-    /// </summary>
-    public bool IgnorePercentageDiscountOnTierPrices { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to ignore percentage tier prices on attribute price adjustments.
-    /// </summary>
-    public bool IgnorePercentageTierPricesOnAttributePriceAdjustments { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether discounts should be ignored during price calculation.
-    /// </summary>
-    public bool IgnoreDiscounts { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether the source price (the one retrieved from database) includes sales tax already.
     /// </summary>
     public bool IsGrossPrice { get; set; }

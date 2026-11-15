@@ -23,11 +23,6 @@ public class CalculatorContext : PriceCalculationContext
     /// </summary>
     public ProductVariantAttributeCombination AppliedAttributeCombination { get; set; }
 
-    /// <summary>
-    /// The tier price applied during calculation of the final price.
-    /// </summary>
-    public TierPrice AppliedTierPrice { get; set; }
-
     public PricingType PricingType { get; set; }
 
     /// <summary>
@@ -65,14 +60,9 @@ public class CalculatorContext : PriceCalculationContext
 
     /// <summary>
     /// The lowest possible price of a product, if any.
-    /// Includes prices of attribute combinations and tier prices. Ignores price adjustments of attributes.
+    /// Includes prices of attribute combinations. Ignores price adjustments of attributes.
     /// </summary>
     public decimal? LowestPrice { get; set; }
-
-    /// <summary>
-    /// Gets or sets the miniumum tier price determined during calculation.
-    /// </summary>
-    public decimal? MinTierPrice { get; set; }
 
     /// <summary>
     /// The additional charges applied to the <see cref="FinalPrice"/> during calculation, such as price adjustments of product attributes.
@@ -111,7 +101,6 @@ public class CalculatorContext : PriceCalculationContext
         target.OfferEndDateUtc = OfferEndDateUtc;
         target.PreselectedPrice = PreselectedPrice;
         target.LowestPrice = LowestPrice;
-        target.MinTierPrice = MinTierPrice;
         target.AdditionalCharge = AdditionalCharge;
         target.DiscountAmount = DiscountAmount;
 

@@ -17,10 +17,6 @@
     "pictures": [
       { "file": "product/gf-1001.jpg", "name": "tour-distance-golf-balls" }
     ],
-    "tierPrices": [
-      { "quantity": 5, "price": 8.90 },
-      { "quantity": 10, "price": 7.90 }
-    ],
     "specifications": [
       { "specificationAttributeOption": "hardness/medium", "allowFiltering": true, "showOnProductPage": true, "displayOrder": 1 },
       { "specificationAttributeOption": "layers/3-piece", "allowFiltering": true, "showOnProductPage": true, "displayOrder": 2 },

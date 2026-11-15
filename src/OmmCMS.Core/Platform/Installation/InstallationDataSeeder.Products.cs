@@ -265,7 +265,6 @@ public partial class InstallationDataSeeder
             // Keyless list: an overlay replaces the specifications of a product as a whole.
             .ChildList("specifications", x => x.ProductSpecificationAttributes, new SeedEntityDescriptor<ProductSpecificationAttribute>("specificationAttributeOption")
                 .Reference<SpecificationAttributeOption>("specificationAttributeOption", (psa, option) => psa.SpecificationAttributeOptionId = option.Id))
-            .Child("tierPrices", x => x.TierPrices, new SeedEntityDescriptor<TierPrice>("quantity"))
             .Bind("download", (product, node, _) =>
             {
                 product.IsDownload = true;
@@ -284,7 +283,6 @@ public partial class InstallationDataSeeder
             // Derived product properties are maintained by hooks at runtime, which do not run during installation.
             .OnCreated((product, _) =>
             {
-                product.HasTierPrices = product.TierPrices.Count > 0;
             });
 
         // Child collections created after the products: declared for merging only.

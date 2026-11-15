@@ -35,13 +35,6 @@ public class AttributePriceCalculator : PriceCalculator
             return;
         }
 
-        var includeTierPriceAttributePriceAdjustment =
-            !options.IgnoreTierPrices &&
-            !options.IgnorePercentageTierPricesOnAttributePriceAdjustments &&
-            product.HasTierPrices &&
-            context.BundleItem == null &&
-            context.Quantity > 1;
-
         var attributes = await options.BatchContext.Attributes.GetOrLoadAsync(product.Id);
         var attributeValues = await GetSelectedAttributeValuesAsync(context, attributes);
         var hasSelectedValues = attributeValues.Count > 0;
@@ -79,26 +72,13 @@ public class AttributePriceCalculator : PriceCalculator
 
             if (value.ValueType == ProductVariantAttributeValueType.Simple)
             {
-                if (includeTierPriceAttributePriceAdjustment && value.PriceAdjustment > 0m)
-                {
-                    var tierPrices = await context.GetTierPricesAsync();
-                    adjustment = GetTierPriceAttributeAdjustment(product, tierPrices, context.Quantity, value.PriceAdjustment);
-                }
-
-                if (adjustment == 0m)
-                {
-                    adjustment = value.PriceAdjustment;
-                }
+                adjustment = value.PriceAdjustment;
             }
             else if (value.ValueType == ProductVariantAttributeValueType.ProductLinkage && linkedProducts.TryGetValue(value.LinkedProductId, out var linkedProduct))
             {
                 var childCalculation = await CalculateChildPriceAsync(linkedProduct, context, c =>
                 {
                     c.Quantity = 1;
-
-                    // Note the logic here!
-                    var applyLinkedDiscounts = !context.Options.IgnoreDiscounts && _priceSettings.ApplyDiscountsOfLinkedProducts;
-                    c.Options.IgnoreDiscounts = !applyLinkedDiscounts;
                 });
 
                 // Add price of linked product to root final price (unit price * linked product quantity).
@@ -129,29 +109,6 @@ public class AttributePriceCalculator : PriceCalculator
         }
 
         await next(context);
-    }
-
-    protected virtual decimal GetTierPriceAttributeAdjustment(Product product, IEnumerable<TierPrice> tierPrices, int quantity, decimal adjustment)
-    {
-        var result = decimal.Zero;
-        var previousQty = 1;
-
-        foreach (var tierPrice in tierPrices)
-        {
-            if (quantity < tierPrice.Quantity || tierPrice.Quantity < previousQty)
-            {
-                continue;
-            }
-
-            if (tierPrice.CalculationMethod == TierPriceCalculationMethod.Percental)
-            {
-                result = adjustment - (adjustment / 100m * tierPrice.Price);
-            }
-
-            previousQty = tierPrice.Quantity;
-        }
-
-        return result;
     }
 
     protected virtual async Task<List<ProductVariantAttributeValue>> GetSelectedAttributeValuesAsync(CalculatorContext context, IEnumerable<ProductVariantAttribute> attributes)

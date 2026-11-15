@@ -79,9 +79,6 @@ public class ProductImporter : EntityImporterBase
         {
             switch (context.File.RelatedType.Value)
             {
-                case RelatedEntityType.TierPrice:
-                    await ProcessTierPricesAsync(context);
-                    break;
                 case RelatedEntityType.ProductVariantAttributeValue:
                     await ProcessAttributeValuesAsync(context);
                     break;
@@ -394,7 +391,6 @@ public class ProductImporter : EntityImporterBase
                 row.SetProperty(context.Result, (x) => x.CustomerEntersPrice);
                 row.SetProperty(context.Result, (x) => x.MinimumCustomerEnteredPrice);
                 row.SetProperty(context.Result, (x) => x.MaximumCustomerEnteredPrice, 1000);
-                // HasTierPrices: see ProcessTierPricesAsync.
                 // LowestAttributeCombinationPrice: see ProcessAttributeCombinationsAsync.
                 row.SetProperty(context.Result, (x) => x.Weight);
                 row.SetProperty(context.Result, (x) => x.Length);
@@ -827,96 +823,6 @@ public class ProductImporter : EntityImporterBase
         }
 
         return num;
-    }
-
-    protected virtual async Task ProcessTierPricesAsync(ImportExecuteContext context)
-    {
-        var segmenter = context.DataSegmenter;
-        var batch = segmenter.GetCurrentBatch<TierPrice>();
-        var entityName = _services.Localization.GetLocalizedEnum(RelatedEntityType.TierPrice, _services.WorkContext.WorkingLanguage.Id);
-        var savedEntities = 0;
-
-        using (var scope = new DbContextScope(_db, autoDetectChanges: false, minHookImportance: HookImportance.Important, deferCommit: true))
-        {
-            await context.SetProgressAsync(T("Admin.Common.ProcessingInfo", entityName, segmenter.CurrentSegmentFirstRowIndex - 1, segmenter.TotalRows));
-
-            try
-            {
-                foreach (var row in batch)
-                {
-                    var id = row.GetDataValue<int>(nameof(TierPrice.Id));
-                    var tierPrice = await _db.TierPrices.FindByIdAsync(id, true, context.CancelToken);
-
-                    if (tierPrice == null)
-                    {
-                        if (context.UpdateOnly)
-                        {
-                            ++context.Result.SkippedRecords;
-                            continue;
-                        }
-
-                        // Product-ID is required for new tier prices.
-                        var productId = row.GetDataValue<int>(nameof(TierPrice.ProductId));
-
-                        if (productId == 0 &&
-                            context.KeyFieldNames.Contains("Sku") &&
-                            row.TryGetDataValue<string>("ProductSku", out var sku) &&
-                            sku.HasValue())
-                        {
-                            productId = await _db.Products
-                                .ApplySkuFilter(sku)
-                                .Select(x => x.Id)
-                                .FirstOrDefaultAsync(context.CancelToken);
-                        }
-
-                        if (productId == 0)
-                        {
-                            ++context.Result.SkippedRecords;
-                            context.Result.AddMissingFieldError(row.RowInfo, nameof(TierPrice), nameof(TierPrice.ProductId));
-                            continue;
-                        }
-
-                        tierPrice = new TierPrice
-                        {
-                            ProductId = productId
-                        };
-                    }
-
-                    row.Initialize(tierPrice, null);
-
-                    // Ignore ProductId field to avoid accidents.
-                    row.SetProperty(context.Result, (x) => x.StoreId);
-                    row.SetProperty(context.Result, (x) => x.CustomerRoleId);
-                    row.SetProperty(context.Result, (x) => x.Quantity);
-                    row.SetProperty(context.Result, (x) => x.Price);
-
-                    if (row.TryGetDataValue(nameof(TierPrice.CalculationMethod), out int calcMethod))
-                    {
-                        tierPrice.CalculationMethod = (TierPriceCalculationMethod)calcMethod;
-                    }
-
-                    if (row.IsTransient)
-                    {
-                        _db.TierPrices.Add(tierPrice);
-                    }
-                }
-
-                savedEntities = await scope.CommitAsync(context.CancelToken);
-            }
-            catch (Exception ex)
-            {
-                context.Result.AddError(ex, segmenter.CurrentSegment, nameof(ProcessTierPricesAsync));
-            }
-
-            batch = batch.Where(x => x.Entity != null && !x.IsTransient).ToArray();
-
-            context.Result.NewRecords += batch.Count(x => x.IsNew);
-            context.Result.ModifiedRecords += Math.Max(0, savedEntities - context.Result.NewRecords);
-
-            // INFO: Product.HasTierPrices is updated by TierPriceHook.
-        }
-
-        await _services.EventPublisher.PublishAsync(new ImportBatchExecutedEvent<TierPrice>(context, batch));
     }
 
     protected virtual async Task ProcessAttributeValuesAsync(ImportExecuteContext context)

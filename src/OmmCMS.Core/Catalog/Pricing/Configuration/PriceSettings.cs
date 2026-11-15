@@ -42,22 +42,6 @@ public class PriceSettings : ISettings
     /// </summary>
     public bool DisplayTextForZeroPrices { get; set; }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether to always ignore discounts.
-    /// Discounts explicitly offered for bundle items are excluded from this. They are always applied.
-    /// </summary>
-    public bool IgnoreDiscounts { get; set; }
-
-    /// <summary>
-    /// Gets or sets whether to also apply percentage discounts in tier prices.
-    /// </summary>
-    public bool ApplyPercentageDiscountOnTierPrice { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether percental values of tierprices should be applied to price adjustments of attributes
-    /// </summary>
-    public bool ApplyTierPricePercentageToAttributePriceAdjustments { get; set; } = false;
-
     #endregion
 
     #region New
@@ -137,16 +121,6 @@ public class PriceSettings : ISettings
     public bool ShowRetailPriceSaving { get; set; } = true;
 
     /// <summary>
-    /// <c>true</c> to validate discount limitations in product lists.
-    /// </summary>
-    public bool ValidateDiscountLimitationsInLists { get; set; }
-
-    /// <summary>
-    /// <c>true</c> to validate cart rules assigned to discounts in product lists.
-    /// </summary>
-    public bool ValidateDiscountRulesInLists { get; set; }
-
-    /// <summary>
     /// <c>true</c> to initially apply the price range format (e.g. "from {0}") in product details.
     /// </summary>
     public bool ApplyPriceRangeFormatInProductDetails { get; set; }
@@ -156,16 +130,6 @@ public class PriceSettings : ISettings
     /// are displayed discreetly below the price of the main product.
     /// </summary>
     public bool ShowRequiredProductPricesWithMainProduct { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to ignore discounts assigned to products when a special price is applied.
-    /// </summary>
-    public bool IgnoreProductDiscountsForSpecialPrices { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether discounts (e.g. tier prices) of linked products are taken into account when calculating attribute price surcharges.
-    /// </summary>
-    public bool ApplyDiscountsOfLinkedProducts { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether rule builder rules calculate prices including or excluding tax.

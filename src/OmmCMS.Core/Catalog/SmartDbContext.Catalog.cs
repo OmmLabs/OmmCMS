@@ -36,5 +36,4 @@ public partial class SmartDbContext
     public DbSet<SpecificationAttributeOption> SpecificationAttributeOptions { get; set; }
     public DbSet<ProductSpecificationAttribute> ProductSpecificationAttributes { get; set; }
 
-    public DbSet<TierPrice> TierPrices { get; set; }
 }

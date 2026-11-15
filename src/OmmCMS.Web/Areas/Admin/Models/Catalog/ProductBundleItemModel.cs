@@ -26,12 +26,6 @@ public class ProductBundleItemModel : EntityModelBase, ILocalizedModel<ProductBu
     [LocalizedDisplay("*Quantity")]
     public int Quantity { get; set; }
 
-    [LocalizedDisplay("*Discount")]
-    public decimal? Discount { get; set; }
-
-    [LocalizedDisplay("*DiscountPercentage")]
-    public bool DiscountPercentage { get; set; }
-
     [LocalizedDisplay("*FilterAttributes")]
     public bool FilterAttributes { get; set; }
 

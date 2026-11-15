@@ -220,7 +220,6 @@ internal class AddProductToOrderMapper : IMapper<AddOrderProductModel, MapperRes
             product.MergeWithCombination(selectedCombination);
 
             var calculationOptions = _priceCalculationService.CreateDefaultOptions(false, _workContext.CurrentCustomer, currency);
-            calculationOptions.IgnoreDiscounts = true;
 
             var calculationContext = new PriceCalculationContext(product, from.Quantity, calculationOptions);
 

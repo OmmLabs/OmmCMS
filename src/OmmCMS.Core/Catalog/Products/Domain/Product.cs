@@ -671,15 +671,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     public decimal MaximumCustomerEnteredPrice { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether this product has tier prices configured.
-    /// </summary>
-    /// <remarks>
-    /// We use this property for performance optimization:
-    /// if this property is set to false, then we do not need to load TierPrices navigation property.
-    /// </remarks>
-    public bool HasTierPrices { get; set; }
-
-    /// <summary>
     /// Gets or sets a value for the lowest attribute combination price.
     /// </summary>
     public decimal? LowestAttributeCombinationPrice { get; set; }
@@ -1014,16 +1005,6 @@ public partial class Product : EntityWithAttributes, IAuditable, ISoftDeletable,
     {
         get => LazyLoader?.Load(this, ref _productVariantAttributeCombinations) ?? (_productVariantAttributeCombinations ??= new HashSet<ProductVariantAttributeCombination>());
         protected set => _productVariantAttributeCombinations = value;
-    }
-
-    private ICollection<TierPrice> _tierPrices;
-    /// <summary>
-    /// Gets or sets the tier prices.
-    /// </summary>
-    public ICollection<TierPrice> TierPrices
-    {
-        get => LazyLoader?.Load(this, ref _tierPrices) ?? (_tierPrices ??= new HashSet<TierPrice>());
-        protected set => _tierPrices = value;
     }
 
     private ICollection<ProductBundleItem> _productBundleItems;

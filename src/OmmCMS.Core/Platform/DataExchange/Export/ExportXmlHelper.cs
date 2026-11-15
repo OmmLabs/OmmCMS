@@ -654,7 +654,6 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Product.CustomerEntersPrice), entity.CustomerEntersPrice.ToString());
         _writer.WriteElementString(nameof(Product.MinimumCustomerEnteredPrice), entity.MinimumCustomerEnteredPrice.ToString(_culture));
         _writer.WriteElementString(nameof(Product.MaximumCustomerEnteredPrice), entity.MaximumCustomerEnteredPrice.ToString(_culture));
-        _writer.WriteElementString(nameof(Product.HasTierPrices), entity.HasTierPrices.ToString());
         _writer.WriteElementString(nameof(Product.MainPictureId), entity.MainPictureId?.ToString() ?? string.Empty);
         _writer.WriteElementString(nameof(Product.DisplayAllImagesNumber), entity.DisplayAllImagesNumber?.ToString() ?? string.Empty);
         _writer.WriteElementString(nameof(Product.Weight), ((decimal)product.Weight).ToString(_culture));
@@ -718,26 +717,6 @@ public class ExportXmlHelper : Disposable
                     _writer.WriteElementString(nameof(MediaFile.Extension), mediaFile.Extension);
                     _writer.WriteElementString(nameof(MediaFile.MediaStorageId), mediaFile.MediaStorageId?.ToString() ?? string.Empty);
                 }
-                _writer.WriteEndElement();
-            }
-            _writer.WriteEndElement();
-        }
-
-        if (product.TierPrices != null)
-        {
-            _writer.WriteStartElement("TierPrices");
-            foreach (dynamic tierPrice in product.TierPrices)
-            {
-                TierPrice entityTierPrice = tierPrice.Entity;
-
-                _writer.WriteStartElement("TierPrice");
-                _writer.WriteElementString(nameof(TierPrice.Id), entityTierPrice.Id.ToString());
-                _writer.WriteElementString(nameof(TierPrice.ProductId), entityTierPrice.ProductId.ToString());
-                _writer.WriteElementString(nameof(TierPrice.StoreId), entityTierPrice.StoreId.ToString());
-                _writer.WriteElementString(nameof(TierPrice.CustomerRoleId), entityTierPrice.CustomerRoleId?.ToString() ?? string.Empty);
-                _writer.WriteElementString(nameof(TierPrice.Quantity), entityTierPrice.Quantity.ToString());
-                _writer.WriteElementString(nameof(TierPrice.Price), entityTierPrice.Price.ToString(_culture));
-                _writer.WriteElementString(nameof(TierPrice.CalculationMethod), ((int)entityTierPrice.CalculationMethod).ToString());
                 _writer.WriteEndElement();
             }
             _writer.WriteEndElement();
@@ -828,8 +807,6 @@ public class ExportXmlHelper : Disposable
                 _writer.WriteElementString(nameof(ProductBundleItem.ProductId), entityPbi.ProductId.ToString());
                 _writer.WriteElementString(nameof(ProductBundleItem.BundleProductId), entityPbi.BundleProductId.ToString());
                 _writer.WriteElementString(nameof(ProductBundleItem.Quantity), entityPbi.Quantity.ToString());
-                _writer.WriteElementString(nameof(ProductBundleItem.Discount), entityPbi.Discount?.ToString(_culture) ?? string.Empty);
-                _writer.WriteElementString(nameof(ProductBundleItem.DiscountPercentage), entityPbi.DiscountPercentage.ToString());
                 _writer.WriteElementString(nameof(ProductBundleItem.Name), (string)bundleItem.Name);
                 _writer.WriteElementString(nameof(ProductBundleItem.ShortDescription), (string)bundleItem.ShortDescription);
                 _writer.WriteElementString(nameof(ProductBundleItem.FilterAttributes), entityPbi.FilterAttributes.ToString());

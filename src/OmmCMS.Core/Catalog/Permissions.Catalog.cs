@@ -23,7 +23,6 @@ public static partial class Permissions
             public const string EditPromotion = "catalog.product.editpromotion";
             public const string EditPicture = "catalog.product.editpicture";
             public const string EditTag = "catalog.product.edittag";
-            public const string EditTierPrice = "catalog.product.edittierprice";
         }
 
         public static class Category

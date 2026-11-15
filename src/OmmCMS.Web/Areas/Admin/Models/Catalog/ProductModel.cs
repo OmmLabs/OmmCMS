@@ -371,9 +371,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
         [LocalizedDisplay("Common.DisplayOrder")]
         public int DisplayOrder { get; set; }
 
-        [LocalizedDisplay("*Discount")]
-        public decimal? Discount { get; set; }
-
         [LocalizedDisplay("*Visible")]
         public bool Visible { get; set; }
 
@@ -417,34 +414,6 @@ public class ProductModel : ProductOverviewModel, ILocalizedModel<ProductLocaliz
 
         [LocalizedDisplay("Admin.Rules.AddedByRule")]
         public bool IsSystemMapping { get; set; }
-    }
-
-    [LocalizedDisplay("Admin.Catalog.Products.TierPrices.Fields.")]
-    public class TierPriceModel : EntityModelBase
-    {
-        public int ProductId { get; set; }
-
-        [LocalizedDisplay("*CustomerRole")]
-        [UIHint("TierPriceCustomer")]
-        public int? CustomerRoleId { get; set; }
-        public string CustomerRole { get; set; }
-
-        [LocalizedDisplay("*Store")]
-        [UIHint("TierPriceStore")]
-        public int? StoreId { get; set; }
-        public string Store { get; set; }
-
-        [LocalizedDisplay("*Quantity")]
-        public int Quantity { get; set; }
-
-        // We don't name it Price to avoid model binding conflicts with product property.
-        [LocalizedDisplay("*Price")]
-        public decimal? Price1 { get; set; }
-
-        [LocalizedDisplay("*CalculationMethod")]
-        [UIHint("TierPriceCalculationMethod")]
-        public int CalculationMethodId { get; set; }
-        public string CalculationMethod { get; set; }
     }
 
     [LocalizedDisplay("Admin.Catalog.Products.ProductVariantAttributes.Attributes.Fields.")]
@@ -720,14 +689,6 @@ public partial class ProductVariantAttributeValueModelValidator : SmartValidator
         RuleFor(x => x.Colors)
             .Must(x => x?.AdditionalColors?.Any(y => y.HasValue()) != true || x.Color.HasValue())
             .WithMessage(T("Admin.Common.ColorPalette.PrimaryColorRequired"));
-    }
-}
-
-public partial class TierPriceModelValidator : SmartValidator<ProductModel.TierPriceModel>
-{
-    public TierPriceModelValidator()
-    {
-        RuleFor(x => x.Quantity).GreaterThanOrEqualTo(1);
     }
 }
 

@@ -17,7 +17,6 @@ namespace OmmCMS.Core.Catalog.Products;
 public class ProductBatchContext
 {
     protected readonly List<int> _productIds = [];
-    private readonly List<int> _productIdsTierPrices = [];
     private readonly List<int> _bundledProductIds = [];
     private readonly List<int> _groupedProductIds = [];
     private readonly List<int> _mainMediaFileIds = [];
@@ -33,7 +32,6 @@ public class ProductBatchContext
 
     private LazyMultimap<ProductVariantAttribute> _attributes;
     private LazyMultimap<ProductVariantAttributeCombination> _attributeCombinations;
-    private LazyMultimap<TierPrice> _tierPrices;
     private LazyMultimap<ProductCategory> _productCategories;
     private LazyMultimap<ProductManufacturer> _productManufacturers;
     private LazyMultimap<ProductBundleItem> _productBundleItems;
@@ -64,7 +62,6 @@ public class ProductBatchContext
         if (products != null)
         {
             _productIds.AddRange(products.Select(x => x.Id));
-            _productIdsTierPrices.AddRange(products.Where(x => x.HasTierPrices).Select(x => x.Id));
             _bundledProductIds.AddRange(products.Where(x => x.ProductType == ProductType.BundledProduct).Select(x => x.Id));
             _groupedProductIds.AddRange(products.Where(x => x.ProductType == ProductType.GroupedProduct).Select(x => x.Id));
 
@@ -109,11 +106,6 @@ public class ProductBatchContext
     public LazyMultimap<ProductVariantAttributeCombination> AttributeCombinations
     {
         get => _attributeCombinations ??= new LazyMultimap<ProductVariantAttributeCombination>(LoadAttributeCombinations, _productIds);
-    }
-
-    public LazyMultimap<TierPrice> TierPrices
-    {
-        get => _tierPrices ??= new LazyMultimap<TierPrice>(LoadTierPrices, _productIdsTierPrices);
     }
 
     public LazyMultimap<ProductCategory> ProductCategories
@@ -168,7 +160,6 @@ public class ProductBatchContext
     {
         Attributes.Collect(productIds);
         AttributeCombinations.Collect(productIds);
-        TierPrices.Collect(productIds);
         ProductCategories.Collect(productIds);
         ProductManufacturers.Collect(productIds);
         ProductBundleItems.Collect(productIds);
@@ -186,8 +177,6 @@ public class ProductBatchContext
     {
         _attributes?.Clear();
         _attributeCombinations?.Clear();
-        _tierPrices?.Clear();
-        _productIdsTierPrices?.Clear();
         _productCategories?.Clear();
         _productManufacturers?.Clear();
         _productBundleItems?.Clear();
@@ -227,36 +216,6 @@ public class ProductBatchContext
                 .AsQueryable();
         var attributeCombinations = await query.ToListAsync();
         return attributeCombinations.ToMultimap(x => x.ProductId, x => x);
-    }
-
-    protected virtual async Task<Multimap<int, TierPrice>> LoadTierPrices(int[] ids)
-    {
-        var query = _db.TierPrices
-            .AsNoTracking()
-            .Include(x => x.CustomerRole)
-            .Where(x => ids.Contains(x.ProductId));
-
-        if (Store != null)
-        {
-            query = query.Where(x => x.StoreId == 0 || x.StoreId == Store.Id);
-        }
-
-        var tierPrices = await query.ToListAsync();
-        var orderedTierPrices = tierPrices
-            // Sorting locally is most likely faster.
-            .OrderBy(x => x.ProductId)
-            .ThenBy(x => x.Quantity);
-
-        if (Customer != null)
-        {
-            return orderedTierPrices
-                .FilterForCustomer(Customer)
-                .ToMultimap(x => x.ProductId, x => x);
-        }
-        else
-        {
-            return orderedTierPrices.ToMultimap(x => x.ProductId, x => x);
-        }
     }
 
     protected virtual async Task<Multimap<int, ProductCategory>> LoadProductCategories(int[] ids)

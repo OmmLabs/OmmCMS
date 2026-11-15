@@ -54,24 +54,3 @@ public enum PriceDisplayType
     /// </summary>
     Hide = 30
 }
-
-/// <summary>
-/// Represents the tier price calculation method.
-/// </summary>
-public enum TierPriceCalculationMethod
-{
-    /// <summary>
-    /// Fixed tier price.
-    /// </summary>
-    Fixed = 0,
-
-    /// <summary>
-    /// Percental tier price.
-    /// </summary>
-    Percental = 5,
-
-    /// <summary>
-    /// Adjusted tier price.
-    /// </summary>
-    Adjustment = 10
-}

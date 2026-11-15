@@ -31,7 +31,7 @@
 
     if (!attributes.ContainsKey("data-placeholder"))
     {
-        attributes["data-placeholder"] = T("Admin.Catalog.Products.TierPrices.Fields.CustomerRole.AllRoles").Value;
+        attributes["data-placeholder"] = T("Admin.Common.All").Value;
     }
 }
 <select asp-for="@Model" class="edit-control" attrs="attributes" data-editor="select">

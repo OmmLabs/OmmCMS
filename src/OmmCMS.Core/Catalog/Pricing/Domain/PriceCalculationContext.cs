@@ -9,7 +9,6 @@ namespace OmmCMS.Core.Catalog.Pricing;
 public class PriceCalculationContext
 {
     private Product _product;
-    private ICollection<TierPrice> _tierPrices;
     private List<ProductVariantAttributeValue> _preselectedAttributeValues;
 
     /// <summary>
@@ -125,20 +124,6 @@ public class PriceCalculationContext
     /// Use the context extension methods to apply selected product attributes.
     /// </summary>
     public List<PriceCalculationAttributes> SelectedAttributes { get; set; } = [];
-
-    /// <summary>
-    /// Gets tier prices for <see cref="Product"/>. Tier prices with duplicate quantities are removed.
-    /// </summary>
-    public async Task<ICollection<TierPrice>> GetTierPricesAsync()
-    {
-        if (_tierPrices == null)
-        {
-            _tierPrices = (await Options.BatchContext.TierPrices.GetOrLoadAsync(Product.Id))
-                .RemoveDuplicatedQuantities();
-        }
-
-        return _tierPrices;
-    }
 
     /// <summary>
     /// Gets the product attribute values preselected by the merchant.

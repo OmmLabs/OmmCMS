@@ -121,10 +121,6 @@ internal class StoreHook : AsyncDbSaveHook<Store>
                 .ExecuteDeleteAsync(cancelToken);
         }
 
-        await _db.TierPrices
-            .Where(x => deletedStoreIds.Contains(x.StoreId))
-            .ExecuteDeleteAsync(cancelToken);
-
         var numDeleted = await _db.StoreMappings
             .Where(x => deletedStoreIds.Contains(x.StoreId))
             .ExecuteDeleteAsync(cancelToken);

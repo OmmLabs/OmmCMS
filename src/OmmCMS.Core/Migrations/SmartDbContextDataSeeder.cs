@@ -185,20 +185,8 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Specifies how many hours before an offer ends a countdown is displayed on the product detail page and in the shopping cart. A value of 72 hours displays it during the last three days. Only applies to offers with an end date. Leave the field empty to disable the countdown. A setting on the discount takes precedence.",
             "Legt fest, wie viele Stunden vor Angebotsende ein Countdown auf der Produktdetailseite und im Warenkorb angezeigt wird. Bei 72 Stunden erscheint er während der letzten drei Tage. Gilt nur für Angebote mit Enddatum. Lassen Sie das Feld leer, um den Countdown zu deaktivieren. Eine eigene Einstellung am Rabatt hat Vorrang.");
 
-        builder.AddOrUpdate(prefix + "ApplyTierPricePercentageToAttributePriceAdjustments",
-            "Apply tier discount to variant surcharges and reductions",
-            "Staffelrabatt auf Variantenauf- und -abschläge anwenden",
-            "Specifies whether percentage tier discounts also apply to price surcharges and reductions for variant options. For example, a 10% tier discount reduces a variant surcharge from €5.00 to €4.50. Applies to order quantities greater than 1 and not to variant options linked to products.",
-            "Legt fest, ob prozentuale Staffelermäßigungen auch auf Preisaufschläge und Preisabschläge von Variantenoptionen angewendet werden. Beispielsweise reduziert eine Staffelermäßigung von 10 % einen Variantenaufschlag von 5,00 € auf 4,50 €. Gilt für Bestellmengen größer als 1 und nicht für Variantenoptionen mit Produktverknüpfung.");
 
         builder.AddOrUpdate(prefix + "CheckListPrices", "Check when displaying list prices…", "Bei Listenpreisen prüfen…");
-        builder.AddOrUpdate(prefix + "ValidateDiscountLimitationsInLists", "Discount usage limits", "Rabatt-Nutzungsgrenzen");
-        builder.AddOrUpdate(prefix + "ValidateDiscountRulesInLists", "Cart rules for discounts", "Warenkorbregeln von Rabatten");
-        builder.AddOrUpdate(prefix + "IgnoreDiscounts",
-            "Disable discounts",
-            "Rabatte deaktivieren",
-            "Specifies whether configured discounts are disregarded during price calculation. Special prices, tier prices and discounts on bundle items are not affected.",
-            "Legt fest, ob eingerichtete Rabatte bei der Preisberechnung unberücksichtigt bleiben. Aktionspreise, Staffelpreise und Rabatte auf Bundle-Bestandteile sind davon nicht betroffen.");
 
         builder.AddOrUpdate(prefix + "ShowLoginForPriceNote.Hint",
             "Specifies whether the product detail page displays the message 'Prices are displayed after login.' when the visitor is not allowed to see prices. To display prices only to logged-in customers, revoke the price display permission for the 'Guests' customer group under 'Access control' and grant it to registered customers.",

@@ -110,7 +110,6 @@ public partial class DataExporter
         var localizedName = ctx.GetTranslation(product, nameof(product.Name), product.Name);
 
         result.Downloads = null;
-        result.TierPrices = null;
         result.ProductAttributes = null;
         result.ProductAttributeCombinations = null;
         result.ProductMediaFiles = null;
@@ -373,16 +372,6 @@ public partial class DataExporter
         else
         {
             dynObject.ProductAttributeCombinations = Enumerable.Empty<ProductVariantAttributeCombination>();
-        }
-
-        if (product.HasTierPrices)
-        {
-            // INFO: Conflict when using ProductBatchContext which contains filtered tier prices.
-            var tierPrices = await ctx.ProductBatchContextWithoutFilters.TierPrices.GetOrLoadAsync(product.Id);
-
-            dynObject.TierPrices = tierPrices
-                .Select(x => CreateDynamic(x))
-                .ToList();
         }
 
         if (product.IsDownload)

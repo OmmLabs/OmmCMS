@@ -28,7 +28,6 @@ public partial class DisplayControl : IDisplayControl
         [typeof(ProductMediaFile)] = (x, d, c) => ToTask("p" + ((ProductMediaFile)x).ProductId),
         [typeof(ProductSpecificationAttribute)] = (x, d, c) => ToTask("p" + ((ProductSpecificationAttribute)x).ProductId),
         [typeof(ProductVariantAttributeCombination)] = (x, d, c) => ToTask("p" + ((ProductVariantAttributeCombination)x).ProductId),
-        [typeof(TierPrice)] = (x, d, c) => ToTask("p" + ((TierPrice)x).ProductId),
         [typeof(ProductCategory)] = (x, d, c) => ToTask("p" + ((ProductCategory)x).CategoryId, "p" + ((ProductCategory)x).ProductId),
         [typeof(ProductManufacturer)] = (x, d, c) => ToTask("p" + ((ProductManufacturer)x).ManufacturerId, "p" + ((ProductManufacturer)x).ProductId),
         [typeof(Topic)] = (x, d, c) => ToTask("t" + x.Id),

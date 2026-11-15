@@ -68,16 +68,6 @@ public partial class ProductBundleItem : BaseEntity, IAuditable, ILocalizedEntit
     public int Quantity { get; set; }
 
     /// <summary>
-    /// Gets or sets the discount value.
-    /// </summary>
-    public decimal? Discount { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether the discount amount is calculated by percentage.
-    /// </summary>
-    public bool DiscountPercentage { get; set; }
-
-    /// <summary>
     /// Gets or sets the name.
     /// </summary>
     [StringLength(400)]
@@ -141,8 +131,6 @@ public partial class ProductBundleItem : BaseEntity, IAuditable, ILocalizedEntit
             ProductId = ProductId,
             BundleProductId = BundleProductId,
             Quantity = Quantity,
-            Discount = Discount,
-            DiscountPercentage = DiscountPercentage,
             Name = Name,
             ShortDescription = ShortDescription,
             FilterAttributes = FilterAttributes,

@@ -226,11 +226,6 @@ public abstract class ServiceTestBase
                 new PreselectedPriceCalculator(null),
                 new() { ValidTargets = CalculatorTargets.Product, Order = CalculatorOrdering.Early + 1 });
 
-        var tierPriceCalculator =
-            new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
-                new TierPriceCalculator(),
-                new() { ValidTargets = CalculatorTargets.Product, Order = CalculatorOrdering.Default + 100 });
-
         // Custom calculator for additional charge.
         var customCalculator = new Lazy<IPriceCalculator, PriceCalculatorMetadata>(() =>
             new CustomAdditionalChargeCalculator(), new PriceCalculatorMetadata { ValidTargets = CalculatorTargets.Product, Order = CalculatorOrdering.Default });
@@ -242,7 +237,6 @@ public abstract class ServiceTestBase
             lowestPriceCalculator,
             offerPriceCalculator,
             preselectedPriceCalculator,
-            tierPriceCalculator,
             customCalculator
         });
 

@@ -131,129 +131,13 @@ public class PriceCalculationServiceTests : ServiceTestBase
         };
 
         _productBatchContext = new ProductBatchContext(new List<Product> { _product }, DbContext, LifetimeScope, _store, _customer, false);
-        _priceCalculationContext = new PriceCalculationContext(_product, new PriceCalculationOptions(_productBatchContext, _customer, _store, _language, _currency)
-        {
-            IgnoreDiscounts = true
-        })
+        _priceCalculationContext = new PriceCalculationContext(_product, new PriceCalculationOptions(_productBatchContext, _customer, _store, _language, _currency))
         {
             Quantity = 1
         };
 
         DbContext.Products.RemoveRange(DbContext.Products);
         await DbContext.SaveChangesAsync();
-    }
-
-    private void InitTierPrices()
-    {
-        _product.TierPrices.Add(new TierPrice
-        {
-            Id = 1,
-            Price = 10,
-            Quantity = 2,
-            Product = _product,
-            CalculationMethod = TierPriceCalculationMethod.Fixed
-        });
-
-        _product.TierPrices.Add(new TierPrice
-        {
-            Id = 2,
-            Price = 8,
-            Quantity = 5,
-            Product = _product,
-            CalculationMethod = TierPriceCalculationMethod.Fixed
-        });
-
-        _product.TierPrices.Add(new TierPrice
-        {
-            Id = 3,
-            Price = 1,
-            Quantity = 10,
-            Product = _product,
-            CalculationMethod = TierPriceCalculationMethod.Adjustment
-        });
-
-        _product.TierPrices.Add(new TierPrice
-        {
-            Id = 4,
-            Price = 50,
-            Quantity = 20,
-            Product = _product,
-            CalculationMethod = TierPriceCalculationMethod.Percental
-        });
-
-        // set HasTierPrices property
-        _product.HasTierPrices = true;
-
-        DbContext.Products.Add(_product);
-    }
-
-    private void InitTierPricesForCustomerRoles()
-    {
-        var customerRole1 = new CustomerRole
-        {
-            Id = 1,
-            Name = "Some role 1",
-            Active = true,
-        };
-
-        var customerRole2 = new CustomerRole
-        {
-            Id = 2,
-            Name = "Some role 2",
-            Active = true,
-        };
-
-        DbContext.CustomerRoles.Add(customerRole1);
-        DbContext.CustomerRoles.Add(customerRole2);
-
-        _product.TierPrices.Add(new TierPrice
-        {
-            Price = 10,
-            Quantity = 2,
-            Product = _product,
-            CustomerRole = customerRole1,
-            CalculationMethod = TierPriceCalculationMethod.Fixed
-        });
-
-        _product.TierPrices.Add(new TierPrice
-        {
-            Price = 9,
-            Quantity = 2,
-            Product = _product,
-            CustomerRole = customerRole2,
-            CalculationMethod = TierPriceCalculationMethod.Fixed
-        });
-
-        _product.TierPrices.Add(new TierPrice
-        {
-            Price = 8,
-            Quantity = 5,
-            Product = _product,
-            CustomerRole = customerRole1,
-            CalculationMethod = TierPriceCalculationMethod.Fixed
-        });
-
-        _product.TierPrices.Add(new TierPrice
-        {
-            Price = 5,
-            Quantity = 10,
-            Product = _product,
-            CustomerRole = customerRole2,
-            CalculationMethod = TierPriceCalculationMethod.Fixed
-        });
-
-        // set HasTierPrices property
-        _product.HasTierPrices = true;
-
-        DbContext.Products.Add(_product);
-        DbContext.Customers.Add(_customer);
-
-        _customer.CustomerRoleMappings.Add(new CustomerRoleMapping
-        {
-            CustomerId = _customer.Id,
-            CustomerRoleId = customerRole1.Id,
-            CustomerRole = customerRole1
-        });
     }
 
     [Test]
@@ -313,7 +197,6 @@ public class PriceCalculationServiceTests : ServiceTestBase
             _store,
             _customer,
             false);
-        _priceCalculationContext.Options.IgnoreDiscounts = false;
 
         var price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
 
@@ -351,7 +234,6 @@ public class PriceCalculationServiceTests : ServiceTestBase
         await DbContext.SaveChangesAsync();
 
         _priceCalculationContext.Options.DeterminePriceAdjustments = true;
-        _priceCalculationContext.Options.IgnoreDiscounts = false;
 
         var price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
 
@@ -362,71 +244,7 @@ public class PriceCalculationServiceTests : ServiceTestBase
         }
     }
 
-    [Test]
-    public async Task Can_get_final_product_price_with_tier_prices()
-    {
-        InitTierPrices();
 
-        await DbContext.SaveChangesAsync();
-
-        _priceCalculationContext.Options.IgnoreDiscounts = false;
-        _priceCalculationContext.Options.IgnoreTierPrices = false;
-
-        _priceCalculationContext.Quantity = 1;
-
-        var price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(12.34M);
-
-        _priceCalculationContext.Quantity = 2;
-        price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(10);
-
-        _priceCalculationContext.Quantity = 3;
-        price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(10);
-
-        _priceCalculationContext.Quantity = 5;
-        price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(8);
-
-        _priceCalculationContext.Quantity = 10;
-        price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(11.34M);
-
-        _priceCalculationContext.Quantity = 20;
-        price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(6.17M);
-    }
-
-    [Test]
-    public async Task Can_get_final_product_price_with_tier_prices_by_customer_role()
-    {
-        InitTierPricesForCustomerRoles();
-
-        await DbContext.SaveChangesAsync();
-
-        _priceCalculationContext.Options.IgnoreDiscounts = false;
-        _priceCalculationContext.Options.IgnoreTierPrices = false;
-
-        var price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(12.34M);
-
-        _priceCalculationContext.Quantity = 2;
-        price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(10);
-
-        _priceCalculationContext.Quantity = 3;
-        price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(10);
-
-        _priceCalculationContext.Quantity = 5;
-        price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(8);
-
-        _priceCalculationContext.Quantity = 10;
-        price = await _priceCalcService.CalculatePriceAsync(_priceCalculationContext);
-        price.FinalPrice.Amount.ShouldEqual(8);
-    }
 
 
     [Test]
