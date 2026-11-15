@@ -117,7 +117,6 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
 
         await PopulateFromSeedAsync("PopulateMeasureDimensions", InstallationSeedDescriptors.MeasureDimensions());
         await PopulateFromSeedAsync("PopulateMeasureWeights", InstallationSeedDescriptors.MeasureWeights());
-        await PopulateAsync("PopulateTaxCategories", PopulateTaxCategories);
         await PopulateFromSeedAsync("PopulateCountriesAndStates", InstallationSeedDescriptors.Countries());
         await PopulateFromSeedAsync("PopulateDeliveryTimes", InstallationSeedDescriptors.DeliveryTimes());
         await PopulateFromSeedAsync("PopulateQuantityUnits", InstallationSeedDescriptors.QuantityUnits());
@@ -223,26 +222,6 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
             Slug = slug,
             IsActive = true
         };
-    }
-
-    private async Task PopulateTaxCategories()
-    {
-        // By reference: entity equality and hash code depend on the ID, which changes on save.
-        var rates = new Dictionary<TaxCategory, decimal>(ReferenceEqualityComparer.Instance);
-        var taxCategories = CreateFromSeed(InstallationSeedDescriptors.TaxCategories(rates));
-        await SaveRangeAsync(taxCategories);
-
-        // Add tax rates to fixed rate provider
-        foreach (var taxCategory in taxCategories.OrderBy(x => x.DisplayOrder))
-        {
-            Context.Settings.Add(new Setting
-            {
-                Name = string.Format("Tax.TaxProvider.FixedRate.TaxCategoryId{0}", taxCategory.Id).ToLowerInvariant(),
-                Value = rates.GetValueOrDefault(taxCategory).Convert<string>(),
-            });
-        }
-
-        await Context.SaveChangesAsync();
     }
 
     private Task PopulateLanguage(Language primaryLanguage)

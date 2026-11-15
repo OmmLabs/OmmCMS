@@ -3,7 +3,6 @@ using System.Text.Json.Nodes;
 using NUnit.Framework;
 using OmmCMS.Core.Catalog.Categories;
 using OmmCMS.Core.Catalog.Products;
-using OmmCMS.Core.Checkout.Tax;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Installation.Seeding;
 
@@ -280,22 +279,22 @@ public class SeedEntityFactoryTests
     [Test]
     public void CreateAll_strips_synthetic_key_and_registers_aliases()
     {
-        var descriptor = new SeedEntityDescriptor<TaxCategory>("key");
+        var descriptor = new SeedEntityDescriptor<Category>("key");
         var set = new SeedRecordSet(
             descriptor,
             [Record("standard", """{ "key": "standard", "name": "Normal" }""")],
             new System.Collections.Generic.Dictionary<string, string> { ["apparel"] = "standard" });
 
-        var categories = _factory.CreateAll<TaxCategory>(set);
+        var categories = _factory.CreateAll<Category>(set);
 
         Assert.That(categories.Single().Name, Is.EqualTo("Normal"));
-        Assert.That(_resolver.Get<TaxCategory>("apparel"), Is.SameAs(categories[0]));
+        Assert.That(_resolver.Get<Category>("apparel"), Is.SameAs(categories[0]));
     }
 
     [Test]
     public void CreateAll_rejects_record_sets_of_other_types()
     {
-        var set = new SeedRecordSet(new SeedEntityDescriptor<TaxCategory>("key"), [], new System.Collections.Generic.Dictionary<string, string>());
+        var set = new SeedRecordSet(new SeedEntityDescriptor<Category>("key"), [], new System.Collections.Generic.Dictionary<string, string>());
 
         Assert.Throws<System.ArgumentException>(() => _factory.CreateAll<Country>(set));
     }

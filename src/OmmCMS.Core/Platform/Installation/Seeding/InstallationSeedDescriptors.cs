@@ -59,22 +59,6 @@ internal static class InstallationSeedDescriptors
         => new SeedEntityDescriptor<ManufacturerTemplate>("viewPath").FromFiles("core/manufacturer-templates.json");
 
     /// <summary>
-    /// Tax categories. The seed-only field "rate" (fixed tax rate, default 0) is collected in <paramref name="rates"/>.
-    /// </summary>
-    /// <param name="rates">
-    /// Receives the rates. Must compare by reference (<see cref="ReferenceEqualityComparer"/>), because entity
-    /// equality depends on the ID, which changes on save.
-    /// </param>
-    public static SeedEntityDescriptor<TaxCategory> TaxCategories(IDictionary<TaxCategory, decimal> rates)
-    {
-        Guard.NotNull(rates);
-
-        return new SeedEntityDescriptor<TaxCategory>("key")
-            .FromFiles("core/tax-categories.json")
-            .Bind("rate", (category, node, _) => rates[category] = node.GetValue<decimal>());
-    }
-
-    /// <summary>
     /// Countries with their states. States can be referenced as "{countryKey}/{stateKey}", e.g. "DE/BW".
     /// </summary>
     public static SeedEntityDescriptor<Country> Countries()
