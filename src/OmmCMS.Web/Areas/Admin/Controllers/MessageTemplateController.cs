@@ -273,7 +273,7 @@ public class MessageTemplateController : AdminController
     }
 
     [HttpPost]
-    [Permission(Permissions.Configuration.Measure.Delete)]
+    [Permission(Permissions.Cms.MessageTemplate.Delete)]
     public async Task<IActionResult> MessageTemplateDelete(GridSelection selection)
     {
         var success = false;

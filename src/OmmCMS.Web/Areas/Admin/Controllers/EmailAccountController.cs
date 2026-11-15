@@ -27,7 +27,7 @@ public class EmailAccountController : AdminController
         _mailService = mailService;
     }
 
-    [Permission(Permissions.Configuration.Measure.Read)]
+    [Permission(Permissions.Configuration.EmailAccount.Read)]
     public IActionResult List()
     {
         return View();
