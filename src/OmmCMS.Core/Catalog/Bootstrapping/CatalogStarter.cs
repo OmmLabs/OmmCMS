@@ -10,8 +10,6 @@ using OmmCMS.Core.Catalog.Products.Rules;
 using OmmCMS.Core.Catalog.Rules;
 using OmmCMS.Core.Catalog.Search;
 using OmmCMS.Core.Catalog.Search.Modelling;
-using OmmCMS.Core.DataExchange;
-using OmmCMS.Core.DataExchange.Import;
 using OmmCMS.Core.Rules.Rendering;
 using OmmCMS.Core.Search;
 using OmmCMS.Core.Search.Facets;
@@ -41,9 +39,6 @@ internal class CatalogStarter : StarterBase
         builder.RegisterType<ProductAttributeFormatter>().As<IProductAttributeFormatter>().InstancePerLifetimeScope();
 
         builder.RegisterType<ProductUrlHelper>().InstancePerLifetimeScope();
-        builder.RegisterType<ProductImporter>().Keyed<IEntityImporter>(ImportEntityType.Product).InstancePerLifetimeScope();
-        builder.RegisterType<CategoryImporter>().Keyed<IEntityImporter>(ImportEntityType.Category).InstancePerLifetimeScope();
-        builder.RegisterType<ManufacturerImporter>().Keyed<IEntityImporter>(ImportEntityType.Manufacturer).InstancePerLifetimeScope();
 
         // Search.
         builder.RegisterType<CatalogSearchQueryVisitor>()

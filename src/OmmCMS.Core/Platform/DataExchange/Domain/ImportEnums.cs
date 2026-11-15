@@ -5,11 +5,8 @@
 /// </summary>
 public enum ImportEntityType
 {
-    Product = 0,
-    Category,
-    Customer,
-    NewsletterSubscription,
-    Manufacturer
+    Customer = 2,
+    NewsletterSubscription = 3
 }
 
 public enum ImportFileType

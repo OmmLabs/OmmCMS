@@ -38,6 +38,8 @@ Phases 606–615: CMS-only installation is now unconditional; catalogue template
 
 Phases 616–620: removed bundled storefront brand, category, product and downloadable demo media and the obsolete catalogue sample guide; the publish smoke test guards against their return.
 
+Phases 621–627: extracted the product, category and manufacturer import engines, their container registrations, import entity choices, and profile field maps. Customer and newsletter imports remain supported with their existing persisted type identifiers; retired profiles are rejected before import.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

@@ -58,6 +58,9 @@ public partial class DataImporter : IDataImporter
         if (!(profile?.Enabled ?? false))
             return;
 
+        if (!Enum.IsDefined(profile.EntityType))
+            throw new NotSupportedException($"Import profile {profile.Id} targets a retired entity type.");
+
         var (ctx, logFile) = await CreateImporterContext(request, profile, cancelToken);
         using var logger = new TraceLogger(logFile, false);
         ctx.Log = ctx.ExecuteContext.Log = logger;

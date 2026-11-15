@@ -1,7 +1,4 @@
 ﻿using System.Diagnostics;
-using OmmCMS.Core.Catalog.Brands;
-using OmmCMS.Core.Catalog.Categories;
-using OmmCMS.Core.Catalog.Products;
 using OmmCMS.Core.Common;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization;
@@ -113,6 +110,8 @@ public partial class ImportProfileService : IImportProfileService
     public virtual async Task<ImportProfile> InsertImportProfileAsync(string fileName, string name, ImportEntityType entityType)
     {
         Guard.NotEmpty(fileName);
+        if (!Enum.IsDefined(entityType))
+            throw new ArgumentOutOfRangeException(nameof(entityType));
 
         if (name.IsEmpty())
         {
@@ -140,15 +139,6 @@ public partial class ImportProfileService : IImportProfileService
 
         switch (entityType)
         {
-            case ImportEntityType.Product:
-                profile.KeyFieldNames = string.Join(',', ProductImporter.DefaultKeyFields);
-                break;
-            case ImportEntityType.Category:
-                profile.KeyFieldNames = string.Join(',', CategoryImporter.DefaultKeyFields);
-                break;
-            case ImportEntityType.Manufacturer:
-                profile.KeyFieldNames = string.Join(',', ManufacturerImporter.DefaultKeyFields);
-                break;
             case ImportEntityType.Customer:
                 profile.KeyFieldNames = string.Join(',', CustomerImporter.DefaultKeyFields);
                 break;
@@ -247,43 +237,6 @@ public partial class ImportProfileService : IImportProfileService
 
                     var localizableProperties = new Dictionary<ImportEntityType, string[]>
                     {
-                        {
-                            ImportEntityType.Product,
-                            [
-                                nameof(Product.Name),
-                                nameof(Product.ShortDescription),
-                                nameof(Product.FullDescription),
-                                nameof(Product.MetaKeywords),
-                                nameof(Product.MetaDescription),
-                                nameof(Product.MetaTitle),
-                                "SeName"
-                            ]
-                        },
-                        {
-                            ImportEntityType.Category,
-                            [
-                                nameof(Category.Name),
-                                nameof(Category.FullName),
-                                nameof(Category.Description),
-                                nameof(Category.BottomDescription),
-                                nameof(Category.MetaKeywords),
-                                nameof(Category.MetaDescription),
-                                nameof(Category.MetaTitle),
-                                "SeName"
-                            ]
-                        },
-                        {
-                            ImportEntityType.Manufacturer,
-                            [
-                                nameof(Manufacturer.Name),
-                                nameof(Manufacturer.Description),
-                                nameof(Manufacturer.BottomDescription),
-                                nameof(Manufacturer.MetaKeywords),
-                                nameof(Manufacturer.MetaDescription),
-                                nameof(Manufacturer.MetaTitle),
-                                "SeName"
-                            ]
-                        },
                         { ImportEntityType.Customer, [] },
                         { ImportEntityType.NewsletterSubscription, [] }
                     };
@@ -311,16 +264,6 @@ public partial class ImportProfileService : IImportProfileService
                         // Add property names missing for column mapping.
                         switch (importType)
                         {
-                            case ImportEntityType.Product:
-                                names["SeName"] = string.Empty;
-                                break;
-                            case ImportEntityType.Category:
-                                names["SeName"] = string.Empty;
-                                names["TreePath"] = "Category tree path";
-                                break;
-                            case ImportEntityType.Manufacturer:
-                                names["SeName"] = string.Empty;
-                                break;
                             case ImportEntityType.Customer:
                                 foreach (var property in addressProperties)
                                 {
@@ -376,15 +319,6 @@ public partial class ImportProfileService : IImportProfileService
 
         switch (entityType)
         {
-            case ImportEntityType.Product:
-                key = "Admin.Catalog.Products.Fields." + property;
-                break;
-            case ImportEntityType.Category:
-                key = "Admin.Catalog.Categories.Fields." + property;
-                break;
-            case ImportEntityType.Manufacturer:
-                key = "Admin.Catalog.Manufacturers.Fields." + property;
-                break;
             case ImportEntityType.Customer:
                 key = (property.StartsWith("BillingAddress.") || property.StartsWith("ShippingAddress."))
                     ? "Address.Fields." + property.Substring(property.IndexOf('.') + 1)
