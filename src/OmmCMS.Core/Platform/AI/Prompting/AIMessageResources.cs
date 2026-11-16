@@ -297,13 +297,6 @@ public partial class AIMessageResources(ILocalizationService localizationService
     /// <summary>
     /// The title is rendered by the respective entity itself on the page.
     /// </summary>
-    /// <returns>AI instruction: Do not create a heading that contains the product name.</returns>
-    public virtual string DontCreateProductTitle()
-        => P("DontCreateProductTitle");
-
-    /// <summary>
-    /// The title is rendered by the respective entity itself on the page.
-    /// </summary>
     /// <param name="entityName">The name of the entity.</param>
     /// <returns>AI instruction: Do not create the title: '<paramref name="entityName"/>'.</returns>
     public virtual string DontCreateTitle(string entityName)
@@ -544,12 +537,17 @@ public partial class AIMessageResources(ILocalizationService localizationService
     /// Adds an instruction for the AI to act in a specific role.
     /// </summary>
     /// <param name="role">The <see cref="AIRole"/></param>
-    /// <param name="entityName">
-    /// The name of the entity. Currently only used to fill a placeholder for the product name 
-    /// when the role is <see cref="AIRole.ProductExpert"/>.</param>
+    /// <param name="entityName">Optional entity name for role-specific localization.</param>
     /// <returns>AI Instruction: e.g.: Be a SEO expert.</returns>
     public virtual string Role(AIRole role, string entityName = "")
-        => P($"Role.{Enum.GetName(typeof(AIRole), role)}", entityName);
+    {
+        if (!Enum.IsDefined(role))
+        {
+            throw new ArgumentOutOfRangeException(nameof(role), role, "Unknown AI role.");
+        }
+
+        return P($"Role.{role}", entityName);
+    }
 
     #region Utilities
 

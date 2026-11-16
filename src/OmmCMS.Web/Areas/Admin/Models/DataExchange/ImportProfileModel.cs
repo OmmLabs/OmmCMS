@@ -60,15 +60,12 @@ public class ImportProfileModel : EntityModelBase
     [LocalizedDisplay("Admin.DataExchange.Import.")]
     public class ExtraDataModel : IDefaultable
     {
-        [LocalizedDisplay("*NumberOfPictures")]
-        public int? NumberOfPictures { get; set; }
-
         [LocalizedDisplay("*UpdateAllKeyFieldMatches")]
         public bool UpdateAllKeyFieldMatches { get; set; }
 
         public bool IsDefaultState
         {
-            get => NumberOfPictures == null && !UpdateAllKeyFieldMatches;
+            get => !UpdateAllKeyFieldMatches;
         }
     }
 }
@@ -101,8 +98,5 @@ public partial class ImportProfileValidator : AbstractValidator<ImportProfileMod
             .When(x => x.Id != 0)
             .WithMessage(T("Admin.DataExchange.Import.Validate.OneKeyFieldRequired"));
 
-        RuleFor(x => x.ExtraData.NumberOfPictures)
-            .GreaterThanOrEqualTo(0)
-            .When(x => x.ExtraData.NumberOfPictures.HasValue);
     }
 }

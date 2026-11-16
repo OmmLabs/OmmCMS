@@ -44,10 +44,10 @@ for example `{$ref:Currency:EUR}`.
 Every record has a **stable, language-independent key**. Keys are never translated and are
 compared case-insensitively.
 
-- Where the entity has a natural business key, that field **is** the key
-  (e.g. `sku`, `alias`, `twoLetterIsoCode`, `currencyCode`, `systemName`, `systemKeyword`).
+- Where the entity has a natural key, that field **is** the key
+  (e.g. `twoLetterIsoCode`, `currencyCode`, `systemName`, `systemKeyword`).
 - Otherwise the record has a synthetic `key` field in kebab-case ASCII,
-  e.g. `"key": "in-store-pickup"`. It is not stored in the database.
+  e.g. `"key": "default"`. It is not stored in the database.
 - Which field is the key of an entity type is declared by its `SeedEntityDescriptor` in C#.
 - Child records (e.g. the states of a country) are keyed within their parent and can be
   referenced as `{parentKey}/{childKey}`, e.g. `DE/BW`.
@@ -58,8 +58,8 @@ Records refer to each other **by key only**, never by name or database ID. Refer
 are named after the target without an `Id` suffix:
 
 ```jsonc
-"taxCategory": "standard",
-"categories": [ "Coffee and Tea", "Delicacies" ]
+"country": "DE",
+"stateProvince": "DE/BW"
 ```
 
 The descriptor declares which fields are references. An unknown key fails the installation
@@ -83,7 +83,7 @@ Merging inside a record:
 - Nested objects are merged field by field.
 - Declared **child collections** (e.g. `stateProvinces`) accept either an overlay object
   (merged by child key, same directives except `$aliases`) or an array (replaces the collection).
-- All other values, including arrays of keys such as `categories`, are **replaced**.
+- All other values, including arrays of keys, are **replaced**.
 - `null` sets a value to null.
 
 Precedence, lowest first:
@@ -92,42 +92,23 @@ Precedence, lowest first:
 _defaults.json  →  base record  →  overlay $all  →  overlay keyed patch
 ```
 
-A descriptor may declare a defaults file (e.g. `samples/catalog/products/_defaults.json`).
+A descriptor may declare a defaults file (e.g. `core/cms/_defaults.json`).
 A culture can overlay the defaults file under the same path.
 
-Example — Germany gets German tax categories, but products keep referring to `apparel`:
+Example — an overlay translates the starter About page:
 
 ```jsonc
-// cultures/de-DE/core/tax-categories.json
+// cultures/de-DE/core/cms/topics.json
 {
-  "$mode": "replace",
-  "$aliases": { "apparel": "standard", "books": "reduced" },
-  "$items": [
-    { "key": "standard", "name": "Normal" },
-    { "key": "reduced",  "name": "Ermäßigt" },
-    { "key": "tax-free", "name": "Befreit" }
-  ]
+  "AboutUs": { "title": "Über uns" }
 }
 ```
 
-## Sample overlays of core files
+## Core and starter content
 
-Core data and settings apply to every installation, and the defaults of settings are defined in code.
-Changes that are only wanted in the demo shop therefore never go into `base/core/` itself, but into a
-sample overlay that is only applied when sample data is installed:
-
-```
-base/samples/core/{file}                 e.g. base/samples/core/settings.json
-cultures/{culture}/samples/core/{file}   e.g. cultures/de-DE/samples/core/tax-categories.json
-```
-
-They have the same format as culture overlays. Order, lowest first:
-
-```
-base/core  →  base/samples/core  →  cultures/{culture}/core  →  cultures/{culture}/samples/core
-```
-
-Examples: the demo catalog settings, price display, and tax categories.
+Every installation uses the core files and the selected culture overlay. The CMS installer
+does not load legacy sample overlays or expose sample-data selection. The lower-level seed
+loader's optional overlay mechanism remains available for extensions and tests.
 
 ## Long texts (`@file`)
 
@@ -135,8 +116,8 @@ A **top-level** string field with the value `"@file"` is replaced by the content
 `{jsonFileName}/{key}.{field}.html` next to the JSON file that sets the value:
 
 ```
-base/samples/catalog/products/food.json              "fullDescription": "@file"
-base/samples/catalog/products/food/FD-1001.fullDescription.html
+base/core/cms/topics.json              "body": "@file"
+base/core/cms/topics/AboutUs.body.html
 ```
 
 - `"@file:relative/path.html"` names the file explicitly (relative to the JSON file).
@@ -148,10 +129,8 @@ base/samples/catalog/products/food/FD-1001.fullDescription.html
 Rule of thumb: HTML longer than one line or about 200 characters goes into its own file.
 Format these files so that people can edit them: every block element (`<p>`, `<ul>`, `<li>`, ...) on its own line,
 content indented by two spaces, one sentence per line. No one-line HTML.
-Every mention of another product or category is a link to `/{slug}/`
-(e.g. `<a href="/arc-floor-lamp/">Arc floor lamp</a>`). Slugs are
-derived from the name in the installed language; update the links when a name changes. The seed tests report
-links without a matching slug.
+Links between starter pages should use their registered slugs, e.g.
+`<a href="/about">About us</a>`. Topic descriptors accept the `slug` override.
 
 ## Locale resources
 
@@ -175,7 +154,7 @@ code of the wizard is `uniqueSeoCode` from `culture.json`. These texts used to l
 A string value can reference a locale resource of the installed language:
 
 ```jsonc
-"title": "@resource:Menu.ServiceMenu",             // whole value
+"title": "@resource:ContactUs",             // whole value
 "title": "Footer - {@resource:Footer.Info}"       // embedded, any number of times
 ```
 
@@ -187,24 +166,11 @@ seeded yet; the installer guarantees the order.
 
 | Convention | Example | Meaning |
 |---|---|---|
-| Relative date | `"specialPriceEndDateTimeUtc": "@now+1M"` | Installation time plus/minus months (`M`) or days (`d`). |
-| Media reference | `"product/fd-1001.jpg"` or `{ "file": "…", "name": "extra-virgin-olive-oil" }` | Path below `media/`. `name` sets the media file name (SEO name) when it differs from the name derived from the path. |
-| Publish condition | `"publishedWhen": "manufacturers"`, `"publishedWhen": "setting:CatalogSettings.CompareProductsEnabled"` | Menu items: published only if manufacturers exist / the setting is true. |
-| Variant value names | `cultures/de-DE/samples/catalog/attribute-value-names.json`: `{ "black": "Schwarz" }` | Translates all variant attribute values with that alias. A product overlay can still override a single value. |
-| Icon | `"icon": "cheese"` | Concept name from the public icon kit (`App_Data/Icons/kits.json`), so that the icon comes from the shared sprite. Do not use direct SVG addresses such as `hi:cheese!/sr`, they bypass the sprite. If a concept is missing, add it to the `public` kit and map it to the HugeIcons icon in `App_Data/Icons/hugeicons/mapping.json`. |
-
-### Product records
-
-| Field | Form |
-|---|---|
-| `categories`, `manufacturers` | Key, or `{ "category": key, "displayOrder": n, "isFeaturedProduct": bool, "isSystemMapping": bool }` (display order defaults to 1). |
-| `pictures` | Media reference, optionally with `"displayOrder"` (default 1). `"from": "{sku}"` reuses the media file of that product's picture with the same path instead of creating a new one. |
-| `specifications` | List without keys (the same option may occur twice); an overlay replaces the whole list. |
-| `variantAttributes` | Keyed by `productAttribute` alias; `values` keyed by `alias`. A value `mediaFile` is a picture of the product (by path); any other path creates a separate media file (once per path). |
-| `combinations` | List without keys; give every combination its own SKU; `attributes` maps attribute alias to value alias(es). `"pictures": []` stores an empty media list, a missing field none. |
-| `bundleItems` | Keyed by `product` (SKU). Created after all products. |
-| `parentGroupedProduct`, `sampleDownload` | SKU of the grouped product; media path of the sample download. |
-| `groupedProductConfiguration` | Object, e.g. `{ "collapsible": true, "headerFields": [ "image", "sku", "price" ] }`. |
+| Relative date | `"createdOnUtc": "@now-1d"` | Installation time plus/minus months (`M`) or days (`d`) for supported date fields. |
+| Media reference | `"logo.png"` or `{ "file": "logo.png", "name": "website-logo" }` | Path below `media/`, used by descriptor-bound media fields such as `logoMediaFile`. |
+| Topic slug | `"slug": "about"` | Stable public URL for a starter topic. |
+| Menu item | `"providerName": "entity", "model": "topic:AboutUs"` | References an installed CMS topic from a navigation menu. |
+| Icon | `"icon": "home"` | Concept name from the public icon kit (`App_Data/Icons/kits.json`), so that the icon comes from the shared sprite. |
 
 ## Languages
 
@@ -214,7 +180,7 @@ A culture is installable when `cultures/{culture}/culture.json` exists:
 { "name": "Deutsch", "uniqueSeoCode": "de", "flagImageFileName": "de.png" }
 ```
 
-The culture code is the folder name. Only one language is installed per shop: the overlays
+The culture code is the folder name. Only one language is installed initially per website: the overlays
 of that culture are applied on top of the base data.
 
 ### Adding a language

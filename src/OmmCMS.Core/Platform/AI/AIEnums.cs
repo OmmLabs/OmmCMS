@@ -10,7 +10,7 @@ public enum AIProviderFeatures
     None = 0,
 
     /// <summary>
-    /// Generate new text content (e.g. product descriptions, articles).
+    /// Generate new text content (e.g. pages and articles).
     /// </summary>
     TextGeneration = 1 << 0,
 
@@ -82,10 +82,9 @@ public enum AIRole
     SEOExpert,
     Blogger,
     Journalist,
-    SalesPerson,
-    ProductExpert,
-    HtmlEditor,
-    ImageAnalyzer
+    // Values 6 and 7 were retired storefront roles.
+    HtmlEditor = 8,
+    ImageAnalyzer = 9
 }
 
 /// <summary>

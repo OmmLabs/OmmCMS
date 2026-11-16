@@ -6347,18 +6347,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.DataExchange.Export.ProgressInfo">
 		<Value>{0} of {1} records exported</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.AppendDescriptionText">
-		<Value>Text to be appended</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.AppendDescriptionText.Hint">
-		<Value>Specifies the text to be attached to the product description. If there are multiple texts then one of it is selected randomly.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.CriticalCharacters">
-		<Value>Critical characters</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.CriticalCharacters.Hint">
-		<Value>List with characters to be removed from the detail description.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.CurrencyId">
 		<Value>Currency</Value>
 	</LocaleResource>
@@ -6371,18 +6359,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.CustomerId.Hint">
 		<Value>Specifies the ID of the customer to be applied to the export. Is taken into account for price calculations for example.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.DescriptionMerging">
-		<Value>Product description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.DescriptionMerging.Hint">
-		<Value>Specifies what information to use for the description of the product.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.DescriptionToPlainText">
-		<Value>Remove HTML from description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.DescriptionToPlainText.Hint">
-		<Value>Specifies whether to remove all HTML from the product description for the export.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.LanguageId">
 		<Value>Language</Value>
 	</LocaleResource>
@@ -6391,24 +6367,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.Note">
 		<Value>The following information will be taken into account during the export and integrated in the process.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.NumberOfPictures">
-		<Value>Number of pictures</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.NumberOfPictures.Hint">
-		<Value>Specifies the number of images per object to be exported.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.PictureSize">
-		<Value>Product picture size</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.PictureSize.Hint">
-		<Value>Specifies the size (in pixel) of the product image.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.RemoveCriticalCharacters">
-		<Value>Remove critical characters</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.RemoveCriticalCharacters.Hint">
-		<Value>Specifies whether to remove critical characters (like ½) from the detail description.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.StoreId">
 		<Value>Store</Value>
@@ -6449,14 +6407,8 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.DataExchange.Import.CompletedEmail.Subject">
 		<Value>Import of "{0}" has been finished</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Import.DefaultCategoryProfileName">
-		<Value>My category import {0}</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.DefaultCustomerProfileName">
 		<Value>My customer import {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Import.DefaultManufacturerProfileName">
-		<Value>My manufacturer import {0}</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.DefaultNewsletterSubscriptionProfileName">
 		<Value>My newsletter subscription import {0}</Value>
@@ -6493,12 +6445,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.NoProfiles">
 		<Value>There were no import profiles found.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Import.NumberOfPictures">
-		<Value>Number of pictures</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Import.NumberOfPictures.Hint">
-		<Value>Specifies the number of images per object to be imported.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.ProfileCreationNote">
 		<Value>Please select the import object and upload an import file.</Value>
@@ -7112,20 +7058,8 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Rules.EditRuleSet">
 		<Value>Edit rule set</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.Execute.DoesNotMatchCart">
-		<Value>The rule conditions are &lt;b class="fwm"&gt;false&lt;/b&gt; for the current customer {0}.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.Execute.MatchCart">
-		<Value>The rule conditions are &lt;b class="fwm"&gt;true&lt;/b&gt; for the current customer {0}.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.Execute.MatchCustomers">
 		<Value>&lt;b class="fwm"&gt;{0}&lt;/b&gt; customers match the rule conditions.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.Execute.MatchProducts">
-		<Value>&lt;b class="fwm"&gt;{0}&lt;/b&gt; products match the rule conditions.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.AcceptThirdPartyEmailHandOver">
-		<Value>Accept third party email handover</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Active">
 		<Value>Is active</Value>
@@ -7148,14 +7082,8 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.BrowserName">
 		<Value>Browser name</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CancelledOrderCount">
-		<Value>Cancelled order count</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Company">
 		<Value>Company</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.CompletedOrderCount">
-		<Value>Completed order count</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.CreatedDays">
 		<Value>Days since registration</Value>
@@ -7174,12 +7102,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Group.BrowserUserAgent">
 		<Value>Browser User Agent</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.HasPurchasedAllProducts">
-		<Value>Has purchased all products</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.HasPurchasedProduct">
-		<Value>Has purchased product</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.IPCountry">
 		<Value>IP associated with country</Value>
@@ -7202,35 +7124,14 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.LastLoginDays">
 		<Value>Days since last login</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.LastOrderDateDays">
-		<Value>Days since last order</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.LastUserAgent">
 		<Value>Last user agent</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.MobileDevice">
 		<Value>Mobile device</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.NewOrderCount">
-		<Value>New order count</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.OperatingSystem">
 		<Value>Operating system</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.OrderInStore">
-		<Value>Orders in store</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.OrderSubtotalExclTax">
-		<Value>Order subtotal excl tax</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.OrderSubtotalInclTax">
-		<Value>Order subtotal incl. tax</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.OrderTotal">
-		<Value>Order total</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.PaymentStatus">
-		<Value>Payment status</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.RuleSet">
 		<Value>Other rule set</Value>
@@ -7238,29 +7139,17 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Salutation">
 		<Value>Salutation</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.ShippingStatus">
-		<Value>Shipping status</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Store">
 		<Value>Store</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.SubscribedToNewsletter">
 		<Value>Subscribed to newsletter</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.TaxDisplayType">
-		<Value>Tax display type</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.TaxExempt">
-		<Value>Tax exempt</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.TimeZone">
 		<Value>Time zone</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Title">
 		<Value>Title</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.FilterDescriptor.VatNumberStatus">
-		<Value>Status of tax number</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.FilterDescriptor.Weekday">
 		<Value>Weekday</Value>
@@ -7294,12 +7183,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.OperatorNotSupported">
 		<Value>The rule scope does not support this operator.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.ProductAttribute.AllConditions">
-		<Value>&lt;span&gt;Only show the attribute if&lt;/span&gt; {0} &lt;span&gt;of the following rules are true.&lt;/span&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Rules.ProductAttribute.OneCondition">
-		<Value>&lt;span&gt;Only show the attribute if at least&lt;/span&gt; {0} &lt;span&gt;of the following rules are true.&lt;/span&gt;</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Rules.ReapplyRules">
 		<Value>Reapply rules</Value>
@@ -10820,15 +10703,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Permissions.DisplayName.AccessShop">
 		<Value>Access shop</Value>
 	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.AccessShoppingCart">
-		<Value>Access shoppping cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.AccessWishlist">
-		<Value>Access wishlist</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.CollectionGroup">
-		<Value>Display groups</Value>
-	</LocaleResource>
 	<LocaleResource Name="Permissions.DisplayName.CreateAddress">
 		<Value>Create addresses</Value>
 	</LocaleResource>
@@ -10838,26 +10712,11 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Permissions.DisplayName.DeleteAddress">
 		<Value>Delete addresses</Value>
 	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.DisplayPrice">
-		<Value>Display prices</Value>
-	</LocaleResource>
 	<LocaleResource Name="Permissions.DisplayName.EditAddress">
 		<Value>Edit addresses</Value>
 	</LocaleResource>
 	<LocaleResource Name="Permissions.DisplayName.EditAnswer">
 		<Value>Edit answers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditAssociatedProduct">
-		<Value>Edit associated products</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditAttribute">
-		<Value>Edit attributes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditBundle">
-		<Value>Edit bundles</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditCategory">
-		<Value>Edit categories</Value>
 	</LocaleResource>
 	<LocaleResource Name="Permissions.DisplayName.EditComment">
 		<Value>Edit comments</Value>
@@ -10868,44 +10727,14 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Permissions.DisplayName.EditExchangeRate">
 		<Value>Edit exchange rates</Value>
 	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditManufacturer">
-		<Value>Edit manufacturers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditOption">
-		<Value>Edit options</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditOptionSet">
-		<Value>Edit options sets</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditOrderItem">
-		<Value>Edit order items</Value>
-	</LocaleResource>
 	<LocaleResource Name="Permissions.DisplayName.EditPicture">
 		<Value>Edit pictures</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditProduct">
-		<Value>Edit products</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditPromotion">
-		<Value>Edit promotion</Value>
 	</LocaleResource>
 	<LocaleResource Name="Permissions.DisplayName.EditResource">
 		<Value>Edit resources</Value>
 	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditShipment">
-		<Value>Edit shipment</Value>
-	</LocaleResource>
 	<LocaleResource Name="Permissions.DisplayName.EditTag">
 		<Value>Edit tags</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditTierPrice">
-		<Value>Edit tier prices</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.EditVariant">
-		<Value>Edit variants</Value>
-	</LocaleResource>
-	<LocaleResource Name="Permissions.DisplayName.PriceLabel">
-		<Value>Price labels</Value>
 	</LocaleResource>
 	<LocaleResource Name="Permissions.DisplayName.ReadAddress">
 		<Value>Read addresses</Value>
@@ -11317,9 +11146,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="OmmCMS.AI.Prompts.CreateJson">
 		<Value>Only return a single JSON object - without formatting, meta comments or additional text.</Value>
 	</LocaleResource>
-	<LocaleResource Name="OmmCMS.AI.Prompts.DontCreateProductTitle">
-		<Value>Do not create a heading that contains the product name.</Value>
-	</LocaleResource>
 	<LocaleResource Name="OmmCMS.AI.Prompts.DontCreateTitle">
 		<Value>Do not create the title: '{0}'.</Value>
 	</LocaleResource>
@@ -11425,9 +11251,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="OmmCMS.AI.Prompts.ProcessHtmlElementsIndividually">
 		<Value>Process each HTML element individually.</Value>
 	</LocaleResource>
-	<LocaleResource Name="OmmCMS.AI.Prompts.Product.NoAssumptions">
-		<Value>Only describe what is clearly known about the product. Do not make any assumptions about the product.</Value>
-	</LocaleResource>
 	<LocaleResource Name="OmmCMS.AI.Prompts.RemoveCaretPosPlaceholder">
 		<Value>Remove the placeholder [CARETPOS] completely. It must NEVER be included in the response - neither visibly nor as a control character. </Value>
 	</LocaleResource>
@@ -11470,14 +11293,8 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="OmmCMS.AI.Prompts.Role.Marketer">
 		<Value>Be a marketing expert.</Value>
 	</LocaleResource>
-	<LocaleResource Name="OmmCMS.AI.Prompts.Role.ProductExpert">
-		<Value>Be an expert for the product: '{0}'.</Value>
-	</LocaleResource>
 	<LocaleResource Name="OmmCMS.AI.Prompts.Role.Rules">
 		<Value>You must strictly follow these rules:</Value>
-	</LocaleResource>
-	<LocaleResource Name="OmmCMS.AI.Prompts.Role.SalesPerson">
-		<Value>Be an assistant who creates product descriptions that convince a potential customer to buy.</Value>
 	</LocaleResource>
 	<LocaleResource Name="OmmCMS.AI.Prompts.Role.SEOExpert">
 		<Value>Be a SEO expert.</Value>

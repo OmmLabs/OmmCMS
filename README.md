@@ -104,6 +104,8 @@ Phases 1041–1060: retire product-variant related-data import and export sideca
 
 Phases 1061–1080: remove unused storefront payment, invoice, packaging, return, tax, pricing, catalog and enum translations in both installation languages, along with obsolete sales dashboard permissions and catalog-specific recent selection attributes. Generalize email footer company labels and navbar overflow text while retaining CMS search and navigation resources.
 
+Phases 1081–1100: remove unused storefront AI roles, product-specific prompt behavior, image-count import options and retired rule, permission and export labels. Preserve generic AI editing, media imports, SEO and customer rules; align seed documentation with CMS-only installation.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

@@ -16,7 +16,7 @@ public partial class MediaImporter : IMediaImporter
     const int MaxCachedDownloadUrls = 2000;
 
     // Maps downloaded URLs to file names. Avoids redundant downloads.
-    // Sometimes subsequent products (e.g. associated products) share the same image.
+    // Multiple imported entities can share the same image.
     private readonly Dictionary<string, string> _downloadUrls = new();
 
     private readonly SmartDbContext _db;
@@ -152,21 +152,21 @@ public partial class MediaImporter : IMediaImporter
             try
             {
                 var entityId = pair.Key;
-                var productItems = pair.Value;
+                var entityItems = pair.Value;
                 var maxDisplayOrder = int.MaxValue;
 
                 // Be kind and assign a continuous DisplayOrder if none has been explicitly specified by the caller.
-                if (productItems.All(x => x.DisplayOrder == 0))
+                if (entityItems.All(x => x.DisplayOrder == 0))
                 {
                     maxDisplayOrder = existingFiles.TryGetValues(entityId, out var pmf) && pmf.Count > 0
                         ? pmf.Select(x => x.DisplayOrder).Max()
                         : 0;
                 }
 
-                // Download images per product.
-                await Download(productItems.Where(x => x.Url.HasValue() && !x.Success).ToArray(), downloadedItems, cancelToken);
+                // Download images per entity.
+                await Download(entityItems.Where(x => x.Url.HasValue() && !x.Success).ToArray(), downloadedItems, cancelToken);
 
-                foreach (var item in productItems.OrderBy(x => x.DisplayOrder))
+                foreach (var item in entityItems.OrderBy(x => x.DisplayOrder))
                 {
                     if (!Succeeded(item))
                     {
@@ -186,9 +186,8 @@ public partial class MediaImporter : IMediaImporter
                     var equalityCheck = await _mediaService.FindEqualFileAsync(file, currentFiles.Select(x => x.MediaFile), true);
                     if (equalityCheck.Success)
                     {
-                        // INFO: may occur during a initial import when products have the same SKU and
-                        // the first product was overwritten with the data of the second one.
-                        InvokeMessageHandler($"Found equal file in product data for '{item.FileName}'. Skipping file.", item, reason: ImportMessageReason.EqualFile);
+                        // Multiple records may resolve to the same entity during an import.
+                        InvokeMessageHandler($"Found equal file in entity data for '{item.FileName}'. Skipping file.", item, reason: ImportMessageReason.EqualFile);
                     }
                     else
                     {
@@ -200,8 +199,7 @@ public partial class MediaImporter : IMediaImporter
                         equalityCheck = await _mediaService.FindEqualFileAsync(file, item.FileName, album.Id, true);
                         if (equalityCheck.Success)
                         {
-                            // INFO: may occur during a subsequent import when products have the same SKU and
-                            // the images of the second product are additionally assigned to the first one.
+                            // Reuse an existing file in the album when another record references it.
                             var assignedFile = assignMediaFileHandler(equalityCheck.Value, item);
                             existingFiles.Add(item.Entity.Id, assignedFile);
                             InvokeMessageHandler($"Found equal file in {album.Name} album for '{item.FileName}'. Assigning existing file instead.", item, reason: ImportMessageReason.EqualFileInAlbum);

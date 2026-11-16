@@ -340,28 +340,17 @@ public partial class AIMessageBuilder
     /// These rules form the operational core of the system prompt and guide the model's response style, structure, and constraints. 
     /// Each entry in the list should represent a clear, standalone directive.
     /// </param>
-    /// <param name="entityName">The name of the entity. Currently only used to fill a placeholder for the productname when the role is <see cref="AIRole.ProductExpert"/></param>
+    /// <param name="entityName">Optional entity name for role-specific localization.</param>
     /// <returns>AI Instruction: e.g.: Be a SEO expert.</returns>
     public virtual AIChat AddRoleMessage(AIRole role, AIChat chat, List<string> roleInstructions = null, string entityName = "")
     {
         var message = Resources.Role(role, entityName);
         roleInstructions ??= [];
 
-        // Lets add some generic operational instructions for explizit roles.
+        // Add generic operational instructions for specific roles.
         var resRoot = AIMessageResources.PromptResourceRoot;
 
-        // INFO: ProductExpert will be used exclusivly by RichTextDialog of Product.LongDescription
-        if (role == AIRole.ProductExpert)
-        {
-            // Add an empty line between the first role and the second role to make clear that these are two different dimensions of the role.
-            message += "\n\n" + Resources.Role(AIRole.HtmlEditor);
-
-            roleInstructions.AddRange(
-                Resources.GetResource(resRoot + "Product.NoAssumptions"),
-                Resources.DontCreateProductTitle()
-            );
-        }
-        else if (role == AIRole.ImageAnalyzer)
+        if (role == AIRole.ImageAnalyzer)
         {
             message += "\n\n" + Resources.Role(AIRole.SEOExpert);
 
@@ -492,8 +481,7 @@ public partial class AIMessageBuilder
     /// <param name="chat">The <see cref="AIChat" /> containing a <see cref="List{AIChatMessage}"/> to which the generated messages will be added.</param>
     protected virtual async Task<AIChat> AddRichTextMessagesAsync(IAITextModel model, AIChat chat)
     {
-        // INFO: For products we use a slightly different version
-        if (model.TargetProperty != "FullDescription" && model.Type != "Product")
+        if (model.EntityName.HasValue())
         {
             chat.System(Resources.DontCreateTitle(model.EntityName));
         }

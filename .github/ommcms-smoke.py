@@ -169,6 +169,8 @@ def editorial_workflows(password):
     assert not any(name.startswith(("payment.", "pdfinvoice.", "pdfpackagingslip.", "pdfproductcatalog.", "returnrequests.", "tax.", "shipment.", "shipping.", "enums.producttype.", "enums.shoppingcarttype.", "enums.orderstatus.")) for name in resources)
     assert {"common.navigation.more", "common.company.email", "common.company.phone", "common.company.fax", "common.company.taxnumber", "common.company.vatid", "common.company.commercialregister", "search.facet.customer", "search.facet.date", "enums.rulescope.customer"} <= resources
     assert "catalogmenu.morelink" not in resources
+    assert {"ommcms.ai.prompts.role.htmleditor", "ommcms.ai.prompts.role.imageanalyzer", "ommcms.ai.prompts.role.seoexpert", "ommcms.ai.prompts.dontcreatetitle", "admin.rules.execute.matchcustomers", "admin.rules.filterdescriptor.isincustomerrole"} <= resources
+    assert not {"ommcms.ai.prompts.role.productexpert", "ommcms.ai.prompts.role.salesperson", "admin.rules.execute.matchproducts", "admin.rules.filterdescriptor.ordertotal", "admin.dataexchange.import.numberofpictures"} & resources
     print("Fresh locale resources retain CMS export fields without retired commerce labels.")
     if "--admin-commerce-trimmed" in sys.argv:
         for controller, action in (("campaign","list"), ("category","list"), ("currency","list"), ("discount","list"), ("export","list"), ("import","list"), ("manufacturer","list"), ("measure","weights"), ("order","list"), ("product","list"), ("search","searchsettings")):
