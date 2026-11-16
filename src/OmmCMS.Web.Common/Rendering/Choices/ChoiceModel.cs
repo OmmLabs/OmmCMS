@@ -36,11 +36,6 @@ public abstract class ChoiceModel : EntityModelBase
     /// </summary>
     public bool ShowValueNameInSwatch { get; set; }
 
-    /// <summary>
-    /// Gets or sets which price information is displayed in a swatch.
-    /// </summary>
-    public SwatchPriceDisplayMode SwatchPriceDisplay { get; set; }
-
     public string CustomData { get; set; }
 
     /// <summary>
@@ -76,7 +71,7 @@ public abstract class ChoiceModel : EntityModelBase
     /// </summary>
     public bool UseCardLayout
         => CanUseCardLayout
-            && (ShowValueNameInSwatch || SwatchPriceDisplay != SwatchPriceDisplayMode.None)
+            && ShowValueNameInSwatch
             && SwatchSize >= SwatchSize.Large;
 
     /// <summary>

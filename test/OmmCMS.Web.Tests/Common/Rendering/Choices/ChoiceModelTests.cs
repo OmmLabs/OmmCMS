@@ -74,13 +74,13 @@ public class ChoiceModelTests
             AttributeControlType = AttributeControlType.Boxes,
             SwatchShape = SwatchShape.Circle,
             SwatchSize = SwatchSize.Large,
-            SwatchPriceDisplay = SwatchPriceDisplayMode.FinalPrice,
+            ShowValueNameInSwatch = true,
             Values = [new TestChoiceItemModel { Color = "#fff" }]
         };
 
         Assert.That(model.EffectiveSwatchShape, Is.EqualTo(SwatchShape.Rounded));
 
-        model.SwatchPriceDisplay = SwatchPriceDisplayMode.None;
+        model.ShowValueNameInSwatch = false;
 
         Assert.That(model.EffectiveSwatchShape, Is.EqualTo(SwatchShape.Circle));
 

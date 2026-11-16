@@ -29,11 +29,6 @@ internal sealed class OmmCmsInitialSchema : Migration, ILocaleResourcesProvider
         builder.AddOrUpdate("Enums.SwatchShape.Rect", "Rectangular", "Rechteckig");
         builder.AddOrUpdate("Enums.SwatchShape.Circle", "Circle", "Rund");
 
-        builder.AddOrUpdate("Enums.SwatchPriceDisplayMode.None", "None", "Keine");
-        builder.AddOrUpdate("Enums.SwatchPriceDisplayMode.Adjustment", "Price adjustment", "Preisanpassung");
-        builder.AddOrUpdate("Enums.SwatchPriceDisplayMode.FinalPrice",
-            "Product, Comparison, and Base Price",
-            "Produkt-, Vergleichs- und Grundpreis");
 
         builder.AddOrUpdate("Admin.Common.ResetToDefault",
             "Reset to default value.",
@@ -100,11 +95,6 @@ internal sealed class OmmCmsInitialSchema : Migration, ILocaleResourcesProvider
             "Shows the option name inside the swatch. The name is always shown with price information. Card layout requires size L or larger and a color or image for every option.",
             "Zeigt den Optionsnamen im Muster an. Bei eingeblendeten Preisinformationen wird der Name immer angezeigt. Das Kartenformat erfordert mindestens Größe L sowie eine Farbe oder ein Bild für jede Option.");
 
-        builder.AddOrUpdate("Admin.Catalog.Attributes.ProductAttributes.Fields.SwatchPriceDisplay",
-            "Swatch Price Display",
-            "Preisanzeige im Muster",
-            "Shows available price information inside the swatch. This requires visible prices, size L or larger, and a color or image for every option.",
-            "Zeigt verfügbare Preisinformationen im Muster an. Dafür müssen Preise sichtbar sein, mindestens Größe L eingestellt sein und jede Option eine Farbe oder ein Bild besitzen.");
 
 
         builder.AddOrUpdate("Admin.Catalog.Products.ProductVariantAttributes.SwatchInfo",

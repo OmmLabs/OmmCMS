@@ -84,6 +84,8 @@ Phases 861–875: retire remaining checkout language-seeder updates, commerce ac
 
 Phases 876–890: remove checkout/order/cart resource families and obsolete bank, country and default-address translations from both installation languages; retire the unused product and payment grid renderers while preserving general UI helpers.
 
+Phases 891–900: remove price adjustments, price cards and pricing CSS from the reusable swatch controls. Retain color, image, shape, size, accessibility and selection behavior with non-commerce unit tests.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

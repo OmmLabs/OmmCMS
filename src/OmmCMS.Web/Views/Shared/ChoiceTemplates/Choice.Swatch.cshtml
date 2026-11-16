@@ -11,7 +11,6 @@
     var useCardLayout = Model.UseCardLayout;
     var sizeClass = Model.SwatchSize.ToCssToken();
     var shapeClass = Model.EffectiveSwatchShape.ToCssToken();
-    var showFinalPrice = Model.SwatchPriceDisplay == SwatchPriceDisplayMode.FinalPrice;
 
     var groupClass = $"swatch-group swatch-group-{sizeClass} swatch-shape-{shapeClass}";
     if (canUseCardLayout)
@@ -42,9 +41,8 @@
             var hasImage = item.HasImage;
             var colorClass = " swatch-color" + (item.HasMultipleColors ? " swatch-multicolor" : null);
             var isDark = hasColor && ImagingHelper.GetPerceivedBrightness(item.Color) < 200;
-            var swatchPrice = item.GetSwatchPriceText(Model.SwatchPriceDisplay);
             var label = useCardLayout
-                ? item.GetSwatchCardLabel(Model.SwatchPriceDisplay)
+                ? item.GetSwatchCardLabel()
                 : item.GetAccessibleLabel();
             var dynamicLabel = useCardLayout
                 ? item.GetSwatchDisplayName()
@@ -71,19 +69,10 @@
                     <span class="swatch-content">
                         @if (useCardLayout)
                         {
-                            var basePriceInfo = showFinalPrice && item.SwatchBasePriceInfo.HasValue()
-                                ? LocalizedValue.FixBrackets(item.SwatchBasePriceInfo, WorkContext.WorkingLanguage)
-                                : null;
                             <span class="@elementClass">
                                 <span class="swatch-media swatch-visual@(hasImage ? " swatch-image" : colorClass)" attr-style="(css.HasValue(), css)"></span>
                                 <span class="swatch-details">
                                     <span class="swatch-value">@item.SwatchValueText</span>
-                                    <span sm-if="swatchPrice.HasValue()" class="swatch-price">@swatchPrice</span>
-                                    <del sm-if="showFinalPrice && item.SwatchComparePrice.HasValue"
-                                         class="swatch-compare-price">@item.SwatchComparePrice</del>
-                                    <span sm-if="basePriceInfo != null"
-                                          title="@basePriceInfo"
-                                          class="swatch-base-price text-muted">@Html.Raw(basePriceInfo)</span>
                                     <span sm-if="item.UnavailableReason.HasValue()" class="swatch-status">@item.UnavailableReason</span>
                                 </span>
                             </span>

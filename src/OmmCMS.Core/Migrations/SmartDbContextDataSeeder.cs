@@ -141,12 +141,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Specifies whether the product detail page displays the message 'Prices are displayed after login.' when the visitor is not allowed to see prices. To display prices only to logged-in customers, revoke the price display permission for the 'Guests' customer group under 'Access control' and grant it to registered customers.",
             "Legt fest, ob auf der Produktdetailseite der Hinweis „Preise werden nach Anmeldung angezeigt.“ erscheint, wenn der Besucher keine Preise sehen darf. Um Preise nur angemeldeten Kunden anzuzeigen, entziehen Sie der Kundengruppe „Gäste“ unter „Zugriffsrechte“ das Recht zur Preisanzeige und erlauben es für registrierte Kunden.");
 
-        builder.AddOrUpdate(prefix + "ShowVariantCombinationPriceAdjustment",
-            "Show surcharges and reductions for variants",
-            "Auf- und Abschläge bei Varianten anzeigen",
-            "Specifies whether price surcharges and reductions are displayed for variant options, for example 'Extra large (+ €5.00)'. This setting only affects the display; surcharges and reductions are still included in the product price.",
-            "Legt fest, ob Preisaufschläge und Preisabschläge bei Variantenoptionen angezeigt werden, beispielsweise „Extra groß (+ 5,00 €)“. Die Einstellung betrifft nur die Anzeige; die Auf- und Abschläge werden weiterhin im Produktpreis berücksichtigt.");
-
         prefix = "Admin.Configuration.Settings.Catalog.";
 
         builder.AddOrUpdate(prefix + "ProductsAlsoPurchasedEnabled",

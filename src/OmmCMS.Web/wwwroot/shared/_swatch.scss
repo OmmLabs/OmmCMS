@@ -267,7 +267,7 @@
         font-weight: $font-weight-semibold;
     }
 
-    > :is(.swatch-price, .swatch-compare-price, .swatch-base-price, .swatch-status) {
+    > .swatch-status {
         display: block;
         max-width: 100%;
         overflow: hidden;
@@ -277,14 +277,8 @@
         font-weight: $font-weight-normal;
     }
 
-    > .swatch-base-price {
-        font-size: 11px;
-    }
 }
 
-.swatch-group-lg .swatch-details > :is(.swatch-price, .swatch-compare-price, .swatch-base-price) {
-    font-size: 11px;
-}
 
 .swatch-mediafile .swatch-content {
     max-width: var(--swatch-size) !important;

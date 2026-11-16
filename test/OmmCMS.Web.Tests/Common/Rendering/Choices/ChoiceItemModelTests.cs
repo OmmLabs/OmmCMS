@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using OmmCMS.Core.Common;
 using OmmCMS.Web.Rendering.Choices;
 
 namespace OmmCMS.Web.Tests.Common.Rendering.Choices;
@@ -66,56 +65,6 @@ public class ChoiceItemModelTests
         }
     }
 
-    [TestCase(12.5, "+€12.50")]
-    [TestCase(-12.5, "-€12.50")]
-    public void Can_format_signed_price_adjustment(decimal amount, string expected)
-    {
-        var currency = new Currency
-        {
-            CurrencyCode = "EUR",
-            DisplayLocale = "en-US",
-            CustomFormatting = "€0.00"
-        };
-        var item = new TestChoiceItemModel
-        {
-            PriceAdjustment = new Money(amount, currency)
-        };
-
-        Assert.That(item.GetPriceAdjustmentText(), Is.EqualTo(expected));
-    }
-
-    [Test]
-    public void Does_not_format_missing_or_zero_price_adjustment()
-    {
-        var item = new TestChoiceItemModel();
-
-        Assert.That(item.GetPriceAdjustmentText(), Is.Null);
-
-        item.PriceAdjustment = new Money(0, new Currency());
-
-        Assert.That(item.GetPriceAdjustmentText(), Is.Null);
-    }
-
-    [Test]
-    public void Resolves_swatch_price_according_to_display_mode()
-    {
-        var currency = new Currency
-        {
-            CurrencyCode = "EUR",
-            DisplayLocale = "en-US",
-            CustomFormatting = "€0.00"
-        };
-        var item = new TestChoiceItemModel
-        {
-            PriceAdjustment = new Money(12.5m, currency),
-            SwatchPrice = new Money(99m, currency)
-        };
-
-        Assert.That(item.GetSwatchPriceText(SwatchPriceDisplayMode.None), Is.Null);
-        Assert.That(item.GetSwatchPriceText(SwatchPriceDisplayMode.Adjustment), Is.EqualTo("+€12.50"));
-        Assert.That(item.GetSwatchPriceText(SwatchPriceDisplayMode.FinalPrice), Is.EqualTo("€99.00"));
-    }
-
     [Test]
     public void Builds_swatch_card_value_with_quantity()
     {
@@ -129,25 +78,13 @@ public class ChoiceItemModelTests
     }
 
     [Test]
-    public void Adds_compare_and_base_price_only_to_final_price_card_label()
+    public void Builds_accessible_swatch_card_label()
     {
-        var currency = new Currency
-        {
-            CurrencyCode = "EUR",
-            DisplayLocale = "en-US",
-            CustomFormatting = "€0.00"
-        };
-        var item = new TestChoiceItemModel
-        {
-            Name = "Red",
-            PriceAdjustment = new Money(12.5m, currency),
-            SwatchPrice = new Money(99m, currency),
-            SwatchComparePrice = new Money(119m, currency),
-            SwatchBasePriceInfo = "€9.90 / kg"
-        };
+        var item = new TestChoiceItemModel { Name = "Red", QuantityInfo = 2, Title = "Unavailable" };
 
-        Assert.That(item.GetSwatchCardLabel(SwatchPriceDisplayMode.Adjustment), Is.EqualTo("Red, +€12.50"));
-        Assert.That(item.GetSwatchCardLabel(SwatchPriceDisplayMode.FinalPrice), Is.EqualTo("Red, €99.00, €119.00, €9.90 / kg"));
+        Assert.That(item.GetSwatchCardLabel(), Is.EqualTo("2 x Red"));
+        item.IsUnavailable = true;
+        Assert.That(item.GetSwatchCardLabel(), Is.EqualTo("2 x Red, Unavailable"));
     }
 
     [Test]
