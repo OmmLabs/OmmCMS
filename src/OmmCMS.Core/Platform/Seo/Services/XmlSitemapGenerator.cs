@@ -100,6 +100,11 @@ public partial class XmlSitemapGenerator : AsyncDbSaveHook<BaseEntity>, IXmlSite
             InvalidateAll();
             return Task.FromResult(HookResult.Ok);
         }
+        else if (entry.Entity is OmmCMS.Core.Content.Blogs.BlogPost)
+        {
+            InvalidateAll();
+            return Task.FromResult(HookResult.Ok);
+        }
         else if (entry.Entity is Setting setting)
         {
             if (setting.Name.EqualsNoCase(TypeHelper.NameOf<LocalizationSettings>(x => x.DefaultLanguageRedirectBehaviour)))

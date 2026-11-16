@@ -262,6 +262,7 @@ def editorial_workflows(password):
     get_page("/blog/tag/smoke-tag", anonymous, "Blog smoke article")
     get_page("/blog/archive/2020/1", anonymous, "Blog smoke article")
     get_page("/blog/rss.xml", anonymous, "Blog smoke article")
+    get_page("/sitemap.xml", anonymous, "/blog/smoke-blog")
     assert read_rows("SELECT PostId FROM BlogPostCategory WHERE CategoryId = ?", (category_id,)) == [(blog_id,)]
     assert read_rows("SELECT PostId FROM BlogPostTag WHERE TagId = ?", (tag_id,)) == [(blog_id,)]
     print("Native blog draft, publish, sanitized content, category/tag, archive and RSS passed.")

@@ -24,6 +24,13 @@
         "model": "{\"routename\":\"ContactUs\"}",
         "title": "@resource:ContactUs",
         "displayOrder": 3
+      },
+      {
+        "key": "BlogHome",
+        "providerName": "route",
+        "model": "{\"routename\":\"BlogHome\"}",
+        "title": "Blog",
+        "displayOrder": 4
       }
     ]
   },
