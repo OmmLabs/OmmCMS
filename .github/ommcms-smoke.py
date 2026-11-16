@@ -55,8 +55,12 @@ def assert_permanent_redirect(source, target):
             raise AssertionError(f"{source}: expected HTTP 301, got {response.status}")
     except urllib.error.HTTPError as error:
         assert error.code == 301, f"{source}: expected HTTP 301, got {error.code}"
-        actual = urllib.parse.urlsplit(error.headers["Location"]).path
-        assert actual == target, f"{source}: redirects to {actual}, expected {target}"
+        location = error.headers["Location"]
+        actual = urllib.parse.urlsplit(location).path
+        assert actual.rstrip("/") == target.rstrip("/"), f"{source}: redirects to {actual}, expected {target}"
+        # Follow the exact canonical URL emitted by the application, without allowing a second redirect.
+        with opener.open(urllib.parse.urljoin(base, location), timeout=30) as response:
+            assert response.status == 200, f"{source}: redirect destination returned {response.status}"
 
 
 def start():
@@ -320,7 +324,7 @@ def editorial_workflows(password):
     get_page("/blog/smoke-blog-final", anonymous, "Blog smoke content")
     get_page("/blog/rss.xml", anonymous, "/blog/smoke-blog-final")
     sitemap = get_page("/sitemap.xml", anonymous, "/blog/smoke-blog-final")
-    assert "/blog/smoke-blog<" not in sitemap and "/blog/smoke-blog-second<" not in sitemap
+    assert all(old not in sitemap for old in ("/blog/smoke-blog<", "/blog/smoke-blog/<", "/blog/smoke-blog-second<", "/blog/smoke-blog-second/<"))
 
     # A historical URL cannot be stolen by a different post.
     page = get_page("/admin/blog/edit", admin, 'id="blog-post-form"')

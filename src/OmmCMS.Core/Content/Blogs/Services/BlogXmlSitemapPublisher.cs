@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Seo;
+using OmmCMS.Core.Seo.Routing;
 
 namespace OmmCMS.Core.Content.Blogs;
 
@@ -46,7 +47,7 @@ public class BlogXmlSitemapPublisher : IXmlSitemapPublisher
             var path = slugs.GetSlug(0, entity.Id, true);
             return BlogSlugPaths.GetSlug(nameof(BlogPost), path) == null
                 ? null
-                : new XmlSitemapNode { Loc = baseUrl.TrimEnd('/') + "/" + path, LastMod = entity.LastMod };
+                : new XmlSitemapNode { Loc = baseUrl.TrimEnd('/') + "/" + RouteHelper.NormalizePathComponent(path), LastMod = entity.LastMod };
         }
     }
 }
