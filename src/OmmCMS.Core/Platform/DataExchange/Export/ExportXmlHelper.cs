@@ -118,12 +118,9 @@ public class ExportXmlHelper : Disposable
             _writer.WriteStartElement("Country");
             _writer.WriteElementString(nameof(Country.Id), entityCountry.Id.ToString());
             _writer.WriteElementString(nameof(Country.Name), (string)country.Name);
-            _writer.WriteElementString(nameof(Country.AllowsBilling), entityCountry.AllowsBilling.ToString());
-            _writer.WriteElementString(nameof(Country.AllowsShipping), entityCountry.AllowsShipping.ToString());
             _writer.WriteElementString(nameof(Country.TwoLetterIsoCode), entityCountry.TwoLetterIsoCode);
             _writer.WriteElementString(nameof(Country.ThreeLetterIsoCode), entityCountry.ThreeLetterIsoCode);
             _writer.WriteElementString(nameof(Country.NumericIsoCode), entityCountry.NumericIsoCode.ToString());
-            _writer.WriteElementString(nameof(Country.SubjectToVat), entityCountry.SubjectToVat.ToString());
             _writer.WriteElementString(nameof(Country.Published), entityCountry.Published.ToString());
             _writer.WriteElementString(nameof(Country.DisplayOrder), entityCountry.DisplayOrder.ToString());
             _writer.WriteElementString(nameof(Country.LimitedToStores), entityCountry.LimitedToStores.ToString());
@@ -210,12 +207,9 @@ public class ExportXmlHelper : Disposable
 
         _writer.WriteElementString(nameof(Country.Id), entity.Id.ToString());
         _writer.WriteElementString(nameof(Country.Name), entity.Name);
-        _writer.WriteElementString(nameof(Country.AllowsBilling), entity.AllowsBilling.ToString());
-        _writer.WriteElementString(nameof(Country.AllowsShipping), entity.AllowsShipping.ToString());
         _writer.WriteElementString(nameof(Country.TwoLetterIsoCode), entity.TwoLetterIsoCode);
         _writer.WriteElementString(nameof(Country.ThreeLetterIsoCode), entity.ThreeLetterIsoCode);
         _writer.WriteElementString(nameof(Country.NumericIsoCode), entity.NumericIsoCode.ToString());
-        _writer.WriteElementString(nameof(Country.SubjectToVat), entity.SubjectToVat.ToString());
         _writer.WriteElementString(nameof(Country.Published), entity.Published.ToString());
         _writer.WriteElementString(nameof(Country.DisplayOrder), entity.DisplayOrder.ToString());
         _writer.WriteElementString(nameof(Country.LimitedToStores), entity.LimitedToStores.ToString());

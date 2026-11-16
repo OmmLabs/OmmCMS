@@ -12,12 +12,6 @@ public class CountryModel : TabbableModel, ILocalizedModel<CountryLocalizedModel
     [LocalizedDisplay("*Name")]
     public string Name { get; set; }
 
-    [LocalizedDisplay("*AllowsBilling")]
-    public bool AllowsBilling { get; set; } = true;
-
-    [LocalizedDisplay("*AllowsShipping")]
-    public bool AllowsShipping { get; set; } = true;
-
     [LocalizedDisplay("*TwoLetterIsoCode")]
     public string TwoLetterIsoCode { get; set; }
 
@@ -26,9 +20,6 @@ public class CountryModel : TabbableModel, ILocalizedModel<CountryLocalizedModel
 
     [LocalizedDisplay("*NumericIsoCode")]
     public int NumericIsoCode { get; set; }
-
-    [LocalizedDisplay("*SubjectToVat")]
-    public bool SubjectToVat { get; set; }
 
     [LocalizedDisplay("*DisplayCookieManager")]
     public bool DisplayCookieManager { get; set; }

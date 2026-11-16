@@ -2,12 +2,9 @@
 [
   {
     "name": "Germany",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "DE",
     "threeLetterIsoCode": "DEU",
     "numericIsoCode": 276,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": -10,
     "addressFormat": "{{ Company }}\n{{ Salutation }} {{ Title }} {{ FirstName }} {{ LastName }}\n{{ Street1 }}\n{{ Street2 }}\n{{ ZipCode }} {{ City }}\n{{ Country | Upcase }}",
@@ -15,12 +12,9 @@
   },
   {
     "name": "Austria",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AT",
     "threeLetterIsoCode": "AUT",
     "numericIsoCode": 40,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": -5,
     "addressFormat": "{{ Salutation }} {{ FirstName }} {{ LastName }}\n{{ Company }}\n{{ Street1 }}\n{{ Street2 }}\n{{ ZipCode }} {{ City }}\n{{ Country | Upcase }}",
@@ -28,8 +22,6 @@
   },
   {
     "name": "Switzerland",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CH",
     "threeLetterIsoCode": "CHE",
     "numericIsoCode": 756,
@@ -40,8 +32,6 @@
   },
   {
     "name": "United States",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "US",
     "threeLetterIsoCode": "USA",
     "numericIsoCode": 840,
@@ -426,8 +416,6 @@
   },
   {
     "name": "Canada",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CA",
     "threeLetterIsoCode": "CAN",
     "numericIsoCode": 124,
@@ -518,8 +506,6 @@
   },
   {
     "name": "Argentina",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AR",
     "threeLetterIsoCode": "ARG",
     "numericIsoCode": 32,
@@ -529,8 +515,6 @@
   },
   {
     "name": "Armenia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AM",
     "threeLetterIsoCode": "ARM",
     "numericIsoCode": 51,
@@ -540,8 +524,6 @@
   },
   {
     "name": "Aruba",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AW",
     "threeLetterIsoCode": "ABW",
     "numericIsoCode": 533,
@@ -551,8 +533,6 @@
   },
   {
     "name": "Australia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AU",
     "threeLetterIsoCode": "AUS",
     "numericIsoCode": 36,
@@ -562,8 +542,6 @@
   },
   {
     "name": "Azerbaijan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AZ",
     "threeLetterIsoCode": "AZE",
     "numericIsoCode": 31,
@@ -573,8 +551,6 @@
   },
   {
     "name": "Bahamas",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BS",
     "threeLetterIsoCode": "BHS",
     "numericIsoCode": 44,
@@ -584,8 +560,6 @@
   },
   {
     "name": "Bangladesh",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BD",
     "threeLetterIsoCode": "BGD",
     "numericIsoCode": 50,
@@ -595,8 +569,6 @@
   },
   {
     "name": "Belarus",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BY",
     "threeLetterIsoCode": "BLR",
     "numericIsoCode": 112,
@@ -606,20 +578,15 @@
   },
   {
     "name": "Belgium",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BE",
     "threeLetterIsoCode": "BEL",
     "numericIsoCode": 56,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 32
   },
   {
     "name": "Belize",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BZ",
     "threeLetterIsoCode": "BLZ",
     "numericIsoCode": 84,
@@ -629,8 +596,6 @@
   },
   {
     "name": "Bermuda",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BM",
     "threeLetterIsoCode": "BMU",
     "numericIsoCode": 60,
@@ -640,8 +605,6 @@
   },
   {
     "name": "Bolivia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BO",
     "threeLetterIsoCode": "BOL",
     "numericIsoCode": 68,
@@ -651,8 +614,6 @@
   },
   {
     "name": "Bosnia and Herzegowina",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BA",
     "threeLetterIsoCode": "BIH",
     "numericIsoCode": 70,
@@ -662,8 +623,6 @@
   },
   {
     "name": "Brazil",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BR",
     "threeLetterIsoCode": "BRA",
     "numericIsoCode": 76,
@@ -674,20 +633,15 @@
   },
   {
     "name": "Bulgaria",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BG",
     "threeLetterIsoCode": "BGR",
     "numericIsoCode": 100,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 359
   },
   {
     "name": "Cayman Islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "KY",
     "threeLetterIsoCode": "CYM",
     "numericIsoCode": 136,
@@ -697,8 +651,6 @@
   },
   {
     "name": "Chile",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CL",
     "threeLetterIsoCode": "CHL",
     "numericIsoCode": 152,
@@ -708,8 +660,6 @@
   },
   {
     "name": "China",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CN",
     "threeLetterIsoCode": "CHN",
     "numericIsoCode": 156,
@@ -720,8 +670,6 @@
   },
   {
     "name": "Colombia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CO",
     "threeLetterIsoCode": "COL",
     "numericIsoCode": 170,
@@ -731,8 +679,6 @@
   },
   {
     "name": "Costa Rica",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CR",
     "threeLetterIsoCode": "CRI",
     "numericIsoCode": 188,
@@ -742,20 +688,15 @@
   },
   {
     "name": "Croatia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "HR",
     "threeLetterIsoCode": "HRV",
     "numericIsoCode": 191,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 385
   },
   {
     "name": "Cuba",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CU",
     "threeLetterIsoCode": "CUB",
     "numericIsoCode": 192,
@@ -765,44 +706,33 @@
   },
   {
     "name": "Cyprus",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CY",
     "threeLetterIsoCode": "CYP",
     "numericIsoCode": 196,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 357
   },
   {
     "name": "Czech Republic",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CZ",
     "threeLetterIsoCode": "CZE",
     "numericIsoCode": 203,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 420
   },
   {
     "name": "Denmark",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "DK",
     "threeLetterIsoCode": "DNK",
     "numericIsoCode": 208,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 45
   },
   {
     "name": "Dominican Republic",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "DO",
     "threeLetterIsoCode": "DOM",
     "numericIsoCode": 214,
@@ -812,8 +742,6 @@
   },
   {
     "name": "Ecuador",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "EC",
     "threeLetterIsoCode": "ECU",
     "numericIsoCode": 218,
@@ -823,8 +751,6 @@
   },
   {
     "name": "Egypt",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "EG",
     "threeLetterIsoCode": "EGY",
     "numericIsoCode": 818,
@@ -834,24 +760,18 @@
   },
   {
     "name": "Finland",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "FI",
     "threeLetterIsoCode": "FIN",
     "numericIsoCode": 246,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 358
   },
   {
     "name": "France",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "FR",
     "threeLetterIsoCode": "FRA",
     "numericIsoCode": 250,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "addressFormat": "{{ Salutation }} {{ FirstName }} {{ LastName }}\n{{ Company }}\n{{ Street1 }}\n{{ Street2 }}\n{{ ZipCode }} {{ City }}\n{{ Country | Upcase }}",
@@ -859,8 +779,6 @@
   },
   {
     "name": "Georgia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GE",
     "threeLetterIsoCode": "GEO",
     "numericIsoCode": 268,
@@ -870,8 +788,6 @@
   },
   {
     "name": "Gibraltar",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GI",
     "threeLetterIsoCode": "GIB",
     "numericIsoCode": 292,
@@ -881,20 +797,15 @@
   },
   {
     "name": "Greece",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GR",
     "threeLetterIsoCode": "GRC",
     "numericIsoCode": 300,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 30
   },
   {
     "name": "Guatemala",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GT",
     "threeLetterIsoCode": "GTM",
     "numericIsoCode": 320,
@@ -904,8 +815,6 @@
   },
   {
     "name": "Hong Kong",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "HK",
     "threeLetterIsoCode": "HKG",
     "numericIsoCode": 344,
@@ -915,20 +824,15 @@
   },
   {
     "name": "Hungary",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "HU",
     "threeLetterIsoCode": "HUN",
     "numericIsoCode": 348,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 36
   },
   {
     "name": "India",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "IN",
     "threeLetterIsoCode": "IND",
     "numericIsoCode": 356,
@@ -938,8 +842,6 @@
   },
   {
     "name": "Indonesia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "ID",
     "threeLetterIsoCode": "IDN",
     "numericIsoCode": 360,
@@ -949,20 +851,15 @@
   },
   {
     "name": "Ireland",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "IE",
     "threeLetterIsoCode": "IRL",
     "numericIsoCode": 372,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 353
   },
   {
     "name": "Israel",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "IL",
     "threeLetterIsoCode": "ISR",
     "numericIsoCode": 376,
@@ -972,12 +869,9 @@
   },
   {
     "name": "Italy",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "IT",
     "threeLetterIsoCode": "ITA",
     "numericIsoCode": 380,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "addressFormat": "{{ Title }} {{ FirstName }} {{ LastName }}\n{{ Company }}\n{{ Street1 }}\n{{ Street2 }}\n~!\n{{ CountryAbbrev2 }} {{ ZipCode }} {{ City }} {{ State }}\n{{ Country | Upcase }}",
@@ -985,8 +879,6 @@
   },
   {
     "name": "Jamaica",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "JM",
     "threeLetterIsoCode": "JAM",
     "numericIsoCode": 388,
@@ -996,8 +888,6 @@
   },
   {
     "name": "Japan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "JP",
     "threeLetterIsoCode": "JPN",
     "numericIsoCode": 392,
@@ -1008,8 +898,6 @@
   },
   {
     "name": "Jordan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "JO",
     "threeLetterIsoCode": "JOR",
     "numericIsoCode": 400,
@@ -1019,8 +907,6 @@
   },
   {
     "name": "Kazakhstan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "KZ",
     "threeLetterIsoCode": "KAZ",
     "numericIsoCode": 398,
@@ -1030,8 +916,6 @@
   },
   {
     "name": "Korea, Democratic People's Republic of",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "KP",
     "threeLetterIsoCode": "PRK",
     "numericIsoCode": 408,
@@ -1041,8 +925,6 @@
   },
   {
     "name": "Kuwait",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "KW",
     "threeLetterIsoCode": "KWT",
     "numericIsoCode": 414,
@@ -1052,8 +934,6 @@
   },
   {
     "name": "Malaysia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MY",
     "threeLetterIsoCode": "MYS",
     "numericIsoCode": 458,
@@ -1063,8 +943,6 @@
   },
   {
     "name": "Mexico",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MX",
     "threeLetterIsoCode": "MEX",
     "numericIsoCode": 484,
@@ -1074,20 +952,15 @@
   },
   {
     "name": "Netherlands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "NL",
     "threeLetterIsoCode": "NLD",
     "numericIsoCode": 528,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 31
   },
   {
     "name": "New Zealand",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "NZ",
     "threeLetterIsoCode": "NZL",
     "numericIsoCode": 554,
@@ -1097,8 +970,6 @@
   },
   {
     "name": "Norway",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "NO",
     "threeLetterIsoCode": "NOR",
     "numericIsoCode": 578,
@@ -1108,8 +979,6 @@
   },
   {
     "name": "Pakistan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PK",
     "threeLetterIsoCode": "PAK",
     "numericIsoCode": 586,
@@ -1119,8 +988,6 @@
   },
   {
     "name": "Paraguay",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PY",
     "threeLetterIsoCode": "PRY",
     "numericIsoCode": 600,
@@ -1130,8 +997,6 @@
   },
   {
     "name": "Peru",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PE",
     "threeLetterIsoCode": "PER",
     "numericIsoCode": 604,
@@ -1141,8 +1006,6 @@
   },
   {
     "name": "Philippines",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PH",
     "threeLetterIsoCode": "PHL",
     "numericIsoCode": 608,
@@ -1152,32 +1015,24 @@
   },
   {
     "name": "Poland",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PL",
     "threeLetterIsoCode": "POL",
     "numericIsoCode": 616,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 48
   },
   {
     "name": "Portugal",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PT",
     "threeLetterIsoCode": "PRT",
     "numericIsoCode": 620,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 351
   },
   {
     "name": "Puerto Rico",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PR",
     "threeLetterIsoCode": "PRI",
     "numericIsoCode": 630,
@@ -1187,8 +1042,6 @@
   },
   {
     "name": "Qatar",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "QA",
     "threeLetterIsoCode": "QAT",
     "numericIsoCode": 634,
@@ -1198,20 +1051,15 @@
   },
   {
     "name": "Romania",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "RO",
     "threeLetterIsoCode": "ROM",
     "numericIsoCode": 642,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 40
   },
   {
     "name": "Russia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "RU",
     "threeLetterIsoCode": "RUS",
     "numericIsoCode": 643,
@@ -1222,8 +1070,6 @@
   },
   {
     "name": "Saudi Arabia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SA",
     "threeLetterIsoCode": "SAU",
     "numericIsoCode": 682,
@@ -1233,8 +1079,6 @@
   },
   {
     "name": "Singapore",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SG",
     "threeLetterIsoCode": "SGP",
     "numericIsoCode": 702,
@@ -1244,32 +1088,24 @@
   },
   {
     "name": "Slovakia (Slovak Republic)",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SK",
     "threeLetterIsoCode": "SVK",
     "numericIsoCode": 703,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 421
   },
   {
     "name": "Slovenia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SI",
     "threeLetterIsoCode": "SVN",
     "numericIsoCode": 705,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 386
   },
   {
     "name": "South Africa",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "ZA",
     "threeLetterIsoCode": "ZAF",
     "numericIsoCode": 710,
@@ -1279,32 +1115,24 @@
   },
   {
     "name": "Spain",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "ES",
     "threeLetterIsoCode": "ESP",
     "numericIsoCode": 724,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 34
   },
   {
     "name": "Sweden",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SE",
     "threeLetterIsoCode": "SWE",
     "numericIsoCode": 752,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 46
   },
   {
     "name": "Taiwan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TW",
     "threeLetterIsoCode": "TWN",
     "numericIsoCode": 158,
@@ -1314,8 +1142,6 @@
   },
   {
     "name": "Thailand",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TH",
     "threeLetterIsoCode": "THA",
     "numericIsoCode": 764,
@@ -1325,8 +1151,6 @@
   },
   {
     "name": "Timor-Leste",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TL",
     "threeLetterIsoCode": "TLS",
     "numericIsoCode": 626,
@@ -1336,8 +1160,6 @@
   },
   {
     "name": "Turkey",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TR",
     "threeLetterIsoCode": "TUR",
     "numericIsoCode": 792,
@@ -1347,8 +1169,6 @@
   },
   {
     "name": "Ukraine",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "UA",
     "threeLetterIsoCode": "UKR",
     "numericIsoCode": 804,
@@ -1358,8 +1178,6 @@
   },
   {
     "name": "United Arab Emirates",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AE",
     "threeLetterIsoCode": "ARE",
     "numericIsoCode": 784,
@@ -1369,20 +1187,15 @@
   },
   {
     "name": "United Kingdom",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GB",
     "threeLetterIsoCode": "GBR",
     "numericIsoCode": 826,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 44
   },
   {
     "name": "United States minor outlying islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "UM",
     "threeLetterIsoCode": "UMI",
     "numericIsoCode": 581,
@@ -1392,8 +1205,6 @@
   },
   {
     "name": "Uruguay",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "UY",
     "threeLetterIsoCode": "URY",
     "numericIsoCode": 858,
@@ -1403,8 +1214,6 @@
   },
   {
     "name": "Uzbekistan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "UZ",
     "threeLetterIsoCode": "UZB",
     "numericIsoCode": 860,
@@ -1414,8 +1223,6 @@
   },
   {
     "name": "Venezuela",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "VE",
     "threeLetterIsoCode": "VEN",
     "numericIsoCode": 862,
@@ -1425,8 +1232,6 @@
   },
   {
     "name": "Serbia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "RS",
     "threeLetterIsoCode": "SRB",
     "numericIsoCode": 688,
@@ -1436,8 +1241,6 @@
   },
   {
     "name": "Afghanistan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AF",
     "threeLetterIsoCode": "AFG",
     "numericIsoCode": 4,
@@ -1447,8 +1250,6 @@
   },
   {
     "name": "Albania",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AL",
     "threeLetterIsoCode": "ALB",
     "numericIsoCode": 8,
@@ -1458,8 +1259,6 @@
   },
   {
     "name": "Algeria",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "DZ",
     "threeLetterIsoCode": "DZA",
     "numericIsoCode": 12,
@@ -1469,8 +1268,6 @@
   },
   {
     "name": "American Samoa",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AS",
     "threeLetterIsoCode": "ASM",
     "numericIsoCode": 16,
@@ -1480,8 +1277,6 @@
   },
   {
     "name": "Andorra",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AD",
     "threeLetterIsoCode": "AND",
     "numericIsoCode": 20,
@@ -1491,8 +1286,6 @@
   },
   {
     "name": "Angola",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AO",
     "threeLetterIsoCode": "AGO",
     "numericIsoCode": 24,
@@ -1502,8 +1295,6 @@
   },
   {
     "name": "Anguilla",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AI",
     "threeLetterIsoCode": "AIA",
     "numericIsoCode": 660,
@@ -1513,8 +1304,6 @@
   },
   {
     "name": "Antarctica",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AQ",
     "threeLetterIsoCode": "ATA",
     "numericIsoCode": 10,
@@ -1524,8 +1313,6 @@
   },
   {
     "name": "Antigua and Barbuda",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AG",
     "threeLetterIsoCode": "ATG",
     "numericIsoCode": 28,
@@ -1535,8 +1322,6 @@
   },
   {
     "name": "Bahrain",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BH",
     "threeLetterIsoCode": "BHR",
     "numericIsoCode": 48,
@@ -1546,8 +1331,6 @@
   },
   {
     "name": "Barbados",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BB",
     "threeLetterIsoCode": "BRB",
     "numericIsoCode": 52,
@@ -1557,8 +1340,6 @@
   },
   {
     "name": "Benin",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BJ",
     "threeLetterIsoCode": "BEN",
     "numericIsoCode": 204,
@@ -1568,8 +1349,6 @@
   },
   {
     "name": "Bhutan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BT",
     "threeLetterIsoCode": "BTN",
     "numericIsoCode": 64,
@@ -1579,8 +1358,6 @@
   },
   {
     "name": "Botswana",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BW",
     "threeLetterIsoCode": "BWA",
     "numericIsoCode": 72,
@@ -1590,8 +1367,6 @@
   },
   {
     "name": "Bouvet Island",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BV",
     "threeLetterIsoCode": "BVT",
     "numericIsoCode": 74,
@@ -1601,8 +1376,6 @@
   },
   {
     "name": "British Indian Ocean Territory",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "IO",
     "threeLetterIsoCode": "IOT",
     "numericIsoCode": 86,
@@ -1612,8 +1385,6 @@
   },
   {
     "name": "Brunei Darussalam",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BN",
     "threeLetterIsoCode": "BRN",
     "numericIsoCode": 96,
@@ -1623,8 +1394,6 @@
   },
   {
     "name": "Burkina Faso",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BF",
     "threeLetterIsoCode": "BFA",
     "numericIsoCode": 854,
@@ -1634,8 +1403,6 @@
   },
   {
     "name": "Burundi",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "BI",
     "threeLetterIsoCode": "BDI",
     "numericIsoCode": 108,
@@ -1645,8 +1412,6 @@
   },
   {
     "name": "Cambodia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "KH",
     "threeLetterIsoCode": "KHM",
     "numericIsoCode": 116,
@@ -1656,8 +1421,6 @@
   },
   {
     "name": "Cameroon",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CM",
     "threeLetterIsoCode": "CMR",
     "numericIsoCode": 120,
@@ -1667,8 +1430,6 @@
   },
   {
     "name": "Cape Verde",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CV",
     "threeLetterIsoCode": "CPV",
     "numericIsoCode": 132,
@@ -1678,8 +1439,6 @@
   },
   {
     "name": "Central African Republic",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CF",
     "threeLetterIsoCode": "CAF",
     "numericIsoCode": 140,
@@ -1689,8 +1448,6 @@
   },
   {
     "name": "Chad",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TD",
     "threeLetterIsoCode": "TCD",
     "numericIsoCode": 148,
@@ -1700,8 +1457,6 @@
   },
   {
     "name": "Christmas Island",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CX",
     "threeLetterIsoCode": "CXR",
     "numericIsoCode": 162,
@@ -1711,8 +1466,6 @@
   },
   {
     "name": "Cocos (Keeling) Islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CC",
     "threeLetterIsoCode": "CCK",
     "numericIsoCode": 166,
@@ -1722,8 +1475,6 @@
   },
   {
     "name": "Comoros",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "KM",
     "threeLetterIsoCode": "COM",
     "numericIsoCode": 174,
@@ -1733,8 +1484,6 @@
   },
   {
     "name": "Congo",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CG",
     "threeLetterIsoCode": "COG",
     "numericIsoCode": 178,
@@ -1744,8 +1493,6 @@
   },
   {
     "name": "Cook Islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CK",
     "threeLetterIsoCode": "COK",
     "numericIsoCode": 184,
@@ -1755,8 +1502,6 @@
   },
   {
     "name": "Cote D'Ivoire",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "CI",
     "threeLetterIsoCode": "CIV",
     "numericIsoCode": 384,
@@ -1766,8 +1511,6 @@
   },
   {
     "name": "Djibouti",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "DJ",
     "threeLetterIsoCode": "DJI",
     "numericIsoCode": 262,
@@ -1777,8 +1520,6 @@
   },
   {
     "name": "Dominica",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "DM",
     "threeLetterIsoCode": "DMA",
     "numericIsoCode": 212,
@@ -1788,8 +1529,6 @@
   },
   {
     "name": "El Salvador",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SV",
     "threeLetterIsoCode": "SLV",
     "numericIsoCode": 222,
@@ -1799,8 +1538,6 @@
   },
   {
     "name": "Equatorial Guinea",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GQ",
     "threeLetterIsoCode": "GNQ",
     "numericIsoCode": 226,
@@ -1810,8 +1547,6 @@
   },
   {
     "name": "Eritrea",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "ER",
     "threeLetterIsoCode": "ERI",
     "numericIsoCode": 232,
@@ -1821,20 +1556,15 @@
   },
   {
     "name": "Estonia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "EE",
     "threeLetterIsoCode": "EST",
     "numericIsoCode": 233,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 372
   },
   {
     "name": "Ethiopia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "ET",
     "threeLetterIsoCode": "ETH",
     "numericIsoCode": 231,
@@ -1844,8 +1574,6 @@
   },
   {
     "name": "Falkland Islands (Malvinas)",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "FK",
     "threeLetterIsoCode": "FLK",
     "numericIsoCode": 238,
@@ -1855,8 +1583,6 @@
   },
   {
     "name": "Faroe Islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "FO",
     "threeLetterIsoCode": "FRO",
     "numericIsoCode": 234,
@@ -1866,8 +1592,6 @@
   },
   {
     "name": "Fiji",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "FJ",
     "threeLetterIsoCode": "FJI",
     "numericIsoCode": 242,
@@ -1877,8 +1601,6 @@
   },
   {
     "name": "French Guiana",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GF",
     "threeLetterIsoCode": "GUF",
     "numericIsoCode": 254,
@@ -1888,8 +1610,6 @@
   },
   {
     "name": "French Polynesia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PF",
     "threeLetterIsoCode": "PYF",
     "numericIsoCode": 258,
@@ -1899,8 +1619,6 @@
   },
   {
     "name": "French Southern Territories",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TF",
     "threeLetterIsoCode": "ATF",
     "numericIsoCode": 260,
@@ -1910,8 +1628,6 @@
   },
   {
     "name": "Gabon",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GA",
     "threeLetterIsoCode": "GAB",
     "numericIsoCode": 266,
@@ -1921,8 +1637,6 @@
   },
   {
     "name": "Gambia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GM",
     "threeLetterIsoCode": "GMB",
     "numericIsoCode": 270,
@@ -1932,8 +1646,6 @@
   },
   {
     "name": "Ghana",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GH",
     "threeLetterIsoCode": "GHA",
     "numericIsoCode": 288,
@@ -1943,8 +1655,6 @@
   },
   {
     "name": "Greenland",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GL",
     "threeLetterIsoCode": "GRL",
     "numericIsoCode": 304,
@@ -1954,8 +1664,6 @@
   },
   {
     "name": "Grenada",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GD",
     "threeLetterIsoCode": "GRD",
     "numericIsoCode": 308,
@@ -1965,8 +1673,6 @@
   },
   {
     "name": "Guadeloupe",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GP",
     "threeLetterIsoCode": "GLP",
     "numericIsoCode": 312,
@@ -1976,8 +1682,6 @@
   },
   {
     "name": "Guam",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GU",
     "threeLetterIsoCode": "GUM",
     "numericIsoCode": 316,
@@ -1987,8 +1691,6 @@
   },
   {
     "name": "Guinea",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GN",
     "threeLetterIsoCode": "GIN",
     "numericIsoCode": 324,
@@ -1998,8 +1700,6 @@
   },
   {
     "name": "Guinea-bissau",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GW",
     "threeLetterIsoCode": "GNB",
     "numericIsoCode": 624,
@@ -2009,8 +1709,6 @@
   },
   {
     "name": "Guyana",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GY",
     "threeLetterIsoCode": "GUY",
     "numericIsoCode": 328,
@@ -2020,8 +1718,6 @@
   },
   {
     "name": "Haiti",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "HT",
     "threeLetterIsoCode": "HTI",
     "numericIsoCode": 332,
@@ -2031,8 +1727,6 @@
   },
   {
     "name": "Heard and Mc Donald Islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "HM",
     "threeLetterIsoCode": "HMD",
     "numericIsoCode": 334,
@@ -2042,8 +1736,6 @@
   },
   {
     "name": "Honduras",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "HN",
     "threeLetterIsoCode": "HND",
     "numericIsoCode": 340,
@@ -2053,8 +1745,6 @@
   },
   {
     "name": "Iceland",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "IS",
     "threeLetterIsoCode": "ISL",
     "numericIsoCode": 352,
@@ -2064,8 +1754,6 @@
   },
   {
     "name": "Iran (Islamic Republic of)",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "IR",
     "threeLetterIsoCode": "IRN",
     "numericIsoCode": 364,
@@ -2075,8 +1763,6 @@
   },
   {
     "name": "Iraq",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "IQ",
     "threeLetterIsoCode": "IRQ",
     "numericIsoCode": 368,
@@ -2086,8 +1772,6 @@
   },
   {
     "name": "Kenya",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "KE",
     "threeLetterIsoCode": "KEN",
     "numericIsoCode": 404,
@@ -2097,8 +1781,6 @@
   },
   {
     "name": "Kiribati",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "KI",
     "threeLetterIsoCode": "KIR",
     "numericIsoCode": 296,
@@ -2108,8 +1790,6 @@
   },
   {
     "name": "Korea",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "KR",
     "threeLetterIsoCode": "KOR",
     "numericIsoCode": 410,
@@ -2119,8 +1799,6 @@
   },
   {
     "name": "Kosovo",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "XK",
     "threeLetterIsoCode": "XKX",
     "numericIsoCode": 383,
@@ -2130,8 +1808,6 @@
   },
   {
     "name": "Kyrgyzstan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "KG",
     "threeLetterIsoCode": "KGZ",
     "numericIsoCode": 417,
@@ -2141,8 +1817,6 @@
   },
   {
     "name": "Lao People's Democratic Republic",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "LA",
     "threeLetterIsoCode": "LAO",
     "numericIsoCode": 418,
@@ -2152,20 +1826,15 @@
   },
   {
     "name": "Latvia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "LV",
     "threeLetterIsoCode": "LVA",
     "numericIsoCode": 428,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 371
   },
   {
     "name": "Lebanon",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "LB",
     "threeLetterIsoCode": "LBN",
     "numericIsoCode": 422,
@@ -2175,8 +1844,6 @@
   },
   {
     "name": "Lesotho",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "LS",
     "threeLetterIsoCode": "LSO",
     "numericIsoCode": 426,
@@ -2186,8 +1853,6 @@
   },
   {
     "name": "Liberia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "LR",
     "threeLetterIsoCode": "LBR",
     "numericIsoCode": 430,
@@ -2197,8 +1862,6 @@
   },
   {
     "name": "Libyan Arab Jamahiriya",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "LY",
     "threeLetterIsoCode": "LBY",
     "numericIsoCode": 434,
@@ -2208,8 +1871,6 @@
   },
   {
     "name": "Liechtenstein",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "LI",
     "threeLetterIsoCode": "LIE",
     "numericIsoCode": 438,
@@ -2219,32 +1880,24 @@
   },
   {
     "name": "Lithuania",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "LT",
     "threeLetterIsoCode": "LTU",
     "numericIsoCode": 440,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 370
   },
   {
     "name": "Luxembourg",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "LU",
     "threeLetterIsoCode": "LUX",
     "numericIsoCode": 442,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 352
   },
   {
     "name": "Macau",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MO",
     "threeLetterIsoCode": "MAC",
     "numericIsoCode": 446,
@@ -2254,8 +1907,6 @@
   },
   {
     "name": "Macedonia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MK",
     "threeLetterIsoCode": "MKD",
     "numericIsoCode": 807,
@@ -2265,8 +1916,6 @@
   },
   {
     "name": "Madagascar",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MG",
     "threeLetterIsoCode": "MDG",
     "numericIsoCode": 450,
@@ -2276,8 +1925,6 @@
   },
   {
     "name": "Malawi",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MW",
     "threeLetterIsoCode": "MWI",
     "numericIsoCode": 454,
@@ -2287,8 +1934,6 @@
   },
   {
     "name": "Maldives",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MV",
     "threeLetterIsoCode": "MDV",
     "numericIsoCode": 462,
@@ -2298,8 +1943,6 @@
   },
   {
     "name": "Mali",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "ML",
     "threeLetterIsoCode": "MLI",
     "numericIsoCode": 466,
@@ -2309,20 +1952,15 @@
   },
   {
     "name": "Malta",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MT",
     "threeLetterIsoCode": "MLT",
     "numericIsoCode": 470,
-    "subjectToVat": true,
     "published": true,
     "displayOrder": 100,
     "diallingCode": 356
   },
   {
     "name": "Marshall Islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MH",
     "threeLetterIsoCode": "MHL",
     "numericIsoCode": 584,
@@ -2332,8 +1970,6 @@
   },
   {
     "name": "Martinique",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MQ",
     "threeLetterIsoCode": "MTQ",
     "numericIsoCode": 474,
@@ -2343,8 +1979,6 @@
   },
   {
     "name": "Mauritania",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MR",
     "threeLetterIsoCode": "MRT",
     "numericIsoCode": 478,
@@ -2354,8 +1988,6 @@
   },
   {
     "name": "Mauritius",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MU",
     "threeLetterIsoCode": "MUS",
     "numericIsoCode": 480,
@@ -2365,8 +1997,6 @@
   },
   {
     "name": "Mayotte",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "YT",
     "threeLetterIsoCode": "MYT",
     "numericIsoCode": 175,
@@ -2376,8 +2006,6 @@
   },
   {
     "name": "Micronesia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "FM",
     "threeLetterIsoCode": "FSM",
     "numericIsoCode": 583,
@@ -2387,8 +2015,6 @@
   },
   {
     "name": "Moldova",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MD",
     "threeLetterIsoCode": "MDA",
     "numericIsoCode": 498,
@@ -2398,8 +2024,6 @@
   },
   {
     "name": "Monaco",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MC",
     "threeLetterIsoCode": "MCO",
     "numericIsoCode": 492,
@@ -2409,8 +2033,6 @@
   },
   {
     "name": "Mongolia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MN",
     "threeLetterIsoCode": "MNG",
     "numericIsoCode": 496,
@@ -2420,8 +2042,6 @@
   },
   {
     "name": "Montenegro",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "ME",
     "threeLetterIsoCode": "MNE",
     "numericIsoCode": 499,
@@ -2431,8 +2051,6 @@
   },
   {
     "name": "Montserrat",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MS",
     "threeLetterIsoCode": "MSR",
     "numericIsoCode": 500,
@@ -2442,8 +2060,6 @@
   },
   {
     "name": "Morocco",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MA",
     "threeLetterIsoCode": "MAR",
     "numericIsoCode": 504,
@@ -2453,8 +2069,6 @@
   },
   {
     "name": "Mozambique",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MZ",
     "threeLetterIsoCode": "MOZ",
     "numericIsoCode": 508,
@@ -2464,8 +2078,6 @@
   },
   {
     "name": "Myanmar",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MM",
     "threeLetterIsoCode": "MMR",
     "numericIsoCode": 104,
@@ -2475,8 +2087,6 @@
   },
   {
     "name": "Namibia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "NA",
     "threeLetterIsoCode": "NAM",
     "numericIsoCode": 516,
@@ -2486,8 +2096,6 @@
   },
   {
     "name": "Nauru",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "NR",
     "threeLetterIsoCode": "NRU",
     "numericIsoCode": 520,
@@ -2497,8 +2105,6 @@
   },
   {
     "name": "Nepal",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "NP",
     "threeLetterIsoCode": "NPL",
     "numericIsoCode": 524,
@@ -2508,8 +2114,6 @@
   },
   {
     "name": "Netherlands Antilles",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "AN",
     "threeLetterIsoCode": "ANT",
     "numericIsoCode": 530,
@@ -2519,8 +2123,6 @@
   },
   {
     "name": "New Caledonia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "NC",
     "threeLetterIsoCode": "NCL",
     "numericIsoCode": 540,
@@ -2530,8 +2132,6 @@
   },
   {
     "name": "Nicaragua",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "NI",
     "threeLetterIsoCode": "NIC",
     "numericIsoCode": 558,
@@ -2541,8 +2141,6 @@
   },
   {
     "name": "Niger",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "NE",
     "threeLetterIsoCode": "NER",
     "numericIsoCode": 562,
@@ -2552,8 +2150,6 @@
   },
   {
     "name": "Nigeria",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "NG",
     "threeLetterIsoCode": "NGA",
     "numericIsoCode": 566,
@@ -2563,8 +2159,6 @@
   },
   {
     "name": "Niue",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "NU",
     "threeLetterIsoCode": "NIU",
     "numericIsoCode": 570,
@@ -2574,8 +2168,6 @@
   },
   {
     "name": "Norfolk Island",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "NF",
     "threeLetterIsoCode": "NFK",
     "numericIsoCode": 574,
@@ -2585,8 +2177,6 @@
   },
   {
     "name": "Northern Mariana Islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "MP",
     "threeLetterIsoCode": "MNP",
     "numericIsoCode": 580,
@@ -2596,8 +2186,6 @@
   },
   {
     "name": "Oman",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "OM",
     "threeLetterIsoCode": "OMN",
     "numericIsoCode": 512,
@@ -2607,8 +2195,6 @@
   },
   {
     "name": "Palau",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PW",
     "threeLetterIsoCode": "PLW",
     "numericIsoCode": 585,
@@ -2618,8 +2204,6 @@
   },
   {
     "name": "Palestinian Territory",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PS",
     "threeLetterIsoCode": "PSE",
     "numericIsoCode": 275,
@@ -2629,8 +2213,6 @@
   },
   {
     "name": "Panama",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PA",
     "threeLetterIsoCode": "PAN",
     "numericIsoCode": 591,
@@ -2640,8 +2222,6 @@
   },
   {
     "name": "Papua New Guinea",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PG",
     "threeLetterIsoCode": "PNG",
     "numericIsoCode": 598,
@@ -2651,8 +2231,6 @@
   },
   {
     "name": "Pitcairn",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PN",
     "threeLetterIsoCode": "PCN",
     "numericIsoCode": 612,
@@ -2662,8 +2240,6 @@
   },
   {
     "name": "Reunion",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "RE",
     "threeLetterIsoCode": "REU",
     "numericIsoCode": 638,
@@ -2673,8 +2249,6 @@
   },
   {
     "name": "Rwanda",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "RW",
     "threeLetterIsoCode": "RWA",
     "numericIsoCode": 646,
@@ -2684,8 +2258,6 @@
   },
   {
     "name": "Saint Kitts and Nevis",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "KN",
     "threeLetterIsoCode": "KNA",
     "numericIsoCode": 659,
@@ -2695,8 +2267,6 @@
   },
   {
     "name": "Saint Lucia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "LC",
     "threeLetterIsoCode": "LCA",
     "numericIsoCode": 662,
@@ -2706,8 +2276,6 @@
   },
   {
     "name": "Saint Vincent and the Grenadines",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "VC",
     "threeLetterIsoCode": "VCT",
     "numericIsoCode": 670,
@@ -2717,8 +2285,6 @@
   },
   {
     "name": "Samoa",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "WS",
     "threeLetterIsoCode": "WSM",
     "numericIsoCode": 882,
@@ -2728,8 +2294,6 @@
   },
   {
     "name": "San Marino",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SM",
     "threeLetterIsoCode": "SMR",
     "numericIsoCode": 674,
@@ -2739,8 +2303,6 @@
   },
   {
     "name": "Sao Tome and Principe",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "ST",
     "threeLetterIsoCode": "STP",
     "numericIsoCode": 678,
@@ -2750,8 +2312,6 @@
   },
   {
     "name": "Senegal",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SN",
     "threeLetterIsoCode": "SEN",
     "numericIsoCode": 686,
@@ -2761,8 +2321,6 @@
   },
   {
     "name": "Seychelles",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SC",
     "threeLetterIsoCode": "SYC",
     "numericIsoCode": 690,
@@ -2772,8 +2330,6 @@
   },
   {
     "name": "Sierra Leone",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SL",
     "threeLetterIsoCode": "SLE",
     "numericIsoCode": 694,
@@ -2783,8 +2339,6 @@
   },
   {
     "name": "Solomon Islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SB",
     "threeLetterIsoCode": "SLB",
     "numericIsoCode": 90,
@@ -2794,8 +2348,6 @@
   },
   {
     "name": "Somalia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SO",
     "threeLetterIsoCode": "SOM",
     "numericIsoCode": 706,
@@ -2805,8 +2357,6 @@
   },
   {
     "name": "South Georgia & South Sandwich Islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "GS",
     "threeLetterIsoCode": "SGS",
     "numericIsoCode": 239,
@@ -2816,8 +2366,6 @@
   },
   {
     "name": "Sri Lanka",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "LK",
     "threeLetterIsoCode": "LKA",
     "numericIsoCode": 144,
@@ -2827,8 +2375,6 @@
   },
   {
     "name": "St. Helena",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SH",
     "threeLetterIsoCode": "SHN",
     "numericIsoCode": 654,
@@ -2838,8 +2384,6 @@
   },
   {
     "name": "St. Pierre and Miquelon",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "PM",
     "threeLetterIsoCode": "SPM",
     "numericIsoCode": 666,
@@ -2849,8 +2393,6 @@
   },
   {
     "name": "Sudan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SD",
     "threeLetterIsoCode": "SDN",
     "numericIsoCode": 736,
@@ -2860,8 +2402,6 @@
   },
   {
     "name": "Suriname",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SR",
     "threeLetterIsoCode": "SUR",
     "numericIsoCode": 740,
@@ -2871,8 +2411,6 @@
   },
   {
     "name": "Svalbard and Jan Mayen Islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SJ",
     "threeLetterIsoCode": "SJM",
     "numericIsoCode": 744,
@@ -2882,8 +2420,6 @@
   },
   {
     "name": "Swaziland",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SZ",
     "threeLetterIsoCode": "SWZ",
     "numericIsoCode": 748,
@@ -2893,8 +2429,6 @@
   },
   {
     "name": "Syrian Arab Republic",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "SY",
     "threeLetterIsoCode": "SYR",
     "numericIsoCode": 760,
@@ -2904,8 +2438,6 @@
   },
   {
     "name": "Tajikistan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TJ",
     "threeLetterIsoCode": "TJK",
     "numericIsoCode": 762,
@@ -2915,8 +2447,6 @@
   },
   {
     "name": "Tanzania",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TZ",
     "threeLetterIsoCode": "TZA",
     "numericIsoCode": 834,
@@ -2926,8 +2456,6 @@
   },
   {
     "name": "Togo",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TG",
     "threeLetterIsoCode": "TGO",
     "numericIsoCode": 768,
@@ -2937,8 +2465,6 @@
   },
   {
     "name": "Tokelau",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TK",
     "threeLetterIsoCode": "TKL",
     "numericIsoCode": 772,
@@ -2948,8 +2474,6 @@
   },
   {
     "name": "Tonga",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TO",
     "threeLetterIsoCode": "TON",
     "numericIsoCode": 776,
@@ -2959,8 +2483,6 @@
   },
   {
     "name": "Trinidad and Tobago",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TT",
     "threeLetterIsoCode": "TTO",
     "numericIsoCode": 780,
@@ -2970,8 +2492,6 @@
   },
   {
     "name": "Tunisia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TN",
     "threeLetterIsoCode": "TUN",
     "numericIsoCode": 788,
@@ -2981,8 +2501,6 @@
   },
   {
     "name": "Turkmenistan",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TM",
     "threeLetterIsoCode": "TKM",
     "numericIsoCode": 795,
@@ -2992,8 +2510,6 @@
   },
   {
     "name": "Turks and Caicos Islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TC",
     "threeLetterIsoCode": "TCA",
     "numericIsoCode": 796,
@@ -3003,8 +2519,6 @@
   },
   {
     "name": "Tuvalu",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "TV",
     "threeLetterIsoCode": "TUV",
     "numericIsoCode": 798,
@@ -3014,8 +2528,6 @@
   },
   {
     "name": "Uganda",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "UG",
     "threeLetterIsoCode": "UGA",
     "numericIsoCode": 800,
@@ -3025,8 +2537,6 @@
   },
   {
     "name": "Vanuatu",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "VU",
     "threeLetterIsoCode": "VUT",
     "numericIsoCode": 548,
@@ -3036,8 +2546,6 @@
   },
   {
     "name": "Vatican City State (Holy See)",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "VA",
     "threeLetterIsoCode": "VAT",
     "numericIsoCode": 336,
@@ -3047,8 +2555,6 @@
   },
   {
     "name": "Viet Nam",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "VN",
     "threeLetterIsoCode": "VNM",
     "numericIsoCode": 704,
@@ -3058,8 +2564,6 @@
   },
   {
     "name": "Virgin Islands (British)",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "VG",
     "threeLetterIsoCode": "VGB",
     "numericIsoCode": 92,
@@ -3069,8 +2573,6 @@
   },
   {
     "name": "Virgin Islands (U.S.)",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "VI",
     "threeLetterIsoCode": "VIR",
     "numericIsoCode": 850,
@@ -3080,8 +2582,6 @@
   },
   {
     "name": "Wallis and Futuna Islands",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "WF",
     "threeLetterIsoCode": "WLF",
     "numericIsoCode": 876,
@@ -3091,8 +2591,6 @@
   },
   {
     "name": "Western Sahara",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "EH",
     "threeLetterIsoCode": "ESH",
     "numericIsoCode": 732,
@@ -3102,8 +2600,6 @@
   },
   {
     "name": "Yemen",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "YE",
     "threeLetterIsoCode": "YEM",
     "numericIsoCode": 887,
@@ -3113,8 +2609,6 @@
   },
   {
     "name": "Zambia",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "ZM",
     "threeLetterIsoCode": "ZMB",
     "numericIsoCode": 894,
@@ -3124,8 +2618,6 @@
   },
   {
     "name": "Zimbabwe",
-    "allowsBilling": true,
-    "allowsShipping": true,
     "twoLetterIsoCode": "ZW",
     "threeLetterIsoCode": "ZWE",
     "numericIsoCode": 716,

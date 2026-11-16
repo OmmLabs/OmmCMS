@@ -757,6 +757,8 @@ try:
             "measureweight", "collectiongroup", "collectiongroupmapping")
         tables = {name.lower() for name in rows("SELECT name FROM sqlite_master WHERE type='table'")}
         assert not tables.intersection(retired_catalog_tables), "Retired catalogue tables remain"
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('Country') WHERE name IN ('AllowsBilling', 'AllowsShipping', 'SubjectToVat')") == [0], "Commerce country flags remain"
+        assert rows("SELECT COUNT(*) FROM Country")[0] > 0, "Country directory missing"
         assert rows("SELECT COUNT(*) FROM pragma_table_info('RuleSet') WHERE name='ProductVariantAttributeId'") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='BackInStockSubscription'") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Affiliate'") == [0]

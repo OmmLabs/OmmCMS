@@ -222,18 +222,5 @@ public class AddressValidator : SmartValidator<AddressModel>
                     .WithMessage(T("Admin.Address.Fields.EmailMatch.MustMatchEmail"));
             }
         });
-
-        When(x => x.CountryId != null && x.DefaultAddressesEnabled, () =>
-        {
-            RuleFor(x => x.IsDefaultBillingAddress)
-                .Must((model, x) => db.Countries.Any(x => x.Id == model.CountryId.Value && x.AllowsBilling))
-                .When(x => x.IsDefaultBillingAddress)
-                .WithMessage((model, x) => T("Order.CountryNotAllowedForBilling", model.CountryName));
-
-            RuleFor(x => x.IsDefaultShippingAddress)
-                .Must((model, x) => db.Countries.Any(x => x.Id == model.CountryId.Value && x.AllowsShipping))
-                .When(x => x.IsDefaultShippingAddress)
-                .WithMessage((model, x) => T("Order.CountryNotAllowedForShipping", model.CountryName));
-        });
     }
 }

@@ -48,7 +48,7 @@ public class SeedDataSourceTests
     [Test]
     public void Loads_base_records_with_defaults_and_overlay()
     {
-        WriteFile("base/core/_defaults.json", """{ "published": true, "allowsBilling": true }""");
+        WriteFile("base/core/_defaults.json", """{ "published": true, "displayCookieManager": true }""");
         WriteFile("base/core/countries.json", """
             // Comments and trailing commas are allowed.
             [
@@ -56,7 +56,7 @@ public class SeedDataSourceTests
               { "twoLetterIsoCode": "DE", "name": "Germany", "published": false },
             ]
             """);
-        WriteFile("cultures/de-DE/core/countries.json", """{ "$all": { "allowsBilling": false }, "DE": { "name": "Deutschland", "published": true } }""");
+        WriteFile("cultures/de-DE/core/countries.json", """{ "$all": { "displayCookieManager": false }, "DE": { "name": "Deutschland", "published": true } }""");
 
         var descriptor = CountryDescriptor().WithDefaults("core/_defaults.json");
         var set = CreateSource().Load(descriptor);
@@ -66,7 +66,7 @@ public class SeedDataSourceTests
 
         var us = set.Records[0].Data;
         Assert.That((bool)us["published"], Is.True);
-        Assert.That((bool)us["allowsBilling"], Is.False);
+        Assert.That((bool)us["displayCookieManager"], Is.False);
 
         var de = set.Records[1].Data;
         Assert.That((string)de["name"], Is.EqualTo("Deutschland"));

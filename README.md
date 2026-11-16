@@ -70,6 +70,8 @@ Phases 785–790: make route isolation, entity patch restrictions, catalogue men
 
 Phases 791–800: retire storefront layout and installer presentation fallbacks, make CMS settings navigation unconditional, remove the stale storefront search action from structured data, and remove unused CMS-preview installation seed state. Retain the existing CMS home and administrator presentation.
 
+Phases 801–815: retire country billing/shipping and VAT restrictions from persistence, seed data, address selection and validation, administrative editors, exports and related test fixtures. Country directories and customer address management remain available.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

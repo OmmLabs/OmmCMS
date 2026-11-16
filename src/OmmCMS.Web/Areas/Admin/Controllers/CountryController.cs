@@ -96,21 +96,6 @@ public class CountryController : AdminController
             query = query.Where(x => x.TwoLetterIsoCode == model.SearchTwoLetterIsoCode);
         }
 
-        if (model.SearchAllowsBilling.HasValue)
-        {
-            query = query.Where(x => x.AllowsBilling == model.SearchAllowsBilling);
-        }
-
-        if (model.SearchAllowsShipping.HasValue)
-        {
-            query = query.Where(x => x.AllowsShipping == model.SearchAllowsShipping);
-        }
-
-        if (model.SearchSubjectToVat.HasValue)
-        {
-            query = query.Where(x => x.SubjectToVat == model.SearchSubjectToVat);
-        }
-
         if (model.SearchPublished.HasValue)
         {
             query = query.Where(x => x.Published == model.SearchPublished);

@@ -430,26 +430,9 @@ public class CustomerController : PublicController
         var address = customer.Addresses.FirstOrDefault(x => x.Id == id);
         if (address != null)
         {
-            var billingAllowed = address.Country?.AllowsBilling ?? true;
-            var shippingAllowed = address.Country?.AllowsShipping ?? true;
-
-            if (billingAllowed && shippingAllowed)
-            {
-                customer.GenericAttributes.DefaultBillingAddressId = address.Id;
-                customer.GenericAttributes.DefaultShippingAddressId = address.Id;
-                await _db.SaveChangesAsync();
-            }
-            else
-            {
-                if (!billingAllowed)
-                {
-                    NotifyError(T("Order.CountryNotAllowedForBilling", address.Country?.GetLocalized(x => x.Name)));
-                }
-                if (!shippingAllowed)
-                {
-                    NotifyError(T("Order.CountryNotAllowedForShipping", address.Country?.GetLocalized(x => x.Name)));
-                }
-            }
+            customer.GenericAttributes.DefaultBillingAddressId = address.Id;
+            customer.GenericAttributes.DefaultShippingAddressId = address.Id;
+            await _db.SaveChangesAsync();
         }
 
         return RedirectToAction(nameof(Addresses));

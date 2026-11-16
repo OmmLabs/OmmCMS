@@ -49,11 +49,6 @@
         get => !TryGetMetadata<bool>("includeHidden", out var includeHidden) || includeHidden == true;
     }
 
-    private bool ShippingCountriesOnly
-    {
-        get => TryGetMetadata<bool>("shippingCountriesOnly", out var shippingCountriesOnly) && shippingCountriesOnly == true;
-    }
-
     private int StoreId
     {
         get => GetMetadata<int>("storeId");
@@ -72,11 +67,6 @@
         var query = CommonServices.DbContext.Countries
             .AsNoTracking()
             .ApplyStandardFilter(IncludeHidden, StoreId, false);
-
-        if (ShippingCountriesOnly)
-        {
-            query = query.Where(x => x.AllowsShipping);
-        }
 
         var countries = await query.ToListAsync();
         var keys = SelectedKeys;
