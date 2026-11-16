@@ -30,7 +30,7 @@ public abstract class PredicateFilterDescriptor<T, TPredicate, TPredicateValue> 
             // .Any/All<TPredicate>()
             new[] { typeof(TPredicate) },
             // 0 = left collection path: x.Orders.selectMany(o => o.OrderItems)
-            // 1 = right Any/All predicate: y => y.ProductId = 1
+            // 1 = right Any/All predicate: y => y.Id = 1
             new Expression[]
             {
                 MemberExpression.Body,

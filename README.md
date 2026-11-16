@@ -82,6 +82,8 @@ Phases 846–860: replace the legacy billing/shipping customer relationships wit
 
 Phases 861–875: retire remaining checkout language-seeder updates, commerce activity-log types and localized seeds, obsolete page identities and permission labels, and the shipment email partial. Shared address presentation and logging remain.
 
+Phases 876–890: remove checkout/order/cart resource families and obsolete bank, country and default-address translations from both installation languages; retire the unused product and payment grid renderers while preserving general UI helpers.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

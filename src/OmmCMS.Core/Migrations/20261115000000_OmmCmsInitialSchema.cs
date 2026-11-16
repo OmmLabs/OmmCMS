@@ -66,13 +66,13 @@ internal sealed class OmmCmsInitialSchema : Migration, ILocaleResourcesProvider
         builder.AddOrUpdate("Admin.Configuration.Settings.Catalog.DefaultSwatchSize",
             "Default size of swatches",
             "Standardgröße von Swatches (Farb- und Bildmuster)",
-            "Sets the default swatch size. It can be overridden for product and checkout attributes and for individual products. Recommended size is M.",
+            "Sets the default swatch size for shared choice controls. Recommended size is M.",
             "Legt die Standardgröße der Muster fest. Sie kann bei Produkt- und Checkoutattributen sowie bei einzelnen Produkten überschrieben werden. Empfohlen wird Größe M.");
 
         builder.AddOrUpdate("Admin.Configuration.Settings.Catalog.DefaultSwatchShape",
             "Default shape of swatches",
             "Standardform von Swatches (Farb- und Bildmuster)",
-            "Sets the default swatch shape. It can be overridden for product and checkout attributes and for individual products. Default is \"Pill\".",
+            "Sets the default swatch shape for shared choice controls. Default is \"Pill\".",
             "Legt die Standardform der Muster fest. Sie kann bei Produkt- und Checkoutattributen sowie bei einzelnen Produkten überschrieben werden. Standard ist \"Abgerundet\".");
 
 
@@ -123,10 +123,5 @@ internal sealed class OmmCmsInitialSchema : Migration, ILocaleResourcesProvider
 
         builder.AddOrUpdate("Common.CompletedOn", "Completed on", "Abgeschlossen am");
 
-        builder.AddOrUpdate("Admin.Orders.Products.WithdrawalWaiver",
-            "Withdrawal waiver",
-            "Widerrufsverzicht",
-            "Indicates whether and when the customer accepted the withdrawal waiver for this order item.",
-            "Zeigt an, ob und wann der Kunde den Widerrufsverzicht für diese Auftragsposition erklärt hat.");
     }
 }

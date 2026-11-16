@@ -756,6 +756,8 @@ try:
         assert rows("SELECT COUNT(*) FROM __MigrationVersionInfo WHERE Description LIKE '%OmmCMS initial schema%'") == [1], "Initial schema migration missing"
         assert rows("SELECT COUNT(*) FROM __MigrationVersionInfo WHERE Description LIKE '%Core:%'") == [0], "Historical core migrations must not be applied"
         assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName = 'Admin.Common.ResetToDefault'") == [1], "Baseline locale updates missing"
+        assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName LIKE 'ShoppingCart.%' OR ResourceName LIKE 'Checkout.%' OR ResourceName LIKE 'Order.%' OR ResourceName LIKE 'Admin.Orders.%'") == [0], "Retired checkout locale resources remain"
+        assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName LIKE 'Admin.Configuration.Settings.GeneralCommon.BankConnectionSettings%'") == [0], "Retired bank locale resources remain"
         retired_catalog_tables = ("product", "category", "manufacturer", "producttemplate", "categorytemplate",
             "manufacturertemplate", "product_category_mapping", "product_manufacturer_mapping",
             "productbundleitem", "productbundleitemattributefilter", "product_mediafile_mapping", "producttag",

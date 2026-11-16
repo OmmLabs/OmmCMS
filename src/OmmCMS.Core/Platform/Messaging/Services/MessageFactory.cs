@@ -531,7 +531,7 @@ public partial class MessageFactory : IMessageFactory
                 }
                 else
                 {
-                    // Sub-token, e.g. "Order.Customer"
+                    // Sub-token, e.g. "Customer.ContactAddress"
                     // Get "Customer" part, this is our property name, NOT the model name
                     var propName = token[(dotIndex + 1)..];
                     // Get parent model "Order"
@@ -571,7 +571,7 @@ public partial class MessageFactory : IMessageFactory
                 if (currentModel == null)
                     break;
 
-                // Put it in dict as e.g. "Order.Customer"
+                // Put it in dict as e.g. "Customer.ContactAddress"
                 models[token] = currentModel;
             }
 

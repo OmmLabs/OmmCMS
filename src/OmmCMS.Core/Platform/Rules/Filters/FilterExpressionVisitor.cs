@@ -11,7 +11,7 @@ internal sealed class FilterExpressionVisitor : ExpressionVisitor
 
     protected override Expression VisitParameter(ParameterExpression node)
     {
-        // The parameter expressions in each filter (x => x.ProductId) must point to the root parameter (it => ...),
+        // The parameter expressions in each filter (x => x.CustomerId) must point to the root parameter (it => ...),
         // that was created by CompositeFilterExpression.
         if (node.Type == _rootParameter.Type)
         {
