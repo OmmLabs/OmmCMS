@@ -293,8 +293,8 @@ def editorial_workflows(password):
     with sqlite3.connect(database) as connection:
         deleted = connection.execute("DELETE FROM UrlRecord WHERE EntityName IN ('BlogPost', 'BlogCategory', 'BlogTag')").rowcount
         assert deleted == 3, "Expected exactly three newly managed URLs"
-        marker = connection.execute("DELETE FROM __MigrationVersionInfo WHERE Description LIKE '%Central URL records for blog content%'").rowcount
-        assert marker == 1, "Blog central URL migration marker missing"
+        migration_marker_count = connection.execute("DELETE FROM __MigrationVersionInfo WHERE Description LIKE '%Central URL records for blog content%'").rowcount
+        assert migration_marker_count == 1, "Blog central URL migration marker missing"
     start()
     wait_for("/")
     get_page("/blog/smoke-blog", anonymous, "Blog smoke content")
