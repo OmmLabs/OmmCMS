@@ -136,6 +136,8 @@ def editorial_workflows(password):
     assert all(name not in customer_settings for name in ("HideMyAccountOrders", "HideDownloadableProductsTab", "FullNameOnProductRequestRequired")), "Retired account controls remain"
     general_settings = get_page("/admin/setting/generalcommon", admin, "ConvertNonWesternChars")
     assert "ProductDescriptionPriority" not in general_settings, "Retired SEO control remains"
+    performance_settings = get_page("/admin/maintenance/performancesettings", admin, "MediaDupeDetectorMaxCacheSize")
+    assert "MaxUnavailableAttributeCombinations" not in performance_settings, "Retired product variant performance setting remains"
     print("CMS media, account and SEO settings render without commerce controls.")
     if "--presentation-trimmed" in sys.argv:
         for path in ("/pdf/receiptheader", "/pdf/receiptfooter"):
@@ -823,6 +825,7 @@ try:
         assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName IN ('Common.Media.ThumbTitle', 'Common.Media.ThumbAlternateText', 'Admin.Configuration.Currencies.Fields.RoundingEnabled.Validation')") == [3], "CMS media or rounding resources missing"
         assert rows("SELECT COUNT(*) FROM Setting WHERE lower(Name) IN ('mediasettings.productthumbpicturesize', 'mediasettings.productdetailspicturesize', 'mediasettings.cartthumbpicturesize', 'customersettings.hidemyaccountorders', 'customersettings.hidedownloadableproductstab', 'privacysettings.fullnameonproductrequestrequired', 'seosettings.productdescriptionpriority', 'adminareasettings.displayproductpictures')") == [0], "Commerce settings remain"
         assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName = 'Admin.Configuration.Settings.Media.PreviewThumbnailSize'") == [1], "CMS preview thumbnail label missing"
+        assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName LIKE 'Admin.Configuration.Settings.Performance.MaxUnavailableAttributeCombinations%'") == [0], "Retired product variant performance resources remain"
         retired_catalog_tables = ("product", "category", "manufacturer", "producttemplate", "categorytemplate",
             "manufacturertemplate", "product_category_mapping", "product_manufacturer_mapping",
             "productbundleitem", "productbundleitemattributefilter", "product_mediafile_mapping", "producttag",

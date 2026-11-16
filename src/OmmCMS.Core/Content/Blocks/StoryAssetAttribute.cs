@@ -30,24 +30,9 @@ public enum StoryAssetKind
     Video,
 
     /// <summary>
-    /// The property value is a product identifier.
-    /// </summary>
-    Product,
-
-    /// <summary>
-    /// The property value is a category identifier.
-    /// </summary>
-    Category,
-
-    /// <summary>
-    /// The property value is a manufacturer identifier.
-    /// </summary>
-    Manufacturer,
-
-    /// <summary>
     /// The property value is a link builder expression.
     /// </summary>
-    Link,
+    Link = 5,
 
     /// <summary>
     /// The property value is a audio path.

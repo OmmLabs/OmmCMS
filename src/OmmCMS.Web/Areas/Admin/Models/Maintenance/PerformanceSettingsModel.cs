@@ -19,9 +19,6 @@ public partial class PerformanceSettingsModel : ModelBase
         [LocalizedDisplay("*AlwaysPrefetchUrlSlugs")]
         public bool AlwaysPrefetchUrlSlugs { get; set; }
 
-        [LocalizedDisplay("*MaxUnavailableAttributeCombinations")]
-        public int MaxUnavailableAttributeCombinations { get; set; }
-
         [LocalizedDisplay("*UseResponseCompression")]
         public bool UseResponseCompression { get; set; }
 
@@ -83,7 +80,6 @@ public class PerformanceSettingsModelValidator : AbstractValidator<PerformanceSe
         public PerformanceModelValidator()
         {
             RuleFor(x => x.CacheSegmentSize).GreaterThan(0);
-            RuleFor(x => x.MaxUnavailableAttributeCombinations).GreaterThan(0);
             RuleFor(x => x.MediaDupeDetectorMaxCacheSize).GreaterThan(0);
         }
     }

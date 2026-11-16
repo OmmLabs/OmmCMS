@@ -4088,12 +4088,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.Hint">
 		<Value>Nur für technisch erfahrene Benutzer. Achten Sie auf die CPU- und Speicherauslastung, wenn Sie diese Einstellungen ändern.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Performance.MaxUnavailableAttributeCombinations">
-		<Value>Max. nicht verfügbare Attributkombinationen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Performance.MaxUnavailableAttributeCombinations.Hint">
-		<Value>Maximale Anzahl von Attributkombinationen, die geladen und analysiert werden, um nicht verfügbare Kombinationen zu ermitteln.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.MediaDupeDetectorMaxCacheSize">
 		<Value>Max. Cache-Größe für Medien-Duplikat-Detektor</Value>
 	</LocaleResource>

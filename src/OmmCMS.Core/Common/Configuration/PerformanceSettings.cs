@@ -32,12 +32,6 @@ public class PerformanceSettings : ISettings
     public bool AlwaysPrefetchUrlSlugs { get; set; }
 
     /// <summary>
-    /// Maximum number of attribute combinations to be loaded and parsed
-    /// to make them unavailable for selection on the product detail page.
-    /// </summary>
-    public int MaxUnavailableAttributeCombinations { get; set; } = 10000;
-
-    /// <summary>
     /// Enables response compression for text-based static and dynamic responses
     /// (html, css, js, svg etc.). Turn this off if the webserver handles response
     /// compression already. Changing the value requires an application restart to take effect.

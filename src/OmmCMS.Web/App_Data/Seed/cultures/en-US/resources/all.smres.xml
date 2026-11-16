@@ -4160,12 +4160,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.Hint">
 		<Value>For technically experienced users only. Pay attention to the CPU and memory usage when changing these settings.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Performance.MaxUnavailableAttributeCombinations">
-		<Value>Max. unavailable attribute combinations</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Performance.MaxUnavailableAttributeCombinations.Hint">
-		<Value>Maximum number of attribute combinations that will be loaded and parsed to make them unavailable for selection on the product detail page.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.MediaDupeDetectorMaxCacheSize">
 		<Value>Media Duplicate Detector max. cache size</Value>
 	</LocaleResource>

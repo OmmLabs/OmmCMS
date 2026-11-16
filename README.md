@@ -106,6 +106,8 @@ Phases 1061–1080: remove unused storefront payment, invoice, packaging, return
 
 Phases 1081–1100: remove unused storefront AI roles, product-specific prompt behavior, image-count import options and retired rule, permission and export labels. Preserve generic AI editing, media imports, SEO and customer rules; align seed documentation with CMS-only installation.
 
+Phase 1101: retire the unused product attribute-combination performance setting, its administration editor, validation and seed resources, and commerce-specific story asset kinds. Preserve the numeric identifiers of media and link assets.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License
