@@ -166,6 +166,9 @@ def editorial_workflows(password):
     for table, retained, retired in (("ImportProfile", "EntityTypeId", "ImportRelatedData"), ("ExportProfile", "ProviderSystemName", "ExportRelatedData")):
         columns = {row[1] for row in read_rows(f"PRAGMA table_info({table})")}
         assert {"Id", retained} <= columns and retired not in columns, f"Unexpected {table} schema: {columns}"
+    assert not any(name.startswith(("payment.", "pdfinvoice.", "pdfpackagingslip.", "pdfproductcatalog.", "returnrequests.", "tax.", "shipment.", "shipping.", "enums.producttype.", "enums.shoppingcarttype.", "enums.orderstatus.")) for name in resources)
+    assert {"common.navigation.more", "common.company.email", "common.company.phone", "common.company.fax", "common.company.taxnumber", "common.company.vatid", "common.company.commercialregister", "search.facet.customer", "search.facet.date", "enums.rulescope.customer"} <= resources
+    assert "catalogmenu.morelink" not in resources
     print("Fresh locale resources retain CMS export fields without retired commerce labels.")
     if "--admin-commerce-trimmed" in sys.argv:
         for controller, action in (("campaign","list"), ("category","list"), ("currency","list"), ("discount","list"), ("export","list"), ("import","list"), ("manufacturer","list"), ("measure","weights"), ("order","list"), ("product","list"), ("search","searchsettings")):

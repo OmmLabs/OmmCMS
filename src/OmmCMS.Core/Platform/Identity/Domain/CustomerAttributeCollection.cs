@@ -127,24 +127,6 @@ public class CustomerAttributeCollection : GenericAttributeCollection<Customer>
     }
 
     /// <summary>
-    /// Gets or sets the categories most recently used by an admin in the backend.
-    /// </summary>
-    public string MostRecentlyUsedCategories
-    {
-        get => Get<string>(SystemCustomerAttributeNames.MostRecentlyUsedCategories);
-        set => Set(SystemCustomerAttributeNames.MostRecentlyUsedCategories, value);
-    }
-
-    /// <summary>
-    /// Gets or sets the manufacturers most recently used by an admin in the backend.
-    /// </summary>
-    public string MostRecentlyUsedManufacturers
-    {
-        get => Get<string>(SystemCustomerAttributeNames.MostRecentlyUsedManufacturers);
-        set => Set(SystemCustomerAttributeNames.MostRecentlyUsedManufacturers, value);
-    }
-
-    /// <summary>
     /// Gets or sets a value indicating whether the customer has consented to the General Data Protection Regulation (GDPR).
     /// </summary>
     public bool HasConsentedToGdpr

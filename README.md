@@ -102,6 +102,8 @@ Phases 1021–1040: retire product-linked choice thumbnails, product picker call
 
 Phases 1041–1060: retire product-variant related-data import and export sidecars, associated profile fields and translations. Preserve customer and newsletter import profiles, provider-generated extra export files and the shared data-exchange infrastructure; exclude legacy sidecar files from primary imports.
 
+Phases 1061–1080: remove unused storefront payment, invoice, packaging, return, tax, pricing, catalog and enum translations in both installation languages, along with obsolete sales dashboard permissions and catalog-specific recent selection attributes. Generalize email footer company labels and navbar overflow text while retaining CMS search and navigation resources.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

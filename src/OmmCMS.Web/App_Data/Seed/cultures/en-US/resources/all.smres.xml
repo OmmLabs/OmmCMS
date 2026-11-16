@@ -8559,12 +8559,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Aria.Label.UploaderProgressBar">
 		<Value>{0} fileupload</Value>
 	</LocaleResource>
-	<LocaleResource Name="Basket.Bundle.BundleIncludes">
-		<Value>Bundle includes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Bestsellers">
-		<Value>Bestsellers</Value>
-	</LocaleResource>
 	<LocaleResource Name="Blog">
 		<Value>Blog</Value>
 	</LocaleResource>
@@ -8613,47 +8607,17 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Blog.Tags">
 		<Value>Tags</Value>
 	</LocaleResource>
-	<LocaleResource Name="Catalog.Manufacturerall.Numbers">
-		<Value>#</Value>
-	</LocaleResource>
-	<LocaleResource Name="CatalogMenu.MoreLink">
+	<LocaleResource Name="Common.Navigation.More">
 		<Value>More</Value>
 	</LocaleResource>
 	<LocaleResource Name="Categories">
 		<Value>Categories</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.Compare">
-		<Value>Compare</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.OrderBy">
-		<Value>Sort by</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.PageSize">
-		<Value>Display</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.PageSize.PerPage">
-		<Value>per page</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.ViewMode">
-		<Value>View as</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.ViewMode.Grid">
-		<Value>Grid</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.ViewMode.List">
-		<Value>List</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.Wishlist">
-		<Value>Wishlist</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Activated">
 		<Value>Activated</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Active">
 		<Value>Active</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.AdditionalShippingSurcharge">
-		<Value>Plus &lt;b&gt;{0}&lt;/b&gt; shipping surcharge</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.AddNew">
 		<Value>Add new</Value>
@@ -8756,12 +8720,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Common.CaptchaUnableToVerify">
 		<Value>The API call to verify a CAPTCHA has failed.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.CartRules">
-		<Value>Cart rules</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Catalog.EditProduct">
-		<Value>Edit product</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Center">
 		<Value>Center</Value>
@@ -8973,17 +8931,11 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Common.Entity.BlogPost">
 		<Value>Blog post</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.Entity.Category">
-		<Value>Category</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.Entity.Customer">
 		<Value>Customer</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Entity.Download">
 		<Value>Download</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.Manufacturer">
-		<Value>Manufacturer</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Entity.MessageTemplate">
 		<Value>Message template</Value>
@@ -8991,44 +8943,11 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Common.Entity.NewsItem">
 		<Value>News item</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.Entity.Product">
-		<Value>Product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.ProductAttributeOption">
-		<Value>Product attribute options set</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.ProductVariantAttributeValue">
-		<Value>Product attribute option</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SelectCategories">
-		<Value>Select categories</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SelectCategory">
-		<Value>Select category</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SelectManufacturer">
-		<Value>Select manufacturer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SelectManufacturers">
-		<Value>Select manufacturers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SelectProduct">
-		<Value>Select product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SelectProducts">
-		<Value>Select products</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.Entity.SelectTopic">
 		<Value>Select topic</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Entity.SelectTopics">
 		<Value>Select topics</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SpecificationAttribute">
-		<Value>Specification attribute</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SpecificationAttributeOption">
-		<Value>Specification attribute option</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Entity.Topic">
 		<Value>Topic</Value>
@@ -9149,9 +9068,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Common.FormFields.Required.Hint">
 		<Value>* Input fields with an asterisk are mandatory and must be filled in.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.FreeShipping">
-		<Value>Free shipping</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.FriendlyName">
 		<Value>Friendly name</Value>
@@ -9288,9 +9204,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Common.NoProcessingSecurityIssue">
 		<Value>The operation was not carried out for security reasons.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.NoProductsFound">
-		<Value>No products were found.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.Note">
 		<Value>Note</Value>
 	</LocaleResource>
@@ -9308,9 +9221,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Common.NotSelectable">
 		<Value>Not selectable</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.NumberOfOrders">
-		<Value>Number of orders</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Off">
 		<Value>Off</Value>
@@ -9366,18 +9276,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Common.Paste">
 		<Value>Paste</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.Payment.NoCaptureSupport">
-		<Value>Capture method not supported</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Payment.NoRefundSupport">
-		<Value>Refund method not supported</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Payment.NoVoidSupport">
-		<Value>Void method not supported</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Payment.TranactionTypeNotSupported">
-		<Value>Not supported transaction type</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.Pixel">
 		<Value>Pixel</Value>
 	</LocaleResource>
@@ -9398,12 +9296,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Common.Print">
 		<Value>Print</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Product">
-		<Value>Product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.ProductRules">
-		<Value>Product rules</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Profile">
 		<Value>Profile</Value>
@@ -9486,9 +9378,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Common.Search">
 		<Value>Search</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.SearchProducts">
-		<Value>Search products</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.SecurityPrompt">
 		<Value>Security prompt</Value>
 	</LocaleResource>
@@ -9510,35 +9399,8 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Common.ShiftKey">
 		<Value>Shift</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.Basket">
-		<Value>Basket</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.BasketPartOne">
-		<Value>Shopping</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.BasketPartTwo">
-		<Value>Basket</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.Compare">
-		<Value>Compare</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.CompareProductsPartOne">
-		<Value>Compare</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.CompareProductsPartTwo">
-		<Value>Products</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.Shopbar.GuestGreeting">
 		<Value>Hello Guest</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.Products">
-		<Value>Products</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.WishlistPartOne">
-		<Value>Wish</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.WishlistPartTwo">
-		<Value>List</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Show">
 		<Value>Show</Value>
@@ -9816,15 +9678,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Enums.AttributeControlType.TextBox">
 		<Value>Textbox</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.BackorderMode.AllowQtyBelow0">
-		<Value>Allow quantity below 0</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.BackorderMode.AllowQtyBelow0OnBackorder">
-		<Value>Allow quantity below 0. Delivered as soon as in stock.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.BackorderMode.NoBackorders">
-		<Value>No backorders</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.CanonicalHostNameRule.NoRule">
 		<Value>Don't apply</Value>
 	</LocaleResource>
@@ -9833,24 +9686,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Enums.CanonicalHostNameRule.RequireWww">
 		<Value>Require www prefix</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CheckoutNewsletterSubscription.Activated">
-		<Value>Show activated</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CheckoutNewsletterSubscription.Deactivated">
-		<Value>Show deactivated</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CheckoutNewsletterSubscription.None">
-		<Value>Do not show</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CheckoutThirdPartyEmailHandOver.Activated">
-		<Value>Show activated</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CheckoutThirdPartyEmailHandOver.Deactivated">
-		<Value>Show deactivated</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CheckoutThirdPartyEmailHandOver.None">
-		<Value>Do not show</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.CookieConsentRequirement.DependsOnCountry">
 		<Value>Depends on country configuration</Value>
@@ -9948,39 +9783,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Enums.DefaultLanguageRedirectBehaviour.StripSeoCode">
 		<Value>Strip SEO code if specified (recommended)</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.DeliveryTimesPresentation.DateOnly">
-		<Value>Date only (if possible)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DeliveryTimesPresentation.LabelAndDate">
-		<Value>Label and date</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DeliveryTimesPresentation.LabelOnly">
-		<Value>Label only</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DeliveryTimesPresentation.None">
-		<Value>Do not display</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DiscountLimitationType.NTimesOnly">
-		<Value>N times only</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DiscountLimitationType.NTimesPerCustomer">
-		<Value>N times per customer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DiscountLimitationType.Unlimited">
-		<Value>Unlimited</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DownloadActivationType.Manually">
-		<Value>Manually</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DownloadActivationType.WhenOrderIsPaid">
-		<Value>When order is paid</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportAttributeValueMerging.AppendAllValuesToName">
-		<Value>Append all values to the product name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportAttributeValueMerging.None">
-		<Value>Not specified</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.ExportDeploymentType.Email">
 		<Value>Email</Value>
 	</LocaleResource>
@@ -9996,62 +9798,17 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Enums.ExportDeploymentType.PublicFolder">
 		<Value>Public folder</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.Description">
-		<Value>Description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.ManufacturerAndNameAndDescription">
-		<Value>Manufacturer + Product name + long description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.ManufacturerAndNameAndShortDescription">
-		<Value>Manufacturer + Product name + short description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.NameAndDescription">
-		<Value>Product name + long description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.NameAndShortDescription">
-		<Value>Product name + short description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.None">
-		<Value>None</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.ShortDescription">
-		<Value>Short description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.ShortDescriptionOrNameIfEmpty">
-		<Value>Short description or name if empty</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportEntityType.Category">
-		<Value>Category</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.ExportEntityType.Customer">
 		<Value>Customer</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.ExportEntityType.Manufacturer">
-		<Value>Manufacturer</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.ExportEntityType.NewsLetterSubscription">
 		<Value>Newsletter Subscribers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportEntityType.Order">
-		<Value>Order</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportEntityType.Product">
-		<Value>Product</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.ExportHttpTransmissionType.MultipartFormDataPost">
 		<Value>Multipart form data POST</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.ExportHttpTransmissionType.SimplePost">
 		<Value>Simple POST</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportOrderStatusChange.Complete">
-		<Value>Complete</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportOrderStatusChange.None">
-		<Value>None</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportOrderStatusChange.Processing">
-		<Value>Processing</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.FacetSorting.DisplayOrder">
 		<Value>According to display order</Value>
@@ -10089,20 +9846,11 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Enums.GridColumnSpan.Max6Cols">
 		<Value>2 (mobile) to 6 (desktop)</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.ImportEntityType.Category">
-		<Value>Category</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.ImportEntityType.Customer">
 		<Value>Customer</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.ImportEntityType.Manufacturer">
-		<Value>Manufacturer</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.ImportEntityType.NewsLetterSubscription">
 		<Value>Newsletter Subscriber</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ImportEntityType.Product">
-		<Value>Product</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.ImportFileType.CSV">
 		<Value>Delimiter separated values (.csv, .txt, .tab)</Value>
@@ -10158,15 +9906,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Enums.LogLevel.Warning">
 		<Value>Warning</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.LowStockActivity.DisableBuyButton">
-		<Value>Disable buy button</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.LowStockActivity.Nothing">
-		<Value>Nothing</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.LowStockActivity.Unpublish">
-		<Value>Unpublish</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.MailSecureOption.Auto">
 		<Value>Automatic (SSL or TLS if available, otherwise no encryption)</Value>
 	</LocaleResource>
@@ -10181,27 +9920,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Enums.MailSecureOption.StartTlsWhenAvailable">
 		<Value>StartTLS optional (encrypt with TLS after greeting, if available)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ManageInventoryMethod.DontManageStock">
-		<Value>Don't track inventory</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ManageInventoryMethod.ManageStock">
-		<Value>Track inventory</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ManageInventoryMethod.ManageStockByAttributes">
-		<Value>Track inventory by product attributes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.OrderStatus.Cancelled">
-		<Value>Cancelled</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.OrderStatus.Complete">
-		<Value>Complete</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.OrderStatus.Pending">
-		<Value>Pending</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.OrderStatus.Processing">
-		<Value>Processing</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.PageTitleSeoAdjustment.PagenameAfterStorename">
 		<Value>Page name comes after store name</Value>
@@ -10236,86 +9954,11 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Enums.PostListColumns.Two">
 		<Value>Two columns</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayStyle.BadgeAll">
-		<Value>In bagdes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayStyle.BadgeFreeProductsOnly">
-		<Value>Badge free products only</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayStyle.Default">
-		<Value>Default</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayType.Hide">
-		<Value>No price indication</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayType.LowestPrice">
-		<Value>Minimum feasible price</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayType.PreSelectedPrice">
-		<Value>Price preselected on detail page</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayType.PriceWithoutDiscountsAndAttributes">
-		<Value>Price without discounts and attributes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductCondition.Damaged">
-		<Value>Damaged</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductCondition.New">
-		<Value>New</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductCondition.Refurbished">
-		<Value>Refurbished</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductCondition.Used">
-		<Value>Used</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductType.BundledProduct">
-		<Value>Bundled product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductType.GroupedProduct">
-		<Value>Grouped product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductType.SimpleProduct">
-		<Value>Simple product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductVariantAttributeValueType.ProductLinkage">
-		<Value>Product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductVariantAttributeValueType.Simple">
-		<Value>Simple</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductVisibility.Full">
-		<Value>Fully visible</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductVisibility.Hidden">
-		<Value>Not visible</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductVisibility.ProductPage">
-		<Value>On product detail pages</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductVisibility.SearchResults">
-		<Value>In search results</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RuleScope.Cart">
-		<Value>Cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RuleScope.Cart.Hint">
-		<Value>Rule to grant discounts to the customer or offer shipping and payment methods.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.RuleScope.Customer">
 		<Value>Customer</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.RuleScope.Customer.Hint">
 		<Value>Rule to automatically assign customers to customer roles per scheduled task.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RuleScope.OrderItem">
-		<Value>Order item</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RuleScope.Product">
-		<Value>Product</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RuleScope.Product.Hint">
-		<Value>Rule to automatically assign products to categories per scheduled task.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.SearchMode.Contains">
 		<Value>Contains (wildcard)</Value>
@@ -10325,51 +9968,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Enums.SearchMode.StartsWith">
 		<Value>Starts with (prefix)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShippingStatus.Delivered">
-		<Value>Delivered</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShippingStatus.NotYetShipped">
-		<Value>Not yet shipped</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShippingStatus.PartiallyShipped">
-		<Value>Partially shipped</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShippingStatus.Shipped">
-		<Value>Shipped</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShippingStatus.ShippingNotRequired">
-		<Value>Shipping not required</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShoppingCartType.ShoppingCart">
-		<Value>Shopping Cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShoppingCartType.Wishlist">
-		<Value>Wishlist</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.SubCategoryDisplayType.AboveProductList">
-		<Value>Above product list</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.SubCategoryDisplayType.Bottom">
-		<Value>At bottom of page</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.SubCategoryDisplayType.Hide">
-		<Value>Do not display</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.TaxBasedOn.BillingAddress">
-		<Value>Billing address</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.TaxBasedOn.DefaultAddress">
-		<Value>Default address</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.TaxBasedOn.ShippingAddress">
-		<Value>Shipping address</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.TaxDisplayType.ExcludingTax">
-		<Value>Excluding tax</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.TaxDisplayType.IncludingTax">
-		<Value>Including tax</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.TrailingSlashRule.Allow">
 		<Value>Allow</Value>
@@ -10394,21 +9992,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Enums.UserRegistrationType.Standard">
 		<Value>Standard account creation</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.VatNumberStatus.Empty">
-		<Value>Empty</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.VatNumberStatus.Invalid">
-		<Value>Invalid</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.VatNumberStatus.ServiceUnavailable">
-		<Value>Online checks are currently unavailable</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.VatNumberStatus.Unknown">
-		<Value>Unknown</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.VatNumberStatus.Valid">
-		<Value>Valid</Value>
 	</LocaleResource>
 	<LocaleResource Name="ErrorPage.Body">
 		<Value>We apologize, a server error ocurred while handling your request, this is not a problem with your computer or internet connection.
@@ -10988,33 +10571,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="LinkBuilder.LinkTarget">
 		<Value>Define the target attribute for the link.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Manufacturers">
-		<Value>Manufacturers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.List">
-		<Value>All Brands</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.OrderBy">
-		<Value>Sort by</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.PageSize">
-		<Value>Display</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.PageSize.PerPage">
-		<Value>per page</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.ViewAll">
-		<Value>View all</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.ViewMode">
-		<Value>View as</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.ViewMode.Grid">
-		<Value>Grid</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.ViewMode.List">
-		<Value>List</Value>
-	</LocaleResource>
 	<LocaleResource Name="Media.Category.ImageLinkTitleFormat">
 		<Value>Show products in category {0}</Value>
 	</LocaleResource>
@@ -11135,9 +10691,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Offcanvas.Menu.ShowCurrentCat">
 		<Value>Show {0}</Value>
 	</LocaleResource>
-	<LocaleResource Name="OrderSummary.ConfirmOrderLegalHint">
-		<Value>For deliveries to a non-EU state additional costs in regard to customs, fees and taxes can arise.</Value>
-	</LocaleResource>
 	<LocaleResource Name="PageDescription.AllProductTags">
 		<Value>Discover all product tags in the {0} online shop.</Value>
 	</LocaleResource>
@@ -11201,9 +10754,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="PageTitle.AccountActivation">
 		<Value>Account Activation</Value>
 	</LocaleResource>
-	<LocaleResource Name="PageTitle.AllProductTags">
-		<Value>All product tags</Value>
-	</LocaleResource>
 	<LocaleResource Name="PageTitle.Blog">
 		<Value>Blog</Value>
 	</LocaleResource>
@@ -11212,30 +10762,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.Blog.Tag">
 		<Value>Blog entries for the tag {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout">
-		<Value>Checkout</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout.BillingAddress">
-		<Value>Billing address</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout.Completed">
-		<Value>Thank you!</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout.Confirm">
-		<Value>Confirm order</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout.PaymentMethod">
-		<Value>Payment method</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout.ShippingAddress">
-		<Value>Shipping address</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout.ShippingMethod">
-		<Value>Shipping method</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.CompareProducts">
-		<Value>Compare Products</Value>
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.ContactUs">
 		<Value>Contact Us</Value>
@@ -11246,14 +10772,8 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="PageTitle.Login">
 		<Value>Login</Value>
 	</LocaleResource>
-	<LocaleResource Name="PageTitle.Manufacturers">
-		<Value>Manufacturers</Value>
-	</LocaleResource>
 	<LocaleResource Name="PageTitle.NewsArchive">
 		<Value>News Archive</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.OrderDetails">
-		<Value>Order Details</Value>
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.PasswordRecovery">
 		<Value>Password Recovery</Value>
@@ -11261,35 +10781,14 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="PageTitle.PrivateMessages">
 		<Value>Private Messages</Value>
 	</LocaleResource>
-	<LocaleResource Name="PageTitle.ProductEmailAFriend">
-		<Value>Email A Friend</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.ProductsByTag">
-		<Value>Products tagged with '{0}'</Value>
-	</LocaleResource>
 	<LocaleResource Name="PageTitle.Profile">
 		<Value>Profile</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.RecentlyAddedProducts">
-		<Value>Recently Added Products</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.RecentlyViewedProducts">
-		<Value>Recently Viewed Products</Value>
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.Register">
 		<Value>Register</Value>
 	</LocaleResource>
-	<LocaleResource Name="PageTitle.ReturnItems">
-		<Value>Return Item(s)</Value>
-	</LocaleResource>
 	<LocaleResource Name="PageTitle.SendPM">
 		<Value>Post a private message</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.ShipmentDetails">
-		<Value>Shipment details</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.ShoppingCart">
-		<Value>Shopping Cart</Value>
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.StoreClosed">
 		<Value>Store closed</Value>
@@ -11297,182 +10796,23 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="PageTitle.ViewPM">
 		<Value>View the private message</Value>
 	</LocaleResource>
-	<LocaleResource Name="PageTitle.Wishlist">
-		<Value>Wishlist</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.WishlistEmailAFriend">
-		<Value>Email wishlist to a friend</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardCode">
-		<Value>Card code</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardCode.Required">
-		<Value>Enter card code</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardholderName">
-		<Value>Cardholder name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardholderName.Required">
-		<Value>Enter cardholder name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardNumber">
-		<Value>Card number</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardNumber.Required">
-		<Value>Enter card number</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardNumber.Wrong">
-		<Value>Wrong card number</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CouldNotLoadMethod">
-		<Value>The payment method could not be loaded.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.ExpirationDate">
-		<Value>Valid until</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.ExpireMonth.Required">
-		<Value>Expire month is required</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.ExpireYear.Required">
-		<Value>Expire year is required</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.InvalidCredentials">
-		<Value>The credentials for the payment provider are incomplete. Please enter the required credentials in the configuration area of the payment method.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.MethodNotAvailable">
-		<Value>The payment method is not available.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.MissingCheckoutState">
-		<Value>Missing checkout session state ({0}). Your payment cannot be processed. Please go to back to the shopping cart and checkout again.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.OneActiveMethodProviderRequired">
-		<Value>At least one payment method provider is required to be active.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.PaymentFailure">
-		<Value>A problem has occurred with this payment method. Please try again or select another payment method.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.SelectCreditCard">
-		<Value>Select your credit card</Value>
-	</LocaleResource>
-	<LocaleResource Name="Paymentinfo">
-		<Value>Payment info</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.CommercialRegisterHeading">
+	<LocaleResource Name="Common.Company.CommercialRegister">
 		<Value>Commercial register:</Value>
 	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.Footer.Fax">
+	<LocaleResource Name="Common.Company.Fax">
 		<Value>Fax: {0}</Value>
 	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.Footer.Fon">
+	<LocaleResource Name="Common.Company.Phone">
 		<Value>Fon: {0}</Value>
 	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.Footer.Mail">
+	<LocaleResource Name="Common.Company.Email">
 		<Value>Mail: {0}</Value>
 	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.Footer.Url">
-		<Value>Url: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.Order#">
-		<Value>Order#</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.OrderNotes">
-		<Value>Order notes:</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.OrderNotes.CreatedOn">
-		<Value>Created on</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.OrderNotes.Note">
-		<Value>Note</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.Product(s)">
-		<Value>Product(s)</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.ProductName">
-		<Value>Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.ProductPrice">
-		<Value>Price</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.ProductQuantity">
-		<Value>Qty</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.ProductTotal">
-		<Value>Total</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.SKU">
-		<Value>SKU</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.TaxNumber">
+	<LocaleResource Name="Common.Company.TaxNumber">
 		<Value>Tax Number:</Value>
 	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.VatId">
+	<LocaleResource Name="Common.Company.VatId">
 		<Value>Vat-ID:</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Address">
-		<Value>Address: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Address2">
-		<Value>Address 2: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Company">
-		<Value>Company: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.DeliveryDate">
-		<Value>Delivery date</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Gtin">
-		<Value>EAN</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Name">
-		<Value>Name: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Order">
-		<Value>Order #{0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Phone">
-		<Value>Phone: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.ProductListHeadline">
-		<Value>Shipped products</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.ProductName">
-		<Value>Product Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.QTY">
-		<Value>Quantity</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Shipment">
-		<Value>Shipment #{0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.ShippingMethod">
-		<Value>Shipping method</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.SKU">
-		<Value>SKU</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.TrackingNumber">
-		<Value>Tracking number</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Weight">
-		<Value>Weight</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFProductCatalog.CompanyEmailAddress">
-		<Value>Mail</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFProductCatalog.CompanyFaxNumber">
-		<Value>Fax</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFProductCatalog.CompanyTelephoneNumber">
-		<Value>Phone</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFProductCatalog.Cover.Address">
-		<Value>Address</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFProductCatalog.Cover.ContactData">
-		<Value>Contact data</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFProductCatalog.StockQuantity">
-		<Value>Stock quantity</Value>
 	</LocaleResource>
 	<LocaleResource Name="Permissions.DisplayName.AccessBackend">
 		<Value>Access backend</Value>
@@ -11787,45 +11127,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Providers.MenuItems.FriendlyName.Route">
 		<Value>Route</Value>
 	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Comments">
-		<Value>Comments</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.NoItemsSubmitted">
-		<Value>Please select the items you wish to return and specify the quantity.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Products.Name">
-		<Value>Product</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Products.Price">
-		<Value>Unit price</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Products.Quantity">
-		<Value>Quantity to return</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.ReturnAction">
-		<Value>Return action</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.ReturnReason">
-		<Value>Return reason</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.ReturnsNotPossible">
-		<Value>Returns are not possible for this order.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.SelectProduct(s)">
-		<Value>Which items do you want to return?</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Submit">
-		<Value>Submit return request</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Submitted">
-		<Value>A return request has been submitted.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Title">
-		<Value>Returnable items from order no. {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.WhyReturning">
-		<Value>Why are you returning these items?</Value>
-	</LocaleResource>
 	<LocaleResource Name="Reviews">
 		<Value>Reviews</Value>
 	</LocaleResource>
@@ -11850,12 +11151,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Search.EnterSearchTerms">
 		<Value>Please enter some search keyword</Value>
 	</LocaleResource>
-	<LocaleResource Name="Search.Facet.Availability">
-		<Value>Availability</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Facet.Category">
-		<Value>Category</Value>
-	</LocaleResource>
 	<LocaleResource Name="Search.Facet.Customer">
 		<Value>User name</Value>
 	</LocaleResource>
@@ -11868,32 +11163,14 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Search.Facet.Date.Older">
 		<Value>and older</Value>
 	</LocaleResource>
-	<LocaleResource Name="Search.Facet.DeliveryTime">
-		<Value>Delivery Time</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Facet.ExcludeOutOfStock">
-		<Value>Exclude Out of Stock</Value>
-	</LocaleResource>
 	<LocaleResource Name="Search.Facet.FindPlaceholder">
 		<Value>Find {0}...</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.Facet.Forum">
 		<Value>Forum</Value>
 	</LocaleResource>
-	<LocaleResource Name="Search.Facet.IncludeOutOfStock">
-		<Value>Include Out of Stock</Value>
-	</LocaleResource>
 	<LocaleResource Name="Search.Facet.LastDays">
 		<Value>Last {0} days</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Facet.Manufacturer">
-		<Value>Brand</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Facet.NewArrivals">
-		<Value>New Arrivals</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Facet.Price">
-		<Value>Price</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.Facet.RangeBetween">
 		<Value>{0} - {1}</Value>
@@ -11918,12 +11195,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Search.Facet.StarsAndMore">
 		<Value>&amp; more</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Fields.ProductAttributeOptionName">
-		<Value>Option name of product attributes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Fields.SpecificationAttributeOptionName">
-		<Value>Option name of specification attributes</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.FilterBy">
 		<Value>Filter by</Value>
@@ -11964,15 +11235,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Search.PagingInfo">
 		<Value>{0} of {1}</Value>
 	</LocaleResource>
-	<LocaleResource Name="Search.PriceRange">
-		<Value>Price range</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.PriceRange.From">
-		<Value>From</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.PriceRange.To">
-		<Value>to</Value>
-	</LocaleResource>
 	<LocaleResource Name="Search.RelatedSearchTerms">
 		<Value>Related search terms</Value>
 	</LocaleResource>
@@ -12005,21 +11267,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Search.Title">
 		<Value>Search</Value>
-	</LocaleResource>
-	<LocaleResource Name="Shipment.AlreadyDelivered">
-		<Value>This shipment is already delivered.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Shipment.AlreadyShipped">
-		<Value>This shipment is already shipped.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Shipping.CouldNotLoadMethod">
-		<Value>The shipping rate computation method could not be loaded.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Shipping.OneActiveMethodProviderRequired">
-		<Value>At least one shipping rate computation method provider is required to be active.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShippingReturns">
-		<Value>Shipping &amp; Returns</Value>
 	</LocaleResource>
 
 	<LocaleResource Name="OmmCMS.AI.Prompts.AddCallToAction">
@@ -12321,48 +11568,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="StoreTheme">
 		<Value>Select store theme</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.Exclusive">
-		<Value>Show prices tax exclusive</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.ExclVAT">
-		<Value>excl. VAT</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.Inclusive">
-		<Value>Show prices tax inclusive</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.InclVAT">
-		<Value>incl. VAT</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoFooter">
-		<Value>* All prices {0}, plus &lt;a href="{1}"&gt;shipping&lt;/a&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoFooter2">
-		<Value>* All prices {0}, plus shipping</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoProductDetail">
-		<Value>{0} {1} {2}plus &lt;a href="{3}"&gt;shipping&lt;/a&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoProductDetail2">
-		<Value>{0} {1} {2}plus shipping</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoProductGrid">
-		<Value>{0} {1} {2}plus &lt;a href="{3}"&gt;shipping&lt;/a&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoProductList">
-		<Value>{0} {1} {2}plus &lt;a href="{3}"&gt;shipping&lt;/a&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoShort">
-		<Value>Prices {0}, plus &lt;a href='{1}'&gt;shipping&lt;/a&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoShort2">
-		<Value>Prices {0}, plus shipping</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoShort3">
-		<Value>Prices {0}, {1}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.SelectType">
-		<Value>Tax display type</Value>
 	</LocaleResource>
 	<LocaleResource Name="ThemeVar.Alpha.BaseFontSize">
 		<Value>Base font size</Value>

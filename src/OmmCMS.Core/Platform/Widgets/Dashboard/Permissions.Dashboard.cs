@@ -23,38 +23,6 @@ public static partial class Permissions
             public const string Self = "dashboard.widgets";
 
             /// <summary>
-            /// Groups sales dashboard widgets.
-            /// </summary>
-            public static class Sales
-            {
-                /// <summary>
-                /// Grants access to all widgets in this group.
-                /// </summary>
-                public const string Self = "dashboard.widgets.sales";
-
-                /// <summary>
-                /// Allows displaying the IncompleteOrders widget and its data.
-                /// </summary>
-                public const string IncompleteOrders = Self + ".incompleteorders";
-
-                /// <summary>
-                /// Allows displaying the Orders widget and its data.
-                /// </summary>
-                public const string Orders = Self + ".orders";
-
-                /// <summary>
-                /// Allows displaying the Bestsellers widget and its data.
-                /// </summary>
-                public const string Bestsellers = Self + ".bestsellers";
-
-                /// <summary>
-                /// Allows displaying the LatestOrders widget and its data.
-                /// </summary>
-                public const string LatestOrders = Self + ".latestorders";
-
-            }
-
-            /// <summary>
             /// Groups customers dashboard widgets.
             /// </summary>
             public static class Customers
@@ -68,11 +36,6 @@ public static partial class Permissions
                 /// Allows displaying the RegisteredCustomers widget and its data.
                 /// </summary>
                 public const string RegisteredCustomers = Self + ".registeredcustomers";
-
-                /// <summary>
-                /// Allows displaying the TopCustomers widget and its data.
-                /// </summary>
-                public const string TopCustomers = Self + ".topcustomers";
 
                 /// <summary>
                 /// Allows displaying the CookieConsents widget and its data.

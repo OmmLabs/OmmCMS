@@ -19,8 +19,6 @@ public static partial class SystemCustomerAttributeNames
     public static string AccountActivationToken => "AccountActivationToken";
     public static string ImpersonatedCustomerId => "ImpersonatedCustomerId";
     public static string AdminAreaStoreScopeConfiguration => "AdminAreaStoreScopeConfiguration";
-    public static string MostRecentlyUsedCategories => "MostRecentlyUsedCategories";
-    public static string MostRecentlyUsedManufacturers => "MostRecentlyUsedManufacturers";
     public static string HasConsentedToGdpr => "HasConsentedToGdpr";
     public static string CookieConsent => "CookieConsent";
 

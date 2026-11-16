@@ -8381,12 +8381,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Aria.Label.UploaderProgressBar">
 		<Value>{0} Dateiupload</Value>
 	</LocaleResource>
-	<LocaleResource Name="Basket.Bundle.BundleIncludes">
-		<Value>Besteht aus</Value>
-	</LocaleResource>
-	<LocaleResource Name="Bestsellers">
-		<Value>Bestseller</Value>
-	</LocaleResource>
 	<LocaleResource Name="Blog">
 		<Value>Blog</Value>
 	</LocaleResource>
@@ -8435,47 +8429,17 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Blog.Tags">
 		<Value>Tags</Value>
 	</LocaleResource>
-	<LocaleResource Name="Catalog.Manufacturerall.Numbers">
-		<Value>#</Value>
-	</LocaleResource>
-	<LocaleResource Name="CatalogMenu.MoreLink">
+	<LocaleResource Name="Common.Navigation.More">
 		<Value>Mehr</Value>
 	</LocaleResource>
 	<LocaleResource Name="Categories">
 		<Value>Kategorien</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.Compare">
-		<Value>Vergleichen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.OrderBy">
-		<Value>Sortieren nach</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.PageSize">
-		<Value>Anzeige</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.PageSize.PerPage">
-		<Value>Per Seite</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.ViewMode">
-		<Value>Darstellung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.ViewMode.Grid">
-		<Value>Raster</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.ViewMode.List">
-		<Value>Liste</Value>
-	</LocaleResource>
-	<LocaleResource Name="Categories.Wishlist">
-		<Value>Wunschliste</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Activated">
 		<Value>Aktiv</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Active">
 		<Value>Aktiv</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.AdditionalShippingSurcharge">
-		<Value>zzgl. &lt;b&gt;{0}&lt;/b&gt; zusätzlicher Versandgebühr</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.AddNew">
 		<Value>Hinzufügen</Value>
@@ -8578,12 +8542,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Common.CaptchaUnableToVerify">
 		<Value>Der API-Aufruf zur Prüfung eines CAPTCHAs ist fehlgeschlagen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.CartRules">
-		<Value>Warenkorbregeln</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Catalog.EditProduct">
-		<Value>Produkt bearbeiten</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Center">
 		<Value>Mitte</Value>
@@ -8795,17 +8753,11 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Common.Entity.BlogPost">
 		<Value>Blog-Eintrag</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.Entity.Category">
-		<Value>Warengruppe</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.Entity.Customer">
 		<Value>Kunde</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Entity.Download">
 		<Value>Download</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.Manufacturer">
-		<Value>Hersteller</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Entity.MessageTemplate">
 		<Value>Nachrichtenvorlage</Value>
@@ -8813,44 +8765,11 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Common.Entity.NewsItem">
 		<Value>News</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.Entity.Product">
-		<Value>Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.ProductAttributeOption">
-		<Value>Produktattribut-Options-Set</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.ProductVariantAttributeValue">
-		<Value>Produktattribut-Option</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SelectCategories">
-		<Value>Warengruppen auswählen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SelectCategory">
-		<Value>Warengruppe auswählen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SelectManufacturer">
-		<Value>Hersteller auswählen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SelectManufacturers">
-		<Value>Hersteller auswählen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SelectProduct">
-		<Value>Produkt auswählen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SelectProducts">
-		<Value>Produkte auswählen</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.Entity.SelectTopic">
 		<Value>Seite auswählen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Entity.SelectTopics">
 		<Value>Seiten auswählen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SpecificationAttribute">
-		<Value>Spezifikationsattribut</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Entity.SpecificationAttributeOption">
-		<Value>Spezifikationsattribut-Option</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Entity.Topic">
 		<Value>Seite</Value>
@@ -8971,9 +8890,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Common.FormFields.Required.Hint">
 		<Value>* Eingabefelder mit Sternchen sind Pflichtfelder und müssen ausgefüllt werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.FreeShipping">
-		<Value>Versandkostenfrei</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.FriendlyName">
 		<Value>Anzeigename</Value>
@@ -9110,9 +9026,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Common.NoProcessingSecurityIssue">
 		<Value>Der Vorgang wurde aus Sicherheitsgründen nicht ausgeführt.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.NoProductsFound">
-		<Value>Es wurden keine Produkte gefunden.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.Note">
 		<Value>Hinweis</Value>
 	</LocaleResource>
@@ -9130,9 +9043,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Common.NotSelectable">
 		<Value>Nicht auswählbar</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.NumberOfOrders">
-		<Value>Auftragsanzahl</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Off">
 		<Value>Aus</Value>
@@ -9188,18 +9098,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Common.Paste">
 		<Value>Einfügen</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.Payment.NoCaptureSupport">
-		<Value>Capture wird nicht unterstützt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Payment.NoRefundSupport">
-		<Value>Rückerstattung wird nicht unterstützt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Payment.NoVoidSupport">
-		<Value>Stornieren wird nicht unterstützt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Payment.TranactionTypeNotSupported">
-		<Value>Nicht unterstützter Transactions-typ</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.Pixel">
 		<Value>Pixel</Value>
 	</LocaleResource>
@@ -9220,12 +9118,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Common.Print">
 		<Value>Drucken</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Product">
-		<Value>Artikel</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.ProductRules">
-		<Value>Produktregeln</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Profile">
 		<Value>Profil</Value>
@@ -9308,9 +9200,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Common.Search">
 		<Value>Suchen</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.SearchProducts">
-		<Value>Produkte durchsuchen</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.SecurityPrompt">
 		<Value>Sicherheitsabfrage</Value>
 	</LocaleResource>
@@ -9332,35 +9221,8 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Common.ShiftKey">
 		<Value>Umschalt</Value>
 	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.Basket">
-		<Value>Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.BasketPartOne">
-		<Value>Waren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.BasketPartTwo">
-		<Value>Korb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.Compare">
-		<Value>Vergleichen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.CompareProductsPartOne">
-		<Value>Produkte</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.CompareProductsPartTwo">
-		<Value>Vergleichen</Value>
-	</LocaleResource>
 	<LocaleResource Name="Common.Shopbar.GuestGreeting">
 		<Value>Hallo Gast</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.Products">
-		<Value>Produkte</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.WishlistPartOne">
-		<Value>Wunsch</Value>
-	</LocaleResource>
-	<LocaleResource Name="Common.Shopbar.WishlistPartTwo">
-		<Value>Liste</Value>
 	</LocaleResource>
 	<LocaleResource Name="Common.Show">
 		<Value>Anzeigen</Value>
@@ -9638,15 +9500,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Enums.AttributeControlType.TextBox">
 		<Value>Textbox</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.BackorderMode.AllowQtyBelow0">
-		<Value>Menge kleiner als 0 zulassen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.BackorderMode.AllowQtyBelow0OnBackorder">
-		<Value>Menge kleiner als 0 zulassen. Wird nachgeliefert, sobald auf Lager.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.BackorderMode.NoBackorders">
-		<Value>Keine Lieferrückstände</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.CanonicalHostNameRule.NoRule">
 		<Value>Nicht anwenden</Value>
 	</LocaleResource>
@@ -9655,24 +9508,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Enums.CanonicalHostNameRule.RequireWww">
 		<Value>www-Präfix erzwingen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CheckoutNewsletterSubscription.Activated">
-		<Value>Aktiviert anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CheckoutNewsletterSubscription.Deactivated">
-		<Value>Deaktiviert anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CheckoutNewsletterSubscription.None">
-		<Value>Nicht anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CheckoutThirdPartyEmailHandOver.Activated">
-		<Value>Aktiviert anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CheckoutThirdPartyEmailHandOver.Deactivated">
-		<Value>Deaktiviert anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.CheckoutThirdPartyEmailHandOver.None">
-		<Value>Nicht anzeigen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.CookieConsentRequirement.DependsOnCountry">
 		<Value>Abhängig von der Länderkonfiguration</Value>
@@ -9770,39 +9605,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Enums.DefaultLanguageRedirectBehaviour.StripSeoCode">
 		<Value>SEO Code entfernen wenn angegeben (empfohlen)</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.DeliveryTimesPresentation.DateOnly">
-		<Value>Nur Datum (sofern möglich)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DeliveryTimesPresentation.LabelAndDate">
-		<Value>Label und Datum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DeliveryTimesPresentation.LabelOnly">
-		<Value>Nur Label</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DeliveryTimesPresentation.None">
-		<Value>Nicht anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DiscountLimitationType.NTimesOnly">
-		<Value>Nur N mal</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DiscountLimitationType.NTimesPerCustomer">
-		<Value>N mal pro Benutzer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DiscountLimitationType.Unlimited">
-		<Value>Unbegrenzt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DownloadActivationType.Manually">
-		<Value>Manuell</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DownloadActivationType.WhenOrderIsPaid">
-		<Value>Wenn der Auftrag bezahlt ist</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportAttributeValueMerging.AppendAllValuesToName">
-		<Value>Alle Werte an den Produktnamen anhängen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportAttributeValueMerging.None">
-		<Value>Nicht spezifiziert</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.ExportDeploymentType.Email">
 		<Value>E-Mail</Value>
 	</LocaleResource>
@@ -9818,62 +9620,17 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Enums.ExportDeploymentType.PublicFolder">
 		<Value>Öffentlicher Ordner</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.Description">
-		<Value>Detailbeschreibung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.ManufacturerAndNameAndDescription">
-		<Value>Hersteller + Produktname + Detailbeschreibung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.ManufacturerAndNameAndShortDescription">
-		<Value>Hersteller + Produktname + Kurzbeschreibung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.NameAndDescription">
-		<Value>Produktname + Detailbeschreibung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.NameAndShortDescription">
-		<Value>Produktname + Kurzbeschreibung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.None">
-		<Value>Keine</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.ShortDescription">
-		<Value>Kurzbeschreibung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportDescriptionMerging.ShortDescriptionOrNameIfEmpty">
-		<Value>Kurzbeschreibung oder Name falls leer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportEntityType.Category">
-		<Value>Warengruppe</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.ExportEntityType.Customer">
 		<Value>Kunde</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.ExportEntityType.Manufacturer">
-		<Value>Hersteller</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.ExportEntityType.NewsLetterSubscription">
 		<Value>Newsletter Abonnenten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportEntityType.Order">
-		<Value>Auftrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportEntityType.Product">
-		<Value>Produkt</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.ExportHttpTransmissionType.MultipartFormDataPost">
 		<Value>Multipart-Form-Data POST</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.ExportHttpTransmissionType.SimplePost">
 		<Value>Einfacher POST</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportOrderStatusChange.Complete">
-		<Value>Komplett</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportOrderStatusChange.None">
-		<Value>Keine</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ExportOrderStatusChange.Processing">
-		<Value>Wird bearbeitet</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.FacetSorting.DisplayOrder">
 		<Value>Gemäß Reihenfolge</Value>
@@ -9911,20 +9668,11 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Enums.GridColumnSpan.Max6Cols">
 		<Value>2 (Mobil) bis 6 (Desktop)</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.ImportEntityType.Category">
-		<Value>Warengruppe</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.ImportEntityType.Customer">
 		<Value>Kunde</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.ImportEntityType.Manufacturer">
-		<Value>Hersteller</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.ImportEntityType.NewsLetterSubscription">
 		<Value>Newsletter Abonnent</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ImportEntityType.Product">
-		<Value>Produkt</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.ImportFileType.CSV">
 		<Value>Trennzeichen getrennte Werte (.csv, .txt, .tab)</Value>
@@ -9980,15 +9728,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Enums.LogLevel.Warning">
 		<Value>Warnung</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.LowStockActivity.DisableBuyButton">
-		<Value>Kaufen-Button deaktivieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.LowStockActivity.Nothing">
-		<Value>Nichts</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.LowStockActivity.Unpublish">
-		<Value>Nicht veröffentlicht</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.MailSecureOption.Auto">
 		<Value>Automatisch (SSL oder TLS, falls verfügbar, sonst nicht verschlüsseln)</Value>
 	</LocaleResource>
@@ -10003,27 +9742,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Enums.MailSecureOption.StartTlsWhenAvailable">
 		<Value>StartTLS optional (nach Begrüßung mit TLS verschlüsseln, falls verfügbar)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ManageInventoryMethod.DontManageStock">
-		<Value>Keine Lagerbestandsführung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ManageInventoryMethod.ManageStock">
-		<Value>Lagerbestand führen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ManageInventoryMethod.ManageStockByAttributes">
-		<Value>Lagerbestand mit Attributen führen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.OrderStatus.Cancelled">
-		<Value>Abgebrochen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.OrderStatus.Complete">
-		<Value>Komplett</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.OrderStatus.Pending">
-		<Value>Unerledigt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.OrderStatus.Processing">
-		<Value>Wird bearbeitet</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.PageTitleSeoAdjustment.PagenameAfterStorename">
 		<Value>Seitenname nach Shopname</Value>
@@ -10058,86 +9776,11 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Enums.PostListColumns.Two">
 		<Value>2 Spalten</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayStyle.BadgeAll">
-		<Value>Markiert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayStyle.BadgeFreeProductsOnly">
-		<Value>Nur kostenlose Produkte markieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayStyle.Default">
-		<Value>Standard</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayType.Hide">
-		<Value>Keine Preisanzeige</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayType.LowestPrice">
-		<Value>Minimal realisierbarer Preis</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayType.PreSelectedPrice">
-		<Value>Auf der Detailseite vorgewählter Preis</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PriceDisplayType.PriceWithoutDiscountsAndAttributes">
-		<Value>Preis ohne Rabatte und Attribute</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductCondition.Damaged">
-		<Value>Defekt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductCondition.New">
-		<Value>Neu</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductCondition.Refurbished">
-		<Value>Generalüberholt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductCondition.Used">
-		<Value>Gebraucht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductType.BundledProduct">
-		<Value>Produkt-Bundle</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductType.GroupedProduct">
-		<Value>Gruppenprodukt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductType.SimpleProduct">
-		<Value>Einfaches Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductVariantAttributeValueType.ProductLinkage">
-		<Value>Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductVariantAttributeValueType.Simple">
-		<Value>Einfach</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductVisibility.Full">
-		<Value>Überall sichtbar</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductVisibility.Hidden">
-		<Value>Nicht sichtbar</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductVisibility.ProductPage">
-		<Value>Auf Produktdetailseiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductVisibility.SearchResults">
-		<Value>In Suchergebnissen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RuleScope.Cart">
-		<Value>Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RuleScope.Cart.Hint">
-		<Value>Regel, um dem Kunden Rabatte zu gewähren oder Versand- und Zahlarten anzubieten.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.RuleScope.Customer">
 		<Value>Kunde</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.RuleScope.Customer.Hint">
 		<Value>Regel, um Kunden automatisch per geplanter Aufgabe Kundengruppen zuzuordnen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RuleScope.OrderItem">
-		<Value>Bestellposition</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RuleScope.Product">
-		<Value>Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RuleScope.Product.Hint">
-		<Value>Regel, um Produkte automatisch per geplanter Aufgabe Warengruppen zuzuordnen.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.SearchMode.Contains">
 		<Value>Beinhaltet (Wildcard)</Value>
@@ -10147,51 +9790,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Enums.SearchMode.StartsWith">
 		<Value>Beginnt mit (Prefix)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShippingStatus.Delivered">
-		<Value>Geliefert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShippingStatus.NotYetShipped">
-		<Value>Noch nicht geliefert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShippingStatus.PartiallyShipped">
-		<Value>Teilweise geliefert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShippingStatus.Shipped">
-		<Value>Versandt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShippingStatus.ShippingNotRequired">
-		<Value>Versand nicht erforderlich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShoppingCartType.ShoppingCart">
-		<Value>Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ShoppingCartType.Wishlist">
-		<Value>Wunschliste</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.SubCategoryDisplayType.AboveProductList">
-		<Value>Über der Produktliste</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.SubCategoryDisplayType.Bottom">
-		<Value>Am Seitenende</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.SubCategoryDisplayType.Hide">
-		<Value>Nicht anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.TaxBasedOn.BillingAddress">
-		<Value>Rechnungsanschrift</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.TaxBasedOn.DefaultAddress">
-		<Value>Standardanschrift</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.TaxBasedOn.ShippingAddress">
-		<Value>Versandanschrift</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.TaxDisplayType.ExcludingTax">
-		<Value>Zzgl. Mehrwertsteuer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.TaxDisplayType.IncludingTax">
-		<Value>Inkl. Mehrwertsteuer</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.TrailingSlashRule.Allow">
 		<Value>Erlauben</Value>
@@ -10216,21 +9814,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Enums.UserRegistrationType.Standard">
 		<Value>Standard-Konto-Eröffnung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.VatNumberStatus.Empty">
-		<Value>Leer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.VatNumberStatus.Invalid">
-		<Value>Ungültig</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.VatNumberStatus.ServiceUnavailable">
-		<Value>Onlineprüfung derzeit nicht möglich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.VatNumberStatus.Unknown">
-		<Value>Unbekannt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.VatNumberStatus.Valid">
-		<Value>Gültig</Value>
 	</LocaleResource>
 	<LocaleResource Name="ErrorPage.Body">
 		<Value>Leider ist ein Serverfehler aufgetreten, und das hat nichts mit Ihrem Computer oder Ihrem Internetanschluss zu tun.
@@ -10809,33 +10392,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="LinkBuilder.LinkTarget">
 		<Value>Definieren Sie das Attribut target für den Link.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Manufacturers">
-		<Value>Hersteller</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.List">
-		<Value>Alle Marken</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.OrderBy">
-		<Value>Sortieren nach</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.PageSize">
-		<Value>Anzeige</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.PageSize.PerPage">
-		<Value>Nach Seite</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.ViewAll">
-		<Value>Alle anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.ViewMode">
-		<Value>Anzeigen als</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.ViewMode.Grid">
-		<Value>Tabellenansicht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Manufacturers.ViewMode.List">
-		<Value>Listenansicht</Value>
-	</LocaleResource>
 	<LocaleResource Name="Media.Category.ImageLinkTitleFormat">
 		<Value>Zeige Produkte für Kategorie {0}</Value>
 	</LocaleResource>
@@ -10959,9 +10515,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="order.getpdfinvoice">
 		<Value>Bestellung als PDF</Value>
 	</LocaleResource>
-	<LocaleResource Name="OrderSummary.ConfirmOrderLegalHint">
-		<Value>Bei Lieferungen in das Nicht-EU-Ausland können zusätzlich Zölle, Steuern und Gebühren anfallen.</Value>
-	</LocaleResource>
 	<LocaleResource Name="PageDescription.AllProductTags">
 		<Value>Entdecken Sie alle Produkt Tags im {0} Online-Shop.</Value>
 	</LocaleResource>
@@ -11025,9 +10578,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="PageTitle.AccountActivation">
 		<Value>Kontoaktivierung</Value>
 	</LocaleResource>
-	<LocaleResource Name="PageTitle.AllProductTags">
-		<Value>Alle Produkt-Tags</Value>
-	</LocaleResource>
 	<LocaleResource Name="PageTitle.Blog">
 		<Value>Blog</Value>
 	</LocaleResource>
@@ -11036,30 +10586,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.Blog.Tag">
 		<Value>Blog-Einträge für das Stichwort {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout">
-		<Value>Zur Kasse</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout.BillingAddress">
-		<Value>Rechnungsadresse</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout.Completed">
-		<Value>Vielen Dank!</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout.Confirm">
-		<Value>Bestellbestätigung</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout.PaymentMethod">
-		<Value>Zahlart</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout.ShippingAddress">
-		<Value>Lieferadresse</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.Checkout.ShippingMethod">
-		<Value>Versandart</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.CompareProducts">
-		<Value>Produkte vergleichen</Value>
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.ContactUs">
 		<Value>Kontakt zu uns aufnehmen</Value>
@@ -11070,14 +10596,8 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="PageTitle.Login">
 		<Value>Login</Value>
 	</LocaleResource>
-	<LocaleResource Name="PageTitle.Manufacturers">
-		<Value>Hersteller</Value>
-	</LocaleResource>
 	<LocaleResource Name="PageTitle.NewsArchive">
 		<Value>News-Archiv</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.OrderDetails">
-		<Value>Bestelldetails</Value>
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.PasswordRecovery">
 		<Value>Passwort-Wiederherstellung</Value>
@@ -11085,35 +10605,14 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="PageTitle.PrivateMessages">
 		<Value>Private Nachrichten</Value>
 	</LocaleResource>
-	<LocaleResource Name="PageTitle.ProductEmailAFriend">
-		<Value>Weitersagen</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.ProductsByTag">
-		<Value>Produkte markiert mit '{0}'</Value>
-	</LocaleResource>
 	<LocaleResource Name="PageTitle.Profile">
 		<Value>Profil</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.RecentlyAddedProducts">
-		<Value>Kürzlich hinzugefügte Produkte</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.RecentlyViewedProducts">
-		<Value>Kürzlich angesehene Produkte</Value>
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.Register">
 		<Value>Registrieren</Value>
 	</LocaleResource>
-	<LocaleResource Name="PageTitle.ReturnItems">
-		<Value>Artikel zurücksenden</Value>
-	</LocaleResource>
 	<LocaleResource Name="PageTitle.SendPM">
 		<Value>Eine private Nachricht senden</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.ShipmentDetails">
-		<Value>Sendungsdetails</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.ShoppingCart">
-		<Value>Warenkorb</Value>
 	</LocaleResource>
 	<LocaleResource Name="PageTitle.StoreClosed">
 		<Value>Der Shop ist geschloßen.</Value>
@@ -11121,182 +10620,23 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="PageTitle.ViewPM">
 		<Value>Private Nachricht ansehen</Value>
 	</LocaleResource>
-	<LocaleResource Name="PageTitle.Wishlist">
-		<Value>Wunschzettel</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageTitle.WishlistEmailAFriend">
-		<Value>Wunschliste per E-Mail an einen Freund senden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardCode">
-		<Value>Kartencode</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardCode.Required">
-		<Value>Kartencode eingeben</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardholderName">
-		<Value>Name des Karteninhabers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardholderName.Required">
-		<Value>Geben Sie den Namen des Karteninhabers ein.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardNumber">
-		<Value>Kartennummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardNumber.Required">
-		<Value>Geben Sie die Kartennummer ein.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CardNumber.Wrong">
-		<Value>Falsche Kartennummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.CouldNotLoadMethod">
-		<Value>Die Zahlungsart konnte nicht geladen werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.ExpirationDate">
-		<Value>Gültig bis</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.ExpireMonth.Required">
-		<Value>Ablaufmonat ist erforderlich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.ExpireYear.Required">
-		<Value>Ablaufjahr ist erforderlich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.InvalidCredentials">
-		<Value>Die Zugangsdaten zum Zahlungsanbieter sind unvollständig. Bitte geben Sie die erforderlichen Zugangsdaten im Konfigurationsbereich der Zahlungsart ein.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.MethodNotAvailable">
-		<Value>Die Zahlungsart steht nicht zur Verfügung.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.MissingCheckoutState">
-		<Value>Fehlender Checkout-Sitzungsstatus ({0}). Ihre Zahlung kann leider nicht verarbeitet werden. Bitte gehen Sie zurück zum Warenkorb und wiederholen Sie den Bestellvorgang.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.OneActiveMethodProviderRequired">
-		<Value>Mindestens ein Zahlungsart-Provider muss aktiviert sein.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.PaymentFailure">
-		<Value>Mit dieser Zahlungsart ist ein Problem aufgetreten. Bitte versuchen Sie es erneut oder wählen Sie eine andere Zahlungsart aus.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Payment.SelectCreditCard">
-		<Value>Wählen Sie Ihre Kreditkarte aus</Value>
-	</LocaleResource>
-	<LocaleResource Name="Paymentinfo">
-		<Value>Zahlungsarten</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.CommercialRegisterHeading">
+	<LocaleResource Name="Common.Company.CommercialRegister">
 		<Value>Handelsregister:</Value>
 	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.Footer.Fax">
+	<LocaleResource Name="Common.Company.Fax">
 		<Value>Fax: {0}</Value>
 	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.Footer.Fon">
+	<LocaleResource Name="Common.Company.Phone">
 		<Value>Fon: {0}</Value>
 	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.Footer.Mail">
+	<LocaleResource Name="Common.Company.Email">
 		<Value>E-Mail: {0}</Value>
 	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.Footer.Url">
-		<Value>Url: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.Order#">
-		<Value>Bestellnr.</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.OrderNotes">
-		<Value>Auftragsnotizen</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.OrderNotes.CreatedOn">
-		<Value>Erstellt am</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.OrderNotes.Note">
-		<Value>Notiz</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.Product(s)">
-		<Value>Produkte</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.ProductName">
-		<Value>Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.ProductPrice">
-		<Value>Preis</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.ProductQuantity">
-		<Value>Menge</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.ProductTotal">
-		<Value>Gesamt</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.SKU">
-		<Value>Artikelnr.</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.TaxNumber">
+	<LocaleResource Name="Common.Company.TaxNumber">
 		<Value>Steuer-Nr.:</Value>
 	</LocaleResource>
-	<LocaleResource Name="PDFInvoice.VatId">
+	<LocaleResource Name="Common.Company.VatId">
 		<Value>Ust-Id:</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Address">
-		<Value>Strasse: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Address2">
-		<Value>Adresszusatz: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Company">
-		<Value>Firma: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.DeliveryDate">
-		<Value>Lieferdatum</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Gtin">
-		<Value>Gtin</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Name">
-		<Value>Name: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Order">
-		<Value>Bestellung</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Phone">
-		<Value>Telefon: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.ProductListHeadline">
-		<Value>Gelieferte Produkte</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.ProductName">
-		<Value>Produktname</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.QTY">
-		<Value>Menge</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Shipment">
-		<Value>Sendung #{0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.ShippingMethod">
-		<Value>Versandart</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.SKU">
-		<Value>Artikelnummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.TrackingNumber">
-		<Value>Trackingnummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFPackagingSlip.Weight">
-		<Value>Gewicht</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFProductCatalog.CompanyEmailAddress">
-		<Value>E-Mail</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFProductCatalog.CompanyFaxNumber">
-		<Value>Fax</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFProductCatalog.CompanyTelephoneNumber">
-		<Value>Telefon</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFProductCatalog.Cover.Address">
-		<Value>Anschrift</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFProductCatalog.Cover.ContactData">
-		<Value>Kontaktdaten</Value>
-	</LocaleResource>
-	<LocaleResource Name="PDFProductCatalog.StockQuantity">
-		<Value>Lagermenge</Value>
 	</LocaleResource>
 	<LocaleResource Name="Permissions.DisplayName.AccessBackend">
 		<Value>Auf Backend zugreifen</Value>
@@ -11611,45 +10951,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Providers.MenuItems.FriendlyName.Route">
 		<Value>Route</Value>
 	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Comments">
-		<Value>Kommentare</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.NoItemsSubmitted">
-		<Value>Wählen Sie bitte die Artikel und die Menge aus, die Sie zurücksenden möchten.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Products.Name">
-		<Value>Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Products.Price">
-		<Value>Einzelpreis</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Products.Quantity">
-		<Value>Rücksendemenge</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.ReturnAction">
-		<Value>Rücksendeaktion</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.ReturnReason">
-		<Value>Rücksendegrund</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.ReturnsNotPossible">
-		<Value>Für diesen Auftrag ist eine Rücksendung von Artikeln nicht möglich.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.SelectProduct(s)">
-		<Value>Welche Artikel möchten Sie zurücksenden?</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Submit">
-		<Value>Retourenantrag absenden</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Submitted">
-		<Value>Der Retourenantrag wurde übermittelt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.Title">
-		<Value>Retournierbare Artikel aus Auftrag Nr. {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="ReturnRequests.WhyReturning">
-		<Value>Warum möchten Sie diese Artikel zurücksenden?</Value>
-	</LocaleResource>
 	<LocaleResource Name="Reviews">
 		<Value>Bewertungen</Value>
 	</LocaleResource>
@@ -11674,12 +10975,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Search.EnterSearchTerms">
 		<Value>Suchbegriffe eingeben</Value>
 	</LocaleResource>
-	<LocaleResource Name="Search.Facet.Availability">
-		<Value>Verfügbarkeit</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Facet.Category">
-		<Value>Kategorie</Value>
-	</LocaleResource>
 	<LocaleResource Name="Search.Facet.Customer">
 		<Value>Benutzername</Value>
 	</LocaleResource>
@@ -11692,32 +10987,14 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Search.Facet.Date.Older">
 		<Value>und älter</Value>
 	</LocaleResource>
-	<LocaleResource Name="Search.Facet.DeliveryTime">
-		<Value>Lieferzeit</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Facet.ExcludeOutOfStock">
-		<Value>Nicht verfügbare Artikel ausschließen</Value>
-	</LocaleResource>
 	<LocaleResource Name="Search.Facet.FindPlaceholder">
 		<Value>{0} suchen...</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.Facet.Forum">
 		<Value>Forum</Value>
 	</LocaleResource>
-	<LocaleResource Name="Search.Facet.IncludeOutOfStock">
-		<Value>Nicht verfügbare Artikel einschließen</Value>
-	</LocaleResource>
 	<LocaleResource Name="Search.Facet.LastDays">
 		<Value>Letzten {0} Tage</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Facet.Manufacturer">
-		<Value>Marke</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Facet.NewArrivals">
-		<Value>Neuheiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Facet.Price">
-		<Value>Preis</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.Facet.RangeBetween">
 		<Value>{0} - {1}</Value>
@@ -11742,12 +11019,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Search.Facet.StarsAndMore">
 		<Value>&amp; mehr</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Fields.ProductAttributeOptionName">
-		<Value>Optionsname von Produktattributen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.Fields.SpecificationAttributeOptionName">
-		<Value>Optionsname von Spezifikationsattributen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.FilterBy">
 		<Value>Filtern nach</Value>
@@ -11788,15 +11059,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Search.PagingInfo">
 		<Value>{0} von {1}</Value>
 	</LocaleResource>
-	<LocaleResource Name="Search.PriceRange">
-		<Value>Preisgruppe</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.PriceRange.From">
-		<Value>von</Value>
-	</LocaleResource>
-	<LocaleResource Name="Search.PriceRange.To">
-		<Value>bis</Value>
-	</LocaleResource>
 	<LocaleResource Name="Search.RelatedSearchTerms">
 		<Value>Verwandte Suchbegriffe</Value>
 	</LocaleResource>
@@ -11829,21 +11091,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Search.Title">
 		<Value>Suche</Value>
-	</LocaleResource>
-	<LocaleResource Name="Shipment.AlreadyDelivered">
-		<Value>Diese Sendung wird bereits zugestellt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Shipment.AlreadyShipped">
-		<Value>Diese Sendung wird bereits ausgeliefert.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Shipping.CouldNotLoadMethod">
-		<Value>Die Berechnungsmethode für Versandkosten konnte nicht geladen werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Shipping.OneActiveMethodProviderRequired">
-		<Value>Mindestens ein Provider zur Berechnung von Versandkosten muss aktiviert sein.</Value>
-	</LocaleResource>
-	<LocaleResource Name="ShippingReturns">
-		<Value>Versandinfos</Value>
 	</LocaleResource>
 
 	<LocaleResource Name="OmmCMS.AI.Prompts.AddCallToAction">
@@ -12145,48 +11392,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="StoreTheme">
 		<Value>Theme für den Shop auswählen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.Exclusive">
-		<Value>Preise ohne Mehrwertsteuer anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.ExclVAT">
-		<Value>zzgl. MwSt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.Inclusive">
-		<Value>Preise inkl. Mehrwertsteuer anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.InclVAT">
-		<Value>inkl. MwSt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoFooter">
-		<Value>* Alle Preise {0}, zzgl. &lt;a href='{1}'&gt;Versandkosten&lt;/a&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoFooter2">
-		<Value>* Alle Preise {0}, zzgl. Versandkosten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoProductDetail">
-		<Value>{0} {1} {2} zzgl. &lt;a href="{3}"&gt;Versandkosten&lt;/a&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoProductDetail2">
-		<Value>{0} {1} {2} zzgl. Versandkosten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoProductGrid">
-		<Value>{0} {1} {2} zzgl. &lt;a href="{3}"&gt;Versandkosten&lt;/a&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoProductList">
-		<Value>{0} {1} {2} zzgl. &lt;a href="{3}"&gt;Versandkosten&lt;/a&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoShort">
-		<Value>Preise {0}, zzgl. &lt;a href='{1}'&gt;Versandkosten&lt;/a&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoShort2">
-		<Value>Preise {0}, zzgl. Versandkosten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.LegalInfoShort3">
-		<Value>Preise {0}, {1}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Tax.SelectType">
-		<Value>Steuer-Anzeigetyp</Value>
 	</LocaleResource>
 	<LocaleResource Name="ThemeVar.Alpha.BaseFontSize">
 		<Value>Basis-Schriftgröße</Value>
