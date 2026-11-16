@@ -1,0 +1,38 @@
+@using OmmCMS.Web.Models.Blogs
+@model BlogDetailModel
+@{
+    var post = Model.Post;
+    Assets.AppendTitleParts(string.IsNullOrWhiteSpace(post.MetaTitle) ? post.Title : post.MetaTitle);
+    Assets.AppendMetaDescriptionParts(post.MetaDescription ?? post.Intro);
+    Assets.AppendCanonicalUrlParts(Url.RouteUrl("BlogPost", new { post.Slug }, Context.Request.Scheme));
+}
+<div class="container py-4">
+    <nav aria-label="Breadcrumb"><a asp-route="BlogHome">Blog</a>
+        @foreach (var category in post.Categories)
+        { <span> / </span><a asp-route="BlogCategory" asp-route-slug="@category.Slug">@category.Name</a> }
+    </nav>
+    <article class="prose-container prose-lg mx-auto">
+        <header class="my-4">
+            <h1>@post.Title</h1>
+            <p class="text-muted"><time datetime="@post.PublishedOnUtc.ToString("yyyy-MM-dd")">@post.PublishedOnUtc.ToString("dd MMM yyyy")</time> @post.Author</p>
+            @if (!string.IsNullOrWhiteSpace(post.Intro)) { <p class="lead">@post.Intro</p> }
+            @if ((post.CoverImageId ?? post.PreviewImageId).HasValue)
+            { <img sm-file-id="@(post.CoverImageId ?? post.PreviewImageId)" class="img-fluid rounded w-100" alt="@post.Title" /> }
+        </header>
+        <div class="blog-body">@Html.Raw(OmmCMS.Core.Content.Blogs.BlogQueries.SanitizeBody(post.Body))</div>
+        <footer class="my-4">
+            @foreach (var tag in post.Tags)
+            { <a class="badge badge-light mr-1" asp-route="BlogTag" asp-route-slug="@tag.Slug">@tag.Name</a> }
+        </footer>
+    </article>
+    @if (Model.Related.Count > 0)
+    {
+        <section class="mt-5">
+            <h2>Related articles</h2>
+            <ul>
+                @foreach (var item in Model.Related)
+                { <li><a asp-route="BlogPost" asp-route-slug="@item.Slug">@item.Title</a></li> }
+            </ul>
+        </section>
+    }
+</div>

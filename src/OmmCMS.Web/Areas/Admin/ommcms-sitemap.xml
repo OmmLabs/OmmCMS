@@ -4,6 +4,8 @@
     <siteMapNode id="home" title="OmmCMS" controller="Topic" action="List" area="Admin">
         <siteMapNode id="cms" title="Content" permissionNames="cms" icon="cms">
             <siteMapNode id="topics" icon="file-pen" title="Pages &amp; Topics" resKey="Admin.ContentManagement.Topics" permissionNames="cms.topic" controller="Topic" action="List" area="Admin" />
+            <siteMapNode id="blog-posts" icon="file-pen" title="Blog posts" permissionNames="cms.blog.read" controller="Blog" action="List" area="Admin" />
+            <siteMapNode id="blog-categories" icon="folder" title="Blog categories &amp; tags" permissionNames="cms.blog.taxonomy" controller="Blog" action="Taxonomy" area="Admin" />
             <siteMapNode id="menus" icon="menu-button" title="Menus" resKey="Admin.ContentManagement.Menus" permissionNames="cms.menu" controller="Menu" action="List" area="Admin" />
             <siteMapNode id="widgets" icon="widgets" title="Widgets" resKey="Admin.ContentManagement.Widgets" permissionNames="cms.widget" controller="Widget" action="Providers" area="Admin" />
             <siteMapNode id="message-templates" icon="mail-open" title="Email templates" resKey="Admin.ContentManagement.MessageTemplates" permissionNames="cms.messagetemplate" controller="MessageTemplate" action="List" area="Admin" />

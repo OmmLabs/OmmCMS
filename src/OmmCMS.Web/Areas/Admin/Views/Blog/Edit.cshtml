@@ -1,0 +1,56 @@
+@using OmmCMS.Admin.Models.Blogs
+@model BlogEditModel
+@{
+    ViewBag.Title = Model.Id == 0 ? "New blog post" : "Edit blog post";
+    var canPublish = (bool)ViewBag.CanPublish;
+}
+<div class="section-header">
+    <div class="title"><a asp-action="List">Blog posts</a> / @ViewBag.Title</div>
+</div>
+<form id="blog-post-form" method="post" asp-action="Edit">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="form-group"><label asp-for="Title"></label><input asp-for="Title" class="form-control" /></div>
+            <div class="form-group"><label asp-for="Slug">URL slug (leave blank to generate)</label><input asp-for="Slug" class="form-control" /></div>
+            <div class="form-group"><label asp-for="Intro">Preview / introduction</label><textarea asp-for="Intro" rows="3" class="form-control"></textarea></div>
+            <div class="form-group"><label asp-for="Body">Article content</label>@Html.EditorFor(x => x.Body, "Html", new { lazy = false })</div>
+            <h2 class="h5 mt-4">Search engines (SEO)</h2>
+            <div class="form-group"><label asp-for="MetaTitle">Meta title</label><input asp-for="MetaTitle" class="form-control" /></div>
+            <div class="form-group"><label asp-for="MetaDescription">Meta description</label><textarea asp-for="MetaDescription" class="form-control" rows="3"></textarea></div>
+            <div class="form-group"><label><input asp-for="IncludeInSitemap" /> Include in XML sitemap</label></div>
+        </div>
+        <div class="col-lg-4">
+            <h2 class="h5">Publication</h2>
+            <div class="form-group"><label asp-for="Author"></label><input asp-for="Author" class="form-control" /></div>
+            <div class="form-group">
+                @if (canPublish)
+                { <label><input asp-for="IsPublished" /> Published / scheduled</label> }
+                else
+                { <input type="hidden" asp-for="IsPublished" /><p>Publishing requires permission.</p> }
+            </div>
+            <div class="form-group"><label asp-for="PublishedOnUtc">Publish on (UTC)</label><input asp-for="PublishedOnUtc" type="datetime-local" asp-format="{0:yyyy-MM-ddTHH:mm}" class="form-control" /></div>
+            <div class="form-group"><label asp-for="ExpiresOnUtc">Expires on (UTC, optional)</label><input asp-for="ExpiresOnUtc" type="datetime-local" asp-format="{0:yyyy-MM-ddTHH:mm}" class="form-control" /></div>
+            <div class="form-group"><label asp-for="StoreId">Site</label><select asp-for="StoreId" asp-items="ViewBag.Stores" class="form-control"><option value="0">All sites</option></select></div>
+            <div class="form-group"><label asp-for="LanguageId">Language</label><select asp-for="LanguageId" asp-items="ViewBag.Languages" class="form-control"><option value="0">All languages</option></select></div>
+            <h2 class="h5 mt-4">Categories &amp; tags</h2>
+            <div class="form-group"><label asp-for="CategoryIds">Categories</label><select asp-for="CategoryIds" asp-items="ViewBag.Categories" multiple class="form-control"></select><a asp-action="Taxonomy">Manage categories</a></div>
+            <div class="form-group"><label asp-for="TagIds">Tags</label><select asp-for="TagIds" asp-items="ViewBag.Tags" multiple class="form-control"></select><a asp-action="Taxonomy" asp-route-isTag="true">Manage tags</a></div>
+            <h2 class="h5 mt-4">Images</h2>
+            <div class="form-group"><label asp-for="PreviewImageId">Preview image</label>@Html.EditorFor(x => x.PreviewImageId)</div>
+            <div class="form-group"><label asp-for="CoverImageId">Cover image</label>@Html.EditorFor(x => x.CoverImageId)</div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save post</button>
+    <a asp-action="List" class="btn btn-secondary">Cancel</a>
+    @if (Model.Id > 0 && Model.IsPublished)
+    { <a asp-area="" asp-route="BlogPost" asp-route-slug="@Model.Slug" target="_blank" rel="noopener" class="btn btn-secondary">View post</a> }
+</form>
+@if (Model.Id > 0)
+{
+    <form asp-action="Delete" method="post" class="mt-4">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button class="btn btn-danger" type="submit" onclick="return confirm('Permanently delete this post?')">Delete post</button>
+    </form>
+}

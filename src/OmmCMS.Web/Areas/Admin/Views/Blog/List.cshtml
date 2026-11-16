@@ -1,0 +1,47 @@
+@using OmmCMS.Core.Content.Blogs
+@model List<BlogPost>
+@{
+    ViewBag.Title = "Blog posts";
+    var page = (int)ViewBag.Page;
+    var total = (int)ViewBag.Total;
+}
+<div class="section-header">
+    <div class="title">Blog posts</div>
+    <div class="options">
+        <a asp-action="Edit" class="btn btn-primary">New post</a>
+        <a asp-action="Taxonomy" class="btn btn-secondary">Categories</a>
+        <a asp-action="Taxonomy" asp-route-isTag="true" class="btn btn-secondary">Tags</a>
+        <a asp-area="" asp-route="BlogHome" class="btn btn-secondary" target="_blank" rel="noopener">View blog</a>
+    </div>
+</div>
+<form method="get" asp-action="List" class="form-inline my-3">
+    <input name="q" value="@ViewBag.Query" class="form-control mr-2" placeholder="Search title, intro or tag" aria-label="Search posts" />
+    <select name="published" class="form-control mr-2" aria-label="Publication status">
+        <option value="">All statuses</option>
+        <option value="true" selected="@((bool?)ViewBag.Published == true)">Published / scheduled</option>
+        <option value="false" selected="@((bool?)ViewBag.Published == false)">Draft</option>
+    </select>
+    <button type="submit" class="btn btn-secondary">Filter</button>
+</form>
+<div class="table-responsive">
+<table class="table table-striped">
+    <thead><tr><th>Title</th><th>Status</th><th>Publication (UTC)</th><th>Updated (UTC)</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var post in Model)
+    {
+        var status = !post.IsPublished ? "Draft" : post.PublishedOnUtc > DateTime.UtcNow ? "Scheduled" : post.ExpiresOnUtc <= DateTime.UtcNow ? "Expired" : "Published";
+        <tr>
+            <td><a asp-action="Edit" asp-route-id="@post.Id">@post.Title</a><div class="small text-muted">/blog/@post.Slug</div></td>
+            <td>@status</td><td>@post.PublishedOnUtc.ToString("yyyy-MM-dd HH:mm")</td><td>@post.UpdatedOnUtc.ToString("yyyy-MM-dd HH:mm")</td>
+            <td><a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-sm btn-secondary">Edit</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
+</div>
+@if (Model.Count == 0) { <p>No posts yet.</p> }
+<nav class="d-flex justify-content-between">
+    @if (page > 1) { <a asp-action="List" asp-route-page="@(page - 1)" asp-route-q="@ViewBag.Query" asp-route-published="@ViewBag.Published">Previous</a> }
+    <span>Page @page · @total posts</span>
+    @if (page * 30 < total) { <a asp-action="List" asp-route-page="@(page + 1)" asp-route-q="@ViewBag.Query" asp-route-published="@ViewBag.Published">Next</a> }
+</nav>

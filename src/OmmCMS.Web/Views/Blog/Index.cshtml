@@ -1,0 +1,73 @@
+@using OmmCMS.Web.Models.Blogs
+@model BlogPageModel
+@{
+    Assets.AppendTitleParts(Model.Title);
+    Assets.AppendMetaDescriptionParts(Model.Description);
+    var route = Model.Category != null ? "BlogCategory" : Model.Tag != null ? "BlogTag" : Model.Year.HasValue ? "BlogArchive" : "BlogHome";
+    var slug = Model.Category ?? Model.Tag;
+}
+<section class="container py-4">
+    <nav aria-label="Breadcrumb"><a asp-route="BlogHome">Blog</a></nav>
+    <div class="d-flex flex-wrap align-items-center justify-content-between my-3">
+        <h1>@Model.Title</h1>
+        <a asp-route="BlogRss">RSS feed</a>
+    </div>
+    @if (!string.IsNullOrWhiteSpace(Model.Description)) { <p class="lead">@Model.Description</p> }
+    <div class="row">
+        <div class="col-lg-9">
+            @if (!Model.Year.HasValue)
+            {
+                <form method="get" asp-route="@route" asp-route-slug="@slug" class="input-group mb-4">
+                    <input type="search" name="q" value="@Model.Query" class="form-control" placeholder="Search articles" aria-label="Search articles" />
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            }
+            @if (Model.Posts.Count == 0) { <p>No articles found.</p> }
+            <div class="row">
+                @foreach (var post in Model.Posts)
+                {
+                    <div class="col-md-6 mb-4">
+                        <article class="card h-100">
+                            @if ((post.PreviewImageId ?? post.CoverImageId).HasValue)
+                            {
+                                <a asp-route="BlogPost" asp-route-slug="@post.Slug"><img sm-file-id="@(post.PreviewImageId ?? post.CoverImageId)" class="card-img-top img-fluid" alt="@post.Title" loading="lazy" /></a>
+                            }
+                            <div class="card-body">
+                                <p class="small text-muted"><time datetime="@post.PublishedOnUtc.ToString("yyyy-MM-dd")">@post.PublishedOnUtc.ToString("dd MMM yyyy")</time> @post.Author</p>
+                                <h2 class="h4"><a asp-route="BlogPost" asp-route-slug="@post.Slug">@post.Title</a></h2>
+                                <p>@post.Intro</p>
+                                @foreach (var category in post.Categories)
+                                { <a class="badge badge-secondary mr-1" asp-route="BlogCategory" asp-route-slug="@category.Slug">@category.Name</a> }
+                                <div class="mt-3"><a asp-route="BlogPost" asp-route-slug="@post.Slug">Read article</a></div>
+                            </div>
+                        </article>
+                    </div>
+                }
+            </div>
+            <nav aria-label="Blog pages" class="d-flex justify-content-between">
+                @if (Model.Page > 1)
+                { <a asp-route="@route" asp-route-slug="@slug" asp-route-year="@Model.Year" asp-route-month="@Model.Month" asp-route-q="@Model.Query" asp-route-page="@(Model.Page - 1)">Previous</a> }
+                <span>Page @Model.Page</span>
+                @if (Model.Page * Model.PageSize < Model.Total)
+                { <a asp-route="@route" asp-route-slug="@slug" asp-route-year="@Model.Year" asp-route-month="@Model.Month" asp-route-q="@Model.Query" asp-route-page="@(Model.Page + 1)">Next</a> }
+            </nav>
+        </div>
+        <aside class="col-lg-3">
+            <h2 class="h5">Categories</h2>
+            <ul class="list-unstyled">
+                @foreach (var term in Model.Categories)
+                { <li><a asp-route="BlogCategory" asp-route-slug="@term.Slug">@term.Name</a></li> }
+            </ul>
+            <h2 class="h5">Tags</h2>
+            <div class="mb-4">
+                @foreach (var term in Model.Tags)
+                { <a class="badge badge-light mr-1 mb-1" asp-route="BlogTag" asp-route-slug="@term.Slug">@term.Name</a> }
+            </div>
+            <h2 class="h5">Archive</h2>
+            <ul class="list-unstyled">
+                @foreach (var month in Model.Archive)
+                { <li><a asp-route="BlogArchive" asp-route-year="@month.Year" asp-route-month="@month.Month">@((new DateTime(month.Year, month.Month, 1)).ToString("MMMM yyyy")) (@month.Count)</a></li> }
+            </ul>
+        </aside>
+    </div>
+</section>

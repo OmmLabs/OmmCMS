@@ -238,6 +238,35 @@ def editorial_workflows(password):
     get_page("/" + slug, anonymous, marker + " published")
     print("Article draft, publication, public slug and CSRF protection passed.")
 
+    # Independent blog content and reusable taxonomy.
+    page = get_page("/admin/blog/term", admin, 'id="blog-term-form"')
+    post_form("/admin/blog/term", admin, page, {"Id": "0", "IsTag": "false", "Name": "Smoke category", "Slug": "smoke-category", "DisplayOrder": "1"})
+    category_id = read_rows("SELECT Id FROM BlogCategory WHERE Slug = 'smoke-category'")[0][0]
+    page = get_page("/admin/blog/term?isTag=true", admin, 'id="blog-term-form"')
+    post_form("/admin/blog/term", admin, page, {"Id": "0", "IsTag": "true", "Name": "Smoke tag", "Slug": "smoke-tag"})
+    tag_id = read_rows("SELECT Id FROM BlogTag WHERE Slug = 'smoke-tag'")[0][0]
+    page = get_page("/admin/blog/edit", admin, 'id="blog-post-form"')
+    blog_fields = {"Id": "0", "Title": "Blog smoke article", "Slug": "smoke-blog", "Intro": "Blog smoke intro",
+                   "Body": "<p>Blog smoke content</p><script>alert(1)</script>", "PublishedOnUtc": "2020-01-01T12:00",
+                   "IsPublished": "false", "IncludeInSitemap": "true", "CategoryIds": str(category_id), "TagIds": str(tag_id)}
+    post_form("/admin/blog/edit", admin, page, blog_fields)
+    blog_id = read_rows("SELECT Id FROM BlogPost WHERE Slug = 'smoke-blog'")[0][0]
+    assert request("/blog/smoke-blog", client=anonymous)[0] == 404, "Draft exposed"
+    page = get_page(f"/admin/blog/edit/{blog_id}", admin, 'id="blog-post-form"')
+    blog_fields.update(Id=str(blog_id), IsPublished="true")
+    post_form("/admin/blog/edit", admin, page, blog_fields)
+    get_page("/blog", anonymous, "Blog smoke article")
+    detail = get_page("/blog/smoke-blog", anonymous, "Blog smoke content")
+    assert "<script>alert(1)</script>" not in detail, "Unsafe article body"
+    get_page("/blog/category/smoke-category", anonymous, "Blog smoke article")
+    get_page("/blog/tag/smoke-tag", anonymous, "Blog smoke article")
+    get_page("/blog/archive/2020/1", anonymous, "Blog smoke article")
+    get_page("/blog/rss.xml", anonymous, "Blog smoke article")
+    assert read_rows("SELECT PostId FROM BlogPostCategory WHERE CategoryId = ?", (category_id,)) == [(blog_id,)]
+    assert read_rows("SELECT PostId FROM BlogPostTag WHERE TagId = ?", (tag_id,)) == [(blog_id,)]
+    print("Native blog draft, publish, sanitized content, category/tag, archive and RSS passed.")
+
+
     # Verify access controls on the same article using the seeded Administrators role.
     role = read_rows("SELECT Id FROM CustomerRole WHERE SystemName = 'Administrators'")
     assert len(role) == 1, "Administrator role missing"

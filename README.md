@@ -8,7 +8,8 @@ Website: https://ommlabs.ommrudraksha.com
 
 ## Features
 
-- Website pages, articles, navigation menus, media management and SEO.
+- Website pages, dedicated blog posts, reusable content categories and tags, navigation menus, media management and SEO.
+- Blog administration under Content, with publishing schedules, cover/preview media, scoped visibility, related articles, archives, search, RSS and sitemap support. Public blog: `/blog`.
 - Content administration, roles, permissions, authentication and localization.
 - Theme infrastructure and a starter website with Home, About and Contact pages.
 - SQLite, SQL Server, PostgreSQL and MySQL database providers.
