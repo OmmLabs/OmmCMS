@@ -24,9 +24,6 @@ public class ImportProfileModel : EntityModelBase
     [LocalizedDisplay("Common.Enabled")]
     public bool Enabled { get; set; }
 
-    [LocalizedDisplay("*ImportRelatedData")]
-    public bool ImportRelatedData { get; set; }
-
     [LocalizedDisplay("Admin.Common.RecordsSkip")]
     public int? Skip { get; set; }
 

@@ -66,32 +66,21 @@ public partial class ImportProfileService : IImportProfileService
         }
     }
 
-    public virtual async Task<IList<ImportFile>> GetImportFilesAsync(ImportProfile profile, bool includeRelatedFiles = true)
+    public virtual async Task<IList<ImportFile>> GetImportFilesAsync(ImportProfile profile)
     {
         var result = new List<ImportFile>();
         var directory = await GetImportDirectoryAsync(profile, "Content");
 
         if (directory.Exists)
         {
-            var files = directory.EnumerateFiles();
-            if (files.Any())
+            foreach (var file in directory.EnumerateFiles().OrderBy(x => x.Name, StringComparer.OrdinalIgnoreCase))
             {
-                foreach (var file in files)
+                if (ImportFile.IsRetiredSidecar(file.NameWithoutExtension))
                 {
-                    var importFile = new ImportFile(file);
-                    if (!includeRelatedFiles && importFile.RelatedType.HasValue)
-                    {
-                        continue;
-                    }
-
-                    result.Add(importFile);
+                    continue;
                 }
 
-                // Always main data files first.
-                result = result
-                    .OrderBy(x => x.RelatedType)
-                    .ThenBy(x => x.File.Name)
-                    .ToList();
+                result.Add(new ImportFile(file));
             }
         }
 

@@ -17,12 +17,8 @@ public partial interface IImportProfileService
     /// Gets import files for an import profile.
     /// </summary>
     /// <param name="profile">Import profile.</param>
-    /// <param name="includeRelatedFiles">
-    /// A value indicating whether to include related data files.
-    /// A related data file contains, for example, tier price data that is to be imported together with the associated products.
-    /// </param>
     /// <returns>List of import files.</returns>
-    Task<IList<ImportFile>> GetImportFilesAsync(ImportProfile profile, bool includeRelatedFiles = true);
+    Task<IList<ImportFile>> GetImportFilesAsync(ImportProfile profile);
 
     /// <summary>
     /// Gets a new profile name.

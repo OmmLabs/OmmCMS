@@ -6067,15 +6067,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.DataExchange.Export.ExportFiles">
 		<Value>Exportdateien</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.ExportRelatedData">
-		<Value>Zugehörige Daten exportieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.ExportRelatedData.Hint">
-		<Value>Legt fest, ob auch zugehörige Daten (z.B. Staffelpreise) exportiert werden sollen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.ExportRelatedData.Validate">
-		<Value>Zugehörige Daten können nicht exportiert werden, wenn die Option "Attributkombinationen exportieren" aktiviert ist.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.FileExtension">
 		<Value>Dateityp</Value>
 	</LocaleResource>
@@ -6348,12 +6339,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.FolderName">
 		<Value>Ordnerpfad</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Import.ImportRelatedData">
-		<Value>Zugehörige Daten importieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Import.ImportRelatedData.Hint">
-		<Value>Legt fest, ob auch zugehörige Daten (z.B. Staffelpreise) importiert werden sollen.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.KeyFieldNames">
 		<Value>Schlüsselfelder</Value>
@@ -10132,15 +10117,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Enums.ProductVisibility.SearchResults">
 		<Value>In Suchergebnissen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RelatedEntityType.ProductVariantAttributeCombination">
-		<Value>Attribut-Kombination</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RelatedEntityType.ProductVariantAttributeValue">
-		<Value>Attribut-Option</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RelatedEntityType.TierPrice">
-		<Value>Staffelpreis</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.RuleScope.Cart">
 		<Value>Warenkorb</Value>

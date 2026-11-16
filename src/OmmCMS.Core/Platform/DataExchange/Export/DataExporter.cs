@@ -405,27 +405,22 @@ public partial class DataExporter : IDataExporter
             {
                 context.DataStreamId = dataUnit.Id;
 
-                var success = true;
                 var file = dataUnit.FileName.HasValue()
                     ? await dir.GetFileAsync(dataUnit.FileName)
                     : null;
 
-                if (!dataUnit.RelatedType.HasValue)
-                {
-                    // Data unit added by provider.
-                    calledExecuted = true;
-                    success = await CallExportProvider("OnExecuted", file, ctx);
-                }
+                // Data unit added by provider.
+                calledExecuted = true;
+                var success = await CallExportProvider("OnExecuted", file, ctx);
 
-                if (success && ctx.IsFileBasedExport && dataUnit.DisplayInFileDialog && file.Exists)
+                if (success && ctx.IsFileBasedExport && dataUnit.DisplayInFileDialog && file?.Exists == true)
                 {
                     // Save info about extra file.
                     ctx.Result.Files.Add(new DataExportResult.ExportFileInfo
                     {
                         StoreId = ctx.Store.Id,
                         FileName = dataUnit.FileName,
-                        Label = dataUnit.Label,
-                        RelatedType = dataUnit.RelatedType
+                        Label = dataUnit.Label
                     });
                 }
             }
@@ -448,7 +443,6 @@ public partial class DataExporter : IDataExporter
         {
             if (!ctx.IsPreview && profile.Id != 0)
             {
-                ctx.Result.Files = ctx.Result.Files.OrderBy(x => x.RelatedType).ToList();
                 profile.ResultInfo = XmlHelper.Serialize(ctx.Result);
 
                 await _db.SaveChangesAsync(ctx.CancelToken);
@@ -720,7 +714,6 @@ public partial class DataExporter : IDataExporter
     private static async Task<bool> CallExportProvider(string method, IFile file, DataExporterContext ctx)
     {
         var context = ctx.ExecuteContext;
-        var dir = context.ExportDirectory;
         var provider = ctx.Request.Provider.Value;
 
         if (method != "Execute" && method != "OnExecuted")
@@ -760,50 +753,14 @@ public partial class DataExporter : IDataExporter
             context.DataStream?.Dispose();
             context.DataStream = null;
 
-            if (context.Abort == DataExchangeAbortion.Hard && ctx.IsFileBasedExport && file.Exists)
+            if (context.Abort == DataExchangeAbortion.Hard && ctx.IsFileBasedExport && file?.Exists == true)
             {
                 await file.DeleteAsync(ctx.CancelToken);
             }
 
-            if (method == "Execute")
+            if (method == "Execute" && context.Abort != DataExchangeAbortion.Hard)
             {
-                using var psb = StringBuilderPool.Instance.Get(out var unitFileInfos);
-
-                var relatedDataUnits = context.ExtraDataUnits
-                    .Where(x => x.RelatedType.HasValue && x.FileName.HasValue() && x.DataStream != null)
-                    .ToList();
-
-                foreach (var unit in relatedDataUnits)
-                {
-                    // Set unit.DataStream to null so that providers know that this unit should no longer be written to.
-                    // We need these units later for ExportProfile.ResultInfo.
-                    unit.DataStream?.Dispose();
-                    unit.DataStream = null;
-
-                    var unitFile = unit.FileName.HasValue()
-                        ? await dir.GetFileAsync(unit.FileName)
-                        : null;
-
-                    if (context.Abort == DataExchangeAbortion.Hard)
-                    {
-                        if (ctx.IsFileBasedExport && unitFile.Exists)
-                        {
-                            await unitFile.DeleteAsync(ctx.CancelToken);
-                        }
-                    }
-                    else
-                    {
-                        unitFileInfos.AppendLine();
-                        unitFileInfos.Append($"Provider reports {unit.RecordsSucceeded:N0} successfully exported record(s) of type {unit.RelatedType.Value} to {unitFile?.PhysicalPath?.NaIfEmpty()}.");
-                    }
-                }
-
-                if (context.Abort != DataExchangeAbortion.Hard)
-                {
-                    ctx.Log.Info($"Provider reports {context.RecordsSucceeded:N0} successfully exported record(s) of type {provider.EntityType} to {file?.PhysicalPath?.NaIfEmpty()}.");
-                }
-
-                ctx.Log.Info(unitFileInfos.ToString());
+                ctx.Log.Info($"Provider reports {context.RecordsSucceeded:N0} successfully exported record(s) of type {provider.EntityType} to {file?.PhysicalPath?.NaIfEmpty()}.");
             }
         }
 

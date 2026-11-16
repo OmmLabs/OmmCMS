@@ -37,7 +37,7 @@ public class DataExportResult
         public int StoreId { get; set; }
 
         /// <summary>
-        /// Name of the export file including file extension, e.g. "1-7-0001-ordercsvexport.csv".
+        /// Name of the export file including file extension, e.g. "1-7-0001-customercsvexport.csv".
         /// </summary>
         public string FileName { get; set; }
 
@@ -46,10 +46,6 @@ public class DataExportResult
         /// </summary>
         public string Label { get; set; }
 
-        /// <summary>
-        /// The related entity type.
-        /// </summary>
-        public RelatedEntityType? RelatedType { get; set; }
     }
 }
 

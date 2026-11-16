@@ -71,11 +71,6 @@ public partial class ImportProfile : BaseEntity
     public bool Enabled { get; set; }
 
     /// <summary>
-    /// A value indicating whether to import related data.
-    /// </summary>
-    public bool ImportRelatedData { get; set; }
-
-    /// <summary>
     /// Number of records to bypass.
     /// </summary>
     public int Skip { get; set; }

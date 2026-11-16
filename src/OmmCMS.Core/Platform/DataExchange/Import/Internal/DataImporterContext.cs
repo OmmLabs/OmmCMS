@@ -7,5 +7,4 @@ internal class DataImporterContext
     public ILogger Log { get; set; }
     public ImportExecuteContext ExecuteContext { get; init; }
     public ColumnMap ColumnMap { get; init; }
-    public Dictionary<string, ImportResult> Results { get; set; } = new();
 }

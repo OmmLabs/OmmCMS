@@ -10,15 +10,6 @@ public enum ExportEntityType
 }
 
 /// <summary>
-/// Represents related export entity types (data without own export provider or importer).
-/// </summary>
-public enum RelatedEntityType
-{
-    ProductVariantAttributeValue = 1,
-    ProductVariantAttributeCombination
-}
-
-/// <summary>
 /// Represents export deployment types.
 /// </summary>
 public enum ExportDeploymentType

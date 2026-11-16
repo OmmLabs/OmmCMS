@@ -10,25 +10,18 @@ public partial class ImportFile
 
         File = file;
 
-        var fileName = file.NameWithoutExtension;
-        if (fileName.HasValue())
-        {
-            foreach (RelatedEntityType type in Enum.GetValues(typeof(RelatedEntityType)))
-            {
-                if (fileName.EndsWith(type.ToString(), StringComparison.OrdinalIgnoreCase))
-                {
-                    RelatedType = type;
-                }
-            }
-        }
     }
 
     public IFile File { get; private set; }
 
     /// <summary>
-    /// Related entity type.
+    /// Recognizes retired storefront sidecar files so they cannot be mistaken for primary CMS data.
     /// </summary>
-    public RelatedEntityType? RelatedType { get; private set; }
+    internal static bool IsRetiredSidecar(string fileNameWithoutExtension)
+        => fileNameWithoutExtension != null
+            && (fileNameWithoutExtension.EndsWith("ProductVariantAttributeValue", StringComparison.OrdinalIgnoreCase)
+                || fileNameWithoutExtension.EndsWith("ProductVariantAttributeCombination", StringComparison.OrdinalIgnoreCase)
+                || fileNameWithoutExtension.EndsWith("TierPrice", StringComparison.OrdinalIgnoreCase));
 
     /// <summary>
     /// File label text.

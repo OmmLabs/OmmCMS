@@ -6194,15 +6194,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.DataExchange.Export.ExportFiles">
 		<Value>Export files</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.ExportRelatedData">
-		<Value>Export associated data</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.ExportRelatedData.Hint">
-		<Value>Specifies whether to also export associated data (e.g. tier prices).</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.ExportRelatedData.Validate">
-		<Value>Related data cannot be exported if the option "Export attribute combinations" is activated.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.FileExtension">
 		<Value>File type</Value>
 	</LocaleResource>
@@ -6475,12 +6466,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.FolderName">
 		<Value>Folder path</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Import.ImportRelatedData">
-		<Value>Import associated data</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Import.ImportRelatedData.Hint">
-		<Value>Specifies whether to also import associated data (e.g. tier prices).</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.KeyFieldNames">
 		<Value>Key fields</Value>
@@ -10310,15 +10295,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Enums.ProductVisibility.SearchResults">
 		<Value>In search results</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RelatedEntityType.ProductVariantAttributeCombination">
-		<Value>Attribute combination</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RelatedEntityType.ProductVariantAttributeValue">
-		<Value>Attribute option</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.RelatedEntityType.TierPrice">
-		<Value>Tier price</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.RuleScope.Cart">
 		<Value>Cart</Value>

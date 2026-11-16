@@ -100,6 +100,8 @@ Phases 1001–1020: remove commerce-only Google Analytics settings, item identif
 
 Phases 1021–1040: retire product-linked choice thumbnails, product picker callbacks, unused product badge rendering and product-specific media assignment fields. Preserve reusable choices and uploads, remove retired administration, tax, pricing and export translations, and verify the retained resources and assets.
 
+Phases 1041–1060: retire product-variant related-data import and export sidecars, associated profile fields and translations. Preserve customer and newsletter import profiles, provider-generated extra export files and the shared data-exchange infrastructure; exclude legacy sidecar files from primary imports.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

@@ -66,11 +66,6 @@ public partial class ExportProfile : BaseEntity, ICloneable<ExportProfile>
     public bool Enabled { get; set; } = true;
 
     /// <summary>
-    /// A value indicating whether the export related data.
-    /// </summary>
-    public bool ExportRelatedData { get; set; }
-
-    /// <summary>
     /// XML formatted data with filtering information.
     /// </summary>
     [MaxLength]

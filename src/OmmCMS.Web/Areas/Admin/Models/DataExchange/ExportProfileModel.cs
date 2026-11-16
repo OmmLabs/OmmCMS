@@ -32,9 +32,6 @@ public class ExportProfileModel : EntityModelBase
     [LocalizedDisplay("Common.Enabled")]
     public bool Enabled { get; set; }
 
-    [LocalizedDisplay("*ExportRelatedData")]
-    public bool ExportRelatedData { get; set; }
-
     [LocalizedDisplay("Common.Execution")]
     public int TaskId { get; set; }
     public string TaskName { get; set; }
@@ -147,7 +144,6 @@ public partial class ExportFileDetailsModel : EntityModelBase
         public string StoreName { get; set; }
         public string Label { get; set; }
         public int DisplayOrder { get; set; }
-        public RelatedEntityType? RelatedType { get; set; }
 
         public IFile File { get; set; }
         public string FileUrl { get; set; }

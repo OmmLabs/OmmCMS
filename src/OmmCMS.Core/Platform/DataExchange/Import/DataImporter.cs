@@ -1,6 +1,5 @@
 ﻿using System.Security;
 using Autofac;
-using OmmCMS.Collections;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.DataExchange.Csv;
 using OmmCMS.Core.DataExchange.Import.Events;
@@ -70,80 +69,74 @@ public partial class DataImporter : IDataImporter
             await CheckPermission(ctx);
 
             var context = ctx.ExecuteContext;
-            var files = await _importProfileService.GetImportFilesAsync(profile, profile.ImportRelatedData);
-            var fileGroups = files.ToMultimap(x => x.RelatedType?.ToString() ?? string.Empty, x => x);
+            var files = await _importProfileService.GetImportFilesAsync(profile);
 
-            logger.Info(CreateLogHeader(profile, fileGroups));
+            logger.Info(CreateLogHeader(profile, files));
             await _services.EventPublisher.PublishAsync(new ImportExecutingEvent(context), cancelToken);
 
-            foreach (var fileGroup in fileGroups)
+            foreach (var file in files)
             {
-                context.Result = ctx.Results[fileGroup.Key] = new();
+                if (context.Abort == DataExchangeAbortion.Hard)
+                    break;
 
-                foreach (var file in fileGroup.Value)
+                if (!file.File.Exists)
+                    throw new FileNotFoundException($"File does not exist {file.File.SubPath}.");
+
+                try
                 {
-                    if (context.Abort == DataExchangeAbortion.Hard)
-                        break;
+                    var csvConfiguration = file.IsCsv
+                        ? (new CsvConfigurationConverter().ConvertFrom<CsvConfiguration>(profile.FileTypeConfiguration) ?? CsvConfiguration.ExcelFriendlyConfiguration)
+                        : CsvConfiguration.ExcelFriendlyConfiguration;
 
-                    if (!file.File.Exists)
-                        throw new FileNotFoundException($"File does not exist {file.File.SubPath}.");
+                    using var stream = await file.File.OpenReadAsync(cancelToken);
 
-                    try
+                    context.File = file;
+                    context.ColumnMap = ctx.ColumnMap;
+                    context.DataTable = LightweightDataTable.FromFile(
+                        file.File.Name,
+                        stream,
+                        stream.Length,
+                        csvConfiguration,
+                        profile.Skip,
+                        profile.Take > 0 ? profile.Take : int.MaxValue);
+
+                    var segmenter = new ImportDataSegmenter(context.DataTable, context.ColumnMap);
+
+                    context.DataSegmenter = segmenter;
+                    context.Result.TotalRecords += segmenter.TotalRows;
+
+                    while (context.Abort == DataExchangeAbortion.None && segmenter.ReadNextBatch())
                     {
-                        var csvConfiguration = file.IsCsv
-                            ? (new CsvConfigurationConverter().ConvertFrom<CsvConfiguration>(profile.FileTypeConfiguration) ?? CsvConfiguration.ExcelFriendlyConfiguration)
-                            : CsvConfiguration.ExcelFriendlyConfiguration;
+                        using var batchScope = _scopeAccessor.LifetimeScope.BeginLifetimeScope();
 
-                        using var stream = await file.File.OpenReadAsync(cancelToken);
+                        // Apply changes made by TaskContextVirtualizer.VirtualizeAsync (e.g. required for checking permissions).
+                        var workContext = batchScope.Resolve<IWorkContext>();
+                        workContext.CurrentCustomer = _services.WorkContext.CurrentCustomer;
+                        await workContext.InitializeAsync();
 
-                        context.File = file;
-                        context.ColumnMap = file.RelatedType.HasValue ? new ColumnMap() : ctx.ColumnMap;
-                        context.DataTable = LightweightDataTable.FromFile(
-                            file.File.Name,
-                            stream,
-                            stream.Length,
-                            csvConfiguration,
-                            profile.Skip,
-                            profile.Take > 0 ? profile.Take : int.MaxValue);
+                        batchScope.Resolve<IStoreContext>().CurrentStore = _services.StoreContext.CurrentStore;
 
-                        var segmenter = new ImportDataSegmenter(context.DataTable, context.ColumnMap);
+                        // It would be nice if we could make all dependencies use our TraceLogger.
+                        var importerFactory = batchScope.Resolve<Func<ImportEntityType, IEntityImporter>>();
+                        var importer = importerFactory(profile.EntityType);
 
-                        context.DataSegmenter = segmenter;
-                        context.Result.TotalRecords = segmenter.TotalRows;
-
-                        while (context.Abort == DataExchangeAbortion.None && segmenter.ReadNextBatch())
-                        {
-                            using var batchScope = _scopeAccessor.LifetimeScope.BeginLifetimeScope();
-
-                            // Apply changes made by TaskContextVirtualizer.VirtualizeAsync (e.g. required for checking permissions).
-                            var workContext = batchScope.Resolve<IWorkContext>();
-                            workContext.CurrentCustomer = _services.WorkContext.CurrentCustomer;
-                            await workContext.InitializeAsync();
-
-                            batchScope.Resolve<IStoreContext>().CurrentStore = _services.StoreContext.CurrentStore;
-
-                            // It would be nice if we could make all dependencies use our TraceLogger.
-                            var importerFactory = batchScope.Resolve<Func<ImportEntityType, IEntityImporter>>();
-                            var importer = importerFactory(profile.EntityType);
-
-                            await importer.ExecuteAsync(context, cancelToken);
-                        }
+                        await importer.ExecuteAsync(context, cancelToken);
                     }
-                    catch (Exception ex)
-                    {
-                        context.Abort = DataExchangeAbortion.Hard;
-                        context.Result.AddError(ex, $"The importer failed: {ex.ToAllMessages()}.");
-                    }
-                    finally
-                    {
-                        context.Result.EndDateUtc = DateTime.UtcNow;
+                }
+                catch (Exception ex)
+                {
+                    context.Abort = DataExchangeAbortion.Hard;
+                    context.Result.AddError(ex, $"The importer failed: {ex.ToAllMessages()}.");
+                }
+                finally
+                {
+                    context.Result.EndDateUtc = DateTime.UtcNow;
 
-                        if (context.IsMaxFailures)
-                            context.Result.AddWarning("Import aborted. The maximum number of failures has been reached.");
+                    if (context.IsMaxFailures)
+                        context.Result.AddWarning("Import aborted. The maximum number of failures has been reached.");
 
-                        if (ctx.CancelToken.IsCancellationRequested)
-                            context.Result.AddWarning("Import aborted. A cancellation has been requested.");
-                    }
+                    if (ctx.CancelToken.IsCancellationRequested)
+                        context.Result.AddWarning("Import aborted. A cancellation has been requested.");
                 }
             }
         }
@@ -154,6 +147,7 @@ public partial class DataImporter : IDataImporter
         }
         finally
         {
+            ctx.ExecuteContext.Result.EndDateUtc = DateTime.UtcNow;
             await Finalize(ctx);
         }
 
@@ -196,12 +190,8 @@ public partial class DataImporter : IDataImporter
 
         try
         {
-            if (ctx.Results.TryGetValue(string.Empty, out var result))
-            {
-                profile.ResultInfo = XmlHelper.Serialize(result.Clone());
-
-                await _services.DbContext.SaveChangesAsync(ctx.CancelToken);
-            }
+            profile.ResultInfo = XmlHelper.Serialize(ctx.ExecuteContext.Result.Clone());
+            await _services.DbContext.SaveChangesAsync(ctx.CancelToken);
         }
         catch (Exception ex)
         {
@@ -223,7 +213,6 @@ public partial class DataImporter : IDataImporter
         try
         {
             ctx.Request.CustomData.Clear();
-            ctx.Results.Clear();
         }
         catch (Exception ex)
         {
@@ -350,7 +339,7 @@ public partial class DataImporter : IDataImporter
         return (context, logFile);
     }
 
-    private string CreateLogHeader(ImportProfile profile, Multimap<string, ImportFile> files)
+    private string CreateLogHeader(ImportProfile profile, IList<ImportFile> files)
     {
         var executingCustomer = _services.WorkContext.CurrentCustomer;
 
@@ -362,12 +351,8 @@ public partial class DataImporter : IDataImporter
         sb.Append("Import profile: " + profile.Name);
         sb.AppendLine(profile.Id == 0 ? " (transient)" : $" (ID {profile.Id})");
 
-        foreach (var fileGroup in files)
-        {
-            var entityName = fileGroup.Key.NullEmpty() ?? profile.EntityType.ToString();
-            var fileNames = string.Join(", ", fileGroup.Value.Select(x => x.File.Name));
-            sb.AppendLine($"{entityName} files: {fileNames}");
-        }
+        var fileNames = string.Join(", ", files.Select(x => x.File.Name));
+        sb.AppendLine($"{profile.EntityType} files: {fileNames}");
 
         sb.Append("Executed by: " + (executingCustomer.Email.HasValue() ? executingCustomer.Email : executingCustomer.SystemName));
 
@@ -378,40 +363,34 @@ public partial class DataImporter : IDataImporter
     {
         using var psb = StringBuilderPool.Instance.Get(out var sb);
 
-        foreach (var item in ctx.Results)
+        var result = ctx.ExecuteContext.Result;
+        sb.AppendLine();
+        sb.AppendLine(new string('-', 50));
+        sb.AppendLine("Object:            " + profile.EntityType);
+        sb.AppendLine("Started:           " + result.StartDateUtc.ToLocalTime());
+        sb.AppendLine("Finished:          " + result.EndDateUtc.ToLocalTime());
+        sb.AppendLine("Duration:          " + (result.EndDateUtc - result.StartDateUtc).ToString("g"));
+        sb.AppendLine("Rows total:        " + result.TotalRecords.ToString("N0"));
+        sb.AppendLine("Records processed: " + result.AffectedRecords.ToString("N0"));
+        sb.AppendLine("Records imported:  " + result.NewRecords.ToString("N0"));
+        sb.AppendLine("Records updated:   " + result.ModifiedRecords.ToString("N0"));
+        sb.AppendLine("Warnings:          " + result.Warnings.ToString("N0"));
+        sb.Append("Errors:            " + result.Errors.ToString("N0"));
+        ctx.Log.Info(sb.ToString());
+
+        foreach (var message in result.Messages)
         {
-            var result = item.Value;
-            var entityName = item.Key.HasValue() ? item.Key : profile.EntityType.ToString();
-
-            sb.Clear();
-            sb.AppendLine();
-            sb.AppendLine(new string('-', 50));
-            sb.AppendLine("Object:            " + entityName);
-            sb.AppendLine("Started:           " + result.StartDateUtc.ToLocalTime());
-            sb.AppendLine("Finished:          " + result.EndDateUtc.ToLocalTime());
-            sb.AppendLine("Duration:          " + (result.EndDateUtc - result.StartDateUtc).ToString("g"));
-            sb.AppendLine("Rows total:        " + result.TotalRecords.ToString("N0"));
-            sb.AppendLine("Records processed: " + result.AffectedRecords.ToString("N0"));
-            sb.AppendLine("Records imported:  " + result.NewRecords.ToString("N0"));
-            sb.AppendLine("Records updated:   " + result.ModifiedRecords.ToString("N0"));
-            sb.AppendLine("Warnings:          " + result.Warnings.ToString("N0"));
-            sb.Append("Errors:            " + result.Errors.ToString("N0"));
-            ctx.Log.Info(sb.ToString());
-
-            foreach (var message in result.Messages)
+            if (message.MessageType == ImportMessageType.Error)
             {
-                if (message.MessageType == ImportMessageType.Error)
-                {
-                    ctx.Log.Error(new Exception(message.FullMessage), message.ToString());
-                }
-                else if (message.MessageType == ImportMessageType.Warning)
-                {
-                    ctx.Log.Warn(message.ToString());
-                }
-                else
-                {
-                    ctx.Log.Info(message.ToString());
-                }
+                ctx.Log.Error(new Exception(message.FullMessage), message.ToString());
+            }
+            else if (message.MessageType == ImportMessageType.Warning)
+            {
+                ctx.Log.Warn(message.ToString());
+            }
+            else
+            {
+                ctx.Log.Info(message.ToString());
             }
         }
     }

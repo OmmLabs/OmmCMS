@@ -214,16 +214,6 @@ public class ExportDataUnit
     public string Id { get; set; }
 
     /// <summary>
-    /// Stream used to write data to.
-    /// </summary>
-    public Stream DataStream { get; internal set; }
-
-    /// <summary>
-    /// The related entity type.
-    /// </summary>
-    public RelatedEntityType? RelatedType { get; set; }
-
-    /// <summary>
     /// The name of the file to be created.
     /// </summary>
     public string FileName { get; set; }
@@ -238,8 +228,4 @@ public class ExportDataUnit
     /// </summary>
     public bool DisplayInFileDialog { get; set; }
 
-    /// <summary>
-    /// Number of successful processed records.
-    /// </summary>
-    public int RecordsSucceeded { get; set; }
 }
