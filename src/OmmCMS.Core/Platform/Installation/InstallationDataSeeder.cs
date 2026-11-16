@@ -121,12 +121,7 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
         await PopulateAsync("PopulateSettings", PopulateSettings);
         await PopulateFromSeedAsync("PopulateActivityLogTypes", InstallationSeedDescriptors.ActivityLogTypes());
         await PopulateAsync("PopulateCustomersAndUsers", async () => await HashDefaultCustomerPassword(_config.DefaultUserName, _config.DefaultUserPassword));
-        await PopulateAsync("PopulateScheduleTasks", () =>
-        {
-            var tasks = CreateFromSeed(InstallationSeedDescriptors.TaskDescriptors());
-            tasks.RemoveAll(x => x.Type is "UpdateExchangeRateTask" or "ProductRuleEvaluatorTask");
-            return SaveRangeAsync(tasks);
-        });
+        await PopulateFromSeedAsync("PopulateScheduleTasks", InstallationSeedDescriptors.TaskDescriptors());
 
         // Menus come last, after the CMS content and settings.
         await PopulateFromSeedAsync("PopulateMenus", InstallationSeedDescriptors.Menus());

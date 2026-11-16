@@ -14,9 +14,6 @@
   "ClearCacheTask": {
     "name": "Cache bereinigen"
   },
-  "UpdateExchangeRateTask": {
-    "name": "Wechselkurse aktualisieren"
-  },
   "TransientMediaClearTask": {
     "name": "Temporäre Uploads bereinigen"
   },
@@ -28,8 +25,5 @@
   },
   "TargetGroupEvaluatorTask": {
     "name": "Zuordnungen von Kunden zu Kundengruppen aktualisieren"
-  },
-  "ProductRuleEvaluatorTask": {
-    "name": "Zuordnungen von Produkten zu Warengruppen aktualisieren"
   }
 }

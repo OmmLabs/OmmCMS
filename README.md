@@ -108,6 +108,8 @@ Phases 1081–1100: remove unused storefront AI roles, product-specific prompt b
 
 Phase 1101: retire the unused product attribute-combination performance setting, its administration editor, validation and seed resources, and commerce-specific story asset kinds. Preserve the numeric identifiers of media and link assets.
 
+Phases 1102–1107: remove retired scheduled commerce task implementations and seed definitions, obsolete scheduler aliases and automatic exchange-rate configuration. Correct legacy names in the customer index, media tracking and topic grid. Keep CMS scheduled jobs and shared currency services.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

@@ -73,7 +73,12 @@ public partial class InstallationSeedingTests
             Assert.That(topics, Does.Not.Contain("CheckoutAsGuestOrRegister"));
             Assert.That(db.Set<OmmCMS.Core.Content.Menus.MenuItemEntity>().Any(x => x.ProviderName == "catalog"), Is.False);
             var tasks = db.Set<OmmCMS.Scheduling.TaskDescriptor>().Select(x => x.Type).ToList();
-            Assert.That(tasks, Does.Contain("QueuedMessagesSendTask"));
+            Assert.That(tasks, Is.EquivalentTo(new[]
+            {
+                "QueuedMessagesSendTask", "QueuedMessagesClearTask", "DeleteGuestsTask", "DeleteLogsTask",
+                "ClearCacheTask", "TransientMediaClearTask", "TempFileCleanupTask", "RebuildXmlSitemapTask",
+                "TargetGroupEvaluatorTask"
+            }));
             Assert.That(tasks, Does.Not.Contain("ProductRuleEvaluatorTask"));
             Assert.That(tasks, Does.Not.Contain("UpdateExchangeRateTask"));
         }

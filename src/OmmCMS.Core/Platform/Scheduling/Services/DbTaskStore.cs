@@ -28,7 +28,6 @@ public partial class DbTaskStore : Disposable, ITaskStore
         { nameof(DataImportTask), "OmmCMS.Services.DataExchange.Import.DataImportTask, OmmCMS.Services" },
         { nameof(TargetGroupEvaluatorTask), "OmmCMS.Services.Customers.TargetGroupEvaluatorTask, OmmCMS.Services" },
         { nameof(RebuildXmlSitemapTask), "OmmCMS.Services.Seo.RebuildXmlSitemapTask, OmmCMS.Services" },
-        { nameof(UpdateExchangeRateTask), "OmmCMS.Services.Directory.UpdateExchangeRateTask, OmmCMS.Services" },
         { nameof(ClearCacheTask), "OmmCMS.Services.Caching.ClearCacheTask, OmmCMS.Services" },
         { nameof(DeleteGuestsTask), "OmmCMS.Services.Customers.DeleteGuestsTask, OmmCMS.Services" },
         { nameof(DeleteLogsTask), "OmmCMS.Services.Logging.DeleteLogsTask, OmmCMS.Services" },
@@ -39,9 +38,6 @@ public partial class DbTaskStore : Disposable, ITaskStore
 
         { "IndexingTask", "OmmCMS.MegaSearch.IndexingTask, OmmCMS.MegaSearch" },
         { "ForumIndexingTask", "OmmCMS.MegaSearch.ForumIndexingTask, OmmCMS.MegaSearch" },
-        { "BMEcatImportTask", "OmmCMS.BMEcat.FileImportTask, OmmCMS.BMEcat" },
-        { "CleanupCartApprovalTask", "OmmCMS.CartApproval.Tasks.DeleteObsoleteRecordsTask, OmmCMS.CartApproval" },
-        { "CleanupPersonalPromoTask", "OmmCMS.PersonalPromo.CleanupTask, OmmCMS.PersonalPromo" },
         { "NewsImportTask", "OmmCMS.NewsImporter.NewsImportTask, OmmCMS.NewsImporter" },
     };
 

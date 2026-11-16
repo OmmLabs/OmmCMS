@@ -2590,12 +2590,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Blog.ShowHeaderRSSUrl.Hint">
 		<Value>Check to enable the blog RSS feed link in customers browser address bar.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Currency.AutoUpdateEnabled">
-		<Value>Automatically update exchange rates</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Currency.AutoUpdateEnabled.Hint">
-		<Value>Specifies whether exchange rates should be automatically updated via the associated scheduled task.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Currency.ExchangeRateProvider">
 		<Value>Online exchange rate service</Value>
 	</LocaleResource>

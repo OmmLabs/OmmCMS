@@ -63,7 +63,7 @@ internal class CustomerMap : IEntityTypeConfiguration<Customer>
 [Index(nameof(CustomerNumber), Name = "IX_Customer_CustomerNumber")]
 [Index(nameof(BirthDate), Name = "IX_Customer_BirthDate")]
 [Index(nameof(Deleted), nameof(IsSystemAccount), Name = "IX_Customer_Deleted_IsSystemAccount")]
-[Index(nameof(LimitedToStores), Name = "IX_Product_LimitedToStores")]
+[Index(nameof(LimitedToStores), Name = "IX_Customer_LimitedToStores")]
 public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRestricted
 {
     /// <summary>

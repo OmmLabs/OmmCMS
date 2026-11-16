@@ -2536,12 +2536,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Blog.ShowHeaderRSSUrl.Hint">
 		<Value>Legt fest, ob der RSS-Feed-Link in der Adressleiste des Browsers angezeigt werden soll.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Currency.AutoUpdateEnabled">
-		<Value>Wechselkurse automatisch aktualisieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Currency.AutoUpdateEnabled.Hint">
-		<Value>Legt fest, ob Wechselkurse über die zugehörige geplante Aufgabe automatisch aktualisiert werden sollen.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Currency.ExchangeRateProvider">
 		<Value>Online Wechselkursdienst</Value>
 	</LocaleResource>

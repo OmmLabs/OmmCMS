@@ -18,11 +18,6 @@ public class CurrencySettings : ISettings
     public int PrimaryExchangeCurrencyId { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to automatically update currency rates.
-    /// </summary>
-    public bool AutoUpdateEnabled { get; set; }
-
-    /// <summary>
     /// Active exchange rate provider system name
     /// </summary>
     public string ActiveExchangeRateProviderSystemName { get; set; }

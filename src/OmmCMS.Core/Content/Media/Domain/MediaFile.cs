@@ -61,7 +61,7 @@ public partial class MediaFile : EntityWithAttributes, IMediaAware, ITransient, 
 {
     #region static
 
-    private static readonly FrozenSet<string> _outputAffectingProductProps = new string[]
+    private static readonly FrozenSet<string> _outputAffectingMediaProps = new string[]
     {
         nameof(MediaFile.FolderId),
         nameof(MediaFile.Name),
@@ -73,7 +73,7 @@ public partial class MediaFile : EntityWithAttributes, IMediaAware, ITransient, 
 
     public static IReadOnlyCollection<string> GetOutputAffectingPropertyNames()
     {
-        return _outputAffectingProductProps;
+        return _outputAffectingMediaProps;
     }
 
     #endregion
