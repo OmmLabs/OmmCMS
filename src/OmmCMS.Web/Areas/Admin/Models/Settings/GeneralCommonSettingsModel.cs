@@ -31,7 +31,6 @@ public partial class GeneralCommonSettingsModel : ModelBase
     public LocalizationSettingsModel LocalizationSettings { get; set; } = new();
     public CompanyInformationSettingsModel CompanyInformationSettings { get; set; } = new();
     public ContactDataSettingsModel ContactDataSettings { get; set; } = new();
-    public BankConnectionSettingsModel BankConnectionSettings { get; set; } = new();
     public SocialSettingsModel SocialSettings { get; set; } = new();
 
     #region Nested classes
@@ -325,28 +324,6 @@ public partial class GeneralCommonSettingsModel : ModelBase
 
         [LocalizedDisplay("*ContactEmailAddress")]
         public string ContactEmailAddress { get; set; }
-    }
-
-    [LocalizedDisplay("Admin.Configuration.Settings.GeneralCommon.BankConnectionSettings.")]
-    public partial class BankConnectionSettingsModel
-    {
-        [LocalizedDisplay("*Bankname")]
-        public string Bankname { get; set; }
-
-        [LocalizedDisplay("*Bankcode")]
-        public string Bankcode { get; set; }
-
-        [LocalizedDisplay("*AccountNumber")]
-        public string AccountNumber { get; set; }
-
-        [LocalizedDisplay("*AccountHolder")]
-        public string AccountHolder { get; set; }
-
-        [LocalizedDisplay("*Iban")]
-        public string Iban { get; set; }
-
-        [LocalizedDisplay("*Bic")]
-        public string Bic { get; set; }
     }
 
     [LocalizedDisplay("Admin.Configuration.Settings.GeneralCommon.SocialSettings.")]

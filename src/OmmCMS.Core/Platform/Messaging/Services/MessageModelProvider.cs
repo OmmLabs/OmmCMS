@@ -355,14 +355,6 @@ public partial class MessageModelProvider : IMessageModelProvider
         return m;
     }
 
-    protected virtual async Task<object> CreateBankModelPartAsync(MessageContext messageContext)
-    {
-        var settings = await _services.SettingFactory.LoadSettingsAsync<BankConnectionSettings>(messageContext.Store.Id);
-        var m = new HybridExpando(settings, true);
-        await _helper.PublishModelPartCreatedEventAsync(settings, m);
-        return m;
-    }
-
     protected virtual async Task<object> CreateContactModelPartAsync(MessageContext messageContext)
     {
         var settings = await _services.SettingFactory.LoadSettingsAsync<ContactDataSettings>(messageContext.Store.Id);
@@ -429,7 +421,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             { "Logo", await CreateModelPartAsync(logoFile, messageContext, host, null, new Size(400, 75)) },
             { "Company", await CreateCompanyModelPartAsync(messageContext) },
             { "Contact", await CreateContactModelPartAsync(messageContext) },
-            { "Bank", await CreateBankModelPartAsync(messageContext) },
             { "Copyright", T("Content.CopyrightNotice", messageContext.Language.Id, DateTime.Now.Year.ToString(), part.Name).ToString() }
         };
 

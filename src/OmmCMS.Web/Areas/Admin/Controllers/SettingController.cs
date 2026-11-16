@@ -75,7 +75,6 @@ public partial class SettingController : AdminController
         LocalizationSettings localizationSettings,
         CompanyInformationSettings companySettings,
         ContactDataSettings contactDataSettings,
-        BankConnectionSettings bankConnectionSettings,
         SocialSettings socialSettings,
         HomePageSettings homePageSettings,
         EmailAccountSettings emailAccountSettings)
@@ -92,7 +91,6 @@ public partial class SettingController : AdminController
         MiniMapper.Map(localizationSettings, model.LocalizationSettings);
         MiniMapper.Map(companySettings, model.CompanyInformationSettings);
         MiniMapper.Map(contactDataSettings, model.ContactDataSettings);
-        MiniMapper.Map(bankConnectionSettings, model.BankConnectionSettings);
         MiniMapper.Map(socialSettings, model.SocialSettings);
         MiniMapper.Map(homePageSettings, model.HomepageSettings);
         MiniMapper.Map(emailAccountSettings, model.EmailAccountSettings);
@@ -146,7 +144,6 @@ public partial class SettingController : AdminController
         LocalizationSettings localizationSettings,
         CompanyInformationSettings companySettings,
         ContactDataSettings contactDataSettings,
-        BankConnectionSettings bankConnectionSettings,
         SocialSettings socialSettings,
         HomePageSettings homePageSeoSettings,
         EmailAccountSettings emailAccountSettings)
@@ -163,7 +160,6 @@ public partial class SettingController : AdminController
                 localizationSettings,
                 companySettings,
                 contactDataSettings,
-                bankConnectionSettings,
                 socialSettings,
                 homePageSeoSettings,
                 emailAccountSettings);
@@ -184,7 +180,6 @@ public partial class SettingController : AdminController
         MiniMapper.Map(model.LocalizationSettings, localizationSettings);
         MiniMapper.Map(model.CompanyInformationSettings, companySettings);
         MiniMapper.Map(model.ContactDataSettings, contactDataSettings);
-        MiniMapper.Map(model.BankConnectionSettings, bankConnectionSettings);
         MiniMapper.Map(model.SocialSettings, socialSettings);
         MiniMapper.Map(model.HomepageSettings, homePageSeoSettings);
         MiniMapper.Map(model.EmailAccountSettings, emailAccountSettings);
