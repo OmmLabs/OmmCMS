@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OmmCMS.Admin.Models.Customers;
-using OmmCMS.Admin.Models.Orders;
+using OmmCMS.Admin.Models.Dashboard;
 using OmmCMS.ComponentModel;
 using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Common.Services;
