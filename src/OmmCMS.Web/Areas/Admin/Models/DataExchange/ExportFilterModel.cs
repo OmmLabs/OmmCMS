@@ -54,7 +54,4 @@ public class ExportFilterModel
 
     #endregion
 
-    #region Shopping Cart Items
-
-    #endregion
 }

@@ -98,6 +98,8 @@ Phases 981–1000: retire the catalog product rotator, its theme settings and ob
 
 Phases 1001–1020: remove commerce-only Google Analytics settings, item identifier migration and resources; retain site tracking and consent. Generalize search facets and entity-picker defaults, retain customer selection and CMS media albums, and test the published configuration.
 
+Phases 1021–1040: retire product-linked choice thumbnails, product picker callbacks, unused product badge rendering and product-specific media assignment fields. Preserve reusable choices and uploads, remove retired administration, tax, pricing and export translations, and verify the retained resources and assets.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

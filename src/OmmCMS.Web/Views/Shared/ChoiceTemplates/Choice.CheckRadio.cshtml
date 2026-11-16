@@ -29,16 +29,7 @@
                 @if (item.ImageUrl.HasValue())
                 {
                     @* INFO: An intentionally tiny thumbnail that does not further increase the height of the choice row. *@
-                    if (item.SeName.HasValue())
-                    {
-                        <a asp-route="Product" asp-route-SeName="@item.SeName" class="choice-item-img choice-item-linked-product-img">
-                            <img src="@item.ImageUrl" alt="@item.Name" />
-                        </a>
-                    }
-                    else
-                    {
-                        <img class="choice-item-img" src="@item.ImageUrl" alt="@item.Name" />
-                    }
+                    <img class="choice-item-img" src="@item.ImageUrl" alt="@item.Name" />
                 }
                 else if (hasColor)
                 {

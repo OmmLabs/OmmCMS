@@ -498,7 +498,7 @@
                                         .attr("data-display-order", 1000)
                                         .attr("data-media-id", value.MediaFileId)
                                         .attr("data-media-name", value.Name)
-                                        .attr("data-entity-media-id", value.ProductMediaFileId)
+                                        .attr("data-entity-media-id", value.EntityMediaId)
                                         .addClass("dz-success dz-complete")
                                         .removeClass("d-none dz-processing");
 
@@ -537,7 +537,7 @@
                         newOrder.push($(val).data('entity-media-id'));
                     });
 
-                    // Set display order of ProductPicture.
+                    // Set display order of entity media.
                     $.ajax({
                         async: true,
                         cache: false,
@@ -554,11 +554,6 @@
                                 preview.attr("data-display-order", value.DisplayOrder);
                                 preview.attr("data-entity-media-id", value.EntityMediaId);
 
-                                if (index === 0) {
-                                    // Update preview pic in upper left corner of product detail page.
-                                    var productThumb = $(".section-header .title > img");
-                                    productThumb.attr("src", preview.find("img").attr("src"));
-                                }
                             });
                         }
                     });

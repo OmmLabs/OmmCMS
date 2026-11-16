@@ -735,35 +735,6 @@ public static class HtmlHelperRenderingExtensions
     #region Misc
 
     /// <summary>
-    /// Renderes badged product name including link to edit view. Not intended to be used in grids (use LabeledProductName there). 
-    /// </summary>
-    public static IHtmlContent BadgedProductName(this IHtmlHelper helper, int id, string name, string typeName, string typeLabelHint)
-    {
-        if (id == 0 && name.IsEmpty())
-            return null;
-
-        var builder = new SmartHtmlContentBuilder();
-
-        if (typeName.HasValue())
-        {
-            builder.AppendHtml($"<span class='badge badge-subtle badge-ring badge-{typeLabelHint} mr-1'>{typeName}</span>");
-        }
-
-        if (id != 0)
-        {
-            var urlHelper = helper.ViewContext.HttpContext.RequestServices.GetRequiredService<IUrlHelper>();
-            string url = urlHelper.Content("~/Admin/Product/Edit/");
-            builder.AppendHtml($"<a href='{url}{id}' title='{name}'>{name}</a>");
-        }
-        else
-        {
-            builder.AppendHtml($"<span>{helper.Encode(name)}</span>");
-        }
-
-        return builder;
-    }
-
-    /// <summary>
     /// Gets the antiforgery token for the current request. Usage is intended for ajax calls where you don't have a post form which renders the token automatically.
     /// </summary>
     /// <param name="store">

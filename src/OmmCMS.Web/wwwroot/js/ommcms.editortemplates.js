@@ -100,31 +100,6 @@
         });
     }
 
-    window.productPickerCallback = function (ids, selectedItems) {
-        var $el = $(this);
-
-        if ($el.length == 0)
-            return;
-
-        var cnt = $el.closest(".link-builder");
-        var val = 'product:' + ids[0];
-        var qs = cnt.find(".query-string").val() || '';
-
-        while (qs.startsWith('?')) {
-            qs = qs.substring(1);
-        }
-
-        if (!_.isEmpty(qs)) {
-            val = val + '?' + qs;
-        }
-
-        // Ctrl
-        $('#' + $el.data("field-id")).val(val).trigger("change");
-        cnt.find(".product-picker-input").val(selectedItems[0].name);
-
-        return true;
-    }
-
     // TODO: (mh) (core) This method must be used in FileUploader script as a callback function.
     // > window.onMediaSelected.apply($("#control-id").get(0), [file]);
     window.onMediaSelected = function (file) {

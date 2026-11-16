@@ -158,6 +158,11 @@ def editorial_workflows(password):
     analytics = get_page("/admin/googleanalytics/configure", admin, "RenderWithUserConsentOnly")
     assert "TrackingScript" in analytics and "{ECOMMERCE}" not in analytics
     print("CMS Google Analytics configuration and consent controls passed without commerce settings.")
+    resources = {name.lower() for (name,) in read_rows("SELECT ResourceName FROM LocaleStringResource")}
+    assert all(name.lower() not in resources for name in ("Admin.Configuration.PriceLabels", "Admin.Configuration.Tax", "Admin.Customers.Customers.Orders", "Admin.Product.Picture.Added", "Admin.DataExchange.Export.Filter.PriceMaximum"))
+    assert "admin.dataexchange.export.filter.isactivecustomer" in resources
+    assert "admin.dataexchange.export.filter.isactivesubscriber" in resources
+    print("Fresh locale resources retain CMS export fields without retired commerce labels.")
     if "--admin-commerce-trimmed" in sys.argv:
         for controller, action in (("campaign","list"), ("category","list"), ("currency","list"), ("discount","list"), ("export","list"), ("import","list"), ("manufacturer","list"), ("measure","weights"), ("order","list"), ("product","list"), ("search","searchsettings")):
             path = f"/admin/{controller}/{action}"
@@ -307,12 +312,17 @@ def editorial_workflows(password):
         assert ".media-gallery" in css and ".gal-box" in css, f"{theme} gallery styling missing"
         assert ".costep" not in css and ".pd-offer" not in css and ".art-finalprice" not in css, f"{theme} contains retired commerce styling"
         assert ".rotator-container" not in css, f"{theme} contains the retired product rotator"
+        assert ".choice-item-linked-product-img" not in css and ".choice-item-img" in css, f"{theme} retains product-linked choice styling or lacks choice images"
     print(f"All {len(published_themes)} published CMS theme stylesheets passed.")
     rtl_status, rtl_css = request("/themes/flex/theme-rtl.css", timeout=120)
     assert rtl_status == 200 and ".media-gallery" in rtl_css, "RTL theme stylesheet missing gallery styling"
     menu_status, menu_js = request("/js/ommcms.megamenu.js")
     assert menu_status == 200 and "aria-expanded" in menu_js and "megaMenu" in menu_js
     assert "productRotatorAjaxUrl" not in menu_js, "Catalog rotator still exposed"
+    editor_status, editor_js = request("/js/ommcms.editortemplates.js")
+    assert editor_status == 200 and "onMediaSelected" in editor_js and "productPickerCallback" not in editor_js
+    uploader_status, uploader_js = request("/js/ommcms.dropzoneWrapper.js")
+    assert uploader_status == 200 and "EntityMediaId" in uploader_js and "ProductMediaFileId" not in uploader_js
     assert request("/bundle/css/site-common.css")[0] == 200, "Common CSS bundle missing"
     assert request("/css/compiled/theme.css")[0] == 404, "Obsolete compiled theme snapshot still exposed"
     assert request("/css/compiled/site-common.css")[0] == 404, "Obsolete compiled common snapshot still exposed"

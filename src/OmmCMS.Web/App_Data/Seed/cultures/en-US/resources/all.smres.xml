@@ -420,9 +420,6 @@
 	<LocaleResource Name="ActivityLog.DeleteManufacturer">
 		<Value>Deleted a manufacturer ('{0}')</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.DeleteOrder">
-		<Value>Deleted order {0}</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteReturnRequest">
 		<Value>Deleted a return (ID = {0})</Value>
 	</LocaleResource>
@@ -2494,69 +2491,6 @@
 	<LocaleResource Name="Admin.Configuration.Plugins.UnknownError">
 		<Value>An unknown error occurred when calling a plugin. Please refer to the following message for details.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.Added">
-		<Value>Price label was successfully added.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.CantDeleteDefaultComparePriceLabel">
-		<Value>Cannot delete default label for compare price.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.CantDeleteDefaultRegularPriceLabel">
-		<Value>Cannot delete default label for regular price.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.Fields.Description">
-		<Value>Description</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.Fields.Description.Hint">
-		<Value>The optional description that is displayed on product detail pages in a tooltip.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.Fields.DisplayShortNameInLists">
-		<Value>Display short name in lists</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.Fields.DisplayShortNameInLists.Hint">
-		<Value>Specifies whether the label's short name should be displayed in product lists.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.Fields.IsRetailPrice">
-		<Value>Is MSRP</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.Fields.IsRetailPrice.Hint">
-		<Value>Specifies whether this label represents an MSRP price.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.Fields.Name">
-		<Value>Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.Fields.Name.Hint">
-		<Value>Specifies the optional name that is displayed on product detail pages, e.g. 'Retail price', 'Lowest recent price'.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.Fields.ShortName">
-		<Value>Name (short)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.Fields.ShortName.Hint">
-		<Value>The short name that is displayed in product lists, e.g. 'MSRP', 'Lowest'.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.IsDefaultComparePriceLabel">
-		<Value>Is compare price default</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.IsDefaultRegularPriceLabel">
-		<Value>Is regular price default</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.SetDefaultComparePriceLabel">
-		<Value>Make default for compare price</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.SetDefaultRegularPriceLabel">
-		<Value>Make default for regular price</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabel.Updated">
-		<Value>Price label was successfully updated.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabels">
-		<Value>Price Labels</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabels.AddNew">
-		<Value>Add Price Label</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.PriceLabels.EditPriceLabelDetails">
-		<Value>Edit Price Label</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Quantityunits.Updated">
 		<Value>Quantity unit successfully updated</Value>
 	</LocaleResource>
@@ -4360,12 +4294,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Configuration.Settings.Search.Forum.SearchFields.Hint">
 		<Value>Specifies additional search fields. The topic title is always searched.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Search.IncludeNotAvailable">
-		<Value>Include out of stock products</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Search.IncludeNotAvailable.Hint">
-		<Value>Specifies whether to include or exclude products that are out of stock by default.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.InstantSearchEnabled">
 		<Value>Enable Instant Search</Value>
 	</LocaleResource>
@@ -4377,9 +4305,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.InstantSearchNumberOfHits.Hint">
 		<Value>Specifies the number of hits displayed in instant search.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Search.InstantSearchNumberOfProducts.Hint">
-		<Value>Specifies the number of product hits displayed in instant search.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.InstantSearchTermMinLength">
 		<Value>Minimum search term length</Value>
@@ -4401,24 +4326,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.SearchMode.Hint">
 		<Value>Specifies the search mode. Please keep in mind that the search mode can - depending on number of objects - strongly affect search performance. 'Is equal to' is the fastest, 'Contains' the slowest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Search.SearchProductByIdentificationNumber">
-		<Value>Open product directly at SKU, MPN or GTIN</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Search.SearchProductByIdentificationNumber.Hint">
-		<Value>Specifies whether the product page should be opened directly if the search term matches a SKU, MPN or GTIN.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Search.ShowProductImagesInInstantSearch">
-		<Value>Show product images</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Search.ShowProductImagesInInstantSearch.Hint">
-		<Value>Specifies whether to display product images in instant search.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Search.UseFeaturedSorting">
-		<Value>Sort by recommendation</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Search.UseFeaturedSorting.Hint">
-		<Value>Specifies whether sorting by recommendations is offered instead of sorting by best results. If activated, the products are sorted in the order specified for them.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.WildcardSearchNote">
 		<Value>The wildcard mode can slow down the search for a large number of objects.</Value>
@@ -4567,27 +4474,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Stores.Updated">
 		<Value>The store has been updated successfully.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Tax">
-		<Value>Tax</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Tax.Categories">
-		<Value>Tax categories</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Tax.Categories.Fields">
-		<Value>Display order</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Tax.Categories.Fields.Name">
-		<Value>Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Tax.Providers">
-		<Value>Tax providers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Tax.Providers.Fields.IsPrimaryTaxProvider">
-		<Value>Is primary provider</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Tax.Providers.Fields.MarkAsPrimaryProvider">
-		<Value>Mark as primary provider</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Themes">
 		<Value>Themes</Value>
@@ -4900,9 +4786,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.ContentManagement.Menus.CannotBeDeleted">
 		<Value>The menu "{0}" is required by your shop and cannot be deleted.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.ContentManagement.Menus.CatalogNote">
-		<Value>The category tree is dynamically integrated into the menu.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.ContentManagement.Menus.DisplayOrder">
 		<Value>Display order</Value>
@@ -5576,29 +5459,11 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.Active.Hint">
 		<Value>Check the box to make this role active.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.FreeShipping">
-		<Value>Free shipping</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.FreeShipping.Hint">
-		<Value>Check the box to allow customers in this role to get free shipping on their orders.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.IsSystemRole">
 		<Value>Is system role</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.IsSystemRole.Hint">
 		<Value>A value indicating whether it's a system role</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.MaxOrderTotal">
-		<Value>Maximum order total</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.MaxOrderTotal.Hint">
-		<Value>Defines the maximum order total for customers in this group.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.MinOrderTotal">
-		<Value>Minimum order total</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.MinOrderTotal.Hint">
-		<Value>Defines the minimum order total for customers in this group.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.Name">
 		<Value>Name</Value>
@@ -5614,15 +5479,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.SystemName.Hint">
 		<Value>The system name of the customer role.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.TaxDisplayType">
-		<Value>Tax display type</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.TaxExempt">
-		<Value>Tax exempt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.CustomerRoles.Fields.TaxExempt.Hint">
-		<Value>Check the box to allow customers in this role to make tax free purchases.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.CustomerRoles.Updated">
 		<Value>The customer role has been updated successfully.</Value>
@@ -5674,15 +5530,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.AssociatedExternalAuth.Hint">
 		<Value>A list of external authentication identifiers.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.CurrentCart">
-		<Value>Current cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.CurrentShoppingCart">
-		<Value>Current shopping cart</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.CurrentWishlist">
-		<Value>Current wishlist</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.CustomerRoles">
 		<Value>Customer Roles</Value>
@@ -5788,12 +5635,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.Fields.IsSystemAccount">
 		<Value>Is system account</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Fields.IsTaxExempt">
-		<Value>Is tax exempt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Fields.IsTaxExempt.Hint">
-		<Value>Determines whether the customer is tax exempt.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.Fields.LastActivityDate">
 		<Value>Last activity</Value>
@@ -5972,30 +5813,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Customers.Customers.List.SearchZipCode.Hint">
 		<Value>Search by zip code.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Orders">
-		<Value>Orders</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Orders.ID">
-		<Value>Order ID</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Orders.OrderStatus">
-		<Value>Order status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Orders.OrderTotal">
-		<Value>Order total</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Orders.PaymentStatus">
-		<Value>Payment status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Orders.ShippingStatus">
-		<Value>Shipping status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Orders.Store">
-		<Value>Store</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Customers.Orders.Store.Hint">
-		<Value>Name of the store.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.PasswordChanged">
 		<Value>The password has been changed successfully.</Value>
 	</LocaleResource>
@@ -6097,42 +5914,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Reports">
 		<Value>Customer reports</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Reports.BestBy">
-		<Value>Top 20 customers by number of orders</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Reports.BestBy.BestByOrderTotal">
-		<Value>Top 20 customers by order total</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Reports.BestBy.Fields">
-		<Value>Customer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Reports.BestBy.Fields.Customer">
-		<Value>Customer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Reports.BestBy.Fields.OrderCount">
-		<Value>Number of orders</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Reports.BestBy.Fields.OrderTotal">
-		<Value>Order total</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Reports.BestBy.OrderStatus">
-		<Value>Order status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Reports.BestBy.OrderStatus.Hint">
-		<Value>Search by a specific order status e.g. Complete.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Reports.BestBy.PaymentStatus">
-		<Value>Payment status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Reports.BestBy.PaymentStatus.Hint">
-		<Value>Search by a specific payment status e.g. Paid.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Reports.BestBy.ShippingStatus">
-		<Value>Shipping status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Customers.Reports.BestBy.ShippingStatus.Hint">
-		<Value>Search by a specific shipping status e.g. Not yet shipped.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Reports.BestCustomers">
 		<Value>Top customers</Value>
@@ -6437,24 +6218,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.DataExchange.Export.FileNamePatternDescriptions">
 		<Value>ID of export profil;Folder name of export profil;SEO name of export profil;Store ID;SEO name of store;One based file index;Random number;UTC timestamp;Date and time</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.AvailabilityMaximum">
-		<Value>Availability to</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.AvailabilityMaximum.Hint">
-		<Value>Filter by availability quantity.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.AvailabilityMinimum">
-		<Value>Availability from</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.AvailabilityMinimum.Hint">
-		<Value>Filter by availability quantity.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.CategoryIds">
-		<Value>Categories</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.CategoryIds.Hint">
-		<Value>Filter by categories.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.CreatedFrom">
 		<Value>Created from</Value>
 	</LocaleResource>
@@ -6473,24 +6236,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.CustomerRoleIds.Hint">
 		<Value>Filter by customer roles.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.FeaturedProducts">
-		<Value>Only featured products</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.FeaturedProducts.Hint">
-		<Value>Filter by featured products. Is only applied when the filtering by categories and manufacturers.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.HasPlacedAtLeastOrders">
-		<Value>Has placed x orders</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.HasPlacedAtLeastOrders.Hint">
-		<Value>Filter by number of placed orders.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.HasSpentAtLeastAmount">
-		<Value>Has spent amount x</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.HasSpentAtLeastAmount.Hint">
-		<Value>Filter by spent amount.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IdMaximum">
 		<Value>Product Id to</Value>
 	</LocaleResource>
@@ -6502,12 +6247,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IdMinimum.Hint">
 		<Value>Filter by product identifier.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.IncludeSubCategories">
-		<Value>Include subcategories</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.IncludeSubCategories.Hint">
-		<Value>Specifies whether products from subcategories should also be filtered.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IsActiveCustomer">
 		<Value>Only active customers</Value>
@@ -6527,12 +6266,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IsPublished.Hint">
 		<Value>Filter by publishing.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.IsTaxExempt">
-		<Value>Only tax exempt customers</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.IsTaxExempt.Hint">
-		<Value>Filter by tax exempt customers.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.LastActivityFrom">
 		<Value>Last activity from</Value>
 	</LocaleResource>
@@ -6545,80 +6278,14 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.LastActivityTo.Hint">
 		<Value>Filter by date of last store activity.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.ManufacturerId">
-		<Value>Manufacturer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.ManufacturerId.Hint">
-		<Value>Filter by manufacturer.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.Note">
 		<Value>Specify individual filters to limit the exported data.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.OrderStatusIds">
-		<Value>Order status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.OrderStatusIds.Hint">
-		<Value>Filter by order status.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.PaymentStatusIds">
-		<Value>Payment status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.PaymentStatusIds.Hint">
-		<Value>Filter by payment status.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.PriceMaximum">
-		<Value>Price to</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.PriceMaximum.Hint">
-		<Value>Filter by price.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.PriceMinimum">
-		<Value>Price from</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.PriceMinimum.Hint">
-		<Value>Filter by price.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.ProductTagId">
-		<Value>Product tag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.ProductTagId.Hint">
-		<Value>Filter by product tag.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.ProductType">
-		<Value>Product type</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.ProductType.Hint">
-		<Value>Filter by product type.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.ShippingStatusIds">
-		<Value>Shipping status</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.ShippingStatusIds.Hint">
-		<Value>Filter by shipping status.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.StoreId">
 		<Value>Store</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.StoreId.Hint">
 		<Value>Filter by store.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.Visibility">
-		<Value>Visibility</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.Visibility.Hint">
-		<Value>Filter by visibility. "In search results" includes fully visible products.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.WithoutCategories">
-		<Value>Without category mapping</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.WithoutCategories.Hint">
-		<Value>Filter by missing category mapping.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.WithoutManufacturers">
-		<Value>Without manufacturer mapping</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Filter.WithoutManufacturers.Hint">
-		<Value>Filter by missing manufacturer mapping.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.WorkingLanguageId">
 		<Value>Language</Value>
@@ -6695,30 +6362,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.AppendDescriptionText.Hint">
 		<Value>Specifies the text to be attached to the product description. If there are multiple texts then one of it is selected randomly.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.AttributeCombinationAsProduct">
-		<Value>Export attribute combinations</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.AttributeCombinationAsProduct.Hint">
-		<Value>Specifies whether to export a standalone product for each active attribute combination.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.AttributeCombinationValueMerging">
-		<Value>Attribute values</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.AttributeCombinationValueMerging.Hint">
-		<Value>Specifies if and how to further process the attribute values.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.Brand">
-		<Value>Manufacturer\Brand</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.Brand.Hint">
-		<Value>Specifies the manufacturer or brand to be exported, if a product has no manufacturer assigned.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.ConvertNetToGrossPrices">
-		<Value>Convert net into gross prices</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.ConvertNetToGrossPrices.Hint">
-		<Value>Specifies to convert net into gross prices.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.CriticalCharacters">
 		<Value>Critical characters</Value>
 	</LocaleResource>
@@ -6749,29 +6392,11 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.DescriptionToPlainText.Hint">
 		<Value>Specifies whether to remove all HTML from the product description for the export.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.FreeShippingThreshold">
-		<Value>Free shipping threshold</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.FreeShippingThreshold.Hint">
-		<Value>Specifies the amount as from shipping is free.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.LanguageId">
 		<Value>Language</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.LanguageId.Hint">
 		<Value>Specifies the language to be applied to the export.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.NoBundleProducts">
-		<Value>Do not export bundled products</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.NoBundleProducts.Hint">
-		<Value>Specifies whether to export bundled products. If this option is activated, then the associated bundle items will be exported.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.NoGroupedProducts">
-		<Value>Do not export grouped products</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.NoGroupedProducts.Hint">
-		<Value>Specifies whether to export grouped products. If this option is activated, then the associated products will be exported.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.Note">
 		<Value>The following information will be taken into account during the export and integrated in the process.</Value>
@@ -6782,47 +6407,17 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.NumberOfPictures.Hint">
 		<Value>Specifies the number of images per object to be exported.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.OnlyIndividuallyVisibleAssociated">
-		<Value>Only individually visible products</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.OnlyIndividuallyVisibleAssociated.Hint">
-		<Value>Specifies whether to only export individually visible associated products.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.OrderStatusChange">
-		<Value>Change order status to</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.OrderStatusChange.Hint">
-		<Value>Specifies if and how to change the status of the exported orders.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.PictureSize">
 		<Value>Product picture size</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.PictureSize.Hint">
 		<Value>Specifies the size (in pixel) of the product image.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.PriceType">
-		<Value>Product price</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.PriceType.Hint">
-		<Value>Specifies the product price to be exported.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.RemoveCriticalCharacters">
 		<Value>Remove critical characters</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.RemoveCriticalCharacters.Hint">
 		<Value>Specifies whether to remove critical characters (like ½) from the detail description.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.ShippingCosts">
-		<Value>Shipping costs</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.ShippingCosts.Hint">
-		<Value>The shipping costs to be exported.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.ShippingTime">
-		<Value>Shipping time</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Export.Projection.ShippingTime.Hint">
-		<Value>Specifies the shipping time for products where it is unspecified.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Projection.StoreId">
 		<Value>Store</Value>
@@ -6874,9 +6469,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.DefaultNewsletterSubscriptionProfileName">
 		<Value>My newsletter subscription import {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.DataExchange.Import.DefaultProductProfileName">
-		<Value>My product import {0}</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.FileUpload">
 		<Value>Upload import file...</Value>
@@ -7184,9 +6776,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Media.StorageMovingNotSupported">
 		<Value>The provider "{0}" does not support moving media from one provider to another.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.MessageTemplate.OrderTooOldForMessageInfo">
-		<Value>The message "{0}" was not sent. The order {1} is too old ({2}).</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.MessageTemplate.Preview.From">
 		<Value>From</Value>
 	</LocaleResource>
@@ -7349,9 +6938,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Plugins.KnownGroup.Mobile">
 		<Value>Mobile</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Plugins.KnownGroup.Payment">
-		<Value>Payment &amp; Gateways</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Plugins.KnownGroup.Performance">
 		<Value>Performance</Value>
 	</LocaleResource>
@@ -7364,17 +6950,11 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.Plugins.KnownGroup.SEO">
 		<Value>SEO</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Plugins.KnownGroup.Shipping">
-		<Value>Shipping &amp; Logistics</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Plugins.KnownGroup.Social">
 		<Value>Social</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Plugins.KnownGroup.StoreFront">
 		<Value>Store Front</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Plugins.KnownGroup.Tax">
-		<Value>Tax</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Plugins.LicensingDemoExpired">
 		<Value>Demo expired</Value>
@@ -7390,18 +6970,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Plugins.Manage">
 		<Value>Manage plugins</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Product.Picture.Added">
-		<Value>The picture has successfully been added</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Product.Price.Tierprices.Adjustment">
-		<Value>Adjustment</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Product.Price.Tierprices.Fixed">
-		<Value>Fixed Value</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Product.Price.Tierprices.Percental">
-		<Value>Percental</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Products.BasePrice.Hint">
 		<Value>Please keep in mind, the base price is depending on several factors and will therefore only be calculated reliable in the front end.</Value>

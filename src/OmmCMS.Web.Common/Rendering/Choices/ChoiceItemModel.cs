@@ -6,7 +6,6 @@ namespace OmmCMS.Web.Rendering.Choices;
 public abstract class ChoiceItemModel : EntityModelBase
 {
     public string Name { get; set; }
-    public string SeName { get; set; }
     public string Title { get; set; }
     public string Alias { get; set; }
     public string Color { get; set; }
