@@ -15,9 +15,7 @@
     --art-font-size-sm: #{$font-size-xs};
     --art-font-size-xs: 0.75rem;
     --art-font-size-lg: #{$font-size-base};
-    --art-finalprice-font-size: 1rem;
-    --art-finalprice-color: #{$product-price-color};
-    --art-finalprice-offer-color: #{$product-price-color};
+
     --art-muted-color: #{color.mix($body-color, $white, 67%)};
     --art-muted-color-2: #{$text-muted};
     --art-border-color: transparent;
@@ -33,7 +31,7 @@
         --art-font-size-sm: #{$font-size-sm};
         --art-font-size-xs: #{$font-size-xs};
         --art-font-size-lg: #{$font-size-lg};
-        --art-finalprice-font-size: 1.25rem;
+
     }
 }
 
@@ -125,7 +123,6 @@
 .artlist-actions--top {
     border-bottom: 1px solid var(--light-border-subtle);
 }
-
 
 // List
 
@@ -262,73 +259,6 @@
     margin-bottom: 0.4rem;
 }
 
-.art-price-block {
-    position: relative;
-    margin-top: 0.5rem;
-}
-
-.art-price {
-    &.art-price-offer {
-        color: var(--art-finalprice-offer-color);
-    }
-    &.badge {
-        color: #fff;
-    }
-}
-
-.art-price-value {
-    font-weight: $font-weight-medium;
-    font-size: var(--art-finalprice-font-size);
-    color: var(--art-finalprice-color);
-    margin-inline-end: 0.4rem;
-
-    .art-price-call & {
-        font-size: var(--art-font-size-sm);
-        color: var(--art-muted-color-2);
-    }
-}
-
-.art-price-value,
-.art-compareprice-value {
-    white-space: nowrap;
-}
-
-.art-price,
-.art-finalprice,
-.art-compareprice {
-    display: inline-flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.art-compareprice {
-    font-size: var(--art-font-size-sm);
-    color: var(--art-muted-color);
-}
-
-.art-compareprice-label {
-    margin-inline-end: 3px;
-}
-
-.art-compareprice-value {
-    display: inline-block;
-    text-decoration: line-through;
-}
-
-.art-pangv {
-    color: var(--art-muted-color-2);
-    padding-top: 0.25rem;
-}
-
-.art-shipsurcharge {
-    color: var(--art-muted-color);
-    @include text-truncate();
-}
-
-.art-legalinfo {
-    color: var(--art-muted-color-2);
-}
-
 .art-drop {
     --shadow-yoffset: 1;
     position: absolute;
@@ -454,13 +384,6 @@
     font-size: var(--art-font-size-sm);
 }
 
-.art-pangv,
-.art-legalinfo,
-.art-shipsurcharge {
-    font-size: var(--art-font-size-xs);
-}
-
-
 // Line style (one item per row)
 // ---------------------------------------------
 
@@ -546,14 +469,6 @@
         margin-bottom: 0.5em;
     }
 
-    :is(.art-price, .art-finalprice, .art-compareprice-group, .art-compareprice) {
-        display: block;
-    }
-
-    .art-compareprice-group {
-        margin-bottom: 0.25rem;
-    }
-
     .art-variant-info {
         margin-bottom: 1rem;
     }
@@ -591,7 +506,6 @@
     }
 }
 
-
 // Grid styles (common)
 // ---------------------------------------------
 
@@ -599,7 +513,6 @@
 .artlist-grid > .art.active {
     border-radius: var(--art-border-radius);
 }
-
 
 // Grid style
 // ---------------------------------------------
@@ -650,22 +563,10 @@
         height: calc(var(--art-font-size-sm) * var(--art-line-height) * 2);
     }
     
-    &.artlist-boxed .art-price-block {
-        // At least 2 lines height for description
-        height: calc(var(--art-font-size-sm) * var(--art-line-height) * 2);
-    }
-
     :is(.art-brand, .art-delivery-info) {
         // Always 1 small line height, even if empty
         box-sizing: content-box;
         min-height: calc(var(--art-font-size-sm) * var(--art-line-height));
-        @include text-truncate();
-    }
-
-    :is(.art-shipsurcharge, .art-delivery-info, .art-pangv) {
-        // Always 1 line height, even if empty
-        box-sizing: content-box;
-        min-height: calc(var(--art-font-size-xs) * var(--art-line-height));
         @include text-truncate();
     }
 
@@ -735,7 +636,6 @@
     }
 }
 
-
 // Carousel
 // ---------------------------------------------
 
@@ -777,7 +677,6 @@
     }
 }
 
-
 // Special overrides
 // ---------------------------------------------
 
@@ -789,7 +688,6 @@
         height: 0 !important;
     }
 }
-
 
 // 'Show all' special item
 // ---------------------------------------------

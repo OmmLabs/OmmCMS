@@ -92,6 +92,8 @@ Phases 921–940: generalize currency rounding, retire cart-only rounding option
 
 Phases 941–960: remove retired commerce settings and editors from media, identity, privacy, SEO and admin configuration. Keep generic preview and avatar thumbnail sizing, CMS page identity, contact privacy and SEO controls, with authenticated settings page checks.
 
+Phases 961–980: retire product and checkout Sass, price-specific card styles, commerce theme variables and payment-specific module artwork across the theme sources. Retain reusable cards and responsive media galleries; verify compiled CSS for every published theme.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

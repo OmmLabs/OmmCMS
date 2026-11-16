@@ -33,17 +33,13 @@ h1, h2, h3, .heading-title {
     --footer-link-hover-color: #{$primary};
 }
 
-// Keep product titles and prices clear without adding more accent colors.
+// Keep card titles clear without adding more accent colors.
 .art-name {
     font-weight: 600;
     letter-spacing: -0.015em;
 }
 
-.pd-name {
-    letter-spacing: -0.035em;
-}
-
-// A compact, light masthead above a quiet product canvas.
+// A compact, light masthead above a quiet content canvas.
 .shopbar-section {
     padding-block: 0.625rem;
 }

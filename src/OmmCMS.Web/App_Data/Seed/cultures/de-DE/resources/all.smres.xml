@@ -8624,9 +8624,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.ThemeVar.Boxed">
 		<Value>Legt fest, ob sich die Seite über den kompletten verfügbaren Platz streckt.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.ThemeVar.CostepPogressColor">
-		<Value>Legt die Farbe der Fortschrittsanzeige des Checkoutprozesses fest.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Validation.InvalidPath">
 		<Value>Der Pfad "{0}" ist ungültig. Bitte geben Sie einen gültigen Pfad ein.</Value>
 	</LocaleResource>

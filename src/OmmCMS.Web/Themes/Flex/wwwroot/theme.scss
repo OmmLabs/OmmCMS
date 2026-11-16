@@ -2,7 +2,6 @@
 // Theme: FLEX
 // ========================================
 
-
 //
 // Head
 // --------------------------------------------------
@@ -42,7 +41,6 @@
 // Bootstrap main
 @import "/lib/bootstrap/scss/bootstrap-main";
 
-
 //
 // Vendor components (neutral)
 // --------------------------------------------------
@@ -51,15 +49,12 @@
 @import "/lib/select2/scss/core";
 @import "/lib/aos/scss/aos";
 
-
-
 // Button tweaks:
 // Must come BEFORE custom button import because of
 // css specificity.
 // -----------------------------------------------------
 
 @import "buttons";
-
 
 //
 // Global / Shared
@@ -104,7 +99,6 @@
 @import "/shared/gallery";
 @import "/shared/lightbox";
 
-
 //
 // Vendor component (skinning)
 // --------------------------------------------------
@@ -114,7 +108,6 @@
 @import "/skinning/slick";
 @import "/skinning/drift";
 @import "/skinning/fileupload";
-
 
 //
 // Main
@@ -131,21 +124,17 @@
 @import "login";
 @import "rating";
 @import "artlist";
-@import "product";
 @import "gallery";
-@import "checkout"; 
 @import "accordion";
 @import "cookie-manager"; 
 @import "misc";
 @import "print";
-
 
 //
 // Custom imports from modules
 // --------------------------------------------------
 
 @import '/.app/moduleimports.scss';
-
 
 //
 // Customization

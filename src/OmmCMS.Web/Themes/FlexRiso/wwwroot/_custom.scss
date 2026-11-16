@@ -11,7 +11,6 @@ $riso-overprint: rgba($pink, 0.9);
     --heading-line-color: #{$pink};
 }
 
-
 // Registration strip: the three spot inks as a thin band above the header.
 // --------------------------------------------------
 
@@ -24,7 +23,6 @@ $riso-overprint: rgba($pink, 0.9);
         $pink 33.333% 66.666%,
         $yellow 66.666% 100%);
 }
-
 
 // Navigation: poster typography and a single ink rule below the bar.
 // --------------------------------------------------
@@ -39,28 +37,16 @@ $riso-overprint: rgba($pink, 0.9);
     letter-spacing: 0.04em;
 }
 
-
 // Page titles: a sunflower highlighter stroke behind the text.
 // --------------------------------------------------
 
-.page-title:not(.pd-info .page-title) > :where(h1, .h1) {
+.page-title > :where(h1, .h1) {
     display: inline;
     padding-inline: 0.08em;
     background-image: linear-gradient(transparent 60%, rgba($yellow, 0.75) 60%, rgba($yellow, 0.75) 92%, transparent 92%);
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
 }
-
-
-// Prices: set in the display face with even figures.
-// --------------------------------------------------
-
-.art-price-value,
-.pd-price {
-    font-family: $headings-font-family;
-    font-variant-numeric: tabular-nums;
-}
-
 
 // Primary buttons: a misregistered pink layer slips out on hover.
 // --------------------------------------------------
@@ -78,7 +64,6 @@ $riso-overprint: rgba($pink, 0.9);
         transform: none;
     }
 }
-
 
 // Footer: cobalt poster with sunflower titles.
 // --------------------------------------------------

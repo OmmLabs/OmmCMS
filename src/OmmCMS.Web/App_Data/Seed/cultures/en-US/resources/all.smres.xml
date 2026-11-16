@@ -8811,9 +8811,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.ThemeVar.Boxed">
 		<Value>Specifies whether the site will strech over the complete avaliable space.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.ThemeVar.CostepPogressColor">
-		<Value>Specifies the color of the checkout progress bar.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Validation.InvalidPath">
 		<Value>The path "{0}" is invalid. Please enter a valid path.</Value>
 	</LocaleResource>

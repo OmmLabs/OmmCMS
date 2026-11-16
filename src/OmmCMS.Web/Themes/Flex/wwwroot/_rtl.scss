@@ -42,30 +42,6 @@
     .search-focused .shop-logo {
         transform: translateX(-100%);
     }
-    // Checkout
-    // ------
-
-    .costep {
-        &:first-child:after,
-        &:last-child:before {
-            display: none;
-        }
-
-        &:first-child:before,
-        &:last-child:after {
-            display: block;
-        }
-    }
-
-    .costep.active {
-        &:before {
-            background-color: $costep-border;
-        }
-
-        &:after {
-            background-color: $costep-active-border;
-        }
-    }
     // Category Menu
     // -------------
 
@@ -111,8 +87,7 @@
     // Product
     // -------
 
-
-    #pd-gallery .gal {
+    .media-gallery .gal {
         direction: ltr;
     }
 

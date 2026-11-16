@@ -31,26 +31,6 @@ $enable-rfs:                    true !default; // declared in _rfs.scss
 $font-size-root-md:             16px !default;
 $font-size-root-sm:             16px !default;
 
-//
-// Checkout Steps
-// --------------------------------------------------
-
-$costep-border:                 #f2f2f2 !default;
-$costep-bg:                     $white !default; 
-$costep-color:                  #ccc !default;
-$costep-label-color:            $body-color !default;
-
-$costep-visited-border:         $costep-progress-color !default;
-$costep-visited-bg:             $costep-progress-color !default;
-$costep-visited-color:          rgba($white, 0.85) !default;
-$costep-visited-label-color:    $costep-label-color !default;
-
-$costep-active-border:          $costep-visited-border !default;
-$costep-active-bg:              $white !default;
-$costep-active-color:           $body-color !default;
-$costep-active-label-color:     $costep-label-color !default;
-
-
 // Bootstrap variable overrides
 // ========================================
 
@@ -107,7 +87,6 @@ $display2-weight:               $font-weight-light !default;
 $display3-weight:               $font-weight-light !default;
 $display4-weight:               $font-weight-light !default;
 
-
 // Buttons + Forms
 
 $input-btn-font-size:           $font-size-base !default;
@@ -125,7 +104,6 @@ $input-group-addon-bg:		    $gray-100 !default;
 $input-border-color:            $gray-300 !default;
 $input-disabled-bg:             $gray-100 !default;
 
-
 // Buttons
 
 $btn-font-weight:               $font-weight-medium !default;
@@ -134,7 +112,6 @@ $btn-box-shadow:                0 1px 0 rgba($gray-900, 0.04), inset 0 1px 0 rgb
 $btn-border-radius:             $input-border-radius !default;
 $btn-border-radius-lg:          $input-border-radius !default;
 $btn-border-radius-sm:          $input-border-radius-sm !default;
-
 
 // Badge
 
@@ -158,19 +135,16 @@ $dropdown-link-active-bg:       darken($dropdown-link-hover-bg, 3%) !default;
 $dropdown-item-padding-y:       0.5rem !default;
 $dropdown-item-padding-x:       1rem !default;
 
-
 // Modal
 
 //$modal-content-box-shadow-xs:       $box-shadow;
 //$modal-content-box-shadow-sm-up:    $box-shadow-lg;
 //$modal-content-border-radius:		$border-radius-lg;
 
-
 // Popover
 
 $popover-box-shadow:			    $dropdown-box-shadow !default;
 $popover-border-color:			    $dropdown-border-color !default;
-
 
 // Pagination
 
@@ -203,7 +177,6 @@ $pagination-disabled-color:         $gray-400 !default;
 $pagination-disabled-bg:            $pagination-bg !default;
 $pagination-disabled-border-color:  $pagination-border-color !default;
 
-
 // Cards
 
 //$card-spacer-y:                     1rem !default;
@@ -230,7 +203,6 @@ $list-group-action-hover-color:     $list-group-action-color !default;
 $list-group-action-active-color:	$body-color !default;
 $list-group-action-active-bg:       $gray-200 !default;
 
-
 // Nav
 
 //$nav-link-font-weight:            $font-weight-medium;    
@@ -240,14 +212,12 @@ $nav-tabs-link-active-color:        $gray-900 !default;
 $nav-pills-link-active-color:       $white !default;
 $nav-pills-link-active-bg:          $primary !default;
 
-
 // Breadcrumb
 
 $breadcrumb-padding-x:              0 !default;
 $breadcrumb-padding-y:              0 !default;
 $breadcrumb-bg:                     transparent !default;
 $breadcrumb-border-radius:          0 !default;
-
 
 // Misc
 

@@ -24,8 +24,6 @@
 .offcanvas,
 #offcanvas-menu .layer,
 #ocm-service .menubar-link,
-#offcanvas-cart .throbber,
-.pd-tierprices .table,
 #scroll-top {
     background-color: $card-bg;
 }
@@ -57,25 +55,6 @@
 
 .nav-pills {
     --nav-pills-link-active-color: #{$yiq-text-dark};
-}
-
-.costep-icon,
-.costep.active .costep-icon {
-    background-color: $card-bg;
-    color: $body-color;
-}
-
-.costep:not(.visited):not(.active) .costep-icon {
-    border-color: $gray-300;
-}
-
-.costep:not(.visited):after,
-.costep:not(.visited):not(.active):before {
-    background-color: $gray-300;
-}
-
-.costep.visited .costep-icon {
-    color: $yiq-text-dark;
 }
 
 // Opaque footer colors cannot brighten through increased opacity.

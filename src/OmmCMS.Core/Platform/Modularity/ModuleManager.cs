@@ -355,18 +355,13 @@ public partial class ModuleManager
                 if (defaultImageUrl == null)
                 {
                     // No default image found, take fallback.
-                    if (metadata.GroupName == "Payment")
-                    {
-                        result.DefaultImageUrl = WebHelper.ToAppRelativePath("images/default-payment-icon.png");
-                    }
-                    else if (descriptor.BrandImageFileName.HasValue())
+                    if (descriptor.BrandImageFileName.HasValue())
                     {
                         result.DefaultImageUrl = WebHelper.ToAppRelativePath(PathUtility.Combine(descriptor.Path, descriptor.BrandImageFileName));
                     }
                 }
 
-                // Payment methods like credit card can have multiple brands like
-                // Master Card, Visa, etc. 5 Icons per provider should be enough.
+                // Providers may supply up to five additional brand images.
                 var numberedImages = new List<string>(5);
                 for (var i = 1; i <= 5; i++)
                 {

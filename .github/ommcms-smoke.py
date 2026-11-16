@@ -287,6 +287,15 @@ def editorial_workflows(password):
     assert Inputs(get_page("/admin/theme/list", admin)).values["DefaultTheme"] == replacement
     get_page("/", anonymous, "Welcome to OmmCMS")
     print("Theme configuration and theme switch passed.")
+    # Fetch the actual compiled Sass bundle for every published theme.
+    published_themes = sorted(path.name for path in (root / "Themes").iterdir() if (path / "theme.config").is_file())
+    assert set(published_themes) >= {"Flex", "FlexBlack", "FlexBlue"}
+    for theme in published_themes:
+        css_status, css = request(f"/themes/{theme.lower()}/theme.css", timeout=120)
+        assert css_status == 200, f"{theme} stylesheet returned HTTP {css_status}"
+        assert ".media-gallery" in css and ".gal-box" in css, f"{theme} gallery styling missing"
+        assert ".costep" not in css and ".pd-offer" not in css and ".art-finalprice" not in css, f"{theme} contains retired commerce styling"
+    print(f"All {len(published_themes)} published CMS theme stylesheets passed.")
 
 
 def verify_trimmed_distribution():

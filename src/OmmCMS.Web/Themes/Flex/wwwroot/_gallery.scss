@@ -3,8 +3,8 @@
 // Image Gallery
 // ========================================
 
-#pd-gallery {
-    container: product-gallery / inline-size;
+.media-gallery {
+    container: media-gallery / inline-size;
 }
 
 .gal-box {
@@ -14,7 +14,7 @@
     table-layout: fixed;
 }
 
-// Product viewports retain the existing square ratio and focus handling.
+// Media viewports retain the existing square ratio and focus handling.
 .gal-box .gal-item-viewport {
     block-size: 0;
     padding-block-start: 100%;
@@ -52,7 +52,6 @@
     }
 }
 
-
 .gal-nav-cell {
     display: table-cell;
     vertical-align: top;
@@ -68,16 +67,16 @@
 }
 
 // Use the available gallery width to switch between thumbnails and dots.
-@container product-gallery (width < 28rem) {
+@container media-gallery (width < 28rem) {
     .gal-nav-cell { display: none !important; }
 }
 
-@container product-gallery (min-width: 28rem) {
+@container media-gallery (min-width: 28rem) {
     .gal .slick-dots { display: none !important; }
     .gal.slick-dotted.slick-slider { margin-bottom: 0 !important; }
 }
 
-@container product-gallery (min-width: 40rem) {
+@container media-gallery (min-width: 40rem) {
     .gal-nav-cell { width: 5.5rem; }
 }
 
