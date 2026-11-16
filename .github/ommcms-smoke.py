@@ -295,7 +295,17 @@ def editorial_workflows(password):
         assert css_status == 200, f"{theme} stylesheet returned HTTP {css_status}"
         assert ".media-gallery" in css and ".gal-box" in css, f"{theme} gallery styling missing"
         assert ".costep" not in css and ".pd-offer" not in css and ".art-finalprice" not in css, f"{theme} contains retired commerce styling"
+        assert ".rotator-container" not in css, f"{theme} contains the retired product rotator"
     print(f"All {len(published_themes)} published CMS theme stylesheets passed.")
+    rtl_status, rtl_css = request("/themes/flex/theme-rtl.css", timeout=120)
+    assert rtl_status == 200 and ".media-gallery" in rtl_css, "RTL theme stylesheet missing gallery styling"
+    menu_status, menu_js = request("/js/ommcms.megamenu.js")
+    assert menu_status == 200 and "aria-expanded" in menu_js and "megaMenu" in menu_js
+    assert "productRotatorAjaxUrl" not in menu_js, "Catalog rotator still exposed"
+    assert request("/bundle/css/site-common.css")[0] == 200, "Common CSS bundle missing"
+    assert request("/css/compiled/theme.css")[0] == 404, "Obsolete compiled theme snapshot still exposed"
+    assert request("/css/compiled/site-common.css")[0] == 404, "Obsolete compiled common snapshot still exposed"
+    print("CMS navigation script, RTL styling and dynamic CSS bundles passed.")
 
 
 def verify_trimmed_distribution():

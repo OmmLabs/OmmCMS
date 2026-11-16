@@ -164,8 +164,9 @@
 
 @{
     // JSON-LD
-    if (Assets.JsonLd.TryGetFragment("Product", out var frag))
+    if (imageUrls.Count > 0 || videoObjects.Count > 0)
     {
+        var frag = Assets.JsonLd.Fragment(imageUrls.Count > 0 ? "ImageGallery" : "VideoGallery");
         if (imageUrls.Count > 0)
         {
             frag.Arr("image", imageUrls);

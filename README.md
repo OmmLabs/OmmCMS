@@ -94,6 +94,8 @@ Phases 941–960: remove retired commerce settings and editors from media, ident
 
 Phases 961–980: retire product and checkout Sass, price-specific card styles, commerce theme variables and payment-specific module artwork across the theme sources. Retain reusable cards and responsive media galleries; verify compiled CSS for every published theme.
 
+Phases 981–1000: retire the catalog product rotator, its theme settings and obsolete compiled CSS snapshots. Keep accessible menu navigation, dynamic themes and generic media gallery structured data; verify published assets.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

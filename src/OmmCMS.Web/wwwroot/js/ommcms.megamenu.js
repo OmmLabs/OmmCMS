@@ -1,18 +1,9 @@
 ﻿(function ($) {
 
     $.fn.extend({
-        megaMenu: function (settings) {
-
-            var defaults = {
-                productRotatorInterval: 4000,
-                productRotatorDuration: 300,
-                productRotatorCycle: false,
-                productRotatorAjaxUrl: ""
-            };
+        megaMenu: function () {
 
             var rtl = OmmCMS.globalization.culture.isRTL;
-
-            settings = $.extend(defaults, settings);
 
             return this.each(function () {
                 var megamenuContainer = $(this);
@@ -22,7 +13,7 @@
                 var megamenuPrev = $(".megamenu-nav--prev", megamenuContainer);
                 var megamenuDropdownContainer = $('.megamenu-dropdown-container');
                 var navElems = megamenu.find(".navbar-nav .nav-item");	// li
-                var zoomContainer = $(".zoomContainer");		// needed to fix elevateZoom z-index problem e.g. in product detail gallery
+
                 var closingTimeout = 0;							// timeout to handle delay of dropdown closing
                 var openTimeout;								// timeout to handle opening attempts in tryOpen
                 var tempLink; 		// for temporary storage of the link that was passed into tryOpen, its needed to determine whether a new link was passed into tryOpen so the timeout for the old link can be cleared
@@ -39,7 +30,6 @@
                         link.attr("aria-expanded", "false");
                     }
 
-                    zoomContainer.css("z-index", "999");
                 }
 
                 function tryOpen(link) {
@@ -62,9 +52,7 @@
                             link.attr("aria-expanded", "true");
                         }
 
-                        initRotator(link.data("target"));
 
-                        zoomContainer.css("z-index", "0");
                     }
                 }
 
@@ -244,80 +232,7 @@
                         });
                     }
 
-                    function onPageResized() {
-                        megamenuDropdownContainer.find('.megamenu-product-rotator > .artlist-grid').each(function (i, el) {
-                            try {
-                                $(this).slick('unslick');
-                                $(this).attr('data-slick', '{"dots": false, "autoplay": true}');
-                                applyCommonPlugins($(this).closest('.rotator-content'));
-                            }
-                            catch (err) { }
-                        });
-                    }
-
-                    EventBroker.subscribe("page.resized", function (msg, viewport) {
-                        onPageResized();
-                    });
-
-                    onPageResized();
                 });
-
-                function initRotator(containerId) {
-                    var container = $(containerId);
-                    var dropdownId = container.data("id") || 0;
-                    var entityId = container.data("entity-id") || 0;
-                    var entityName = container.data("entity-name") || 0;
-                    var displayRotator = container.data("display-rotator");
-
-                    // reinit slick product rotator
-                    container.find('.megamenu-product-rotator > .artlist-grid').each(function (i, el) {
-                        try {
-                            $(this).slick('unslick');
-                            $(this).attr('data-slick', '{"dots": false, "autoplay": true}');
-                            applyCommonPlugins($(this).closest('.rotator-content'));
-                        }
-                        catch (err) {
-                            console.log(err);
-                        }
-                    });
-
-                    //if ($(".pl-slider", container).length == 0 && catId != null && displayRotator) {
-                    if (displayRotator && entityId !== 0) {
-                        var rotatorColumn = $(".rotator-" + dropdownId);
-
-                        // clear content & init throbber
-                        rotatorColumn.find(".rotator-content")
-                            .html('<div class="placeholder"></div>')
-                            .throbber({ white: true, small: true, message: '' });
-
-                        // wait a little to imply hard work is going on ;-)
-                        setTimeout(function () {
-                            $.ajax({
-                                cache: false,
-                                type: "POST",
-                                url: settings.productRotatorAjaxUrl,
-                                data: { "entityId": entityId, "entityName": entityName },
-                                success: function (data) {
-                                    // add html view
-                                    rotatorColumn.find(".rotator-content").html(data);
-
-                                    var list = container.find('.megamenu-product-rotator > .artlist-grid');
-                                    list.attr('data-slick', '{"dots": false, "autoplay": true}');
-
-                                    // Init carousel
-                                    applyCommonPlugins(container);
-
-                                    if (container.hasClass("show")) {
-                                        container.data("display-rotator", false);
-                                    }
-                                }
-                            });
-                        }, 300);
-                    }
-                    else {
-                        container.find(".placeholder").addClass("empty");
-                    }
-                }
 
                 // TODO: (mh) (wcag) Bad API design. These callback handlers should call methods that already exist here and not introduce new code and flow.
                 // Accessibility event handling

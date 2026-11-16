@@ -321,26 +321,7 @@ $mixed-megamenu-bg:             $megamenu-bg;
         }
     }
 
-    // Product rotator 
-    .rotator-container {
-        border: 1px solid rgba($black, .1);
-        background: $megamenu-rotator-bg;
-        overflow: hidden;
-	    min-height: 320px;
 
-        .rotator-heading {
-            padding: 0.5rem 0;
-        }
-
-        .rotator-content > div.placeholder {
-            height: 280px;
-            background-color: rgba($white, 0.85);
-
-            .empty {
-                background-color: transparent;
-            }
-        }
-    }
 }
 
 .megamenu-dropdown-container {
@@ -457,13 +438,6 @@ $mixed-megamenu-bg:             $megamenu-bg;
         color: inherit;
         text-decoration: none !important;
     }
-}
-
-@include media-breakpoint-up(xl) {
-	.megamenu-container .rotator-container {
-		// Prevents nav-item focus loss when background image is available
-		min-height: 370px;
-	}
 }
 
 // Brand menu 

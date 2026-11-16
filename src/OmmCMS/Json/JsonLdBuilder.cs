@@ -31,7 +31,7 @@ public class JsonLdBuilder
     /// Gets or creates the <see cref="JsonLdFragment"/> fragment for the given schema.org @type.
     /// Multiple callers accessing the same type receive the same instance and contribute via deep merge.
     /// </summary>
-    /// <param name="type">The schema.org @type (e.g., "Product", "BreadcrumbList").</param>
+    /// <param name="type">The schema.org @type (e.g., "ImageGallery", "BreadcrumbList").</param>
     public JsonLdFragment Fragment(string type)
     {
         Guard.NotEmpty(type);
@@ -44,10 +44,6 @@ public class JsonLdBuilder
 
         return fragment;
     }
-
-    /// <summary>Gets or creates the <c>Product</c> fragment.</summary>
-    public JsonLdFragment Product
-        => this["Product"];
 
     /// <summary>Gets or creates the <c>CollectionPage</c> fragment.</summary>
     public JsonLdFragment CollectionPage
@@ -100,7 +96,7 @@ public class JsonLdBuilder
     /// Returns the fragment for the given schema.org @type if it has already been registered,
     /// without creating a new one.
     /// </summary>
-    /// <param name="type">The schema.org @type (e.g., "Product", "BreadcrumbList").</param>
+    /// <param name="type">The schema.org @type (e.g., "ImageGallery", "BreadcrumbList").</param>
     /// <param name="fragment">The fragment if found; otherwise <see langword="null"/>.</param>
     /// <returns><see langword="true"/> if the fragment exists; otherwise <see langword="false"/>.</returns>
     public bool TryGetFragment(string type, out JsonLdFragment? fragment)
