@@ -450,8 +450,7 @@ public class CustomerImporter : EntityImporterBase
     {
         foreach (var row in batch)
         {
-            ImportAddress("BillingAddress.", row, context, cargo);
-            ImportAddress("ShippingAddress.", row, context, cargo);
+            ImportAddress("ContactAddress.", row, context, cargo);
         }
 
         var num = await scope.CommitAsync(context.CancelToken);
@@ -462,7 +461,7 @@ public class CustomerImporter : EntityImporterBase
             foreach (var row in batch)
             {
                 var customer = row.Entity;
-                customer.GenericAttributes.DefaultAddressId = customer.BillingAddress?.Id ?? customer.ShippingAddress?.Id;
+                customer.GenericAttributes.DefaultAddressId = customer.ContactAddress?.Id;
             }
 
             await scope.CommitAsync(context.CancelToken);
@@ -477,16 +476,7 @@ public class CustomerImporter : EntityImporterBase
         ImportExecuteContext context,
         ImporterCargoData cargo)
     {
-        Address address = null;
-
-        if (fieldPrefix == "BillingAddress.")
-        {
-            address = row.Entity.BillingAddress ?? new Address { CreatedOnUtc = context.UtcNow };
-        }
-        else if (fieldPrefix == "ShippingAddress.")
-        {
-            address = row.Entity.ShippingAddress ?? new Address { CreatedOnUtc = context.UtcNow };
-        }
+        var address = row.Entity.ContactAddress ?? new Address { CreatedOnUtc = context.UtcNow };
 
         var childRow = new ImportRow<Address>(row.Segmenter, row.DataRow, row.Position);
         childRow.Initialize(address, row.EntityDisplayName);
@@ -533,7 +523,7 @@ public class CustomerImporter : EntityImporterBase
 
         if (address.Id == 0)
         {
-            // Avoid importing two addresses if billing and shipping address are equal.
+            // Reuse an existing matching address when possible.
             var appliedAddress = row.Entity.Addresses.FindAddress(address);
             if (appliedAddress == null)
             {
@@ -542,14 +532,7 @@ public class CustomerImporter : EntityImporterBase
             }
 
             // Map address to customer.
-            if (fieldPrefix == "BillingAddress.")
-            {
-                row.Entity.BillingAddress = appliedAddress;
-            }
-            else if (fieldPrefix == "ShippingAddress.")
-            {
-                row.Entity.ShippingAddress = appliedAddress;
-            }
+            row.Entity.ContactAddress = appliedAddress;
         }
     }
 

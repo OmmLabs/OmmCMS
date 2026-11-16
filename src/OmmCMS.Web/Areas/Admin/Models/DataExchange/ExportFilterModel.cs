@@ -31,11 +31,8 @@ public class ExportFilterModel
     [LocalizedDisplay("*IsActiveCustomer")]
     public bool? IsActiveCustomer { get; set; }
 
-    [LocalizedDisplay("*BillingCountryIds")]
-    public int[] BillingCountryIds { get; set; }
-
-    [LocalizedDisplay("*ShippingCountryIds")]
-    public int[] ShippingCountryIds { get; set; }
+    [LocalizedDisplay("Address.Fields.Country")]
+    public int[] ContactCountryIds { get; set; }
 
     [LocalizedDisplay("*LastActivityFrom")]
     [AdditionalMetadata("pickTime", true)]

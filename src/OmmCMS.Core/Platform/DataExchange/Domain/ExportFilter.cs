@@ -34,14 +34,9 @@ public class ExportFilter
     public int[] CustomerRoleIds { get; set; }
 
     /// <summary>
-    /// Filter by billing country identifiers.
+    /// Filter by contact country identifiers.
     /// </summary>
-    public int[] BillingCountryIds { get; set; }
-
-    /// <summary>
-    /// Filter by shipping country identifiers.
-    /// </summary>
-    public int[] ShippingCountryIds { get; set; }
+    public int[] ContactCountryIds { get; set; }
 
     /// <summary>
     /// Filter by last activity date from.

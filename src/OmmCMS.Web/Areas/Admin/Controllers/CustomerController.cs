@@ -395,8 +395,7 @@ public class CustomerController : AdminController
         var dtHelper = Services.DateTimeHelper;
         var query = _db.Customers
             .AsNoTracking()
-            .Include(x => x.BillingAddress)
-            .Include(x => x.ShippingAddress)
+            .Include(x => x.ContactAddress)
             .IncludeCustomerRoles()
             .ApplyIdentFilter(model.SearchEmail, model.SearchUsername, model.SearchCustomerNumber)
             .ApplyBirthDateFilter(model.SearchYearOfBirth.ToInt(), model.SearchMonthOfBirth.ToInt(), model.SearchDayOfBirth.ToInt());
@@ -572,8 +571,7 @@ public class CustomerController : AdminController
         var customer = await _db.Customers
             .AsSplitQuery()
             .IncludeCustomerRoles()
-            .Include(x => x.BillingAddress)
-            .Include(x => x.ShippingAddress)
+            .Include(x => x.ContactAddress)
             .Include(x => x.Addresses)
             .Include(x => x.ExternalAuthenticationRecords)
             .FindByIdAsync(id);

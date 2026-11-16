@@ -38,16 +38,10 @@ internal class CustomerMap : IEntityTypeConfiguration<Customer>
                     c.HasKey("Customer_Id", "Address_Id");
                 });
 
-        // INFO: we cannot set both addresses to DeleteBehavior.SetNull. It would produce cycles or multiple cascade paths.
         builder
-            .HasOne(c => c.BillingAddress)
+            .HasOne(c => c.ContactAddress)
             .WithOne(navigationName: null)
-            .HasForeignKey<Customer>(c => c.BillingAddressId);
-
-        builder
-            .HasOne(c => c.ShippingAddress)
-            .WithOne(navigationName: null)
-            .HasForeignKey<Customer>(c => c.ShippingAddressId)
+            .HasForeignKey<Customer>(c => c.ContactAddressId)
             .OnDelete(DeleteBehavior.SetNull);
     }
 }
@@ -226,11 +220,8 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
 
     public string LastUserDeviceType { get; set; }
 
-    [Column("BillingAddress_Id")]
-    public int? BillingAddressId { get; set; }
-
-    [Column("ShippingAddress_Id")]
-    public int? ShippingAddressId { get; set; }
+    [Column("ContactAddress_Id")]
+    public int? ContactAddressId { get; set; }
 
     [NotMapped, IgnoreDataMember]
     public override CustomerAttributeCollection GenericAttributes
@@ -241,24 +232,14 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
 
     #region Navigation properties
 
-    private Address _billingAddress;
+    private Address _contactAddress;
     /// <summary>
-    /// Default billing address
+    /// Primary contact address
     /// </summary>
-    public Address BillingAddress
+    public Address ContactAddress
     {
-        get => _billingAddress ?? LazyLoader.Load(this, ref _billingAddress);
-        set => _billingAddress = value;
-    }
-
-    private Address _shippingAddress;
-    /// <summary>
-    /// Default shipping address
-    /// </summary>
-    public Address ShippingAddress
-    {
-        get => _shippingAddress ?? LazyLoader.Load(this, ref _shippingAddress);
-        set => _shippingAddress = value;
+        get => _contactAddress ?? LazyLoader.Load(this, ref _contactAddress);
+        set => _contactAddress = value;
     }
 
     private ICollection<Address> _addresses;
@@ -339,13 +320,9 @@ public partial class Customer : EntityWithAttributes, ISoftDeletable, IStoreRest
     {
         if (Addresses.Contains(address))
         {
-            if (BillingAddress == address)
+            if (ContactAddress == address)
             {
-                BillingAddress = null;
-            }
-            if (ShippingAddress == address)
-            {
-                ShippingAddress = null;
+                ContactAddress = null;
             }
 
             Addresses.Remove(address);

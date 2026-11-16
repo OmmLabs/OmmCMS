@@ -20,8 +20,7 @@ public partial class DataExporter
         var genericAttributes = await ctx.CustomerBatchContext.GenericAttributes.GetOrLoadAsync(customer.Id);
 
         dynamic dynObject = ToDynamic(customer);
-        dynObject.BillingAddress = ToDynamic(customer.BillingAddress, ctx);
-        dynObject.ShippingAddress = ToDynamic(customer.ShippingAddress, ctx);
+        dynObject.ContactAddress = ToDynamic(customer.ContactAddress, ctx);
 
         dynObject.Addresses = customer.Addresses
             .Select(x => ToDynamic(x, ctx))
@@ -152,8 +151,7 @@ public partial class DataExporter
 
         dynamic result = new DynamicEntity(customer);
 
-        result.BillingAddress = null;
-        result.ShippingAddress = null;
+        result.ContactAddress = null;
         result.Addresses = null;
 
 

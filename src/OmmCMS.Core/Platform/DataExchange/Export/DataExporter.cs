@@ -533,8 +533,7 @@ public partial class DataExporter : IDataExporter
         {
             var query = _db.Customers
                 .IncludeCustomerRoles()
-                .Include(x => x.BillingAddress)
-                .Include(x => x.ShippingAddress)
+                .Include(x => x.ContactAddress)
                 .Include(x => x.Addresses)
                 .AsSplitQuery()
                 .AsNoTrackingWithIdentityResolution()
@@ -544,11 +543,8 @@ public partial class DataExporter : IDataExporter
                 query = query.Where(x => x.Active == f.IsActiveCustomer.Value);
 
 
-            if (!f.BillingCountryIds.IsNullOrEmpty())
-                query = query.Where(x => x.BillingAddress != null && f.BillingCountryIds.Contains(x.BillingAddress.CountryId ?? 0));
-
-            if (!f.ShippingCountryIds.IsNullOrEmpty())
-                query = query.Where(x => x.ShippingAddress != null && f.ShippingCountryIds.Contains(x.ShippingAddress.CountryId ?? 0));
+            if (!f.ContactCountryIds.IsNullOrEmpty())
+                query = query.Where(x => x.ContactAddress != null && f.ContactCountryIds.Contains(x.ContactAddress.CountryId ?? 0));
 
             if (f.LastActivityFrom.HasValue)
                 query = query.Where(x => f.LastActivityFrom.Value <= x.LastActivityDateUtc);

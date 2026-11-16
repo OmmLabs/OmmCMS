@@ -497,7 +497,6 @@ public partial class MessageModelProvider : IMessageModelProvider
             ["IsRegistered"] = part.IsRegistered(),
 
             // URLs
-            ["WishlistUrl"] = _helper.BuildRouteUrl("Wishlist", new { customerGuid = part.CustomerGuid }, messageContext),
             ["EditUrl"] = _helper.BuildActionUrl("Edit", "Customer", new { id = part.Id, area = "Admin" }, messageContext),
             ["PasswordRecoveryURL"] = pwdRecoveryToken == null ? null : _helper.BuildActionUrl("passwordrecoveryconfirm", "identity",
                 new { token = pwdRecoveryToken, email, area = "" },
@@ -507,8 +506,7 @@ public partial class MessageModelProvider : IMessageModelProvider
                 messageContext),
 
             // Addresses
-            ["BillingAddress"] = await CreateModelPartAsync(part.BillingAddress ?? new Address(), messageContext),
-            ["ShippingAddress"] = part.ShippingAddress == null ? null : await CreateModelPartAsync(part.ShippingAddress, messageContext),
+            ["ContactAddress"] = await CreateModelPartAsync(part.ContactAddress ?? new Address(), messageContext),
         };
 
         await _helper.PublishModelPartCreatedEventAsync(part, m);

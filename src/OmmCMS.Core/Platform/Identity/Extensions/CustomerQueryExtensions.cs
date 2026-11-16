@@ -32,8 +32,8 @@ public static partial class CustomerQueryExtensions
         if (email.HasValue())
         {
             query = exactMatch
-                ? query.Where(c => c.Email == email || c.BillingAddress.Email == email || c.ShippingAddress.Email == email)
-                : query.Where(c => c.Email.Contains(email) || c.BillingAddress.Email.Contains(email) || c.ShippingAddress.Email.Contains(email));
+                ? query.Where(c => c.Email == email || c.ContactAddress.Email == email || c.Addresses.Any(a => a.Email == email))
+                : query.Where(c => c.Email.Contains(email) || c.ContactAddress.Email.Contains(email) || c.Addresses.Any(a => a.Email.Contains(email)));
         }
 
         if (userName.HasValue())

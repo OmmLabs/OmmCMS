@@ -78,6 +78,8 @@ Phases 831–840: unify the preferred address selection, its per-site customer a
 
 Phases 841–845: enable the preferred-address picker, editing and ownership checks in the account and administration UI and add a fresh-install regression for selection and persistence.
 
+Phases 846–860: replace the legacy billing/shipping customer relationships with a single contact address, update identity, import/export, country rules, messaging, GDPR and seed data, and preserve the address book and preferred-address selection.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

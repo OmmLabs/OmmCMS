@@ -309,13 +309,13 @@ public class FilterTests : FilterTestsBase
 
         var countryFilter = new FilterExpression
         {
-            Descriptor = FilterDescriptors.BillingCountry,
+            Descriptor = FilterDescriptors.ContactCountry,
             Operator = RuleOperator.IsEqualTo,
             Value = 2
         };
 
         var expectedResult = Customers
-            .Where(x => x.Active && x.BillingAddress != null && x.BillingAddress.CountryId == 2)
+            .Where(x => x.Active && x.ContactAddress != null && x.ContactAddress.CountryId == 2)
             .ToList();
         var result = ExecuteQuery(LogicalRuleOperator.And, activeFilter, countryFilter);
 
@@ -334,22 +334,22 @@ public class FilterTests : FilterTestsBase
 
         var countryFilter = new FilterExpression
         {
-            Descriptor = FilterDescriptors.BillingCountry,
+            Descriptor = FilterDescriptors.ContactCountry,
             Operator = RuleOperator.IsEqualTo,
             Value = 2
         };
 
-        var shippingCountryFilter = new FilterExpression
+        var alternateCountryFilter = new FilterExpression
         {
-            Descriptor = FilterDescriptors.ShippingCountry,
+            Descriptor = FilterDescriptors.AlternateCountry,
             Operator = RuleOperator.IsEqualTo,
             Value = 2
         };
 
         var expectedResult = Customers
-            .Where(x => x.Active || x.BillingAddress?.CountryId == 2 || x.ShippingAddress?.CountryId == 2)
+            .Where(x => x.Active || x.ContactAddress?.CountryId == 2 || x.AlternateAddress?.CountryId == 2)
             .ToList();
-        var result = ExecuteQuery(LogicalRuleOperator.Or, activeFilter, countryFilter, shippingCountryFilter);
+        var result = ExecuteQuery(LogicalRuleOperator.Or, activeFilter, countryFilter, alternateCountryFilter);
 
         AssertEquality(expectedResult, result);
     }

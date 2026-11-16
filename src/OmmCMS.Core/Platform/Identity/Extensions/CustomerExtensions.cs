@@ -201,12 +201,7 @@ public static class CustomerExtensions
             return customer.FullName;
         }
 
-        var name = customer.BillingAddress?.GetFullName();
-
-        if (name.IsEmpty())
-        {
-            name = customer.ShippingAddress?.GetFullName();
-        }
+        var name = customer.ContactAddress?.GetFullName();
 
         if (name.IsEmpty())
         {
@@ -376,8 +371,8 @@ public static class CustomerExtensions
         if (customer != null)
         {
             return customer.Email.NullEmpty()
-                ?? customer.BillingAddress?.Email?.NullEmpty()
-                ?? customer.ShippingAddress?.Email?.NullEmpty();
+                ?? customer.ContactAddress?.Email?.NullEmpty()
+                ?? customer.Addresses.Select(x => x.Email.NullEmpty()).FirstOrDefault(x => x != null);
         }
 
         return null;

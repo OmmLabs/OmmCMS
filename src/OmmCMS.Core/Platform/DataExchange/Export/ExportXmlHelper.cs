@@ -304,8 +304,7 @@ public class ExportXmlHelper : Disposable
             _writer.WriteEndElement();
         }
 
-        WriteAddress(customer.BillingAddress, nameof(Customer.BillingAddress));
-        WriteAddress(customer.ShippingAddress, nameof(Customer.ShippingAddress));
+        WriteAddress(customer.ContactAddress, nameof(Customer.ContactAddress));
 
         if (customer.Addresses != null)
         {

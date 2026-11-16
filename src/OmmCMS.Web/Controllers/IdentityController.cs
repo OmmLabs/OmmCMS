@@ -931,10 +931,9 @@ public class IdentityController : PublicController
 
         if (await _addressService.IsAddressValidAsync(defaultAddress))
         {
-            // Set default addresses.
+            // Set the primary contact address.
             customer.Addresses.Add(defaultAddress);
-            customer.BillingAddress = defaultAddress;
-            customer.ShippingAddress = defaultAddress;
+            customer.ContactAddress = defaultAddress;
         }
 
         _db.TryUpdate(customer);

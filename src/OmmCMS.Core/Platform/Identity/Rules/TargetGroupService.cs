@@ -181,17 +181,10 @@ public partial class TargetGroupService : RuleProviderBase, ITargetGroupService
                 SelectList = new LocalRuleValueSelectList(_userAgentParser.GetDetectableDevices()
                     .Select(x => new RuleValueSelectListOption { Value = x, Text = x }).ToArray()) { Multiple = true }
             },
-            new FilterDescriptor<Customer, int?>(x => x.BillingAddress != null ? x.BillingAddress.CountryId : 0)
+            new FilterDescriptor<Customer, int?>(x => x.ContactAddress != null ? x.ContactAddress.CountryId : 0)
             {
-                Name = "BillingCountry",
-                DisplayName = T("Admin.Rules.FilterDescriptor.BillingCountry"),
-                RuleType = RuleType.IntArray,
-                SelectList = new RemoteRuleValueSelectList("Country") { Multiple = true }
-            },
-            new FilterDescriptor<Customer, int?>(x => x.ShippingAddress != null ? x.ShippingAddress.CountryId : 0)
-            {
-                Name = "ShippingCountry",
-                DisplayName = T("Admin.Rules.FilterDescriptor.ShippingCountry"),
+                Name = "ContactCountry",
+                DisplayName = T("Address.Fields.Country"),
                 RuleType = RuleType.IntArray,
                 SelectList = new RemoteRuleValueSelectList("Country") { Multiple = true }
             },

@@ -40,9 +40,8 @@ public partial class GdprTool : IGdprTool
 
         var ignoreMemberNames = new string[]
         {
-            "WishlistUrl", "EditUrl", "PasswordRecoveryURL",
-            "BillingAddress.NameLine", "BillingAddress.StreetLine", "BillingAddress.CityLine", "BillingAddress.CountryLine",
-            "ShippingAddress.NameLine", "ShippingAddress.StreetLine", "ShippingAddress.CityLine", "ShippingAddress.CountryLine"
+            "EditUrl", "PasswordRecoveryURL",
+            "ContactAddress.NameLine", "ContactAddress.StreetLine", "ContactAddress.CityLine", "ContactAddress.CountryLine"
         };
 
         var model = await _messageModelProvider.CreateModelPartAsync(customer, true, ignoreMemberNames) as IDictionary<string, object>;
@@ -51,6 +50,15 @@ public partial class GdprTool : IGdprTool
         {
             // Roles
             model["CustomerRoles"] = customer.CustomerRoleMappings.Select(x => x.CustomerRole.Name).ToArray();
+
+            // Include the complete address book, not just the primary contact address.
+            var addresses = new List<object>();
+            foreach (var address in customer.Addresses)
+            {
+                addresses.Add(await _messageModelProvider.CreateModelPartAsync(address, true,
+                    "NameLine", "StreetLine", "CityLine", "CountryLine"));
+            }
+            model["Addresses"] = addresses;
 
             // Generic attributes
             var attributes = customer.GenericAttributes;

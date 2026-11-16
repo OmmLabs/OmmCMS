@@ -267,8 +267,7 @@ public partial class ImportProfileService : IImportProfileService
                             case ImportEntityType.Customer:
                                 foreach (var property in addressProperties)
                                 {
-                                    names["BillingAddress." + property] = string.Empty;
-                                    names["ShippingAddress." + property] = string.Empty;
+                                    names["ContactAddress." + property] = string.Empty;
                                 }
                                 break;
                         }
@@ -308,19 +307,15 @@ public partial class ImportProfileService : IImportProfileService
         string key = null;
         string prefixKey = null;
 
-        if (property.StartsWith("BillingAddress."))
+        if (property.StartsWith("ContactAddress."))
         {
-            prefixKey = "Admin.Orders.Fields.BillingAddress";
-        }
-        else if (property.StartsWith("ShippingAddress."))
-        {
-            prefixKey = "Admin.Orders.Fields.ShippingAddress";
+            prefixKey = "Address";
         }
 
         switch (entityType)
         {
             case ImportEntityType.Customer:
-                key = (property.StartsWith("BillingAddress.") || property.StartsWith("ShippingAddress."))
+                key = property.StartsWith("ContactAddress.")
                     ? "Address.Fields." + property.Substring(property.IndexOf('.') + 1)
                     : "Admin.Customers.Customers.Fields." + property;
                 break;
@@ -389,8 +384,7 @@ public partial class ImportProfileService : IImportProfileService
         ["Deleted"] = "Admin.Common.Deleted",
         ["WorkingLanguageId"] = "Common.Language",
         ["CreatedOnUtc"] = "Common.CreatedOn",
-        ["BillingAddress.CreatedOnUtc"] = "Common.CreatedOn",
-        ["ShippingAddress.CreatedOnUtc"] = "Common.CreatedOn",
+        ["ContactAddress.CreatedOnUtc"] = "Common.CreatedOn",
         ["UpdatedOnUtc"] = "Common.UpdatedOn",
         ["DefaultViewMode"] = "Admin.Configuration.Settings.Catalog.DefaultViewMode",
         ["StoreId"] = "Admin.Common.Store",
@@ -409,8 +403,7 @@ public partial class ImportProfileService : IImportProfileService
         ["SeName"] = "Admin.Configuration.Seo.SeName",
         ["MainPictureId"] = "FileUploader.MultiFiles.MainMediaFile",
         ["MediaFileId"] = "Common.Image",
-        ["BillingAddressId"] = "Admin.Orders.Fields.BillingAddress",
-        ["ShippingAddressId"] = "Admin.Orders.Fields.ShippingAddress",
+        ["ContactAddressId"] = "Address",
         ["DurabilityGuaranteeDurationYears"] = "Plugins.OmmCMS.EUWarranty.DurabilityGuaranteeDurationYears"
     };
 

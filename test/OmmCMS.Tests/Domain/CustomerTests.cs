@@ -29,18 +29,18 @@ public class CustomerTests
     }
 
     [Test]
-    public void Can_remove_address_assigned_as_billing_address()
+    public void Can_remove_address_assigned_as_contact_address()
     {
         var customer = new Customer();
         var address = new Address { Id = 1 };
 
         customer.Addresses.Add(address);
-        customer.BillingAddress = address;
+        customer.ContactAddress = address;
 
-        Assert.That(customer.BillingAddress, Is.SameAs(customer.Addresses.First()));
+        Assert.That(customer.ContactAddress, Is.SameAs(customer.Addresses.First()));
 
         customer.RemoveAddress(address);
         customer.Addresses.Count.ShouldEqual(0);
-        customer.BillingAddress.ShouldBeNull();
+        customer.ContactAddress.ShouldBeNull();
     }
 }

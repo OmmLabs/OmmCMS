@@ -16,6 +16,7 @@ public abstract class FilterTestsBase
 {
     protected sealed class FilterCustomer : Customer
     {
+        public Address AlternateAddress { get; set; }
         public List<FilterOrder> Orders { get; set; } = new();
     }
 
@@ -66,15 +67,15 @@ public abstract class FilterTestsBase
             RuleType = RuleType.Boolean,
             Name = "Active"
         };
-        public static FilterDescriptor BillingCountry = new FilterDescriptor<FilterCustomer, int?>(x => x.BillingAddress.CountryId)
+        public static FilterDescriptor ContactCountry = new FilterDescriptor<FilterCustomer, int?>(x => x.ContactAddress.CountryId)
         {
             RuleType = RuleType.NullableInt,
-            Name = "BillingCountry"
+            Name = "ContactCountry"
         };
-        public static FilterDescriptor ShippingCountry = new FilterDescriptor<FilterCustomer, int?>(x => x.ShippingAddress.CountryId)
+        public static FilterDescriptor AlternateCountry = new FilterDescriptor<FilterCustomer, int?>(x => x.AlternateAddress.CountryId)
         {
             RuleType = RuleType.NullableInt,
-            Name = "ShippingCountry"
+            Name = "AlternateCountry"
         };
         public static FilterDescriptor LastActivityDays = new FilterDescriptor<FilterCustomer, double>(x => (DateTime.UtcNow - x.LastActivityDateUtc).TotalDays /* DbFunctions.DiffDays(x.LastActivityDateUtc, DateTime.UtcNow)*/)
         {
@@ -156,8 +157,8 @@ public abstract class FilterTestsBase
         {
             Id = 1,
             Username = "sally",
-            BillingAddress = new Address { CountryId = 1 },
-            ShippingAddress = new Address { CountryId = 1 },
+            ContactAddress = new Address { CountryId = 1 },
+            AlternateAddress = new Address { CountryId = 1 },
             BirthDate = new DateTime(1980, 1, 1),
             Active = false,
             LastActivityDateUtc = DateTime.Now.AddDays(-5),
@@ -188,8 +189,8 @@ public abstract class FilterTestsBase
         {
             Id = 2,
             Username = "john",
-            BillingAddress = new Address { CountryId = 2 },
-            ShippingAddress = new Address { CountryId = 1 },
+            ContactAddress = new Address { CountryId = 2 },
+            AlternateAddress = new Address { CountryId = 1 },
             BirthDate = new DateTime(1999, 12, 24),
             Active = true,
             LastActivityDateUtc = DateTime.Now.AddDays(-1),
@@ -223,8 +224,8 @@ public abstract class FilterTestsBase
         {
             Id = 3,
             Username = "edward",
-            BillingAddress = new Address { CountryId = 3 },
-            ShippingAddress = new Address { CountryId = 3 },
+            ContactAddress = new Address { CountryId = 3 },
+            AlternateAddress = new Address { CountryId = 3 },
             BirthDate = new DateTime(1960, 10, 10),
             Active = false,
             LastActivityDateUtc = DateTime.Now.AddDays(-100),
@@ -256,8 +257,8 @@ public abstract class FilterTestsBase
         {
             Id = 4,
             Username = "snowden",
-            BillingAddress = new Address { CountryId = 1 },
-            ShippingAddress = new Address { CountryId = 1 },
+            ContactAddress = new Address { CountryId = 1 },
+            AlternateAddress = new Address { CountryId = 1 },
             BirthDate = DateTime.Now.AddYears(-32),
             Active = true,
             LastActivityDateUtc = DateTime.Now.AddDays(0),
@@ -285,8 +286,8 @@ public abstract class FilterTestsBase
         var customer5 = new FilterCustomer
         {
             Id = 5,
-            BillingAddress = new Address { CountryId = 2 },
-            ShippingAddress = new Address { CountryId = 2 },
+            ContactAddress = new Address { CountryId = 2 },
+            AlternateAddress = new Address { CountryId = 2 },
             LastActivityDateUtc = DateTime.Now.AddDays(-2),
             Orders = new List<FilterOrder>
             {
@@ -302,8 +303,8 @@ public abstract class FilterTestsBase
         var customer6 = new FilterCustomer
         {
             Id = 6,
-            BillingAddress = new Address { CountryId = 1 },
-            ShippingAddress = new Address { CountryId = 1 },
+            ContactAddress = new Address { CountryId = 1 },
+            AlternateAddress = new Address { CountryId = 1 },
             LastActivityDateUtc = DateTime.Now.AddDays(-10),
             Orders = new List<FilterOrder>
             {

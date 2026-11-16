@@ -768,6 +768,8 @@ try:
         assert not tables.intersection(retired_catalog_tables), "Retired catalogue tables remain"
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Country') WHERE name IN ('AllowsBilling', 'AllowsShipping', 'SubjectToVat')") == [0], "Commerce country flags remain"
         assert rows("SELECT COUNT(*) FROM Country")[0] > 0, "Country directory missing"
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('Customer') WHERE name IN ('BillingAddress_Id', 'ShippingAddress_Id')") == [0], "Legacy checkout addresses remain"
+        assert rows("SELECT COUNT(*) FROM pragma_table_info('Customer') WHERE name='ContactAddress_Id'") == [1], "Contact address relation missing"
         assert rows("SELECT COUNT(*) FROM Setting WHERE lower(Name) LIKE 'bankconnectionsettings.%'") == [0], "Bank payment settings remain"
         assert rows("SELECT COUNT(*) FROM pragma_table_info('RuleSet') WHERE name='ProductVariantAttributeId'") == [0]
         assert rows("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='BackInStockSubscription'") == [0]

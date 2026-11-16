@@ -286,8 +286,7 @@ public partial class InstallationDataSeeder : DataSeeder<SmartDbContext>
         var adminAddress = CreateFromSeed(InstallationSeedDescriptors.AdminAddress()).Single();
 
         adminUser.Addresses.Add(adminAddress);
-        adminUser.BillingAddress = adminAddress;
-        adminUser.ShippingAddress = adminAddress;
+        adminUser.ContactAddress = adminAddress;
 
         var adminRole = customerRoles.First(x => x.SystemName == SystemCustomerRoleNames.Administrators);
         var forumRole = customerRoles.First(x => x.SystemName == SystemCustomerRoleNames.ForumModerators);
