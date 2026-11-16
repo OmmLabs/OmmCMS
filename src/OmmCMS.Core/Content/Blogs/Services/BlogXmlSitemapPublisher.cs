@@ -37,11 +37,16 @@ public class BlogXmlSitemapPublisher : IXmlSitemapPublisher
         {
             var posts = await Query.Select(x => new { x.Id, x.Slug, x.UpdatedOnUtc, x.LanguageId }).ToListAsync(cancelToken);
             foreach (var p in posts)
-                yield return new NamedEntity { Id = p.Id, EntityName = nameof(BlogPost), Slug = p.Slug, LastMod = p.UpdatedOnUtc, LanguageId = p.LanguageId };
+                yield return new NamedEntity { Id = p.Id, EntityName = nameof(BlogPost), LastMod = p.UpdatedOnUtc, LanguageId = p.LanguageId };
         }
 
         public override XmlSitemapNode CreateNode(string baseUrl, NamedEntity entity, UrlRecordCollection slugs,
             Language language, XmlSitemapBuildNodeContext ctx)
-            => new() { Loc = baseUrl.TrimEnd('/') + "/blog/" + entity.Slug, LastMod = entity.LastMod };
+        {
+            var path = slugs.GetSlug(0, entity.Id, true);
+            return BlogSlugPaths.GetSlug(nameof(BlogPost), path) == null
+                ? null
+                : new XmlSitemapNode { Loc = baseUrl.TrimEnd('/') + "/" + path, LastMod = entity.LastMod };
+        }
     }
 }

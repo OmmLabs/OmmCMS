@@ -43,6 +43,22 @@ def request(path, data=None, timeout=30, client=anonymous, headers=None):
         return error.code, error.read().decode(errors="replace")
 
 
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+def assert_permanent_redirect(source, target):
+    opener = urllib.request.build_opener(NoRedirect())
+    try:
+        with opener.open(base + source, timeout=30) as response:
+            raise AssertionError(f"{source}: expected HTTP 301, got {response.status}")
+    except urllib.error.HTTPError as error:
+        assert error.code == 301, f"{source}: expected HTTP 301, got {error.code}"
+        actual = urllib.parse.urlsplit(error.headers["Location"]).path
+        assert actual == target, f"{source}: redirects to {actual}, expected {target}"
+
+
 def start():
     global process
     with log.open("a", encoding="utf-8") as output:
@@ -266,6 +282,69 @@ def editorial_workflows(password):
     assert read_rows("SELECT PostId FROM BlogPostCategory WHERE CategoryId = ?", (category_id,)) == [(blog_id,)]
     assert read_rows("SELECT PostId FROM BlogPostTag WHERE TagId = ?", (tag_id,)) == [(blog_id,)]
     print("Native blog draft, publish, sanitized content, category/tag, archive and RSS passed.")
+
+    # Simulate the immediately preceding schema on this disposable database only.
+    # The article and taxonomy rows already exist, but their central URLs do not.
+    stop()
+    with sqlite3.connect(database) as connection:
+        deleted = connection.execute("DELETE FROM UrlRecord WHERE EntityName IN ('BlogPost', 'BlogCategory', 'BlogTag')").rowcount
+        assert deleted == 3, "Expected exactly three newly managed URLs"
+        marker = connection.execute("DELETE FROM __MigrationVersionInfo WHERE Description LIKE '%Central URL records for blog content%'").rowcount
+        assert marker == 1, "Blog central URL migration marker missing"
+    start()
+    wait_for("/")
+    get_page("/blog/smoke-blog", anonymous, "Blog smoke content")
+    get_page("/blog/category/smoke-category", anonymous, "Blog smoke article")
+    get_page("/blog/tag/smoke-tag", anonymous, "Blog smoke article")
+    assert read_rows("SELECT COUNT(*) FROM UrlRecord WHERE EntityName IN ('BlogPost','BlogCategory','BlogTag') AND IsActive = 1") == [(3,)]
+    print("Existing blog URL migration passed without changing public paths.")
+
+    # Rename all kinds of content and verify exact HTTP 301 responses.
+    page = get_page(f"/admin/blog/edit/{blog_id}", admin, 'id="blog-post-form"')
+    blog_fields["Slug"] = "smoke-blog-second"
+    post_form(f"/admin/blog/edit/{blog_id}", admin, page, blog_fields)
+    assert_permanent_redirect("/blog/smoke-blog", "/blog/smoke-blog-second")
+    page = get_page(f"/admin/blog/edit/{blog_id}", admin, 'id="blog-post-form"')
+    blog_fields["Slug"] = "smoke-blog-final"
+    post_form(f"/admin/blog/edit/{blog_id}", admin, page, blog_fields)
+    assert_permanent_redirect("/blog/smoke-blog", "/blog/smoke-blog-final")
+    assert_permanent_redirect("/blog/smoke-blog-second", "/blog/smoke-blog-final")
+    page = get_page(f"/admin/blog/term/{category_id}", admin, 'id="blog-term-form"')
+    post_form(f"/admin/blog/term/{category_id}", admin, page, {"Id": str(category_id), "IsTag": "false", "Name": "Smoke category", "Slug": "smoke-blog-final", "DisplayOrder": "1"})
+    page = get_page(f"/admin/blog/term/{tag_id}?isTag=true", admin, 'id="blog-term-form"')
+    post_form(f"/admin/blog/term/{tag_id}?isTag=true", admin, page, {"Id": str(tag_id), "IsTag": "true", "Name": "Smoke tag", "Slug": "smoke-blog-final"})
+    assert_permanent_redirect("/blog/category/smoke-category", "/blog/category/smoke-blog-final")
+    assert_permanent_redirect("/blog/tag/smoke-tag", "/blog/tag/smoke-blog-final")
+    get_page("/blog/category/smoke-blog-final", anonymous, "Blog smoke article")
+    get_page("/blog/tag/smoke-blog-final", anonymous, "Blog smoke article")
+    get_page("/blog/smoke-blog-final", anonymous, "Blog smoke content")
+    get_page("/blog/rss.xml", anonymous, "/blog/smoke-blog-final")
+    sitemap = get_page("/sitemap.xml", anonymous, "/blog/smoke-blog-final")
+    assert "/blog/smoke-blog<" not in sitemap and "/blog/smoke-blog-second<" not in sitemap
+
+    # A historical URL cannot be stolen by a different post.
+    page = get_page("/admin/blog/edit", admin, 'id="blog-post-form"')
+    conflicting = dict(blog_fields, Id="0", Title="Conflicting blog post", Slug="smoke-blog", IsPublished="false")
+    post_form("/admin/blog/edit", admin, page, conflicting)
+    assert read_rows("SELECT COUNT(*) FROM BlogPost WHERE Title = 'Conflicting blog post'") == [(0,)]
+    assert read_rows("SELECT Slug, IsActive FROM UrlRecord WHERE EntityName = 'BlogPost' AND EntityId = ? ORDER BY Slug", (blog_id,)) == [
+        ("blog/smoke-blog", 0), ("blog/smoke-blog-final", 1), ("blog/smoke-blog-second", 0)]
+
+    # Reclaiming an item's own historical URL is allowed, but drafts never redirect publicly.
+    page = get_page(f"/admin/blog/edit/{blog_id}", admin, 'id="blog-post-form"')
+    blog_fields.update(Slug="smoke-blog", IsPublished="true")
+    post_form(f"/admin/blog/edit/{blog_id}", admin, page, blog_fields)
+    assert_permanent_redirect("/blog/smoke-blog-final", "/blog/smoke-blog")
+    page = get_page(f"/admin/blog/edit/{blog_id}", admin, 'id="blog-post-form"')
+    blog_fields["IsPublished"] = "false"
+    post_form(f"/admin/blog/edit/{blog_id}", admin, page, blog_fields)
+    assert request("/blog/smoke-blog")[0] == 404
+    assert request("/blog/smoke-blog-final")[0] == 404
+    page = get_page(f"/admin/blog/edit/{blog_id}", admin, 'id="blog-post-form"')
+    blog_fields["IsPublished"] = "true"
+    post_form(f"/admin/blog/edit/{blog_id}", admin, page, blog_fields)
+    print("Blog URL history, 301 redirects, namespace isolation, collision rejection and draft privacy passed.")
+
 
 
     # Verify access controls on the same article using the seeded Administrators role.

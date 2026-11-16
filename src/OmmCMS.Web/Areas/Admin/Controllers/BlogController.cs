@@ -13,11 +13,13 @@ public class BlogController : AdminController
 {
     private readonly SmartDbContext _db;
     private readonly IPermissionService _permissions;
+    private readonly BlogSlugService _slugs;
 
-    public BlogController(SmartDbContext db, IPermissionService permissions)
+    public BlogController(SmartDbContext db, IPermissionService permissions, BlogSlugService slugs)
     {
         _db = db;
         _permissions = permissions;
+        _slugs = slugs;
     }
 
     [HttpGet, Permission(Permissions.Cms.Blog.Read)]
@@ -80,8 +82,8 @@ public class BlogController : AdminController
         model.Slug = BlogQueries.NormalizeSlug(string.IsNullOrWhiteSpace(model.Slug) ? model.Title : model.Slug);
         if (string.IsNullOrEmpty(model.Slug))
             ModelState.AddModelError(nameof(model.Slug), "Enter a search-friendly URL slug using letters or numbers.");
-        else if (await _db.BlogPosts.AnyAsync(x => x.Slug == model.Slug && x.Id != model.Id))
-            ModelState.AddModelError(nameof(model.Slug), "This post URL is already in use.");
+        else if (!await _slugs.IsAvailableAsync(nameof(BlogPost), model.Id, model.Slug))
+            ModelState.AddModelError(nameof(model.Slug), "This post URL is already in use or reserved by another post’s URL history.");
 
         if (model.ExpiresOnUtc <= model.PublishedOnUtc)
             ModelState.AddModelError(nameof(model.ExpiresOnUtc), "The end date must be after the publication date.");
@@ -132,12 +134,16 @@ public class BlogController : AdminController
 
             try
             {
+                await using var transaction = await _db.Database.BeginTransactionAsync();
                 await _db.SaveChangesAsync();
+                await _slugs.SaveAsync(p, model.Slug);
+                await transaction.CommitAsync();
                 NotifySuccess("Blog post saved.");
                 return RedirectToAction(nameof(List));
             }
-            catch (DbUpdateException)
+            catch (Exception ex) when (ex is DbUpdateException or BlogSlugConflictException)
             {
+                _db.ChangeTracker.Clear();
                 ModelState.AddModelError("", "The post could not be saved. Check the URL and selected terms.");
             }
         }
@@ -188,18 +194,18 @@ public class BlogController : AdminController
         model.Slug = BlogQueries.NormalizeSlug(string.IsNullOrWhiteSpace(model.Slug) ? model.Name : model.Slug);
         if (string.IsNullOrEmpty(model.Slug))
             ModelState.AddModelError(nameof(model.Slug), "Enter a URL slug using letters or numbers.");
-        else if (model.IsTag
-            ? await _db.BlogTags.AnyAsync(x => x.Slug == model.Slug && x.Id != model.Id)
-            : await _db.BlogCategories.AnyAsync(x => x.Slug == model.Slug && x.Id != model.Id))
-            ModelState.AddModelError(nameof(model.Slug), "This URL is already in use.");
+        else if (!await _slugs.IsAvailableAsync(model.IsTag ? nameof(BlogTag) : nameof(BlogCategory), model.Id, model.Slug))
+            ModelState.AddModelError(nameof(model.Slug), "This URL is already in use or reserved by another term’s URL history.");
 
         if (!ModelState.IsValid) return View(model);
+        OmmCMS.Core.Seo.ISlugSupported entity;
         if (model.IsTag)
         {
             var tag = model.Id == 0 ? new BlogTag() : await _db.BlogTags.FindAsync(model.Id);
             if (tag == null) return NotFound();
             tag.Name = model.Name.Trim(); tag.Slug = model.Slug; tag.Description = model.Description;
             if (model.Id == 0) _db.BlogTags.Add(tag);
+            entity = tag;
         }
         else
         {
@@ -208,13 +214,18 @@ public class BlogController : AdminController
             category.Name = model.Name.Trim(); category.Slug = model.Slug;
             category.Description = model.Description; category.DisplayOrder = model.DisplayOrder;
             if (model.Id == 0) _db.BlogCategories.Add(category);
+            entity = category;
         }
         try
         {
+            await using var transaction = await _db.Database.BeginTransactionAsync();
             await _db.SaveChangesAsync();
+            await _slugs.SaveAsync(entity, model.Slug);
+            await transaction.CommitAsync();
         }
-        catch (DbUpdateException)
+        catch (Exception ex) when (ex is DbUpdateException or BlogSlugConflictException)
         {
+            _db.ChangeTracker.Clear();
             ModelState.AddModelError("", "The term could not be saved. Check the URL.");
             return View(model);
         }

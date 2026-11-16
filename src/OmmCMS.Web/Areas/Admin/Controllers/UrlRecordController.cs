@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using OmmCMS.Admin.Models.UrlRecord;
+using OmmCMS.Core.Content.Blogs;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Security;
 using OmmCMS.Core.Seo;
@@ -119,6 +120,9 @@ public class UrlRecordController : AdminController
             return NotFound();
         }
 
+        if (BlogSlugPaths.IsManaged(urlRecord.EntityName))
+            return RedirectToBlogEditor(urlRecord);
+
         var model = new UrlRecordModel();
         PrepareUrlRecordModel(model, urlRecord);
         await PrepareAvailableLanguages();
@@ -135,6 +139,13 @@ public class UrlRecordController : AdminController
         {
             return NotFound();
         }
+
+        // Blog content owns its canonical URL and history; never change those rows independently.
+        if (BlogSlugPaths.IsManaged(urlRecord.EntityName))
+            return Forbid();
+
+        if (model.Slug?.StartsWith("blog/", StringComparison.OrdinalIgnoreCase) == true)
+            ModelState.AddModelError(nameof(model.Slug), "Blog paths are managed by the blog editors.");
 
         if (!urlRecord.IsActive && model.IsActive)
         {
@@ -179,6 +190,9 @@ public class UrlRecordController : AdminController
             return NotFound();
         }
 
+        if (BlogSlugPaths.IsManaged(urlRecord.EntityName))
+            return Forbid();
+
         try
         {
             _db.UrlRecords.Remove(urlRecord);
@@ -206,7 +220,8 @@ public class UrlRecordController : AdminController
         if (ids.Any())
         {
             var toDelete = await _db.UrlRecords
-                .Where(x => ids.Contains(x.Id))
+                .Where(x => ids.Contains(x.Id) && x.EntityName != nameof(BlogPost)
+                    && x.EntityName != nameof(BlogCategory) && x.EntityName != nameof(BlogTag))
                 .ToListAsync();
 
             numDeleted = toDelete.Count;
@@ -230,9 +245,11 @@ public class UrlRecordController : AdminController
             //var slugSupportedTypes = Services.ApplicationContext.TypeScanner.FindTypes(typeof(ISlugSupported));
             var entitySets = new Dictionary<string, IQueryable<ISlugSupported>>
             {
-                ["Topic"] = _db.Topics
+                ["Topic"] = _db.Topics,
+                [nameof(BlogPost)] = _db.BlogPosts,
+                [nameof(BlogCategory)] = _db.BlogCategories,
+                [nameof(BlogTag)] = _db.BlogTags
                 // TODO: Not found entity types. Cleanup using SQL?
-                //["BlogPost"] = GetEntityQueryByName("BlogPost"),
                 //["NewsItem"] = GetEntityQueryByName("NewsItem"),
                 //["Forum"] = GetEntityQueryByName("Forum"),
                 //["ForumGroup"] = GetEntityQueryByName("ForumGroup")
@@ -308,6 +325,11 @@ public class UrlRecordController : AdminController
         //}
     }
 
+    private IActionResult RedirectToBlogEditor(UrlRecord record)
+        => record.EntityName == nameof(BlogPost)
+            ? RedirectToAction("Edit", "Blog", new { id = record.EntityId })
+            : RedirectToAction("Term", "Blog", new { id = record.EntityId, isTag = record.EntityName == nameof(BlogTag) });
+
     private async Task PrepareAvailableLanguages()
     {
         ViewBag.AvailableLanguages = (await _languageService.GetAllLanguagesAsync(true)).ToSelectListItems();
@@ -334,9 +356,13 @@ public class UrlRecordController : AdminController
             model.LanguageId = urlRecord.LanguageId;
 
             var routeValues = SlugRouteTransformer.GetRouteValuesFor(urlRecord, RouteTarget.Edit);
-            model.EntityUrl = routeValues != null
-                ? Url.RouteUrl(routeValues)
-                : Url.Action("Edit", urlRecord.EntityName, new { id = urlRecord.EntityId });
+            model.EntityUrl = BlogSlugPaths.IsManaged(urlRecord.EntityName)
+                ? (urlRecord.EntityName == nameof(BlogPost)
+                    ? Url.Action("Edit", "Blog", new { id = urlRecord.EntityId })
+                    : Url.Action("Term", "Blog", new { id = urlRecord.EntityId, isTag = urlRecord.EntityName == nameof(BlogTag) }))
+                : routeValues != null
+                    ? Url.RouteUrl(routeValues)
+                    : Url.Action("Edit", urlRecord.EntityName, new { id = urlRecord.EntityId });
 
             if (urlRecord.LanguageId == 0)
             {

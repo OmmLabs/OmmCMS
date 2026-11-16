@@ -3,14 +3,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OmmCMS.Domain;
+using OmmCMS.Core.Seo;
 
 namespace OmmCMS.Core.Content.Blogs;
 
 [Table("BlogPost")]
 [Index(nameof(Slug), IsUnique = true)]
 [Index(nameof(IsPublished), nameof(PublishedOnUtc))]
-public class BlogPost : BaseEntity
+public class BlogPost : BaseEntity, ISlugSupported
 {
+    public string GetDisplayName() => Title;
+    public string[] GetDisplayNameMemberNames() => [nameof(Title)];
+
     [Required, StringLength(250)]
     public string Title { get; set; }
     [Required, StringLength(180)]
@@ -41,8 +45,11 @@ public class BlogPost : BaseEntity
 
 [Table("BlogCategory")]
 [Index(nameof(Slug), IsUnique = true)]
-public class BlogCategory : BaseEntity
+public class BlogCategory : BaseEntity, ISlugSupported
 {
+    public string GetDisplayName() => Name;
+    public string[] GetDisplayNameMemberNames() => [nameof(Name)];
+
     [Required, StringLength(150)]
     public string Name { get; set; }
     [Required, StringLength(180)]
@@ -54,8 +61,11 @@ public class BlogCategory : BaseEntity
 
 [Table("BlogTag")]
 [Index(nameof(Slug), IsUnique = true)]
-public class BlogTag : BaseEntity
+public class BlogTag : BaseEntity, ISlugSupported
 {
+    public string GetDisplayName() => Name;
+    public string[] GetDisplayNameMemberNames() => [nameof(Name)];
+
     [Required, StringLength(150)]
     public string Name { get; set; }
     [Required, StringLength(180)]

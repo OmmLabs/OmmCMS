@@ -11,6 +11,7 @@ internal class BlogStarter : StarterBase
 
     public override void ConfigureContainer(ContainerBuilder builder, IApplicationContext appContext)
     {
+        builder.RegisterType<BlogSlugService>().InstancePerLifetimeScope();
         builder.RegisterType<BlogXmlSitemapPublisher>().As<IXmlSitemapPublisher>().InstancePerLifetimeScope();
     }
 }

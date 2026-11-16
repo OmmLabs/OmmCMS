@@ -13,7 +13,13 @@ public class BlogController : PublicController
 {
     private readonly SmartDbContext _db;
 
-    public BlogController(SmartDbContext db) => _db = db;
+    private readonly BlogSlugService _slugs;
+
+    public BlogController(SmartDbContext db, BlogSlugService slugs)
+    {
+        _db = db;
+        _slugs = slugs;
+    }
 
     private IQueryable<BlogPost> VisiblePosts() => _db.BlogPosts.AsNoTracking()
         .Visible(DateTime.UtcNow, Services.StoreContext.CurrentStore.Id, Services.WorkContext.WorkingLanguage.Id);
@@ -24,11 +30,25 @@ public class BlogController : PublicController
 
     [HttpGet, LocalizedRoute("blog/category/{slug}", Name = "BlogCategory")]
     public async Task<IActionResult> Category(string slug, string q, int page = 1)
-        => await RenderList(q, page, category: slug);
+    {
+        var resolved = await _slugs.ResolveAsync(nameof(BlogCategory), slug);
+        if (resolved == null || !await _db.BlogCategories.AnyAsync(x => x.Id == resolved.EntityId))
+            return NotFound();
+        if (resolved.IsRedirect)
+            return RedirectToRoutePermanent("BlogCategory", new { slug = resolved.Slug, q, page });
+        return await RenderList(q, page, category: resolved.Slug);
+    }
 
     [HttpGet, LocalizedRoute("blog/tag/{slug}", Name = "BlogTag")]
     public async Task<IActionResult> Tag(string slug, string q, int page = 1)
-        => await RenderList(q, page, tag: slug);
+    {
+        var resolved = await _slugs.ResolveAsync(nameof(BlogTag), slug);
+        if (resolved == null || !await _db.BlogTags.AnyAsync(x => x.Id == resolved.EntityId))
+            return NotFound();
+        if (resolved.IsRedirect)
+            return RedirectToRoutePermanent("BlogTag", new { slug = resolved.Slug, q, page });
+        return await RenderList(q, page, tag: resolved.Slug);
+    }
 
     [HttpGet, LocalizedRoute("blog/archive/{year:int}/{month:int}", Name = "BlogArchive")]
     public async Task<IActionResult> Archive(int year, int month, int page = 1)
@@ -37,10 +57,15 @@ public class BlogController : PublicController
     [HttpGet, LocalizedRoute("blog/{slug}", Name = "BlogPost")]
     public async Task<IActionResult> Detail(string slug)
     {
+        var resolved = await _slugs.ResolveAsync(nameof(BlogPost), slug);
+        if (resolved == null) return NotFound();
+
         var visible = VisiblePosts();
         var post = await visible.Include(x => x.Categories).Include(x => x.Tags)
-            .FirstOrDefaultAsync(x => x.Slug == slug);
+            .FirstOrDefaultAsync(x => x.Id == resolved.EntityId);
         if (post == null) return NotFound();
+        if (resolved.IsRedirect)
+            return RedirectToRoutePermanent("BlogPost", new { slug = resolved.Slug });
 
         var categories = post.Categories.Select(x => x.Id).ToArray();
         var tags = post.Tags.Select(x => x.Id).ToArray();

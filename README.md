@@ -9,7 +9,7 @@ Website: https://ommlabs.ommrudraksha.com
 ## Features
 
 - Website pages, dedicated blog posts, reusable content categories and tags, navigation menus, media management and SEO.
-- Blog administration under Content, with publishing schedules, cover/preview media, scoped visibility, related articles, archives, search, RSS and sitemap support. Public blog: `/blog`.
+- Blog administration under Content, with publishing schedules, cover/preview media, scoped visibility, related articles, archives, search, RSS and sitemap support. Public blog: `/blog`. Blog, category and tag URLs use central URL records with automatic permanent redirects from former paths.
 - Content administration, roles, permissions, authentication and localization.
 - Theme infrastructure and a starter website with Home, About and Contact pages.
 - SQLite, SQL Server, PostgreSQL and MySQL database providers.
@@ -25,7 +25,7 @@ cd src/OmmCMS.Web
 dotnet run -c Release --no-build --no-launch-profile --urls http://localhost:5080
 ```
 
-Open http://localhost:5080/install. Use a fresh database (SQLite is recommended for local evaluation), complete the installer and visit `/admin` to manage content. The initial OmmCMS schema is created directly by the installer and recorded as one core migration. Older upstream and OmmCMS preview databases are not supported for in-place upgrade; use a fresh database.
+Open http://localhost:5080/install. Use a fresh database (SQLite is recommended for local evaluation), complete the installer and visit `/admin` to manage content. The current OmmCMS schema is created directly by the installer and all core migrations are recorded as applied. Older upstream and OmmCMS preview databases are not supported for in-place upgrade; use a fresh database.
 
 ## Development
 
