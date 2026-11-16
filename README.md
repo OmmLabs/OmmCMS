@@ -96,6 +96,8 @@ Phases 961–980: retire product and checkout Sass, price-specific card styles, 
 
 Phases 981–1000: retire the catalog product rotator, its theme settings and obsolete compiled CSS snapshots. Keep accessible menu navigation, dynamic themes and generic media gallery structured data; verify published assets.
 
+Phases 1001–1020: remove commerce-only Google Analytics settings, item identifier migration and resources; retain site tracking and consent. Generalize search facets and entity-picker defaults, retain customer selection and CMS media albums, and test the published configuration.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

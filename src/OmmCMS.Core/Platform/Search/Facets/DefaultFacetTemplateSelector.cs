@@ -27,19 +27,12 @@ public class DefaultFacetTemplateSelector : IFacetTemplateSelector
         switch (group?.Kind)
         {
             case FacetGroupKind.Category:
-            case FacetGroupKind.DeliveryTime:
-            case FacetGroupKind.Brand:
-            case FacetGroupKind.Availability:
-            case FacetGroupKind.NewArrivals:
             case FacetGroupKind.Forum:
             case FacetGroupKind.Customer:
             case FacetGroupKind.Date:
                 return group.IsMultiSelect ? "MultiSelect" : "SingleSelect";
-            case FacetGroupKind.Price:
-                return "Price";
             case FacetGroupKind.Unknown:
             case FacetGroupKind.Attribute:
-            case FacetGroupKind.Variant:
             default:
                 return null;
         }

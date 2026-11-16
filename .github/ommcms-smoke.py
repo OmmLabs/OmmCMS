@@ -145,8 +145,19 @@ def editorial_workflows(password):
             assert request(path, client=admin)[0] == 404, f"Residual commerce action reachable: {path}"
         for entity_type in ("product", "category", "manufacturer"):
             assert request("/entity/picker?entityType=" + entity_type, client=admin)[0] == 404
-        get_page("/entity/picker?entityType=customer", admin, "CustomerSearchType")
+        picker = get_page("/entity/picker?entityType=customer", admin, "CustomerSearchType")
+        assert 'name="DisableIf"' not in picker and 'name="DisableIds"' in picker
+        picker_status, picker_js = request("/js/ommcms.entitypicker.js")
+        assert picker_status == 200 and "entityType: 'customer'" in picker_js and "disableIf" not in picker_js
         print("Residual commerce routes absent; authorized customer picker remains available.")
+    analytics_settings = {name.lower() for (name,) in read_rows("SELECT Name FROM Setting WHERE lower(Name) LIKE 'googleanalyticssettings.%'")}
+    assert "googleanalyticssettings.googleid" in analytics_settings
+    assert "googleanalyticssettings.trackingscript" in analytics_settings
+    assert "googleanalyticssettings.renderwithuserconsentonly" in analytics_settings
+    assert not any(name in analytics_settings for name in ("googleanalyticssettings.ecommercescript", "googleanalyticssettings.ecommercedetailscript", "googleanalyticssettings.rendercatalogscripts", "googleanalyticssettings.rendercheckoutscripts", "googleanalyticssettings.itemidentifier"))
+    analytics = get_page("/admin/googleanalytics/configure", admin, "RenderWithUserConsentOnly")
+    assert "TrackingScript" in analytics and "{ECOMMERCE}" not in analytics
+    print("CMS Google Analytics configuration and consent controls passed without commerce settings.")
     if "--admin-commerce-trimmed" in sys.argv:
         for controller, action in (("campaign","list"), ("category","list"), ("currency","list"), ("discount","list"), ("export","list"), ("import","list"), ("manufacturer","list"), ("measure","weights"), ("order","list"), ("product","list"), ("search","searchsettings")):
             path = f"/admin/{controller}/{action}"

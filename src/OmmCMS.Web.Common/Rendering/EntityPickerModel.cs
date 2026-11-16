@@ -6,7 +6,6 @@ public class EntityPickerModel : ModelBase
 {
     public string EntityType { get; set; }
     public bool HighlightSearchTerm { get; set; }
-    public string DisableIf { get; set; }
     public string DisableIds { get; set; }
     public string SearchTerm { get; set; }
     public string ReturnField { get; set; }

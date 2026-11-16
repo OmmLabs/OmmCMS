@@ -15,8 +15,6 @@ public class EntityPickerTagHelper : BaseFormTagHelper
     const string CaptionAttributeName = "caption";
     const string IconAttributeName = "icon";
     const string DialogTitleAttributeName = "dialog-title";
-    const string DisableGroupedProductsAttributeName = "disable-grouped-products";
-    const string DisableBundleProductsAttributeName = "disable-bundle-products";
     const string DisabledEntityIdsAttributeName = "disabled-entity-ids";
     const string SelectedAttributeName = "selected";
     const string EnableThumbZoomerAttributeName = "enable-thumb-zoomer";
@@ -30,10 +28,10 @@ public class EntityPickerTagHelper : BaseFormTagHelper
     const string OnSelectionCompletedAttributeName = "onselectioncompleted";
 
     /// <summary>
-    /// Sets the entity type which shall be picked. Default = "product"
+    /// Sets the entity type which shall be picked. Default = "customer"
     /// </summary>
     [HtmlAttributeName(EntityTypeAttributeName)]
-    public string EntityType { get; set; } = "product";
+    public string EntityType { get; set; } = "customer";
 
     /// <summary>
     /// Sets the target input selector.
@@ -58,18 +56,6 @@ public class EntityPickerTagHelper : BaseFormTagHelper
     /// </summary>
     [HtmlAttributeName(DialogTitleAttributeName)]
     public string DialogTitle { get; set; }
-
-    /// <summary>
-    /// Whether to disable search for grouped products.
-    /// </summary>
-    [HtmlAttributeName(DisableGroupedProductsAttributeName)]
-    public bool DisableGroupedProducts { get; set; }
-
-    /// <summary>
-    /// Whether to disable search for bundled products.
-    /// </summary>
-    [HtmlAttributeName(DisableBundleProductsAttributeName)]
-    public bool DisableBundleProducts { get; set; }
 
     /// <summary>
     /// The ids of disabled entities.
@@ -149,7 +135,6 @@ public class EntityPickerTagHelper : BaseFormTagHelper
             entityType = EntityType,
             url = UrlHelper.Action("Picker", "Entity", new { area = string.Empty }),
             caption = (DialogTitle.NullEmpty() ?? Caption).HtmlEncode(),
-            disableIf = DisableGroupedProducts ? "groupedproduct" : (DisableBundleProducts ? "notsimpleproduct" : null),
             disableIds = DisabledEntityIds == null ? null : string.Join(',', DisabledEntityIds),
             thumbZoomer = EnableThumbZoomer,
             highligtSearchTerm = HighlightSearchTerm,

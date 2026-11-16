@@ -67,9 +67,8 @@
 
         var defaults = {
             url: '',
-            entityType: 'product',
+            entityType: 'customer',
             caption: '&nbsp;',
-            disableIf: '',
             disableIds: '',
             thumbZoomer: false,
             highligtSearchTerm: true,
@@ -176,7 +175,6 @@
                     "ReturnField": opt.returnField,
                     "MaxItems": opt.maxItems,
                     "Selected": opt.selected.join(),
-                    "DisableIf": opt.disableIf,
                     "DisableIds": opt.disableIds
                 },
                 url: opt.url,

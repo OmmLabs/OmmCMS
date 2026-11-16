@@ -5,17 +5,11 @@ namespace OmmCMS.Core.Search.Facets;
 public enum FacetGroupKind
 {
     Unknown = -1,
-    Category,
-    Brand,
-    Price,
-    DeliveryTime = 4,
-    Availability,
-    NewArrivals,
-    Attribute,
-    Variant,
-    Forum,
-    Customer,
-    Date
+    Category = 0,
+    Attribute = 7,
+    Forum = 9,
+    Customer = 10,
+    Date = 11
 }
 
 [DebuggerDisplay("Key: {Key}, Label: {Label}, Kind: {Kind}")]
@@ -74,27 +68,13 @@ public class FacetGroup
         {
             return FacetGroupKind.Attribute;
         }
-        else if (key.StartsWith("variantid"))
-        {
-            return FacetGroupKind.Variant;
-        }
 
         switch (key)
         {
             case "categoryid":
-            case "notfeaturedcategoryid":
                 return FacetGroupKind.Category;
-            case "manufacturerid":
-                return FacetGroupKind.Brand;
-            case "price":
-                return FacetGroupKind.Price;
-            case "deliveryid":
-                return FacetGroupKind.DeliveryTime;
-            case "available":
-                return FacetGroupKind.Availability;
             case "createdon":
-            case "availablestart":
-                return scope == "Catalog" ? FacetGroupKind.NewArrivals : FacetGroupKind.Date;
+                return FacetGroupKind.Date;
             case "forumid":
                 return FacetGroupKind.Forum;
             case "customerid":

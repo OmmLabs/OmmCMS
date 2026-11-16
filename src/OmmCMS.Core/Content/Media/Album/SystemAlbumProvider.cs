@@ -17,7 +17,6 @@ public class SystemAlbumProvider : IAlbumProvider, IMediaTrackDetector
         _db = db;
     }
 
-    public const string Catalog = "catalog";
     public const string Content = "content";
     public const string Downloads = "download";
     public const string Messages = "message";

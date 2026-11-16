@@ -61,19 +61,14 @@ public abstract partial class FacetUrlHelperBase : IFacetUrlHelper
 
                 string[] currentValues = null;
 
-                // The query string value is not necessarily equal to the facet value.
-                // We must skip subsequent lines here to not add the removed value again and again.
-                if (facet.FacetGroup.Kind != FacetGroupKind.Price &&
-                    facet.FacetGroup.Kind != FacetGroupKind.Availability &&
-                    facet.FacetGroup.Kind != FacetGroupKind.NewArrivals)
+                // A single selection or range owns the entire query parameter.
+                // Only a multi-select list needs to preserve sibling values.
+                if (facet.FacetGroup.IsMultiSelect && !facet.Value.IsRange && qs.TryGetValue(qsName, out var rawValue))
                 {
-                    if (qs.TryGetValue(qsName, out var rawValue))
-                    {
-                        currentValues = rawValue.ToString()?
-                            .Split(',', StringSplitOptions.RemoveEmptyEntries)
-                            .Select(x => x.Trim())
-                            .ToArray();
-                    }
+                    currentValues = rawValue.ToString()?
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(x => x.Trim())
+                        .ToArray();
                 }
 
                 qs.Remove(qsName);
@@ -114,7 +109,7 @@ public abstract partial class FacetUrlHelperBase : IFacetUrlHelper
     }
 
     /// <summary>
-    /// Gets the unmapped name of a query part, e.g. "m" if the URL contains the brand\manufacturer name.
+    /// Gets the unmapped name of a query part, e.g. "c" if the URL contains a category name.
     /// </summary>
     protected abstract string GetUnmappedQueryName(Facet facet);
 
