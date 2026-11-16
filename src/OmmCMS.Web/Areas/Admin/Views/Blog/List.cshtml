@@ -2,7 +2,7 @@
 @model List<BlogPost>
 @{
     ViewBag.Title = "Blog posts";
-    var page = (int)ViewBag.Page;
+    var pageNumber = (int)ViewBag.Page;
     var total = (int)ViewBag.Total;
 }
 <div class="section-header">
@@ -41,7 +41,7 @@
 </div>
 @if (Model.Count == 0) { <p>No posts yet.</p> }
 <nav class="d-flex justify-content-between">
-    @if (page > 1) { <a asp-action="List" asp-route-page="@(page - 1)" asp-route-q="@ViewBag.Query" asp-route-published="@ViewBag.Published">Previous</a> }
-    <span>Page @page · @total posts</span>
-    @if (page * 30 < total) { <a asp-action="List" asp-route-page="@(page + 1)" asp-route-q="@ViewBag.Query" asp-route-published="@ViewBag.Published">Next</a> }
+    @if (pageNumber > 1) { <a asp-action="List" asp-route-page="@(pageNumber - 1)" asp-route-q="@ViewBag.Query" asp-route-published="@ViewBag.Published">Previous</a> }
+    <span>Page @pageNumber · @total posts</span>
+    @if (pageNumber * 30 < total) { <a asp-action="List" asp-route-page="@(pageNumber + 1)" asp-route-q="@ViewBag.Query" asp-route-published="@ViewBag.Published">Next</a> }
 </nav>

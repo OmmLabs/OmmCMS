@@ -15,6 +15,9 @@ public class BlogXmlSitemapPublisher : IXmlSitemapPublisher
 
     public XmlSitemapProvider PublishXmlSitemap(XmlSitemapBuildContext context)
     {
+        if (!context.LoadSettings<SeoSettings>().XmlSitemapIncludesBlog)
+            return null;
+
         var now = DateTime.UtcNow;
         return new Provider
         {

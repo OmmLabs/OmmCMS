@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using NUnit.Framework;
 using OmmCMS.Core.Content.Blogs;
 
