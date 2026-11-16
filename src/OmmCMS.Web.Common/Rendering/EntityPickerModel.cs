@@ -2,7 +2,6 @@
 
 namespace OmmCMS.Web.Rendering;
 
-[LocalizedDisplay("Admin.Catalog.Products.List.")]
 public class EntityPickerModel : ModelBase
 {
     public string EntityType { get; set; }
@@ -20,22 +19,10 @@ public class EntityPickerModel : ModelBase
 
     #region Search properties
 
-    [LocalizedDisplay("*SearchProductName")]
-    public string ProductName { get; set; }
-
-    [LocalizedDisplay("*SearchCategory")]
-    public int CategoryId { get; set; }
-
-    [LocalizedDisplay("*SearchManufacturer")]
-    public int ManufacturerId { get; set; }
-
     [LocalizedDisplay("Admin.Common.Store.SearchFor")]
     public int StoreId { get; set; }
 
-    [LocalizedDisplay("*SearchProductType")]
-    public int ProductTypeId { get; set; }
-
-    [LocalizedDisplay("Admin.Catalog.Customers.CustomerSearchType")]
+    [LocalizedDisplay("Common.Search")]
     public string CustomerSearchType { get; set; }
 
     #endregion

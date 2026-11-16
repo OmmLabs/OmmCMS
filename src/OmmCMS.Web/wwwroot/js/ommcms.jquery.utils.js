@@ -268,8 +268,8 @@
                 el[0].style.setProperty('--text-expander-collapsed-height', maxHeight + 'px');
 
                 var toggle = $(`<button type="button" class="text-expander-toggle btn btn-plain rounded-pill px-4" aria-expanded="false" aria-controls="${innerId}">`
-                    + `<span class="text-expander-label-more"><sm-icon name="chevrons-down" class="pr-2" aria-hidden="true"></sm-icon>${Res['Products.Longdesc.More']}</span>`
-                    + `<span class="text-expander-label-less"><sm-icon name="chevrons-up" class="pr-2" aria-hidden="true"></sm-icon>${Res['Products.Longdesc.Less']}</span></button>`);
+                    + `<span class="text-expander-label-more"><sm-icon name="chevrons-down" class="pr-2" aria-hidden="true"></sm-icon>${Res['Common.ShowMore']}</span>`
+                    + `<span class="text-expander-label-less"><sm-icon name="chevrons-up" class="pr-2" aria-hidden="true"></sm-icon>${Res['Common.ShowLess']}</span></button>`);
 
                 el.append(toggle).data('text-expander-initialized', true);
 

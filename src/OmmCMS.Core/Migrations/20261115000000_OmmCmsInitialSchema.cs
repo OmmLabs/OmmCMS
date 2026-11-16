@@ -29,7 +29,6 @@ internal sealed class OmmCmsInitialSchema : Migration, ILocaleResourcesProvider
         builder.AddOrUpdate("Enums.SwatchShape.Rect", "Rectangular", "Rechteckig");
         builder.AddOrUpdate("Enums.SwatchShape.Circle", "Circle", "Rund");
 
-
         builder.AddOrUpdate("Admin.Common.ResetToDefault",
             "Reset to default value.",
             "Auf den Standardwert zurücksetzen.");
@@ -48,58 +47,6 @@ internal sealed class OmmCmsInitialSchema : Migration, ILocaleResourcesProvider
         builder.AddOrUpdate("Enums.FacetTemplateHint.Custom",
             "Color and image swatches",
             "Farb- und Bildmuster");
-
-        builder.AddOrUpdate("Admin.Catalog.Attributes.ProductAttributes.Swatches",
-            "Color and image swatches",
-            "Swatches (Farb- und Bildmuster)");
-
-        builder.AddOrUpdate("Admin.Catalog.Attributes.ProductAttributes.EditSwatches",
-            "Edit color and image swatches",
-            "Farb- und Bildmuster bearbeiten");
-
-
-        builder.AddOrUpdate("Admin.Configuration.Settings.Catalog.DefaultSwatchSize",
-            "Default size of swatches",
-            "Standardgröße von Swatches (Farb- und Bildmuster)",
-            "Sets the default swatch size for shared choice controls. Recommended size is M.",
-            "Legt die Standardgröße der Muster fest. Sie kann bei Produkt- und Checkoutattributen sowie bei einzelnen Produkten überschrieben werden. Empfohlen wird Größe M.");
-
-        builder.AddOrUpdate("Admin.Configuration.Settings.Catalog.DefaultSwatchShape",
-            "Default shape of swatches",
-            "Standardform von Swatches (Farb- und Bildmuster)",
-            "Sets the default swatch shape for shared choice controls. Default is \"Pill\".",
-            "Legt die Standardform der Muster fest. Sie kann bei Produkt- und Checkoutattributen sowie bei einzelnen Produkten überschrieben werden. Standard ist \"Abgerundet\".");
-
-
-        builder.AddOrUpdate("Admin.Catalog.Attributes.ProductAttributes.Fields.SwatchSize",
-            "Swatch Size",
-            "Mustergröße",
-            "Sets the swatch size. Names and prices appear inside the swatch from size L when every option has a color or image.",
-            "Legt die Mustergröße fest. Namen und Preise erscheinen ab Größe L im Muster, wenn jede Option eine Farbe oder ein Bild besitzt.");
-
-        builder.AddOrUpdate("Admin.Catalog.Attributes.ProductAttributes.Fields.SwatchAspectRatio",
-            "Swatch Aspect Ratio",
-            "Muster-Seitenverhältnis",
-            "Sets the height-to-width ratio. Default is 1:1 (square). It only affects card-style swatches, used from size L when name or price display is enabled and every option has a color or image.",
-            "Legt das Höhen-Breiten-Verhältnis fest. Standard ist 1:1 (quadratisch). Es wirkt nur im Kartenformat, das ab Größe L bei aktivierter Namens- oder Preisanzeige verwendet wird, wenn jede Option eine Farbe oder ein Bild besitzt.");
-
-        builder.AddOrUpdate("Admin.Catalog.Attributes.ProductAttributes.Fields.SwatchShape",
-            "Swatch Shape",
-            "Musterform",
-            "Sets the swatch shape. Circle is replaced by Pill when names or prices are shown inside the swatch or an option has no color or image.",
-            "Legt die Musterform fest. Rund wird durch Abgerundet ersetzt, wenn Namen oder Preise im Muster erscheinen oder eine Option keine Farbe und kein Bild besitzt.");
-
-        builder.AddOrUpdate("Admin.Catalog.Attributes.ProductAttributes.Fields.ShowValueNameInSwatch",
-            "Show option name",
-            "Optionsnamen anzeigen",
-            "Shows the option name inside the swatch. The name is always shown with price information. Card layout requires size L or larger and a color or image for every option.",
-            "Zeigt den Optionsnamen im Muster an. Bei eingeblendeten Preisinformationen wird der Name immer angezeigt. Das Kartenformat erfordert mindestens Größe L sowie eine Farbe oder ein Bild für jede Option.");
-
-
-
-        builder.AddOrUpdate("Admin.Catalog.Products.ProductVariantAttributes.SwatchInfo",
-            "Use these settings to override the default attribute values for this product.",
-            "Legen Sie hier abweichende Einstellungen fest, wenn Sie die Vorgaben des Attributs für dieses Produkt überschreiben möchten.");
 
         builder.AddOrUpdate("Admin.Common.Overwritten", "Overwritten: {0}.", "Abweichend: {0}.");
 

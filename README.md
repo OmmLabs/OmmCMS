@@ -86,6 +86,8 @@ Phases 876–890: remove checkout/order/cart resource families and obsolete bank
 
 Phases 891–900: remove price adjustments, price cards and pricing CSS from the reusable swatch controls. Retain color, image, shape, size, accessibility and selection behavior with non-commerce unit tests.
 
+Phases 901–920: retire catalog, pricing and tax localization seeder updates and installation translations; move customer lookup, media statistics and expandable text to shared resources, simplify import metadata and remove retired commerce widget-zone groups. Preserve content and extension widgets.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

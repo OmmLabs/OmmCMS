@@ -23,7 +23,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             builder.Add(TypeHelper.NameOf<ThemeSettings>(x => x.KeepSassCompilerInMemory, true), "False");
         });
 
-
     }
 
     public void MigrateLocaleResources(LocaleResourcesBuilder builder)
@@ -31,7 +30,7 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
         MigrateThemeResources(builder);
         MigrateDashboardAndNavigationResources(builder);
         MigrateSettingsResources(builder);
-        MigrateCatalogResources(builder);
+        MigrateChoiceResources(builder);
         MigrateCommonResources(builder);
     }
 
@@ -95,196 +94,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Use separate values for all settings on this page in this store.",
             "Alle Einstellungen dieser Seite für diesen Shop separat festlegen.");
 
-        string prefix = "Admin.Configuration.Settings.Catalog.";
-
-        builder.AddOrUpdate(prefix + "ShowManufacturersOnHomepage", "Show manufacturers on the homepage", "Hersteller auf der Startseite anzeigen");
-        builder.AddOrUpdate(prefix + "ManufacturerItemsToDisplayOnHomepage",
-            "Maximum number of manufacturers on the homepage",
-            "Maximale Herstelleranzahl auf der Startseite",
-            "Specifies the maximum number of manufacturers displayed on the homepage.",
-            "Legt fest, wie viele Hersteller höchstens auf der Startseite angezeigt werden.");
-        builder.AddOrUpdate(prefix + "ShowManufacturersInOffCanvas",
-            "Show manufacturers in the OffCanvas menu",
-            "Hersteller im OffCanvas-Menü anzeigen",
-            "Specifies whether manufacturers are displayed in the OffCanvas menu. This is the navigation menu that slides in from the side and that customers open using the menu button on mobile devices.",
-            "Legt fest, ob Hersteller im OffCanvas-Menü angezeigt werden. Das ist das seitlich eingeblendete Navigationsmenü, das Kunden über die Menü-Schaltfläche auf mobilen Endgeräten öffnen.");
-        builder.AddOrUpdate(prefix + "ManufacturerItemsToDisplayInOffcanvasMenu",
-            "Maximum number of manufacturers in the OffCanvas menu",
-            "Maximale Herstelleranzahl im OffCanvas-Menü",
-            "Specifies the maximum number of manufacturers displayed in the OffCanvas menu.",
-            "Legt fest, wie viele Hersteller höchstens im OffCanvas-Menü angezeigt werden.");
-        builder.AddOrUpdate(prefix + "ShowManufacturerPictures.Hint",
-            "Specifies whether manufacturer images are displayed in manufacturer lists on the homepage and in the OffCanvas menu.",
-            "Legt fest, ob Herstellerbilder in den Herstellerlisten auf der Startseite und im OffCanvas-Menü angezeigt werden.");
-        builder.AddOrUpdate(prefix + "HideManufacturerDefaultPictures", "Hide manufacturer placeholder images", "Hersteller-Platzhalterbilder ausblenden");
-        builder.AddOrUpdate(prefix + "SortManufacturersAlphabetically", "Sort manufacturer overview alphabetically", "Herstellerübersicht alphabetisch sortieren");
-
-        builder.AddOrUpdate(prefix + "AllowDifferingEmailAddressForEmailAFriend",
-            "Allow a different email address",
-            "Abweichende E-Mail-Adresse erlauben",
-            "Specifies whether customers can change their own email address in the product recommendation form. Otherwise, the address from their customer account is used and cannot be edited. Enable this option also if guests are allowed to recommend products by email.",
-            "Legt fest, ob Kunden ihre eigene E-Mail-Adresse im Weiterempfehlungsformular ändern dürfen. Andernfalls wird die Adresse aus dem Kundenkonto verwendet und kann nicht bearbeitet werden. Aktivieren Sie diese Option auch, wenn Gäste Produkte per E-Mail weiterempfehlen dürfen.");
-
-        builder.AddOrUpdate(prefix + "ProductContactGroup", "Product inquiries & recommendations", "Produktanfragen & Weiterempfehlungen");
-        builder.AddOrUpdate(prefix + "EmailAFriendEnabled",
-            "Enable product recommendations by email",
-            "Weiterempfehlung per E-Mail aktivieren",
-            "Specifies whether customers can recommend a product by email.",
-            "Legt fest, ob Kunden ein Produkt per E-Mail weiterempfehlen können.");
-
-        prefix = "Admin.Configuration.Settings.Price.";
-
-
-        builder.AddOrUpdate(prefix + "CheckListPrices", "Check when displaying list prices…", "Bei Listenpreisen prüfen…");
-
-        builder.AddOrUpdate(prefix + "ShowLoginForPriceNote.Hint",
-            "Specifies whether the product detail page displays the message 'Prices are displayed after login.' when the visitor is not allowed to see prices. To display prices only to logged-in customers, revoke the price display permission for the 'Guests' customer group under 'Access control' and grant it to registered customers.",
-            "Legt fest, ob auf der Produktdetailseite der Hinweis „Preise werden nach Anmeldung angezeigt.“ erscheint, wenn der Besucher keine Preise sehen darf. Um Preise nur angemeldeten Kunden anzuzeigen, entziehen Sie der Kundengruppe „Gäste“ unter „Zugriffsrechte“ das Recht zur Preisanzeige und erlauben es für registrierte Kunden.");
-
-        prefix = "Admin.Configuration.Settings.Catalog.";
-
-        builder.AddOrUpdate(prefix + "ProductsAlsoPurchasedEnabled",
-            "Enable 'Also purchased'",
-            "„Auch gekauft“ aktivieren",
-            "Specifies whether products ordered together with this product are displayed on the product detail page.",
-            "Legt fest, ob auf der Produktdetailseite Produkte angezeigt werden, die zusammen mit diesem Produkt bestellt wurden.");
-        builder.AddOrUpdate(prefix + "ProductsAlsoPurchasedNumber",
-            "Maximum number of products",
-            "Maximale Produktanzahl",
-            "Specifies the maximum number of products displayed in the 'Also purchased' section.",
-            "Legt fest, wie viele Produkte im Bereich „Auch gekauft“ höchstens angezeigt werden.");
-        builder.AddOrUpdate(prefix + "RecentlyViewedProductsEnabled",
-            "Enable 'Recently viewed'",
-            "„Zuletzt angesehen“ aktivieren",
-            "Specifies whether customers can see their recently viewed products on a dedicated overview page and in additional product overviews throughout the store.",
-            "Legt fest, ob Kunden ihre zuletzt angesehenen Produkte auf einer eigenen Übersichtsseite und in ergänzenden Produktübersichten im Shop sehen können.");
-        builder.AddOrUpdate(prefix + "RecentlyViewedProductsNumber",
-            "Maximum number of products",
-            "Maximale Produktanzahl",
-            "Specifies the maximum number of products displayed in the 'Recently viewed' section.",
-            "Legt fest, wie viele Produkte im Bereich „Zuletzt angesehen“ höchstens angezeigt werden.");
-        builder.AddOrUpdate(prefix + "RecentlyAddedProductsEnabled",
-            "Enable 'New arrivals'",
-            "„Neu eingetroffen“ aktivieren",
-            "Specifies whether customers can view the most recently added products on the 'New arrivals' page.",
-            "Legt fest, ob Kunden die zuletzt hinzugefügten Produkte auf der Seite „Neu eingetroffen“ ansehen können.");
-        builder.AddOrUpdate(prefix + "RecentlyAddedProductsNumber",
-            "Maximum number of products",
-            "Maximale Produktanzahl",
-            "Specifies the maximum number of products displayed in the 'New arrivals' section.",
-            "Legt fest, wie viele Produkte im Bereich „Neu eingetroffen“ höchstens angezeigt werden.");
-
-        builder.AddOrUpdate(prefix + "ShowLinkedAttributeValueQuantity",
-            "Show product quantity in variant selection",
-            "Produktmenge in der Variantenauswahl anzeigen",
-            "Specifies whether variant options linked to a product display the configured quantity before the name, for example '2 x spare battery'. The quantity is only displayed when it is greater than 1 and the customer is allowed to see prices.",
-            "Legt fest, ob bei Variantenoptionen mit Produktverknüpfung die hinterlegte Stückzahl vor dem Namen angezeigt wird, beispielsweise „2 x Ersatzakku“. Die Angabe erscheint nur bei Mengen größer als 1 und wenn der Kunde Preise sehen darf.");
-        builder.AddOrUpdate(prefix + "ShowLinkedAttributeValueImage",
-            "Show product image in variant selection",
-            "Produktbild in der Variantenauswahl anzeigen",
-            "Specifies whether variant options linked to a product use the linked product's first image as a thumbnail. The display depends on the variant attribute's control type.",
-            "Legt fest, ob bei Variantenoptionen mit Produktverknüpfung das erste Bild des verknüpften Produkts als Vorschaubild verwendet wird. Die Darstellung hängt vom Auswahltyp des Variantenattributs ab.");
-
-        builder.AddOrUpdate(prefix + "AdditionalProductOverviews", "Additional product overviews", "Weitere Produktübersichten");
-        builder.AddOrUpdate(prefix + "ShowProductCondition", "Item condition", "Artikelzustand");
-        builder.AddOrUpdate(prefix + "ShowProductTags", "Tags", "Tags");
-        builder.AddOrUpdate(prefix + "ShowManufacturerInProductDetail", "Manufacturer/brand", "Hersteller/Marke");
-        builder.AddOrUpdate(prefix + "ShowManufacturerPicturesInProductDetail", "Brand logo", "Markenlogo");
-
-        builder.AddOrUpdate(prefix + "ShowShortDescriptionInGridStyleLists", "Short description", "Kurzbeschreibung");
-        builder.AddOrUpdate(prefix + "ShowManufacturerInGridStyleLists", "Manufacturer/brand", "Hersteller/Marke");
-        builder.AddOrUpdate(prefix + "ShowProductOptionsInLists", "Variant names", "Variantnamen");
-        builder.AddOrUpdate(prefix + "ShowColorSquaresInLists", "Color variants", "Farbvarianten");
-        builder.AddOrUpdate(prefix + "ShowManufacturerLogoInLists", "Brand logo instead of brand name", "Markenlogo statt Markenname");
-        builder.AddOrUpdate(prefix + "LinkManufacturerLogoInLists", "Link brand logo", "Markenlogo verlinken");
-
-        builder.AddOrUpdate(prefix + "IgnoreFeaturedProducts",
-            "Hide featured products block",
-            "Top-Produkte-Block ausblenden",
-            "Disables the separate featured products block on category and manufacturer pages. Whether featured products appear in the regular product list is controlled by 'Show featured products in lists'.",
-            "Deaktiviert den separaten Top-Produkte-Block auf Warengruppen- und Markenseiten. Ob Top-Produkte in der normalen Produktliste erscheinen, wird durch „Top-Produkte in Listen anzeigen“ festgelegt.");
-
-        builder.AddOrUpdate(prefix + "IncludeInCompareProducts", "Include in product comparisons…", "Beim Produktvergleich einbeziehen…");
-        builder.AddOrUpdate(prefix + "IncludeShortDescriptionInCompareProducts", "Short description", "Kurzbeschreibung");
-        builder.AddOrUpdate(prefix + "IncludeFullDescriptionInCompareProducts", "Full description", "Komplette Beschreibung");
-
-        builder.AddOrUpdate(prefix + "ShowProductInformation", "Show product information…", "Produktinformationen anzeigen…");
-        builder.AddOrUpdate(prefix + "ShowProductSku",
-            "SKU",
-            "Artikelnummer",
-            "Specifies whether SKUs are displayed on product detail pages, in the list view of product lists, in product comparisons, in the shopping cart, on the wishlist and during checkout. Also applies to order and shipment details and printed orders and packing slips.",
-            "Legt fest, ob Artikelnummern auf Produktdetailseiten, in der Listenansicht von Produktlisten, im Produktvergleich, im Warenkorb, auf der Merkliste und im Bestellvorgang angezeigt werden. Die Einstellung gilt auch für Bestell- und Versanddetails sowie die Druckansicht von Bestellungen und Lieferscheinen.");
-        builder.AddOrUpdate(prefix + "ShowManufacturerPartNumber",
-            "Manufacturer part number",
-            "Herstellerartikelnummer",
-            "Check the box to show manufacturer part numbers in public store.",
-            "Legt fest, ob die Hersteller-Produktnummer im Shop angezeigt werden soll.");
-        builder.AddOrUpdate(prefix + "ShowGtin",
-            "GTIN",
-            "GTIN",
-            "Check the box to show GTIN in public store.",
-            "Legt fest, ob die EAN Nummer im Shop angezeigt werden soll.");
-        builder.AddOrUpdate(prefix + "ShowWeight",
-            "Weight",
-            "Gewicht",
-            "Specifies whether the product weight is displayed on the product detail page, in the list view of product lists and in product comparisons. Weight display in the shopping cart is configured separately in the shopping cart settings.",
-            "Legt fest, ob das Produktgewicht auf der Produktdetailseite, in der Listenansicht von Produktlisten und im Produktvergleich angezeigt wird. Die Gewichtsanzeige im Warenkorb wird separat in den Warenkorb-Einstellungen festgelegt.");
-        builder.AddOrUpdate(prefix + "ShowDimensions",
-            "Dimensions",
-            "Abmessungen",
-            "Specifies whether width, height and length are displayed on the product detail page, in the list view of product lists and in product comparisons.",
-            "Legt fest, ob Breite, Höhe und Länge auf der Produktdetailseite, in der Listenansicht von Produktlisten und im Produktvergleich angezeigt werden.");
-        builder.AddOrUpdate(prefix + "ShowDefaultQuantityUnit",
-            "Use default quantity unit",
-            "Standard-Verpackungseinheit verwenden",
-            "Specifies whether the default quantity unit is used when no quantity unit is assigned to the product.",
-            "Legt fest, ob die Standard-Verpackungseinheit verwendet wird, wenn dem Produkt keine Verpackungseinheit zugewiesen ist.");
-        builder.AddOrUpdate(prefix + "ShowDefaultDeliveryTime",
-            "Use default delivery time",
-            "Standard-Lieferzeit verwenden",
-            "Specifies whether the default delivery time is used when no delivery time is assigned to the product.",
-            "Legt fest, ob die Standard-Lieferzeit verwendet wird, wenn dem Produkt keine Lieferzeit zugewiesen ist.");
-
-        builder.AddOrUpdate("Admin.CatalogSettings.ProductDisplay", "Shared product settings", "Übergreifende Produkteinstellungen");
-        builder.AddOrUpdate("Admin.CatalogSettings.ProductDisplay.Info",
-            "These settings are used in multiple places in the store. For example, the SKU display setting also controls its display on orders; the placeholder image setting applies to products and the shopping cart, among other places.",
-            "Diese Einstellungen werden an mehreren Stellen im Shop verwendet. Beispielsweise steuert die Artikelnummer-Anzeige auch die Darstellung bei Bestellungen; die Einstellung für Platzhalterbilder wirkt unter anderem bei Produkten und im Warenkorb.");
-
-        builder.AddOrUpdate(prefix + "DefaultProductListPageSize",
-            "Products per page",
-            "Produkte pro Seite",
-            "Specifies how many products are displayed on a product list page.",
-            "Legt fest, wie viele Produkte auf einer Produktlistenseite angezeigt werden.");
-
-        builder.AddOrUpdate(prefix + "ProductTileContent", "Product tile content", "Inhalt der Produktkacheln");
-
-        builder.AddOrUpdate(prefix + "AllowProductViewModeChanging.Hint",
-            "Displays a switch between grid and list views in product lists for customers. The initial view is set with 'Default view mode'.",
-            "Zeigt Kunden einen Umschalter zwischen Raster- und Listenansicht in Produktlisten an. Die anfängliche Darstellung legen Sie mit „Standardansicht“ fest.");
-
-        builder.AddOrUpdate(prefix + "KeepOnSubPages",
-            "Keep when paging and filtering…",
-            "Beim Blättern und Filtern beibehalten…",
-            "Specifies which content remains visible from page 2 of the product list onwards and when filters are active.",
-            "Legt fest, welche Inhalte ab Seite 2 der Produktliste und bei aktiven Filtern weiterhin angezeigt werden.");
-        builder.AddOrUpdate(prefix + "IncludeFeaturedProductsInSubPages", "Featured products", "Top-Produkte");
-        builder.AddOrUpdate(prefix + "ShowSubCategoriesInSubPages",
-            "Subcategories",
-            "Unterwarengruppen",
-            "Keeps subcategories visible from page 2 onwards and when filters are active. Only applies when subcategories are displayed above the product list.",
-            "Zeigt Unterwarengruppen auch ab Seite 2 der Produktliste und bei aktiven Filtern an. Gilt nur für die Anzeige oberhalb der Produktliste.");
-        builder.AddOrUpdate(prefix + "ShowDescriptionInSubPages",
-            "Page descriptions",
-            "Seitenbeschreibungen",
-            "Keeps category and manufacturer descriptions visible from page 2 onwards and when filters are active.",
-            "Zeigt Beschreibungen von Warengruppen und Marken auch ab Seite 2 der Produktliste und bei aktiven Filtern an.");
-
-        builder.AddOrUpdate(prefix + "DefaultPageSizeOptions",
-            "Page size options",
-            "Seitengrößen",
-            "Specify the page sizes customers can select in product lists.",
-            "Legt die auswählbaren Seitengrößen in Produktlisten fest.");
-
         builder.AddOrUpdate("Admin.Configuration.Settings.CustomerUser.Salutations",
             "Salutations",
             "Anreden",
@@ -312,27 +121,13 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
 
         builder.AddOrUpdate("Common.Variants", "Variants", "Varianten");
 
-        builder.AddOrUpdate(prefix + "DisplayAllImagesNumber",
-            "Show all product images up to",
-            "Alle Produktbilder anzeigen bis",
-            "Specifies the total number of product images up to which all images are displayed. When there are more images, the gallery only shows images of the selected variant and images not assigned to any variant. The limit can be set individually for each product.",
-            "Legt fest, bis zu welcher Gesamtzahl alle Produktbilder angezeigt werden. Bei mehr Bildern zeigt die Galerie nur Bilder der gewählten Variante und Bilder ohne Variantenzuordnung. Die Grenze kann für jedes Produkt individuell festgelegt werden.");
-
-        prefix = "Admin.Configuration.Settings.Price.";
-
-        builder.AddOrUpdate(prefix + "RulesCalculateIncludingTax",
-            "Cart rules calculate amounts including tax",
-            "Warenkorbregeln berechnen Beträge inklusive Steuer",
-            "Specifies whether shopping cart rules calculate amounts as inclusive of or exclusive of tax. If not specified (default), the tax settings for the respective shopping cart or customer apply.",
-            "Legt fest, ob Warenkorbregeln die Beträge inklusive oder exklusive Umsatzsteuer berechnen. Falls nicht festgelegt (Standard), gelten die Steuereinstellungen des jeweiligen Warenkorbs bzw. Kunden.");
-
         builder.AddOrUpdate("Admin.Configuration.Settings.CustomerUser.CustomerFormFields.Description",
             "Manage form fields that are displayed during registration. In order to ensure the address transfer from the registration form, it is necessary that the following fields are activated and filled in by the customer:<ul class=\"mb-0\"><li>First name</li><li>Last name</li><li>Email</li><li>and all fields that are selected as required in the tab <b>Addresses</b></li></ul>",
             "Sie können Formularfelder verwalten, die während der Registrierung angezeigt werden. Um die Adressübergabe aus dem Registrierungsformular zu gewährleisten, müssen folgende Felder aktiviert und vom Kunden ausgefüllt sein:<ul class=\"mb-0\"><li>Vorname</li><li>Nachname</li><li>E-Mail</li><li>und alle Felder die im Tab <b>Adressen</b> als erforderlich ausgewählt sind</li></ul>");
 
         builder.AddOrUpdate("Admin.Configuration.Settings.Icons", "Icons", "Icons");
 
-        prefix = "Admin.Configuration.Settings.Icons.";
+        var prefix = "Admin.Configuration.Settings.Icons.";
 
         builder.AddOrUpdate(prefix + "Description",
             "Choose which menu areas display icons and set their size and optional fallback icon. In My Account, icons are always displayed and only their size can be changed.",
@@ -389,176 +184,16 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Füllt fehlende Icons nur in Menüblöcken auf, die bereits mindestens ein Eintragsicon enthalten.");
     }
 
-    private static void MigrateCatalogResources(LocaleResourcesBuilder builder)
+    private static void MigrateChoiceResources(LocaleResourcesBuilder builder)
     {
         builder.AddOrUpdate("Admin.Common.ColorPalette.Color",
             "Color",
             "Farbe",
             "Define up to four colors for this attribute value. The colors are only displayed when the attribute's control type is set to swatches.",
             "Legen Sie bis zu vier Farben für diesen Attributwert fest. Die Farben werden nur angezeigt, wenn das Attribut als Swatches (Farb- und Bildmuster) dargestellt wird.");
-        builder.Delete(
-            "Admin.Catalog.Products.ProductVariantAttributes.Attributes.Values.Fields.ColorSquaresRgb",
-            "Admin.Catalog.Products.ProductVariantAttributes.Attributes.Values.Fields.ColorSquaresRgb.Hint",
-            "Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.Color",
-            "Admin.Catalog.Attributes.CheckoutAttributes.Values.Fields.Color.Hint");
         builder.AddOrUpdate("Admin.Common.ColorPalette.AddColor", "Add color", "Farbe hinzufügen");
         builder.AddOrUpdate("Admin.Common.ColorPalette.RemoveColor", "Remove this color field", "Dieses Farbfeld entfernen");
 
-        string prefix = "Admin.Catalog.Products.";
-
-        builder.Delete(
-            prefix + "Fields.Published.Hint",
-            prefix + "Fields.QuantityUnit.Hint",
-            prefix + "Fields.Weight.Hint",
-            prefix + "Fields.Length.Hint",
-            prefix + "Fields.Width.Hint",
-            prefix + "Fields.Height.Hint",
-            prefix + "Groups.RequiredProducts",
-            prefix + "Groups.Subscription",
-            prefix + "Availability.From",
-            prefix + "Availability.To");
-
-        builder.AddOrUpdate(prefix + "Fields.HomePageDisplayOrder", "Homepage display order", "Reihenfolge auf der Homepage");
-        builder.AddOrUpdate(prefix + "Fields.DisplayOrder",
-            "General sort priority",
-            "Allgemeine Sortierpriorität",
-            "Specifies the order in which associated products of a grouped product are displayed. In addition, this setting determines the order of hits in the search, if sort by recommendation is enabled in the search settings. Lower values are displayed first.",
-            "Legt die Reihenfolge fest, in der verknüpfte Produkte eines Gruppenproduktes angezeigt werden. Zusätzlich legt diese Einstellung die Reihenfolge der Treffer bei der Suche fest, sofern in den Sucheinstellungen die Sortierung nach Empfehlung aktiviert ist. Kleinere Werte werden zuerst angezeigt.");
-        builder.AddOrUpdate(prefix + "Groups.Restrictions", "Publication and availability", "Veröffentlichung und Verfügbarkeit");
-        builder.AddOrUpdate(prefix + "Fields.Availability",
-            "Availability",
-            "Verfügbarkeit",
-            "Limits product availability to this period. Leave either field empty to leave that boundary unrestricted.",
-            "Begrenzt die Verfügbarkeit des Produkts auf diesen Zeitraum. Lassen Sie ein Feld leer, um die jeweilige Grenze offen zu lassen.");
-        builder.AddOrUpdate(prefix + "Groups.Taxes", "Taxes", "Steuern");
-        builder.AddOrUpdate(prefix + "Groups.SalesOptions", "Sales options", "Verkaufsoptionen");
-        builder.AddOrUpdate(prefix + "Groups.SalesOptions.Info",
-            "Specify whether additional items must be ordered with this product. Enable the option to show its settings.",
-            "Hier legen Sie fest, ob zum Produkt weitere Artikel mitbestellt werden müssen. Aktivieren Sie die Option, um die zugehörigen Einstellungen einzublenden.");
-        builder.AddOrUpdate(prefix + "Groups.Shipping", "Shipping, dimensions and units", "Versand, Maße und Einheiten");
-        builder.AddOrUpdate(prefix + "Groups.Shipping.Info",
-            "The quantity unit specifies how product quantities are labeled in the shop, for example as pieces, packs or pairs. It appears alongside the quantity when ordering and in the cart. Weight and dimensions can affect shipping costs, depending on the shipping provider, and are displayed on the product page when the corresponding catalog settings are enabled.",
-            "Die Verpackungseinheit legt fest, wie Produktmengen im Shop bezeichnet werden, zum Beispiel als Stück, Packung oder Paar. Sie erscheint bei der Mengenauswahl und im Warenkorb neben der Anzahl. Gewicht und Maße können je nach Versandanbieter die Versandkosten beeinflussen und werden bei aktivierten Katalogeinstellungen auf der Produktseite angezeigt.");
-
-        builder.AddOrUpdate(prefix + "Fields.Condition",
-            "Item condition",
-            "Artikelzustand",
-            "Condition of the goods offered, e.g. new, used or refurbished. Used for structured product data and supported product exports. Display in the shop is controlled by the catalog settings.",
-            "Zustand der angebotenen Ware, z. B. neu, gebraucht oder generalüberholt. Wird für strukturierte Produktdaten und unterstützte Produktexporte verwendet. Die Anzeige im Shop wird über die Katalogeinstellungen gesteuert.");
-        builder.AddOrUpdate(prefix + "Fields.CountryOfOriginId",
-            "Country of origin",
-            "Herkunftsland",
-            "Country of origin of the goods. This information is available to integrations and exports. It does not determine tax or shipping costs in the standard implementation.",
-            "Ursprungsland der Ware. Die Angabe steht für Schnittstellen und Exporte zur Verfügung. Sie bestimmt im Standard keine Steuer- oder Versandkosten.");
-        builder.AddOrUpdate(prefix + "Fields.IsShipEnabled",
-            "Shipping required",
-            "Versand erforderlich",
-            "Enable if this product must be shipped. The product is included in shipping calculations. When disabled, delivery times are hidden in the shop. The quantity unit is independent of this setting.",
-            "Aktivieren, wenn dieses Produkt versendet werden muss. Es wird bei der Versandberechnung berücksichtigt. Bei deaktivierter Option werden Lieferzeiten im Shop ausgeblendet. Die Verpackungseinheit ist davon unabhängig.");
-
-        builder.AddOrUpdate("Admin.Catalog.Categories.Fields.PageSizeOptions",
-            "Page size options",
-            "Seitengrößen",
-            "Specify the page sizes customers can select in this category's product list. Leave empty to use the page sizes from the catalog settings.",
-            "Legt die auswählbaren Seitengrößen der Produktliste dieser Warengruppe fest. Lassen Sie das Feld leer, um die Seitengrößen der Katalog-Einstellungen zu verwenden.");
-
-        builder.AddOrUpdate("Admin.Catalog.Manufacturers.Fields.PageSizeOptions",
-            "Page size options",
-            "Seitengrößen",
-            "Specify the page sizes customers can select in this manufacturer's product list. Leave empty to use the page sizes from the catalog settings.",
-            "Legt die auswählbaren Seitengrößen der Produktliste dieses Herstellers fest. Lassen Sie das Feld leer, um die Seitengrößen der Katalog-Einstellungen zu verwenden.");
-
-
-        builder.AddOrUpdate(prefix + "Deleted",
-            "The product was moved to the recycle bin.",
-            "Das Produkt wurde in den Papierkorb verschoben.");
-
-        builder.AddOrUpdate("ActivityLog.DeleteProduct",
-            "Product ('{0}') has been moved to the recycle bin",
-            "Produkt ('{0}') in den Papierkorb verschoben");
-
-        #region product legal info
-
-        builder.AddOrUpdate("Products.ShippingInfo",
-            "plus shipping",
-            "zzgl. Versandkosten");
-
-        builder.AddOrUpdate("Products.ShippingInfoUrl",
-            "plus <a href=\"{0}\">shipping</a>",
-            "zzgl. <a href=\"{0}\">Versandkosten</a>");
-
-        builder.AddOrUpdate("Products.ShippingInfoWithSurcharge",
-            "plus shipping and a <b>{0}</b> shipping surcharge",
-            "zzgl. Versandkosten und <b>{0}</b> Versandaufschlag");
-
-        builder.AddOrUpdate("Products.ShippingInfoUrlWithSurcharge",
-            "plus <a href=\"{0}\">shipping</a> and a <b>{1}</b> shipping surcharge",
-            "zzgl. <a href=\"{0}\">Versandkosten</a> und <b>{1}</b> Versandaufschlag");
-
-        builder.AddOrUpdate("Products.ShippingSurchargeInfo",
-            "plus <b>{0}</b> shipping surcharge",
-            "zzgl. <b>{0}</b> Versandaufschlag");
-
-        builder.AddOrUpdate("Products.FreeShippingInfo",
-            "free shipping",
-            "versandkostenfrei");
-
-        builder.AddOrUpdate("Products.TaxLegalInfo", "Prices {0}", "Preise {0}");
-
-        builder.AddOrUpdate("Common.AdditionalShippingSurcharge",
-            "Plus <b>{0}</b> shipping surcharge",
-            "zzgl. <b>{0}</b> Versandaufschlag");
-
-        builder.AddOrUpdate("Admin.Configuration.Settings.Catalog.LegalInfoInProductDetail",
-            "Legal information on product page",
-            "Rechtliche Hinweise auf der Produktseite",
-            "Specifies which tax and shipping cost notes are displayed on the product page. If nothing is selected, no note is displayed. An additional shipping charge is always displayed.",
-            "Legt fest, welche Hinweise zu Steuer und Versandkosten auf der Produktseite angezeigt werden. Ohne Auswahl wird kein Hinweis angezeigt. Ein Transportzuschlag wird immer angezeigt.");
-
-        builder.AddOrUpdate("Admin.Configuration.Settings.Catalog.LegalInfoInLists",
-            "Legal information in product lists",
-            "Rechtliche Hinweise in Produktlisten",
-            "Specifies which tax and shipping cost notes are displayed in the list view and in the product comparison. If nothing is selected, no note is displayed.",
-            "Legt fest, welche Hinweise zu Steuer und Versandkosten in der Listenansicht und im Produktvergleich angezeigt werden. Ohne Auswahl wird kein Hinweis angezeigt.");
-
-        builder.AddOrUpdate("Enums.ProductLegalInfo.Tax", "Tax note (incl./excl. VAT)", "Steuerhinweis (inkl./zzgl. MwSt.)");
-        builder.AddOrUpdate("Enums.ProductLegalInfo.Shipping", "Shipping cost note", "Versandkostenhinweis");
-
-        prefix = "Admin.Configuration.Settings.Tax.";
-
-        builder.Delete(
-            "Tax.LegalInfoProductDetail",
-            "Tax.LegalInfoProductDetail2",
-            "Tax.LegalInfoShort",
-            "Tax.LegalInfoShort2",
-            "Tax.LegalInfoShort3",
-            prefix + "ShowLegalHintsInProductDetails",
-            prefix + "ShowLegalHintsInProductDetails.Hint",
-            prefix + "ShowLegalHintsInProductList",
-            prefix + "ShowLegalHintsInProductList.Hint",
-            prefix + "ShowLegalHintsInProductGrid",
-            prefix + "ShowLegalHintsInProductGrid.Hint");
-
-        #endregion
-
-        builder.AddOrUpdate("Products.EmailAFriend.LoginNote",
-            "Please log in to use this function. <a href=\"{0}\" rel=\"nofollow\">Login now</a>",
-            "Bitte melden Sie sich an, um diese Funktion nutzen zu können. <a href=\"{0}\" rel=\"nofollow\">Jetzt anmelden</a>");
-
-        prefix = "Admin.Catalog.Products.";
-
-        builder.AddOrUpdate(prefix + "ProductVariantAttributes.AttributeCombinations.SelectAttributes",
-            "Set the attributes for the combination.",
-            "Legen Sie die Attribute für die Kombination fest");
-
-        builder.AddOrUpdate("Admin.Catalog.Attributes.ProductAttributes.Fields.ExportMappings.Note",
-            "Define the mapping of attribute values to export fields according to the following pattern: <b>&lt;Format prefix&gt;:&lt;Export field name&gt;</b>."
-            + " For example, <b>gmc:color</b> exports the attribute values for colors to the <b>color</b> field during"
-            + " the Google Merchant Center export and <b>channable:color</b> exports them to the Channable export."
-            + " Theses mappings are only apply when exporting attribute combinations.",
-            "Legen Sie Zuordnungen von Attributwerten zu Exportfeldern nach dem folgenden Muster fest: <b>&lt;Formatpräfix&gt;:&lt;Export-Feldname&gt;</b>"
-            + " fest. Beispiel: <b>gmc:color</b> exportiert beim Google-Merchant-Center-Export die Attributwerte für Farben in das Feld"
-            + " <b>color</b> und <b>channable:color</b> beim Channable-Export. Die Zuordnungen sind nur beim Export von Attributkombinationen wirksam.");
     }
 
     private static void MigrateThemeResources(LocaleResourcesBuilder builder)
@@ -677,12 +312,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
         builder.AddOrUpdate("Admin.IconBrowser.Search", "Search icons", "Icons suchen");
         builder.AddOrUpdate("Admin.IconBrowser.Size", "Size", "Größe");
         builder.Delete("Admin.IconBrowser.Color", "Admin.IconBrowser.FlipHorizontal", "Admin.IconBrowser.FlipVertical", "Admin.IconBrowser.Rotation", "Admin.IconBrowser.Animation", "Admin.IconBrowser.StrokeWidth", "Admin.IconBrowser.NoAnimation");
-
-        builder.AddOrUpdate("Admin.Catalog.Categories.Fields.Icon",
-            "Icon",
-            "Icon",
-            "The icon appears in the category navigation, in the main menu including dropdowns, in the mobile menu and in the category tree in the administration.",
-            "Das Icon erscheint in der Kategorienavigation, im Hauptmenü einschließlich Dropdowns, im mobilen Menü sowie im Kategoriebaum der Administration.");
 
         builder.AddOrUpdate("Admin.Design.Color", "Color", "Farbe");
         builder.AddOrUpdate("Admin.Design.Opacity", "Opacity", "Deckkraft");

@@ -759,6 +759,8 @@ try:
         assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName LIKE 'ShoppingCart.%' OR ResourceName LIKE 'Checkout.%' OR ResourceName LIKE 'Order.%' OR ResourceName LIKE 'Admin.Orders.%'") == [0], "Retired checkout locale resources remain"
         assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName LIKE 'Admin.Configuration.Settings.GeneralCommon.BankConnectionSettings%'") == [0], "Retired bank locale resources remain"
         assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName LIKE 'Enums.SwatchPriceDisplayMode.%'") == [0], "Commerce swatch price resources remain"
+        assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName = 'Admin.Catalog' OR ResourceName LIKE 'Admin.Catalog.%' OR ResourceName LIKE 'Admin.Configuration.Settings.Catalog%' OR ResourceName LIKE 'Admin.Configuration.Settings.Price%' OR ResourceName LIKE 'Admin.Configuration.Settings.Tax%' OR ResourceName LIKE 'Admin.CatalogSettings%' OR ResourceName LIKE 'Products.%'") == [0], "Retired catalog locale resources remain"
+        assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName IN ('Common.ShowMore', 'Common.ShowLess', 'Common.Search', 'Admin.Plugins.KnownGroup.Media')") == [4], "Shared CMS labels missing"
         retired_catalog_tables = ("product", "category", "manufacturer", "producttemplate", "categorytemplate",
             "manufacturertemplate", "product_category_mapping", "product_manufacturer_mapping",
             "productbundleitem", "productbundleitemattributefilter", "product_mediafile_mapping", "producttag",

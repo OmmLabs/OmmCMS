@@ -370,7 +370,7 @@ public partial class ImportProfileService : IImportProfileService
     /// </summary>
     private static readonly HashSet<string> _ignoreResourceKeys = new(StringComparer.OrdinalIgnoreCase)
     {
-        "IsSystemProduct", "SystemName", "LastForumVisit", "LastUserAgent", "LastUserDeviceType", "GroupedProductConfiguration", "ClientIdent"
+        "SystemName", "LastForumVisit", "LastUserAgent", "LastUserDeviceType", "ClientIdent"
     };
 
     /// <summary>
@@ -386,25 +386,21 @@ public partial class ImportProfileService : IImportProfileService
         ["CreatedOnUtc"] = "Common.CreatedOn",
         ["ContactAddress.CreatedOnUtc"] = "Common.CreatedOn",
         ["UpdatedOnUtc"] = "Common.UpdatedOn",
-        ["DefaultViewMode"] = "Admin.Configuration.Settings.Catalog.DefaultViewMode",
         ["StoreId"] = "Admin.Common.Store",
         ["LimitedToStores"] = "Admin.Common.Store.LimitedTo",
         ["SubjectToAcl"] = "Admin.Common.CustomerRole.LimitedTo",
-        ["ParentGroupedProductId"] = "Admin.Catalog.Products.Fields.AssociatedToProductName",
         ["PasswordFormatId"] = "Admin.Configuration.Settings.CustomerUser.DefaultPasswordFormat",
         ["LastIpAddress"] = "Admin.Customers.Customers.Fields.IPAddress",
         ["CustomerNumber"] = "Account.Fields.CustomerNumber",
         ["BirthDate"] = "Admin.Customers.Customers.Fields.DateOfBirth",
         ["Salutation"] = "Address.Fields.Salutation",
-        ["VisibleIndividually"] = "Admin.Catalog.Products.Fields.Visibility",
         ["MetaDescription"] = "Admin.Configuration.Seo.MetaDescription",
         ["MetaKeywords"] = "Admin.Configuration.Seo.MetaKeywords",
         ["MetaTitle"] = "Admin.Configuration.Seo.MetaTitle",
         ["SeName"] = "Admin.Configuration.Seo.SeName",
         ["MainPictureId"] = "FileUploader.MultiFiles.MainMediaFile",
         ["MediaFileId"] = "Common.Image",
-        ["ContactAddressId"] = "Address",
-        ["DurabilityGuaranteeDurationYears"] = "Plugins.OmmCMS.EUWarranty.DurabilityGuaranteeDurationYears"
+        ["ContactAddressId"] = "Address"
     };
 
     #endregion
