@@ -1081,8 +1081,7 @@ public class CustomerController : AdminController
             return NotFound();
         }
 
-        customer.GenericAttributes.DefaultBillingAddressId = address.Id;
-        customer.GenericAttributes.DefaultShippingAddressId = address.Id;
+        customer.GenericAttributes.DefaultAddressId = address.Id;
         await _db.SaveChangesAsync();
 
         var model = new CustomerModel.AddressesModel
@@ -1108,6 +1107,10 @@ public class CustomerController : AdminController
             return NotFound();
         }
 
+        if (customer.GenericAttributes.DefaultAddressId == address.Id)
+        {
+            customer.GenericAttributes.DefaultAddressId = null;
+        }
         customer.RemoveAddress(address);
         _db.Addresses.Remove(address);
         await _db.SaveChangesAsync();

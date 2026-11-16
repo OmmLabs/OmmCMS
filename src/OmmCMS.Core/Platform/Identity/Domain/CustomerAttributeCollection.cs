@@ -208,26 +208,16 @@ public class CustomerAttributeCollection : GenericAttributeCollection<Customer>
 
     #endregion
 
-    #region Checkout
+    #region Addresses
 
     /// <summary>
-    /// Gets or sets the ID of the customer's default billing address. It is preselected in the checkout if Quick Checkout is activated.
+    /// Gets or sets the ID of the customer's preferred address for the current site.
     /// </summary>
-    public int? DefaultBillingAddressId
+    public int? DefaultAddressId
     {
-        get => Get<int?>(SystemCustomerAttributeNames.DefaultBillingAddressId, CurrentStoreId);
-        set => Set(SystemCustomerAttributeNames.DefaultBillingAddressId, value, CurrentStoreId);
+        get => Get<int?>(SystemCustomerAttributeNames.DefaultAddressId, CurrentStoreId);
+        set => Set(SystemCustomerAttributeNames.DefaultAddressId, value, CurrentStoreId);
     }
-
-    /// <summary>
-    /// Gets or sets the ID of the customer's default shipping address. It is preselected in the checkout if Quick Checkout is activated.
-    /// </summary>
-    public int? DefaultShippingAddressId
-    {
-        get => Get<int?>(SystemCustomerAttributeNames.DefaultShippingAddressId, CurrentStoreId);
-        set => Set(SystemCustomerAttributeNames.DefaultShippingAddressId, value, CurrentStoreId);
-    }
-
 
     #endregion
 }

@@ -95,10 +95,8 @@ public partial class AddressModel : EntityModelBase
     public DateTime CreatedOnUtc { get; set; }
 
     public bool DefaultAddressesEnabled { get; set; }
-    [LocalizedDisplay("*IsDefaultBillingAddress")]
-    public bool IsDefaultBillingAddress { get; set; }
-    [LocalizedDisplay("*IsDefaultShippingAddress")]
-    public bool IsDefaultShippingAddress { get; set; }
+    [LocalizedDisplay("Address.IsDefaultAddress")]
+    public bool IsDefaultAddress { get; set; }
 
     public IList<CountrySelectListItem> AvailableCountries { get; set; }
     public IList<SelectListItem> AvailableStates { get; set; } = new List<SelectListItem>();

@@ -317,6 +317,10 @@ public class CustomerController : PublicController
         var address = customer.Addresses.Where(a => a.Id == id).FirstOrDefault();
         if (address != null)
         {
+            if (customer.GenericAttributes.DefaultAddressId == address.Id)
+            {
+                customer.GenericAttributes.DefaultAddressId = null;
+            }
             customer.RemoveAddress(address);
             // Now delete the address record.
             _db.Addresses.Remove(address);
@@ -430,8 +434,7 @@ public class CustomerController : PublicController
         var address = customer.Addresses.FirstOrDefault(x => x.Id == id);
         if (address != null)
         {
-            customer.GenericAttributes.DefaultBillingAddressId = address.Id;
-            customer.GenericAttributes.DefaultShippingAddressId = address.Id;
+            customer.GenericAttributes.DefaultAddressId = address.Id;
             await _db.SaveChangesAsync();
         }
 

@@ -164,20 +164,11 @@
     <div sm-if="Model.DefaultAddressesEnabled && Model.Id != 0">
         <div class="adminRow">
             <div class="adminTitle">
-                <smart-label asp-for="IsDefaultBillingAddress" />
+                <smart-label asp-for="IsDefaultAddress" />
             </div>
             <div class="adminData">
-                <input asp-for="IsDefaultBillingAddress" />
-                <span asp-validation-for="IsDefaultBillingAddress"></span>
-            </div>
-        </div>
-        <div class="adminRow">
-            <div class="adminTitle">
-                <smart-label asp-for="IsDefaultShippingAddress" />
-            </div>
-            <div class="adminData">
-                <input asp-for="IsDefaultShippingAddress" />
-                <span asp-validation-for="IsDefaultShippingAddress"></span>
+                <input asp-for="IsDefaultAddress" />
+                <span asp-validation-for="IsDefaultAddress"></span>
             </div>
         </div>
     </div>

@@ -74,6 +74,8 @@ Phases 801–815: retire country billing/shipping and VAT restrictions from pers
 
 Phases 816–830: remove bank account configuration, settings binding, payment-specific email model parts and footer markup while retaining company and contact information.
 
+Phases 831–840: unify the preferred address selection, its per-site customer attribute, administrative and public address editors, and import defaults. Historical customer address relationships are handled separately.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

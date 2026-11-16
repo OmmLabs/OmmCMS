@@ -458,12 +458,11 @@ public class CustomerImporter : EntityImporterBase
 
         if (num > 0)
         {
-            // Set default billing and shipping address.
+            // Set the preferred address.
             foreach (var row in batch)
             {
                 var customer = row.Entity;
-                customer.GenericAttributes.DefaultBillingAddressId = customer.BillingAddress?.Id;
-                customer.GenericAttributes.DefaultShippingAddressId = customer.ShippingAddress?.Id;
+                customer.GenericAttributes.DefaultAddressId = customer.BillingAddress?.Id ?? customer.ShippingAddress?.Id;
             }
 
             await scope.CommitAsync(context.CancelToken);

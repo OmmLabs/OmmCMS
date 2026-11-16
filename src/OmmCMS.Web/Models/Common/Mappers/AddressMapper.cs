@@ -18,18 +18,7 @@ public static class AddressMappingExtensions
 
         if (defaultAddressesEnabled)
         {
-            return await models.OrderByDescending(x =>
-            {
-                if (x.IsDefaultBillingAddress && x.IsDefaultShippingAddress)
-                    return int.MaxValue;
-                else if (x.IsDefaultBillingAddress)
-                    return int.MaxValue - 1;
-                else if (x.IsDefaultShippingAddress)
-                    return int.MaxValue - 2;
-
-                return x.Id;
-            })
-            .ToListAsync();
+            return await models.OrderByDescending(x => x.IsDefaultAddress).ThenByDescending(x => x.Id).ToListAsync();
         }
 
         return await models.OrderByDescending(x => x.Id).ToListAsync();
@@ -133,8 +122,7 @@ internal class AddressMapper :
             // INFO: Admin should be allowed to modify/delete the email. Parameter and model property
             // should be removed later when implementing #1399 because an address should never contain an email.
             to.EmailEnabled = (parameters?.EmailEnabled as bool?) ?? customer.IsGuest();
-            to.IsDefaultBillingAddress = from.Id == customer.GenericAttributes.DefaultBillingAddressId;
-            to.IsDefaultShippingAddress = from.Id == customer.GenericAttributes.DefaultShippingAddressId;
+            to.IsDefaultAddress = from != null && from.Id != 0 && from.Id == customer.GenericAttributes.DefaultAddressId;
         }
 
         var salutations = _addressSettings.GetLocalizedSetting(x => x.Salutations).Value.SplitSafe(',');
@@ -158,22 +146,13 @@ internal class AddressMapper :
         {
             var ga = customer.GenericAttributes;
 
-            if (ga.DefaultBillingAddressId == from.Id && !from.IsDefaultBillingAddress)
+            if (from.IsDefaultAddress)
             {
-                ga.DefaultBillingAddressId = null;
+                ga.DefaultAddressId = from.Id;
             }
-            else if (ga.DefaultBillingAddressId != from.Id && from.IsDefaultBillingAddress)
+            else if (ga.DefaultAddressId == from.Id)
             {
-                ga.DefaultBillingAddressId = from.Id;
-            }
-
-            if (ga.DefaultShippingAddressId == from.Id && !from.IsDefaultShippingAddress)
-            {
-                ga.DefaultShippingAddressId = null;
-            }
-            else if (ga.DefaultShippingAddressId != from.Id && from.IsDefaultShippingAddress)
-            {
-                ga.DefaultShippingAddressId = from.Id;
+                ga.DefaultAddressId = null;
             }
         }
 

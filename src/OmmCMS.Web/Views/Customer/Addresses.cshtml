@@ -26,7 +26,7 @@
 
 <span id="caddr-edit-label" class="sr-only">@T("Common.Edit")</span>
 <span id="caddr-delete-label" class="sr-only">@T("Common.Delete")</span>
-<span id="caddr-setdefault-label" class="sr-only">@T("Address.SetDefaultAddress")</span>
+<span id="caddr-setdefault-label" class="sr-only">@T("Common.SetDefault")</span>
 <span id="caddr-empty" aria-hidden="true" class="sr-only"></span>
 
 <ul class="row card-grid g-3 row-cols-1 row-cols-lg-2 address-list list-unstyled" aria-labelledby="myaccount-header">
@@ -88,17 +88,11 @@
                     </button>
 
                     <div sm-if="address.DefaultAddressesEnabled" class="d-flex ml-auto">
-                        @if (address.IsDefaultBillingAddress && address.IsDefaultShippingAddress)
+                        @if (address.IsDefaultAddress)
                         {
                             <span id="caddr-hint@(id)" class="badge badge-success align-self-center p-1 pr-2">
                                 <icon name="check" class="mx-1" aria-hidden="true" />
                                 <span>@T("Address.IsDefaultAddress")</span>
-                            </span>
-                        }
-                        else if (address.IsDefaultBillingAddress || address.IsDefaultShippingAddress)
-                        {
-                            <span id="caddr-hint@(id)" class="badge badge-info align-self-center py-1 px-2 ml-auto">
-                                <span>@T(address.IsDefaultBillingAddress ? "Address.IsDefaultBillingAddress" : "Address.IsDefaultShippingAddress")</span>
                             </span>
                         }
                         else
@@ -106,7 +100,7 @@
                             <button type="button" 
                                     class="btn btn-light btn-flat btn-sm default-address-button"
                                     data-url="@Url.Action("SetDefaultAddress", new { id })"
-                                    title="@T("Address.SetDefaultAddress")"
+                                    title="@T("Common.SetDefault")"
                                     aria-labelledby="caddr-setdefault-label caddr-fullname@(id)"
                                     aria-describedby="caddr-empty">
                                 <span aria-hidden="true">@T("Common.SetDefault")</span>

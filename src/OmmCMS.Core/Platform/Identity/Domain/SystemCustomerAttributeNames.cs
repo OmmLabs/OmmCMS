@@ -25,8 +25,7 @@ public static partial class SystemCustomerAttributeNames
     public static string CookieConsent => "CookieConsent";
 
     // Checkout
-    public static string DefaultBillingAddressId => "DefaultBillingAddressId";
-    public static string DefaultShippingAddressId => "DefaultShippingAddressId";
+    public static string DefaultAddressId => "DefaultAddressId";
 
 
     // Depends on store
