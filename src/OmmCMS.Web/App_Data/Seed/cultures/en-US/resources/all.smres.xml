@@ -396,9 +396,6 @@
 	<LocaleResource Name="ActivityLog.AddNewCustomerRole">
 		<Value>Added a new customer role ('{0}')</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.AddNewManufacturer">
-		<Value>Added a new manufacturer ('{0}')</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.AddNewSetting">
 		<Value>Added a new setting ('{0}')</Value>
 	</LocaleResource>
@@ -416,9 +413,6 @@
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteCustomerRole">
 		<Value>Deleted a customer role ('{0}')</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.DeleteManufacturer">
-		<Value>Deleted a manufacturer ('{0}')</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteReturnRequest">
 		<Value>Deleted a return (ID = {0})</Value>
@@ -440,9 +434,6 @@
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.EditCustomerRole">
 		<Value>Edited a customer role ('{0}')</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.EditManufacturer">
-		<Value>Edited a manufacturer ('{0}')</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.EditReturnRequest">
 		<Value>Edited a return (ID = {0})</Value>
@@ -471,9 +462,6 @@
 	<LocaleResource Name="ActivityLog.PublicStore.AddNewsComment">
 		<Value>Added a news comment</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.PublicStore.AddToCompareList">
-		<Value>Added a product to compare list ('{0}')</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.PublicStore.ContactUs">
 		<Value>Used contact us form</Value>
 	</LocaleResource>
@@ -485,12 +473,6 @@
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.PublicStore.Logout">
 		<Value>Logout</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.PublicStore.ViewCategory">
-		<Value>Public store. Viewed a category details page ('{0}')</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.PublicStore.ViewManufacturer">
-		<Value>Public store. Viewed a manufacturer details page ('{0}')</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.ResetThemeVars">
 		<Value>Theme "{0}" zurückgesetzt</Value>
@@ -2606,7 +2588,7 @@
 		<Value>Addresses</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.AddressFormFields.Description">
-		<Value>Manage form fields that are displayed during checkout and on "My account" page.</Value>
+		<Value>Manage address fields displayed in user accounts.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.AllowCustomersToSetTimeZone">
 		<Value>Allow customers to select time zone</Value>
@@ -2705,7 +2687,7 @@
 		<Value>Customer name format</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.CustomerNameFormat.Hint">
-		<Value>Sets the customer's display name to be used for public content such as product reviews, comments, etc..</Value>
+		<Value>Sets the display name used for public content such as comments.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.CustomerNameFormatMaxLength">
 		<Value>Maximum length of the customer name</Value>
@@ -3087,7 +3069,7 @@
 		<Value>Validate customer email address</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.ValidateEmailAddress.Hint">
-		<Value>Determines whether the customers email address is validated during the checkout process</Value>
+		<Value>Determines whether the user's email address is validated.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.Visibility">
 		<Value>Visibility</Value>
@@ -3558,19 +3540,19 @@
 		<Value>Default meta description</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultMetaDescription.Hint">
-		<Value>Defines the default meta description for pages in your store. You can override this for individual categories, products, manufacturer and topic pages.</Value>
+		<Value>Defines the default meta description for the website. Individual content pages can override it.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultMetaKeywords">
 		<Value>Default meta keywords</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultMetaKeywords.Hint">
-		<Value>Defines the default meta keywords for pages in your store. You can override these for individual categories, products, manufacturer and topic pages.</Value>
+		<Value>Defines default meta keywords for the website. Individual content pages can override them.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultTitle">
 		<Value>Default title tag</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultTitle.Hint">
-		<Value>Defines the default title for pages in your store. You can override this for individual categories, products, manufacturer and topic pages.</Value>
+		<Value>Defines the default title for the website. Individual content pages can override it.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DetectBrowserUserLanguage">
 		<Value>Detect browser user language</Value>
@@ -3834,7 +3816,7 @@
 		<Value>Facebook App ID</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.SocialSettings.FacebookAppId.Hint">
-		<Value>A Facebook App ID is a unique number that identifies your application and connects it to your Facebook account. It is used when sharing products, category and manufacturer pages on Facebook.</Value>
+		<Value>Identifies your Facebook application when website content is shared on Facebook.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.SocialSettings.FacebookLink">
 		<Value>Facebook link</Value>
@@ -3873,7 +3855,7 @@
 		<Value>X Username</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.SocialSettings.TwitterSite.Hint">
-		<Value>X username that gets displayed on X cards when a product, category and manufacturer page is shared on X. Starts with a '@'.</Value>
+		<Value>X username displayed on X cards when website content is shared. Starts with '@'.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.SocialSettings.VimeoLink">
 		<Value>Vimeo Link</Value>
@@ -3953,12 +3935,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.XmlSitemapIncludesForum.Hint">
 		<Value>Adds forum pages to sitemap.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.XmlSitemapIncludesManufacturers">
-		<Value>Include brands</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.XmlSitemapIncludesManufacturers.Hint">
-		<Value>Adds brand pages to sitemap.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.XmlSitemapIncludesNews">
 		<Value>Include news</Value>
 	</LocaleResource>
@@ -3990,7 +3966,7 @@
 		<Value>Enable image zoom</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.DefaultPictureZoomEnabled.Hint">
-		<Value>Adds 'zoom on hover' functionality to product detail images.</Value>
+		<Value>Enables zoom on hover for images in media galleries.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.FileStorage">
 		<Value>Storage</Value>
@@ -4032,7 +4008,7 @@
 		<Value>Offload embedded Base64 images on save</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.OffloadEmbeddedImagesOnSave.Hint">
-		<Value>Finds embedded Base64 images in long HTML descriptions, extracts and saves them to the media storage, and replaces the Base64 fragment with the media path. Offloading is automatically triggered by saving an entity to the database. Currently supported entity types are: Product, Category, Manufacturer and Topic.</Value>
+		<Value>Extracts embedded Base64 images from topic HTML, saves them to media storage and replaces the embedded image with its media path when the topic is saved.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.Change">
 		<Value>Change</Value>
@@ -4134,13 +4110,13 @@
 		<Value>Always prefetch translations</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.AlwaysPrefetchTranslations.Hint">
-		<Value>By default, only Instant Search prefetches translations. All other product listings work against the segmented cache. For very large multilingual catalogs (&gt; 500,000), enabling this can improve query performance and reduce resource usage.</Value>
+		<Value>Prefetch translations instead of loading them through the segmented cache. This can improve performance for large multilingual websites.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.AlwaysPrefetchUrlSlugs">
 		<Value>Always prefetch URL slugs</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.AlwaysPrefetchUrlSlugs.Hint">
-		<Value>By default, only Instant Search prefetches URL slugs. All other product listings work against the segmented cache. For very large multilingual catalogs (&gt; 500,000), enabling this can improve query performance and reduce resource usage.</Value>
+		<Value>Prefetch URL slugs instead of loading them through the segmented cache. This can improve performance for large websites.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.Cache">
 		<Value>Cache</Value>
@@ -4149,7 +4125,7 @@
 		<Value>Cache segment size</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.CacheSegmentSize.Hint">
-		<Value>The number of entries in a single cache segment when greedy loading is disabled. The larger the catalog, the smaller this value should be. We recommend segment size of 500 for catalogs with less than 100.000 items.</Value>
+		<Value>Number of entries per cache segment when eager loading is disabled. Use smaller segments for larger websites; 500 is a suitable starting value.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.Hint">
 		<Value>For technically experienced users only. Pay attention to the CPU and memory usage when changing these settings.</Value>
@@ -4262,7 +4238,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Specifies the default sort order in search results.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.DefaultSortOrderMode.Hint">
-		<Value>Specifies the default product sort order in search results.</Value>
+		<Value>Specifies the default sort order in search results.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.FilterMaxChoicesCount">
 		<Value>Maximum number of filters</Value>
@@ -4304,7 +4280,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Search fields</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.SearchFields.Hint">
-		<Value>Specifies additional search fields. The product name is always searched.</Value>
+		<Value>Specifies additional fields included in search.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.SearchFieldsNote">
 		<Value>Additional search fields require a suitable search extension.</Value>
@@ -5381,12 +5357,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.ContentManagement.Widgets.ChooseZone.Hint">
 		<Value>Choose widget zone</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentWishlists">
-		<Value>Current wishlists</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentWishlists.Short">
-		<Value>Whishlists</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.CustomerRoleMapping.RoleMappingListDescription">
 		<Value>The list shows customers who are assigned to this customer role. Customers are automatically assigned by scheduled task as long as the group is active and active rules are specified for it. You can make a manual assignment using the customer role selection at the respective customer.</Value>
 	</LocaleResource>
@@ -5733,13 +5703,13 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Impersonate</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.Impersonate.Button">
-		<Value>Place order</Value>
+		<Value>Start impersonation</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.Impersonate.Description1">
-		<Value>During the order placement process, you will see almost exactly what the customer would see while browsing this site, with the exception of the header menu (you will see the following text 'Impersonated as customer@email.here - finish session'). Navigate to the products the customer wants and add them to the cart exactly as the customer would, then use the 'Checkout' button to proceed through the usual checkout process.</Value>
+		<Value>View the website as this user to investigate account and access issues. A banner identifies the active impersonation session.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.Impersonate.Description2">
-		<Value>Note: Click 'finish session' link in order to finish this session</Value>
+		<Value>Select 'finish session' when you have completed the investigation.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.Info">
 		<Value>General</Value>
@@ -6216,16 +6186,16 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Filter by customer roles.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IdMaximum">
-		<Value>Product Id to</Value>
+		<Value>Entity ID to</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IdMaximum.Hint">
-		<Value>Filter by product identifier.</Value>
+		<Value>Filter by maximum entity identifier.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IdMinimum">
-		<Value>Product Id from</Value>
+		<Value>Entity ID from</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IdMinimum.Hint">
-		<Value>Filter by product identifier.</Value>
+		<Value>Filter by minimum entity identifier.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IsActiveCustomer">
 		<Value>Only active customers</Value>
@@ -6447,7 +6417,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Update all that match a key field value</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.UpdateAllKeyFieldMatches.Hint">
-		<Value>Specifies that all records matching the value of a key field are updated. By default, only the first matching record is updated. Enable this option if, for example, you have assigned an MPN multiple times and want to update all products with that MPN in a consistent manner. Enabling this option may reduce the performance of the import.</Value>
+		<Value>Updates all records matching a key field rather than only the first. This may reduce import performance.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.UpdateOnly">
 		<Value>Only update</Value>
@@ -6889,9 +6859,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.Plugins.Manage">
 		<Value>Manage plugins</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Products.BasePrice.Hint">
-		<Value>Please keep in mind, the base price is depending on several factors and will therefore only be calculated reliable in the front end.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.PromotionFeeds">
 		<Value>Promotion feeds</Value>
@@ -7505,18 +7472,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.System.Maintenance.DbBackup.Upload">
 		<Value>Upload backup</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.System.Maintenance.DeleteAbandonedCarts">
-		<Value>Deleting abandoned shopping carts</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Maintenance.DeleteAbandonedCarts.OlderThan">
-		<Value>Created before</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Maintenance.DeleteAbandonedCarts.OlderThan.Hint">
-		<Value>Delete shopping cart items created before the specified date.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Maintenance.DeleteAbandonedCarts.TotalDeleted">
-		<Value>{0} items were deleted</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.System.Maintenance.DeletedExportFilesAndFolders">
 		<Value>{0} export files and {1} export folders have been deleted.</Value>
 	</LocaleResource>
@@ -7584,7 +7539,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>The start date must not be after the end date.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Maintenance.TreePaths.Hint">
-		<Value>Tree paths provide quick access to hierarchically organized data records, such as product categories. In very rare cases, gaps can occur here, e.g. due to faulty migrations or imports. Problems with missing paths include products appearing in categories to which they are not assigned. If you experience such problems in your shop, you can generate the missing paths here.</Value>
+		<Value>Tree paths accelerate access to hierarchical records such as media folders. Rebuild missing paths if imports or migrations have left gaps.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Maintenance.TreePaths.PathCount">
 		<Value>The task was completed successfully. {0} new paths were generated.</Value>
@@ -8132,9 +8087,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Admin.System.Warnings.NoPermissionsDefined">
 		<Value>There are no permissions defined.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.System.Warnings.NoShipmentItems">
-		<Value>No shipment items</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.PrimaryCurrency">
 		<Value>Primary store currency is not set</Value>
 	</LocaleResource>
@@ -8170,9 +8122,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.XMLSitemap">
 		<Value>XML Sitemap</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Tax.Categories.NoDuplicatesAllowed">
-		<Value>A tax category with this name already exists. Please choose another name.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Telerik">
 		<Value>Bold</Value>
@@ -8227,10 +8176,10 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Messages</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.ThemeVar.ArtActiveBgColor">
-		<Value>Specifies the background color for product boxes when hovering over them.</Value>
+		<Value>Background color of content cards on hover.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.ThemeVar.ArtActiveBorderColor">
-		<Value>Specifies the border color for product boxes when hovering over them.</Value>
+		<Value>Border color of content cards on hover.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.ThemeVar.Boxed">
 		<Value>Specifies whether the site will strech over the complete avaliable space.</Value>
@@ -8325,35 +8274,8 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Aria.Label.Breadcrumb">
 		<Value>Breadcrumb</Value>
 	</LocaleResource>
-	<LocaleResource Name="Aria.Label.BundleContains">
-		<Value>The product set contains {0}</Value>
-	</LocaleResource>
 	<LocaleResource Name="Aria.Label.BuyHint">
 		<Value>By clicking on "Buy," I accept the terms and conditions.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CartItemSummary">
-		<Value>{0} at {1}.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CartItemSummaryWithAttributes">
-		<Value>{0} at {1}, quantity {2}. {3}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CartItemSummaryWithTotal">
-		<Value>{0} at {1} each, quantity {2}, total {3}.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CartTotalSummary">
-		<Value>Your order: {0} {1}, {2} products.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CheckoutProcess">
-		<Value>Checkout process</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CheckoutStep.Current">
-		<Value>Current step</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CheckoutStep.Pending">
-		<Value>Not visited</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CheckoutStep.Visited">
-		<Value>Completed</Value>
 	</LocaleResource>
 	<LocaleResource Name="Aria.Label.Choice">
 		<Value>{0}, {1}</Value>
@@ -8379,9 +8301,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Aria.Label.MediaGallery">
 		<Value>Media gallery</Value>
 	</LocaleResource>
-	<LocaleResource Name="Aria.Label.OffCanvasCartTab">
-		<Value>My articles</Value>
-	</LocaleResource>
 	<LocaleResource Name="Aria.Label.OffCanvasMenuTab">
 		<Value>Shop sections</Value>
 	</LocaleResource>
@@ -8393,12 +8312,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Aria.Label.PriceRange">
 		<Value>Price range</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.ProductOfOrderPlacedOn">
-		<Value>Order {0} from {1}, {2}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.ProductVariants">
-		<Value>Product variants</Value>
 	</LocaleResource>
 	<LocaleResource Name="Aria.Label.Rating">
 		<Value>Rating: {0} out of 5 stars. {1}</Value>
@@ -8415,14 +8328,8 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Aria.Label.SelectDeselectEntry">
 		<Value>Select or deselect entry</Value>
 	</LocaleResource>
-	<LocaleResource Name="Aria.Label.ShowNextProducts">
-		<Value>Show next product group</Value>
-	</LocaleResource>
 	<LocaleResource Name="Aria.Label.ShowPassword">
 		<Value>Show password</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.ShowPreviousProducts">
-		<Value>Show previous product group</Value>
 	</LocaleResource>
 	<LocaleResource Name="Aria.Label.SocialMediaLinks">
 		<Value>Our social media channels</Value>
@@ -9481,7 +9388,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Required cookies</Value>
 	</LocaleResource>
 	<LocaleResource Name="CookieManager.Dialog.Required.Intro">
-		<Value>Technically required cookies help us to make the operation of the website possible. They provide basic functions such as the display of products or login and are therefore a prerequisite for using the site.</Value>
+		<Value>Required cookies enable essential website functions such as sign-in and navigation.</Value>
 	</LocaleResource>
 	<LocaleResource Name="CookieManager.Dialog.Show">
 		<Value>Show</Value>
@@ -9509,12 +9416,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Customer.Guest">
 		<Value>Guest</Value>
-	</LocaleResource>
-	<LocaleResource Name="Customer.UserAgreement.OrderItemNotFound">
-		<Value>The corresponding order item could not be found.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Customer.UserAgreement.ProductNotFound">
-		<Value>The corresponding product could not be found.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Disclaimer">
 		<Value>Disclaimer</Value>
@@ -9886,18 +9787,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="ExternalAuthentication.ConfigError">
 		<Value>There is a problem with the selected login method. Please choose another one or notify the store owner.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Fields.BasketSubTotalIncludesDiscounts">
-		<Value>Include discounts</Value>
-	</LocaleResource>
-	<LocaleResource Name="Fields.BasketSubTotalIncludesDiscounts.Hint">
-		<Value>When selected the specified amount is compared with the basket subtotal excluding all cart item discounts.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Fields.LimitToCurrentBasketSubTotal">
-		<Value>Limit to basket subtotal</Value>
-	</LocaleResource>
-	<LocaleResource Name="Fields.LimitToCurrentBasketSubTotal.Hint">
-		<Value>Specifies whether the amount refers to the current basket subtotal or - when unselected - to the sum of all previously incurred orders.</Value>
 	</LocaleResource>
 	<LocaleResource Name="FileUploader.Dropzone.DictCancelUpload">
 		<Value>Cancel upload</Value>
@@ -10301,9 +10190,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Homepage.Brands.ShowAll">
 		<Value>Show all</Value>
 	</LocaleResource>
-	<LocaleResource Name="HomePage.Products">
-		<Value>Featured products</Value>
-	</LocaleResource>
 	<LocaleResource Name="Homepage.TopBrands">
 		<Value>Top Brands</Value>
 	</LocaleResource>
@@ -10442,15 +10328,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="LinkBuilder.LinkTarget">
 		<Value>Define the target attribute for the link.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Media.Category.ImageLinkTitleFormat">
-		<Value>Show products in category {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Media.Manufacturer.ImageLinkTitleFormat">
-		<Value>All products from {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Media.Product.ImageLinkTitleFormat">
-		<Value>Show details for {0}</Value>
-	</LocaleResource>
 	<LocaleResource Name="Metadesc.Blog.Month">
 		<Value>Blog entries in {0}</Value>
 	</LocaleResource>
@@ -10561,21 +10438,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Offcanvas.Menu.ShowCurrentCat">
 		<Value>Show {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageDescription.AllProductTags">
-		<Value>Discover all product tags in the {0} online shop.</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageDescription.CompareProducts">
-		<Value>Compare products in the {0} online shop.</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageDescription.Manufacturers">
-		<Value>Discover all manufacturers in the {0} online shop.</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageDescription.RecentlyAddedProducts">
-		<Value>Discover all recently added product in the {0} online shop.</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageDescription.RecentlyViewedProducts">
-		<Value>Discover all recently viewed products in the {0} online shop.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Pager.CurrentPage">
 		<Value>Page {0} of {1} ({2} total)</Value>
@@ -10735,12 +10597,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Plugins.CannotLoadModule">
 		<Value>The plugin or provider "{0}" cannot be loaded.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Plugins.Feed.FreeShippingThreshold">
-		<Value>Free shipping threshold</Value>
-	</LocaleResource>
-	<LocaleResource Name="Plugins.Feed.FreeShippingThreshold.Hint">
-		<Value>Amount as from shipping is free.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Plugins.Permissions.DisplayName.Display">
 		<Value>Display</Value>
@@ -10932,9 +10788,6 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Providers.FriendlyName.MediaStorage.OmmCMSFileSystem">
 		<Value>File system</Value>
 	</LocaleResource>
-	<LocaleResource Name="Providers.FriendlyName.Tax.Free">
-		<Value>Free tax rate provider</Value>
-	</LocaleResource>
 	<LocaleResource Name="Providers.MenuItems.FriendlyName.Catalog">
 		<Value>Category tree</Value>
 	</LocaleResource>
@@ -10946,12 +10799,6 @@ within the observation window, additional requests may be denied, even if type-s
 	</LocaleResource>
 	<LocaleResource Name="Reviews">
 		<Value>Reviews</Value>
-	</LocaleResource>
-	<LocaleResource Name="RSS.InformationAboutProducts">
-		<Value>Information about products</Value>
-	</LocaleResource>
-	<LocaleResource Name="RSS.RecentlyAddedProducts">
-		<Value>Recently added products</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search">
 		<Value>Search</Value>
@@ -11017,7 +10864,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Filter by</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.FilterNoResultsText">
-		<Value>Your filter did not match any products.</Value>
+		<Value>Your filter did not match any content.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.Hits">
 		<Value>Hits</Value>
@@ -11034,14 +10881,11 @@ within the observation window, additional requests may be denied, even if type-s
 	<LocaleResource Name="Search.InstantSearch">
 		<Value>Instant Search</Value>
 	</LocaleResource>
-	<LocaleResource Name="Search.Manufacturer">
-		<Value>Manufacturer</Value>
-	</LocaleResource>
 	<LocaleResource Name="Search.NoMoreHitsFound">
 		<Value>There were no more hits found.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.NoResultsText">
-		<Value>Your search did not match any products.</Value>
+		<Value>Your search did not match any content.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.NumHits">
 		<Value>{0} Hits</Value>
@@ -11065,7 +10909,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>What are you looking for?</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.SearchInDescriptions">
-		<Value>Search In product descriptions</Value>
+		<Value>Search in descriptions</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.SearchTerm">
 		<Value>Search keyword</Value>
@@ -11387,7 +11231,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Listelements background color</Value>
 	</LocaleResource>
 	<LocaleResource Name="ThemeVar.Alpha.BoxBackground.Hint">
-		<Value>Background color of list elements such as category or product lists</Value>
+		<Value>Background color of list elements and content cards.</Value>
 	</LocaleResource>
 	<LocaleResource Name="ThemeVar.Alpha.BtnBackground">
 		<Value>Background color default button</Value>

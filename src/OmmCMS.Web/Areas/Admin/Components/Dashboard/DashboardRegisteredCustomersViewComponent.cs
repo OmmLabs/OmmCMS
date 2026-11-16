@@ -1,4 +1,4 @@
-﻿using OmmCMS.Admin.Models.Orders;
+﻿using OmmCMS.Admin.Models.Dashboard;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Security;
 

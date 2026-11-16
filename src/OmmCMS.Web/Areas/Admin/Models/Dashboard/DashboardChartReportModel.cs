@@ -1,4 +1,4 @@
-﻿namespace OmmCMS.Admin.Models.Orders;
+﻿namespace OmmCMS.Admin.Models.Dashboard;
 
 public class DashboardChartReportModel
 {

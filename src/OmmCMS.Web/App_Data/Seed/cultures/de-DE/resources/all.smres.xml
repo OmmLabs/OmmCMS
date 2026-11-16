@@ -396,9 +396,6 @@
 	<LocaleResource Name="ActivityLog.AddNewCustomerRole">
 		<Value>Neue Kundengruppe ('{0}') hinzugefügt</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.AddNewManufacturer">
-		<Value>Neuer Hersteller ('{0}') hinzugefügt</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.AddNewSetting">
 		<Value>Neue Einstellung ('{0}') hinzugefügt</Value>
 	</LocaleResource>
@@ -416,9 +413,6 @@
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteCustomerRole">
 		<Value>Kundengruppe ('{0}') gelöscht</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.DeleteManufacturer">
-		<Value>Hersteller ('{0}') gelöscht</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteReturnRequest">
 		<Value>Retoure (ID = {0}) gelöscht</Value>
@@ -440,9 +434,6 @@
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.EditCustomerRole">
 		<Value>Kundengruppe ('{0}') bearbeitet</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.EditManufacturer">
-		<Value>Hersteller ('{0}') bearbeitet</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.EditReturnRequest">
 		<Value>Retoure (ID = {0}) bearbeitet</Value>
@@ -471,9 +462,6 @@
 	<LocaleResource Name="ActivityLog.PublicStore.AddNewsComment">
 		<Value>News-Kommentar wurde hinzugefügt</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.PublicStore.AddToCompareList">
-		<Value>Produkt zur Vergleichsliste hinzugefügt ('{0}')</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.PublicStore.ContactUs">
 		<Value>Kontaktformular benutzt</Value>
 	</LocaleResource>
@@ -485,12 +473,6 @@
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.PublicStore.Logout">
 		<Value>Abmeldung</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.PublicStore.ViewCategory">
-		<Value>Öffentlicher Shop. Hat eine Warengruppen-Detailseite angesehen ('{0}')</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.PublicStore.ViewManufacturer">
-		<Value>Öffentlicher Shop. Hat eine Hersteller-Detailseite angesehen (''{0}'')</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.ResetThemeVars">
 		<Value>Theme "{0}" zurückgesetzt</Value>
@@ -2552,7 +2534,7 @@
 		<Value>Adressen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.AddressFormFields.Description">
-		<Value>Verwalten Sie Formularfelder, die während des Checkout-Prozesses und im "Mein Konto" Bereich angezeigt werden.</Value>
+		<Value>Adressfelder in Benutzerkonten verwalten.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.AllowCustomersToSetTimeZone">
 		<Value>Kunden können die Zeitzone einstellen</Value>
@@ -2651,7 +2633,7 @@
 		<Value>Angezeigter Benutzername</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.CustomerNameFormat.Hint">
-		<Value>Legt den Anzeigenamen des Kunden fest, der für öffentliche Inhalte wie Produktbewertungen, Kommentare, etc. verwendet wird.</Value>
+		<Value>Legt den Anzeigenamen für öffentliche Inhalte wie Kommentare fest.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.CustomerNameFormatMaxLength">
 		<Value>Maximale Länge des Benutzernamens</Value>
@@ -3027,7 +3009,7 @@
 		<Value>Prüfung der E-Mail-Adresse des Kunden</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.ValidateEmailAddress.Hint">
-		<Value>Legt fest, ob die E-Mail-Adresse des Kunden im Checkout validiert wird.</Value>
+		<Value>Legt fest, ob die E-Mail-Adresse des Benutzers validiert wird.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.Visibility">
 		<Value>Sichtbarkeit</Value>
@@ -3486,19 +3468,19 @@
 		<Value>Standard Meta Beschreibung</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultMetaDescription.Hint">
-		<Value>Legt die Meta Beschreibung für Seiten im Shop fest. Diese kann für Warengruppen, Produkte, Hersteller und Seiten individuell angegeben werden.</Value>
+		<Value>Legt die Standard-Meta-Beschreibung der Website fest. Einzelne Inhaltsseiten können sie überschreiben.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultMetaKeywords">
 		<Value>Standard Meta Keywords</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultMetaKeywords.Hint">
-		<Value>Legt die Meta Keywords für Seiten im Shop fest. Für Warengruppen, Produkte, Hersteller und Seiten können diese individuell angegeben werden.</Value>
+		<Value>Legt die Standard-Meta-Schlüsselwörter der Website fest. Einzelne Inhaltsseiten können sie überschreiben.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultTitle">
 		<Value>Standard-Titel-Tag</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultTitle.Hint">
-		<Value>Legt das Standard-Titel-Tag für Seiten im Shop fest. Es kann für Warengruppen, Produkte, Hersteller und Seiten individuell angegeben werden.</Value>
+		<Value>Legt den Standardtitel der Website fest. Einzelne Inhaltsseiten können ihn überschreiben.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DetectBrowserUserLanguage">
 		<Value>Browsersprache erkennen</Value>
@@ -3762,7 +3744,7 @@
 		<Value>Facebook App ID</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.SocialSettings.FacebookAppId.Hint">
-		<Value>Eine Facebook App ID ist eine eindeutige Nummer, die Ihre Anwendung identifiziert und mit Ihrem Facebook-Account verknüpft. Wird beim Teilen von Produkten, Warengruppen- und Herstellerseiten auf Facebook genutzt.</Value>
+		<Value>Identifiziert Ihre Facebook-Anwendung beim Teilen von Website-Inhalten auf Facebook.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.SocialSettings.FacebookLink">
 		<Value>Facebook Link</Value>
@@ -3801,7 +3783,7 @@
 		<Value>Benutzername auf X</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.SocialSettings.TwitterSite.Hint">
-		<Value>Benutzername auf X, der auf Karten von X angezeigt wird, wenn ein Produkt, eine Kategorie oder eine Herstellerseite auf X geteilt wird. Beginnt mit einem '@'.</Value>
+		<Value>X-Benutzername, der beim Teilen von Website-Inhalten auf X-Karten angezeigt wird. Beginnt mit '@'.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.SocialSettings.VimeoLink">
 		<Value>Vimeo Link</Value>
@@ -3881,12 +3863,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.XmlSitemapIncludesForum.Hint">
 		<Value>Fügt Forum-Seiten zur Sitemap hinzu.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.XmlSitemapIncludesManufacturers">
-		<Value>Hersteller einbeziehen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.XmlSitemapIncludesManufacturers.Hint">
-		<Value>Fügt Hersteller-Seiten zur Sitemap hinzu.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.XmlSitemapIncludesNews">
 		<Value>News einbeziehen</Value>
 	</LocaleResource>
@@ -3918,7 +3894,7 @@
 		<Value>Bildzoom aktivieren</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.DefaultPictureZoomEnabled.Hint">
-		<Value>Aktiviert 'Zoom bei Hover'-Funktion für Produktdetail-Bilder.</Value>
+		<Value>Aktiviert die Zoomfunktion beim Überfahren von Bildern in Mediengalerien.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.FileStorage">
 		<Value>Dateispeicher</Value>
@@ -3960,7 +3936,7 @@
 		<Value>Eingebettete Base64-Bilder beim Speichern extrahieren</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.OffloadEmbeddedImagesOnSave.Hint">
-		<Value>Findet eingebettete Base64-Bilder in langen HTML-Beschreibungen, extrahiert und speichert sie im Medienspeicher und ersetzt das Base64-Fragment durch den Medienpfad. Die Extraktion wird automatisch ausgelöst, wenn eine Entität in der Datenbank gespeichert wird. Derzeit unterstützte Entitätstypen sind: Produkt, Warengruppe, Hersteller und Seite.</Value>
+		<Value>Extrahiert beim Speichern einer Seite eingebettete Base64-Bilder aus dem HTML, speichert sie im Medienspeicher und ersetzt sie durch den Medienpfad.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.Change">
 		<Value>Ändern</Value>
@@ -4062,13 +4038,13 @@
 		<Value>Übersetzungen immer vorladen (Prefetch)</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.AlwaysPrefetchTranslations.Hint">
-		<Value>Standardmäßig werden nur bei der Sofortsuche Übersetzungen vorgeladen. Alle anderen Produktauflistungen arbeiten mit dem segmentierten Cache. Bei sehr großen mehrsprachigen Katalogen (&gt; 500.000) kann die Aktivierung dieser Option die Abfrageleistung verbessern und die Ressourcennutzung verringern.</Value>
+		<Value>Übersetzungen vorab laden, statt sie über den segmentierten Cache abzurufen. Dies kann die Leistung großer mehrsprachiger Websites verbessern.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.AlwaysPrefetchUrlSlugs">
 		<Value>URL Slugs immer vorladen (Prefetch)</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.AlwaysPrefetchUrlSlugs.Hint">
-		<Value>Standardmäßig werden nur bei der Sofortsuche URL slugs vorgeladen. Alle anderen Produktauflistungen arbeiten mit dem segmentierten Cache. Bei sehr großen mehrsprachigen Katalogen (&gt; 500.000) kann die Aktivierung dieser Option die Abfrageleistung verbessern und die Ressourcennutzung verringern.</Value>
+		<Value>URL-Slugs vorab laden, statt sie über den segmentierten Cache abzurufen. Dies kann die Leistung großer Websites verbessern.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.Cache">
 		<Value>Cache</Value>
@@ -4077,7 +4053,7 @@
 		<Value>Cache Segment Größe</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.CacheSegmentSize.Hint">
-		<Value>Die Anzahl der Einträge in einem einzelnen Cache-Segment, wenn Greedy Loading deaktiviert ist. Je größer der Katalog ist, desto kleiner sollte dieser Wert sein. Wir empfehlen eine Segmentgröße von 500 für Kataloge mit weniger als 100.000 Einträgen.</Value>
+		<Value>Anzahl der Einträge pro Cache-Segment, wenn das vorzeitige Laden deaktiviert ist. Für größere Websites kleinere Segmente verwenden; 500 ist ein geeigneter Startwert.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance.Hint">
 		<Value>Nur für technisch erfahrene Benutzer. Achten Sie auf die CPU- und Speicherauslastung, wenn Sie diese Einstellungen ändern.</Value>
@@ -4192,7 +4168,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Legt die Standardsortierreihenfolge in den Suchergebnissen fest.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.DefaultSortOrderMode.Hint">
-		<Value>Legt die Standardsortierreihenfolge für Produkte in den Suchergebnissen fest.</Value>
+		<Value>Legt die Standardsortierung der Suchergebnisse fest.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.FilterMaxChoicesCount">
 		<Value>Maximale Anzahl an Filtern</Value>
@@ -4234,7 +4210,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Suchfelder</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.SearchFields.Hint">
-		<Value>Legt zusätzlich zu durchsuchende Felder fest. Der Produktname wird grundsätzlich immer durchsucht.</Value>
+		<Value>Legt zusätzliche Felder für die Suche fest.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.SearchFieldsNote">
 		<Value>Weitere Suchfelder erfordern eine geeignete Sucherweiterung.</Value>
@@ -5275,12 +5251,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.ContentManagement.Widgets.ChooseZone.Hint">
 		<Value>Bereich in den das Widget eingebunden werden soll.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentWishlists">
-		<Value>Aktuelle Wunschzettel</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentWishlists.Short">
-		<Value>Wunschlisten</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.CustomerRoleMapping.RoleMappingListDescription">
 		<Value>Die Liste zeigt Kunden, die dieser Kundengruppe zugeordnet sind. Kunden werden automatisch per geplanter Aufgabe zugeordnet, sofern die Gruppe aktiv ist und für sie aktive Regeln festgelegt sind. Eine manuelle Zuordnung können Sie über die Kundengruppenauswahl beim jeweiligen Kunden vornehmen.</Value>
 	</LocaleResource>
@@ -5618,13 +5588,13 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Imitieren</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.Impersonate.Button">
-		<Value>Auftragserteilung beginnen</Value>
+		<Value>Benutzersitzung starten</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.Impersonate.Description1">
-		<Value>Hier kann im Namen des Kunden ein Auftrag erteilt werden.</Value>
+		<Value>Zeigen Sie die Website als dieser Benutzer an, um Konto- und Zugriffsprobleme zu untersuchen. Ein Banner kennzeichnet die aktive Sitzung.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.Impersonate.Description2">
-		<Value>Um die Auftragserteilung im Namen des Kunden zu beenden muss der *Session beenden*-Button betätigt werden.</Value>
+		<Value>Wählen Sie nach Abschluss der Untersuchung 'Session beenden'.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.Customers.Info">
 		<Value>Allgemein</Value>
@@ -6089,16 +6059,16 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Nach Kundengruppen filtern.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IdMaximum">
-		<Value>Produkt-ID bis</Value>
+		<Value>Entitäts-ID bis</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IdMaximum.Hint">
-		<Value>Nach der Produkt-ID filtern.</Value>
+		<Value>Nach maximaler Entitäts-ID filtern.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IdMinimum">
-		<Value>Produkt-ID von</Value>
+		<Value>Entitäts-ID von</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IdMinimum.Hint">
-		<Value>Nach der Produkt-ID filtern.</Value>
+		<Value>Nach minimaler Entitäts-ID filtern.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Export.Filter.IsActiveCustomer">
 		<Value>Nur aktive Kunden</Value>
@@ -6320,7 +6290,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Alle aktualisieren, die dem Wert eines Schlüsselfelds entsprechen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.UpdateAllKeyFieldMatches.Hint">
-		<Value>Legt fest, dass alle mit dem Wert eines Schlüsselfeldes übereinstimmenden Datensätze aktualisiert werden. Standardmäßig wird nur der erste übereinstimmende Datensatz aktualisiert. Aktivieren Sie diese Option, wenn Sie z.B. eine MPN mehrfach vergeben haben und alle Produkte mit dieser MPN einheitlich aktualisieren möchten. Die Aktivierung dieser Option kann die Performance des Imports beeinträchtigen.</Value>
+		<Value>Aktualisiert alle zu einem Schlüsselfeld passenden Datensätze statt nur des ersten. Dies kann die Importleistung verringern.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.DataExchange.Import.UpdateOnly">
 		<Value>Nur aktualisieren</Value>
@@ -6756,9 +6726,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Plugins.Manage">
 		<Value>Plugins verwalten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Products.BasePrice.Hint">
-		<Value>Bitte beachten Sie, dass der tatsächliche Grundpreis von verschiedenen Faktoren abhängig ist und erst im Shop zuverlässig berechnet werden kann.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.PromotionFeeds">
 		<Value>Promotion Feeds</Value>
@@ -7360,18 +7327,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.System.Maintenance.DbBackup.Upload">
 		<Value>Sicherung hochladen</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.System.Maintenance.DeleteAbandonedCarts">
-		<Value>Verworfene Warenkörbe löschen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Maintenance.DeleteAbandonedCarts.OlderThan">
-		<Value>Älter als</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Maintenance.DeleteAbandonedCarts.OlderThan.Hint">
-		<Value>Warenkörbe löschen, die älter sind als das angegebene Datum.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.System.Maintenance.DeleteAbandonedCarts.TotalDeleted">
-		<Value>{0} Datensätze wurden gelöscht</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.System.Maintenance.DeletedExportFilesAndFolders">
 		<Value>Es wurden {0} Exportdateien und {1} Exportordner gelöscht.</Value>
 	</LocaleResource>
@@ -7439,7 +7394,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Das Anfangsdatum darf nicht nach dem Enddatum liegen.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Maintenance.TreePaths.Hint">
-		<Value>Hierarchiepfade ermöglichen die performante Abfrage hierarchisch geordneter Datensätze wie z.B. Warengruppen. In sehr seltenen Fällen kann es hier zu Lücken kommen, z.B. durch fehlerhafte Migrationen oder Importe. Probleme mit fehlenden Pfaden äußern sich u.a. darin, dass Produkte in Warengruppen angezeigt werden, denen sie nicht zugeordnet sind. Sollten Sie solche Fehler in Ihrem Shop feststellen, können Sie die fehlenden Pfade hier nachgenerieren lassen.</Value>
+		<Value>Hierarchiepfade beschleunigen den Zugriff auf hierarchische Datensätze wie Medienordner. Fehlende Pfade können nach Importen oder Migrationen neu aufgebaut werden.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Maintenance.TreePaths.PathCount">
 		<Value>Die Aufgabe wurde erfolgreich abgeschlossen. Es wurden {0} neue Pfade generiert.</Value>
@@ -7966,9 +7921,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.System.Warnings.NoPermissionsDefined">
 		<Value>Es sind keine Zugriffsrechte festgelegt.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.System.Warnings.NoShipmentItems">
-		<Value>Keine Versand-Artikel</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.PrimaryCurrency.NotSet">
 		<Value>Die Hauptwährung für den Shop wurde nicht festgelegt.</Value>
 	</LocaleResource>
@@ -7998,9 +7950,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.XMLSitemap">
 		<Value>XML-Sitemap</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Tax.Categories.NoDuplicatesAllowed">
-		<Value>Eine Steuerklasse mit diesem Namen existiert bereits. Bitte wählen Sie einen anderen Namen.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Theme.GoogleFonts.Gdpr.Hint">
 		<Value>Bitte beachten Sie, dass der Einsatz von Google Fonts ohne lokale Einbindung laut Urteil vom LG München (20.01.2022, Az. 3 O 17493/20) gegen die DSGVO verstößt. Bitte informieren Sie sich über die aktuelle Rechtslage, bevor Sie Web Fonts einsetzen. OmmCMS übernimmt keinerlei Haftung.</Value>
@@ -8049,10 +7998,10 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Meldungen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.ThemeVar.ArtActiveBgColor">
-		<Value>Legt die Hintergrundfarbe von Produktboxen für den Hover-Effekt fest.</Value>
+		<Value>Hintergrundfarbe von Inhaltskarten beim Überfahren.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.ThemeVar.ArtActiveBorderColor">
-		<Value>Legt die Rahmenfarbe von Produktboxen für den Hover-Effekt fest.</Value>
+		<Value>Rahmenfarbe von Inhaltskarten beim Überfahren.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.ThemeVar.Boxed">
 		<Value>Legt fest, ob sich die Seite über den kompletten verfügbaren Platz streckt.</Value>
@@ -8147,35 +8096,8 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Aria.Label.Breadcrumb">
 		<Value>Breadcrumb-Navigation</Value>
 	</LocaleResource>
-	<LocaleResource Name="Aria.Label.BundleContains">
-		<Value>Das Produktset enthält {0}</Value>
-	</LocaleResource>
 	<LocaleResource Name="Aria.Label.BuyHint">
 		<Value>Mit Klick auf "Kaufen" akzeptiere ich die Bedingungen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CartItemSummary">
-		<Value>{0} zu {1}.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CartItemSummaryWithAttributes">
-		<Value>{0} zu {1}, Menge {2}. {3}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CartItemSummaryWithTotal">
-		<Value>{0} zu je {1}, Menge {2}, Gesamt {3}.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CartTotalSummary">
-		<Value>Ihre Bestellung: {0} {1}, {2} Artikel.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CheckoutProcess">
-		<Value>Bestellprozess</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CheckoutStep.Current">
-		<Value>Aktueller Schritt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CheckoutStep.Pending">
-		<Value>Noch nicht besucht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.CheckoutStep.Visited">
-		<Value>Abgeschlossen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Aria.Label.Choice">
 		<Value>{0}, {1}</Value>
@@ -8201,9 +8123,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Aria.Label.MediaGallery">
 		<Value>Mediengalerie</Value>
 	</LocaleResource>
-	<LocaleResource Name="Aria.Label.OffCanvasCartTab">
-		<Value>Meine Artikel</Value>
-	</LocaleResource>
 	<LocaleResource Name="Aria.Label.OffCanvasMenuTab">
 		<Value>Shopbereiche</Value>
 	</LocaleResource>
@@ -8215,12 +8134,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Aria.Label.PriceRange">
 		<Value>Preisspanne</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.ProductOfOrderPlacedOn">
-		<Value>Auftrag {0} vom {1}, {2}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.ProductVariants">
-		<Value>Produktvarianten</Value>
 	</LocaleResource>
 	<LocaleResource Name="Aria.Label.Rating">
 		<Value>Bewertung: {0} von 5 Sternen. {1}</Value>
@@ -8237,14 +8150,8 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Aria.Label.SelectDeselectEntry">
 		<Value>Eintrag aus- oder abwählen</Value>
 	</LocaleResource>
-	<LocaleResource Name="Aria.Label.ShowNextProducts">
-		<Value>Nächste Produktgruppe anzeigen</Value>
-	</LocaleResource>
 	<LocaleResource Name="Aria.Label.ShowPassword">
 		<Value>Passwort anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Aria.Label.ShowPreviousProducts">
-		<Value>Vorherige Produktgruppe anzeigen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Aria.Label.SocialMediaLinks">
 		<Value>Unsere Social-Media-Kanäle</Value>
@@ -9303,7 +9210,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Notwendige Cookies</Value>
 	</LocaleResource>
 	<LocaleResource Name="CookieManager.Dialog.Required.Intro">
-		<Value>Technisch erforderliche Cookies helfen uns dabei, die Bedienung der Webseite zu ermöglichen. Sie stellen Grundfunktionen, wie die Darstellung von Produkten oder den Login sicher und sind daher eine Voraussetzung zur Nutzung der Seite.</Value>
+		<Value>Notwendige Cookies ermöglichen wesentliche Website-Funktionen wie Anmeldung und Navigation.</Value>
 	</LocaleResource>
 	<LocaleResource Name="CookieManager.Dialog.Show">
 		<Value>Anzeigen</Value>
@@ -9331,12 +9238,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Customer.Guest">
 		<Value>Gast</Value>
-	</LocaleResource>
-	<LocaleResource Name="Customer.UserAgreement.OrderItemNotFound">
-		<Value>Die entsprechende Auftragsposition konnte nicht gefunden werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Customer.UserAgreement.ProductNotFound">
-		<Value>Das entsprechende Produkt konnte nicht gefunden werden.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Disclaimer">
 		<Value>Rechtshinweise</Value>
@@ -9707,18 +9608,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="ExternalAuthentication.ConfigError">
 		<Value>Es liegt ein Problem mit der gewählten Login-Methode vor. Bitte wählen Sie eine andere Methode oder benachrichtigen Sie den Shop-Betreiber.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Fields.BasketSubTotalIncludesDiscounts">
-		<Value>Positions-Rabatte berücktichtigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Fields.BasketSubTotalIncludesDiscounts.Hint">
-		<Value>Wenn aktiv, ist der Vergleichswert die Warenkorbsumme abzüglich aller Positions-Rabatte.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Fields.LimitToCurrentBasketSubTotal">
-		<Value>Bezogen auf Warenkorb-Zwischensumme</Value>
-	</LocaleResource>
-	<LocaleResource Name="Fields.LimitToCurrentBasketSubTotal.Hint">
-		<Value>Legt fest, ob sich der angegebene Betrag auf die Zwischensumme im aktuellen Warenkorb oder - wenn inaktiv - auf die Summe aller zuvor vom Kunden getätigten Bestellungen bezieht.</Value>
 	</LocaleResource>
 	<LocaleResource Name="FileUploader.Dropzone.DictCancelUpload">
 		<Value>Upload abbrechen</Value>
@@ -10122,9 +10011,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Homepage.Brands.ShowAll">
 		<Value>Alle anzeigen</Value>
 	</LocaleResource>
-	<LocaleResource Name="HomePage.Products">
-		<Value>Empfohlene Produkte</Value>
-	</LocaleResource>
 	<LocaleResource Name="Homepage.TopBrands">
 		<Value>Top-Marken</Value>
 	</LocaleResource>
@@ -10263,15 +10149,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="LinkBuilder.LinkTarget">
 		<Value>Definieren Sie das Attribut target für den Link.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Media.Category.ImageLinkTitleFormat">
-		<Value>Zeige Produkte für Kategorie {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Media.Manufacturer.ImageLinkTitleFormat">
-		<Value>Alle Produkte von {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Media.Product.ImageLinkTitleFormat">
-		<Value>Zeige Details für {0}</Value>
-	</LocaleResource>
 	<LocaleResource Name="Metadesc.Blog.Month">
 		<Value>Blog Einträge des Monats {0}</Value>
 	</LocaleResource>
@@ -10385,21 +10262,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="order.getpdfinvoice">
 		<Value>Bestellung als PDF</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageDescription.AllProductTags">
-		<Value>Entdecken Sie alle Produkt Tags im {0} Online-Shop.</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageDescription.CompareProducts">
-		<Value>Vergleichen Sie Produkte im {0} Online-Shop.</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageDescription.Manufacturers">
-		<Value>Entdecken Sie alle Hersteller im {0} Online-Shop.</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageDescription.RecentlyAddedProducts">
-		<Value>Entdecken Sie alle zuletzt hinzugefügten Produkte im {0} Online-Shop.</Value>
-	</LocaleResource>
-	<LocaleResource Name="PageDescription.RecentlyViewedProducts">
-		<Value>Entdecken Sie alle zuletzt angesehenen Produkte im {0} Online-Shop.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Pager.CurrentPage">
 		<Value>Seite {0} von {1} ({2} Gesamt)</Value>
@@ -10559,12 +10421,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Plugins.CannotLoadModule">
 		<Value>Das Plugin oder der Provider "{0}" kann nicht geladen werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Plugins.Feed.FreeShippingThreshold">
-		<Value>Kostenloser Versand ab</Value>
-	</LocaleResource>
-	<LocaleResource Name="Plugins.Feed.FreeShippingThreshold.Hint">
-		<Value>Betrag, ab dem keine Versandkosten anfallen.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Plugins.Permissions.DisplayName.Display">
 		<Value>Anzeigen</Value>
@@ -10756,9 +10612,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Providers.FriendlyName.MediaStorage.OmmCMSFileSystem">
 		<Value>Dateisystem</Value>
 	</LocaleResource>
-	<LocaleResource Name="Providers.FriendlyName.Tax.Free">
-		<Value>Steuerbefreit</Value>
-	</LocaleResource>
 	<LocaleResource Name="Providers.MenuItems.FriendlyName.Catalog">
 		<Value>Warengruppenbaum</Value>
 	</LocaleResource>
@@ -10770,12 +10623,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Reviews">
 		<Value>Bewertungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="RSS.InformationAboutProducts">
-		<Value>Produkt-Informationen</Value>
-	</LocaleResource>
-	<LocaleResource Name="RSS.RecentlyAddedProducts">
-		<Value>Neu zugefügte Produkte</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search">
 		<Value>Suchen</Value>
@@ -10841,7 +10688,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Filtern nach</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.FilterNoResultsText">
-		<Value>Ihr Filter ergab leider keine Produkttreffer.</Value>
+		<Value>Ihr Filter hat keine passenden Inhalte gefunden.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.Hits">
 		<Value>Treffer</Value>
@@ -10858,14 +10705,11 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Search.InstantSearch">
 		<Value>Instantsuche</Value>
 	</LocaleResource>
-	<LocaleResource Name="Search.Manufacturer">
-		<Value>Hersteller</Value>
-	</LocaleResource>
 	<LocaleResource Name="Search.NoMoreHitsFound">
 		<Value>Es wurden keine weiteren Treffer gefunden.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.NoResultsText">
-		<Value>Ihre Suche ergab leider keine Produkttreffer.</Value>
+		<Value>Ihre Suche hat keine passenden Inhalte gefunden.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.NumHits">
 		<Value>{0} Treffer</Value>
@@ -10889,7 +10733,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Wonach suchen Sie?</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.SearchInDescriptions">
-		<Value>In den Produktbeschreibungen suchen</Value>
+		<Value>In Beschreibungen suchen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Search.SearchTerm">
 		<Value>Suchbegriff</Value>
@@ -11211,7 +11055,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Hintergrundfarbe Listenelemente</Value>
 	</LocaleResource>
 	<LocaleResource Name="ThemeVar.Alpha.BoxBackground.Hint">
-		<Value>Hintergrundfarbe von Listenelementen wie Kategorie- oder Produktlisten</Value>
+		<Value>Hintergrundfarbe von Listenelementen und Inhaltskarten.</Value>
 	</LocaleResource>
 	<LocaleResource Name="ThemeVar.Alpha.BtnBackground">
 		<Value>Hintergrundfarbe Standard-Button</Value>

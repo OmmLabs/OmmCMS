@@ -30,7 +30,7 @@ public class MediaSettings : ISettings
     /// Gets or sets the height to width ratio for thumbnails in grid style lists (0.2 - 2)
     /// </summary>
     /// <remarks>
-    /// A value greater than 1 indicates, that your product pictures are generally
+    /// A value greater than 1 indicates, that your content images are generally
     /// in portrait format, less than 1 indicates landscape format.
     /// </remarks>
     public float DefaultThumbnailAspectRatio { get; set; } = 1;
@@ -201,7 +201,7 @@ public class MediaSettings : ISettings
     /// to the media storage, and replaces the Base64 fragment with the media path.
     /// Offloading is automatically triggered by saving an entity to the database.
     /// Currently supported entity types are: 
-    /// <c>Product</c>, <c>Category</c>, <c>Manufacturer</c> and <c>Topic</c>.
+    /// <c>Topic</c>.
     /// </summary>
     public bool OffloadEmbeddedImagesOnSave { get; set; } = true;
 

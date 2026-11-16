@@ -5,7 +5,7 @@ using OmmCMS.Core.Common;
 using OmmCMS.Core.Localization;
 using OmmCMS.Test.Common;
 
-namespace OmmCMS.Core.Tests.Catalog.Pricing;
+namespace OmmCMS.Core.Tests.Common;
 
 [TestFixture]
 public class PriceFormattingTests : ServiceTestBase

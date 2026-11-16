@@ -826,6 +826,8 @@ try:
         assert rows("SELECT COUNT(*) FROM Setting WHERE lower(Name) IN ('mediasettings.productthumbpicturesize', 'mediasettings.productdetailspicturesize', 'mediasettings.cartthumbpicturesize', 'customersettings.hidemyaccountorders', 'customersettings.hidedownloadableproductstab', 'privacysettings.fullnameonproductrequestrequired', 'seosettings.productdescriptionpriority', 'adminareasettings.displayproductpictures')") == [0], "Commerce settings remain"
         assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName = 'Admin.Configuration.Settings.Media.PreviewThumbnailSize'") == [1], "CMS preview thumbnail label missing"
         assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName LIKE 'Admin.Configuration.Settings.Performance.MaxUnavailableAttributeCombinations%'") == [0], "Retired product variant performance resources remain"
+        assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName LIKE 'Aria.Label.Cart%' OR ResourceName LIKE 'Aria.Label.Checkout%' OR ResourceName LIKE 'Admin.System.Maintenance.DeleteAbandonedCarts%' OR ResourceName LIKE 'Admin.CurrentWishlists%' OR ResourceName IN ('HomePage.Products', 'RSS.RecentlyAddedProducts', 'Providers.FriendlyName.Tax.Free')") == [0], "Final retired commerce resource families remain"
+        assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName IN ('Admin.Customers.Customers.Impersonate.Button', 'Search.NoResultsText', 'CookieManager.Dialog.Required.Intro')") == [3], "Retained CMS labels missing"
         retired_catalog_tables = ("product", "category", "manufacturer", "producttemplate", "categorytemplate",
             "manufacturertemplate", "product_category_mapping", "product_manufacturer_mapping",
             "productbundleitem", "productbundleitemattributefilter", "product_mediafile_mapping", "producttag",
@@ -880,8 +882,9 @@ try:
         assert not topics.intersection({"PaymentInfo", "ShippingInfo", "CheckoutAsGuestOrRegister"})
         assert "catalog" not in rows("SELECT ProviderName FROM MenuItemRecord")
         tasks = set(rows("SELECT Type FROM ScheduleTask"))
-        assert "QueuedMessagesSendTask" in tasks
-        assert not tasks.intersection({"ProductRuleEvaluatorTask", "UpdateExchangeRateTask"})
+        assert tasks == {"QueuedMessagesSendTask", "QueuedMessagesClearTask", "DeleteGuestsTask", "DeleteLogsTask",
+                         "ClearCacheTask", "TransientMediaClearTask", "TempFileCleanupTask",
+                         "RebuildXmlSitemapTask", "TargetGroupEvaluatorTask"}, "Unexpected scheduled jobs in fresh CMS"
     print("CMS installer and SQLite starter content passed.")
     start()
     page = wait_for("/")
