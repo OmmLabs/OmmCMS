@@ -76,6 +76,8 @@ Phases 816–830: remove bank account configuration, settings binding, payment-s
 
 Phases 831–840: unify the preferred address selection, its per-site customer attribute, administrative and public address editors, and import defaults. Historical customer address relationships are handled separately.
 
+Phases 841–845: enable the preferred-address picker, editing and ownership checks in the account and administration UI and add a fresh-install regression for selection and persistence.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

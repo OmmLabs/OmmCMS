@@ -183,7 +183,7 @@ public class CustomerController : AdminController
             model.Addresses = new()
             {
                 Id = customer.Id,
-                Addresses = await customer.Addresses.MapAsync(customer, false)
+                Addresses = await customer.Addresses.MapAsync(customer, true)
             };
 
             model.SelectedCustomerRoleIds = [.. customer.CustomerRoleMappings
@@ -354,7 +354,7 @@ public class CustomerController : AdminController
 
     private async Task PrepareAddressModelAsync(CustomerAddressModel model, Customer customer, Address address)
     {
-        await address.MapAsync(model.Address, customer, false, true);
+        await address.MapAsync(model.Address, customer, true, true);
 
         model.CustomerId = customer.Id;
         model.Username = customer.Username;
@@ -1007,13 +1007,14 @@ public class CustomerController : AdminController
     {
         var customer = await _db.Customers
             .IncludeCustomerRoles()
+            .Include(x => x.Addresses)
             .FindByIdAsync(customerId, false);
         if (customer == null)
         {
             return NotFound();
         }
 
-        var address = await _db.Addresses.FindByIdAsync(addressId, false);
+        var address = customer.Addresses.FirstOrDefault(x => x.Id == addressId);
         if (address == null)
         {
             return NotFound();
@@ -1032,13 +1033,14 @@ public class CustomerController : AdminController
     {
         var customer = await _db.Customers
             .IncludeCustomerRoles()
-            .FindByIdAsync(model.CustomerId, false);
+            .Include(x => x.Addresses)
+            .FindByIdAsync(model.CustomerId);
         if (customer == null)
         {
             return NotFound();
         }
 
-        var address = await _db.Addresses.FindByIdAsync(model.Address.Id, true);
+        var address = customer.Addresses.FirstOrDefault(x => x.Id == model.Address.Id);
         if (address == null)
         {
             return NotFound();
@@ -1051,7 +1053,7 @@ public class CustomerController : AdminController
 
         if (ModelState.IsValid)
         {
-            await model.Address.MapAsync(address, customer, false);
+            await model.Address.MapAsync(address, customer, true);
             await _db.SaveChangesAsync();
 
             NotifySuccess(T("Admin.Customers.Customers.Addresses.Updated"));
@@ -1087,7 +1089,7 @@ public class CustomerController : AdminController
         var model = new CustomerModel.AddressesModel
         {
             Id = customer.Id,
-            Addresses = await customer.Addresses.MapAsync(customer, false)
+            Addresses = await customer.Addresses.MapAsync(customer, true)
         };
 
         return PartialView("_Addresses", model);
@@ -1118,7 +1120,7 @@ public class CustomerController : AdminController
         var model = new CustomerModel.AddressesModel
         {
             Id = customer.Id,
-            Addresses = await customer.Addresses.MapAsync(customer, false)
+            Addresses = await customer.Addresses.MapAsync(customer, true)
         };
 
         return PartialView("_Addresses", model);

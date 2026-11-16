@@ -153,7 +153,16 @@ def editorial_workflows(password):
     if "--account-trimmed" in sys.argv:
         profile = get_page("/customer/info", admin, "save-info-button")
         assert "PreferredShippingMethodId" not in profile and "PreferredPaymentMethod" not in profile
-        get_page("/customer/addresses", admin, "add-address-button")
+        addresses = get_page("/customer/addresses", admin, "default-address-button")
+        admin_id = read_rows("SELECT Id FROM Customer WHERE Email = ?", ("admin@ommcms.test",))[0][0]
+        address_id = read_rows("SELECT Address_Id FROM CustomerAddresses WHERE Customer_Id = ?", (admin_id,))[0][0]
+        post_form(f"/customer/setdefaultaddress/{address_id}", admin, profile, {})
+        assert read_rows("SELECT Value FROM GenericAttribute WHERE EntityId = ? AND KeyGroup = 'Customer' AND Key = 'DefaultAddressId'", (admin_id,)) == [(str(address_id),)], "Preferred address was not persisted"
+        addresses = get_page("/customer/addresses", admin, f"id=\"caddr-hint{address_id}\"")
+        assert "Is default address" in addresses, "Preferred address badge missing"
+        edit = get_page(f"/customer/addressedit/{address_id}", admin, 'name="IsDefaultAddress"')
+        assert "IsDefaultBillingAddress" not in edit and "IsDefaultShippingAddress" not in edit
+        print("Preferred CMS address persists and renders without billing/shipping controls.")
         for action in ("orders", "cancelrecurringpayment", "returncases", "downloadableproducts", "useragreement", "rewardpoints", "stocksubscriptions", "stocksubscriptionspost"):
             path = "/customer/" + action
             assert request(path, client=admin)[0] == 404, f"Retired account action reachable: {path}"

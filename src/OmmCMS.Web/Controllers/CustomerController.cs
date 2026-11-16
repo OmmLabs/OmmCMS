@@ -295,7 +295,7 @@ public class CustomerController : PublicController
             return ChallengeOrForbid();
         }
 
-        var models = await customer.Addresses.MapAsync(customer, false);
+        var models = await customer.Addresses.MapAsync(customer, true);
 
         return View(models);
     }
@@ -388,7 +388,7 @@ public class CustomerController : PublicController
             return RedirectToAction(nameof(Addresses));
         }
 
-        var model = await address.MapAsync(customer, false);
+        var model = await address.MapAsync(customer, true);
 
         return View(model);
     }
@@ -411,13 +411,14 @@ public class CustomerController : PublicController
 
         if (ModelState.IsValid)
         {
-            await model.MapAsync(address, customer, false);
+            model.Id = address.Id;
+            await model.MapAsync(address, customer, true);
             await _db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Addresses));
         }
 
-        await address.MapAsync(model, customer, false);
+        await address.MapAsync(model, customer, true);
 
         return View(model);
     }
