@@ -50,11 +50,11 @@ public partial interface IRoundingHelper
     /// <param name="amount">Amount to round.</param>
     /// <param name="toNearestRounding">Amount by which was rounded.</param>
     /// <param name="currency">
-    /// Currency. <see cref="Currency.RoundOrderTotalEnabled"/> must be activated for this currency.
+    /// Currency. <see cref="Currency.RoundToNearestEnabled"/> must be activated for this currency.
     /// If <c>null</c>, currency will be obtained via <see cref="IWorkContext.WorkingCurrency"/>.
     /// </param>
     /// <returns>Rounded amount.</returns>
     /// <example>"Schweizer Rappenrundung" of 16.23 -> returned value is 16.25 and toNearestRounding is 0.02.</example>
-    /// <remarks>Usually this method is used to round the order total.</remarks>
+    /// <remarks>Rounds a monetary amount to the configured denomination.</remarks>
     decimal ToNearest(decimal amount, out decimal toNearestRounding, Currency currency = null);
 }

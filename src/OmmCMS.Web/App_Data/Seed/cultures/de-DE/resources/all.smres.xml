@@ -99,56 +99,8 @@
 	<LocaleResource Name="Account.CustomerInfo">
 		<Value>Kundeninformation</Value>
 	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders">
-		<Value>Bestellungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.NoOrders">
-		<Value>Keine Bestellungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.NotYourOrder">
-		<Value>Diese Bestellung konnte Ihnen nicht zugeordnet werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.OrderDate">
-		<Value>Auftragsdatum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.OrderDetails">
-		<Value>Auftragsdetails</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.OrderNumber">
-		<Value>Auftragsnummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.OrderStatus">
-		<Value>Auftragsstatus</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.OrderTotal">
-		<Value>Auftragswert gesamt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerOrders.ReturnItems">
-		<Value>Artikel zurücksenden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerReturnRequests">
-		<Value>Widerrufe und Retouren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerReturnRequests.Action">
-		<Value>Rücksendeaktion</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerReturnRequests.Comments">
-		<Value>Kommentar:</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerReturnRequests.Date">
-		<Value>Angefragt am</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerReturnRequests.Item">
-		<Value>Artikel</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.CustomerReturnRequests.Reason">
-		<Value>Rücksendegrund</Value>
-	</LocaleResource>
 	<LocaleResource Name="Account.CustomerSince">
 		<Value>Kunde seit {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.DownloadableProducts">
-		<Value>Downloadbare Artikel</Value>
 	</LocaleResource>
 	<LocaleResource Name="Account.EmailUsernameErrors.EmailTooLong">
 		<Value>Die E-Mail-Adresse ist zu lang.</Value>
@@ -285,12 +237,6 @@
 	<LocaleResource Name="Account.Login.CheckEmailAccount">
 		<Value>Die eingegebenen Benutzerdaten sind nicht korrekt oder Sie haben Ihr Konto noch nicht aktiviert. Bitte prüfen Sie Ihren Email-Posteingang und bestätigen Sie die Registrierung.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Account.Login.CheckoutAsGuest">
-		<Value>Als Gast bestellen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.Login.CheckoutAsGuestOrRegister">
-		<Value>Als Gast bestellen oder registrieren</Value>
-	</LocaleResource>
 	<LocaleResource Name="Account.Login.Fields.Email">
 		<Value>E-Mail</Value>
 	</LocaleResource>
@@ -338,9 +284,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Account.MyAccount">
 		<Value>Mein Konto</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.MyOrders">
-		<Value>Meine Bestellungen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Account.Options">
 		<Value>Optionen</Value>
@@ -432,12 +375,6 @@
 	<LocaleResource Name="Account.Register.Unsuccessful">
 		<Value>Registrierung nicht erfolgreich. Bitte korrigieren Sie die Fehler und versuchen es erneut.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Account.RewardPoints">
-		<Value>Bonuspunkte</Value>
-	</LocaleResource>
-	<LocaleResource Name="Account.ShoppingCart">
-		<Value>Warenkorb</Value>
-	</LocaleResource>
 	<LocaleResource Name="Account.YourAddress">
 		<Value>Ihre Adresse</Value>
 	</LocaleResource>
@@ -459,17 +396,8 @@
 	<LocaleResource Name="ActivityLog.AddNewCustomerRole">
 		<Value>Neue Kundengruppe ('{0}') hinzugefügt</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.AddNewDiscount">
-		<Value>Neuer Rabatt ('{0}') hinzugefügt</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.AddNewManufacturer">
 		<Value>Neuer Hersteller ('{0}') hinzugefügt</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.AddNewProduct">
-		<Value>Neues Produkt ('{0}') hinzugefügt</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.AddNewProductAttribute">
-		<Value>Neues Produktattribut ('{0}') hinzugefügt</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.AddNewSetting">
 		<Value>Neue Einstellung ('{0}') hinzugefügt</Value>
@@ -489,20 +417,11 @@
 	<LocaleResource Name="ActivityLog.DeleteCustomerRole">
 		<Value>Kundengruppe ('{0}') gelöscht</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.DeleteDiscount">
-		<Value>Rabatt ('{0}') gelöscht</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteManufacturer">
 		<Value>Hersteller ('{0}') gelöscht</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteOrder">
 		<Value>Auftrag {0} gelöscht</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.DeleteProduct">
-		<Value>Produkt ('{0}') gelöscht</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.DeleteProductAttribute">
-		<Value>Produktattribut ('{0}') gelöscht</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.DeleteReturnRequest">
 		<Value>Retoure (ID = {0}) gelöscht</Value>
@@ -525,20 +444,8 @@
 	<LocaleResource Name="ActivityLog.EditCustomerRole">
 		<Value>Kundengruppe ('{0}') bearbeitet</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.EditDiscount">
-		<Value>Rabatt ('{0}') bearbeitet</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.EditManufacturer">
 		<Value>Hersteller ('{0}') bearbeitet</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.EditOrder">
-		<Value>Auftrag {0} bearbeitet</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.EditProduct">
-		<Value>Produkt ('{0}') bearbeitet</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.EditProductAttribute">
-		<Value>Produktattribut ('{0}') bearbeitet</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.EditReturnRequest">
 		<Value>Retoure (ID = {0}) bearbeitet</Value>
@@ -570,12 +477,6 @@
 	<LocaleResource Name="ActivityLog.PublicStore.AddToCompareList">
 		<Value>Produkt zur Vergleichsliste hinzugefügt ('{0}')</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.PublicStore.AddToShoppingCart">
-		<Value>Produkt in den Warenkorb gelegt ('{0}')</Value>
-	</LocaleResource>
-	<LocaleResource Name="ActivityLog.PublicStore.AddToWishlist">
-		<Value>Produkt zur Wunschliste hinzugefügt ('{0}')</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.PublicStore.ContactUs">
 		<Value>Kontaktformular benutzt</Value>
 	</LocaleResource>
@@ -588,32 +489,14 @@
 	<LocaleResource Name="ActivityLog.PublicStore.Logout">
 		<Value>Abmeldung</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.PublicStore.PlaceOrder">
-		<Value>Hat einen neuen Auftrag erteilt (ID = {0})</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.PublicStore.ViewCategory">
 		<Value>Öffentlicher Shop. Hat eine Warengruppen-Detailseite angesehen ('{0}')</Value>
 	</LocaleResource>
 	<LocaleResource Name="ActivityLog.PublicStore.ViewManufacturer">
 		<Value>Öffentlicher Shop. Hat eine Hersteller-Detailseite angesehen (''{0}'')</Value>
 	</LocaleResource>
-	<LocaleResource Name="ActivityLog.PublicStore.ViewProduct">
-		<Value>Öffentlicher Shop. Hat eine Produkt-Detailseite angesehen (''{0}''</Value>
-	</LocaleResource>
 	<LocaleResource Name="ActivityLog.ResetThemeVars">
 		<Value>Theme "{0}" zurückgesetzt</Value>
-	</LocaleResource>
-	<LocaleResource Name="AddProductToCompareList.CouldNotBeAdded">
-		<Value>Produkt konnte nicht hinzugefügt werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="AddProductToCompareList.CouldNotBeRemoved">
-		<Value>Produkt konnte nicht entfernt werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="AddProductToCompareList.ProductWasAdded">
-		<Value>Das Produkt '{0}' wurde der Vergleichsliste hinzugefügt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="AddProductToCompareList.ProductWasDeleted">
-		<Value>Das Produkt '{0}' wurde von der Vergleichsliste entfernt.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Address">
 		<Value>Adresse</Value>
@@ -1783,21 +1666,6 @@
 	<LocaleResource Name="Admin.Configuration.ActivityLog.ActivityLogType.Updated">
 		<Value>Die Ereignistypen wurden erfolgreich bearbeitet.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Category.Acl.AssignToSubCategoriesAndProducts">
-		<Value>Diese Konfiguration für Kindelemente übernehmen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Category.Acl.AssignToSubCategoriesAndProducts.Hint">
-		<Value>Diese Funktion übernimmt die Zugriffsrecht-Konfiguration dieser Warengruppe für alle Unterwarengruppen und Produkte.&lt;br/&gt;
-                    Bitte beachten Sie, dass die Änderungen der Zugriffsrechte zunächst gespeichert werden müssen, &lt;br /&gt;
-                    bevor diese für Unterkategorien und Produkte übernommen werden können. &lt;br /&gt;
-                    &lt;b&gt;Vorsicht:&lt;/b&gt; Bitte beachten Sie, &lt;b&gt;dass vorhandene Zugriffsrechte überschrieben bzw. gelöscht werden&lt;/b&gt;.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Category.Stores.AssignToSubCategoriesAndProducts">
-		<Value>Diese Konfiguration für Kindelemente übernehmen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Category.Stores.AssignToSubCategoriesAndProducts.Hint">
-		<Value>Diese Funktion übernimmt die Shop-Konfiguration dieser Warengruppe für alle Unterwarengruppen und Produkte. Bitte beachten Sie, dass die Änderungen an der Store-Konfiguration zunächst gespeichert werden müssen, bevor diese für Unterkategorien und Produkte übernommen werden können. &lt;b&gt;Vorsicht:&lt;/b&gt; Bitte beachten Sie, &lt;b&gt;dass vorhandene Store-Konfigurationen überschrieben bzw. gelöscht werden&lt;/b&gt;.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.CollectionGroup.EntityName">
 		<Value>Objekt</Value>
 	</LocaleResource>
@@ -2032,62 +1900,44 @@
 	<LocaleResource Name="Admin.Configuration.Currencies.Fields.Rate.Hint">
 		<Value>Der Wechselkurs im Verhältnis zur Hauptwährung des Shops.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundNetPrices">
-		<Value>Bei Nettopreisanzeige runden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundNetPrices.Hint">
-		<Value>Legt fest, ob bei der Warenkorbberechnung auch dann gerundet werden soll, wenn dem Kunden Nettopreise angezeigt werden.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundNumDecimals">
 		<Value>Anzahl Dezimalstellen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundNumDecimals.Hint">
 		<Value>Legt fest, auf wieviele Dezimalstellen gerundet werden soll (Standard: 2)</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundOrderItemsEnabled">
-		<Value>Beträge aller Bestellpositionen runden</Value>
+	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundingEnabled">
+		<Value>Währungsbeträge runden</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundOrderItemsEnabled.Hint">
-		<Value>Legt fest, ob die Beträge aller Bestellpositionen gerundet werden sollen (Preise, Steuern, Gebühren etc.). Es gelten die allgemeinen Rundungseinstellungen, sofern hier nicht festgelegt.</Value>
+	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundingEnabled.Hint">
+		<Value>Legt fest, ob Währungsbeträge gerundet werden sollen. Es gelten die allgemeinen Rundungseinstellungen, sofern hier nicht festgelegt.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundOrderItemsEnabled.Validation">
+	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundingEnabled.Validation">
 		<Value>Die Anzahl der Dezimalstellen muss zwischen 0 und 8 liegen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundOrderTotalDenominator">
+	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundingDenomination">
 		<Value>Runden nach</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundOrderTotalDenominator.Hint">
-		<Value>Legt das nächste Vielfache des kleinsten, gewählten Betrages fest, auf den die Bestellsumme gerundet werden soll. Bei 0,05 wird z.B. 9,43 auf 9,45 gerundet.</Value>
+	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundingDenomination.Hint">
+		<Value>Legt das nächste Vielfache des kleinsten, gewählten Betrages fest, auf den der Betrag gerundet werden soll. Bei 0,05 wird z.B. 9,43 auf 9,45 gerundet.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundOrderTotalEnabled">
-		<Value>Bestellsumme runden</Value>
+	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundToNearestEnabled">
+		<Value>Auf die nächste Stückelung runden</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundOrderTotalEnabled.Hint">
-		<Value>Legt fest, ob die Bestellsumme gerundet werden soll.</Value>
+	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundToNearestEnabled.Hint">
+		<Value>Legt fest, ob der Betrag auf die nächste Stückelung gerundet werden soll.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundOrderTotalRule">
+	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundingRule">
 		<Value>Rundungsregel</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundOrderTotalRule.Hint">
-		<Value>Legt die Regel für das Runden der Bestellsumme fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundUnitPrices">
-		<Value>Einzelpreis runden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundUnitPrices.Hint">
-		<Value>Legt fest, ob der Produktpreis bei der Warenkorbberechnung vor oder nach der Mengenmultiplikation gerundet werden soll. Falls aktiviert wird der Einzelpreis gerundet und dann mit der Menge multipliziert. Falls deaktiviert wird der Einzelpreis mit der Menge multipliziert und erst danach gerundet.</Value>
+	<LocaleResource Name="Admin.Configuration.Currencies.Fields.RoundingRule.Hint">
+		<Value>Legt die Regel für das Runden des Betrags fest.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Currencies.LiveRates">
 		<Value>Aktuelle Umrechnungskurse Online (Live)</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Currencies.Localization">
 		<Value>Lokalisierung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.NoPaymentMethodsEnabledRounding">
-		<Value>Unabhängig von der Währungs-Konfiguration werden Bestellsummen erst gerundet, wenn das für die gewählte Zahlart auch vorgesehen ist. Klicken Sie bei den gewünschten Zahlarten auf &lt;a href='{0}'&gt;Bearbeiten&lt;/a&gt; und aktivieren Sie die Rundungs-Option.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Currencies.PaymentMethodsEnabledRoundingList">
-		<Value>Zahlarten, bei denen Bestellsummen-Rundung aktiviert ist</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Currencies.PublishedCurrencyRequired">
 		<Value>Mindestens eine Währung muss veröffentlicht sein.</Value>
@@ -2112,48 +1962,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.DeliveryTime.EditDeliveryTimeDetails">
 		<Value>Lieferzeit bearbeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes">
-		<Value>Lieferzeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.AddNew">
-		<Value>Lieferzeit hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.CannotDeleteAssignedProducts">
-		<Value>Die Lieferzeit "{0}" kann nicht gelöscht werden. Ihr sind Produkte oder Produktvarianten zugeordnet.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.CannotDeleteDefaultDeliveryTime">
-		<Value>Die Standard-Lieferzeit "{0}" kann nicht gelöscht werden. Bestimmen Sie zuvor eine andere Standard-Lieferzeit.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.Fields.Color">
-		<Value>Farbe</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.Fields.DisplayLocale.Validation">
-		<Value>Die Eingabe muss zwischen 1 und 50 Zeichen lang sein.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.Fields.IsDefault">
-		<Value>Ist Standard</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.Fields.IsDefault.Hint">
-		<Value>Bestimmt die Standard-Lieferzeit</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.Fields.MaxDays">
-		<Value>Lieferung spätestens (in Tagen)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.Fields.MaxDays.Hint">
-		<Value>Legt den spätesten Zeitpunkt der Lieferung in Tagen fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.Fields.MinDays">
-		<Value>Lieferung frühestens (in Tagen)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.Fields.MinDays.Hint">
-		<Value>Legt den frühesten Zeitpunkt der Lieferung in Tagen fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.Fields.Name">
-		<Value>Anzeigename</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.DeliveryTimes.Updated">
-		<Value>Die Lieferzeit wurde erfolgreich aktualisiert.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.EmailAccounts">
 		<Value>E-Mail</Value>
@@ -2698,48 +2506,6 @@
 	<LocaleResource Name="Admin.Configuration.PriceLabels.EditPriceLabelDetails">
 		<Value>Preis Label bearbeiten</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit">
-		<Value>Verpackungseinheiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.Added">
-		<Value>Verpackungseinheit wurde erfolgreich zugefügt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.AddNew">
-		<Value>Verpackungseinheit hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.AddQuantityUnit">
-		<Value>Verpackungseinheit hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.CannotDeleteAssignedProducts">
-		<Value>Die Verpackungseinheit "{0}" kann nicht gelöscht werden. Ihr sind Produkte oder Produktvarianten zugeordnet.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.CannotDeleteDefaultQuantityUnit">
-		<Value>Die Standard-Verpackungseinheit "{0}" kann nicht gelöscht werden. Bestimmen Sie zuvor eine andere Standard-Verpackungseinheit.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.EditQuantityUnit">
-		<Value>Verpackungseinheit bearbeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.EditQuantityUnitDetails">
-		<Value>Verpackungseinheit bearbeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.Fields.IsDefault">
-		<Value>Standard-Verpackungseinheit</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.Fields.IsDefault.Hint">
-		<Value>Legt die Standard-Verpackungseinheit fest</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.Fields.Name">
-		<Value>Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.Fields.Name.Hint">
-		<Value>Legt den Namen der Verpackungseinheit fest</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.Fields.NamePlural">
-		<Value>Name Mehrzahl</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.QuantityUnit.Fields.NamePlural.Hint">
-		<Value>Legt den Namen in Mehrzahl fest. Beispiel: "Fässer" für die Verpackungseinheit "Fass".</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Quantityunits.Updated">
 		<Value>Verpackungseinheit wurde erfolgreich aktualisiert</Value>
 	</LocaleResource>
@@ -2845,11 +2611,11 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Currency.ExchangeRateProvider">
 		<Value>Online Wechselkursdienst</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Currency.RoundOrderItemsEnabled">
-		<Value>Beträge aller Bestellpositionen runden</Value>
+	<LocaleResource Name="Admin.Configuration.Settings.Currency.RoundingEnabled">
+		<Value>Währungsbeträge runden</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Currency.RoundOrderItemsEnabled.Hint">
-		<Value>Legt fest, ob die Beträge aller Bestellpositionen gerundet werden sollen (Preise, Steuern, Gebühren etc.). Rundungseinstellungen können optional auch bei der jeweiligen Währung festgelegt werden.</Value>
+	<LocaleResource Name="Admin.Configuration.Settings.Currency.RoundingEnabled.Hint">
+		<Value>Legt fest, ob Währungsbeträge gerundet werden sollen. Rundungseinstellungen können optional auch bei der jeweiligen Währung festgelegt werden.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser">
 		<Value>Kunden-Einstellungen</Value>
@@ -4442,81 +4208,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.News.ShowNewsOnMainPage.Hint">
 		<Value>News auf der Startseite anzeigen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order">
-		<Value>Auftrags-Einstellungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.AnonymousCheckoutAllowed">
-		<Value>Gäste dürfen bestellen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.AnonymousCheckoutAllowed.Hint">
-		<Value>Gästen erlauben, ohne sich zu Registrieren Bestellungen aufzugeben.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.ApplyToSubtotal.Hint">
-		<Value>Bestimmt, ob sich der Mindest-/Höchstbetrag auf die Auftragszwischensumme bezieht, andernfalls bezieht er sich auf den Gesamtbetrag.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.DisableOrderCompletedPage">
-		<Value>"Auftrag abgeschlossen" Seite unterbinden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.DisableOrderCompletedPage.Hint">
-		<Value>Der Kunde wird direkt auf die Auftrags-Detail-Seite geleitet, falls diese Einstellung aktiviert ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.DisplayOrdersOfAllStores">
-		<Value>Aufträge aller Shops anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.DisplayOrdersOfAllStores.Hint">
-		<Value>Legt fest, ob dem Kunden die Aufträge aller Shops angezeigt werden sollen. Ist diese Option deaktiviert, so werden nur die Aufträge des aktuellen Shops angezeigt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.IsReOrderAllowed">
-		<Value>"Erneut bestellen" aktiviert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.IsReOrderAllowed.Hint">
-		<Value>Benutzer können Bestellung erneut abschicken.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.MaxMessageOrderAgeInDays">
-		<Value>Maximale Auftragsalter für den Nachrichtenversand</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.MaxMessageOrderAgeInDays.Hint">
-		<Value>Legt das maximale Auftragsalter in Tagen fest, bis zu dem Nachrichten erstellt und gesendet werden sollen. Setzen Sie diesen Wert auf 0, um Nachrichten immer zu versenden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.MaxOrderTotal">
-		<Value>Höchstbestellwert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.MaxOrderTotal.Hint">
-		<Value>Legt den standardmäßigen Höchstbestellwert für den Shop fest. Wird von Beschränkungen in Kundengruppen überschrieben.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.MinOrderTotal">
-		<Value>Mindestbestellwert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.MinOrderTotal.Hint">
-		<Value>Legt den standardmäßigen Mindestbestellwert für den Shop fest. Wird von Beschränkungen in Kundengruppen überschrieben.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.MultipleOrderTotalRestrictionsExpandRange">
-		<Value>Kundengruppen erweitern den Wertebereich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.MultipleOrderTotalRestrictionsExpandRange.Hint">
-		<Value>Legt fest, ob mehrfache Bestellwertbeschränkungen durch Kundengruppenzuordnungen den erlaubten Bestellwertbereich erweitern.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.OnePageCheckoutEnabled">
-		<Value>OnePageCheckout aktiviert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.OnePageCheckoutEnabled.Hint">
-		<Value>Aktiviert Eine-Seite-Schnellcheckout.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.OrderIdent">
-		<Value>Bestellnummer</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.OrderIdent.Hint">
-		<Value>Legen Sie einen Startwert für Bestellnummern fest. Dies ist nützlich, wenn Sie Ihre Aufträge ab einem Bestimmten Wert starten lassen möchten. Der Wert muss größer sein, als die aktuell höchste Bestellnummer und gilt für zukünftige Bestellungen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.OrderListPageSize">
-		<Value>Anzahl der Aufträge pro Seite</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.OrderListPageSize.Hint">
-		<Value>Legt die Anzahl der dargestellten Aufträge pro Seite fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Order.OrderTotalRestrictionType.Hint">
-		<Value>Bestimmt, ob mehrfache Bestellwertbeschränkungen durch Kundengruppenzuordnungen kumuliert werden.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Performance">
 		<Value>Leistung</Value>
 	</LocaleResource>
@@ -4641,84 +4332,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Configuration.Settings.Resiliency.TrafficTimeWindow.Hint">
 		<Value>Die Dauer des Zeitfensters, das den Zeitraum definiert, in dem der anhaltende Traffic gemessen wird.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints">
-		<Value>Bonuspunkte-Einstellungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.Description">
-		<Value>Das Bonuspunkteprogramm ermöglicht es Kunden, für bestimmte Aktionen Punkte zu sammeln, beispielsweise für Registrierungen oder Bestellungen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.Earning">
-		<Value>Bonus Punkt System</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.Enabled">
-		<Value>Aktiviert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.Enabled.Hint">
-		<Value>Bonuspunkte aktivieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.ExchangeRate">
-		<Value>Wechselkurs</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.ExchangeRate.Hint">
-		<Value>Wechselkurs für Bonuspunkte</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.ExchangeRate.Hint2">
-		<Value>1 Bonus Punkt =</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForNewsletterSubscription">
-		<Value>Punkte für das Abonnieren des Newsletters</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForNewsletterSubscription.Hint">
-		<Value>Legt fest, wie viele Bonuspunkte registrierte Kunden einmalig für das Abonnieren des Newsletters erhalten.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Amount">
-		<Value>Punkte auf den Bestellwert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Amount.Hint">
-		<Value>Bonuspunkte, die für den Einkauf gewährt werden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Awarded">
-		<Value>Voraussetzung Auftragsstatus</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Awarded.Hint">
-		<Value>Die Bonuspunkte werden gewährt, wenn der Auftragsstatus ist …</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Awarded.Pending">
-		<Value>Der Auftragsstatus konnte nicht auf "unerledigt" gesetzt werden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Canceled">
-		<Value>Stornierter Auftragsstatus</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Canceled.Hint">
-		<Value>Die Bonuspunkte werden storniert, wenn der Auftragsstatus ist …</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Canceled.Pending">
-		<Value>Der Auftragsstatus konnte nicht auf "unerledigt" gesetzt werden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForRegistration">
-		<Value>Punkte für die Registrierung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.PointsForRegistration.Hint">
-		<Value>Bonuspunkte, die für eine Registrierung gewährt werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.RoundDownPointsForPurchasedAmount">
-		<Value>Betrag bei Punkten für einen Einkauf abrunden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.RoundDownPointsForPurchasedAmount.Hint">
-		<Value>Legt fest, ob der Betrag bei der Berechnung der Bonuspunkte, die für den Kauf eines Produkts gewährt werden, abgerundet werden soll.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.RoundDownRewardPoints">
-		<Value>Punkte abrunden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.RoundDownRewardPoints.Hint">
-		<Value>Legt fest, ob bei der Punkteberechnung abgerundet werden soll. Ansonsten werden Bonuspunkte aufgerundet.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.ShowPointsForProductPurchase">
-		<Value>Punkte für den Kauf eines Produktes anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.RewardPoints.ShowPointsForProductPurchase.Hint">
-		<Value>Legt fest, ob die für den Kauf eines Produktes gewährten Bonuspunkte samt dem entsprechenden Betrag auf der Produktdetailseite angezeigt werden sollen.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Search.CommonFacet.Alias">
 		<Value>Alias</Value>
 	</LocaleResource>
@@ -4821,220 +4434,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Configuration.Settings.Search.WildcardSearchNote">
 		<Value>Der Wildcard-Modus kann bei einer großen Anzahl an Objekten die Suche verlangsamen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart">
-		<Value>Warenkorb-Einstellungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.AddProductsToBasketInSinglePositions">
-		<Value>Produkte in einzelnen Positionen in den Warenkorb legen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.AddProductsToBasketInSinglePositions.Hint">
-		<Value>Aktivieren Sie diese Option, wenn Produkte mit verschiedenen Mengenangaben als Einzelpositionen in den Warenkorb gelegt werden sollen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.AllowActivatableCartItems">
-		<Value>Produkte im Warenkorb können deaktiviert werden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.AllowActivatableCartItems.Hint">
-		<Value>Legt fest, ob Produkte im Warenkorb deaktiviert werden können. Deaktivierte Produkte werden nicht mitbestellt und verbleiben nach Auftragseingang im Warenkorb.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.AllowAnonymousUsersToEmailWishlist">
-		<Value>Gästen erlauben, ihre Wunschzettel per E-Mail zu versenden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.AllowAnonymousUsersToEmailWishlist.Hint">
-		<Value>Legt fest, ob Gäste ihre Wunschliste per E-Mail zu versenden dürfen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.AllowOutOfStockItemsToBeAddedToWishlist">
-		<Value>Nicht vorrätige Artikel zur Wunschliste hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.AllowOutOfStockItemsToBeAddedToWishlist.Hint">
-		<Value>Legt fest, ob nicht vorrätige Produkte zur Wunschliste hinzugefügt werden können.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CartSettings">
-		<Value>Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.Checkout">
-		<Value>Checkout</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CheckoutProcess">
-		<Value>Checkout-Prozess</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CheckoutProcess.Hint">
-		<Value>Legt die Art des Checkout mit den zu durchlaufenden Schritten fest.</Value>
-	</LocaleResource>
 
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.DeliveryTimesInShoppingCart">
-		<Value>Darstellung von Lieferzeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.DeliveryTimesInShoppingCart.Hint">
-		<Value>Legt die Darstellungsart von Lieferzeiten im Warenkorb fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.DisplayCartAfterAddingProduct">
-		<Value>Warenkorb anzeigen, wenn ein Produkt hinzugefügt wird</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.DisplayCartAfterAddingProduct.Hint">
-		<Value>Falls aktiviert, wird der Kunde zum Warenkorb weitergeleitet, wenn er ein Produkt hinzufügt. Ansonsten findet keine Weiterleitung statt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.DisplayWishlistAfterAddingProduct">
-		<Value>Wunschzettel anzeigen, nachdem ein Produkt hinzugefügt wurde</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.DisplayWishlistAfterAddingProduct.Hint">
-		<Value>Falls aktiviert, wird der Kunde auf die Wunschzettelseite weitergeleitet, nachdem er ein Produkt hinzugefügt hat.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.EmailWishlistEnabled">
-		<Value>Wunschzettel kann per E-Mail verschickt werden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.EmailWishlistEnabled.Hint">
-		<Value>Legt fest, ob der Wunschzettel per E-Mail verschickt werden kann.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MaximumShoppingCartItems">
-		<Value>Maximale Anzahl Produkte im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MaximumShoppingCartItems.Hint">
-		<Value>Legt die maximale Anzahl Produkte im Warenkorb fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MaximumWishlistItems">
-		<Value>Maximale Anzahl Produkte auf dem Wunschzettel</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MaximumWishlistItems.Hint">
-		<Value>Legt die maximale Anzahl Produkte auf dem Wunschzettel fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MaxQuantityInputDropdownItems">
-		<Value>Obergrenze für die Bestellmengenauswahl via Dropdown-Menü</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MaxQuantityInputDropdownItems.Hint">
-		<Value>Legt die Obergrenze möglicher Bestellmengen fest, bis zu der ein Dropdown-Menü zur Eingabe der Bestellmenge angeboten werden soll. Ist die Anzahl größer, wird ein numerisches Eingabefeld als Steuerelement verwendet.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MiniShoppingCartEnabled">
-		<Value>Mini-Warenkorb aktiviert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MiniShoppingCartEnabled.Hint">
-		<Value>Aktiviert den Mini-Warenkorb.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MoveItemsFromWishlistToCart">
-		<Value>Artikel aus der Wunschliste in den Warenkorb verschieben</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MoveItemsFromWishlistToCart.Hint">
-		<Value>Aktivieren, um Artikel aus der Wunschliste in den Warenkorb zu verschieben.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.NewsLetterSubscription">
-		<Value>Abonnieren von Newslettern</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.NewsLetterSubscription.Hint">
-		<Value>Legt fest, ob Kunden bei einer Bestellung Newsletter abonnieren können und ob die Checkbox standardmäßig aktiviert ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.OrderConfirmationPage">
-		<Value>Bestellabschlussseite</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.QuickCheckoutEnabled">
-		<Value>Quick-Checkout</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.QuickCheckoutEnabled.Hint">
-		<Value>Beim Quick-Checkout werden Einstellungen der letzten Bestellung oder Kaufvoreinstellungen des Kunden angewendet (z.B. für die Rechnungs- und Lieferanschrift) und die zugehörigen Checkout-Schritte übersprungen. Der Kunde hat so die Möglichkeit direkt vom Warenkorb zur Bestellbestätigungsseite zu gelangen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowBasePrice">
-		<Value>Grundpreis anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowBasePrice.Hint">
-		<Value>Bestimmt ob der Grundpreis im Warenkorb angezeigt werden soll.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowCommentBox">
-		<Value>Kommentarbox anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowCommentBox.Hint">
-		<Value>Legt fest, ob der Kunde auf der Bestellabschlussseite einen Kommentar zu seiner Bestellung hinterlegen kann.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowConfirmOrderLegalHint">
-		<Value>Rechtliche Hinweise in der Warenkorbübersicht anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowConfirmOrderLegalHint.Hint">
-		<Value>Legt fest, ob rechtliche Hinweise in der Warenkorbübersicht auf der Bestellabschlussseite angezeigt werden. Dieser Text kann in den Sprachresourcen geändert werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowDiscountBox">
-		<Value>Zeige die Rabattbox im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowDiscountBox.Hint">
-		<Value>Zeigt die Rabattbox im Warenkorb an.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowEsdRevocationWaiverBox">
-		<Value>Widerrufsverzichtbox für elektronische Leistungen anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowEsdRevocationWaiverBox.Hint">
-		<Value>Legt fest, ob der Kunde auf der Bestellabschlussseite einem Widerrufsverzicht für elektronische Leistungen zustimmen muss.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowEssentialAttributesInMiniShoppingCart">
-		<Value>Wesentliche Merkmale im Mini-Warenkorb anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowLinkedAttributeValueQuantity">
-		<Value>Menge verknüpfter Produkte anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowLinkedAttributeValueQuantity.Hint">
-		<Value>Bestimmt, ob bei Werten von Variantattributen die Menge von verknüpften Produkten angezeigt werden soll.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowProductBundleImagesOnShoppingCart">
-		<Value>Produktbilder von Bundle-Bestandteilen anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowProductBundleImagesOnShoppingCart.Hint">
-		<Value>Legt fest, ob Produktbilder von Bundle-Bestandteilen angezeigt werden sollen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowProductBundleImagesOnWishList">
-		<Value>Zeigt Produktbilder von Bundle-Bestandteilen auf dem Wunschzettel</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowProductBundleImagesOnWishList.Hint">
-		<Value>Zeigt Produktbilder von Bundle-Bestandteilen auf dem Wunschzettel an.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowProductImagesInMiniShoppingCart">
-		<Value>Produktbilder im Mini-Warenkorb anzeigen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowProductImagesInMiniShoppingCart.Hint">
-		<Value>Zeigt Produktbilder im Mini-Warenkorb an.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowProductImagesOnShoppingCart">
-		<Value>Anzeige der Produktbilder im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowProductImagesOnShoppingCart.Hint">
-		<Value>Zeigt Produktbilder im Warenkorb an.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowProductImagesOnWishList">
-		<Value>Zeige Produktbilder auf dem Wunschzettel</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowProductImagesOnWishList.Hint">
-		<Value>Zeigt Produktbilder auf dem Wunschzettel an.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowSecondBuyButtonBelowCart">
-		<Value>Zweiter Kauf-Button unterhalb des Warenkorbs</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowSecondBuyButtonBelowCart.Hint">
-		<Value>Legt fest, ob auf der Bestellabschlussseite ein zweiter Kauf-Button (einschließlich der Gesamtsumme der Bestellung) unterhalb der Warenkorbartikel angezeigt werden soll. Aus Gründen der Rechtssicherheit wird dies für Shops in der EU empfohlen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowShortDesc">
-		<Value>Zeige Kurzbeschreibung der Produkte</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowShortDesc.Hint">
-		<Value>Bestimmt ob die Kurzbeschreibungen der Produkte im Warenkorb angezeigt werden sollen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowWeight">
-		<Value>Zeige Produktgewicht im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowWeight.Hint">
-		<Value>Legt fest ob das Produktgewicht im Warenkorb angezeigt wird.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ThirdPartyEmailHandOver">
-		<Value>Zustimmung zur E-Mail Weitergabe an Dritte</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ThirdPartyEmailHandOver.Hint">
-		<Value>Legt fest, ob Kunden bei einer Bestellung der Weitergabe ihrer E-Mail Adresse an Dritte zustimmen können und ob die Checkbox dafür standardmäßig aktiviert ist. Bitte beachten Sie, dass die Option 'Aktiviert anzeigen' im Rahmen der DSVGO nicht rechtskonform ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ThirdPartyEmailHandOverLabel">
-		<Value>Text für E-Mail Weitergabe</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ThirdPartyEmailHandOverLabel.Default">
-		<Value>Mit der Übermittlung und Speicherung meiner E-Mail-Adresse durch dritte Parteien bin ich einverstanden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ThirdPartyEmailHandOverLabel.Hint">
-		<Value>Legt den Text für die Zustimmung zur Weitergabe der E-Mail Adresse an Dritte fest. Wählen Sie bitte einen konkreten Grund für die Weitergabe, z.B. 'Mit der Übermittlung und Speicherung meiner E-Mail-Adresse zur Abwicklung des Käuferschutzes durch Trusted Shops bin ich einverstanden.'</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.WishlistSettings">
-		<Value>Wunschzettel</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.StoreScope">
 		<Value>Multi-Shop Konfiguration für</Value>
 	</LocaleResource>
@@ -6081,33 +5481,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.ContentManagement.Widgets.ChooseZone.Hint">
 		<Value>Bereich in den das Widget eingebunden werden soll.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentCarts">
-		<Value>Aktuelle Warenkörbe</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentCarts.Customer">
-		<Value>Kunde</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentCarts.Product">
-		<Value>Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentCarts.Quantity">
-		<Value>Menge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentCarts.Short">
-		<Value>Warenkörbe</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentCarts.Total">
-		<Value>Gesamt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentCarts.TotalItems">
-		<Value>Artikelanzahl</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentCarts.UnitPrice">
-		<Value>Einzelpreis</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.CurrentCarts.UpdatedOn">
-		<Value>geändert am</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.CurrentWishlists">
 		<Value>Aktuelle Wunschzettel</Value>
@@ -7777,102 +7150,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.NewsFeed.Title">
 		<Value>Aktuelles</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Order">
-		<Value>Auftrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Order.CustomerComment.Heading">
-		<Value>Der Kunde hat folgenden Kommentar für diese Bestellung hinterlassen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Order.FromStore">
-		<Value>von {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Order.ViaShippingMethod">
-		<Value>via {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Order.WithPaymentMethod">
-		<Value>per {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.CustomerCancelledEmailQueued">
-		<Value>"Auftrag storniert" E-Mail (an Kunden) wurde gequeued. Queued Email ID: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.CustomerCompletedEmailQueued">
-		<Value>"Auftrag abgeschlossen" E-Mail (an Kunden) wurde gequeued. Queued Email ID: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.CustomerDeliveredEmailQueued">
-		<Value>"Ausgeliefert" E-Mail (an Kunden) wurde gequeued. Queued Email ID: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.CustomerEmailQueued">
-		<Value>"Auftrag eingegangen" E-Mail (an Kunden) wurde gequeued. Queued Email ID: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.CustomerShippedEmailQueued">
-		<Value>"Versendet" E-Mail (an Kunden) wurde gequeued. Queued Email ID: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.MerchantEmailQueued">
-		<Value>"Auftrag eingegangen" E-Mail (an Shopbetreiber) wurde gequeued. Queued Email ID: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.NewsLetterSubscriptionAdded">
-		<Value>Newsletter wurde abonniert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.NewsLetterSubscriptionRemoved">
-		<Value>Newsletter-Abonnent wurde entfernt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderCancelled">
-		<Value>Auftrag wurde storniert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderCaptured">
-		<Value>Zahlung wurde erfasst</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderCaptureError">
-		<Value>Es ist ein Fehler bei der Zahlungsbuchung zu Auftrag {0} aufgetreten.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderDeleted">
-		<Value>Auftrag wurde gelöscht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderMarkedAsAuthorized">
-		<Value>Auftrag wurde autorisiert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderMarkedAsPaid">
-		<Value>Auftrag als bezahlt markiert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderMarkedAsPartiallyRefunded">
-		<Value>Auftrag als teilweise erstattet markiert: Betrag: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderMarkedAsRefunded">
-		<Value>Auftrag als erstattet markiert: Betrag: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderMarkedAsVoided">
-		<Value>Zahlungstransaktion als storniert markiert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderPartiallyRefunded">
-		<Value>Auftrag wurde teilweise erstattet. Betrag: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderPartiallyRefundError">
-		<Value>Es ist ein Fehler bei einer Teilerstattung zu Auftrag {0} aufgetreten.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderPlaced">
-		<Value>Auftrag ist eingegangen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderPlacedUcp">
-		<Value>Bestellung ist über UCP (Agentic Commerce) "{0}" eingegangen. Das Zahlungstoken {1} wurde ohne Benutzeroberfläche verarbeitet.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderRefunded">
-		<Value>Auftrag wurde erstattet. Betrag: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderRefundError">
-		<Value>Es ist ein Fehler bei einer Rückerstattung zu Auftrag {0} aufgetreten.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderStatusChanged">
-		<Value>Auftragsstatus geändert. Neuer Status: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderVoided">
-		<Value>Zahlungstransaktion wurde storniert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.OrderVoidError">
-		<Value>Es ist ein Fehler bei der Stornierung einer Zahlungstransaktion zu Auftrag {0} aufgetreten.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.OrderNotice.RefundAmountError">
-		<Value>Der zu erstattende Betrag muss größer 0 sein.</Value>
-	</LocaleResource>
 	<LocaleResource Name="admin.orders.pdfinvoice">
 		<Value>Auftrag als PDF</Value>
 	</LocaleResource>
@@ -8137,192 +7414,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Admin.Promotions.Campaigns.Warning">
 		<Value>Speichern Sie die Kampagne und benutzen Sie den Vorschau-Button, um sie zu testen, bevor Sie sie an viele Kunden versenden. Weitere Einstellungen, wie beispielsweise das bei der Kampagne zu verwendende E-Mail-Konto, können bei der Nachrichtenvorlage &lt;a href="{0}" class="alert-link"&gt;System.Campaign&lt;/a&gt; vorgenommen werden.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts">
-		<Value>Rabatte</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Added">
-		<Value>Der neue Rabatt wurde hinzugefügt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.AddNew">
-		<Value>Neuen Rabatt hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.AppliedDiscounts">
-		<Value>Rabatte</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.AppliedDiscounts.Hint">
-		<Value>Legt auf das Objekt anzuwendende Rabatte fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Deleted">
-		<Value>Der Rabatt wurde gelöscht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.EditDiscountDetails">
-		<Value>Rabattinformationen bearbeiten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.AppliedToCategories">
-		<Value>Zu Kategorien zugeordnet</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.AppliedToCategories.Hint">
-		<Value>Eine Liste von Kategorien, zu denen der Rabatt zugeordnet ist. Die Zuordnung kann auf der Detailseite der Kategorien vorgenommen werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.AppliedToManufacturers">
-		<Value>Herstellern zugeordnet</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.AppliedToManufacturers.Hint">
-		<Value>Eine Liste von Herstellern, denen der Rabatt zugeordnet ist. Die Zuordnung kann auf der Hersteller-Detailseite vorgenommen werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.AppliedToProducts">
-		<Value>Produkten zugeordnet</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.AppliedToProducts.Hint">
-		<Value>Eine Liste von Produkten, denen der Rabatt zugeordnet ist. Die Zuordnung kann auf der Produkt-Detailseite vorgenommen werden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.CouponCode">
-		<Value>Rabattcode</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.DiscountAmount">
-		<Value>Rabattbetrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.DiscountAmount.Hint">
-		<Value>Der Rabattbetrag, der dem Aufträgen zugeordnet werden soll.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.DiscountLimitation">
-		<Value>Gültigkeit</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.DiscountLimitation.Hint">
-		<Value>Legt die Gültigkeit des Rabatts fest.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.DiscountPercentage">
-		<Value>Rabatt in %</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.DiscountPercentage.Hint">
-		<Value>Der Prozentsatz, welcher als Rabatt dem Auftrag angerechnet werden soll.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.DiscountType">
-		<Value>Rabatttyp</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.DiscountType.Hint">
-		<Value>Der Rabatttyp.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.EndDate">
-		<Value>Endatum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.EndDate.Hint">
-		<Value>Das Enddatum für den Rabatt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.LimitationTimes">
-		<Value>Wie oft soll der Rabatt angewendet werden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.LimitationTimes.Hint">
-		<Value>Legt fest, wie oft der Rabatt angewendet werden soll.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.LimitationTimes.Times">
-		<Value>mal</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.Name">
-		<Value>Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.Name.Hint">
-		<Value>Der Name des Rabattes.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.OfferBadgeLabel">
-		<Value>Angebots-Badge Text</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.OfferBadgeLabel.Hint">
-		<Value>Text für das Angebots-Badge, z.B. "Deal". Dieser Wert überschreibt die Standardeinstellung des Systems.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.RequiresCouponCode">
-		<Value>Rabattcode erforderlich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.RequiresCouponCode.Hint">
-		<Value>Legt fest, dass der Rabatt erst nach Eingabe des Rabattcodes auf der Warenkorbseite angewendet wird.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.ShowCountdownRemainingHours">
-		<Value>Angebotsrestzeit, ab der ein Countdown angezeigt werden soll</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.ShowCountdownRemainingHours.Hint">
-		<Value>Legt die verbleibende Zeit (in Stunden) eines Angebotes fest, ab der ein Countdown auf der Produktdetailseite angezeigt werden soll, z.B. "endet in 3 Stunden, 23 Min.". Gilt nur für zeitlich begrenzte Rabatte mit einem Enddatum. Dieser Wert überschreibt die Standardeinstellung des Systems.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.StartDate">
-		<Value>Anfangsdatum</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.StartDate.Hint">
-		<Value>Das Datum, ab dem der Rabatt gültig ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.UsePercentage">
-		<Value>Als Prozentwert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Fields.UsePercentage.Hint">
-		<Value>Legt fest, ob der Wert als als Prozentwert rabattiert wir. Sonst wird der Wert direkt rabattiert.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.History">
-		<Value>Nutzungsprotokoll</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.History.Order">
-		<Value>Bisher erteilte Aufträge für den Rabatttyp</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.List.DiscountType">
-		<Value>Rabatttyp</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.List.DiscountType.Hint">
-		<Value>Filtert nach dem Rabatttyp.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.List.Name">
-		<Value>Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.List.Name.Hint">
-		<Value>Filtert nach dem Rabattnamen.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.List.RequiresCouponCode">
-		<Value>Gutscheincode erforderlich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.List.RequiresCouponCode.Hint">
-		<Value>Filtert Rabatte, bei denen ein Gutscheincode erforderlich ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.List.UsePercentage">
-		<Value>Als Prozentwert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.List.UsePercentage.Hint">
-		<Value>Filtert nach prozentualen Rabatten.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.NoObjectsAssigned">
-		<Value>Keinen Objekten zugeordnet</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Requirements">
-		<Value>Voraussetzungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Requirements.AddNew">
-		<Value>Hinzufügen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Requirements.DiscountRequirementType">
-		<Value>Typ der Voraussetzung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Requirements.DiscountRequirementType.Hint">
-		<Value>Voraussetzungen für den Rabatt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Requirements.DiscountRequirementType.Select">
-		<Value>Typ auswählen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Requirements.FailedToSave">
-		<Value>Speichern fehlgeschlagen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Requirements.Remove">
-		<Value>Voraussetzung für den Rabatt entfernen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Requirements.SaveBeforeEdit">
-		<Value>Sie müssen den Rabatt zunächst speichern, bevor Sie Voraussetzungen für seine Anwendung festlegen können</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Requirements.Saved">
-		<Value>Rabattvoraussetzung gespeichert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.RuleSetRequirements">
-		<Value>Voraussetzungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.RuleSetRequirements.Hint">
-		<Value>Legt Voraussetzungen für die Anwendung des Rabatts fest. Der Rabatt wird gewährt, wenn eine der ausgewählten Regeln erfüllt ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.Discounts.Updated">
-		<Value>Der Rabatt wurde erfolgreich bearbeitet</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Promotions.NewsLetterSubscriptions">
 		<Value>Newsletter Abonnenten</Value>
 	</LocaleResource>
@@ -8337,9 +7428,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Promotions.NewsLetterSubscriptions.Short">
 		<Value>Newsletter Abos</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Promotions.SalesReport.Sales">
-		<Value>Verkäufe</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Providers.ProvidingPlugin">
 		<Value>Bereitstellendes Plugin</Value>
@@ -8751,117 +7839,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Admin.Sales">
 		<Value>Verkauf</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Attribute">
-		<Value>Attribute</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Average">
-		<Value>Auftragssummen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Average.OrderStatus">
-		<Value>Auftragsstatus</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Average.SumAllTimeOrders">
-		<Value>Gesamt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Average.SumThisMonthOrders">
-		<Value>Diesen Monat</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Average.SumThisWeekOrders">
-		<Value>Diese Woche</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Average.SumThisYearOrders">
-		<Value>Dieses Jahr</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Average.SumTodayOrders">
-		<Value>Heute</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Bestsellers">
-		<Value>Bestseller</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Bestsellers.BillingCountry">
-		<Value>Land</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Bestsellers.BillingCountry.Hint">
-		<Value>Nach Ländern filtern.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Bestsellers.ByAmount">
-		<Value>Bestseller nach Betrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Bestsellers.ByQuantity">
-		<Value>Bestseller nach Menge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Bestsellers.Fields.Name">
-		<Value>Name</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Bestsellers.Fields.TotalAmount">
-		<Value>Gesamtwert (netto)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Bestsellers.Fields.TotalQuantity">
-		<Value>Gesamtmenge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Bestsellers.OrderStatus">
-		<Value>Auftragsstatus</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Bestsellers.OrderStatus.Hint">
-		<Value>Suche nach einem bestimmten Auftragsstatus, z.B. erledigt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Bestsellers.PaymentStatus">
-		<Value>Zahlungsstatus</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Bestsellers.PaymentStatus.Hint">
-		<Value>Suche nach einem bestimmten Zahlungsstatus, z.B. bezahlt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.ByAmount">
-		<Value>Nach Betrag</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.ByQuantity">
-		<Value>Nach Anzahl</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Incomplete">
-		<Value>Unvollständige Aufträge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Incomplete.Count">
-		<Value>Anzahl</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Incomplete.Item">
-		<Value>Unerledigte Aufträge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Incomplete.Total">
-		<Value>Summe</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Incomplete.TotalIncompleteOrders">
-		<Value>Gesamt (Aufträge unerledigt)</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Incomplete.TotalNotShippedOrders">
-		<Value>Nicht gelieferte Aufträge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Incomplete.TotalUnpaidOrders">
-		<Value>Unbezahlte Aufträge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.LatestOrders">
-		<Value>Neueste Bestellungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.NeverSold">
-		<Value>Unverkäufliche Produkte</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.NewOrders">
-		<Value>Neue Aufträge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.NoIncompleteOrders">
-		<Value>Keine unvollständigen Aufträge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Sales">
-		<Value>Umsatz</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Sales.Hint">
-		<Value>Gesamtwert aller Aufträge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.TopCustomers">
-		<Value>Top Kunden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.SalesReport.Value">
-		<Value>Werte</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.SaveBeforeEdit">
 		<Value>Um fortfahren zu können, muss der Datensatz zunächst gespeichert werden.</Value>
@@ -11150,56 +10127,8 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Customer.UserAgreement.ProductNotFound">
 		<Value>Das entsprechende Produkt konnte nicht gefunden werden.</Value>
 	</LocaleResource>
-	<LocaleResource Name="DeliveryTimes.Dates.Between">
-		<Value>&lt;b&gt;{0}&lt;/b&gt; - &lt;b&gt;{1}&lt;/b&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="DeliveryTimes.Dates.DeliveryOn">
-		<Value>&lt;b&gt;{0}&lt;/b&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="DeliveryTimes.Dates.NotBefore">
-		<Value>frühestens &lt;b&gt;{0}&lt;/b&gt;</Value>
-	</LocaleResource>
-	<LocaleResource Name="DeliveryTimes.Dates.OnTomorrow">
-		<Value>Morgen</Value>
-	</LocaleResource>
-	<LocaleResource Name="DeliveryTimes.Dates.Tomorrow">
-		<Value>Morgen</Value>
-	</LocaleResource>
-	<LocaleResource Name="DeliveryTimes.Dates.Until">
-		<Value>bis &lt;b&gt;{0}&lt;/b&gt;</Value>
-	</LocaleResource>
 	<LocaleResource Name="Disclaimer">
 		<Value>Rechtshinweise</Value>
-	</LocaleResource>
-	<LocaleResource Name="DownloadableProducts.Fields.Download">
-		<Value>Download</Value>
-	</LocaleResource>
-	<LocaleResource Name="DownloadableProducts.Fields.Download.NA">
-		<Value>nicht verfügbar</Value>
-	</LocaleResource>
-	<LocaleResource Name="DownloadableProducts.Fields.DownloadLicense">
-		<Value>Lizenz herunterladen</Value>
-	</LocaleResource>
-	<LocaleResource Name="DownloadableProducts.Fields.Order">
-		<Value>#</Value>
-	</LocaleResource>
-	<LocaleResource Name="DownloadableProducts.Fields.Product">
-		<Value>Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="DownloadableProducts.HasNoUserAgreement">
-		<Value>Das Produkt besitzt keine Nutzungsvereinbarung.</Value>
-	</LocaleResource>
-	<LocaleResource Name="DownloadableProducts.IAgree">
-		<Value>Ich habe die Nutzungsvereinbarung gelesen und bin einverstanden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="DownloadableProducts.NoItems">
-		<Value>Es gibt keine Produkte, die heruntergeladen werden können.</Value>
-	</LocaleResource>
-	<LocaleResource Name="DownloadableProducts.UserAgreement">
-		<Value>Nutzungsvereinbarung</Value>
-	</LocaleResource>
-	<LocaleResource Name="DownloadableProducts.UserAgreementConfirmation">
-		<Value>Ja, ich stimme der &lt;a href='javascript:void(0)' data-id='{0}' class='download-user-agreement'&gt;Nutzungsvereinbarung&lt;/a&gt; für dieses Produkt zu.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.AttributeChoiceBehaviour.GrayOutUnavailable">
 		<Value>Nicht verfügbare Attribute ausgrauen</Value>
@@ -11383,24 +10312,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Enums.DiscountLimitationType.Unlimited">
 		<Value>Unbegrenzt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DiscountType.AssignedToCategories">
-		<Value>Bezogen auf Warengruppen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DiscountType.AssignedToManufacturers">
-		<Value>Bezogen auf Hersteller</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DiscountType.AssignedToOrderSubTotal">
-		<Value>Bezogen auf Zwischensumme</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DiscountType.AssignedToOrderTotal">
-		<Value>Bezogen auf Gesamtsumme</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DiscountType.AssignedToShipping">
-		<Value>Bezogen auf Versandkosten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.DiscountType.AssignedToSkus">
-		<Value>Bezogen auf Produkte</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.DownloadActivationType.Manually">
 		<Value>Manuell</Value>
@@ -11651,24 +10562,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Enums.PasswordFormat.Hashed">
 		<Value>Gehashed</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.PaymentStatus.Authorized">
-		<Value>Genehmigt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PaymentStatus.Paid">
-		<Value>Bezahlt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PaymentStatus.PartiallyRefunded">
-		<Value>Teilweise erstattet</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PaymentStatus.Pending">
-		<Value>Ausstehend</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PaymentStatus.Refunded">
-		<Value>Erstattet</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.PaymentStatus.Voided">
-		<Value>Ungültig</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.PostIntroVisibility.FullText">
 		<Value>Komplett anzeigen</Value>
 	</LocaleResource>
@@ -11729,30 +10622,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Enums.ProductDescriptionPriority.ShortDescription">
 		<Value>Kurzbeschreibung</Value>
 	</LocaleResource>
-	<LocaleResource Name="Enums.ProductSortingEnum.CreatedOn">
-		<Value>Neu eingetroffen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductSortingEnum.CreatedOnAsc">
-		<Value>Datum: älteste zuerst</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductSortingEnum.Initial">
-		<Value>Position</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductSortingEnum.NameAsc">
-		<Value>Name: A bis Z</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductSortingEnum.NameDesc">
-		<Value>Name: Z bis A</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductSortingEnum.PriceAsc">
-		<Value>Preis: aufsteigend</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductSortingEnum.PriceDesc">
-		<Value>Preis: absteigend</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductSortingEnum.Relevance">
-		<Value>Beste Ergebnisse</Value>
-	</LocaleResource>
 	<LocaleResource Name="Enums.ProductType.BundledProduct">
 		<Value>Produkt-Bundle</Value>
 	</LocaleResource>
@@ -11788,27 +10657,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Enums.RelatedEntityType.TierPrice">
 		<Value>Staffelpreis</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ReturnRequestStatus.Cancelled">
-		<Value>Abgebrochen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ReturnRequestStatus.ItemsRefunded">
-		<Value>Artikel gutgeschrieben</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ReturnRequestStatus.ItemsRepaired">
-		<Value>Artikel repariert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ReturnRequestStatus.Pending">
-		<Value>Ausstehend</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ReturnRequestStatus.Received">
-		<Value>Ware erhalten</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ReturnRequestStatus.RequestRejected">
-		<Value>Antrag abgewiesen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ReturnRequestStatus.ReturnAuthorized">
-		<Value>Rücksendung genehmigt</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.RuleScope.Cart">
 		<Value>Warenkorb</Value>
@@ -11923,24 +10771,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Enums.VatNumberStatus.Valid">
 		<Value>Gültig</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.WalletPostingReason.Admin">
-		<Value>Administration</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.WalletPostingReason.Debit">
-		<Value>Kontobelastung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.WalletPostingReason.PartialRefund">
-		<Value>Teilerstattung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.WalletPostingReason.Purchase">
-		<Value>Einkauf</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.WalletPostingReason.Refill">
-		<Value>Auffüllung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.WalletPostingReason.Refund">
-		<Value>Rückerstattung</Value>
 	</LocaleResource>
 	<LocaleResource Name="ErrorPage.Body">
 		<Value>Leider ist ein Serverfehler aufgetreten, und das hat nichts mit Ihrem Computer oder Ihrem Internetanschluss zu tun.
@@ -12468,9 +11298,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="Install.LanguageNotRegistered">
 		<Value>Die Installationssprache '{0}' ist nicht registriert.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Jquery.Validate.Creditcard">
-		<Value>Bitte geben Sie eine gültige Kreditkartennummer ein.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Jquery.Validate.Date">
 		<Value>Bitte geben Sie ein gültiges Datum ein.</Value>
 	</LocaleResource>
@@ -12557,54 +11384,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Media.Product.ImageLinkTitleFormat">
 		<Value>Zeige Details für {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.OrderTotal">
-		<Value>Gesamtauftragswert</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.PaymentMethodAdditionalFee">
-		<Value>Zahlungsgebühr</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.Product(s)">
-		<Value>Produkte</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.Product(s).Download">
-		<Value>Download</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.Product(s).Name">
-		<Value>Produkt</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.Product(s).Price">
-		<Value>Preis</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.Product(s).Quantity">
-		<Value>Menge</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.Product(s).SKU">
-		<Value>Artikelnummer: {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.Product(s).Total">
-		<Value>Gesamtsumme</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.RewardPoints">
-		<Value>{0} Bonuspunkte:</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.Shipping">
-		<Value>Versand:</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.SubTotal">
-		<Value>Zwischensumme:</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.SubTotalDiscount">
-		<Value>Rabatt:</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.Tax">
-		<Value>Steuer:</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.TaxRateLine">
-		<Value>Steuer {0}%:</Value>
-	</LocaleResource>
-	<LocaleResource Name="Messages.Order.TotalDiscount">
-		<Value>Rabatt:</Value>
 	</LocaleResource>
 	<LocaleResource Name="Metadesc.Blog.Month">
 		<Value>Blog Einträge des Monats {0}</Value>
@@ -13299,14 +12078,11 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	<LocaleResource Name="PrivateMessages.YouHaveUnreadPM">
 		<Value>Sie haben {0} ungelesene Nachrichten im Posteingang.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Product.ThumbAlternateText">
+	<LocaleResource Name="Common.Media.ThumbAlternateText">
 		<Value>{0}, Bild {1}</Value>
 	</LocaleResource>
-	<LocaleResource Name="Product.ThumbTitle">
+	<LocaleResource Name="Common.Media.ThumbTitle">
 		<Value>{0}, Bild {1} groß</Value>
-	</LocaleResource>
-	<LocaleResource Name="products.callforprice">
-		<Value>Preis auf Anfrage</Value>
 	</LocaleResource>
 
 	<LocaleResource Name="Profile.Country">
@@ -13416,48 +12192,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Reviews">
 		<Value>Bewertungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.CurrentBalance">
-		<Value>Sie haben aktuell {0} Bonuspunkte ({1}).</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Fields.Message">
-		<Value>Nachricht</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Fields.Points">
-		<Value>Punkte</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Fields.PointsBalance">
-		<Value>Punktestand</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.History">
-		<Value>Ihr Bonuspunkteverlauf</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Message.EarnedForNewsletterSubscription">
-		<Value>Erhaltene Bonuspunkte für die Newsletter-Anmeldung im Shop "{0}".</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Message.EarnedForOrder">
-		<Value>Erhaltene Bonuspunkte für Auftrag #{0}.</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Message.RedeemedForOrder">
-		<Value>Eingelöst für Auftrag #{0}.</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Message.ReducedForOrder">
-		<Value>Abgezogene Bonuspunkte für Auftrag #{0}.</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Message.RegisteredAsCustomer">
-		<Value>Als Kunde registriert</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.Message.RewardPointsForProductPurchase">
-		<Value>Sie erhalten &lt;strong&gt;{0}&lt;/strong&gt; Bonuspunkte im Wert von &lt;strong&gt;{1}&lt;/strong&gt; für diesen Einkauf.</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.NoHistory">
-		<Value>Keine Aktionen vorhanden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.OrderAmount">
-		<Value>Bestellwert</Value>
-	</LocaleResource>
-	<LocaleResource Name="RewardPoints.PointsForPurchasesInfo">
-		<Value>Für einen Auftragswert von je {0} netto werden {1} Punkte gewährt.</Value>
 	</LocaleResource>
 	<LocaleResource Name="RSS.InformationAboutProducts">
 		<Value>Produkt-Informationen</Value>
@@ -14491,59 +13225,5 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Validation.ScalePrecisionValidator">
 		<Value>'{PropertyName}' darf insgesamt nicht mehr als {expectedPrecision} Ziffern enthalten, unter Berücksichtigung von {expectedScale} Dezimalstellen. {digits} Ziffern und {actualScale} Dezimalstellen wurden gefunden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist">
-		<Value>Wunschliste</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.CartIsEmpty">
-		<Value>Die Wunschliste ist leer!</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.EmailAFriend">
-		<Value>Weitersagen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.EmailAFriend.Button">
-		<Value>E-Mail senden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.EmailAFriend.FriendEmail">
-		<Value>E-Mail-Adresse des Freundes</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.EmailAFriend.FriendEmail.Hint">
-		<Value>Geben Sie die E-Mail-Adresse des Freundes ein.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.EmailAFriend.OnlyRegisteredUsers">
-		<Value>Nur registrierte Benutzer können eine E-Mail an Freunde senden.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.EmailAFriend.PersonalMessage">
-		<Value>Persönliche Nachricht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.EmailAFriend.PersonalMessage.Hint">
-		<Value>Geben Sie eine Persönliche Nachricht ein (optional).</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.EmailAFriend.SuccessfullySent">
-		<Value>Die Nachricht wurde verschickt.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.EmailAFriend.Title">
-		<Value>Wunschliste per E-Mail an einen Freund schicken.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.EmailAFriend.YourEmailAddress">
-		<Value>Ihre E-Mail-Adresse</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.EmailAFriend.YourEmailAddress.Hint">
-		<Value>Geben Sie Ihre E-Mail-Adresse ein.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.IsDisabled">
-		<Value>Die Wunschliste ist deaktiviert.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.Mini.ViewWishlist">
-		<Value>Wunschliste ansehen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.UpdateCart">
-		<Value>Wunschliste aktualisieren</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.WishlistOf">
-		<Value>Wunschliste von {0}</Value>
-	</LocaleResource>
-	<LocaleResource Name="Wishlist.YourWishlistURL">
-		<Value>Ihre Wunschlisten-URL</Value>
 	</LocaleResource>
 </Language>

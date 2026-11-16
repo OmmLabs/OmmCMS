@@ -178,12 +178,10 @@ public class ExportXmlHelper : Disposable
         _writer.WriteElementString(nameof(Currency.DomainEndings), entity.DomainEndings);
         _writer.WriteElementString(nameof(Currency.RoundNumDecimals), entity.RoundNumDecimals.ToString());
         _writer.WriteElementString(nameof(Currency.MidpointRounding), ((int)entity.MidpointRounding).ToString());
-        _writer.WriteElementString(nameof(Currency.RoundOrderItemsEnabled), entity.RoundOrderItemsEnabled.ToString());
-        _writer.WriteElementString(nameof(Currency.RoundNetPrices), entity.RoundNetPrices.ToString());
-        _writer.WriteElementString(nameof(Currency.RoundUnitPrices), entity.RoundUnitPrices.ToString());
-        _writer.WriteElementString(nameof(Currency.RoundOrderTotalEnabled), entity.RoundOrderTotalEnabled.ToString());
-        _writer.WriteElementString(nameof(Currency.RoundOrderTotalDenominator), entity.RoundOrderTotalDenominator.ToString(_culture));
-        _writer.WriteElementString(nameof(Currency.RoundOrderTotalRule), ((int)entity.RoundOrderTotalRule).ToString());
+        _writer.WriteElementString(nameof(Currency.RoundingEnabled), entity.RoundingEnabled.ToString());
+        _writer.WriteElementString(nameof(Currency.RoundToNearestEnabled), entity.RoundToNearestEnabled.ToString());
+        _writer.WriteElementString(nameof(Currency.RoundingDenomination), entity.RoundingDenomination.ToString(_culture));
+        _writer.WriteElementString(nameof(Currency.RoundingRule), ((int)entity.RoundingRule).ToString());
 
         WriteLocalized(currency);
 

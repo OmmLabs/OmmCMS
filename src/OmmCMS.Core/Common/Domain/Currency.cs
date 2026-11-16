@@ -100,37 +100,25 @@ public partial class Currency : EntityWithAttributes, IAuditable, ILocalizedEnti
     public CurrencyMidpointRounding MidpointRounding { get; set; } = CurrencyMidpointRounding.AwayFromZero;
 
     /// <summary>
-    /// Gets or sets a value indicating whether rounding during shopping cart calculation is enabled.
-    /// Will be obtained from <see cref="CurrencySettings.RoundOrderItemsEnabled"/> if <c>null</c>.
+    /// Gets or sets a value indicating whether currency amount rounding is enabled.
+    /// Will be obtained from <see cref="CurrencySettings.RoundingEnabled"/> if <c>null</c>.
     /// </summary>
-    public bool? RoundOrderItemsEnabled { get; set; }
+    public bool? RoundingEnabled { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to round during shopping cart calculation when net prices are displayed for the customer.
-    /// Will be obtained from <see cref="CurrencySettings.RoundNetPrices"/> if <c>null</c>.
+    /// Gets or sets a value indicating whether to round to the nearest denomination.
     /// </summary>
-    public bool? RoundNetPrices { get; set; }
+    public bool RoundToNearestEnabled { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to round the unit price before or after quantity multiplication.
-    /// Will be obtained from <see cref="CurrencySettings.RoundUnitPrices"/> if <c>null</c>.
+    /// Gets or sets the smallest denomination. The amount is rounded to the nearest multiple of it.
     /// </summary>
-    public bool? RoundUnitPrices { get; set; }
+    public decimal RoundingDenomination { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to round the order total
+    /// Gets or sets the denomination rounding rule.
     /// </summary>
-    public bool RoundOrderTotalEnabled { get; set; }
-
-    /// <summary>
-    /// Gets or sets the smallest denomination. The order total is rounded to the nearest multiple of it.
-    /// </summary>
-    public decimal RoundOrderTotalDenominator { get; set; }
-
-    /// <summary>
-    /// Gets or sets the order total rounding rule.
-    /// </summary>
-    public CurrencyRoundingRule RoundOrderTotalRule { get; set; }
+    public CurrencyRoundingRule RoundingRule { get; set; }
 
     #endregion
 

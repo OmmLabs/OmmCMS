@@ -48,9 +48,6 @@ public static partial class RegularExpressions
     [GeneratedRegex("^.+\\.min(\\.[^\\.]*)?$", RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.Singleline, "de-DE")]
     private static partial Regex IsMinFileRegex();
 
-    [GeneratedRegex("^[0-9]{3,4}$", RegexOptions.Compiled | RegexOptions.Singleline)]
-    private static partial Regex IsCvvRegex();
-
     [GeneratedRegex("[0-9]*[.][0-9]*[.][0-9]*", RegexOptions.Compiled)]
     private static partial Regex HasTwoDotRegex();
 
@@ -80,5 +77,4 @@ public static partial class RegularExpressions
     public static readonly Regex IsGtin = IsGtinRegex();
     public static readonly Regex IsBic = IsBicRegex();
     public static readonly Regex IsMinFile = IsMinFileRegex();
-    public static readonly Regex IsCvv = IsCvvRegex();
 }

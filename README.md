@@ -88,6 +88,8 @@ Phases 891–900: remove price adjustments, price cards and pricing CSS from the
 
 Phases 901–920: retire catalog, pricing and tax localization seeder updates and installation translations; move customer lookup, media statistics and expandable text to shared resources, simplify import metadata and remove retired commerce widget-zone groups. Preserve content and extension widgets.
 
+Phases 921–940: generalize currency rounding, retire cart-only rounding options and payment card validators, remove commerce API group labels and residual order, reward, discount and checkout translation families, and move media gallery captions to common resources.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

@@ -54,8 +54,8 @@ public class CurrencyTests
             Rate = 1,
             DisplayLocale = "de-DE",
             Published = true,
-            RoundOrderTotalRule = rule,
-            RoundOrderTotalDenominator = denomination
+            RoundingRule = rule,
+            RoundingDenomination = denomination
         };
 
         var roundedAmount = _roundingHelper.ToNearest(amount, out _, currency);

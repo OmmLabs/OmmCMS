@@ -30,20 +30,9 @@ public class CurrencySettings : ISettings
     #region Rounding
 
     /// <summary>
-    /// Gets or sets a value indicating whether rounding during shopping cart calculation is enabled.
+    /// Gets or sets a value indicating whether currency amount rounding is enabled.
     /// </summary>
-    public bool RoundOrderItemsEnabled { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to round during shopping cart calculation when net prices are displayed for the customer.
-    /// </summary>
-    public bool RoundNetPrices { get; set; } = true;
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to round the unit price before or after quantity multiplication.
-    /// <c>true</c> to round before and <c>false</c> to round after quantity multiplication.
-    /// </summary>
-    public bool RoundUnitPrices { get; set; } = true;
+    public bool RoundingEnabled { get; set; }
 
     #endregion
 }

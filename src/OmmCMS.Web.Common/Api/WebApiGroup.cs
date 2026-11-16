@@ -11,18 +11,14 @@ public static class WebApiGroupNames
     public const string Platform = "platform";
     public const string Common = "common";
     public const string Identity = "identity";
-    public const string Catalog = "catalog";
     public const string Content = "content";
-    public const string Checkout = "checkout";
 
     public static readonly string[] All =
     [
         Platform,
         Common,
         Identity,
-        Catalog,
-        Content,
-        Checkout
+        Content
     ];
 }
 

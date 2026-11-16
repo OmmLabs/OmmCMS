@@ -55,25 +55,14 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
 
         builder.AddOrUpdate("Admin.Dashboard.Labels.ByQuantity", "By quantity", "Nach Anzahl");
         builder.AddOrUpdate("Admin.Dashboard.Labels.ByAmount", "By amount", "Nach Betrag");
-        builder.AddOrUpdate("Admin.Dashboard.Labels.OrderCount", "Orders", "Bestellungen");
         builder.AddOrUpdate("Admin.Dashboard.Labels.Customer", "Customer", "Kunde");
-        builder.Delete(
-            "Admin.SalesReport.ByQuantity",
-            "Admin.SalesReport.ByAmount",
-            "Admin.Customers.Reports.BestBy.Fields.Customer");
 
         builder.Delete("FixedValueOrPercent.Absolute", "FixedValueOrPercent.Percentage",
             "Common.AmountOrPercent.Absolute", "Common.AmountOrPercent.Percentage");
         builder.AddOrUpdate("Permissions.DisplayName.Dashboard", "Dashboard", "Dashboard");
         builder.AddOrUpdate("Permissions.DisplayName.Widgets", "Widgets", "Widgets");
-        builder.AddOrUpdate("Permissions.DisplayName.Sales", "Sales", "Verkäufe");
         builder.AddOrUpdate("Permissions.DisplayName.Customers", "Customers", "Kunden");
-        builder.AddOrUpdate("Permissions.DisplayName.IncompleteOrders", "Incomplete orders", "Unvollständige Bestellungen");
-        builder.AddOrUpdate("Permissions.DisplayName.Orders", "Order statistics", "Bestellstatistik");
-        builder.AddOrUpdate("Permissions.DisplayName.Bestsellers", "Bestsellers", "Bestseller");
-        builder.AddOrUpdate("Permissions.DisplayName.LatestOrders", "Latest orders", "Neueste Bestellungen");
         builder.AddOrUpdate("Permissions.DisplayName.RegisteredCustomers", "Customer registrations", "Kundenregistrierungen");
-        builder.AddOrUpdate("Permissions.DisplayName.TopCustomers", "Top customers", "Top Kunden");
         builder.AddOrUpdate("Permissions.DisplayName.StoreReport", "Store statistics", "Shop-Statistiken");
         builder.AddOrUpdate("Permissions.DisplayName.NewsFeed", "News", "News");
 
@@ -257,7 +246,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
             "Anzahl angezeigter Elemente",
             "Show between 1 and 50 items.",
             "Zeigt zwischen 1 und 50 Elemente an.");
-        builder.Delete("Admin.Dashboard.LatestOrders.Fields.Count", "Admin.Dashboard.LatestOrders.Fields.Count.Hint");
         builder.AddOrUpdate("Admin.Dashboard.Editor.Width", "Change widget width", "Widget-Breite ändern");
         builder.AddOrUpdate("Admin.Dashboard.Editor.Height", "Change widget row span (Home: one row)", "Widget-Zeilenspanne ändern (Pos1: eine Zeile)");
         builder.Delete("Permissions.DisplayName.dashboard.personalize", "Permissions.DisplayName.dashboard.manageglobal");

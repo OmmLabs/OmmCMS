@@ -14,7 +14,6 @@
             dateISO: r["Jquery.Validate.DateISO"],
             number: r["Jquery.Validate.Number"],
             digits: r["Jquery.Validate.Digits"],
-            creditcard: r["Jquery.Validate.Creditcard"],
             equalTo: r["Jquery.Validate.Equalto"],
             extension: r["Jquery.Validate.Extension"],
             maxlength: $.validator.format(r["Jquery.Validate.Maxlength"]),
@@ -99,44 +98,6 @@
     jQuery.validator.addMethod("mustbetrue", function (value, element, param) {
         return element.checked;
     });
-
-    // Creditcard validation
-    jQuery.validator.unobtrusive.adapters.add('creditcard', ['cardtype'], function (options) {
-        options.rules['creditcard'] = {
-            cardtype: options.params.cardtype
-        };
-        if (options.message) {
-            options.messages['creditcard'] = options.message;
-        }
-    });
-
-    jQuery.validator.addMethod('creditcard', function (value, element, params) {
-        return isValidCreditCard(value);
-    });
-
-    function isValidCreditCard(value) {
-        value = value.replace(/\s|-/g, '');
-
-        if (!/^\d+$/.test(value)) {
-            return false;
-        }
-
-        var reversed = value.split('').reverse().map(Number);
-
-        // Execute Luhn-Algorithm
-        var sum = 0;
-        for (var i = 0; i < reversed.length; i++) {
-            if (i % 2 === 1) {
-                reversed[i] *= 2;
-                if (reversed[i] > 9) {
-                    reversed[i] -= 9;
-                }
-            }
-            sum += reversed[i];
-        }
-
-        return sum % 10 === 0;
-    }
 
     // Validator <> Bootstrap
     function setControlFeedback(ctl, success) {

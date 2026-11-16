@@ -30,7 +30,7 @@ public partial class RoundingHelper : IRoundingHelper
     {
         currency ??= _workContext.WorkingCurrency;
 
-        return currency.RoundOrderItemsEnabled ?? _currencySettings.RoundOrderItemsEnabled;
+        return currency.RoundingEnabled ?? _currencySettings.RoundingEnabled;
     }
 
     public virtual decimal RoundIfEnabledFor(decimal amount, Currency currency = null)
@@ -51,7 +51,7 @@ public partial class RoundingHelper : IRoundingHelper
 
         var oldValue = amount;
 
-        switch (currency.RoundOrderTotalRule)
+        switch (currency.RoundingRule)
         {
             case CurrencyRoundingRule.RoundMidpointUp:
                 amount = ToNearest(amount, currency, CurrencyMidpointRounding.AwayFromZero, null);
@@ -75,19 +75,19 @@ public partial class RoundingHelper : IRoundingHelper
 
     protected virtual decimal ToNearest(decimal amount, Currency currency, CurrencyMidpointRounding? midpointRounding, bool? roundUp)
     {
-        if (currency.RoundOrderTotalDenominator != 0m)
+        if (currency.RoundingDenomination != 0m)
         {
             if (midpointRounding.HasValue)
             {
-                return decimal.Round(amount / currency.RoundOrderTotalDenominator, 0, Convert(midpointRounding.Value)) * currency.RoundOrderTotalDenominator;
+                return decimal.Round(amount / currency.RoundingDenomination, 0, Convert(midpointRounding.Value)) * currency.RoundingDenomination;
             }
             else if (roundUp.HasValue)
             {
                 var roundedAmountBase = roundUp.Value
-                    ? decimal.Ceiling(amount / currency.RoundOrderTotalDenominator)
-                    : decimal.Floor(amount / currency.RoundOrderTotalDenominator);
+                    ? decimal.Ceiling(amount / currency.RoundingDenomination)
+                    : decimal.Floor(amount / currency.RoundingDenomination);
 
-                return Round(roundedAmountBase, 0, currency.MidpointRounding) * currency.RoundOrderTotalDenominator;
+                return Round(roundedAmountBase, 0, currency.MidpointRounding) * currency.RoundingDenomination;
             }
         }
 

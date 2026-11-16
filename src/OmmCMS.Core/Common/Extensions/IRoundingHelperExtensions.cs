@@ -54,13 +54,13 @@ public static partial class IRoundingHelperExtensions
     /// </summary>
     /// <param name="amount">Amount to round.</param>
     /// <param name="currency">
-    /// Currency. <see cref="Currency.RoundOrderTotalEnabled"/> must be activated for this currency.
+    /// Currency. <see cref="Currency.RoundToNearestEnabled"/> must be activated for this currency.
     /// If <c>null</c>, currency will be obtained via <see cref="IWorkContext.WorkingCurrency"/>.
     /// </param>
     /// <param name="toNearestRounding">Amount by which was rounded.</param>
     /// <returns>Rounded amount.</returns>
     /// <example>"Schweizer Rappenrundung" of 16.23 -> returned value is 16.25 and toNearestRounding is 0.02.</example>
-    /// <remarks>Usually this method is used to round the order total.</remarks>
+    /// <remarks>Rounds a monetary amount to the configured denomination.</remarks>
     public static Money ToNearest(this IRoundingHelper helper, Money amount, Currency currency, out Money toNearestRounding)
     {
         Guard.NotNull(helper);

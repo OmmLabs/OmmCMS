@@ -67,25 +67,17 @@ public class CurrencyModel : EntityModelBase, ILocalizedModel<CurrencyLocalizedM
     [LocalizedDisplay("*MidpointRounding")]
     public CurrencyMidpointRounding MidpointRounding { get; set; } = CurrencyMidpointRounding.AwayFromZero;
 
-    [LocalizedDisplay("*RoundOrderItemsEnabled")]
-    public bool? RoundOrderItemsEnabled { get; set; }
+    [LocalizedDisplay("*RoundingEnabled")]
+    public bool? RoundingEnabled { get; set; }
 
-    [LocalizedDisplay("*RoundNetPrices")]
-    public bool? RoundNetPrices { get; set; }
+    [LocalizedDisplay("*RoundToNearestEnabled")]
+    public bool RoundToNearestEnabled { get; set; }
 
-    [LocalizedDisplay("*RoundUnitPrices")]
-    public bool? RoundUnitPrices { get; set; }
+    [LocalizedDisplay("*RoundingDenomination")]
+    public decimal RoundingDenomination { get; set; }
 
-    [LocalizedDisplay("*RoundOrderTotalEnabled")]
-    public bool RoundOrderTotalEnabled { get; set; }
-
-    [LocalizedDisplay("*RoundOrderTotalDenominator")]
-    public decimal RoundOrderTotalDenominator { get; set; }
-
-    [LocalizedDisplay("*RoundOrderTotalRule")]
-    public CurrencyRoundingRule RoundOrderTotalRule { get; set; }
-
-    public Dictionary<string, string> RoundOrderTotalPaymentMethods { get; set; } = [];
+    [LocalizedDisplay("*RoundingRule")]
+    public CurrencyRoundingRule RoundingRule { get; set; }
 
     #endregion
 }
@@ -128,6 +120,6 @@ public partial class CurrencyValidator : AbstractValidator<CurrencyModel>
 
         RuleFor(x => x.RoundNumDecimals)
             .InclusiveBetween(0, 8)
-            .WithMessage(T("Admin.Configuration.Currencies.Fields.RoundOrderItemsEnabled.Validation"));
+            .WithMessage(T("Admin.Configuration.Currencies.Fields.RoundingEnabled.Validation"));
     }
 }
