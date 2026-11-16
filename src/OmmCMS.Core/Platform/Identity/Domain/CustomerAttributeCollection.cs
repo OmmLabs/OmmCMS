@@ -16,7 +16,7 @@ public class CustomerAttributeCollection : GenericAttributeCollection<Customer>
     #region Form fields
 
     // INFO: this address data is for information purposes only (e.g. on the customer profile page).
-    // Usually customer addresses are used for it (e.g. in checkout).
+    // The customer's address book is maintained separately.
 
     public string StreetAddress
     {

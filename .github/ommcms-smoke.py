@@ -708,7 +708,7 @@ try:
         assert not (repo / "src/OmmCMS.Web" / cart_template).exists()
         assert not (root / cart_template).exists()
         assert not (repo / "src/OmmCMS.Web/Areas/Admin/Models/ShoppingCart").exists()
-        for path in ("wwwroot/js/public.refreshcart.js", "wwwroot/js/public.offcanvas-cart.js", "Themes/Flex/wwwroot/_cart.scss", "wwwroot/js/public.product.js", "Areas/Admin/Views/Menu/EditorTemplates/MenuItem.Catalog.cshtml", "Themes/Flex/Views/Shared/EmailTemplates/order.liquid"):
+        for path in ("wwwroot/js/public.refreshcart.js", "wwwroot/js/public.offcanvas-cart.js", "Themes/Flex/wwwroot/_cart.scss", "wwwroot/js/public.product.js", "Areas/Admin/Views/Menu/EditorTemplates/MenuItem.Catalog.cshtml", "Themes/Flex/Views/Shared/EmailTemplates/order.liquid", "Themes/Flex/Views/Shared/EmailTemplates/shipment.liquid"):
             assert not (repo / "src/OmmCMS.Web" / path).exists(), f"Retired cart asset remains: {path}"
             assert not (root / path).exists(), f"Retired cart asset published: {path}"
         print("Core commerce source extraction passed.")
@@ -768,6 +768,8 @@ try:
         assert not tables.intersection(retired_catalog_tables), "Retired catalogue tables remain"
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Country') WHERE name IN ('AllowsBilling', 'AllowsShipping', 'SubjectToVat')") == [0], "Commerce country flags remain"
         assert rows("SELECT COUNT(*) FROM Country")[0] > 0, "Country directory missing"
+        assert rows("SELECT COUNT(*) FROM ActivityLogType WHERE SystemKeyword IN ('AddNewProduct', 'EditOrder', 'PublicStore.AddToShoppingCart', 'PublicStore.AddToWishlist')") == [0], "Commerce activity logs remain"
+        assert rows("SELECT COUNT(*) FROM ActivityLogType WHERE SystemKeyword='PublicStore.ContactUs'") == [1], "Contact activity logging missing"
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Customer') WHERE name IN ('BillingAddress_Id', 'ShippingAddress_Id')") == [0], "Legacy checkout addresses remain"
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Customer') WHERE name='ContactAddress_Id'") == [1], "Contact address relation missing"
         assert rows("SELECT COUNT(*) FROM Setting WHERE lower(Name) LIKE 'bankconnectionsettings.%'") == [0], "Bank payment settings remain"

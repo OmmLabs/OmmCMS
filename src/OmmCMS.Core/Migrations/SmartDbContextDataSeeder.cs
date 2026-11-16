@@ -32,7 +32,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
         MigrateDashboardAndNavigationResources(builder);
         MigrateSettingsResources(builder);
         MigrateCatalogResources(builder);
-        MigrateCheckoutResources(builder);
         MigrateCommonResources(builder);
     }
 
@@ -736,65 +735,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
         builder.Delete(
             "Admin.Configuration.Settings.Performance.KeepSassCompilerInMemory",
             "Admin.Configuration.Settings.Performance.KeepSassCompilerInMemory.Hint");
-    }
-
-    private static void MigrateCheckoutResources(LocaleResourcesBuilder builder)
-    {
-        builder.AddOrUpdate("ShoppingCart.Mini.EmptyCart.Info",
-            "You have not added any product to your cart yet. Use the {0} icon to add a product to your cart.",
-            "Sie haben noch keine Produkte in Ihren Warenkorb gelegt.<br /> Benutzen Sie das {0} Symbol, um ein Produkt in den Warenkorb zu legen.");
-        builder.AddOrUpdate("ShoppingCart.Mini.EmptyWishlist.Info",
-            "You have not added any product to your wishlist yet. Use the {0} icon to add a product to your wishlist.",
-            "Sie haben noch keine Produkte auf Ihrer Wunschliste vermerkt.<br /> Benutzen Sie das {0} Symbol, um ein Produkt in Ihrer Wunschliste zu vermerken.");
-        builder.AddOrUpdate("ShoppingCart.Mini.EmptyCompare.Info",
-            "You have not added any product to your compare list yet. Use the {0} icon to add a product to your compare list.",
-            "Sie haben noch keine Produkte in Ihrer Vergleichsliste.<br /> Benutzen Sie das {0} Symbol, um ein Produkt in die Vergleichsliste aufzunehmen.");
-
-        builder.Delete(
-            "Admin.Orders.Products.AddNew.UnitPriceInclTax.Hint",
-            "Admin.Orders.Products.AddNew.UnitPriceExclTax.Hint",
-            "Admin.Orders.Products.AddNew.SubTotalInclTax.Hint",
-            "Admin.Orders.Products.AddNew.SubTotalExclTax.Hint",
-            "Admin.Orders.Products.Edit",
-            "Admin.Orders.Products.Edit.InclTax",
-            "Admin.Orders.Products.Edit.ExclTax",
-            "Admin.Orders.Fields.OrderShippingInclTax.Hint",
-            "Admin.Orders.Fields.OrderSubTotalDiscountInclTax.Hint",
-            "Admin.Orders.Fields.OrderSubtotalInclTax.Hint",
-            "Admin.Orders.Fields.OrderShippingExclTax.Hint",
-            "Admin.Orders.Fields.OrderSubTotalDiscountExclTax.Hint",
-            "Admin.Orders.Fields.OrderSubtotalExclTax.Hint");
-
-        builder.AddOrUpdate("Admin.Orders.Products.AddNew.UnitPriceInclTax", "Unit price", "Einzelpreis");
-        builder.AddOrUpdate("Admin.Orders.Products.AddNew.UnitPriceExclTax", "Unit price", "Einzelpreis");
-        builder.AddOrUpdate("Admin.Orders.Products.AddNew.SubTotalInclTax", "Total", "Gesamt");
-        builder.AddOrUpdate("Admin.Orders.Products.AddNew.SubTotalExclTax", "Total", "Gesamt");
-
-        builder.AddOrUpdate("Admin.Orders.Fields.Edit.InclTax", "{0} gross", "{0} brutto");
-        builder.AddOrUpdate("Admin.Orders.Fields.Edit.ExclTax", "{0} net", "{0} netto");
-        builder.AddOrUpdate("Admin.Common.TaxPercent", "tax %", "Steuer %");
-
-        builder.AddOrUpdate("Admin.Orders.Fields.OrderShippingInclTax", "Order shipping (gross)", "Versandkosten (brutto)");
-        builder.AddOrUpdate("Admin.Orders.Fields.OrderShippingExclTax", "Order shipping (net)", "Versandkosten (netto)");
-
-        builder.AddOrUpdate("Admin.Orders.Fields.OrderSubTotalDiscountInclTax", "Order subtotal discount (gross)", "Rabatt für Auftragszwischensumme (brutto)");
-        builder.AddOrUpdate("Admin.Orders.Fields.OrderSubTotalDiscountExclTax", "Order subtotal discount (net)", "Rabatt für Auftragszwischensumme (netto)");
-
-        builder.AddOrUpdate("Admin.Orders.Fields.OrderSubtotalInclTax", "Order subtotal (gross)", "Auftragszwischensumme (brutto)");
-        builder.AddOrUpdate("Admin.Orders.Fields.OrderSubtotalExclTax", "Order subtotal (net)", "Auftragszwischensumme (netto)");
-
-        builder.AddOrUpdate("Admin.Orders.Products.Total")
-            .Value("de", "Gesamt");
-
-        builder.AddOrUpdate("Order.PlaceOrderError",
-            "The order could not be completed due to an unexpected error. Customer ID: {0}.",
-            "Die Bestellung konnte aufgrund eines unerwarteten Fehlers nicht abgeschlossen werden. Kunden-ID: {0}.");
-
-        builder.AddOrUpdate("Order.AlreadyExists",
-            "The order has already been created. Customer ID: {0}.",
-            "Die Bestellung wurde bereits angelegt. Kunden-ID: {0}.");
-
-
     }
 
     private static void MigrateCommonResources(LocaleResourcesBuilder builder)

@@ -24,7 +24,7 @@ public static partial class SystemCustomerAttributeNames
     public static string HasConsentedToGdpr => "HasConsentedToGdpr";
     public static string CookieConsent => "CookieConsent";
 
-    // Checkout
+    // Addresses
     public static string DefaultAddressId => "DefaultAddressId";
 
 

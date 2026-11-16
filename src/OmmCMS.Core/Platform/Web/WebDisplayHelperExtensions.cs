@@ -106,27 +106,6 @@ public static class WebDisplayHelperExtensions
                 currentPageType = "home";
                 currentPageId = 0;
             }
-            else if (controllerName == "catalog")
-            {
-                if (actionName == "category")
-                {
-                    currentPageType = "category";
-                    currentPageId = routeValues.Get("categoryId")!;
-                }
-                else if (actionName == "manufacturer")
-                {
-                    currentPageType = "brand";
-                    currentPageId = routeValues.Get("manufacturerId")!;
-                }
-            }
-            else if (controllerName == "product")
-            {
-                if (actionName == "productdetails")
-                {
-                    currentPageType = "product";
-                    currentPageId = routeValues.Get("productId")!;
-                }
-            }
             else if (controllerName == "topic")
             {
                 if (actionName == "topicdetails")

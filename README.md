@@ -80,6 +80,8 @@ Phases 841–845: enable the preferred-address picker, editing and ownership che
 
 Phases 846–860: replace the legacy billing/shipping customer relationships with a single contact address, update identity, import/export, country rules, messaging, GDPR and seed data, and preserve the address book and preferred-address selection.
 
+Phases 861–875: retire remaining checkout language-seeder updates, commerce activity-log types and localized seeds, obsolete page identities and permission labels, and the shipment email partial. Shared address presentation and logging remain.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

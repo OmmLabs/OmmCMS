@@ -1,11 +1,6 @@
 // Key field: systemKeyword
 [
   {
-    "systemKeyword": "AddNewCategory",
-    "name": "Add a new category",
-    "enabled": true
-  },
-  {
     "systemKeyword": "AddNewCustomer",
     "name": "Add a new customer",
     "enabled": true
@@ -16,43 +11,13 @@
     "enabled": true
   },
   {
-    "systemKeyword": "AddNewDiscount",
-    "name": "Add a new discount",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "AddNewManufacturer",
-    "name": "Add a new manufacturer",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "AddNewProduct",
-    "name": "Add a new product",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "AddNewProductAttribute",
-    "name": "Add a new product attribute",
-    "enabled": true
-  },
-  {
     "systemKeyword": "AddNewSetting",
     "name": "Add a new setting",
     "enabled": true
   },
   {
-    "systemKeyword": "AddNewSpecAttribute",
-    "name": "Add a new specification attribute",
-    "enabled": true
-  },
-  {
     "systemKeyword": "AddNewWidget",
     "name": "Add a new widget",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "DeleteCategory",
-    "name": "Delete category",
     "enabled": true
   },
   {
@@ -66,43 +31,13 @@
     "enabled": true
   },
   {
-    "systemKeyword": "DeleteDiscount",
-    "name": "Delete a discount",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "DeleteManufacturer",
-    "name": "Delete a manufacturer",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "DeleteProduct",
-    "name": "Delete a product",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "DeleteProductAttribute",
-    "name": "Delete a product attribute",
-    "enabled": true
-  },
-  {
     "systemKeyword": "DeleteSetting",
     "name": "Delete a setting",
     "enabled": true
   },
   {
-    "systemKeyword": "DeleteSpecAttribute",
-    "name": "Delete a specification attribute",
-    "enabled": true
-  },
-  {
     "systemKeyword": "DeleteWidget",
     "name": "Delete a widget",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "EditCategory",
-    "name": "Edit category",
     "enabled": true
   },
   {
@@ -116,38 +51,8 @@
     "enabled": true
   },
   {
-    "systemKeyword": "EditDiscount",
-    "name": "Edit a discount",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "EditManufacturer",
-    "name": "Edit a manufacturer",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "EditProduct",
-    "name": "Edit a product",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "EditProductAttribute",
-    "name": "Edit a product attribute",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "EditPromotionProviders",
-    "name": "Edit promotion providers",
-    "enabled": true
-  },
-  {
     "systemKeyword": "EditSettings",
     "name": "Edit setting(s)",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "EditSpecAttribute",
-    "name": "Edit a specification attribute",
     "enabled": true
   },
   {
@@ -158,11 +63,6 @@
   {
     "systemKeyword": "EditThemeVars",
     "name": "Edit theme variables",
-    "enabled": true
-  },
-  {
-    "systemKeyword": "EditOrder",
-    "name": "Edit an order",
     "enabled": true
   },
   {
@@ -181,36 +81,8 @@
     "enabled": true
   },
   {
-    "systemKeyword": "PublicStore.ViewCategory",
-    "name": "Public store. View a category"
-  },
-  {
-    "systemKeyword": "PublicStore.ViewManufacturer",
-    "name": "Public store. View a manufacturer"
-  },
-  {
-    "systemKeyword": "PublicStore.ViewProduct",
-    "name": "Public store. View a product"
-  },
-  {
-    "systemKeyword": "PublicStore.PlaceOrder",
-    "name": "Public store. Place an order"
-  },
-  {
     "systemKeyword": "PublicStore.ContactUs",
     "name": "Public store. Use contact us form"
-  },
-  {
-    "systemKeyword": "PublicStore.AddToCompareList",
-    "name": "Public store. Add to compare list"
-  },
-  {
-    "systemKeyword": "PublicStore.AddToShoppingCart",
-    "name": "Public store. Add to shopping cart"
-  },
-  {
-    "systemKeyword": "PublicStore.AddToWishlist",
-    "name": "Public store. Add to wishlist"
   },
   {
     "systemKeyword": "PublicStore.Login",
