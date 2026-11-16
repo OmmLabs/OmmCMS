@@ -6,6 +6,22 @@ namespace OmmCMS.Core.Tests.Content.Media;
 [TestFixture]
 public class MediaUrlGeneratorTests
 {
+    [Test]
+    public void Cms_preview_and_avatar_thumbnail_sizes_are_allowed()
+    {
+        var settings = new MediaSettings
+        {
+            PreviewThumbnailSize = 333,
+            AvatarPictureSize = 77,
+            AllowedExtraThumbnailSizes = [444]
+        };
+
+        Assert.That(settings.IsAllowedThumbnailSize(333), Is.True);
+        Assert.That(settings.IsAllowedThumbnailSize(77), Is.True);
+        Assert.That(settings.IsAllowedThumbnailSize(444), Is.True);
+        Assert.That(settings.IsAllowedThumbnailSize(334), Is.False);
+    }
+
     [TestCase("default-image.png")]
     [TestCase("DEFAULT-IMAGE.PNG")]
     [TestCase("/default-image.png")]

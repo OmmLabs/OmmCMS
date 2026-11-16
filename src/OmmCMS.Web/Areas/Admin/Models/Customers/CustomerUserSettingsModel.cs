@@ -58,12 +58,6 @@ public partial class CustomerUserSettingsModel : ModelBase, ILocalizedModel<Cust
         [LocalizedDisplay("*NotifyNewCustomerRegistration")]
         public bool NotifyNewCustomerRegistration { get; set; }
 
-        [LocalizedDisplay("*HideMyAccountOrders")]
-        public bool HideMyAccountOrders { get; set; }
-
-        [LocalizedDisplay("*HideDownloadableProductsTab")]
-        public bool HideDownloadableProductsTab { get; set; }
-
         [LocalizedDisplay("*CustomerNameFormat")]
         public CustomerNameFormat CustomerNameFormat { get; set; }
 
@@ -267,9 +261,6 @@ public partial class CustomerUserSettingsModel : ModelBase, ILocalizedModel<Cust
 
         [LocalizedDisplay("*Privacy.FullNameOnContactUsRequired")]
         public bool FullNameOnContactUsRequired { get; set; }
-
-        [LocalizedDisplay("*Privacy.FullNameOnProductRequestRequired")]
-        public bool FullNameOnProductRequestRequired { get; set; }
 
         public List<CookieInfo> CookieInfos { get; set; } = new();
     }

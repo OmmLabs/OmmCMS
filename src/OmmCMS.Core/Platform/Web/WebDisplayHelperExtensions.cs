@@ -77,15 +77,6 @@ public static class WebDisplayHelperExtensions
     public static object CurrentPageId(this IDisplayHelper displayHelper)
         => IdentifyPage(displayHelper).CurrentPageId;
 
-    public static int CurrentCategoryId(this IDisplayHelper displayHelper)
-        => displayHelper.CurrentPageType() == "category" ? displayHelper.CurrentPageId().Convert<int>() : 0;
-
-    public static int CurrentManufacturerId(this IDisplayHelper displayHelper)
-        => displayHelper.CurrentPageType() == "manufacturer" ? displayHelper.CurrentPageId().Convert<int>() : 0;
-
-    public static int CurrentProductId(this IDisplayHelper displayHelper)
-        => displayHelper.CurrentPageType() == "product" ? displayHelper.CurrentPageId().Convert<int>() : 0;
-
     public static int CurrentTopicId(this IDisplayHelper displayHelper)
         => displayHelper.CurrentPageType() == "topic" ? displayHelper.CurrentPageId().Convert<int>() : 0;
 

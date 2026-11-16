@@ -32,41 +32,8 @@ public class MediaSettingsModel : ModelBase
     [LocalizedDisplay("*AvatarPictureSize")]
     public int AvatarPictureSize { get; set; }
 
-    [LocalizedDisplay("*ProductThumbPictureSize")]
-    public int ProductThumbPictureSize { get; set; }
-
-    [LocalizedDisplay("*ProductDetailsPictureSize")]
-    public int ProductDetailsPictureSize { get; set; }
-
-    [LocalizedDisplay("*ProductThumbPictureSizeOnProductDetailsPage")]
-    public int ProductThumbPictureSizeOnProductDetailsPage { get; set; }
-
-    [LocalizedDisplay("*MessageProductThumbPictureSize")]
-    public int MessageProductThumbPictureSize { get; set; }
-
-    [LocalizedDisplay("*AssociatedProductPictureSize")]
-    public int AssociatedProductPictureSize { get; set; }
-
-    [LocalizedDisplay("*AssociatedProductHeaderThumbSize")]
-    public int AssociatedProductHeaderThumbSize { get; set; }
-
-    [LocalizedDisplay("*BundledProductPictureSize")]
-    public int BundledProductPictureSize { get; set; }
-
-    [LocalizedDisplay("*CategoryThumbPictureSize")]
-    public int CategoryThumbPictureSize { get; set; }
-
-    [LocalizedDisplay("*ManufacturerThumbPictureSize")]
-    public int ManufacturerThumbPictureSize { get; set; }
-
-    [LocalizedDisplay("*CartThumbPictureSize")]
-    public int CartThumbPictureSize { get; set; }
-
-    [LocalizedDisplay("*CartThumbBundleItemPictureSize")]
-    public int CartThumbBundleItemPictureSize { get; set; }
-
-    [LocalizedDisplay("*MiniCartThumbPictureSize")]
-    public int MiniCartThumbPictureSize { get; set; }
+    [LocalizedDisplay("*PreviewThumbnailSize")]
+    public int PreviewThumbnailSize { get; set; }
 
     public int[] CurrentlyAllowedThumbnailSizes { get; set; }
 
@@ -159,18 +126,7 @@ public partial class MediaSettingsValidator : SettingModelValidator<MediaSetting
         RuleFor(x => x.MaxUploadFileSize).GreaterThan(0);
         RuleFor(x => x.MaximumImageSize).GreaterThanOrEqualTo(0);
         RuleFor(x => x.AvatarPictureSize).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.ProductThumbPictureSize).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.ProductDetailsPictureSize).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.ProductThumbPictureSizeOnProductDetailsPage).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.MessageProductThumbPictureSize).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.AssociatedProductPictureSize).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.AssociatedProductHeaderThumbSize).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.BundledProductPictureSize).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.CategoryThumbPictureSize).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.ManufacturerThumbPictureSize).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.CartThumbPictureSize).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.CartThumbBundleItemPictureSize).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.MiniCartThumbPictureSize).GreaterThanOrEqualTo(0);
+        RuleFor(x => x.PreviewThumbnailSize).GreaterThanOrEqualTo(0);
     }
 }
 

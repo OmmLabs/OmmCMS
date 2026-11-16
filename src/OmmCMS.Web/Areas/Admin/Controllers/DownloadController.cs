@@ -137,7 +137,7 @@ public class DownloadController : AdminController
             id = file.Id,
             name = file.Name,
             type = file.MediaType,
-            thumbUrl = await _mediaService.GetUrlAsync(file.Id, _mediaSettings.ProductThumbPictureSize, host: string.Empty)
+            thumbUrl = await _mediaService.GetUrlAsync(file.Id, _mediaSettings.PreviewThumbnailSize, host: string.Empty)
         });
     }
 

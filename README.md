@@ -90,6 +90,8 @@ Phases 901–920: retire catalog, pricing and tax localization seeder updates an
 
 Phases 921–940: generalize currency rounding, retire cart-only rounding options and payment card validators, remove commerce API group labels and residual order, reward, discount and checkout translation families, and move media gallery captions to common resources.
 
+Phases 941–960: remove retired commerce settings and editors from media, identity, privacy, SEO and admin configuration. Keep generic preview and avatar thumbnail sizing, CMS page identity, contact privacy and SEO controls, with authenticated settings page checks.
+
 Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License

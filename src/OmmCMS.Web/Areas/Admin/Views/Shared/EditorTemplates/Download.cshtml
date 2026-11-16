@@ -54,7 +54,7 @@
         initiallyShowUrlPanel = !minimalMode && download.UseDownloadUrl;
         hasFile = !download.UseDownloadUrl;
         fileName = download.MediaFile?.Name ?? (download.Id.ToString().Grow(download.MediaFile?.Extension, "."));
-        thumbUrl = await Url.MediaAsync(download.MediaFileId, MediaSettings.ProductThumbPictureSize);
+        thumbUrl = await Url.MediaAsync(download.MediaFileId, MediaSettings.PreviewThumbnailSize);
     }
 
     Assets.AppendScriptFiles("~/admin/js/ommcms.download.js");

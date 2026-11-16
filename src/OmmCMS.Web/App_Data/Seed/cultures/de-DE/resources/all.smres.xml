@@ -2809,15 +2809,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.GenderEnabled.Hint">
 		<Value>Legt fest, ob das Eingabefeld "Geschlecht" aktiviert ist.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideDownloadableProductsTab">
-		<Value>Downloads im Bereich "Mein Konto" ausblenden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideDownloadableProductsTab.Hint">
-		<Value>Deaktiviert downloadbare Produkte.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideMyAccountOrders">
-		<Value>Bestellungen im Bereich "Mein Konto" ausblenden</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideNewsletterBlock">
 		<Value>Verberge Newsletter Anmeldeformular</Value>
 	</LocaleResource>
@@ -2965,12 +2956,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.Privacy.FullNameOnContactUsRequired.Hint">
 		<Value>Legt fest, ob die Angabe des Namens im Kontaktformular erforderlich ist.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.Privacy.FullNameOnProductRequestRequired">
-		<Value>Name im Produktanfrage-Formular ist erforderlich</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.Privacy.FullNameOnProductRequestRequired.Hint">
-		<Value>Legt fest, ob die Angabe des Namens im Produktanfrage-Formular erforderlich ist.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.Privacy.ModalCookieConsent">
 		<Value>Cookie-Manager modal anzeigen</Value>
@@ -3332,18 +3317,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.AppendTrailingSlashToUrls.Hint">
 		<Value>Erzwingt, dass alle internen Links mit einem Schrägstrich abschließen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.AttachOrderPdfToOrderCompletedEmail">
-		<Value>Bei Abschluss einer Bestellung PDF mitsenden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.AttachOrderPdfToOrderCompletedEmail.Hint">
-		<Value>Erstellt bei Abschluss einer Bestellung das Auftrags-PDF-Dokument und hängt es der Kunden-Benachrichtigungs-Email an</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.AttachOrderPdfToOrderPlacedEmail">
-		<Value>Bei Bestelleingang PDF mitsenden</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.AttachOrderPdfToOrderPlacedEmail.Hint">
-		<Value>Erstellt bei Bestelleingang das Auftrags-PDF-Dokument und hängt es der Kunden-Benachrichtigungs-Email an</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.CanonicalHostNameRule">
 		<Value>Regel für kanonischen Domänennamen</Value>
 	</LocaleResource>
@@ -3386,17 +3359,8 @@
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnTargets.Option.PasswordRecovery">
 		<Value>Passwort-Wiederherstellung</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnTargets.Option.ProductInquiry">
-		<Value>Produktanfrage</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnTargets.Option.Registration">
 		<Value>Registrierung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnTargets.Option.ShareProduct">
-		<Value>Produkt teilen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnTargets.Option.ShareWishlist">
-		<Value>Wunschliste teilen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnTargets.Option.Withdrawal">
 		<Value>Widerruf</Value>
@@ -3824,12 +3788,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.PdfSettings">
 		<Value>PDF</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.ProductDescriptionPriority">
-		<Value>Vorrang von Produktbeschreibungen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.ProductDescriptionPriority.Hint">
-		<Value>Bestimmt, welche Beschreibung von Suchmaschinen als 'description'-Inhalt für Rich Snippets ausgelesen wird. Wenn die hier gewählte Beschreibung nicht im Produkt hinterlegt ist, wird automatisch die andere als 'description' gekennzeichnet, sofern vorhanden.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.ProviderSystemName">
 		<Value>Anbieter</Value>
 	</LocaleResource>
@@ -4007,12 +3965,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.XmlSitemapIncludesNews.Hint">
 		<Value>Fügt News-Seiten zur Sitemap hinzu.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.XmlSitemapIncludesProducts">
-		<Value>Produkte einbeziehen</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.XmlSitemapIncludesProducts.Hint">
-		<Value>Fügt Produkt-Seiten zur Sitemap hinzu.</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.XmlSitemapIncludesTopics">
 		<Value>Seiten einbeziehen</Value>
 	</LocaleResource>
@@ -4022,12 +3974,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Media">
 		<Value>Medien-Einstellungen</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Media.AssociatedProductHeaderThumbSize">
-		<Value>Verknüpftes (Gruppen)-Produkt in der Titelzeile</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Media.AssociatedProductPictureSize">
-		<Value>Verknüpftes (Gruppen)-Produkt</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.AutoGenerateAbsoluteUrls">
 		<Value>Absolute URLs erzeugen</Value>
 	</LocaleResource>
@@ -4036,18 +3982,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.AvatarPictureSize">
 		<Value>Kundenavatar</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Media.BundledProductPictureSize">
-		<Value>Bundle Stückliste</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Media.CartThumbBundleItemPictureSize">
-		<Value>Bundle Stückliste im Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Media.CartThumbPictureSize">
-		<Value>Warenkorb</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Media.CategoryThumbPictureSize">
-		<Value>Warengruppen</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.CurrentStorageLocation">
 		<Value>Der aktuelle Speicheranbieter ist</Value>
@@ -4070,9 +4004,6 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Media.MakeFilesTransientWhenOrphaned.Hint">
 		<Value>Legt fest, ob verwaiste Mediendateien beim nächsten Aufräumvorgang automatisch gelöscht werden sollen.</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Media.ManufacturerThumbPictureSize">
-		<Value>Marken</Value>
-	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.MaximumImageSize">
 		<Value>Maximale Bildgröße</Value>
 	</LocaleResource>
@@ -4093,12 +4024,6 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.MediaTypesNotes">
 		<Value>Medientypen steuern, welche Dateien hochgeladen werden können. Alle anderen Medientypen werden grundsätzlich abgelehnt. Die Typen bitte Leerzeichen getrennt und ohne Punkt angeben.</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Media.MessageProductThumbPictureSize">
-		<Value>Produkte in E-Mails</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Media.MiniCartThumbPictureSize">
-		<Value>Mini-Warenkorb</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.MoveMediaNote">
 		<Value>Bitte sichern Sie Ihre Datenbank, ehe Sie Mediendateien verschieben. Dieser Vorgang kann je nach Dateimenge mehrere Minuten in Anspruch nehmen.</Value>
@@ -4124,14 +4049,8 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Media.PictureZoomType.Window">
 		<Value>Fenster</Value>
 	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Media.ProductDetailsPictureSize">
-		<Value>Produktdetail</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Media.ProductThumbPictureSize">
-		<Value>Produktliste</Value>
-	</LocaleResource>
-	<LocaleResource Name="Admin.Configuration.Settings.Media.ProductThumbPictureSizeOnProductDetailsPage">
-		<Value>Gallerie-Thumbnail</Value>
+	<LocaleResource Name="Admin.Configuration.Settings.Media.PreviewThumbnailSize">
+		<Value>Medien-Vorschaubild</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.StorageProvider">
 		<Value>Speicher wechseln</Value>
@@ -10612,15 +10531,6 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 	</LocaleResource>
 	<LocaleResource Name="Enums.ProductCondition.Used">
 		<Value>Gebraucht</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductDescriptionPriority.Both">
-		<Value>Langtext und Kurzbeschreibung</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductDescriptionPriority.FullDescription">
-		<Value>Langtext</Value>
-	</LocaleResource>
-	<LocaleResource Name="Enums.ProductDescriptionPriority.ShortDescription">
-		<Value>Kurzbeschreibung</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.ProductType.BundledProduct">
 		<Value>Produkt-Bundle</Value>

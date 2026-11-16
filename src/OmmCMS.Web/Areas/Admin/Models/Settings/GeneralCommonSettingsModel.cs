@@ -93,9 +93,6 @@ public partial class GeneralCommonSettingsModel : ModelBase
         [LocalizedDisplay("*MetaRobotsContent")]
         public string MetaRobotsContent { get; set; }
 
-        [LocalizedDisplay("*ProductDescriptionPriority")]
-        public ProductDescriptionPriority ProductDescriptionPriority { get; set; }
-
         [LocalizedDisplay("*ConvertNonWesternChars")]
         public bool ConvertNonWesternChars { get; set; }
 

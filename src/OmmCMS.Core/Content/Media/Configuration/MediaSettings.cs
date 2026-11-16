@@ -58,20 +58,7 @@ public class MediaSettings : ISettings
     #region Thumb sizes / security
 
     public int AvatarPictureSize { get; set; } = ThumbnailSizeMd;
-    public int ProductThumbPictureSize { get; set; } = ThumbnailSizeMd;
-    public int ProductDetailsPictureSize { get; set; } = ThumbnailSizeXl;
-    public int ProductThumbPictureSizeOnProductDetailsPage { get; set; } = ThumbnailSizeXs;
-    public int MessageProductThumbPictureSize { get; set; } = ThumbnailSizeXs;
-    public int AssociatedProductPictureSize { get; set; } = ThumbnailSizeXl;
-    public int AssociatedProductHeaderThumbSize { get; set; } = ThumbnailSizeXs;
-    public int BundledProductPictureSize { get; set; } = ThumbnailSizeXs;
-    public int CategoryThumbPictureSize { get; set; } = ThumbnailSizeMd;
-    public int ManufacturerThumbPictureSize { get; set; } = ThumbnailSizeMd;
-    public int CartThumbPictureSize { get; set; } = ThumbnailSizeMd;
-    public int CartThumbBundleItemPictureSize { get; set; } = ThumbnailSizeXxs;
-    public int MiniCartThumbPictureSize { get; set; } = ThumbnailSizeMd;
-    public int VariantValueThumbPictureSize { get; set; } = ThumbnailSizeXs;
-    public int AttributeOptionThumbPictureSize { get; set; } = ThumbnailSizeXs;
+    public int PreviewThumbnailSize { get; set; } = ThumbnailSizeMd;
 
     public List<int> AllowedExtraThumbnailSizes { get; set; }
 
@@ -122,19 +109,7 @@ public class MediaSettings : ISettings
         {
             48, ThumbnailSizeXxs, ThumbnailSizeXs, ThumbnailSizeSm, ThumbnailSizeMd, ThumbnailSizeLg, ThumbnailSizeXl, ThumbnailSizeXxl,
             AvatarPictureSize,
-            ProductThumbPictureSize,
-            ProductDetailsPictureSize,
-            ProductThumbPictureSizeOnProductDetailsPage,
-            MessageProductThumbPictureSize,
-            AssociatedProductPictureSize,
-            BundledProductPictureSize,
-            CategoryThumbPictureSize,
-            ManufacturerThumbPictureSize,
-            CartThumbPictureSize,
-            CartThumbBundleItemPictureSize,
-            MiniCartThumbPictureSize,
-            VariantValueThumbPictureSize,
-            AttributeOptionThumbPictureSize,
+            PreviewThumbnailSize,
             MaxImageSize
         }
         .Concat(numExtraSizes > 0 ? AllowedExtraThumbnailSizes : Enumerable.Empty<int>())

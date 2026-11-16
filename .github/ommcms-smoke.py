@@ -130,6 +130,13 @@ def editorial_workflows(password):
     })
     page = get_page("/admin/topic/create", admin, 'id="topic-form"')
     print("Authenticated admin access passed.")
+    media_settings = get_page("/admin/media/mediasettings", admin, "PreviewThumbnailSize")
+    assert all(name not in media_settings for name in ("ProductThumbPictureSize", "ProductDetailsPictureSize", "CartThumbPictureSize", "ManufacturerThumbPictureSize")), "Retired media controls remain"
+    customer_settings = get_page("/admin/customer/customerusersettings", admin, "FullNameOnContactUsRequired")
+    assert all(name not in customer_settings for name in ("HideMyAccountOrders", "HideDownloadableProductsTab", "FullNameOnProductRequestRequired")), "Retired account controls remain"
+    general_settings = get_page("/admin/setting/generalcommon", admin, "ConvertNonWesternChars")
+    assert "ProductDescriptionPriority" not in general_settings, "Retired SEO control remains"
+    print("CMS media, account and SEO settings render without commerce controls.")
     if "--presentation-trimmed" in sys.argv:
         for path in ("/pdf/receiptheader", "/pdf/receiptfooter"):
             assert request(path, client=admin)[0] == 404, f"Retired receipt endpoint reachable: {path}"
@@ -765,6 +772,8 @@ try:
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Currency') WHERE name IN ('RoundNetPrices', 'RoundUnitPrices', 'RoundOrderItemsEnabled', 'RoundOrderTotalEnabled', 'RoundOrderTotalDenominator', 'RoundOrderTotalRule')") == [0], "Commerce currency flags remain"
         assert rows("SELECT COUNT(*) FROM pragma_table_info('Currency') WHERE name IN ('RoundingEnabled', 'RoundToNearestEnabled', 'RoundingDenomination', 'RoundingRule')") == [4], "Generic currency rounding missing"
         assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName IN ('Common.Media.ThumbTitle', 'Common.Media.ThumbAlternateText', 'Admin.Configuration.Currencies.Fields.RoundingEnabled.Validation')") == [3], "CMS media or rounding resources missing"
+        assert rows("SELECT COUNT(*) FROM Setting WHERE lower(Name) IN ('mediasettings.productthumbpicturesize', 'mediasettings.productdetailspicturesize', 'mediasettings.cartthumbpicturesize', 'customersettings.hidemyaccountorders', 'customersettings.hidedownloadableproductstab', 'privacysettings.fullnameonproductrequestrequired', 'seosettings.productdescriptionpriority', 'adminareasettings.displayproductpictures')") == [0], "Commerce settings remain"
+        assert rows("SELECT COUNT(*) FROM LocaleStringResource WHERE ResourceName = 'Admin.Configuration.Settings.Media.PreviewThumbnailSize'") == [1], "CMS preview thumbnail label missing"
         retired_catalog_tables = ("product", "category", "manufacturer", "producttemplate", "categorytemplate",
             "manufacturertemplate", "product_category_mapping", "product_manufacturer_mapping",
             "productbundleitem", "productbundleitemattributefilter", "product_mediafile_mapping", "producttag",

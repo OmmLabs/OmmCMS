@@ -106,21 +106,6 @@ public class CustomerSettings : ISettings
     public bool NotifyNewCustomerRegistration { get; set; } = true;
 
     /// <summary>
-    /// Gets or sets a value indicating whether to hide orders tab on 'My account' page.
-    /// </summary>
-    public bool HideMyAccountOrders { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to hide 'Downloable products' tab on 'My account' page.
-    /// </summary>
-    public bool HideDownloadableProductsTab { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to validate user when downloading products.
-    /// </summary>
-    public bool DownloadableProductsValidateUser { get; set; }
-
-    /// <summary>
     /// Customer name formatting.
     /// </summary>
     public CustomerNameFormat CustomerNameFormat { get; set; } = CustomerNameFormat.ShowFirstName;

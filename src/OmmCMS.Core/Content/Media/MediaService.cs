@@ -1150,7 +1150,7 @@ public partial class MediaService : IMediaService
     {
         var mediaFile = new MediaFileInfo(file, this, _urlGenerator, folder?.Path)
         {
-            ThumbSize = _mediaSettings.ProductThumbPictureSize
+            ThumbSize = _mediaSettings.PreviewThumbnailSize
         };
 
         return mediaFile;
