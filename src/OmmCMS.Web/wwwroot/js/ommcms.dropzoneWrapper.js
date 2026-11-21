@@ -22,7 +22,7 @@
 (function ($) {
     var assignableFiles = [];
     var assignableFileIds = "";
-    var dialog = OmmCMS.Admin ? OmmCMS.Admin.Media.fileConflictResolutionDialog : null;
+    var dialog = OmmCMS.Admin?.Media?.fileConflictResolutionDialog || null;
 
     $.fn.dropzoneWrapper = function (options) {
         return this.each(function () {
@@ -236,7 +236,7 @@
             el.on("success", function (file, response, progress) {
                 logEvent("success", file, response, progress);
 
-                if (opts.maxFiles === 1) {
+                if (opts.maxFiles === 1 && response && response.success) {
                     displaySingleFilePreview(response, fuContainer, options);
                 }
                 else if (displayPreviewInList) {
@@ -248,18 +248,26 @@
                 }
 
                 // If there was an error returned by the server set file status accordingly.
-                if (response.length) {
-                    for (var fileResponse of response) {
-                        if (!fileResponse.success) {
-                            file.status = Dropzone.ERROR;
-                            file.media = fileResponse;
+                if (Array.isArray(response)) {
+                    if (response.length === 0) {
+                        file.status = Dropzone.ERROR;
+                    }
+                    else {
+                        for (var fileResponse of response) {
+                            if (!fileResponse.success) {
+                                file.status = Dropzone.ERROR;
+                                file.media = fileResponse;
+                            }
                         }
                     }
                 }
-                else {
+                else if (response) {
                     file.media = response;
 
                     if (!response.success) file.status = Dropzone.ERROR;
+                }
+                else {
+                    file.status = Dropzone.ERROR;
                 }
 
                 if (options.onUploadCompleted) options.onUploadCompleted.apply(this, [file, response, progress]);
@@ -269,7 +277,7 @@
                 logEvent("successmultiple", files, response, progress);
 
                 // Handle notifications
-                var xhr = progress.currentTarget;
+                var xhr = progress?.currentTarget;
                 if (xhr && xhr.getResponseHeader) {
                     var msg = xhr.getResponseHeader('X-Message');
                     if (msg) {
@@ -304,11 +312,11 @@
                 logEvent("complete", file);
 
                 // Reset dropzone for single file uploads, so other files can be uploaded again.
-                // (opts.maxFiles === 1 && file.media && file.media.dupe === false) > Reset for SingleFileUploads if there are no dupes.
+                // (opts.maxFiles === 1 && file.media && !file.media.dupe) > Reset for SingleFileUploads if there are no dupes.
                 // !file.media	> Some upload actions might not set media because they are not uploading to MM. 
-                // !file.status === Dropzone.ERROR > If file upload fails there's also no media
+                // file.status !== Dropzone.ERROR > If file upload fails there's also no media
                 // TODO: !file.media doesn't feel right. Better give control to the action by returning a corresponding value
-                if ((opts.maxFiles === 1 && file.media && !file.media.dupe) || (!file.media && !file.status === Dropzone.ERROR)) {
+                if ((opts.maxFiles === 1 && file.media && !file.media.dupe) || (opts.maxFiles === 1 && !file.media) || (!file.media && file.status !== Dropzone.ERROR)) {
                     this.removeAllFiles(true);
                 }
 
@@ -363,7 +371,7 @@
                 }
                 else {
                     // Duplicate resolution may not be done yet.
-                    if (!dialog.isOpen && dupeFiles.length > 0) {
+                    if ((!dialog || !dialog.isOpen) && dupeFiles.length > 0) {
                         assignableFileIds = "";
                         assignableFiles.length = 0;
                     }
@@ -438,7 +446,7 @@
 
                     // Can be removed when issue was resolved (dropzone Update 5.8.03)
                     // https://gitlab.com/meno/dropzone/-/issues/217
-                    if (errMessage.indexOf(el.options.timeout) > 0)
+                    if (typeof errMessage === 'string' && errMessage.indexOf(el.options.timeout) > 0)
                         errMessage = errMessage.replace(el.options.timeout, el.options.timeout / 1000);
                 }
 

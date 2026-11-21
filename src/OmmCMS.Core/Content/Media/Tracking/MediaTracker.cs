@@ -84,7 +84,7 @@ public class MediaTracker : IMediaTracker
         Guard.NotNull(settings);
         Guard.NotEmpty(propertyName);
 
-        var key = nameof(TSetting) + "." + propertyName;
+        var key = typeof(TSetting).Name + "." + propertyName;
         var storeId = _storeContext.CurrentStoreIdIfMultiStoreMode;
 
         var settingEntity = await _settingService.GetSettingEntityByKeyAsync(key, storeId);

@@ -62,6 +62,8 @@ public class MediaController : SmartController
         string directory = "",
         string entityType = "")
     {
+        path = path.NullEmpty() ?? SystemAlbumProvider.Files;
+
         var numFiles = Request.Form.Files.Count;
         var result = new List<object>(numFiles);
 
@@ -78,7 +80,12 @@ public class MediaController : SmartController
         for (var i = 0; i < numFiles; ++i)
         {
             var uploadedFile = Request.Form.Files[i];
-            var fileName = uploadedFile.FileName;
+            var fileName = Path.GetFileName(uploadedFile.FileName.EmptyNull().Replace('\\', '/'));
+            if (fileName.IsEmpty())
+            {
+                continue;
+            }
+
             var filePath = _mediaService.CombinePaths(path, fileName);
 
             try

@@ -184,6 +184,11 @@ public partial class FolderService : AsyncDbSaveHook<MediaFolder>, IFolderServic
 
     protected internal static string NormalizePath(string path, bool forQuery = true)
     {
+        if (path.IsEmpty())
+        {
+            return string.Empty;
+        }
+
         if (path.IndexOf('\\') > -1)
         {
             path = path.Replace('\\', '/');

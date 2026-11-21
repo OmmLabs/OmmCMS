@@ -38,7 +38,7 @@ public class PackagingController : AdminController
                 return Json(new { fileName = file.FileName, message, returnUrl });
             }
 
-            using var package = new ExtensionPackage(file.OpenReadStream(), false) { FileName = file.Name };
+            using var package = new ExtensionPackage(file.OpenReadStream(), false) { FileName = file.FileName };
 
             if (!OmmCMSVersion.IsAssumedCompatible(package.Descriptor.MinAppVersion))
             {
@@ -65,12 +65,12 @@ public class PackagingController : AdminController
             var result = await _packageInstaller.InstallPackageAsync(package);
 
             message = T("Admin.Packaging.InstallSuccess" + (isTheme ? ".Theme" : string.Empty), result.Name).ToString();
-            return Json(new { success = true, file = file.Name, message, returnUrl });
+            return Json(new { success = true, file = file.FileName, message, returnUrl });
         }
         catch (Exception ex)
         {
             message = ex.Message;
-            return Json(new { fileName = file?.Name, message, returnUrl });
+            return Json(new { fileName = file?.FileName, message, returnUrl });
         }
     }
 }

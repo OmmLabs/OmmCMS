@@ -183,7 +183,7 @@ public static class PathUtility
             path1,
             path2.TrimStart(trimChars)), ensureLeadingSeparator);
 
-        return joined[0] == '\\' ? '/' + joined[1..] : joined;
+        return joined.Length > 0 && joined[0] == '\\' ? '/' + joined[1..] : joined;
     }
 
     /// <inheritdoc cref="Join(string, string)"/>
@@ -196,7 +196,7 @@ public static class PathUtility
             path2.TrimStart(trimChars),
             path3.TrimStart(trimChars)), ensureLeadingSeparator);
 
-        return joined[0] == '\\' ? '/' + joined[1..] : joined;
+        return joined.Length > 0 && joined[0] == '\\' ? '/' + joined[1..] : joined;
     }
 
     /// <inheritdoc cref="Join(string, string)"/>
@@ -210,7 +210,7 @@ public static class PathUtility
             path3.TrimStart(trimChars),
             path4.TrimStart(trimChars)), ensureLeadingSeparator);
 
-        return joined[0] == '\\' ? '/' + joined[1..] : joined;
+        return joined.Length > 0 && joined[0] == '\\' ? '/' + joined[1..] : joined;
     }
 
     #endregion

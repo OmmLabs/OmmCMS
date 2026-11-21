@@ -104,7 +104,7 @@ public partial class EntityController : PublicController
                     .FirstOrDefaultAsync(x => x.SystemName == SystemCustomerRoleNames.Registered);
 
                 var customers = await customerQuery
-                    .ApplyRolesFilter([registeredRole.Id])
+                    .ApplyRolesFilter([registeredRole?.Id ?? 0])
                     .ApplyPaging(model.PageIndex, model.PageSize)
                     .ToListAsync();
 

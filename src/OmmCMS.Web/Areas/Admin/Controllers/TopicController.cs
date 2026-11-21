@@ -200,6 +200,7 @@ public class TopicController : AdminController
         }
 
         // If we got this far something failed. Redisplay form.
+        AddCookieTypes(model, model.CookieType);
         return View(model);
     }
 

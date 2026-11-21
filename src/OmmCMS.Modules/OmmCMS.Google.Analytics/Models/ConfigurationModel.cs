@@ -13,7 +13,7 @@ public class ConfigurationModel : ModelBase
     public bool DisplayCookieInfosForAds { get; set; }
 
     [LocalizedDisplay("*TrackingScript")]
-    [UIHint("TextArea"), AdditionalMetadata("rows", 12)]
+    [UIHint("Textarea"), AdditionalMetadata("rows", 12)]
     public string TrackingScript { get; set; }
 
     [LocalizedDisplay("*MinifyScripts")]

@@ -48,7 +48,7 @@ public class BlogController : AdminController
         var model = new BlogEditModel();
         if (id != 0)
         {
-            var p = await _db.BlogPosts.AsNoTracking().Include(x => x.Categories).Include(x => x.Tags)
+            var p = await _db.BlogPosts.AsNoTracking().Include(x => x.Categories).Include(x => x.Tags).AsSplitQuery()
                 .FirstOrDefaultAsync(x => x.Id == id);
             if (p == null) return NotFound();
             model = new BlogEditModel
@@ -72,7 +72,7 @@ public class BlogController : AdminController
         if (!await _permissions.AuthorizeAsync(creating ? Permissions.Cms.Blog.Create : Permissions.Cms.Blog.Update))
             return Forbid();
 
-        var p = creating ? new BlogPost() : await _db.BlogPosts.Include(x => x.Categories).Include(x => x.Tags)
+        var p = creating ? new BlogPost() : await _db.BlogPosts.Include(x => x.Categories).Include(x => x.Tags).AsSplitQuery()
             .FirstOrDefaultAsync(x => x.Id == model.Id);
         if (p == null) return NotFound();
 
@@ -94,7 +94,7 @@ public class BlogController : AdminController
 
         var imageIds = new[] { model.PreviewImageId, model.CoverImageId }.Where(x => x.GetValueOrDefault() > 0)
             .Select(x => x.Value).Distinct().ToArray();
-        if (await _db.MediaFiles.CountAsync(x => imageIds.Contains(x.Id) && !x.Deleted && !x.Hidden && x.MediaType == "image") != imageIds.Length)
+        if (imageIds.Length > 0 && await _db.MediaFiles.CountAsync(x => imageIds.Contains(x.Id) && !x.Deleted && !x.Hidden && x.MediaType == "image") != imageIds.Length)
             ModelState.AddModelError("", "Choose an available image from the media library.");
 
         var categoryIds = (model.CategoryIds ?? []).Distinct().ToArray();

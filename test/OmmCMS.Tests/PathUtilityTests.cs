@@ -49,6 +49,11 @@ public class PathUtilityTests
             var combined = PathUtility.Join(path1, path2);
             Assert.That(combined, Is.EqualTo(combiner[2]));
         }
+
+        Assert.That(PathUtility.Join((string)null, (string)null), Is.EqualTo(string.Empty));
+        Assert.That(PathUtility.Join(string.Empty, string.Empty), Is.EqualTo(string.Empty));
+        Assert.That(PathUtility.Join(string.Empty, string.Empty, string.Empty), Is.EqualTo(string.Empty));
+        Assert.That(PathUtility.Join(string.Empty, string.Empty, string.Empty, string.Empty), Is.EqualTo(string.Empty));
     }
 
     [TestCase("file.csv", true)]

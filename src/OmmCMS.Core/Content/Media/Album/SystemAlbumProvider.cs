@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using OmmCMS.Core.Common;
+using OmmCMS.Core.Content.Blogs;
 using OmmCMS.Core.Data;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Messaging;
@@ -117,6 +118,8 @@ public class SystemAlbumProvider : IAlbumProvider, IMediaTrackDetector
             table.Register<Store>(x => x.PngIconMediaFileId);
             table.Register<Store>(x => x.AppleTouchIconMediaFileId);
             table.Register<Store>(x => x.MsTileImageMediaFileId);
+            table.Register<BlogPost>(x => x.PreviewImageId);
+            table.Register<BlogPost>(x => x.CoverImageId);
         }
         else if (albumName == Downloads)
         {
@@ -141,12 +144,46 @@ public class SystemAlbumProvider : IAlbumProvider, IMediaTrackDetector
             // Store
             {
                 var name = nameof(Store);
-                var p = new FastPager<Store>(_db.Stores.AsNoTracking().Where(x => x.LogoMediaFileId > 0));
-                while ((await p.ReadNextPageAsync(x => new { x.Id, x.LogoMediaFileId }, x => x.Id, cancelToken)).Out(out var list))
+                var p = new FastPager<Store>(_db.Stores.AsNoTracking());
+                while ((await p.ReadNextPageAsync(x => new
+                {
+                    x.Id,
+                    x.LogoMediaFileId,
+                    x.FavIconMediaFileId,
+                    x.PngIconMediaFileId,
+                    x.AppleTouchIconMediaFileId,
+                    x.MsTileImageMediaFileId
+                }, x => x.Id, cancelToken)).Out(out var list))
                 {
                     foreach (var x in list)
                     {
-                        yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.LogoMediaFileId, Property = nameof(x.LogoMediaFileId) };
+                        if (x.LogoMediaFileId > 0)
+                            yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.LogoMediaFileId, Property = nameof(x.LogoMediaFileId) };
+                        if (x.FavIconMediaFileId is > 0)
+                            yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.FavIconMediaFileId.Value, Property = nameof(x.FavIconMediaFileId) };
+                        if (x.PngIconMediaFileId is > 0)
+                            yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.PngIconMediaFileId.Value, Property = nameof(x.PngIconMediaFileId) };
+                        if (x.AppleTouchIconMediaFileId is > 0)
+                            yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.AppleTouchIconMediaFileId.Value, Property = nameof(x.AppleTouchIconMediaFileId) };
+                        if (x.MsTileImageMediaFileId is > 0)
+                            yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.MsTileImageMediaFileId.Value, Property = nameof(x.MsTileImageMediaFileId) };
+                    }
+                    list.Clear();
+                }
+            }
+
+            // BlogPost
+            {
+                var name = nameof(BlogPost);
+                var p = new FastPager<BlogPost>(_db.BlogPosts.AsNoTracking().Where(x => x.PreviewImageId > 0 || x.CoverImageId > 0));
+                while ((await p.ReadNextPageAsync(x => new { x.Id, x.PreviewImageId, x.CoverImageId }, x => x.Id, cancelToken)).Out(out var list))
+                {
+                    foreach (var x in list)
+                    {
+                        if (x.PreviewImageId is > 0)
+                            yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.PreviewImageId.Value, Property = nameof(x.PreviewImageId) };
+                        if (x.CoverImageId is > 0)
+                            yield return new MediaTrack { EntityId = x.Id, EntityName = name, MediaFileId = x.CoverImageId.Value, Property = nameof(x.CoverImageId) };
                     }
                     list.Clear();
                 }

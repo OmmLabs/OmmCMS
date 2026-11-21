@@ -244,7 +244,7 @@ public class MessageTemplateController : AdminController
             NotifySuccess(T("Admin.ContentManagement.MessageTemplates.Updated"));
 
             return continueEditing
-                ? RedirectToAction(nameof(Edit), messageTemplate.Id)
+                ? RedirectToAction(nameof(Edit), new { id = messageTemplate.Id })
                 : RedirectToAction(nameof(List));
         }
 
@@ -442,7 +442,7 @@ public class MessageTemplateController : AdminController
             NotifyError(ex);
         }
 
-        return RedirectToAction(nameof(Edit), template.Id);
+        return RedirectToAction(nameof(Edit), new { id = template.Id });
     }
 
     [HttpPost]

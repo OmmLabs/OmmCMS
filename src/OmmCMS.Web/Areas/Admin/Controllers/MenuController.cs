@@ -329,7 +329,7 @@ public class MenuController : AdminController
             NotifySuccess(T("Admin.Common.DataSuccessfullySaved"));
 
             return continueEditing
-                ? RedirectToAction(nameof(Edit), menu.Id)
+                ? RedirectToAction(nameof(Edit), new { id = menu.Id })
                 : RedirectToAction(nameof(List));
         }
 

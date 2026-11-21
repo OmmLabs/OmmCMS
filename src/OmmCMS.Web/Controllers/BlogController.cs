@@ -61,7 +61,7 @@ public class BlogController : PublicController
         if (resolved == null) return NotFound();
 
         var visible = VisiblePosts();
-        var post = await visible.Include(x => x.Categories).Include(x => x.Tags)
+        var post = await visible.Include(x => x.Categories).Include(x => x.Tags).AsSplitQuery()
             .FirstOrDefaultAsync(x => x.Id == resolved.EntityId);
         if (post == null) return NotFound();
         if (resolved.IsRedirect)
@@ -128,7 +128,7 @@ public class BlogController : PublicController
 
         model.Total = await query.CountAsync();
         if (page > 1 && (page - 1) * model.PageSize >= model.Total) return NotFound();
-        model.Posts = await query.Include(x => x.Categories).Include(x => x.Tags)
+        model.Posts = await query.Include(x => x.Categories).Include(x => x.Tags).AsSplitQuery()
             .OrderByDescending(x => x.PublishedOnUtc).ThenByDescending(x => x.Id)
             .Skip((page - 1) * model.PageSize).Take(model.PageSize).ToListAsync();
         model.Categories = await _db.BlogCategories.AsNoTracking()

@@ -3899,8 +3899,14 @@
 	<LocaleResource Name="Admin.Configuration.Settings.Media.FileStorage">
 		<Value>Dateispeicher</Value>
 	</LocaleResource>
+	<LocaleResource Name="Admin.Configuration.Settings.Media.GifQuantizationMethod">
+		<Value>GIF-Quantisierungsmethode</Value>
+	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.ImageSizes">
 		<Value>Bild-/Thumbnailgrößen</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Configuration.Settings.Media.JpegColorType">
+		<Value>JPEG-Farbtyp</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.MakeFilesTransientWhenOrphaned">
 		<Value>Verwaiste Dateien automatisch löschen</Value>
@@ -3952,6 +3958,15 @@
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.PictureZoomType.Window">
 		<Value>Fenster</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Configuration.Settings.Media.PngInterlaced">
+		<Value>PNG Interlaced</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Configuration.Settings.Media.PngInterlaced.Hint">
+		<Value>Legt fest, ob erzeugte PNG-Bilder mit Adam7-Interlacing codiert werden sollen.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Configuration.Settings.Media.PngQuantizationMethod">
+		<Value>PNG-Quantisierungsmethode</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.Media.PreviewThumbnailSize">
 		<Value>Medien-Vorschaubild</Value>

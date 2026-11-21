@@ -8,7 +8,6 @@ using OmmCMS.Core.Content.Media;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Security;
 using OmmCMS.IO;
-using OmmCMS.Json;
 
 namespace OmmCMS.Admin.Controllers;
 
@@ -444,22 +443,34 @@ public class RoxyFileManagerController : AdminController
             var uploadedFiles = Request.Form.Files;
             foreach (var uploadedFile in uploadedFiles)
             {
-                var extension = Path.GetExtension(uploadedFile.FileName);
+                var fileName = Path.GetFileName(uploadedFile.FileName.EmptyNull().Replace('\\', '/'));
+                if (fileName.IsEmpty())
+                {
+                    continue;
+                }
+
+                var extension = Path.GetExtension(fileName);
 
                 if (IsAllowedFileType(extension))
                 {
-                    var path = PathUtility.Join(destinationPath, uploadedFile.FileName);
+                    var path = PathUtility.Join(destinationPath, fileName);
                     if ((await _fileSystem.CheckUniqueFileNameAsync(path)).Out(out var uniquePath))
                     {
                         path = uniquePath;
                     }
 
-                    uploadedFileInfo = await _mediaService.SaveFileAsync(path, uploadedFile.OpenReadStream(), false, DuplicateFileHandling.Overwrite);
+                    await using var stream = uploadedFile.OpenReadStream();
+                    uploadedFileInfo = await _mediaService.SaveFileAsync(path, stream, false, DuplicateFileHandling.Overwrite);
                 }
                 else
                 {
                     message = LangRes("E_UploadNotAll");
                 }
+            }
+
+            if (uploadedFileInfo == null && message.HasValue())
+            {
+                hasError = true;
             }
         }
         catch (Exception ex)
@@ -528,13 +539,38 @@ public class RoxyFileManagerController : AdminController
         {
             var js = _webRoot.ReadAllText(path, Encoding.UTF8);
             var objStart = js.IndexOf('{');
-            var json = js[objStart..];
+            if (objStart < 0)
+            {
+                return [];
+            }
 
-            return JsonSerializer.Deserialize<Dictionary<string, string>>(json, SmartJsonOptions.Default);
+            var json = js[objStart..];
+            var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+            using var doc = JsonDocument.Parse(json, new JsonDocumentOptions
+            {
+                AllowTrailingCommas = true,
+                CommentHandling = JsonCommentHandling.Skip
+            });
+
+            if (doc.RootElement.ValueKind == JsonValueKind.Object)
+            {
+                foreach (var prop in doc.RootElement.EnumerateObject())
+                {
+                    result[prop.Name] = prop.Value.ValueKind switch
+                    {
+                        JsonValueKind.String => prop.Value.GetString(),
+                        JsonValueKind.Null => null,
+                        _ => prop.Value.ToString()
+                    };
+                }
+            }
+
+            return result;
         }
         catch (Exception ex)
         {
-            ex.Dump();
+            Logger.Error(ex);
             return [];
         }
     }
@@ -574,7 +610,7 @@ public class RoxyFileManagerController : AdminController
 
     private bool IsAllowedFileType(string extension)
     {
-        extension = extension.EmptyNull().ToLower().TrimEnd('.');
+        extension = extension.EmptyNull().ToLower().Trim('.');
 
         var setting = GetSetting("FORBIDDEN_UPLOADS").EmptyNull().Trim().ToLower();
         if (setting.HasValue())

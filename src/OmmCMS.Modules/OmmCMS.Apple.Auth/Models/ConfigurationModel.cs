@@ -14,7 +14,7 @@ public class ConfigurationModel : ModelBase
     [LocalizedDisplay("*KeyId")]
     public string KeyId { get; set; }
 
-    [UIHint("TextArea")]
+    [UIHint("Textarea")]
     [LocalizedDisplay("*PrivateKey")]
     public string PrivateKey { get; set; }
 

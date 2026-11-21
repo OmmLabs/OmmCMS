@@ -159,6 +159,9 @@ OmmCMS.Admin.Media = (function () {
 
                     // Listen to change events of radio group (dupe handling type) and display name of renamed file accordingly.
                     $(self._dialog).on("change", 'input[name=resolution-type]', (e) => {
+                        if (!self.currentConflict)
+                            return;
+
                         var fileName = self.currentConflict.dest.name;
 
                         if ($(e.target).val() === "2") {
@@ -172,12 +175,12 @@ OmmCMS.Admin.Media = (function () {
                             .text(fileName);
                     });
 
-                    $(self._dialog).on("click", ".btn-apply", () => {
+                    $(self._dialog).on("click", ".btn-apply", (e) => {
                         self._dialog.data('canceled', false);
                         var applyToRemaining = self._dialog.find('#apply-to-remaining').is(":checked");
 
                         // Display apply button until current item is processed & next item is called by refresh (prevents double clicks while the server is still busy).
-                        $(this).addClass("disabled");
+                        $(e.currentTarget).addClass("disabled");
 
                         if (_.isFunction(self.onResolve)) {
                             var start = self.currentIndex;

@@ -43,10 +43,20 @@ public class DownloadController : AdminController
         else
         {
             // Use stored data
+            if (download.MediaFile == null)
+            {
+                return Content(T("Common.Download.NoDataAvailable"));
+            }
+
             var data = await _downloadService.OpenDownloadStreamAsync(download);
 
             if (data == null || data.Length == 0)
             {
+                if (data != null)
+                {
+                    await data.DisposeAsync();
+                }
+
                 return Content(T("Common.Download.NoDataAvailable"));
             }
 
@@ -124,9 +134,14 @@ public class DownloadController : AdminController
             throw new ArgumentException(T("Common.NoFileUploaded"));
         }
 
-        var path = _mediaService.CombinePaths(SystemAlbumProvider.Downloads, postedFile.FileName);
-        using var stream = postedFile.OpenReadStream();
-        Response.RegisterForDispose(stream);
+        var fileName = Path.GetFileName(postedFile.FileName.EmptyNull().Replace('\\', '/'));
+        if (fileName.IsEmpty())
+        {
+            throw new ArgumentException(T("Common.NoFileUploaded"));
+        }
+
+        var path = _mediaService.CombinePaths(SystemAlbumProvider.Downloads, fileName);
+        await using var stream = postedFile.OpenReadStream();
 
         var file = await _mediaService.SaveFileAsync(path, stream, dupeFileHandling: DuplicateFileHandling.Rename);
 

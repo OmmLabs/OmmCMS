@@ -16,8 +16,14 @@ public class BlogEditModel
     [StringLength(150)]
     public string Author { get; set; }
     [UIHint("Media")]
+    [AdditionalMetadata("album", "content")]
+    [AdditionalMetadata("transientUpload", true)]
+    [AdditionalMetadata("entityType", "BlogPost")]
     public int? PreviewImageId { get; set; }
     [UIHint("Media")]
+    [AdditionalMetadata("album", "content")]
+    [AdditionalMetadata("transientUpload", true)]
+    [AdditionalMetadata("entityType", "BlogPost")]
     public int? CoverImageId { get; set; }
     public int StoreId { get; set; }
     public int LanguageId { get; set; }

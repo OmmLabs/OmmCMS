@@ -18,7 +18,7 @@
 
     private string MediaPath
     {
-        get => GetMetadata<string>("path") ?? GetMetadata<string>("album");
+        get => GetMetadata<string>("path").NullEmpty() ?? GetMetadata<string>("album").NullEmpty() ?? SystemAlbumProvider.Files;
     }
 
     private string TypeFilter

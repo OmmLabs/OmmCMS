@@ -316,7 +316,23 @@ public partial class MediaService : IMediaService
 
     public string CombinePaths(params string[] paths)
     {
-        return FolderService.NormalizePath(Path.Combine(paths), false);
+        if (paths == null || paths.Length == 0)
+        {
+            return string.Empty;
+        }
+
+        var segments = paths
+            .Where(x => x.HasValue())
+            .Select(x => x.Trim('/', '\\'))
+            .Where(x => x.HasValue())
+            .ToArray();
+
+        if (segments.Length == 0)
+        {
+            return string.Empty;
+        }
+
+        return FolderService.NormalizePath(string.Join('/', segments), false);
     }
 
     public bool FindEqualFile(Stream source, IEnumerable<MediaFile> files, bool leaveOpen, out MediaFile equalFile)

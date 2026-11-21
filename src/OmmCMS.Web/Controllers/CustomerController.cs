@@ -28,6 +28,7 @@ public class CustomerController : PublicController
     private readonly SmartDbContext _db;
     private readonly INewsletterSubscriptionService _newsletterSubscriptionService;
     private readonly IMediaService _mediaService;
+    private readonly IMediaTypeResolver _mediaTypeResolver;
     private readonly IMessageFactory _messageFactory;
     private readonly UserManager<Customer> _userManager;
     private readonly SignInManager<Customer> _signInManager;
@@ -42,6 +43,7 @@ public class CustomerController : PublicController
         SmartDbContext db,
         INewsletterSubscriptionService newsletterSubscriptionService,
         IMediaService mediaService,
+        IMediaTypeResolver mediaTypeResolver,
         IMessageFactory messageFactory,
         UserManager<Customer> userManager,
         SignInManager<Customer> signInManager,
@@ -55,6 +57,7 @@ public class CustomerController : PublicController
         _db = db;
         _newsletterSubscriptionService = newsletterSubscriptionService;
         _mediaService = mediaService;
+        _mediaTypeResolver = mediaTypeResolver;
         _messageFactory = messageFactory;
         _userManager = userManager;
         _signInManager = signInManager;
@@ -479,10 +482,17 @@ public class CustomerController : PublicController
 
         if (customer.IsRegistered() && _customerSettings.AllowCustomersToUploadAvatars)
         {
-            var uploadedFile = Request.Form.Files[0];
-            if (uploadedFile != null && uploadedFile.FileName.HasValue())
+            var uploadedFile = Request.Form.Files.FirstOrDefault();
+            var fileName = Path.GetFileName(uploadedFile?.FileName.EmptyNull().Replace('\\', '/'));
+            if (uploadedFile != null && fileName.HasValue())
             {
-                if (uploadedFile.Length <= maxFileSize)
+                var extension = Path.GetExtension(fileName).TrimStart('.').ToLowerInvariant();
+                var allowedImageExtensions = _mediaTypeResolver.ParseTypeFilter("image");
+                if (!allowedImageExtensions.Contains(extension))
+                {
+                    NotifyError(T("Admin.Media.Exception.DeniedMediaType", fileName, string.Join(", ", allowedImageExtensions)));
+                }
+                else if (uploadedFile.Length <= maxFileSize)
                 {
                     var oldAvatar = await _db.MediaFiles.FindByIdAsync(customer.GenericAttributes.AvatarPictureId ?? 0);
                     if (oldAvatar != null)
@@ -490,9 +500,9 @@ public class CustomerController : PublicController
                         await _mediaService.DeleteFileAsync(oldAvatar, true);
                     }
 
-                    var path = _mediaService.CombinePaths(SystemAlbumProvider.Customers, PathUtility.SanitizeFileName(uploadedFile.FileName));
+                    var path = _mediaService.CombinePaths(SystemAlbumProvider.Customers, PathUtility.SanitizeFileName(fileName));
 
-                    using var stream = uploadedFile.OpenReadStream();
+                    await using var stream = uploadedFile.OpenReadStream();
                     var newAvatar = await _mediaService.SaveFileAsync(path, stream, false, DuplicateFileHandling.Rename);
 
                     if (newAvatar != null)
@@ -524,7 +534,8 @@ public class CustomerController : PublicController
         var customer = Services.WorkContext.CurrentCustomer;
         if (customer.IsRegistered() && _customerSettings.AllowCustomersToUploadAvatars)
         {
-            var file = await _db.MediaFiles.FindByIdAsync((int)customer.GenericAttributes.AvatarPictureId);
+            var avatarPictureId = customer.GenericAttributes.AvatarPictureId.GetValueOrDefault();
+            var file = avatarPictureId > 0 ? await _db.MediaFiles.FindByIdAsync(avatarPictureId) : null;
             if (file != null)
             {
                 await _mediaService.DeleteFileAsync(file, true);

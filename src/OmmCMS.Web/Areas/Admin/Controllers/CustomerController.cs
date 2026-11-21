@@ -710,7 +710,7 @@ public class CustomerController : AdminController
                     NotifySuccess(T("Admin.Customers.Customers.Updated"));
 
                     return continueEditing
-                        ? RedirectToAction(nameof(Edit), customer.Id)
+                        ? RedirectToAction(nameof(Edit), new { id = customer.Id })
                         : RedirectToAction(nameof(List));
                 }
                 else
@@ -839,7 +839,7 @@ public class CustomerController : AdminController
         if (!Services.WorkContext.CurrentCustomer.IsAdmin() && customer.IsAdmin())
         {
             NotifyAccessDenied();
-            return RedirectToAction(nameof(Edit), customer.Id);
+            return RedirectToAction(nameof(Edit), new { id = customer.Id });
         }
 
         Services.WorkContext.CurrentCustomer.GenericAttributes.ImpersonatedCustomerId = customer.Id;
