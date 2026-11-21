@@ -27,7 +27,6 @@ public partial class GeneralCommonSettingsModel : ModelBase
 
     public SecuritySettingsModel SecuritySettings { get; set; } = new();
     public CaptchaSettingsModel CaptchaSettings { get; set; } = new();
-    public PdfSettingsModel PdfSettings { get; set; } = new();
     public LocalizationSettingsModel LocalizationSettings { get; set; } = new();
     public CompanyInformationSettingsModel CompanyInformationSettings { get; set; } = new();
     public ContactDataSettingsModel ContactDataSettings { get; set; } = new();
@@ -195,24 +194,6 @@ public partial class GeneralCommonSettingsModel : ModelBase
         public string ConfigureUrl { get; set; }
 
         public ModuleIcon Icon { get; set; }
-    }
-
-    [LocalizedDisplay("Admin.Configuration.Settings.GeneralCommon.")]
-    public partial class PdfSettingsModel
-    {
-        [LocalizedDisplay("*PdfEnabled")]
-        public bool Enabled { get; set; }
-
-        [LocalizedDisplay("*PdfLetterPageSizeEnabled")]
-        public bool LetterPageSizeEnabled { get; set; }
-
-        [LocalizedDisplay("*MaxItemsToPrint")]
-        public int MaxItemsToPrint { get; set; }
-
-        [LocalizedDisplay("*PdfLogo")]
-        [UIHint("Media"), AdditionalMetadata("album", "content"), AdditionalMetadata("transientUpload", true)]
-        public int LogoPictureId { get; set; }
-
     }
 
     [LocalizedDisplay("Admin.Configuration.Settings.GeneralCommon.")]

@@ -105,13 +105,13 @@
         <Value>SQLite (not suitable for use in production!)</Value>
     </LocaleResource>
     <LocaleResource Name="StoreInformation">
-        <Value>Store information</Value>
+        <Value>Administrator account</Value>
     </LocaleResource>
     <LocaleResource Name="Title">
         <Value>Installation</Value>
     </LocaleResource>
     <LocaleResource Name="Tooltip1">
-        <Value>Welcome to OmmCMS! This wizard helps you set up your store. Create your administrator account and choose the appropriate database and basic settings</Value>
+        <Value>Welcome to OmmCMS! This wizard helps you set up your website. Create your administrator account and choose the appropriate database and basic settings</Value>
     </LocaleResource>
     <LocaleResource Name="Tooltip2">
         <Value>Depending on your database system, you may need the credentials for your database server. If you do not have them, contact your hosting provider or IT administrator for assistance</Value>
@@ -129,7 +129,7 @@
         <Value>Do you want to install OmmCMS now?</Value>
     </LocaleResource>
     <LocaleResource Name="AdminEmailValue">
-        <Value>admin@mystore.com</Value>
+        <Value>admin@example.com</Value>
     </LocaleResource>
     <LocaleResource Name="MediaStorage.Label">
         <Value>Media storage</Value>
@@ -147,7 +147,7 @@
         <Value>Alert</Value>
     </LocaleResource>
     <LocaleResource Name="Common.StartShop">
-        <Value>Yippieee! The installation was completed successfully ;-) Your shop is being started now...</Value>
+        <Value>Installation completed successfully! Starting your website...</Value>
     </LocaleResource>
     <LocaleResource Name="Progress.CheckingRequirements">
         <Value>Checking requirements</Value>
@@ -171,7 +171,7 @@
         <Value>Creating sample data</Value>
     </LocaleResource>
     <LocaleResource Name="Progress.Redirect">
-        <Value><![CDATA[If you are not automatically redirected to the home page of the store please click <a href="{0}">here</a>]]></Value>
+        <Value><![CDATA[If you are not automatically redirected to the home page please click <a href="{0}">here</a>]]></Value>
     </LocaleResource>
     <LocaleResource Name="InstallOptions">
         <Value>Options</Value>
@@ -195,7 +195,7 @@
         <Value>'Admin user password' is required</Value>
     </LocaleResource>
     <LocaleResource Name="ConfirmPasswordRequired">
-        <Value>'Passwort confirmation' is required</Value>
+        <Value>'Password confirmation' is required</Value>
     </LocaleResource>
     <LocaleResource Name="DbRawConnectionStringRequired">
         <Value>'Connection string' is required</Value>

@@ -136,7 +136,7 @@ public abstract class DbFactory
 
             if (assemblyName.IsEmpty())
             {
-                throw new NotSupportedException($"Unknown database provider type name '${provider}'.");
+                throw new NotSupportedException($"Unknown database provider type name '{provider}'.");
             }
 
             var baseDirectory = EngineContext.Current.Application.RuntimeInfo.BaseDirectory;

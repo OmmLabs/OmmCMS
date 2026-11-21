@@ -1,24 +1,16 @@
-﻿using System.Data;
-using Autofac;
-using OmmCMS.Core.Common.Configuration;
-using OmmCMS.Core.Content.Menus;
+﻿using OmmCMS.Core.Common.Configuration;
 using OmmCMS.Core.Content.Topics;
-using OmmCMS.Core.DataExchange.Export;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Localization;
 using OmmCMS.Core.Localization.Routing;
 using OmmCMS.Core.Logging;
 using OmmCMS.Core.Messaging;
-using OmmCMS.Core.Rules;
-using OmmCMS.Core.Rules.Filters;
 using OmmCMS.Core.Security;
 using OmmCMS.Core.Stores;
 using OmmCMS.Json;
 using OmmCMS.Net.Mail;
 using OmmCMS.Utilities.Html;
 using OmmCMS.Web.Models.Common;
-
-using OmmCMS.Engine;
 
 namespace OmmCMS.Web.Controllers;
 
@@ -51,7 +43,6 @@ public class HomeController : PublicController
         _storeContext = storeContext;
         _homePageSettings = homePageSettings;
         _messageFactory = messageFactory;
-        _assetBuilder = assetBuilder;
         _assetBuilder = assetBuilder;
         _privacySettings = privacySettings;
         _commonSettings = commonSettings;

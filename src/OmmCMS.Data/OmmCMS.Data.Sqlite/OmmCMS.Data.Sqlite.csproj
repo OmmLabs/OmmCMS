@@ -13,7 +13,7 @@
         <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="10.0.8" GeneratePathProperty="true" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="10.0.8" GeneratePathProperty="true" />
 
-        <None Include="$(PkgSourceGear_sqlite3)\runtimes\**\*" CopyToOutputDirectory="PreserveNewest" LinkBase="runtimes">
+        <None Include="$(PkgSourceGear_sqlite3)\runtimes\win-*\**\*;$(PkgSourceGear_sqlite3)\runtimes\linux-*\**\*;$(PkgSourceGear_sqlite3)\runtimes\osx-*\**\*" CopyToOutputDirectory="PreserveNewest" LinkBase="runtimes">
             <Visible>true</Visible>
         </None>
         <None Include="$(PkgSQLitePCLRaw_config_e_sqlite3)\lib\net8.0\*.dll" CopyToOutputDirectory="PreserveNewest">
@@ -22,7 +22,7 @@
         <None Include="$(PkgSQLitePCLRaw_provider_e_sqlite3)\lib\net8.0\*.dll" CopyToOutputDirectory="PreserveNewest">
             <Visible>false</Visible>
         </None>
-        <None Include="$(PkgSQLitePCLRaw_core)\lib\netstandard2.0\*.dll" CopyToOutputDirectory="PreserveNewest">
+        <None Include="$(PkgSQLitePCLRaw_core)\lib\net8.0\*.dll" CopyToOutputDirectory="PreserveNewest">
             <Visible>false</Visible>
         </None>
         <None Include="$(PkgMicrosoft_Data_Sqlite_Core)\lib\net8.0\*.dll" CopyToOutputDirectory="PreserveNewest">

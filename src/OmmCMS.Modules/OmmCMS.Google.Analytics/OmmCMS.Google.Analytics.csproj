@@ -5,9 +5,6 @@
         <OutDir>$(OutputPath)</OutDir>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="DouglasCrockford.JsMin" Version="2.2.0" />
-    </ItemGroup>
-    <ItemGroup>
         <ProjectReference Include="..\..\OmmCMS.Web\OmmCMS.Web.csproj">
             <Private>False</Private>
             <CopyLocal>False</CopyLocal>

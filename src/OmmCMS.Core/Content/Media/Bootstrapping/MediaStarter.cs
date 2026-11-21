@@ -8,8 +8,6 @@ using OmmCMS.Engine.Builders;
 using OmmCMS.Engine.Modularity;
 using OmmCMS.Imaging;
 using OmmCMS.Imaging.Adapters.ImageSharp;
-using OmmCMS.Imaging.Barcodes;
-using OmmCMS.Imaging.Barcodes.Impl;
 
 namespace OmmCMS.Core.Bootstrapping;
 
@@ -59,9 +57,6 @@ internal class MediaStarter : StarterBase
         builder.RegisterType<SharpImageFactory>().As<IImageFactory>().SingleInstance();
         builder.RegisterType<ImageCache>().As<IImageCache>().InstancePerLifetimeScope();
         builder.RegisterType<DefaultImageProcessor>().As<IImageProcessor>().InstancePerLifetimeScope();
-
-        // Barcode & QrCode
-        builder.RegisterType<DefaultBarcodeEncoder>().As<IBarcodeEncoder>().SingleInstance();
 
         // Register factory for currently active media storage provider
         builder.Register(MediaStorageProviderFactory);

@@ -7,68 +7,61 @@
         <DataDir>..\OmmCMS.Data\</DataDir>
     </PropertyGroup>
 
+    <!--
+    Build data provider projects before the host without referencing their assemblies
+    or flowing their NuGet packages into the host compile/runtime graph.
+    -->
     <ItemGroup>
-        <!-- Compile output of all data provider projects except JSON files -->
-        <DistFiles Include="$(DataDir)OmmCMS.Data.*\$(BinDir)*" Exclude="**\*.json" />
+        <ProjectReference Include="$(DataDir)OmmCMS.Data.Sqlite\OmmCMS.Data.Sqlite.csproj"
+                          ReferenceOutputAssembly="false"
+                          Private="false"
+                          ExcludeAssets="all" />
+        <ProjectReference Include="$(DataDir)OmmCMS.Data.SqlServer\OmmCMS.Data.SqlServer.csproj"
+                          ReferenceOutputAssembly="false"
+                          Private="false"
+                          ExcludeAssets="all" />
+        <ProjectReference Include="$(DataDir)OmmCMS.Data.PostgreSql\OmmCMS.Data.PostgreSql.csproj"
+                          ReferenceOutputAssembly="false"
+                          Private="false"
+                          ExcludeAssets="all" />
+        <ProjectReference Include="$(DataDir)OmmCMS.Data.MySql\OmmCMS.Data.MySql.csproj"
+                          ReferenceOutputAssembly="false"
+                          Private="false"
+                          ExcludeAssets="all" />
     </ItemGroup>
 
-    <Target Name="CopyDataProvidersToOutput" AfterTargets="Build">
-        <Copy SourceFiles="@(DistFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+    <!-- Ensure Visual Studio's Fast Up-To-Date Check triggers a copy if provider binaries are missing or updated. -->
+    <ItemGroup>
+        <UpToDateCheckBuilt Include="$(OutDir)OmmCMS.Data.Sqlite.dll" Original="$(DataDir)OmmCMS.Data.Sqlite\$(BinDir)OmmCMS.Data.Sqlite.dll" />
+        <UpToDateCheckBuilt Include="$(OutDir)OmmCMS.Data.SqlServer.dll" Original="$(DataDir)OmmCMS.Data.SqlServer\$(BinDir)OmmCMS.Data.SqlServer.dll" />
+        <UpToDateCheckBuilt Include="$(OutDir)OmmCMS.Data.PostgreSql.dll" Original="$(DataDir)OmmCMS.Data.PostgreSql\$(BinDir)OmmCMS.Data.PostgreSql.dll" />
+        <UpToDateCheckBuilt Include="$(OutDir)OmmCMS.Data.MySql.dll" Original="$(DataDir)OmmCMS.Data.MySql\$(BinDir)OmmCMS.Data.MySql.dll" />
+    </ItemGroup>
+
+    <!-- Collect provider outputs dynamically after provider projects have built (never at evaluation time). -->
+    <Target Name="CollectDataProviderFiles">
+        <ItemGroup>
+            <DataProviderDistFiles Include="$(DataDir)OmmCMS.Data.*\$(BinDir)*" Exclude="**\*.json;**\*.pdb" Condition="'$(Configuration)' == 'Release'" />
+            <DataProviderDistFiles Include="$(DataDir)OmmCMS.Data.*\$(BinDir)*" Exclude="**\*.json" Condition="'$(Configuration)' != 'Release'" />
+        </ItemGroup>
     </Target>
 
-    <!-- 
-    Because data provider projects are not referenced, their output files are not copied to the publish directory.
-    We gonna collect all output files here and announce them to the publisher.
+    <Target Name="CopyDataProvidersToOutput" AfterTargets="Build" DependsOnTargets="CollectDataProviderFiles">
+        <Copy SourceFiles="@(DataProviderDistFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+    </Target>
+
+    <!--
+    Because data provider projects are not compile-referenced, announce their compiled binaries
+    to the publish pipeline.
     -->
-    <Target Name="PublishDataProviders" AfterTargets="ComputeFilesToPublish">
+    <Target Name="PublishDataProviders" AfterTargets="ComputeFilesToPublish" DependsOnTargets="CollectDataProviderFiles">
         <ItemGroup>
-            <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+            <ResolvedFileToPublish Include="@(DataProviderDistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
                 <RelativePath>%(Filename)%(Extension)</RelativePath>
                 <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
                 <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
             </ResolvedFileToPublish>
         </ItemGroup>
     </Target>
-    
-    <!-- 
-    When publishing OmmCMS.Web in VS, the data providers are not built automatically 
-    (because they are not referenced). Therefore we check whether the compilation assembly 
-    exists in the bin directory and if not, we build the provider projects manually.
-    -->
-    <!--<Target Name="CompileSqlServerProvider" BeforeTargets="ComputeFilesToPublish" Condition="!Exists('$(BinDir)OmmCMS.Data.SqlServer.dll')">
-        <Message Importance="high" Text="Building SqlServer data provider..." />
-        <Exec Command="dotnet build ..\OmmCMS.Data\OmmCMS.Data.SqlServer\OmmCMS.Data.SqlServer.csproj -c $(Configuration)" />
-    </Target>
-    <Target Name="CompileMySqlProvider" BeforeTargets="ComputeFilesToPublish" Condition="!Exists('$(BinDir)OmmCMS.Data.MySql.dll')">
-        <Message Importance="high" Text="Building MySql data provider..." />
-        <Exec Command="dotnet build ..\OmmCMS.Data\OmmCMS.Data.MySql\OmmCMS.Data.MySql.csproj -c $(Configuration)" />
-    </Target>-->
-    <!--<Target Name="CompilePostgreSqlProvider" BeforeTargets="ComputeFilesToPublish" Condition="!Exists('$(BinDir)OmmCMS.Data.PostgreSql.dll')">
-        <Message Importance="high" Text="Building PostgreSql data provider..." />
-        <Exec Command="dotnet build ..\OmmCMS.Data\OmmCMS.Data.PostgreSql\OmmCMS.Data.PostgreSql.csproj -c $(Configuration)" />
-    </Target>-->
-
-    <!-- 
-    Because data provider projects are not referenced, their output files are not copied to the publish directory.
-    We gonna collect all output files here and announce them to the publisher.
-    -->
-    <!--<Target Name="DeployDataProviders" AfterTargets="ComputeFilesToPublish">
-        <ItemGroup>
-            <DistFiles Include="
-            $(BinDir)OmmCMS.Data.SqlServer.dll;
-            $(BinDir)OmmCMS.Data.MySql.dll;
-            $(BinDir)OmmCMS.Data.PostgreSql.dll;
-            $(BinDir)Microsoft.EntityFrameworkCore.SqlServer.dll;
-            $(BinDir)Pomelo.EntityFrameworkCore.MySql.dll;
-            $(BinDir)Npgsql.EntityFrameworkCore.PostgreSQL.dll;
-            $(BinDir)MySqlConnector.dll;
-            $(BinDir)Npgsql.dll" />
-            <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
-                <RelativePath>%(Filename)%(Extension)</RelativePath>
-                <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-                <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-            </ResolvedFileToPublish>
-        </ItemGroup>
-    </Target>-->
 
 </Project>

@@ -35,10 +35,6 @@
                 <span class="badge badge-dark label-uninstall-count hide">0</span>
                 <span class="badge badge-warning label-install-count hide">0</span>
             </button>
-            <a id="uploadpackage" href="#uploadpackage-window" data-toggle="modal" class="btn btn-secondary" role="button">
-                <icon name="upload" />
-                <span>@T("Admin.Packaging.UploadPlugin")</span>
-            </a>
             <div class="dropdown">
                 <a class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" href="#">
                     @T("Admin.Common.Edit")
@@ -61,7 +57,6 @@
         <button type="button" class="btn-close" data-dismiss="alert"></button>
         <h4>@T("Admin.Configuration.Plugins.Description")</h4>
         <ol>
-            <li>@Html.Raw(T("Admin.Configuration.Plugins.Description.Step1", "uploadpackage", "#uploadpackage-window"))</li>
             <li>@Html.Raw(T("Admin.Configuration.Plugins.Description.Step2"))</li>
             <li>@Html.Raw(T("Admin.Configuration.Plugins.Description.Step3"))</li>
             <li>@Html.Raw(T("Admin.Configuration.Plugins.Description.Step4"))</li>
@@ -82,8 +77,6 @@
         <input type="submit" id="btnRefresh" name="btnRefresh" class="d-none" />
     </div>
 </form>
-
-<partial name="UploadPackage" model="new { isTheme = false }" />
 
 <script sm-target-zone="scripts" data-origin="ModuleList">
     $(function() {

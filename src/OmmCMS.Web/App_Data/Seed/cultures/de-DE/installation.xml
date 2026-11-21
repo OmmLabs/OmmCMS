@@ -114,7 +114,7 @@
         <Value>Installation</Value>
     </LocaleResource>
     <LocaleResource Name="Tooltip1">
-        <Value>Willkommen bei OmmCMS! Dieser Assistent unterstützt Sie dabei, Ihren Shop einzurichten. Legen Sie Ihr Administratorkonto an und wählen Sie die passenden Datenbank- und Grundeinstellungen</Value>
+        <Value>Willkommen bei OmmCMS! Dieser Assistent unterstützt Sie dabei, Ihre Website einzurichten. Legen Sie Ihr Administratorkonto an und wählen Sie die passenden Datenbank- und Grundeinstellungen</Value>
     </LocaleResource>
     <LocaleResource Name="Tooltip2">
         <Value>Je nach Datenbanksystem benötigen Sie die Zugangsdaten zu Ihrem Datenbankserver. Falls Sie diese nicht kennen, hilft Ihnen Ihr Hosting-Anbieter oder Ihre IT-Administration weiter</Value>
@@ -127,7 +127,7 @@
         <Value>Möchten Sie OmmCMS jetzt installieren?</Value>
     </LocaleResource>
     <LocaleResource Name="AdminEmailValue">
-        <Value>admin@meinstore.de</Value>
+        <Value>admin@example.com</Value>
     </LocaleResource>
 
     <LocaleResource Name="MediaStorage.Label">
@@ -147,7 +147,7 @@
         <Value>Achtung</Value>
     </LocaleResource>
     <LocaleResource Name="Common.StartShop">
-        <Value>Juhuuu! Die Installation wurde erfolgreich abgeschlossen ;-) Der Shop wird nun gestartet...</Value>
+        <Value>Die Installation wurde erfolgreich abgeschlossen! Ihre Website wird nun gestartet...</Value>
     </LocaleResource>
 
     <LocaleResource Name="Progress.CheckingRequirements">
@@ -172,7 +172,7 @@
         <Value>Schreibe Beispieldaten</Value>
     </LocaleResource>
     <LocaleResource Name="Progress.Redirect">
-        <Value><![CDATA[Sollten Sie nicht automatisch zur Startseite des Shops weitergeleitet werden, klicken Sie bitte <a href="{0}">hier</a>]]></Value>
+        <Value><![CDATA[Sollten Sie nicht automatisch zur Startseite weitergeleitet werden, klicken Sie bitte <a href="{0}">hier</a>]]></Value>
     </LocaleResource>
 
     <LocaleResource Name="InstallOptions">

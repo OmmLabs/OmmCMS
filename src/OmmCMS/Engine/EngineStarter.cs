@@ -14,7 +14,6 @@ using OmmCMS.Engine.Modularity;
 using OmmCMS.Engine.Runtimes;
 using OmmCMS.IO;
 using OmmCMS.Json;
-using OmmCMS.Pdf;
 
 namespace OmmCMS.Engine;
 
@@ -163,7 +162,6 @@ public abstract class EngineStarter<TEngine> : Disposable, IEngineStarter
 
         services.AddSingleton<IFilePermissionChecker, FilePermissionChecker>();
         services.AddSingleton<ILifetimeScopeAccessor, DefaultLifetimeScopeAccessor>();
-        services.AddSingleton<IPdfConverter, NullPdfConverter>();
         services.AddScoped<IDisplayHelper, DefaultDisplayHelper>();
         services.AddHttpContextAccessor();
 

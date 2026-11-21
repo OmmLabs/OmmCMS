@@ -127,16 +127,10 @@ public partial class SmartConfiguration
     public int TaskSchedulerPollInterval { get; set; } = 1;
 
     /// <summary>
-    /// Set this to your store's task scheduler base url
-    /// when the automatic url resolution fails (e.g. 'http://www.mystore.com')
+    /// Set this to your site's task scheduler base url
+    /// when the automatic url resolution fails (e.g. 'https://example.com')
     /// </summary>
     public string? TaskSchedulerBaseUrl { get; set; }
-
-    /// <summary>
-    /// Set this to your store's PDF engine base url
-    /// when the automatic url resolution fails (e.g. 'http://www.mystore.com')
-    /// </summary>
-    public string? PdfEngineBaseUrl { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether to store TempData in a cookie.

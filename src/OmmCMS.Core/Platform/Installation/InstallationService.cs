@@ -86,9 +86,13 @@ public partial class InstallationService : IInstallationService
             // Installation has started already...
             if (result.Completed)
             {
-                // ...but has completed: remove from state and return result 
+                // Remove finished result from state; return immediately if it succeeded,
+                // otherwise allow a fresh installation attempt to proceed.
                 _asyncState.Remove<InstallationResult>();
-                return false;
+                if (result.Success)
+                {
+                    return false;
+                }
             }
             else
             {
@@ -135,6 +139,9 @@ public partial class InstallationService : IInstallationService
             return Progress(x =>
             {
                 x.Errors.Add(ex.Message);
+                x.Completed = true;
+                x.Success = false;
+                x.RedirectUrl = null;
                 Logger.Error(ex);
             });
         }
@@ -168,6 +175,9 @@ public partial class InstallationService : IInstallationService
             return Progress(x =>
             {
                 x.Errors.Add(GetResource("ConnectionStringWrongFormat"));
+                x.Completed = true;
+                x.Success = false;
+                x.RedirectUrl = null;
                 Logger.Error(ex, x.Errors.Last());
             });
         }

@@ -265,15 +265,15 @@ public class CommonController : PublicController
     public async Task<IActionResult> StatesByCountryId(string countryId, bool addEmptyStateIfRequired)
     {
         // This should never happen. But just in case we return an empty List to don't throw in frontend.
-        if (!countryId.HasValue())
+        if (!int.TryParse(countryId, out var parsedCountryId))
         {
             return Json(new List<SelectListItem>());
         }
 
-        var cacheKey = string.Format(ModelCacheInvalidator.STATEPROVINCES_BY_COUNTRY_MODEL_KEY, countryId, addEmptyStateIfRequired, Services.WorkContext.WorkingLanguage.Id);
+        var cacheKey = string.Format(ModelCacheInvalidator.STATEPROVINCES_BY_COUNTRY_MODEL_KEY, parsedCountryId, addEmptyStateIfRequired, Services.WorkContext.WorkingLanguage.Id);
         var cacheModel = await _cache.GetAsync(cacheKey, async () =>
         {
-            var stateProvinces = await _db.StateProvinces.GetStateProvincesByCountryIdAsync(Convert.ToInt32(countryId));
+            var stateProvinces = await _db.StateProvinces.GetStateProvincesByCountryIdAsync(parsedCountryId);
             var result = stateProvinces.ToSelectListItems() ?? new List<SelectListItem>();
 
             if (addEmptyStateIfRequired && result.Count == 0)

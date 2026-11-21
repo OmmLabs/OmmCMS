@@ -26,22 +26,19 @@ public partial class SettingController : AdminController
     private readonly Lazy<ModuleManager> _moduleManager;
     private readonly ICaptchaManager _captchaManager;
     private readonly ILocalizedEntityService _localizedEntityService;
-    private readonly Lazy<IMediaTracker> _mediaTracker;
 
     public SettingController(
         SmartDbContext db,
         IProviderManager providerManager,
         Lazy<ModuleManager> moduleManager,
         ICaptchaManager captchaManager,
-        ILocalizedEntityService localizedEntityService,
-        Lazy<IMediaTracker> mediaTracker)
+        ILocalizedEntityService localizedEntityService)
     {
         _db = db;
         _providerManager = providerManager;
         _moduleManager = moduleManager;
         _captchaManager = captchaManager;
         _localizedEntityService = localizedEntityService;
-        _mediaTracker = mediaTracker;
     }
 
     public async Task<IActionResult> ChangeStoreScopeConfiguration(int storeid, string returnUrl = "")
@@ -71,7 +68,6 @@ public partial class SettingController : AdminController
         DateTimeSettings dateTimeSettings,
         SecuritySettings securitySettings,
         CaptchaSettings captchaSettings,
-        PdfSettings pdfSettings,
         LocalizationSettings localizationSettings,
         CompanyInformationSettings companySettings,
         ContactDataSettings contactDataSettings,
@@ -87,7 +83,6 @@ public partial class SettingController : AdminController
         MiniMapper.Map(dateTimeSettings, model.DateTimeSettings);
         MiniMapper.Map(securitySettings, model.SecuritySettings);
         MiniMapper.Map(captchaSettings, model.CaptchaSettings);
-        MiniMapper.Map(pdfSettings, model.PdfSettings);
         MiniMapper.Map(localizationSettings, model.LocalizationSettings);
         MiniMapper.Map(companySettings, model.CompanyInformationSettings);
         MiniMapper.Map(contactDataSettings, model.ContactDataSettings);
@@ -140,7 +135,6 @@ public partial class SettingController : AdminController
         DateTimeSettings dateTimeSettings,
         SecuritySettings securitySettings,
         CaptchaSettings captchaSettings,
-        PdfSettings pdfSettings,
         LocalizationSettings localizationSettings,
         CompanyInformationSettings companySettings,
         ContactDataSettings contactDataSettings,
@@ -156,7 +150,6 @@ public partial class SettingController : AdminController
                 dateTimeSettings,
                 securitySettings,
                 captchaSettings,
-                pdfSettings,
                 localizationSettings,
                 companySettings,
                 contactDataSettings,
@@ -167,16 +160,12 @@ public partial class SettingController : AdminController
 
         ModelState.Clear();
 
-        // Necessary before mapping
-        var prevPdfLogoId = pdfSettings.LogoPictureId;
-
         // Map model to entities
         MiniMapper.Map(model.StoreInformationSettings, storeInformationSettings);
         MiniMapper.Map(model.SeoSettings, seoSettings);
         MiniMapper.Map(model.DateTimeSettings, dateTimeSettings);
         MiniMapper.Map(model.SecuritySettings, securitySettings);
         MiniMapper.Map(model.CaptchaSettings, captchaSettings);
-        MiniMapper.Map(model.PdfSettings, pdfSettings);
         MiniMapper.Map(model.LocalizationSettings, localizationSettings);
         MiniMapper.Map(model.CompanyInformationSettings, companySettings);
         MiniMapper.Map(model.ContactDataSettings, contactDataSettings);
@@ -188,9 +177,6 @@ public partial class SettingController : AdminController
 
         // Set CountryId explicitly else it can't be resetted.
         companySettings.CountryId = model.CompanyInformationSettings.CountryId ?? 0;
-
-        // (Un)track PDF logo id
-        await _mediaTracker.Value.TrackAsync(pdfSettings, prevPdfLogoId, x => x.LogoPictureId);
 
         seoSettings.MetaTitle = model.SeoSettings.MetaTitle;
         seoSettings.MetaDescription = model.SeoSettings.MetaDescription;

@@ -512,46 +512,6 @@
                 </div>
             </div>
         </tab>
-        <tab sm-title="@T("Admin.Configuration.Settings.GeneralCommon.PdfSettings")">
-            <div class="adminContent">
-                <div class="adminRow">
-                    <div class="adminTitle">
-                        <smart-label asp-for="PdfSettings.Enabled" />
-                    </div>
-                    <div class="adminData">
-                        <setting-editor asp-for="PdfSettings.Enabled"></setting-editor>
-                        <span asp-validation-for="PdfSettings.Enabled"></span>
-                    </div>
-                </div>
-                <div class="adminRow">
-                    <div class="adminTitle">
-                        <smart-label asp-for="PdfSettings.LetterPageSizeEnabled" />
-                    </div>
-                    <div class="adminData">
-                        <setting-editor asp-for="PdfSettings.LetterPageSizeEnabled"></setting-editor>
-                        <span asp-validation-for="PdfSettings.LetterPageSizeEnabled"></span>
-                    </div>
-                </div>
-                <div class="adminRow">
-                    <div class="adminTitle">
-                        <smart-label asp-for="PdfSettings.MaxItemsToPrint" />
-                    </div>
-                    <div class="adminData">
-                        <setting-editor asp-for="PdfSettings.MaxItemsToPrint"></setting-editor>
-                        <span asp-validation-for="PdfSettings.MaxItemsToPrint"></span>
-                    </div>
-                </div>
-                <div class="adminRow">
-                    <div class="adminTitle">
-                        <smart-label asp-for="PdfSettings.LogoPictureId" />
-                    </div>
-                    <div class="adminData" id="pdf-logo-picture">
-                        <setting-editor asp-for="PdfSettings.LogoPictureId" parent-selector="#pdf-logo-picture"></setting-editor>
-                        <span asp-validation-for="PdfSettings.LogoPictureId"></span>
-                    </div>
-                </div>
-            </div>
-        </tab>
         <tab sm-title="@T("Admin.Configuration.Settings.GeneralCommon.CompanyInformationSettings")">
             <div class="adminContent">
                 <div class="adminRow">

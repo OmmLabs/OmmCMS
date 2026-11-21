@@ -28,7 +28,10 @@ internal class SqliteDbFactory : DbFactory
     {
         Guard.NotEmpty(database);
 
-        var dbRelativePath = PathUtility.Join("App_Data", "Tenants", DataSettings.Instance.TenantName, $"{database}.db");
+        var fileName = database.EndsWith(".db", StringComparison.OrdinalIgnoreCase)
+            ? database
+            : $"{database}.db";
+        var dbRelativePath = PathUtility.Join("App_Data", "Tenants", DataSettings.Instance.TenantName, fileName);
 
         var builder = new SqliteConnectionStringBuilder
         {

@@ -65,18 +65,18 @@ public class MediaController : SmartController
         var numFiles = Request.Form.Files.Count;
         var result = new List<object>(numFiles);
 
+        if (numFiles > 0 && directory.HasValue())
+        {
+            path = _mediaService.CombinePaths(path, directory);
+
+            if (!_mediaService.FolderExists(path))
+            {
+                await _mediaService.CreateFolderAsync(path);
+            }
+        }
+
         for (var i = 0; i < numFiles; ++i)
         {
-            if (directory.HasValue())
-            {
-                path = _mediaService.CombinePaths(path, directory);
-
-                if (!_mediaService.FolderExists(path))
-                {
-                    await _mediaService.CreateFolderAsync(path);
-                }
-            }
-
             var uploadedFile = Request.Form.Files[i];
             var fileName = uploadedFile.FileName;
             var filePath = _mediaService.CombinePaths(path, fileName);
@@ -102,9 +102,10 @@ public class MediaController : SmartController
                     }
                 }
 
+                await using var stream = uploadedFile.OpenReadStream();
                 var mediaFile = await _mediaService.SaveFileAsync(
                     filePath,
-                    uploadedFile.OpenReadStream(),
+                    stream,
                     isTransient,
                     duplicateFileHandling);
 

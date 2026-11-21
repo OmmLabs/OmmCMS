@@ -21,10 +21,6 @@
                 <icon name="sync" />
                 <span>@T("Admin.Configuration.Themes.Reload")</span>
             </a>
-            <a id="uploadpackage" href="#uploadpackage-window" data-toggle="modal" class="btn btn-secondary" role="button">
-                <icon name="upload" />
-                <span>@T("Admin.Packaging.UploadTheme")</span>
-            </a>
 
             <zone name="admin_button_toolbar_after"></zone>
         </div>
@@ -143,8 +139,6 @@
         </tab>
     </tabstrip>
 </form>
-
-<partial name="UploadPackage" model="new { isTheme = true }" />
 
 @{ 
     async Task ThemeList(IList<ThemeDescriptorModel> themes, string caption)

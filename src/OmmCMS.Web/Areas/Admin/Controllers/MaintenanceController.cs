@@ -57,7 +57,6 @@ public class MaintenanceController : AdminController
     private readonly Lazy<IExportProfileService> _exportProfileService;
     private readonly Lazy<IImportProfileService> _importProfileService;
     private readonly Lazy<UpdateChecker> _updateChecker;
-    private readonly IHostApplicationLifetime _appLifetime;
     private readonly IMediaService _mediaService;
 
     public MaintenanceController(
@@ -75,7 +74,6 @@ public class MaintenanceController : AdminController
         Lazy<IExportProfileService> exportProfileService,
         Lazy<IImportProfileService> importProfileService,
         Lazy<UpdateChecker> updateChecker,
-        IHostApplicationLifetime appLifetime,
         IMediaService mediaService)
     {
         _db = db;
@@ -92,7 +90,6 @@ public class MaintenanceController : AdminController
         _exportProfileService = exportProfileService;
         _importProfileService = importProfileService;
         _updateChecker = updateChecker;
-        _appLifetime = appLifetime;
         _mediaService = mediaService;
     }
 
@@ -152,7 +149,7 @@ public class MaintenanceController : AdminController
             var numDeletedCustomers = await _customerService.DeleteGuestCustomersAsync(
                 startDateValue,
                 endDateValue,
-                _appLifetime.ApplicationStopping);
+                _hostApplicationLifetime.ApplicationStopping);
 
             NotifyInfo(T("Admin.System.Maintenance.DeleteGuests.TotalDeleted", numDeletedCustomers));
         }
@@ -573,10 +570,10 @@ public class MaintenanceController : AdminController
                 var tableInfos = await CommonHelper.TryAction(() => _db.DataProvider.ReadTableInfosAsync(), []);
                 var currentSize = tableInfos.FirstOrDefault(x => x.TableName == tableName)?.TotalSpace;
 
-                if (size.HasValue && currentSize.HasValue && size > currentSize)
+                if (size.HasValue && currentSize.HasValue && currentSize.Value > 0 && size > currentSize)
                 {
                     var diffBytes = currentSize.Value - size.Value;
-                    var diffPercent = Math.Round(diffBytes / (double)currentSize, 2);
+                    var diffPercent = Math.Round(diffBytes / (double)currentSize.Value, 2);
 
                     NotifySuccess(T("Common.OptimizeTableSuccess",
                         tableName,

@@ -321,21 +321,6 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
         builder.AddOrUpdate("Admin.Themes.Info.FlexBlue",
             "A signature all-blue header, crisp white content surfaces and warm orange actions. Soft blue details and a deep navy footer give this classic a clear, contemporary feel.",
             "Ein durchgehend blauer Header, klare weiße Inhaltsflächen und warme orangefarbene Akzente. Sanfte Blautöne und ein tiefblauer Footer verleihen diesem Klassiker einen zeitgemäßen Charakter.");
-        builder.AddOrUpdate("Admin.Themes.Info.FlexSorbet",
-            "A fresh editorial palette of aubergine, lime and mint on warm porcelain, with expressive serif headings.",
-            "Eine frische Kombination aus Aubergine, Limette und Mint auf warmem Porzellanweiß. Ausdrucksstarke Serifenschriften setzen die Überschriften in Szene.");
-        builder.AddOrUpdate("Admin.Themes.Info.FlexTidal",
-            "Atlantic ink, vivid coral and glacial blue. Crisp typography, clean geometry and bright content surfaces.",
-            "Atlantikblau, lebendiges Korallrot und kühles Eisblau. Klare Typografie, geradlinige Formen und helle Inhaltsflächen.");
-        builder.AddOrUpdate("Admin.Themes.Info.FlexAfterglow",
-            "Graphite nights with electric mint, soft orchid and apricot accents. A calm dark canvas with luminous details.",
-            "Dunkle Graphittöne mit leuchtendem Mint, sanftem Orchideenlila und Apricot. Ein ruhiges Dark Theme mit strahlenden Akzenten.");
-        builder.AddOrUpdate("Admin.Themes.Info.FlexLumen",
-            "A bright white canvas with iris-blue actions, soft lavender surfaces and petrol accents. Familiar, airy and quietly modern.",
-            "Strahlendes Weiß mit irisblauen Akzenten, sanften Lavendelflächen und Petrol. Vertraut, luftig und dezent modern.");
-        builder.AddOrUpdate("Admin.Themes.Info.FlexRiso",
-            "Inspired by risograph prints: cobalt ink, fluorescent pink and sunflower yellow on bright white paper. Condensed DIN-style headings and playful off-register accents.",
-            "Inspiriert vom Risographie-Druck: Kobaltblau, Neonpink und Sonnengelb auf strahlend weißem Papier. Kompakte Überschriften im DIN-Stil und verspielte, leicht versetzte Farbakzente.");
 
         builder.AddOrUpdate("Admin.Configuration.Themes.Option.KeepSassCompilerInMemory",
             "Keep Sass compiler in memory",

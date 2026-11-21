@@ -1,8 +1,9 @@
-﻿using DouglasCrockford.JsMin;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
+using NUglify;
+using NUglify.Html;
 using OmmCMS.Core.Identity;
 using OmmCMS.Core.Widgets;
 using OmmCMS.Google.Analytics.Services;
@@ -12,7 +13,13 @@ namespace OmmCMS.Google.Analytics.Components;
 
 public class GoogleAnalyticsViewComponent : SmartViewComponent
 {
-    private static readonly JsMinifier Minifier = new();
+    private static readonly HtmlSettings MinifyHtmlSettings = new()
+    {
+        MinifyJs = true,
+        RemoveComments = true,
+        RemoveOptionalTags = false,
+        IsFragmentOnly = true
+    };
 
     private readonly GoogleAnalyticsSettings _settings;
     private readonly ICookieConsentManager _cookieConsentManager;
@@ -64,7 +71,11 @@ public class GoogleAnalyticsViewComponent : SmartViewComponent
 
         if (_settings.MinifyScripts && rootScript.HasValue())
         {
-            rootScript = Minifier.Minify(rootScript);
+            var minified = Uglify.Html(rootScript, MinifyHtmlSettings);
+            if (!minified.HasErrors && minified.Code.HasValue())
+            {
+                rootScript = minified.Code;
+            }
         }
 
         var path = Url.Content("~/Modules/OmmCMS.Google.Analytics/js/google-analytics.utils.js");

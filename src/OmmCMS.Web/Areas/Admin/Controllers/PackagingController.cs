@@ -25,7 +25,7 @@ public class PackagingController : AdminController
         if (Request.Form.Files.Count == 0)
         {
             message = T("Admin.Common.UploadFile").Value;
-            return Json(new { fileName = file.FileName, message, returnUrl });
+            return Json(new { fileName = (string)null, message, returnUrl });
         }
 
         try

@@ -20,7 +20,6 @@ public class NUglifyProcessorTests
         var bundle = new ScriptBundle("/bundle/test.js");
         var currentKey = bundle.GetCacheKey(httpContext);
         bundle.ClearProcessors();
-        bundle.Processors.Add(new JsMinProcessor());
         bundle.Processors.Add(new ConcatProcessor());
 
         Assert.That(bundle.GetCacheKey(httpContext).Key, Is.Not.EqualTo(currentKey.Key));

@@ -103,7 +103,7 @@
             let urlHome = "@Url.Action("Index", "Home")";
             let progressMessage = "@(wasRunning ? Html.Raw(installResult.ProgressMessage) : string.Empty)";
 
-            var checkAliveInterval, progressInterval;
+            var checkAliveInterval, progressInterval, checkAliveAttempts = 0;
 
             return {
 
@@ -116,12 +116,14 @@
                 },
 
                 startCheckAlive: function (redirectUrl, checkUrl = null) {
+                    checkAliveAttempts = 0;
                     checkAliveInterval = setInterval(function () {
                         Installation.checkAlive(redirectUrl, checkUrl);
                     }, 1000);
                 },
 
                 checkAlive: function (redirectUrl, checkUrl = null) {
+                    checkAliveAttempts++;
                     $.ajax({
                         type: "GET",
                         cache: false,
@@ -130,12 +132,19 @@
                         success: function () {
                             clearInterval(checkAliveInterval);
 
-                            // Redirection sometimes fails in Chrome. Therefore we we delay and repeat the call until it succeeds.
+                            // Redirection sometimes fails in Chrome. Therefore we delay and repeat the call until it succeeds.
                             setTimeout(() => {
                                 setInterval(() => {
                                     location.replace(redirectUrl);
                                 }, 1000);
                             }, 1000);
+                        },
+                        error: function () {
+                            if (checkAliveAttempts === 6) {
+                                $("#install-progress").append(
+                                    '<div class="mt-3 fs-sm">If running locally via <code>dotnet run</code> or Kestrel, restart the application and open <a href="' + redirectUrl + '">the website</a>.</div>'
+                                );
+                            }
                         }
                     });
                 },
@@ -148,11 +157,12 @@
                         type: "POST",
                         cache: false,
                         success: function (data, status) {
-                            console.log(data);
+                            if (!data) {
+                                return;
+                            }
 
                             if (!data.Completed) {
 						        if (data.ProgressMessage !== undefined && _.isString(data.ProgressMessage) && data.ProgressMessage) {
-							        console.log(data.ProgressMessage);
                         	        $("#install-progress").html(data.ProgressMessage);
                                 }
                             }
@@ -166,13 +176,12 @@
                                 }
                             }
                         },
-                        error: function () {
+                        error: function (xhr) {
                             if (wasRunning) {
                                 Installation.onComplete();
                             }
 
-                            console.log("ERROR");
-                            Installation.handleError(arguments[0].responseText);
+                            Installation.handleError((xhr && xhr.responseText) || "Installation progress check failed.");
                         }
                     });
                 },
@@ -255,8 +264,10 @@
                     }
                 },
 
-                onFailure: function (context) {
-                    Installation.handleError(context);
+                onFailure: function (xhr, status, error) {
+                    $.throbber.hide();
+                    let message = (xhr && xhr.responseText) || error || status || "Installation request failed.";
+                    Installation.handleError(message);
                 },
 
                 onComplete: function () {

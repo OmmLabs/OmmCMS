@@ -63,8 +63,6 @@ var configuration = (IConfiguration)builder.Configuration
 // Setup Serilog logging
 Log.Logger = SetupSerilog(configuration);
 
-var maxRequestBodySize = configuration["OmmCMS:MaxRequestBodySize"];
-
 builder.Host
     .UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureLogging(SetupLogging)
@@ -242,7 +240,6 @@ Logger SetupSerilog(IConfiguration configuration)
                 // Do not allow system/3rdParty noise less than WRN level
                 .Filter.ByIncludingOnly(IsDbSource)
                 .Filter.ByExcluding(IsFileSource)
-                .Filter.ByExcluding(IsApiQueryWarning)
                 .WriteTo.DbContext(period: TimeSpan.FromSeconds(10), batchSize: 50, eagerlyEmitFirstEvent: false, queueLimit: 1000);
         }, restrictedToMinimumLevel: dbMinLevel, levelSwitch: null);
 
@@ -259,18 +256,6 @@ bool IsFileSource(LogEvent e)
 {
     var source = e.GetSourceContext();
     return source != null && (source.EqualsNoCase("File") || source.StartsWithNoCase("File/"));
-}
-
-bool IsApiQueryWarning(LogEvent e)
-{
-    if (e.Level <= LogEventLevel.Warning
-        && e.GetPropertyValue<string>("RequestPath").EmptyNull().StartsWithNoCase("/odata/")
-        && e.GetSourceContext().EqualsNoCase("Microsoft.EntityFrameworkCore.Query"))
-    {
-        return true;
-    }
-
-    return false;
 }
 
 #endregion
