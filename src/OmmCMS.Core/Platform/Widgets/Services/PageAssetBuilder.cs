@@ -134,38 +134,41 @@ public partial class PageAssetBuilder : IPageAssetBuilder
         if (_titleParts == null)
             return HtmlString.Empty;
 
-        var result = string.Empty;
         var currentTitle = string.Join(_seoSettings.PageTitleSeparator, _titleParts.Distinct(StringComparer.CurrentCultureIgnoreCase).Reverse().ToArray());
+        var defaultTitle = addDefaultTitle || currentTitle.IsEmpty()
+            ? _seoSettings.GetLocalizedSetting(x => x.MetaTitle).Value
+            : null;
 
-        if (currentTitle.HasValue())
-        {
-            if (addDefaultTitle)
-            {
-                // Store name + page title
-                switch (_seoSettings.PageTitleSeoAdjustment)
-                {
-                    case PageTitleSeoAdjustment.PagenameAfterStorename:
-                        result = string.Join(_seoSettings.PageTitleSeparator, _seoSettings.GetLocalizedSetting(x => x.MetaTitle).Value, currentTitle);
-                        break;
-                    case PageTitleSeoAdjustment.StorenameAfterPagename:
-                    default:
-                        result = string.Join(_seoSettings.PageTitleSeparator, currentTitle, _seoSettings.GetLocalizedSetting(x => x.MetaTitle).Value);
-                        break;
-                }
-            }
-            else
-            {
-                // Page title only
-                result = currentTitle;
-            }
-        }
-        else
-        {
-            // Store name only
-            result = _seoSettings.GetLocalizedSetting(x => x.MetaTitle).Value;
-        }
+        var result = CombineDocumentTitle(
+            currentTitle,
+            defaultTitle,
+            _seoSettings.PageTitleSeparator,
+            _seoSettings.PageTitleSeoAdjustment,
+            addDefaultTitle);
 
         return new HtmlString(result);
+    }
+
+    public static string CombineDocumentTitle(
+        string currentTitle,
+        string defaultTitle,
+        string separator,
+        PageTitleSeoAdjustment adjustment,
+        bool addDefaultTitle = true)
+    {
+        if (currentTitle.HasValue())
+        {
+            if (addDefaultTitle && defaultTitle.HasValue() && !currentTitle.EqualsNoCase(defaultTitle))
+            {
+                return adjustment == PageTitleSeoAdjustment.PagenameAfterStorename
+                    ? string.Join(separator, defaultTitle, currentTitle)
+                    : string.Join(separator, currentTitle, defaultTitle);
+            }
+
+            return currentTitle;
+        }
+
+        return defaultTitle ?? string.Empty;
     }
 
     public virtual IHtmlContent GetMetaDescription()

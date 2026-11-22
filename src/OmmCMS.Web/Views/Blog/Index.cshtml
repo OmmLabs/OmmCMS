@@ -5,69 +5,156 @@
     Assets.AppendMetaDescriptionParts(Model.Description);
     var route = Model.Category != null ? "BlogCategory" : Model.Tag != null ? "BlogTag" : Model.Year.HasValue ? "BlogArchive" : "BlogHome";
     var slug = Model.Category ?? Model.Tag;
+    var hasSidebar = Model.Categories.Count > 0 || Model.Tags.Count > 0 || Model.Archive.Count > 0;
+    var totalPages = Model.PageSize > 0 ? (int)Math.Ceiling((double)Model.Total / Model.PageSize) : 1;
 }
-<section class="container py-4">
-    <nav aria-label="Breadcrumb"><a asp-route="BlogHome">Blog</a></nav>
-    <div class="d-flex flex-wrap align-items-center justify-content-between my-3">
-        <h1>@Model.Title</h1>
-        <a asp-route="BlogRss">RSS feed</a>
-    </div>
-    @if (!string.IsNullOrWhiteSpace(Model.Description)) { <p class="lead">@Model.Description</p> }
+<div class="page blog-page">
+    <header class="blog-header d-flex flex-wrap align-items-baseline justify-content-between gap-2">
+        <div class="page-title mb-0">
+            <h1>@Model.Title</h1>
+        </div>
+        <a asp-route="BlogRss" class="btn btn-sm btn-outline-secondary">
+            <icon name="rss" aria-hidden="true" />
+            <span>RSS feed</span>
+        </a>
+    </header>
+
+    @if (!string.IsNullOrWhiteSpace(Model.Description))
+    {
+        <p class="lead mb-4">@Model.Description</p>
+    }
+
     <div class="row">
-        <div class="col-lg-9">
+        <div class="@(hasSidebar ? "col-lg-9" : "col-12")">
             @if (!Model.Year.HasValue)
             {
-                <form method="get" asp-route="@route" asp-route-slug="@slug" class="input-group mb-4">
-                    <input type="search" name="q" value="@Model.Query" class="form-control" placeholder="Search articles" aria-label="Search articles" />
-                    <button class="btn btn-primary" type="submit">Search</button>
+                <form method="get" asp-route="@route" asp-route-slug="@slug" class="blog-search-form mb-4">
+                    <div class="input-group">
+                        <input type="search" name="q" value="@Model.Query" class="form-control" placeholder="Search articles" aria-label="Search articles" />
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </div>
+                    </div>
                 </form>
             }
-            @if (Model.Posts.Count == 0) { <p>No articles found.</p> }
-            <div class="row">
-                @foreach (var post in Model.Posts)
+
+            @if (Model.Posts.Count == 0)
+            {
+                <div class="blog-empty">
+                    <p class="mb-0">No articles found.</p>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    @foreach (var post in Model.Posts)
+                    {
+                        <div class="@(hasSidebar ? "col-md-6" : "col-md-6 col-lg-4") mb-4">
+                            <article class="card blog-card h-100 overflow-hidden">
+                                @if ((post.PreviewImageId ?? post.CoverImageId).HasValue)
+                                {
+                                    <a asp-route="BlogPost" asp-route-slug="@post.Slug">
+                                        <img sm-file-id="@(post.PreviewImageId ?? post.CoverImageId)" class="card-img-top blog-card-img" alt="@post.Title" loading="lazy" />
+                                    </a>
+                                }
+                                <div class="card-body d-flex flex-column">
+                                    <p class="small text-muted mb-2">
+                                        <time datetime="@post.PublishedOnUtc.ToString("yyyy-MM-dd")">@post.PublishedOnUtc.ToString("dd MMM yyyy")</time>
+                                        @if (!string.IsNullOrWhiteSpace(post.Author))
+                                        {
+                                            <span> &middot; @post.Author</span>
+                                        }
+                                    </p>
+                                    <h2 class="h4 blog-card-title mb-2">
+                                        <a asp-route="BlogPost" asp-route-slug="@post.Slug">@post.Title</a>
+                                    </h2>
+                                    @if (!string.IsNullOrWhiteSpace(post.Intro))
+                                    {
+                                        <p class="mb-3">@post.Intro</p>
+                                    }
+                                    @if (post.Categories.Count > 0)
+                                    {
+                                        <div class="d-flex flex-wrap gap-1 mb-3">
+                                            @foreach (var category in post.Categories)
+                                            {
+                                                <a class="blog-term-badge" asp-route="BlogCategory" asp-route-slug="@category.Slug">@category.Name</a>
+                                            }
+                                        </div>
+                                    }
+                                    <div class="mt-auto pt-2">
+                                        <a asp-route="BlogPost" asp-route-slug="@post.Slug" class="font-weight-medium">Read article &rarr;</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    }
+                </div>
+            }
+
+            @if (totalPages > 1)
+            {
+                <nav aria-label="Blog pages" class="d-flex align-items-center justify-content-between mt-3">
+                    <div>
+                        @if (Model.Page > 1)
+                        {
+                            <a class="btn btn-outline-secondary btn-sm" asp-route="@route" asp-route-slug="@slug" asp-route-year="@Model.Year" asp-route-month="@Model.Month" asp-route-q="@Model.Query" asp-route-page="@(Model.Page - 1)">&larr; Previous</a>
+                        }
+                    </div>
+                    <span class="small text-muted">Page @Model.Page of @totalPages</span>
+                    <div>
+                        @if (Model.Page * Model.PageSize < Model.Total)
+                        {
+                            <a class="btn btn-outline-secondary btn-sm" asp-route="@route" asp-route-slug="@slug" asp-route-year="@Model.Year" asp-route-month="@Model.Month" asp-route-q="@Model.Query" asp-route-page="@(Model.Page + 1)">Next &rarr;</a>
+                        }
+                    </div>
+                </nav>
+            }
+        </div>
+
+        @if (hasSidebar)
+        {
+            <aside class="col-lg-3 blog-sidebar mt-4 mt-lg-0">
+                @if (Model.Categories.Count > 0)
                 {
-                    <div class="col-md-6 mb-4">
-                        <article class="card h-100">
-                            @if ((post.PreviewImageId ?? post.CoverImageId).HasValue)
+                    <div class="blog-sidebar-card">
+                        <h2 class="blog-sidebar-title">Categories</h2>
+                        <ul class="list-unstyled mb-0">
+                            @foreach (var term in Model.Categories)
                             {
-                                <a asp-route="BlogPost" asp-route-slug="@post.Slug"><img sm-file-id="@(post.PreviewImageId ?? post.CoverImageId)" class="card-img-top img-fluid" alt="@post.Title" loading="lazy" /></a>
+                                <li><a asp-route="BlogCategory" asp-route-slug="@term.Slug">@term.Name</a></li>
                             }
-                            <div class="card-body">
-                                <p class="small text-muted"><time datetime="@post.PublishedOnUtc.ToString("yyyy-MM-dd")">@post.PublishedOnUtc.ToString("dd MMM yyyy")</time> @post.Author</p>
-                                <h2 class="h4"><a asp-route="BlogPost" asp-route-slug="@post.Slug">@post.Title</a></h2>
-                                <p>@post.Intro</p>
-                                @foreach (var category in post.Categories)
-                                { <a class="badge badge-secondary mr-1" asp-route="BlogCategory" asp-route-slug="@category.Slug">@category.Name</a> }
-                                <div class="mt-3"><a asp-route="BlogPost" asp-route-slug="@post.Slug">Read article</a></div>
-                            </div>
-                        </article>
+                        </ul>
                     </div>
                 }
-            </div>
-            <nav aria-label="Blog pages" class="d-flex justify-content-between">
-                @if (Model.Page > 1)
-                { <a asp-route="@route" asp-route-slug="@slug" asp-route-year="@Model.Year" asp-route-month="@Model.Month" asp-route-q="@Model.Query" asp-route-page="@(Model.Page - 1)">Previous</a> }
-                <span>Page @Model.Page</span>
-                @if (Model.Page * Model.PageSize < Model.Total)
-                { <a asp-route="@route" asp-route-slug="@slug" asp-route-year="@Model.Year" asp-route-month="@Model.Month" asp-route-q="@Model.Query" asp-route-page="@(Model.Page + 1)">Next</a> }
-            </nav>
-        </div>
-        <aside class="col-lg-3">
-            <h2 class="h5">Categories</h2>
-            <ul class="list-unstyled">
-                @foreach (var term in Model.Categories)
-                { <li><a asp-route="BlogCategory" asp-route-slug="@term.Slug">@term.Name</a></li> }
-            </ul>
-            <h2 class="h5">Tags</h2>
-            <div class="mb-4">
-                @foreach (var term in Model.Tags)
-                { <a class="badge badge-light mr-1 mb-1" asp-route="BlogTag" asp-route-slug="@term.Slug">@term.Name</a> }
-            </div>
-            <h2 class="h5">Archive</h2>
-            <ul class="list-unstyled">
-                @foreach (var month in Model.Archive)
-                { <li><a asp-route="BlogArchive" asp-route-year="@month.Year" asp-route-month="@month.Month">@((new DateTime(month.Year, month.Month, 1)).ToString("MMMM yyyy")) (@month.Count)</a></li> }
-            </ul>
-        </aside>
+
+                @if (Model.Tags.Count > 0)
+                {
+                    <div class="blog-sidebar-card">
+                        <h2 class="blog-sidebar-title">Tags</h2>
+                        <div class="d-flex flex-wrap gap-1">
+                            @foreach (var term in Model.Tags)
+                            {
+                                <a class="blog-term-badge" asp-route="BlogTag" asp-route-slug="@term.Slug">@term.Name</a>
+                            }
+                        </div>
+                    </div>
+                }
+
+                @if (Model.Archive.Count > 0)
+                {
+                    <div class="blog-sidebar-card">
+                        <h2 class="blog-sidebar-title">Archive</h2>
+                        <ul class="list-unstyled mb-0">
+                            @foreach (var month in Model.Archive)
+                            {
+                                <li>
+                                    <a asp-route="BlogArchive" asp-route-year="@month.Year" asp-route-month="@month.Month">@((new DateTime(month.Year, month.Month, 1)).ToString("MMMM yyyy")) (@month.Count)</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </aside>
+        }
     </div>
-</section>
+</div>

@@ -66,6 +66,7 @@ body {
 }
 
 #content-wrapper {
+    flex: 1 0 auto;
     min-height: 300px;
     overflow-x: initial;
 }
@@ -76,11 +77,18 @@ body {
 }
 
 .page-main {
+    display: flex;
+    flex-direction: column;
     position: relative;
     z-index: 1;
     background: $body-bg;
     box-shadow: 0 0 24px rgba($black, 0.2);
     min-height: 100vh;
+}
+
+.html-editor-content img {
+    max-width: 100%;
+    height: auto;
 }
 
 @media screen {

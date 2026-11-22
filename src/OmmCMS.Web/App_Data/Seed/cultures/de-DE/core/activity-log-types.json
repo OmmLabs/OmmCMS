@@ -48,18 +48,18 @@
     "name": "Theme-Variablen exportiert"
   },
   "PublicStore.ContactUs": {
-    "name": "Öffentlicher Shop. Kontaktformular benutzt"
+    "name": "Öffentliche Website. Kontaktformular benutzt"
   },
   "PublicStore.Login": {
-    "name": "Öffentlicher Shop. Anmeldung"
+    "name": "Öffentliche Website. Anmeldung"
   },
   "PublicStore.Logout": {
-    "name": "Öffentlicher Shop. Abmeldung"
+    "name": "Öffentliche Website. Abmeldung"
   },
   "PublicStore.AddNewsComment": {
-    "name": "Öffentlicher Shop. News-Kommentar hinzugefügt"
+    "name": "Öffentliche Website. News-Kommentar hinzugefügt"
   },
   "PublicStore.AddBlogComment": {
-    "name": "Öffentlicher Shop. Blogeintrag hinzugefügt"
+    "name": "Öffentliche Website. Blog-Kommentar hinzugefügt"
   }
 }

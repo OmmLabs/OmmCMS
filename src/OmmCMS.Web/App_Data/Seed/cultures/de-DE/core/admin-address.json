@@ -2,7 +2,7 @@
   "admin": {
     "firstName": "Max",
     "lastName": "Mustermann",
-    "email": "admin@meineshopurl.de",
+    "email": "admin@example.de",
     "company": "Max Mustermann",
     "country": "DE",
     "stateProvince": "DE/BW",

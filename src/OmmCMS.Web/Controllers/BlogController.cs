@@ -1,9 +1,11 @@
 using System.Text;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using OmmCMS.Core.Data;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using OmmCMS.Core.Content.Blogs;
+using OmmCMS.Core.Content.Menus;
+using OmmCMS.Core.Data;
 using OmmCMS.Core.Localization.Routing;
 using OmmCMS.Web.Models.Blogs;
 
@@ -12,13 +14,14 @@ namespace OmmCMS.Web.Controllers;
 public class BlogController : PublicController
 {
     private readonly SmartDbContext _db;
-
     private readonly BlogSlugService _slugs;
+    private readonly IBreadcrumb _breadcrumb;
 
-    public BlogController(SmartDbContext db, BlogSlugService slugs)
+    public BlogController(SmartDbContext db, BlogSlugService slugs, IBreadcrumb breadcrumb)
     {
         _db = db;
         _slugs = slugs;
+        _breadcrumb = breadcrumb;
     }
 
     private IQueryable<BlogPost> VisiblePosts() => _db.BlogPosts.AsNoTracking()
@@ -72,6 +75,20 @@ public class BlogController : PublicController
         var related = await visible.Where(x => x.Id != post.Id &&
             (x.Categories.Any(t => categories.Contains(t.Id)) || x.Tags.Any(t => tags.Contains(t.Id))))
             .OrderByDescending(x => x.PublishedOnUtc).ThenByDescending(x => x.Id).Take(4).ToListAsync();
+
+        _breadcrumb.Track(new MenuItem { Text = "Blog", RouteName = "BlogHome" });
+        var primaryCategory = post.Categories.FirstOrDefault();
+        if (primaryCategory != null)
+        {
+            _breadcrumb.Track(new MenuItem
+            {
+                Text = primaryCategory.Name,
+                RouteName = "BlogCategory",
+                RouteValues = new RouteValueDictionary { ["slug"] = primaryCategory.Slug }
+            });
+        }
+        _breadcrumb.Track(new MenuItem { Text = post.Title });
+
         return View(new BlogDetailModel { Post = post, Related = related });
     }
 
@@ -140,6 +157,13 @@ public class BlogController : PublicController
         model.Archive = await all.GroupBy(x => new { x.PublishedOnUtc.Year, x.PublishedOnUtc.Month })
             .OrderByDescending(x => x.Key.Year).ThenByDescending(x => x.Key.Month)
             .Select(x => new BlogArchiveMonth(x.Key.Year, x.Key.Month, x.Count())).ToListAsync();
+
+        _breadcrumb.Track(new MenuItem { Text = "Blog", RouteName = "BlogHome" });
+        if (category != null || tag != null || (year.HasValue && month.HasValue))
+        {
+            _breadcrumb.Track(new MenuItem { Text = model.Title });
+        }
+
         return View("Index", model);
     }
 }

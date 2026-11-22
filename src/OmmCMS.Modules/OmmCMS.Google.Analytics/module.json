@@ -1,6 +1,6 @@
 {
   "$schema": "../module.schema.json",
-  "Author": "SmartStore AG",
+  "Author": "OmmLabs",
   "Group": "Analytics",
   "SystemName": "OmmCMS.Google.Analytics",
   "FriendlyName": "Google Analytics",

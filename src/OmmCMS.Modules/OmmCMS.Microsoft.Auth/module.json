@@ -6,7 +6,7 @@
   "Description": "Enables login with Microsoft account.",
   "Version": "6.4.0",
   "MinAppVersion": "6.4.0",
-  "Author": "SmartStore AG",
+  "Author": "OmmLabs",
   "Order": 1,
   "ResourceRootKey": "Plugins.OmmCMS.Microsoft.Auth",
   "PrivateReferences": [

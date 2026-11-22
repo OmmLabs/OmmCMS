@@ -2,8 +2,8 @@
 [
   {
     "key": "default",
-    "email": "test@mail.com",
-    "displayName": "Store name",
+    "email": "noreply@example.com",
+    "displayName": "OmmCMS",
     "host": "smtp.mail.com",
     "port": 25,
     "username": "123",

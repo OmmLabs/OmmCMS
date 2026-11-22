@@ -7,7 +7,7 @@
   "Icon": "bi:terminal?color=#0891B2",
   "Version": "6.4.0",
   "MinAppVersion": "6.4.0",
-  "Author": "SmartStore AG",
+  "Author": "OmmLabs",
   "Order": 1,
   "ResourceRootKey": "Plugins.Developer.DevTools",
   "PrivateReferences": [

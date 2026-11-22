@@ -262,7 +262,7 @@
 		<Value>New Customer</Value>
 	</LocaleResource>
 	<LocaleResource Name="account.login.newcustomertext">
-		<Value>As a registered customer you will be able to shop faster, be up to date on an orders status, and keep track of the orders you have previously made.</Value>
+		<Value>Create an account to manage your profile, preferences, and access restricted content on this site.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Account.Login.NotRegisteredYet">
 		<Value>Not registered yet?</Value>
@@ -9921,7 +9921,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Company</Value>
 	</LocaleResource>
 	<LocaleResource Name="Footer.Info">
-		<Value>Informations</Value>
+		<Value>Information</Value>
 	</LocaleResource>
 	<LocaleResource Name="Footer.Seals">
 		<Value>Seals &amp;amp; Logos</Value>
@@ -10446,7 +10446,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Brands</Value>
 	</LocaleResource>
 	<LocaleResource Name="Offcanvas.Menu.Categories">
-		<Value>Categories</Value>
+		<Value>Menu</Value>
 	</LocaleResource>
 	<LocaleResource Name="Offcanvas.Menu.Service">
 		<Value>Service</Value>

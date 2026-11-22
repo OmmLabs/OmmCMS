@@ -6,33 +6,72 @@
     Assets.AppendMetaDescriptionParts(post.MetaDescription ?? post.Intro);
     Assets.AppendCanonicalUrlParts(Url.RouteUrl("BlogPost", new { post.Slug }, Context.Request.Scheme));
 }
-<div class="container py-4">
-    <nav aria-label="Breadcrumb"><a asp-route="BlogHome">Blog</a>
-        @foreach (var category in post.Categories)
-        { <span> / </span><a asp-route="BlogCategory" asp-route-slug="@category.Slug">@category.Name</a> }
-    </nav>
+<div class="page blog-post-page">
     <article class="prose-container prose-lg mx-auto">
-        <header class="my-4">
-            <h1>@post.Title</h1>
-            <p class="text-muted"><time datetime="@post.PublishedOnUtc.ToString("yyyy-MM-dd")">@post.PublishedOnUtc.ToString("dd MMM yyyy")</time> @post.Author</p>
-            @if (!string.IsNullOrWhiteSpace(post.Intro)) { <p class="lead">@post.Intro</p> }
+        <header class="blog-post-header">
+            @if (post.Categories.Count > 0)
+            {
+                <div class="d-flex flex-wrap gap-1 mb-3">
+                    @foreach (var category in post.Categories)
+                    {
+                        <a class="blog-term-badge" asp-route="BlogCategory" asp-route-slug="@category.Slug">@category.Name</a>
+                    }
+                </div>
+            }
+            <div class="page-title mb-2">
+                <h1>@post.Title</h1>
+            </div>
+            <p class="text-muted mb-3">
+                <time datetime="@post.PublishedOnUtc.ToString("yyyy-MM-dd")">@post.PublishedOnUtc.ToString("dd MMM yyyy")</time>
+                @if (!string.IsNullOrWhiteSpace(post.Author))
+                {
+                    <span> &middot; @post.Author</span>
+                }
+            </p>
+            @if (!string.IsNullOrWhiteSpace(post.Intro))
+            {
+                <p class="lead mb-4">@post.Intro</p>
+            }
             @if ((post.CoverImageId ?? post.PreviewImageId).HasValue)
-            { <img sm-file-id="@(post.CoverImageId ?? post.PreviewImageId)" class="img-fluid rounded w-100" alt="@post.Title" /> }
+            {
+                <img sm-file-id="@(post.CoverImageId ?? post.PreviewImageId)" class="img-fluid blog-post-cover mb-4" alt="@post.Title" />
+            }
         </header>
-        <div class="blog-body">@Html.Raw(OmmCMS.Core.Content.Blogs.BlogQueries.SanitizeBody(post.Body))</div>
-        <footer class="my-4">
-            @foreach (var tag in post.Tags)
-            { <a class="badge badge-light mr-1" asp-route="BlogTag" asp-route-slug="@tag.Slug">@tag.Name</a> }
-        </footer>
+
+        <div class="blog-body html-editor-content">@Html.Raw(OmmCMS.Core.Content.Blogs.BlogQueries.SanitizeBody(post.Body))</div>
+
+        @if (post.Tags.Count > 0)
+        {
+            <footer class="d-flex flex-wrap gap-1 mt-4 pt-3 border-top">
+                @foreach (var tag in post.Tags)
+                {
+                    <a class="blog-term-badge" asp-route="BlogTag" asp-route-slug="@tag.Slug">#@tag.Name</a>
+                }
+            </footer>
+        }
     </article>
+
     @if (Model.Related.Count > 0)
     {
-        <section class="mt-5">
-            <h2>Related articles</h2>
-            <ul>
+        <section class="blog-related">
+            <h2 class="h3 mb-3">Related articles</h2>
+            <div class="row">
                 @foreach (var item in Model.Related)
-                { <li><a asp-route="BlogPost" asp-route-slug="@item.Slug">@item.Title</a></li> }
-            </ul>
+                {
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="card blog-card h-100">
+                            <div class="card-body">
+                                <p class="small text-muted mb-1">
+                                    <time datetime="@item.PublishedOnUtc.ToString("yyyy-MM-dd")">@item.PublishedOnUtc.ToString("dd MMM yyyy")</time>
+                                </p>
+                                <h3 class="h5 blog-card-title mb-0">
+                                    <a asp-route="BlogPost" asp-route-slug="@item.Slug">@item.Title</a>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         </section>
     }
 </div>

@@ -11,7 +11,7 @@ Website: https://ommlabs.ommrudraksha.com
 - Website pages, dedicated blog posts, reusable content categories and tags, navigation menus, media management and SEO.
 - Blog administration under Content, with publishing schedules, cover/preview media, scoped visibility, related articles, archives, search, RSS and sitemap support. Public blog: `/blog`. Blog, category and tag URLs use central URL records with automatic permanent redirects from former paths.
 - Content administration, roles, permissions, authentication and localization.
-- Theme infrastructure and a starter website with Home, About and Contact pages.
+- Nine bundled CMS themes in the Flex family (`Flex`, `FlexAfterglow`, `FlexBlack`, `FlexBlue`, `FlexLumen`, `FlexPorcelain`, `FlexRiso`, `FlexSorbet`, `FlexTidal`) with live theme variable configuration, preview mode, LTR/RTL Sass compilation and a starter website with Home, About, Blog and Contact pages.
 - SQLite, SQL Server, PostgreSQL and MySQL database providers.
 
 ## Getting started

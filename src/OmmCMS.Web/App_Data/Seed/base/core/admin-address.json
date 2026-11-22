@@ -4,7 +4,7 @@
     "key": "admin",
     "firstName": "John",
     "lastName": "Smith",
-    "email": "admin@myshop.com",
+    "email": "admin@example.com",
     "company": "John Smith LLC",
     "country": "US",
     "stateProvince": "US/AA",

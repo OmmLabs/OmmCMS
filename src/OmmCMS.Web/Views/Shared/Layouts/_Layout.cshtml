@@ -1,6 +1,4 @@
-﻿@inject OmmCMS.Core.Stores.IStoreContext StoreContext
-
-@{
+﻿@{
     Layout = "_Document";
 
     var hasLeftCol = await Display.ZoneHasWidgetsAsync("left");
@@ -41,13 +39,22 @@
         <zone name="header_before"></zone>
 
         <header id="header" zone-name="header" replace-content="true">
-            <div class="container py-3">
-                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-                    <a href="@Url.Content("~/")" class="h4 m-0 text-decoration-none">@StoreContext.CurrentStore.Name</a>
-                    <nav class="navbar navbar-light p-0" aria-label="@T("Aria.Label.MainNavigation")">
-                        <menu name="Main" template="Main" />
-                    </nav>
+            <div class="menubar-section d-none d-lg-block @(Display.GetThemeVariable<bool>("inverse-menubar") ? "menubar-inverse" : "menubar-light")">
+                <div class="container menubar-container">
+                    @await Component.InvokeAsync("TopBar")
                 </div>
+            </div>
+            <div class="shopbar-section @(Display.GetThemeVariable<bool>("inverse-shopbar") ? "shopbar-inverse" : "shopbar-light")">
+                <div class="container shopbar-container">
+                    @await Component.InvokeAsync("ShopBar")
+                </div>
+            </div>
+            <div class="megamenu-section d-none d-lg-block">
+                <nav class="navbar @(Display.GetThemeVariable<bool>("inverse-navbar") ? "navbar-inverse" : "navbar-light")" aria-label="@T("Aria.Label.MainNavigation")">
+                    <div class="container megamenu-container">
+                        <menu name="Main" template="Main" />
+                    </div>
+                </nav>
             </div>
         </header>
 
@@ -95,12 +102,9 @@
 
         <zone name="footer_before"></zone>
 
-        <footer class="border-top py-4">
-            <div class="container d-flex flex-wrap align-items-center justify-content-between gap-3">
-                <span>@StoreContext.CurrentStore.Name</span>
-                <span class="small text-muted">Powered by OmmCMS</span>
-            </div>
-        </footer>
+        <zone name="footer" replace-content="true">
+            @await Component.InvokeAsync("Footer")
+        </zone>
 
         <zone name="page-end"></zone>
     </div>

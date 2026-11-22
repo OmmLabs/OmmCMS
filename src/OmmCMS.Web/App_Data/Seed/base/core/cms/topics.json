@@ -35,7 +35,7 @@
     "systemName": "PrivacyInfo",
     "title": "Privacy policy",
     "shortTitle": "Privacy",
-    "body": "<p><strong></strong></p>"
+    "body": "<p>Put your privacy policy information here. You can edit this in the admin site.</p>"
   },
   {
     "systemName": "Imprint",

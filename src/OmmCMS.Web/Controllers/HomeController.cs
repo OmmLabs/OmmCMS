@@ -155,7 +155,7 @@ public class HomeController : PublicController
         {
             telephone = (_contactDataSettings.HotlineTelephoneNumber ?? _contactDataSettings.CompanyTelephoneNumber).NullEmpty(),
             email = _contactDataSettings.ContactEmailAddress.NullEmpty(),
-            contactType = "Customer Service"
+            contactType = "General Inquiries"
         });
 
         var address = JsonLdFragment.Create("PostalAddress", new

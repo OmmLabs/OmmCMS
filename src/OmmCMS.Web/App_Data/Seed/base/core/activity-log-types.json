@@ -82,22 +82,22 @@
   },
   {
     "systemKeyword": "PublicStore.ContactUs",
-    "name": "Public store. Use contact us form"
+    "name": "Public website. Use contact us form"
   },
   {
     "systemKeyword": "PublicStore.Login",
-    "name": "Public store. Login"
+    "name": "Public website. Login"
   },
   {
     "systemKeyword": "PublicStore.Logout",
-    "name": "Public store. Logout"
+    "name": "Public website. Logout"
   },
   {
     "systemKeyword": "PublicStore.AddNewsComment",
-    "name": "Public store. Add news comment"
+    "name": "Public website. Add news comment"
   },
   {
     "systemKeyword": "PublicStore.AddBlogComment",
-    "name": "Public store. Add blog comment"
+    "name": "Public website. Add blog comment"
   }
 ]

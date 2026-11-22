@@ -262,7 +262,7 @@
 		<Value>Neuer Kunde</Value>
 	</LocaleResource>
 	<LocaleResource Name="account.login.newcustomertext">
-		<Value>Als registrierter Kunde können Sie Ihren Auftragsstatus einsehen und brauchen Ihre persönlichen Daten beim nächsten Einkauf nicht erneut einzugeben.</Value>
+		<Value>Erstellen Sie ein Konto, um Ihr Profil und Ihre Einstellungen zu verwalten sowie auf geschützte Inhalte dieser Website zuzugreifen.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Account.Login.NotRegisteredYet">
 		<Value>Noch nicht registriert?</Value>
@@ -9751,7 +9751,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Service</Value>
 	</LocaleResource>
 	<LocaleResource Name="Footer.Service.Mobile">
-		<Value>Service, Versand &amp; Zahlung</Value>
+		<Value>Service</Value>
 	</LocaleResource>
 	<LocaleResource Name="Footer.Social">
 		<Value>Folgen Sie uns</Value>
@@ -10267,7 +10267,7 @@ auch wenn die typspezifischen Limits nicht erreicht wurden. Ein leerer Wert bede
 		<Value>Marken</Value>
 	</LocaleResource>
 	<LocaleResource Name="Offcanvas.Menu.Categories">
-		<Value>Sortiment</Value>
+		<Value>Menü</Value>
 	</LocaleResource>
 	<LocaleResource Name="Offcanvas.Menu.Service">
 		<Value>Service</Value>

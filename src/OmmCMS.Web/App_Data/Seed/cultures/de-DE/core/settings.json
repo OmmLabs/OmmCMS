@@ -4,6 +4,6 @@
     "PrimaryExchangeCurrencyId": "$ref:Currency:EUR"
   },
   "SeoSettings": {
-    "MetaTitle": "Mein Shop"
+    "MetaTitle": "OmmCMS"
   }
 }

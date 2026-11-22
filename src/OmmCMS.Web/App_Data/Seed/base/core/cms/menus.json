@@ -47,11 +47,18 @@
         "displayOrder": 1
       },
       {
+        "key": "BlogHome",
+        "providerName": "route",
+        "model": "{\"routename\":\"BlogHome\"}",
+        "title": "Blog",
+        "displayOrder": 2
+      },
+      {
         "key": "ContactUs",
         "providerName": "route",
         "model": "{\"routename\":\"ContactUs\"}",
         "title": "@resource:ContactUs",
-        "displayOrder": 2
+        "displayOrder": 3
       }
     ]
   },

@@ -429,7 +429,7 @@ def editorial_workflows(password):
     print("Theme configuration and theme switch passed.")
     # Fetch the actual compiled Sass bundle for every published theme.
     published_themes = sorted(path.name for path in (root / "Themes").iterdir() if (path / "theme.config").is_file())
-    assert set(published_themes) >= {"Flex", "FlexBlack", "FlexBlue"}
+    assert set(published_themes) >= {"Flex", "FlexAfterglow", "FlexBlack", "FlexBlue", "FlexLumen", "FlexPorcelain", "FlexRiso", "FlexSorbet", "FlexTidal"}, f"Missing bundled themes: {published_themes}"
     for theme in published_themes:
         css_status, css = request(f"/themes/{theme.lower()}/theme.css", timeout=120)
         assert css_status == 200, f"{theme} stylesheet returned HTTP {css_status}"

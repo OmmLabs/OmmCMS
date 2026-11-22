@@ -62,6 +62,25 @@
                 width: auto;
             }
         }
+
+        &.textual {
+            display: inline-block;
+            width: auto;
+            max-width: none;
+            max-height: none;
+            text-align: start;
+            font-family: $headings-font-family;
+            font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+            font-weight: $headings-font-weight;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            color: $shopbar-color;
+
+            &:hover {
+                opacity: 0.85;
+            }
+        }
     }
 }
 
@@ -113,15 +132,22 @@
 
 @include media-breakpoint-down(md) {
     .shopbar-section {
+        padding: 0.625rem 0;
         border-bottom: 1px solid rgba(#000, 0.12);
     }
 
     .shopbar {
-        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .shopbar-col-group-tools {
-        width: 100%;
+        margin-inline-start: auto;
+    }
+
+    .shopbar-tools {
+        width: auto;
+        gap: 0.25rem;
     }
 
     .shopbar-button {
@@ -184,6 +210,10 @@
 }
 
 .shopbar-light {
+    .shop-logo .brand.textual {
+        color: $shopbar-color;
+    }
+
     .shopbar-button { 
         color: $shopbar-color !important; 
 
@@ -204,6 +234,10 @@
 }
 
 .shopbar-inverse {
+    .shop-logo .brand.textual {
+        color: $shopbar-inverse-color;
+    }
+
     .shopbar-button {
         color: $shopbar-inverse-color !important;
 

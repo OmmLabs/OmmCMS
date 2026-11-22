@@ -7,7 +7,7 @@
   "Description": "Enables login with Facebook account.",
   "Version": "6.4.0",
   "MinAppVersion": "6.4.0",
-  "Author": "SmartStore AG",
+  "Author": "OmmLabs",
   "Order": 1,
   "ResourceRootKey": "Plugins.ExternalAuth.Facebook",
   "PrivateReferences": [
