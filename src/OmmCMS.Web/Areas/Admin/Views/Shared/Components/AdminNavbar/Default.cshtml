@@ -15,9 +15,14 @@
 }
 
 <nav id="navbar" class="navbar navbar-slide navbar-expand navbar-sidebar" data-submenu-back-label="@T("Common.Back")" data-expand-label="@expandSidebarLabel" data-collapse-label="@collapseSidebarLabel">
-    <a class="navbar-brand" asp-action="Index" asp-controller="Home" asp-area="Admin">
-        <span class="navbar-brand-symbol font-weight-bold">O</span>
-        <span class="navbar-brand-wordmark font-weight-bold" aria-hidden="true">OmmCMS</span>
+    <a class="navbar-brand" asp-action="Index" asp-controller="Home" asp-area="Admin" title="OmmCMS" aria-label="OmmCMS">
+        <span class="navbar-brand-symbol" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="26" height="26" focusable="false">
+                <rect x="1" y="1" width="30" height="30" rx="8" fill="rgba(255, 255, 255, 0.14)" stroke="rgba(255, 255, 255, 0.28)" stroke-width="1.25" />
+                <circle cx="16" cy="16" r="8.25" fill="none" stroke="#ffffff" stroke-width="3.2" />
+            </svg>
+        </span>
+        <span class="navbar-brand-wordmark" aria-hidden="true">OmmCMS</span>
     </a>
 
     <div id="navbar-menu" class="navbar-collapse">
@@ -49,14 +54,14 @@
                 <div class="dropdown-menu dropdown-menu-compact dropdown-menu-light-icons">
                     <div class="dropdown-group">
                         <button type="button" class="dropdown-item" aria-haspopup="true" aria-expanded="false" aria-controls="account-shops-menu">
-                            <icon name="store" class="icon-fw" />
+                            <icon name="globe" class="icon-fw" />
                             @T("Admin.Common.Stores")
                         </button>
                         <div id="account-shops-menu" class="dropdown-menu">
                             @foreach (var store in stores)
                             {
                                 <a class="dropdown-item" href="@store.GetBaseUrl()" title="@T("Admin.Header.PublicStore") - @store.Name">
-                                    <icon name="store" class="icon-fw" />
+                                    <icon name="globe" class="icon-fw" />
                                     @store.Name.Truncate(32, "…")
                                 </a>
                             }

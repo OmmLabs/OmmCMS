@@ -338,10 +338,10 @@ public class SmartDbContextDataSeeder : IDataSeeder<SmartDbContext>
         builder.AddOrUpdate("Common.Email", "Email", "E-Mail");
 
         builder.AddOrUpdate("Admin.Common.Store.LimitedTo",
-            "Limited to stores",
-            "Auf Shops begrenzt",
-            "Specifies whether the object is only available in certain stores.",
-            "Legt fest, ob das Objekt nur für bestimmte Shops verfügbar ist.");
+            "Limited to sites",
+            "Auf Websites begrenzt",
+            "Specifies whether the object is only available on certain sites.",
+            "Legt fest, ob das Objekt nur für bestimmte Websites verfügbar ist.");
 
         builder.AddOrUpdate("OmmCMS.AI.Prompts.UseImagePlaceholders",
             "If an image is to be inserted, output this HTML placeholder: <div class=\"mb-3\"><sm-icon name=\"file-image\" size=\"xl\" class=\"ai-preview-file\" title=\"SECTION_HEADING\"></sm-icon></div>. Replace SECTION_HEADING with the associated section heading, escaped for an HTML attribute. Keep the element names and all other attributes exactly as shown. The sm-icon element must remain empty and have an explicit closing tag; do not replace it with an i, img or svg element or add Font Awesome classes.",

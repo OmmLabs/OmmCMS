@@ -5,7 +5,8 @@
 @{
     ViewBag.Title = T("Admin.Configuration.Languages.EditLanguageDetails").Value;
 
-    var downloadableLanguages = ViewBag.DownloadableLanguages as List<AvailableLanguageModel>;
+    var downloadableLanguages = ViewBag.DownloadableLanguages as List<AvailableLanguageModel> ?? new List<AvailableLanguageModel>();
+    var hasOnlineTranslationService = ViewBag.HasOnlineTranslationService == true;
 }
 
 <form asp-action="Edit">
@@ -70,7 +71,7 @@
                         <input type="file" id="importxmlfile" name="importxmlfile" class="form-control-file" accept=".xml" />
                     </div>
                 </tab>
-                <tab sm-title="@T("Common.Download")">
+                <tab sm-if="hasOnlineTranslationService" sm-title="@T("Common.Download")">
                     <div sm-if="!downloadableLanguages.Any()" class="alert alert-warning">
                         @Html.Raw(T("Admin.Configuration.Languages.NoAvailableLanguagesFound", OmmCMSVersion.CurrentFullVersion))
                     </div>

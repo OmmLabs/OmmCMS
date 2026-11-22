@@ -6,6 +6,7 @@
 <div asp-validation-summary="ModelOnly"></div>
 
 <input type="hidden" asp-for="Id" />
+<input type="hidden" asp-for="DefaultCurrencyId" />
 
 <div class="adminContent">
     <div class="adminRow">
@@ -71,15 +72,6 @@
         <div class="adminData">
             <input asp-for="ContentDeliveryNetwork" />
             <span asp-validation-for="ContentDeliveryNetwork"></span>
-        </div>
-    </div>
-    <div class="adminRow">
-        <div class="adminTitle">
-            <smart-label asp-for="DefaultCurrencyId" />
-        </div>
-        <div class="adminData">
-            <select asp-for="DefaultCurrencyId" asp-items="ViewBag.Currencies"></select>
-            <span asp-validation-for="DefaultCurrencyId"></span>
         </div>
     </div>
     <div class="adminRow">

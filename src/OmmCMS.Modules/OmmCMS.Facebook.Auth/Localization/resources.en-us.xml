@@ -3,7 +3,7 @@
         <Value>Facebook Login</Value>
     </LocaleResource>
     <LocaleResource Name="Plugins.Description.OmmCMS.Facebook.Auth" AppendRootKey="false">
-        <Value>Adds Facebook authentication to the store.</Value>
+        <Value>Adds Facebook authentication to the site.</Value>
     </LocaleResource>
     <LocaleResource Name="AdminInstruction">
         <Value>

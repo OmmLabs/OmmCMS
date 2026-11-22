@@ -83,6 +83,8 @@ public class LanguageController : AdminController
         })
         .ToListAsync();
 
+        ViewBag.HasOnlineTranslationService = Services.ApplicationContext.AppConfiguration.TranslateCheckUrl.HasValue();
+
         return View(models);
     }
 
@@ -101,6 +103,11 @@ public class LanguageController : AdminController
     public async Task<IActionResult> AvailableLanguages(bool enforce = false)
     {
         var model = new AvailableLanguageListModel();
+        if (!Services.ApplicationContext.AppConfiguration.TranslateCheckUrl.HasValue())
+        {
+            return PartialView(model);
+        }
+
         var languages = _languageService.GetAllLanguages(true);
         var languageDic = languages.ToDictionarySafe(x => x.LanguageCulture, StringComparer.OrdinalIgnoreCase);
         var downloadState = await _asyncState.GetAsync<LanguageDownloadState>();
@@ -732,7 +739,16 @@ public class LanguageController : AdminController
             {
             }
 
-            // Provide downloadable resources.
+            // Provide downloadable resources only when an online translation service is configured.
+            var hasOnlineTranslationService = Services.ApplicationContext.AppConfiguration.TranslateCheckUrl.HasValue();
+            ViewBag.HasOnlineTranslationService = hasOnlineTranslationService;
+
+            if (!hasOnlineTranslationService)
+            {
+                ViewBag.DownloadableLanguages = new List<AvailableLanguageModel>();
+                return;
+            }
+
             var availableResources = await CheckAvailableResources();
             if (availableResources != null)
             {

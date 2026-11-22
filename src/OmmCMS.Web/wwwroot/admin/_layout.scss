@@ -24,8 +24,7 @@ body {
     --sidebar-label-width: 0px;
     --sidebar-label-opacity: 0;
     --sidebar-label-shift: -8px;
-    --sidebar-brand-width: 140px;
-    --sidebar-wordmark-width: 0px;
+    --sidebar-brand-symbol-size: 26px;
     --sidebar-chevron-display: none;
     --sidebar-motion: 0s;
 
@@ -40,7 +39,6 @@ body {
             --sidebar-label-gap: 10px;
             --sidebar-label-opacity: 1;
             --sidebar-label-shift: 0px;
-            --sidebar-wordmark-width: calc(var(--sidebar-brand-width) * 0.8);
             --sidebar-chevron-display: inline-block;
         }
     }
@@ -386,48 +384,60 @@ body.sticky-header #content .section-header::after {
     }
 
     .navbar-brand {
-        position: relative;
-        flex: 0 0 48px;
-        width: 100%;
-        margin: 0;
-        padding: 8px 0 12px;
-    }
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex: 0 0 44px;
+        width: calc(100% - 2 * var(--sidebar-item-margin-x));
+        margin: 0 var(--sidebar-item-margin-x);
+        // Center the emblem horizontally on the same vertical axis as the sidebar icons.
+        padding: 8px calc(var(--sidebar-item-padding-x) - (var(--sidebar-brand-symbol-size) - var(--sidebar-icon-size)) / 2);
+        border-radius: var(--border-radius-md);
+        color: #fff;
+        text-decoration: none;
+        transition: background-color 0.1s linear, color 0.1s linear;
 
-    .navbar-brand-symbol,
-    .navbar-brand-wordmark {
-        position: absolute;
-        top: 8px;
-        // Align the drawn logo center with the navigation icons, including their configurable spacing.
-        left: calc(var(--sidebar-item-margin-x) + var(--sidebar-item-padding-x) + var(--sidebar-icon-size) / 2);
-        height: 29px;
-        overflow: hidden;
-        transform: translateX(calc(var(--sidebar-brand-width) * -0.0988));
-
-        > img {
-            display: block;
-            width: var(--sidebar-brand-width);
-            max-width: none;
-            height: auto;
-            margin-top: calc((29px - var(--sidebar-brand-width) * 0.1792) / 2);
+        &:hover,
+        &:focus-visible {
+            color: #fff;
+            text-decoration: none;
+            background-color: var(--nav-link-hover-bg);
+            outline: none;
         }
     }
 
-    // The symbol spans x=0.6..48.8 in the original 250-unit viewBox; its center is 24.7 / 250.
     .navbar-brand-symbol {
-        width: calc(var(--sidebar-brand-width) * 0.2);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 var(--sidebar-brand-symbol-size);
+        width: var(--sidebar-brand-symbol-size);
+        height: var(--sidebar-brand-symbol-size);
+
+        > svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
     }
 
     .navbar-brand-wordmark {
-        margin-left: calc(var(--sidebar-brand-width) * 0.2);
-        width: var(--sidebar-wordmark-width);
-        transition: width var(--sidebar-motion) ease;
-
-        > img {
-            margin-left: calc(var(--sidebar-brand-width) * -0.2);
-            opacity: var(--sidebar-label-opacity);
-            transform: translateX(var(--sidebar-label-shift));
-            transition: opacity var(--sidebar-motion) ease, transform var(--sidebar-motion) ease;
-        }
+        display: block;
+        min-width: 0;
+        max-width: var(--sidebar-label-width);
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 1.0625rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        line-height: 1;
+        color: #fff;
+        // Align the wordmark leading edge with the navigation labels when expanded.
+        margin-inline-start: max(0px, calc(var(--sidebar-label-gap) - (var(--sidebar-brand-symbol-size) - var(--sidebar-icon-size)) / 2));
+        opacity: var(--sidebar-label-opacity);
+        transform: translateX(var(--sidebar-label-shift));
+        transition: max-width var(--sidebar-motion) ease, opacity var(--sidebar-motion) ease,
+                    margin-inline-start var(--sidebar-motion) ease, transform var(--sidebar-motion) ease;
     }
 
     .navbar-sidebar-toggle {
@@ -675,7 +685,6 @@ body.sticky-header #content .section-header::after {
         --sidebar-label-gap: 10px;
         --sidebar-label-opacity: 1;
         --sidebar-label-shift: 0px;
-        --sidebar-wordmark-width: calc(var(--sidebar-brand-width) * 0.8);
         --sidebar-chevron-display: inline-block;
 
         #navbar-menu {

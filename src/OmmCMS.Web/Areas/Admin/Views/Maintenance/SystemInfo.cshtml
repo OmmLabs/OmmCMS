@@ -96,7 +96,7 @@
         <div class="adminData">
             <div class="form-control-plaintext">
                 <span class="sysmetric">@Html.DisplayFor(model => model.AppVersion)</span>
-                <a href='@Url.Action("CheckUpdate", new { enforce = true })' class="fwm">@T("Admin.CheckUpdate")</a>
+                <a sm-if="CommonServices.ApplicationContext.AppConfiguration.UpdateCheckUrl.HasValue()" href='@Url.Action("CheckUpdate", new { enforce = true })' class="fwm">@T("Admin.CheckUpdate")</a>
             </div>
         </div>
     </div>

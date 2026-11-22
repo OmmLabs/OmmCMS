@@ -2,13 +2,14 @@
 <!-- OmmCMS preview administration. Known commerce MVC endpoints are isolated by Phase 3. -->
 <siteMap>
     <siteMapNode id="home" title="OmmCMS" controller="Topic" action="List" area="Admin">
-        <siteMapNode id="cms" title="Content" permissionNames="cms" icon="cms">
+        <siteMapNode id="cms" title="Content" permissionNames="cms, promotion.newsletter" icon="cms">
             <siteMapNode id="topics" icon="file-pen" title="Pages &amp; Topics" resKey="Admin.ContentManagement.Topics" permissionNames="cms.topic" controller="Topic" action="List" area="Admin" />
             <siteMapNode id="blog-posts" icon="file-pen" title="Blog posts" permissionNames="cms.blog.read" controller="Blog" action="List" area="Admin" />
             <siteMapNode id="blog-categories" icon="folder" title="Blog categories &amp; tags" permissionNames="cms.blog.taxonomy" controller="Blog" action="Taxonomy" area="Admin" />
             <siteMapNode id="menus" icon="menu-button" title="Menus" resKey="Admin.ContentManagement.Menus" permissionNames="cms.menu" controller="Menu" action="List" area="Admin" />
             <siteMapNode id="widgets" icon="widgets" title="Widgets" resKey="Admin.ContentManagement.Widgets" permissionNames="cms.widget" controller="Widget" action="Providers" area="Admin" />
             <siteMapNode id="message-templates" icon="mail-open" title="Email templates" resKey="Admin.ContentManagement.MessageTemplates" permissionNames="cms.messagetemplate" controller="MessageTemplate" action="List" area="Admin" />
+            <siteMapNode id="newsletter-subscribers" icon="mail" title="Newsletter subscribers" resKey="Admin.Promotions.NewsletterSubscriptions" permissionNames="promotion.newsletter" controller="NewsletterSubscription" action="List" area="Admin" />
         </siteMapNode>
         <siteMapNode id="design" title="Design &amp; SEO" icon="palette" permissionNames="configuration.theme, system.urlrecord, configuration.setting">
             <siteMapNode id="themes" icon="palette" title="Themes" resKey="Admin.Configuration.Themes" permissionNames="configuration.theme" controller="Theme" action="List" area="Admin" />
@@ -23,7 +24,7 @@
         </siteMapNode>
         <siteMapNode id="configuration" title="Site settings" icon="sliders-v" permissionNames="configuration.setting, configuration.store, configuration.language, configuration.emailaccount">
             <siteMapNode id="settings" icon="sliders-v" title="General settings" resKey="Admin.Configuration.Settings.GeneralCommon" permissionNames="configuration.setting" controller="Setting" action="GeneralCommon" area="Admin" />
-            <siteMapNode id="stores" icon="store" title="Sites" resKey="Admin.Common.Stores" permissionNames="configuration.store" controller="Store" action="List" area="Admin" />
+            <siteMapNode id="stores" icon="globe" title="Sites" resKey="Admin.Common.Stores" permissionNames="configuration.store" controller="Store" action="List" area="Admin" />
             <siteMapNode id="languages" icon="earth" title="Languages" resKey="Admin.Configuration.Languages" permissionNames="configuration.language" controller="Language" action="List" area="Admin" />
             <siteMapNode id="email-accounts" icon="mail" title="Email accounts" resKey="Admin.Configuration.EmailAccounts" permissionNames="configuration.emailaccount" controller="EmailAccount" action="List" area="Admin" />
         </siteMapNode>
@@ -32,6 +33,8 @@
             <siteMapNode id="queued-emails" icon="inbox" title="Queued emails" resKey="Admin.System.QueuedEmails" permissionNames="system.message" controller="QueuedEmail" action="List" area="Admin" />
             <siteMapNode id="scheduled-tasks" icon="clock" title="Scheduled tasks" resKey="Admin.System.ScheduleTasks" permissionNames="system.scheduletask" controller="Scheduling" action="List" area="Admin" />
             <siteMapNode id="maintenance" icon="maintenance" title="Maintenance" resKey="Admin.System.Maintenance" permissionNames="system.maintenance" controller="Maintenance" action="Index" area="Admin" />
+            <siteMapNode id="system-info" icon="info-circle" title="System info" resKey="Admin.System.SystemInfo" permissionNames="system.maintenance" controller="Maintenance" action="SystemInfo" area="Admin" />
+            <siteMapNode id="system-warnings" icon="alert-circle" title="Warnings" resKey="Admin.System.Warnings" permissionNames="system.maintenance" controller="Maintenance" action="Warnings" area="Admin" />
         </siteMapNode>
         <!-- Keep this node: OmmCMS module menu providers append entries to it. -->
         <siteMapNode id="modules" title="Extensions" icon="puzzle" permissionNames="configuration.plugin.read">

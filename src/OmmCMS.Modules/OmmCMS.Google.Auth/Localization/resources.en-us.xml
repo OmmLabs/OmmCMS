@@ -3,7 +3,7 @@
         <Value>Google Login</Value>
     </LocaleResource>
     <LocaleResource Name="Plugins.Description.OmmCMS.Google.Auth" AppendRootKey="false">
-        <Value>Adds Google authentication to the store.</Value>
+        <Value>Adds Google authentication to the site.</Value>
     </LocaleResource>
     <LocaleResource Name="AdminInstruction">
         <Value>

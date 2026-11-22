@@ -1511,19 +1511,19 @@
 		<Value>Standard</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Common.Store">
-		<Value>Store</Value>
+		<Value>Site</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Common.Store.AvailableFor">
-		<Value>Stores</Value>
+		<Value>Sites</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Common.Store.AvailableFor.Hint">
-		<Value>Select stores for which the item will be shown.</Value>
+		<Value>Select sites for which the item will be shown.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Common.Store.LimitedTo">
-		<Value>Limited to stores</Value>
+		<Value>Limited to sites</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Common.Store.LimitedTo.Hint">
-		<Value>Determines whether the item is available only at certain stores.</Value>
+		<Value>Determines whether the item is available only at certain sites.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Common.Store.SearchFor">
 		<Value>Store</Value>
@@ -1532,7 +1532,7 @@
 		<Value>Search by a specific store.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Common.Stores">
-		<Value>Stores</Value>
+		<Value>Sites</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Common.StoresAll">
 		<Value>All stores</Value>
@@ -2102,7 +2102,7 @@
 		<Value>An error occurred while checking for other available languages.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Languages.DefaultLanguage.Note">
-		<Value>The default language of the shop is &lt;b class="fwm"&gt;{0}&lt;/b&gt;. The default is always the first published language.</Value>
+		<Value>The default language of the site is &lt;b class="fwm"&gt;{0}&lt;/b&gt;. The default is always the first published language.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Languages.Deleted">
 		<Value>The language has been deleted successfully.</Value>
@@ -2591,7 +2591,7 @@
 		<Value>Manage address fields displayed in user accounts.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.AllowCustomersToSetTimeZone">
-		<Value>Allow customers to select time zone</Value>
+		<Value>Allow users to select time zone</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.AllowCustomersToSetTimeZone.Hint">
 		<Value>Check the box to allow customers to select a time zone. If checked, then the time zone can be selected on the public store (account page). If not, then the default time zone will be used.</Value>
@@ -2735,7 +2735,7 @@
 		<Value>Choose default password format. Please keep in mind that this setting will be applied only to the newly registered customers.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.DefaultStoreTimeZone">
-		<Value>Default store time zone</Value>
+		<Value>Default site time zone</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.CustomerUser.DefaultStoreTimeZone.Hint">
 		<Value>The default store time zone used to display dates.</Value>
@@ -3867,13 +3867,13 @@
 		<Value>Youtube Link</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.StoreClosed">
-		<Value>Store closed</Value>
+		<Value>Site closed</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.StoreClosed.Hint">
 		<Value>Check the box to close the store. Uncheck to re-open.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.StoreClosedAllowForAdmins">
-		<Value>Allow an admin to view the closed store</Value>
+		<Value>Allow administrators to view the closed site</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.StoreClosedAllowForAdmins.Hint">
 		<Value>Check the box to allow a user with admin access to view the store while it is set to closed.</Value>
@@ -4530,7 +4530,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Allow customers to select a theme</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Themes.Option.AllowCustomerToSelectTheme">
-		<Value>Allow customers to select a theme</Value>
+		<Value>Allow visitors to select a theme</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Configuration.Themes.Option.AllowCustomerToSelectTheme.Hint">
 		<Value>Check the box to allow customers to select a store theme.</Value>
@@ -5376,7 +5376,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>The list shows customers who are assigned to this customer role. Customers are automatically assigned by scheduled task as long as the group is active and active rules are specified for it. You can make a manual assignment using the customer role selection at the respective customer.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers">
-		<Value>Customers</Value>
+		<Value>Users</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Customers.CanOnlyBeCustomerOrGuest">
 		<Value>The customer cannot be in both '{0}' and '{1}' customer roles.</Value>
@@ -6540,10 +6540,10 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Logged in as: {0}</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Header.Logout">
-		<Value>Logout?</Value>
+		<Value>Log out</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Header.PublicStore">
-		<Value>Public store</Value>
+		<Value>Public site</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.Header.RestartApplication">
 		<Value>Restart application</Value>
@@ -7482,7 +7482,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>The backup was created with a different OmmCMS version. Restoring it may cause unpredictable issues. Do you still want to proceed?</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Maintenance.DbBackup.SameServerNote">
-		<Value>Backing up and restoring databases is only possible if the database server (e.g. MS SQL Server or MySQL) and the physical location of the store installation are on the same server.</Value>
+		<Value>Backing up and restoring databases is only possible if the database server (e.g. MS SQL Server or MySQL) and the physical location of the OmmCMS installation are on the same server.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Maintenance.DbBackup.Upload">
 		<Value>Upload backup</Value>
@@ -7509,7 +7509,7 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>{0} files were deleted</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Maintenance.DeleteGuests">
-		<Value>Deleting guest customers</Value>
+		<Value>Delete guest accounts</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Maintenance.DeleteGuests.EndDate">
 		<Value>End date</Value>
@@ -8115,10 +8115,10 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>The reachability of the sitemap could not be validated.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.SitemapReachable.OK">
-		<Value>The sitemap for the store is reachable.</Value>
+		<Value>The sitemap for the site is reachable.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.SitemapReachable.Wrong">
-		<Value>The sitemap for the store is not reachable.</Value>
+		<Value>The sitemap for the site is not reachable.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.TaskScheduler.Fail">
 		<Value>The task scheduler cannot poll and execute tasks. Base URL: {0}, Status: {1}. Please specify a working base url in appsettings.json, setting 'OmmCMS.TaskSchedulerBaseUrl'.</Value>
@@ -8127,13 +8127,13 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>The task scheduler can poll and execute tasks.</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.URL">
-		<Value>Specified store URL matches this store URL</Value>
+		<Value>Specified site URL matches this site URL</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.URL.Match">
-		<Value>Specified store URL matches this store URL</Value>
+		<Value>Specified site URL matches this site URL</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.Warnings.URL.NoMatch">
-		<Value>Specified store URL ({0}) doesn't match this store URL ({1})</Value>
+		<Value>Specified site URL ({0}) doesn't match this site URL ({1})</Value>
 	</LocaleResource>
 	<LocaleResource Name="Admin.System.XMLSitemap">
 		<Value>XML Sitemap</Value>
@@ -9709,10 +9709,10 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>StartTLS optional (encrypt with TLS after greeting, if available)</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.PageTitleSeoAdjustment.PagenameAfterStorename">
-		<Value>Page name comes after store name</Value>
+		<Value>Page name comes after site name</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.PageTitleSeoAdjustment.StorenameAfterPagename">
-		<Value>Store name comes after page name</Value>
+		<Value>Site name comes after page name</Value>
 	</LocaleResource>
 	<LocaleResource Name="Enums.PasswordFormat.Clear">
 		<Value>Clear</Value>
@@ -11219,16 +11219,16 @@ within the observation window, additional requests may be denied, even if type-s
 		<Value>Click here to be forwarded to our blog</Value>
 	</LocaleResource>
 	<LocaleResource Name="OmmCMS.Core.Domain.Seo.PageTitleSeoAdjustment.PagenameAfterStorename">
-		<Value>Page name comes after store name</Value>
+		<Value>Page name comes after site name</Value>
 	</LocaleResource>
 	<LocaleResource Name="OmmCMS.Core.Domain.Seo.PageTitleSeoAdjustment.StorenameAfterPagename">
-		<Value>Store name comes after page name</Value>
+		<Value>Site name comes after page name</Value>
 	</LocaleResource>
 	<LocaleResource Name="StoreClosed">
 		<Value>We'll be back.</Value>
 	</LocaleResource>
 	<LocaleResource Name="StoreClosed.Hint">
-		<Value>We're busy updating our online store for you and will be back soon.</Value>
+		<Value>We're busy updating our site and will be back soon.</Value>
 	</LocaleResource>
 	<LocaleResource Name="StoreTheme">
 		<Value>Select store theme</Value>

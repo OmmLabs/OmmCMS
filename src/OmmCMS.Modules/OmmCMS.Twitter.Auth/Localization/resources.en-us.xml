@@ -3,7 +3,7 @@
         <Value>X Login</Value>
     </LocaleResource>
     <LocaleResource Name="Plugins.Description.OmmCMS.Twitter.Auth" AppendRootKey="false">
-        <Value>Adds X authentication to the store.</Value>
+        <Value>Adds X authentication to the site.</Value>
     </LocaleResource>
     <LocaleResource Name="AdminInstruction">
         <Value>

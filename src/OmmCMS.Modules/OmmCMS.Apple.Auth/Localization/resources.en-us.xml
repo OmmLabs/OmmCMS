@@ -3,7 +3,7 @@
         <Value>Apple Login</Value>
     </LocaleResource>
     <LocaleResource Name="Plugins.Description.OmmCMS.Apple.Auth" AppendRootKey="false">
-        <Value>Adds Apple authentication to the store.</Value>
+        <Value>Adds Apple authentication to the site.</Value>
     </LocaleResource>
     <LocaleResource Name="AdminInstruction">
         <Value><![CDATA[

@@ -53,7 +53,6 @@ public class MaintenanceController : AdminController
     private readonly Lazy<IImageCache> _imageCache;
     private readonly Lazy<IImageOffloder> _imageOffloader;
     private readonly Lazy<IFilePermissionChecker> _filePermissionChecker;
-    private readonly Lazy<ICurrencyService> _currencyService;
     private readonly Lazy<IExportProfileService> _exportProfileService;
     private readonly Lazy<IImportProfileService> _importProfileService;
     private readonly Lazy<UpdateChecker> _updateChecker;
@@ -70,7 +69,6 @@ public class MaintenanceController : AdminController
         Lazy<IImageCache> imageCache,
         Lazy<IImageOffloder> imageOffloader,
         Lazy<IFilePermissionChecker> filePermissionChecker,
-        Lazy<ICurrencyService> currencyService,
         Lazy<IExportProfileService> exportProfileService,
         Lazy<IImportProfileService> importProfileService,
         Lazy<UpdateChecker> updateChecker,
@@ -86,7 +84,6 @@ public class MaintenanceController : AdminController
         _imageCache = imageCache;
         _imageOffloader = imageOffloader;
         _filePermissionChecker = filePermissionChecker;
-        _currencyService = currencyService;
         _exportProfileService = exportProfileService;
         _importProfileService = importProfileService;
         _updateChecker = updateChecker;
@@ -695,36 +692,6 @@ public class MaintenanceController : AdminController
             AddEntry(SystemWarningLevel.Warning, T("Admin.System.Warnings.SitemapReachable.Wrong"));
             Logger.Warn(ex, T("Admin.System.Warnings.SitemapReachable.Wrong"));
         }
-
-        // Primary exchange rate currency
-        // ====================================
-        var perCurrency = _currencyService.Value.PrimaryExchangeCurrency;
-        if (perCurrency != null)
-        {
-            AddEntry(SystemWarningLevel.Pass, T("Admin.System.Warnings.ExchangeCurrency.Set"));
-
-            if (perCurrency.Rate != 1)
-            {
-                AddEntry(SystemWarningLevel.Fail, T("Admin.System.Warnings.ExchangeCurrency.Rate1"));
-            }
-        }
-        else
-        {
-            AddEntry(SystemWarningLevel.Fail, T("Admin.System.Warnings.ExchangeCurrency.NotSet"));
-        }
-
-        // Primary store currency
-        // ====================================
-        var pscCurrency = _currencyService.Value.PrimaryCurrency;
-        if (pscCurrency != null)
-        {
-            AddEntry(SystemWarningLevel.Pass, T("Admin.System.Warnings.PrimaryCurrency.Set"));
-        }
-        else
-        {
-            AddEntry(SystemWarningLevel.Fail, T("Admin.System.Warnings.PrimaryCurrency.NotSet"));
-        }
-
 
         // Incompatible modules
         // ====================================

@@ -94,37 +94,40 @@
     </div>
 </div>
 
-<div class="mt-5">
-    <h5 class="mb-3">@T("Admin.Configuration.Languages.AvailableLanguages")</h5>
-    <div id="AvailableLanguages"></div>
-</div>
+@if (ViewBag.HasOnlineTranslationService == true)
+{
+    <div class="mt-5">
+        <h5 class="mb-3">@T("Admin.Configuration.Languages.AvailableLanguages")</h5>
+        <div id="AvailableLanguages"></div>
+    </div>
 
-<script sm-target-zone="scripts" data-origin="language-list">
-    $(function () {
-        // Load available languages.
-	    $({}).ajax({
-	        url: '@Url.Action("AvailableLanguages")',
-	        smallIcon: '#AvailableLanguages',
-	        success: function (resp) {
-	            $('#AvailableLanguages').html(resp);
-	        }
-	    });
+    <script sm-target-zone="scripts" data-origin="language-list">
+        $(function () {
+            // Load available languages.
+            $({}).ajax({
+                url: '@Url.Action("AvailableLanguages")',
+                smallIcon: '#AvailableLanguages',
+                success: function (resp) {
+                    $('#AvailableLanguages').html(resp);
+                }
+            });
 
-        // Watch language download progress.
-        OmmCMS.Admin.TaskWatcher.startWatching({
-            context: $('#AvailableLanguages'),
-            elementsSelector: '.task-progress',
-            defaultProgressMessage: @T("Admin.System.ScheduleTasks.RunNow.IsRunning").JsValue,
-            pollUrl: '@Url.Action("DownloadProgress", "Language")',
-            onTaskStarted: function (task, el) {
-                var tr = el.closest('tr');
+            // Watch language download progress.
+            OmmCMS.Admin.TaskWatcher.startWatching({
+                context: $('#AvailableLanguages'),
+                elementsSelector: '.task-progress',
+                defaultProgressMessage: @T("Admin.System.ScheduleTasks.RunNow.IsRunning").JsValue,
+                pollUrl: '@Url.Action("DownloadProgress", "Language")',
+                onTaskStarted: function (task, el) {
+                    var tr = el.closest('tr');
 
-                $('#AvailableLanguages').find('a.download-language').addClass('hide');
-                $('body, html').animate({ scrollTop: tr.offset().top - 70 }, 'slow');
-            },
-            onTaskCompleted: function (taskId, el) {
-               window.location = '@Url.Action("List")';
-            }
+                    $('#AvailableLanguages').find('a.download-language').addClass('hide');
+                    $('body, html').animate({ scrollTop: tr.offset().top - 70 }, 'slow');
+                },
+                onTaskCompleted: function (taskId, el) {
+                   window.location = '@Url.Action("List")';
+                }
+            });
         });
-    });
-</script>
+    </script>
+}

@@ -282,7 +282,12 @@ public partial class SettingController : AdminController
             .ToList();
 
         var selectedTargets = model.CaptchaSettings.ShowOn ?? [];
+        var supportedTargets = new HashSet<string>(
+            [CaptchaSettings.Targets.Login, CaptchaSettings.Targets.Registration, CaptchaSettings.Targets.PasswordRecovery, CaptchaSettings.Targets.ContactUs],
+            StringComparer.OrdinalIgnoreCase);
+
         var captchaTargetOptions = CaptchaSettings.Targets.GetDisplayResourceKeys()
+            .Where(x => supportedTargets.Contains(x.Key) || selectedTargets.Contains(x.Key, StringComparer.OrdinalIgnoreCase))
             .Select(x => new SelectListItem
             {
                 Value = x.Key,

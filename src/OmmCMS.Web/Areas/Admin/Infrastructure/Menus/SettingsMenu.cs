@@ -69,15 +69,6 @@ public partial class SettingsMenu : MenuBase
             },
             new MenuItem
             {
-                Id = "dataexchange",
-                Text = T("Admin.Common.DataExchange"),
-                Icon = "exchange",
-                PermissionNames = perm,
-                ControllerName = "Import",
-                ActionName = "DataExchangeSettings"
-            },
-            new MenuItem
-            {
                 Id = "performance",
                 Text = T("Admin.Configuration.Settings.Performance"),
                 Icon = "bi:speedometer2!",
@@ -100,7 +91,7 @@ public partial class SettingsMenu : MenuBase
         // Keep unsupported settings navigation inaccessible in the CMS profile.
         foreach (var child in root.Children)
         {
-            if (child.Value.Id is "dataexchange" or "all")
+            if (child.Value.Id is "all")
             {
                 child.Value.Visible = false;
             }
