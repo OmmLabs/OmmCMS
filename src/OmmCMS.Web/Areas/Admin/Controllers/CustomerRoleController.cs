@@ -190,6 +190,7 @@ public class CustomerRoleController : AdminController
         return View(model);
     }
 
+    [HttpPost]
     public async Task<IActionResult> RoleUpdate(CustomerRoleModel model)
     {
         var success = false;
@@ -361,6 +362,9 @@ public class CustomerRoleController : AdminController
             .LoadAsync();
 
         var role = await _roleManager.FindByIdAsync(id.ToString());
+        if (role == null)
+            return NotFound();
+
         var isGuestRole = role.SystemName.EqualsNoCase(SystemCustomerRoleNames.Guests);
         var emailFallbackStr = isGuestRole ? T("Admin.Customers.Guest").Value : string.Empty;
 
@@ -390,6 +394,12 @@ public class CustomerRoleController : AdminController
         if (ids.Any())
         {
             var roleMappings = await _db.CustomerRoleMappings.GetManyAsync(ids, true);
+            if (roleMappings.Any(x => x.IsSystemMapping))
+            {
+                NotifyError("System role assignments cannot be removed.");
+                return Json(new { Success = false, Count = 0 });
+            }
+
             _db.CustomerRoleMappings.RemoveRange(roleMappings);
 
             numDeleted = await _db.SaveChangesAsync();
