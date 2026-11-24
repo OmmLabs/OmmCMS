@@ -1,8 +1,12 @@
 ﻿@using OmmCMS.Admin.Models.Menus
+@using OmmCMS.Core.Security
+@inject IPermissionService MenuPermissions
 
 @model MenuEntityModel
 
 @{
+    var canUpdate = await MenuPermissions.AuthorizeAsync(Permissions.Cms.Menu.Update);
+    var canDelete = !Model.IsSystemMenu && await MenuPermissions.AuthorizeAsync(Permissions.Cms.Menu.Delete);
     ViewBag.Title = T("Admin.ContentManagement.EditMenu").Value;
 }
 
@@ -13,18 +17,18 @@
             <span>@T("Admin.ContentManagement.EditMenu") - @Model.Title</span>
         </div>
         <div class="options">
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
-            <button type="submit" name="save" value="save-continue" class="btn btn-secondary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save-continue" class="btn btn-secondary">
                 <span>@T("Admin.Common.SaveContinue")</span>
             </button>
-            <button type="submit" name="menu-delete" id="menu-delete" value="menu-delete" class="btn btn-secondary btn-destructive" attr-disabled='(Model.IsSystemMenu, "disabled")'>
+            <button sm-if="canDelete" type="submit" name="menu-delete" id="menu-delete" value="menu-delete" class="btn btn-secondary btn-destructive" attr-disabled='(Model.IsSystemMenu, "disabled")'>
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete")</span>
             </button>
-            <confirm button-id="menu-delete" />
+            <confirm sm-if="canDelete" button-id="menu-delete" />
         </div>
     </div>
 
