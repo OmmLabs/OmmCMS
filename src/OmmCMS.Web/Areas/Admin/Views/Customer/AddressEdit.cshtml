@@ -1,4 +1,6 @@
-﻿@model CustomerAddressModel
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService CustomerPermissions
+@model CustomerAddressModel
 
 @{
     ViewBag.Title = T("Admin.Customers.Customers.Addresses.EditAddress").Value.Grow(Model.Username, " - ");
@@ -13,7 +15,7 @@
             <span>@ViewBag.Title</span>
         </div>
         <div class="options">
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="await CustomerPermissions.AuthorizeAsync(Permissions.Customer.EditAddress)" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
