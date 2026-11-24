@@ -1,4 +1,7 @@
-﻿@{
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService LogPermissions
+@{
+    var canDelete = await LogPermissions.AuthorizeAsync(Permissions.System.Log.Delete);
     ViewBag.Title = T("Admin.System.Log").Value;
     Assets.BodyAttributes.AppendCssClass("spa-layout");
 }
@@ -16,11 +19,11 @@
             @T("Admin.System.Log")
         </div>
         <div class="options">
-            <button type="submit" name="clearall" id="clearall" value="clearall" class="btn btn-danger">
+            <button sm-if="canDelete" type="submit" name="clearall" id="clearall" value="clearall" class="btn btn-danger">
                 <icon name="trash" />
                 <span>@T("Admin.System.Log.ClearLog")</span>
             </button>
-            <confirm button-id="clearall" action="LogClear" message="@T("Admin.System.Log.ClearLog.Confirm")" />
+            <confirm sm-if="canDelete" button-id="clearall" action="LogClear" message="@T("Admin.System.Log.ClearLog.Confirm")" />
         </div>
     </div>
 </form>
