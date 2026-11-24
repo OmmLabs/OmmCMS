@@ -1,6 +1,10 @@
-﻿@model CustomerRoleModel
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService RolePermissions
+@model CustomerRoleModel
 
 @{
+    var canUpdate = await RolePermissions.AuthorizeAsync(Permissions.Customer.Role.Update);
+    var canDelete = await RolePermissions.AuthorizeAsync(Permissions.Customer.Role.Delete);
     ViewBag.Title = T("Admin.Customers.CustomerRoles.EditCustomerRoleDetails") + " - " + Model.Name;
 }
 
@@ -14,14 +18,14 @@
         <div class="options">
             <zone name="admin_button_toolbar_before" />
 
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
             <button type="submit" name="save" value="save-continue" class="btn btn-secondary">
                 <span>@T("Admin.Common.SaveContinue")</span>
             </button>
-            @if (!Model.IsSystemRole)
+            @if (!Model.IsSystemRole && canDelete)
             {
                 <button type="submit" id="customerrole-delete" name="customerrole-delete" class="btn btn-secondary btn-destructive">
                     <icon name="trash" />
