@@ -1,6 +1,9 @@
+@using OmmCMS.Core.Security
+@inject IPermissionService ThemePermissions
 @model ThemeListModel
 
 @{
+    var canUpdate = await ThemePermissions.AuthorizeAsync(Permissions.Configuration.Theme.Update);
     ViewBag.Title = T("Admin.Configuration.Themes").Value;
 }
 
@@ -13,11 +16,11 @@
         <div class="options">
             <zone name="admin_button_toolbar_before"></zone>
 
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
-            <a asp-action="ReloadThemes" asp-route-storeId="@Model.StoreId" class="btn btn-secondary">
+            <a sm-if="canUpdate" asp-action="ReloadThemes" asp-route-storeId="@Model.StoreId" class="btn btn-secondary">
                 <icon name="sync" />
                 <span>@T("Admin.Configuration.Themes.Reload")</span>
             </a>
@@ -130,7 +133,7 @@
                         &nbsp;
                     </div>
                     <div class="adminData">
-                        <a asp-action="ClearAssetCache" class="btn btn-danger">
+                        <a sm-if="canUpdate" asp-action="ClearAssetCache" class="btn btn-danger">
                             <span>@T("Admin.Configuration.Themes.ClearAssetCache")</span>
                         </a>
                     </div>
@@ -178,13 +181,13 @@
                                 <span>@T("Admin.Configuration.Themes.Version"): </span><span class="text-muted">@theme.Version</span>
                             </div>
                             <div class="theme-buttons d-flex mt-auto pt-3">
-                                @if (!theme.IsActive)
+                                @if (!theme.IsActive && canUpdate)
                                 {
                                     <a href="#" class="btn btn-primary set-as-defaulttheme@(isBroken ? " invisible" : "")" data-name="@theme.Name">
                                         @T("Admin.Common.Activate")
                                     </a>
                                 }
-                                else
+                                else if (theme.IsActive)
                                 {
                                     <span class="badge badge-success badge-pill hstack-inline align-self-center gap-1">
                                         <icon name="check" />
