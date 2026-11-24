@@ -5,12 +5,12 @@
 }
 <div class="section-header"><div class="title">@ViewBag.Title</div></div>
 <form id="blog-term-form" asp-action="Term" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
+    <div asp-validation-summary="All" class="text-danger" role="alert"></div>
     <input type="hidden" asp-for="Id" /><input type="hidden" asp-for="IsTag" />
-    <div class="form-group"><label asp-for="Name"></label><input asp-for="Name" class="form-control" /></div>
-    <div class="form-group"><label asp-for="Slug">URL slug (leave blank to generate)</label><input asp-for="Slug" class="form-control" /></div>
-    <div class="form-group"><label asp-for="Description"></label><textarea asp-for="Description" class="form-control" rows="3"></textarea></div>
-    @if (!Model.IsTag) { <div class="form-group"><label asp-for="DisplayOrder">Display order</label><input asp-for="DisplayOrder" class="form-control" /></div> }
+    <div class="form-group"><label asp-for="Name"></label><input asp-for="Name" class="form-control" required maxlength="150" /><span asp-validation-for="Name" class="text-danger"></span></div>
+    <div class="form-group"><label asp-for="Slug">URL slug (leave blank to generate)</label><input asp-for="Slug" class="form-control" maxlength="180" aria-describedby="slug-help" /><small id="slug-help" class="form-text text-muted">Changing an existing slug creates a permanent redirect from the former URL.</small><span asp-validation-for="Slug" class="text-danger"></span></div>
+    <div class="form-group"><label asp-for="Description"></label><textarea asp-for="Description" class="form-control" rows="3" maxlength="500"></textarea><span asp-validation-for="Description" class="text-danger"></span></div>
+    @if (!Model.IsTag) { <div class="form-group"><label asp-for="DisplayOrder">Display order</label><input asp-for="DisplayOrder" class="form-control" /><span asp-validation-for="DisplayOrder" class="text-danger"></span></div> }
     <button type="submit" class="btn btn-primary">Save</button>
     <a asp-action="Taxonomy" asp-route-isTag="@Model.IsTag" class="btn btn-secondary">Cancel</a>
 </form>
@@ -19,6 +19,6 @@
     <form asp-action="DeleteTerm" method="post" class="mt-4">
         <input type="hidden" name="id" value="@Model.Id" />
         <input type="hidden" name="isTag" value="@Model.IsTag.ToString().ToLowerInvariant()" />
-        <button class="btn btn-danger" type="submit" onclick="return confirm('Delete this term and remove its assignments? Posts will not be deleted.')">Delete</button>
+        <button class="btn btn-danger" type="submit" onclick="return confirm('Delete this term and remove its assignments? Posts will not be deleted.')">Delete @(Model.IsTag ? "tag" : "category")</button>
     </form>
 }
