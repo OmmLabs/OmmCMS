@@ -2,7 +2,14 @@
 @using OmmCMS.Collections
 @using OmmCMS.Core.Security
 
+@inject IPermissionService CustomerPermissions
 @model CustomerModel
+
+@{
+    var canReadAddress = await CustomerPermissions.AuthorizeAsync(Permissions.Customer.ReadAddress);
+    var canCreateAddress = await CustomerPermissions.AuthorizeAsync(Permissions.Customer.CreateAddress);
+    var canImpersonate = await CustomerPermissions.AuthorizeAsync(Permissions.Customer.Impersonate);
+}
 
 <div asp-validation-summary="All"></div>
 <input sm-if="Model.Id == 0" asp-for="Id" type="hidden" />
@@ -63,9 +70,9 @@
                 </div>
             }
         </tab>
-        <tab sm-title="@T("Admin.Customers.Customers.Addresses")" sm-icon="location">
+        <tab sm-if="canReadAddress" sm-title="@T("Admin.Customers.Customers.Addresses")" sm-icon="location">
             <div>
-                <a asp-action="AddressCreate" asp-route-customerId="@Model.Id" class="btn btn-primary mb-3">
+                <a sm-if="canCreateAddress" asp-action="AddressCreate" asp-route-customerId="@Model.Id" class="btn btn-primary mb-3">
                     <icon name="plus"  />
                     <span>@T("Account.CustomerAddresses.AddNew")</span>
                 </a>
@@ -74,7 +81,7 @@
                 <partial name="_Addresses" model="Model.Addresses" />
             </div>
         </tab>
-        <tab sm-title="@T("Admin.Customers.Customers.Impersonate")" sm-icon="user-badge">
+        <tab sm-if="canImpersonate" sm-title="@T("Admin.Customers.Customers.Impersonate")" sm-icon="user-badge">
             <div class="alert alert-info alert-dismissible fade show">
                 <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
                 <p>@T("Admin.Customers.Customers.Impersonate.Description1")</p>
