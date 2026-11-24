@@ -1,6 +1,12 @@
 ﻿@using OmmCMS.Admin.Models.Menus
+@using OmmCMS.Core.Security
+@inject IPermissionService MenuPermissions
 
 @model MenuEntityModel
+
+@{
+    var canUpdate = await MenuPermissions.AuthorizeAsync(Permissions.Cms.Menu.Update);
+}
 
 <div asp-validation-summary="All"></div>
 <input asp-for="Id" type="hidden" />
@@ -122,7 +128,7 @@
             <h4 class="h4 mt-5 mb-4">@T("Admin.ContentManagement.MenuLinks")</h4>
 
             <div id="menu-items-container" class="card rounded-bottom-0 mb-5">
-                <div class="card-header p-2">
+                <div sm-if="canUpdate" class="card-header p-2">
                     <div class="dropdown">
                         <button type="button" class="btn btn-primary btn-flat dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <icon name="plus"  />
