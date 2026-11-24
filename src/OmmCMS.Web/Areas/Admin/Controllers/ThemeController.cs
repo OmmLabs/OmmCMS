@@ -63,7 +63,7 @@ public class ThemeController : AdminController
             new SelectListItem { Value = "2", Text = T("Common.Yes") }
         };
         model.AvailableBundleOptimizationValues.AddRange(bundlingOptions);
-        model.AvailableBundleOptimizationValues.FirstOrDefault(x => int.Parse(x.Value) == model.BundleOptimizationEnabled).Selected = true;
+        (model.AvailableBundleOptimizationValues.FirstOrDefault(x => int.Parse(x.Value) == model.BundleOptimizationEnabled) ?? model.AvailableBundleOptimizationValues[0]).Selected = true;
 
         var assetCachingOptions = new List<SelectListItem>
         {
@@ -72,7 +72,7 @@ public class ThemeController : AdminController
             new SelectListItem { Value = "2", Text = "{0} ({1})".FormatCurrent(T("Common.Yes"), T("Common.Recommended")) }
         };
         model.AvailableAssetCachingValues.AddRange(assetCachingOptions);
-        model.AvailableAssetCachingValues.FirstOrDefault(x => int.Parse(x.Value) == model.AssetCachingEnabled).Selected = true;
+        (model.AvailableAssetCachingValues.FirstOrDefault(x => int.Parse(x.Value) == model.AssetCachingEnabled) ?? model.AvailableAssetCachingValues[0]).Selected = true;
 
         // Add theme configs.
         model.Themes.AddRange(GetThemes(themeSettings));
@@ -132,6 +132,12 @@ public class ThemeController : AdminController
     public async Task<IActionResult> ListPost(ThemeListModel model, IFormCollection form)
     {
         var themeSettings = await Services.SettingFactory.LoadSettingsAsync<ThemeSettings>(model.StoreId);
+
+        if (string.IsNullOrWhiteSpace(model.DefaultTheme) || !_themeRegistry.ContainsTheme(model.DefaultTheme) || !Services.StoreContext.GetAllStores().Any(x => x.Id == model.StoreId))
+        {
+            NotifyError("Select a valid theme and site.");
+            return RedirectToAction(nameof(List));
+        }
 
         var themeSwitched = !themeSettings.DefaultTheme.EqualsNoCase(model.DefaultTheme);
         if (themeSwitched)
@@ -435,6 +441,11 @@ public class ThemeController : AdminController
     [Permission(Permissions.Configuration.Theme.Update)]
     public async Task<IActionResult> ApplyPreviewTheme(string theme, int storeId)
     {
+        if (string.IsNullOrWhiteSpace(theme) || !_themeRegistry.ContainsTheme(theme) || !Services.StoreContext.GetAllStores().Any(x => x.Id == storeId))
+        {
+            return BadRequest();
+        }
+
         var themeSettings = await Services.SettingFactory.LoadSettingsAsync<ThemeSettings>(storeId);
         var oldTheme = themeSettings.DefaultTheme;
         themeSettings.DefaultTheme = theme;
