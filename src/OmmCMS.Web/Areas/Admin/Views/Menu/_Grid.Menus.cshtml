@@ -1,14 +1,18 @@
 ﻿@using OmmCMS.Admin.Models.Menus
 
+@using OmmCMS.Core.Security
+@inject IPermissionService MenuPermissions
 @model MenuEntityModel
 
 @{
     var parentModel = ViewData["Parent"] as MenuEntityListModel;
+    var canCreate = await MenuPermissions.AuthorizeAsync(Permissions.Cms.Menu.Create);
+    var canDelete = await MenuPermissions.AuthorizeAsync(Permissions.Cms.Menu.Delete);
 }
 
 <datagrid id="menus-grid"
           allow-resize="true"
-          allow-row-selection="true"
+          allow-row-selection="@canDelete"
           allow-column-reordering="true">
     <datasource read="@Url.Action("MenuEntityList", "Menu")" delete="@Url.Action("MenuEntityDelete", "Menu")" />
     <sorting enabled="true">
@@ -22,7 +26,7 @@
             </button>
         </toolbar-group>
         <toolbar-group>
-            <a asp-action="Create" class="btn btn-primary btn-flat no-anims mr-auto">
+            <a sm-if="canCreate" asp-action="Create" class="btn btn-primary btn-flat no-anims mr-auto">
                 <icon name="plus"  />
                 <span>@T("Admin.Common.AddNew")…</span>
             </a>
@@ -31,7 +35,7 @@
         <toolbar-group class="omega"></toolbar-group>
         <zone name="datagrid_toolbar_omega"></zone>
         <toolbar-group>
-            <button datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger no-anims btn-flat">
+            <button sm-if="canDelete" datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger no-anims btn-flat">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete.Selected")</span>
             </button>
@@ -53,6 +57,6 @@
     </columns>
     <row-commands>
         <a datarow-action="DataRowAction.Custom" :href="item.row.EditUrl">@T("Common.Edit")</a>
-        <a datarow-action="DataRowAction.Delete" v-bind:class="{ disabled: item.row.IsSystemMenu }">@T("Common.Delete")</a>
+        <a sm-if="canDelete" datarow-action="DataRowAction.Delete" v-bind:class="{ disabled: item.row.IsSystemMenu }">@T("Common.Delete")</a>
     </row-commands>
 </datagrid>
