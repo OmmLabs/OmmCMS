@@ -1,12 +1,19 @@
 ﻿@using OmmCMS.Admin.Models.Messages
 
+@using OmmCMS.Core.Security
+@inject IPermissionService NewsletterPermissions
 @model NewsletterSubscriptionModel
+
+@{
+    var canUpdate = await NewsletterPermissions.AuthorizeAsync(Permissions.Promotion.Newsletter.Update);
+    var canDelete = await NewsletterPermissions.AuthorizeAsync(Permissions.Promotion.Newsletter.Delete);
+}
 
 <datagrid id="newsletter-subscription-grid"
           allow-resize="true"
-          allow-row-selection="true"
+          allow-row-selection="@canDelete"
           allow-column-reordering="true"
-          allow-edit="true">
+          allow-edit="@canUpdate">
     <datasource read="@Url.Action("List", "NewsletterSubscription")"
                 update="@Url.Action("Update", "NewsletterSubscription")"
                 delete="@Url.Action("Delete", "NewsletterSubscription")" />
@@ -19,11 +26,11 @@
             <button datagrid-action="DataGridToolAction.ToggleSearchPanel" type="button" class="btn btn-plain btn-icon">
                 <icon name="filter" />
             </button>
-            <button datagrid-action="DataGridToolAction.SaveChanges" type="button" class="btn btn-primary no-anims btn-flat">
+            <button sm-if="canUpdate" datagrid-action="DataGridToolAction.SaveChanges" type="button" class="btn btn-primary no-anims btn-flat">
                 <icon name="check" />
                 <span>@T("Admin.Common.SaveChanges")</span>
             </button>
-            <button datagrid-action="DataGridToolAction.CancelEdit" type="button" class="btn btn-plain mr-auto">
+            <button sm-if="canUpdate" datagrid-action="DataGridToolAction.CancelEdit" type="button" class="btn btn-plain mr-auto">
                 <span>@T("Common.Cancel")</span>
             </button>
         </toolbar-group>
@@ -31,7 +38,7 @@
         <toolbar-group class="omega"></toolbar-group>
         <zone name="datagrid_toolbar_omega"></zone>
         <toolbar-group>
-            <button datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger no-anims btn-flat">
+            <button sm-if="canDelete" datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger no-anims btn-flat">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete.Selected")</span>
             </button>
@@ -47,8 +54,8 @@
         <column for="CreatedOn" entity-member="CreatedOnUtc" readonly />
     </columns>
     <row-commands>
-        <a datarow-action="DataRowAction.InlineEdit">@T("Common.Edit")</a>
-        <a datarow-action="DataRowAction.Delete">@T("Common.Delete")</a>
+        <a sm-if="canUpdate" datarow-action="DataRowAction.InlineEdit">@T("Common.Edit")</a>
+        <a sm-if="canDelete" datarow-action="DataRowAction.Delete">@T("Common.Delete")</a>
     </row-commands>
 </datagrid>
 
