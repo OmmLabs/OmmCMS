@@ -211,6 +211,12 @@ public class MediaController : SmartController
         var source = _providerManager.GetProvider<IMediaStorageProvider>(currentStorageProvider);
         var target = _providerManager.GetProvider<IMediaStorageProvider>(targetProvider);
 
+        if (source == null || target == null || string.Equals(currentStorageProvider, targetProvider, StringComparison.OrdinalIgnoreCase))
+        {
+            NotifyError("Select a valid, different media storage provider.");
+            return RedirectToAction(nameof(MediaSettings));
+        }
+
         var success = await _mediaMover.Value.MoveAsync(source, target);
 
         if (success)
