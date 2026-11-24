@@ -291,6 +291,12 @@ public class TopicController : AdminController
             return RedirectToAction(nameof(List));
         }
 
+        if (topic.IsSystemTopic)
+        {
+            model.SystemName = topic.SystemName;
+            model.IsPublished = topic.IsPublished;
+        }
+
         if (!model.IsPasswordProtected)
         {
             model.Password = null;
