@@ -1,11 +1,14 @@
-﻿@model TaskExecutionInfoModel
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService TaskPermissions
+@model TaskExecutionInfoModel
 
 @{
+    var canDelete = await TaskPermissions.AuthorizeAsync(Permissions.System.ScheduleTask.Delete);
 	var parentModel = ViewData["Parent"] as TaskModel;
 }
 
 <datagrid id="task-execution-infos-grid" class="h-100"
-          allow-row-selection="true"
+          allow-row-selection="@canDelete"
           allow-resize="true"
           allow-column-reordering="true"
           preserve-grid-state="true">
@@ -19,7 +22,7 @@
         <toolbar-group class="omega"></toolbar-group>
         <zone name="datagrid_toolbar_omega"></zone>
         <toolbar-group>
-            <button datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger btn-flat">
+            <button sm-if="canDelete" datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger btn-flat">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete.Selected")</span>
             </button>
@@ -39,7 +42,7 @@
             <display-template>
                 <div class="dg-cell-value">
                     <div class="text-truncate">{{ item.row.FinishedOnString }}</div>
-                    <div class="text-truncatetext-muted">{{ item.row.FinishedOnPretty }}</div>
+                    <div class="text-truncate text-muted">{{ item.row.FinishedOnPretty }}</div>
                 </div>
             </display-template>
         </column>
