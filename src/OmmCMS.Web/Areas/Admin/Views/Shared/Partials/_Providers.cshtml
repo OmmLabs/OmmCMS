@@ -97,7 +97,7 @@
                     {
                         @RenderTemplate(Model.ButtonTemplate(item))
                     }
-                    else if (item is IActivatable activatable)
+                    else if (ViewBag.CanActivateProvider != false && item is IActivatable activatable)
                     {
                         <a class="activate-provider btn btn-sm btn-@(activatable.IsActive ? "outline-secondary btn-to-danger" : "success")"
                            data-href='@Url.Action("ActivateProvider")' href="javascript:;" data-systemname="@item.SystemName" data-activate="@(!activatable.IsActive ? "true" : "false")">
