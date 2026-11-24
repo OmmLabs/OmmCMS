@@ -1,6 +1,9 @@
-﻿@model ConfigureThemeModel
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService ThemePermissions
+@model ConfigureThemeModel
 
 @{
+    var canUpdate = await ThemePermissions.AuthorizeAsync(Permissions.Configuration.Theme.Update);
     ViewBag.Title = T("Admin.Configuration.Themes.Title", Model.ThemeName);
     string parsingError = (string)TempData["SassParsingError"];
 }
@@ -29,7 +32,7 @@
         <div class="options">
             <zone name="admin_button_toolbar_before"></zone>
 
-            <a href="#importvariables-window" data-toggle="modal" class="btn btn-outline-secondary">
+            <a sm-if="canUpdate" href="#importvariables-window" data-toggle="modal" class="btn btn-outline-secondary">
                 <icon name="arrow-up-circle" />
                 <span>@T("Common.Import")</span>
             </a>
@@ -38,14 +41,14 @@
                 <span>@T("Common.Export")</span>
             </a>
             <span class="vr"></span>
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
             <button type="submit" name="save" value="save-continue" class="btn btn-secondary">
                 <span>@T("Admin.Common.SaveContinue")</span>
             </button>
-            <button type="submit" class="btn btn-secondary btn-destructive confirm" name="reset-vars" value="reset-vars">
+            <button sm-if="canUpdate" type="submit" class="btn btn-secondary btn-destructive confirm" name="reset-vars" value="reset-vars">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Reset")</span>
             </button>
@@ -70,7 +73,7 @@
     </div>
 </form>
 
-<modal id="importvariables-window">
+<modal sm-if="canUpdate" id="importvariables-window">
     <modal-header sm-title="@T("Admin.Configuration.Themes.ImportVars")"></modal-header>
     <modal-body>
         <form enctype="multipart/form-data" method="post" asp-action="ImportVariables" asp-route-theme="@Model.ThemeName" asp-route-storeId="@Model.StoreId">
