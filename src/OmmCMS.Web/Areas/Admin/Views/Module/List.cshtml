@@ -2,9 +2,14 @@
 @using OmmCMS.Json
 @using System.Text.Json;
 
+@using OmmCMS.Core.Security
+@inject IPermissionService ModulePermissions
 @model LocalModulesModel
 
 @{
+    var canInstall = await ModulePermissions.AuthorizeAsync(Permissions.Configuration.Module.Install);
+    var canUpdate = await ModulePermissions.AuthorizeAsync(Permissions.Configuration.Module.Update);
+    var canReload = await ModulePermissions.AuthorizeAsync(Permissions.System.Maintenance.Execute);
     ViewBag.Title = T("Admin.Configuration.Plugins").Value;
 
     var allModulesSelectList = Model.AllModules.Select(x => new SelectListItem { Value = x.SystemName, Text = x.FriendlyName });
@@ -29,22 +34,22 @@
                     <icon name="search" class="text-muted" />
                 </span>
             </div>
-            <button id="btn-execute-tasks" type="submit" class="btn btn-secondary" disabled="disabled">
+            <button sm-if="canInstall" id="btn-execute-tasks" type="submit" class="btn btn-secondary" disabled="disabled">
                 <icon name="gears" />
                 <span>@T("Admin.Configuration.Plugins.ExecuteTasks")</span>
                 <span class="badge badge-dark label-uninstall-count hide">0</span>
                 <span class="badge badge-warning label-install-count hide">0</span>
             </button>
-            <div class="dropdown">
+            <div sm-if="canReload || canUpdate" class="dropdown">
                 <a class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" href="#">
                     @T("Admin.Common.Edit")
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a asp-action="ReloadList" class="dropdown-item">
+                    <a sm-if="canReload" asp-action="ReloadList" class="dropdown-item">
                         <icon name="refresh" fw="true" />
                         <span>@T("Admin.Configuration.Plugins.ReloadList")</span>
                     </a>
-                    <a asp-action="UpdateAllStringResources" class="module-update-allresources dropdown-item">
+                    <a sm-if="canUpdate" asp-action="UpdateAllStringResources" class="module-update-allresources dropdown-item">
                         <icon name="language" fw="true" />
                         <span>@T("Admin.Configuration.Plugins.Resources.UpdateAll")</span>
                     </a>
@@ -103,7 +108,7 @@
                         return `
                             <div class="form-group form-check mb-1">
                                 <input id="chkstore-${store.value}" name="chkstore" type="checkbox" class="form-check-input" value="${store.value}"${strChecked} />
-                                <label for="chkstore-${store.value}" class="form-check-label">${store.text}</label>
+                                <label for="chkstore-${store.value}" class="form-check-label">${$("<div>").text(store.text).html()}</label>
                             </div>`;
                     });
                     return `
@@ -175,7 +180,7 @@
 
 		var dropdownInstall = $('#modulesToInstall'),
             dropdownUninstall = $('#modulesToUninstall'),
-			btnExecuteTasks = $('#btn-execute-tasks')
+			btnExecuteTasks = $('#btn-execute-tasks'),
 			inputFilterQuery = $('#filter-query');
 
 		// Execute filtering
@@ -191,8 +196,7 @@
 			sessionStorage.setItem("module-filter-query", el.val());
 
 			// Retrieve the input field text and reset the count to zero
-			var filter = el.val(),
-                rg = new RegExp(filter, "i");
+			var filter = el.val().toLowerCase();
 
 			// Loop through the module items
 			$('.module-group').each(function () {
@@ -201,7 +205,7 @@
 
 				group.find('.module-item').each(function () {
 					// If the list item does not contain the text phrase hide it
-                    if (filter.length > 1 && $(this).data('module').search(rg) < 0 && $(this).data('friendly-name').search(rg) < 0) {
+                    if (filter.length > 1 && String($(this).data('module') || '').toLowerCase().indexOf(filter) < 0 && String($(this).data('friendly-name') || '').toLowerCase().indexOf(filter) < 0) {
 						$(this).hide();
 					}
 						// Show the list item if the phrase matches and increase the count by 1
@@ -439,13 +443,14 @@
                             {
                                 <div class="attr-name">@T("Admin.Common.Store.AvailableFor")</div>
                                 <div>
-                                    <a href="javascript:;" data-module='@module.SystemName'
+                                    <a sm-if="canUpdate" href="javascript:;" data-module='@module.SystemName'
                                         data-value='[@string.Join(',', module.SelectedStoreIds)]'
                                         tabindex="0"
                                         class="editable editable-click store-limiter">
                                         <!-- AJAX -->
                                         @T("Common.All")
                                     </a>
+                                    <span sm-if="!canUpdate">@(module.SelectedStoreIds.Any() ? string.Join(", ", Model.AvailableStores.Where(x => module.SelectedStoreIds.Contains(x.Id)).Select(x => x.Name)) : T("Common.All").Value)</span>
                                 </div>
                             }
                         </div>
@@ -462,21 +467,21 @@
 
                     <div class="module-commands">
                         <!-- Button -->
-                        <a sm-if="module.Installed" class="btn btn-outline-secondary btn-to-danger btn-sm module-uninstall" data-toggle="button" href="#">
+                        <a sm-if="canInstall && module.Installed" class="btn btn-outline-secondary btn-to-danger btn-sm module-uninstall" data-toggle="button" href="#">
                             @T("Admin.Configuration.Plugins.Fields.Uninstall")
                         </a>
-                        <a sm-if="!module.Installed" class="btn btn-primary btn-sm module-install" data-toggle="button" href="#">
+                        <a sm-if="canInstall && !module.Installed" class="btn btn-primary btn-sm module-install" data-toggle="button" href="#">
                             <icon name="database-add" />
                             <span>@T("Admin.Configuration.Plugins.Fields.Install")</span>
                         </a>
 
                         <!-- Actions dropdown -->
-                        <div sm-if="module.Installed" class="module-actions dropdown">
+                        <div sm-if="module.Installed && (canUpdate || module.ConfigurationUrl.HasValue())" class="module-actions dropdown">
                             <button class="btn btn-light btn-flat btn-sm btn-icon dropdown-toggle no-chevron" type="button" data-toggle="dropdown">
                                 <icon name="ellipsis"  />
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a asp-action="UpdateStringResources" class="dropdown-item module-update-resources" data-module="@module.SystemName">
+                                <a sm-if="canUpdate" asp-action="UpdateStringResources" class="dropdown-item module-update-resources" data-module="@module.SystemName">
                                     <icon name="language" class="icon-fw" />
                                     <span>@T("Admin.Configuration.Plugins.Resources.Update")</span>
                                 </a>
