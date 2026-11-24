@@ -1,8 +1,11 @@
 ﻿@using OmmCMS.Admin.Models.Media
 
+@using OmmCMS.Core.Security
+@inject IPermissionService MediaPermissions
 @model MediaSettingsModel
 
 @{
+    var canUpdate = await MediaPermissions.AuthorizeAsync(Permissions.Configuration.Setting.Update);
     ViewBag.Title = T("Admin.Configuration.Settings.Media").Value;
     Layout = "_SettingLayout";
 }
@@ -14,7 +17,7 @@
             @T("Admin.Configuration.Settings.Media")
         </div>
         <div class="options">
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
@@ -191,7 +194,7 @@
                     <div class="adminData">
                         <select asp-for="StorageProvider" asp-items="ViewBag.AvailableStorageProviders"></select>
 
-                        <button type="button" id="MoveMediaButton" class="btn btn-danger mt-3" data-url="@Url.Action("ChangeMediaStorage", "Media", new { area = "Admin" })">
+                        <button sm-if="canUpdate" type="button" id="MoveMediaButton" class="btn btn-danger mt-3" data-url="@Url.Action("ChangeMediaStorage", "Media", new { area = "Admin" })">
                             <icon name="folder-transfer" class="icon-fw" />
                             <span>@(T("Admin.Common.MoveNow"))!</span>
                         </button>
