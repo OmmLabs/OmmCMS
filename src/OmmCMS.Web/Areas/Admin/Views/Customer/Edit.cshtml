@@ -1,6 +1,11 @@
-﻿@model CustomerModel
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService CustomerPermissions
+@model CustomerModel
 
 @{
+    var canUpdate = await CustomerPermissions.AuthorizeAsync(Permissions.Customer.Update);
+    var canDelete = await CustomerPermissions.AuthorizeAsync(Permissions.Customer.Delete);
+    var canSend = await CustomerPermissions.AuthorizeAsync(Permissions.System.Message.Send);
     ViewBag.Title = T("Admin.Customers.Customers.EditCustomerDetails").Value;
 }
 
@@ -19,7 +24,7 @@
                 <span>@T("Common.UserProfile")</span>
             </a>
 
-            @if (await Display.ZoneHasWidgetsAsync("admin_button_toolbar_messaging_dropdown"))
+            @if (canSend && await Display.ZoneHasWidgetsAsync("admin_button_toolbar_messaging_dropdown"))
             {
                 <div class="btn-group">
                     <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
@@ -32,7 +37,7 @@
                     </div>
                 </div>
             }
-            else
+            else if (canSend)
             {
                 <a href="#sendemail-window" data-toggle="modal" class="btn btn-outline-secondary">
                     <icon name="send" />
@@ -47,7 +52,7 @@
 
             <span class="vr"></span>
 
-            <button type="submit" name="save" value="save" class="btn btn-primary" attr-formnovalidate='(Model.IsGuest, "formnovalidate")'>
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary" attr-formnovalidate='(Model.IsGuest, "formnovalidate")'>
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
@@ -55,7 +60,7 @@
                 <span>@T("Admin.Common.SaveContinue")</span>
             </button>
 
-            <button sm-if="!Model.Deleted" type="button" id="delete-customer" class="btn btn-secondary btn-destructive">
+            <button sm-if="canDelete && !Model.Deleted" type="button" id="delete-customer" class="btn btn-secondary btn-destructive">
                 <icon name="trash" />
                 <span>@T("Admin.Customers.DeleteCustomer")</span>
             </button>
@@ -67,11 +72,11 @@
     <partial name="_CreateOrUpdate" model="Model" />
 </form>
 
-<partial name="_SendEmailWindow" model="new CustomerModel.SendEmailModel { CustomerId = Model.Id }" />
+<partial sm-if="canSend" name="_SendEmailWindow" model="new CustomerModel.SendEmailModel { CustomerId = Model.Id }" />
 
 @if (Model.Id != 0)
 {
-    <partial name="_ChangePasswordPopup" model="new CustomerModel.ChangePasswordModel { Id = Model.Id }" />
+    <partial sm-if="canUpdate" name="_ChangePasswordPopup" model="new CustomerModel.ChangePasswordModel { Id = Model.Id }" />
 
     if (Model.CookieConsent != null)
     {
