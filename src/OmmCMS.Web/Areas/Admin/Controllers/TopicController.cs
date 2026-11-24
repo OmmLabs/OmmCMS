@@ -129,6 +129,12 @@ public class TopicController : AdminController
         var count = 0;
         var entities = await _db.Topics.GetManyAsync(selection.GetEntityIds(), true);
 
+        if (entities.Any(x => x.IsSystemTopic))
+        {
+            NotifyError(T("Admin.ContentManagement.Topics.CannotBeDeleted"));
+            return Json(new { Success = false, Count = 0 });
+        }
+
         if (entities.Count > 0)
         {
             try
