@@ -1,8 +1,11 @@
-﻿@using OmmCMS.Admin.Models.Logging
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService LogPermissions
+@using OmmCMS.Admin.Models.Logging
  
 @model LogModel
 
 @{
+    var canDelete = await LogPermissions.AuthorizeAsync(Permissions.System.Log.Delete);
     Assets.AppendScriptFiles("~/lib/netstack/netstack.js");
     ViewBag.Title = T("Admin.System.Log.ViewLogDetails").Value;
 }
@@ -17,11 +20,11 @@
             <span>@T("Admin.System.Log.ViewLogDetails")</span>
         </div>
         <div class="options">
-            <button type="submit" id="log-delete" class="btn btn-secondary btn-destructive">
+            <button sm-if="canDelete" type="submit" id="log-delete" class="btn btn-secondary btn-destructive">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete")</span>
             </button>
-            <confirm button-id="log-delete" />
+            <confirm sm-if="canDelete" button-id="log-delete" />
         </div>
     </div>
 
@@ -153,9 +156,9 @@
 <script sm-target-zone="scripts" data-origin="LogDetails">
     $(function() {
         const stackElement = $('#FullMessage');
-        const stack = new netStack(stackElement[0], {
-            prettyprint: true
-        });
+        if (stackElement.length) {
+            new netStack(stackElement[0], { prettyprint: true });
+        }
 
         $('#FullMessage-wrap').on('click', function() {
             stackElement.toggleClass('wrapped');
