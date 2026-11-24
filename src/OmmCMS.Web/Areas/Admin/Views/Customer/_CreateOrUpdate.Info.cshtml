@@ -1,4 +1,6 @@
-﻿@model CustomerModel
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService CustomerPermissions
+@model CustomerModel
 
 @{
     var lastLocation = Model.LastIpAddress;
@@ -61,7 +63,7 @@
         {
             <div class="adminTitle"></div>
             <div class="adminData">
-                <a href="#change-password-dialog" data-toggle="modal" class="btn btn-sm btn-to-danger btn-secondary">
+                <a sm-if="await CustomerPermissions.AuthorizeAsync(Permissions.Customer.Update)" href="#change-password-dialog" data-toggle="modal" class="btn btn-sm btn-to-danger btn-secondary">
                     <icon name="unlock"  />
                     <span>@T("Account.ChangePassword")</span>
                 </a>
