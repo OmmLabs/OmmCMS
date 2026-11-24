@@ -891,6 +891,7 @@ public class CustomerController : AdminController
 
     #region Online customers
 
+    [Permission(Permissions.Customer.Read)]
     public IActionResult OnlineCustomers()
     {
         return View();
@@ -1248,14 +1249,15 @@ public class CustomerController : AdminController
 
     #region Cookie info grid
 
+    [Permission(Permissions.Configuration.Setting.Read)]
     public async Task<IActionResult> CookieInfoList()
     {
         var data = await _cookieManager.Value.GetCookieInfosAsync();
-        var systemCookies = string.Join(",", data.Select(x => x.Name).ToArray());
+        var systemCookies = data.Select(x => x.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
         if (_privacySettings.CookieInfos.HasValue())
         {
-            data.AddRange(JsonSerializer.Deserialize<List<CookieInfo>>(_privacySettings.CookieInfos, SmartJsonOptions.Default)
+            data.AddRange((JsonSerializer.Deserialize<List<CookieInfo>>(_privacySettings.CookieInfos.NullEmpty() ?? "[]", SmartJsonOptions.Default) ?? new List<CookieInfo>())
                 .OrderBy(x => x.CookieType)
                 .ThenBy(x => x.Name));
         }
@@ -1281,16 +1283,17 @@ public class CustomerController : AdminController
         return Json(gridModel);
     }
 
+    [HttpPost]
+    [Permission(Permissions.Configuration.Setting.Update)]
     public async Task<IActionResult> CookieInfoDelete(GridSelection selection)
     {
         var numDeleted = 0;
 
         // First deserialize setting.
-        var ciList = JsonSerializer.Deserialize<List<CookieInfo>>(_privacySettings.CookieInfos, SmartJsonOptions.Default);
+        var ciList = (JsonSerializer.Deserialize<List<CookieInfo>>(_privacySettings.CookieInfos.NullEmpty() ?? "[]", SmartJsonOptions.Default) ?? new List<CookieInfo>());
         foreach (var name in selection.SelectedKeys)
         {
-            ciList.Remove(x => x.Name.EqualsNoCase(name));
-            numDeleted++;
+            numDeleted += ciList.RemoveAll(x => x.Name.EqualsNoCase(name));
         }
 
         // Now serialize again.
@@ -1305,6 +1308,7 @@ public class CustomerController : AdminController
         return Json(new { Success = true, Count = numDeleted });
     }
 
+    [Permission(Permissions.Configuration.Setting.Update)]
     public IActionResult CookieInfoCreatePopup()
     {
         var model = new CookieInfoModel();
@@ -1313,6 +1317,7 @@ public class CustomerController : AdminController
     }
 
     [HttpPost]
+    [Permission(Permissions.Configuration.Setting.Update)]
     public async Task<IActionResult> CookieInfoCreatePopup(string btnId, string formId, CookieInfoModel model)
     {
         if (!ModelState.IsValid)
@@ -1321,7 +1326,7 @@ public class CustomerController : AdminController
         }
 
         // Deserialize
-        var ciList = JsonSerializer.Deserialize<List<CookieInfo>>(_privacySettings.CookieInfos, SmartJsonOptions.Default) ?? [];
+        var ciList = (JsonSerializer.Deserialize<List<CookieInfo>>(_privacySettings.CookieInfos.NullEmpty() ?? "[]", SmartJsonOptions.Default) ?? new List<CookieInfo>());
 
         var cookieInfo = ciList
             .Select(x => x)
@@ -1365,9 +1370,10 @@ public class CustomerController : AdminController
         return View(model);
     }
 
+    [Permission(Permissions.Configuration.Setting.Update)]
     public IActionResult CookieInfoEditPopup(string name)
     {
-        var ciList = JsonSerializer.Deserialize<List<CookieInfo>>(_privacySettings.CookieInfos, SmartJsonOptions.Default);
+        var ciList = (JsonSerializer.Deserialize<List<CookieInfo>>(_privacySettings.CookieInfos.NullEmpty() ?? "[]", SmartJsonOptions.Default) ?? new List<CookieInfo>());
         var cookieInfo = ciList
             .Where(x => x.Name.EqualsNoCase(name))
             .FirstOrDefault();
@@ -1396,13 +1402,14 @@ public class CustomerController : AdminController
     }
 
     [HttpPost]
+    [Permission(Permissions.Configuration.Setting.Update)]
     public async Task<IActionResult> CookieInfoEditPopup(string btnId, string formId, CookieInfoModel model)
     {
         ViewBag.RefreshPage = true;
         ViewBag.btnId = btnId;
         ViewBag.formId = formId;
 
-        var ciList = JsonSerializer.Deserialize<List<CookieInfo>>(_privacySettings.CookieInfos, SmartJsonOptions.Default);
+        var ciList = (JsonSerializer.Deserialize<List<CookieInfo>>(_privacySettings.CookieInfos.NullEmpty() ?? "[]", SmartJsonOptions.Default) ?? new List<CookieInfo>());
         var cookieInfo = ciList
             .Where(x => x.Name.EqualsNoCase(model.Name))
             .FirstOrDefault();
