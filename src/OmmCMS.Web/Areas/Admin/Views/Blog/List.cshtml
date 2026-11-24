@@ -1,16 +1,27 @@
 @using OmmCMS.Core.Content.Blogs
+@using OmmCMS.Core.Security
+@inject IPermissionService BlogPermissions
 @model List<BlogPost>
 @{
     ViewBag.Title = "Blog posts";
     var pageNumber = (int)ViewBag.Page;
     var total = (int)ViewBag.Total;
+    var canCreate = await BlogPermissions.AuthorizeAsync(Permissions.Cms.Blog.Create);
+    var canManageTaxonomy = await BlogPermissions.AuthorizeAsync(Permissions.Cms.Blog.Taxonomy);
+    var hasFilters = !string.IsNullOrWhiteSpace((string)ViewBag.Query) || ((bool?)ViewBag.Published).HasValue;
 }
 <div class="section-header">
     <div class="title">Blog posts</div>
     <div class="options">
-        <a asp-action="Edit" class="btn btn-primary">New post</a>
-        <a asp-action="Taxonomy" class="btn btn-secondary">Categories</a>
-        <a asp-action="Taxonomy" asp-route-isTag="true" class="btn btn-secondary">Tags</a>
+        @if (canCreate)
+        {
+            <a asp-action="Edit" class="btn btn-primary">New post</a>
+        }
+        @if (canManageTaxonomy)
+        {
+            <a asp-action="Taxonomy" class="btn btn-secondary">Categories</a>
+            <a asp-action="Taxonomy" asp-route-isTag="true" class="btn btn-secondary">Tags</a>
+        }
         <a asp-area="" asp-route="BlogHome" class="btn btn-secondary" target="_blank" rel="noopener">View blog</a>
     </div>
 </div>
@@ -22,6 +33,10 @@
         <option value="false" selected="@((bool?)ViewBag.Published == false)">Draft</option>
     </select>
     <button type="submit" class="btn btn-secondary">Filter</button>
+    @if (hasFilters)
+    {
+        <a asp-action="List" class="btn btn-link">Clear filters</a>
+    }
 </form>
 <div class="table-responsive">
 <table class="table table-striped">
@@ -39,8 +54,11 @@
     </tbody>
 </table>
 </div>
-@if (Model.Count == 0) { <p>No posts yet.</p> }
-<nav class="d-flex justify-content-between">
+@if (Model.Count == 0)
+{
+    <p role="status">@(total > 0 ? "No posts on this page." : hasFilters ? "No posts match your filters." : "No posts yet.")</p>
+}
+<nav class="d-flex justify-content-between" aria-label="Blog post pagination">
     @if (pageNumber > 1) { <a asp-action="List" asp-route-page="@(pageNumber - 1)" asp-route-q="@ViewBag.Query" asp-route-published="@ViewBag.Published">Previous</a> }
     <span>Page @pageNumber · @total posts</span>
     @if (pageNumber * 30 < total) { <a asp-action="List" asp-route-page="@(pageNumber + 1)" asp-route-q="@ViewBag.Query" asp-route-published="@ViewBag.Published">Next</a> }
