@@ -1,8 +1,12 @@
 ﻿@using OmmCMS.Admin.Models.UrlRecord
 
+@using OmmCMS.Core.Security
+@inject IPermissionService UrlPermissions
 @model UrlRecordModel
 
 @{
+    var canUpdate = await UrlPermissions.AuthorizeAsync(Permissions.System.UrlRecord.Update);
+    var canDelete = await UrlPermissions.AuthorizeAsync(Permissions.System.UrlRecord.Delete);
     ViewBag.Title = T("Admin.Common.Edit") + " - " + Model.Slug;
 }
 
@@ -14,22 +18,22 @@
             <span>@ViewBag.Title</span>
         </div>
         <div class="options">
-            <a href="@Model.EntityUrl" class="btn btn-secondary">
+            <a sm-if="!string.IsNullOrEmpty(Model.EntityUrl)" href="@Model.EntityUrl" class="btn btn-secondary">
                 <icon name="external-link" />
                 <span>@T("Admin.Common.Entity")</span>
             </a>
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
             <button type="submit" name="save" value="save-continue" class="btn btn-secondary">
                 <span>@T("Admin.Common.SaveContinue")</span>
             </button>
-            <button type="submit" id="urlrecord-delete" name="urlrecord-delete" class="btn btn-secondary btn-destructive">
+            <button sm-if="canDelete" type="submit" id="urlrecord-delete" name="urlrecord-delete" class="btn btn-secondary btn-destructive">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete")</span>
             </button>
-            <confirm button-id="urlrecord-delete" />
+            <confirm sm-if="canDelete" button-id="urlrecord-delete" />
         </div>
     </div>
 
