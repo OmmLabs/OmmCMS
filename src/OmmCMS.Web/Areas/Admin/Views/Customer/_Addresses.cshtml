@@ -1,4 +1,12 @@
-﻿@model CustomerModel.AddressesModel
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService CustomerPermissions
+@model CustomerModel.AddressesModel
+
+@{
+    var canEdit = await CustomerPermissions.AuthorizeAsync(Permissions.Customer.EditAddress);
+    var canDelete = await CustomerPermissions.AuthorizeAsync(Permissions.Customer.DeleteAddress);
+    var canRead = await CustomerPermissions.AuthorizeAsync(Permissions.Customer.ReadAddress);
+}
 
 <div class="grid gap-3">
     @foreach (var address in Model.Addresses)
@@ -19,12 +27,12 @@
                 </div>
             </div>
             <div class="card-footer d-flex p-2">
-                <a asp-action="AddressEdit" asp-controller="Customer" asp-route-customerId="@Model.Id" asp-route-addressId="@address.Id"
+                <a sm-if="canRead" asp-action="AddressEdit" asp-controller="Customer" asp-route-customerId="@Model.Id" asp-route-addressId="@address.Id"
                     class="btn btn-sm btn-flat btn-icon btn-secondary"
                     title="@T("Common.Edit")">
                     <icon name="edit"  />
                 </a>
-                <button id="address-delete-@address.Id" type="button" class="btn btn-sm btn-flat btn-icon btn-danger ml-1 delete-address"
+                <button sm-if="canDelete" id="address-delete-@address.Id" type="button" class="btn btn-sm btn-flat btn-icon btn-danger ml-1 delete-address"
                         title="@T("Common.Delete")"
                         data-url="@Url.Action("AddressDelete", "Customer", new { customerId = Model.Id, addressId = address.Id })">
                     <icon name="trash" />
@@ -40,7 +48,7 @@
                     }
                     else
                     {
-                        <button type="button" class="btn btn-light btn-flat btn-sm default-address-button"
+                        <button sm-if="canEdit" type="button" class="btn btn-light btn-flat btn-sm default-address-button"
                                 data-url="@Url.Action("SetDefaultAddress", "Customer", new { customerId = Model.Id, addressId = address.Id })"
                                 title="@T("Common.SetDefault")">
                             <span>@T("Common.SetDefault")</span>
