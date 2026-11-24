@@ -1,17 +1,20 @@
-﻿@using OmmCMS.Admin.Models.Logging
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService LogPermissions
+@using OmmCMS.Admin.Models.Logging
 
 @model ActivityLogModel
 
 @{
+    var canDelete = await LogPermissions.AuthorizeAsync(Permissions.Configuration.ActivityLog.Delete);
     var parentModel = ViewData["Parent"] as ActivityLogListModel;
 }
 
-<form asp-action="DeleteAll">
+<form sm-if="canDelete" asp-action="DeleteAll">
     <button class="d-none" id="clearall" value="clearall"></button>
-    <confirm button-id="delete-all" action="DeleteAll" />
+    <confirm sm-if="canDelete" button-id="delete-all" action="DeleteAll" />
 </form>
 
-<datagrid id="activity-log-grid" allow-resize="true" allow-row-selection="true" allow-column-reordering="true">
+<datagrid id="activity-log-grid" allow-resize="true" allow-row-selection="@canDelete" allow-column-reordering="true">
     <datasource read="@Url.Action("ActivityLogList", "ActivityLog")"
                 delete="@Url.Action("ActivityLogDelete", "ActivityLog")" />
     <sorting enabled="true">
@@ -28,11 +31,11 @@
         <toolbar-group class="omega"></toolbar-group>
         <zone name="datagrid_toolbar_omega"></zone>
         <toolbar-group>
-            <button datagrid-action="DataGridToolAction.Custom" type="submit" name="delete-all" id="delete-all" value="clearall" class="btn btn-danger no-anims btn-flat">
+            <button sm-if="canDelete" datagrid-action="DataGridToolAction.Custom" type="submit" name="delete-all" id="delete-all" value="clearall" class="btn btn-danger no-anims btn-flat">
                 <icon name="trash" />
                 <span>@T("Admin.Common.DeleteAll")</span>
             </button>
-            <button datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger no-anims btn-flat">
+            <button sm-if="canDelete" datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger no-anims btn-flat">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete.Selected")</span>
             </button>
@@ -55,11 +58,11 @@
         <column for="CreatedOn" entity-member="CreatedOnUtc" />
     </columns>
     <row-commands>
-        <a datarow-action="DataRowAction.Delete">@T("Common.Delete")</a>
+        <a sm-if="canDelete" datarow-action="DataRowAction.Delete">@T("Common.Delete")</a>
     </row-commands>
 </datagrid>
 
-<script sm-target-zone="scripts" data-origin="grid-activity-log">
+<script sm-if="canDelete" sm-target-zone="scripts" data-origin="grid-activity-log">
     $(function () {
         // INFO: Little hack here to trigger form action whose button must be in the form element and can therefore not be in the grid directly.
         $(document).on('click', '.confirmation-dialog .btn-accept', function (e) {
