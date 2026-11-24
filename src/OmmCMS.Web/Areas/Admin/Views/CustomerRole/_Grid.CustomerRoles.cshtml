@@ -1,8 +1,15 @@
-﻿@model CustomerRoleModel
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService RolePermissions
+@model CustomerRoleModel
+
+@{
+    var canCreate = await RolePermissions.AuthorizeAsync(Permissions.Customer.Role.Create);
+    var canUpdate = await RolePermissions.AuthorizeAsync(Permissions.Customer.Role.Update);
+}
 
 <datagrid id="customer-roles-grid"
           key-member="Id"
-          allow-edit="true"
+          allow-edit="@canUpdate"
           allow-resize="true"
           allow-column-reordering="true"
           preserve-grid-state="true"
@@ -14,21 +21,21 @@
     </sorting>
     <toolbar>
         <toolbar-group>
-            <a asp-action="Create" class="btn btn-primary btn-flat">
+            <a sm-if="canCreate" asp-action="Create" class="btn btn-primary btn-flat">
                 <icon name="plus"  />
                 <span>@T("Admin.Common.AddNew")…</span>
             </a>
-            <button datagrid-action="DataGridToolAction.SaveChanges" type="button" class="btn btn-primary no-anims btn-flat">
+            <button sm-if="canUpdate" datagrid-action="DataGridToolAction.SaveChanges" type="button" class="btn btn-primary no-anims btn-flat">
                 <icon name="check" />
                 <span>@T("Admin.Common.SaveChanges")</span>
             </button>
-            <button datagrid-action="DataGridToolAction.CancelEdit" type="button" class="btn btn-plain mr-auto">
+            <button sm-if="canUpdate" datagrid-action="DataGridToolAction.CancelEdit" type="button" class="btn btn-plain mr-auto">
                 <span>@T("Common.Cancel")</span>
             </button>
         </toolbar-group>
     </toolbar>
     <row-commands>
-        <a datarow-action="DataRowAction.InlineEdit">@T("Common.Edit")</a>
+        <a sm-if="canUpdate" datarow-action="DataRowAction.InlineEdit">@T("Common.Edit")</a>
     </row-commands>
     <columns>
         <column for="Id" visible="false" resizable="false" type="string" readonly="true" />
