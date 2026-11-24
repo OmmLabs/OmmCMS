@@ -511,7 +511,7 @@ public class MenuController : AdminController
     [Permission(Permissions.Cms.Menu.Update)]
     public async Task<IActionResult> MoveItem(int menuId, int sourceId, string direction)
     {
-        if (menuId == 0 || sourceId == 0 || direction.IsEmpty())
+        if (menuId <= 0 || sourceId <= 0 || (direction != "up" && direction != "down"))
         {
             return new EmptyResult();
         }
@@ -520,7 +520,10 @@ public class MenuController : AdminController
             .Where(x => x.MenuId == menuId)
             .ToDictionaryAsync(x => x.Id, x => x);
 
-        var sourceItem = allItems[sourceId];
+        if (!allItems.TryGetValue(sourceId, out var sourceItem))
+        {
+            return NotFound();
+        }
 
         var siblings = allItems.Select(x => x.Value)
             .Where(x => x.ParentItemId == sourceItem.ParentItemId)
