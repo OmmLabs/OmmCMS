@@ -1,4 +1,10 @@
-﻿@model TaskModel
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService TaskPermissions
+@model TaskModel
+
+@{
+    var canExecute = await TaskPermissions.AuthorizeAsync(Permissions.System.ScheduleTask.Execute);
+}
 
 <datagrid id="tasks-grid" 
         striped="false"
@@ -42,7 +48,7 @@
 	</columns>
     <row-commands>
         <a datarow-action="DataRowAction.Custom" :href="item.row.EditUrl">@T("Common.Edit")</a>
-        <a v-bind:class="{ hide: item.row.LastExecutionInfo.IsRunning }" datarow-action="DataRowAction.Custom" :href="item.row.ExecuteUrl" class="btn-run-task" :data-task-id="item.row.Id">
+        <a sm-if="canExecute" v-bind:class="{ hide: item.row.LastExecutionInfo.IsRunning }" datarow-action="DataRowAction.Custom" :href="item.row.ExecuteUrl" class="btn-run-task" :data-task-id="item.row.Id">
             @T("Admin.System.ScheduleTasks.RunNow")</a>
         <a v-bind:class="{ hide: !item.row.LastExecutionInfo.IsRunning }" datarow-action="DataRowAction.Custom" :href="item.row.CancelUrl" class="btn-cancel-task confirm" :data-task-id="item.row.Id"
             data-confirm-message="@T("Admin.Common.AreYouSure")">
