@@ -1,25 +1,37 @@
 @using OmmCMS.Admin.Models.Blogs
+@using OmmCMS.Core.Security
+@inject IPermissionService BlogPermissions
 @model List<BlogTermEditModel>
 @{
     var isTag = (bool)ViewBag.IsTag;
+    var canReadPosts = await BlogPermissions.AuthorizeAsync(Permissions.Cms.Blog.Read);
     ViewBag.Title = isTag ? "Blog tags" : "Blog categories";
 }
 <div class="section-header">
     <div class="title">@ViewBag.Title</div>
     <div class="options">
         <a asp-action="Term" asp-route-isTag="@isTag" class="btn btn-primary">New @(isTag ? "tag" : "category")</a>
-        <a asp-action="List" class="btn btn-secondary">Blog posts</a>
+        @if (canReadPosts)
+        {
+            <a asp-action="List" class="btn btn-secondary">Blog posts</a>
+        }
         <a asp-action="Taxonomy" asp-route-isTag="@(!isTag)" class="btn btn-secondary">@(isTag ? "Categories" : "Tags")</a>
     </div>
 </div>
+<div class="table-responsive">
 <table class="table table-striped">
-    <thead><tr><th>Name</th><th>URL slug</th><th>Description</th><th></th></tr></thead>
+    <thead><tr><th scope="col">Name</th><th scope="col">URL slug</th><th scope="col">Description</th>@if (!isTag) { <th scope="col">Display order</th> }<th scope="col">Actions</th></tr></thead>
     <tbody>
     @foreach (var term in Model)
     {
-        <tr><td><a asp-action="Term" asp-route-id="@term.Id" asp-route-isTag="@isTag">@term.Name</a></td><td>@term.Slug</td><td>@term.Description</td>
+        <tr><td><a asp-action="Term" asp-route-id="@term.Id" asp-route-isTag="@isTag">@term.Name</a></td><td>@term.Slug</td><td class="text-break">@term.Description</td>
+        @if (!isTag) { <td>@term.DisplayOrder</td> }
         <td><a asp-action="Term" asp-route-id="@term.Id" asp-route-isTag="@isTag" class="btn btn-sm btn-secondary">Edit</a></td></tr>
     }
     </tbody>
 </table>
-@if (Model.Count == 0) { <p>No entries yet.</p> }
+</div>
+@if (Model.Count == 0)
+{
+    <p role="status">@(isTag ? "No blog tags yet." : "No blog categories yet.")</p>
+}
