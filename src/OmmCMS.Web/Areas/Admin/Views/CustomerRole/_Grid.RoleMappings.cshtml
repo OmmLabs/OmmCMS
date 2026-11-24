@@ -1,6 +1,9 @@
-﻿@model CustomerRoleMappingModel
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService RolePermissions
+@model CustomerRoleMappingModel
 
 @{
+    var canUpdate = await RolePermissions.AuthorizeAsync(Permissions.Customer.Role.Update);
     var parentModel = ViewData["Parent"] as CustomerRoleModel;
     var usernamesEnabled = (bool)ViewBag.UsernamesEnabled;
     var showRuleApplyButton = (bool)ViewBag.ShowRuleApplyButton;
@@ -8,7 +11,7 @@
 
 <datagrid id="role-mappings-grid" class="h-100"
           allow-resize="true"
-          allow-row-selection="true"
+          allow-row-selection="@canUpdate"
           allow-column-reordering="true"
           preserve-grid-state="true">
     <datasource read="@Url.Action("CustomerRoleMappingList", new { id = parentModel.Id })" delete="@Url.Action("CustomerRoleMappingDelete")" />
@@ -22,7 +25,7 @@
                 <icon name="filter" />
             </button>
         </toolbar-group>
-        <toolbar-group sm-if="showRuleApplyButton">
+        <toolbar-group sm-if="showRuleApplyButton && canUpdate">
             <button datagrid-action="DataGridToolAction.Custom" type="button" id="reapply-rules" class="btn btn-primary btn-flat" data-url="@Url.Action("ApplyRules", new { id = parentModel.Id })">
                 <icon name="play" />
                 <span>@T("Admin.Rules.ReapplyRules")</span>
@@ -32,7 +35,7 @@
         <toolbar-group class="omega"></toolbar-group>
         <zone name="datagrid_toolbar_omega"></zone>
         <toolbar-group>
-            <button datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger no-anims btn-flat">
+            <button sm-if="canUpdate" datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger no-anims btn-flat">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete.Selected")</span>
             </button>
@@ -42,7 +45,7 @@
         <partial name="_Grid.RoleMappings.Search" model="parentModel.CustomerSearch" />
     </search-panel>
     <row-commands>
-        <a datarow-action="DataRowAction.Delete">@T("Common.Delete")</a>
+        <a sm-if="canUpdate" datarow-action="DataRowAction.Delete" v-if="!item.row.IsSystemMapping">@T("Common.Delete")</a>
     </row-commands>
     <columns>
         <column for="Email" hideable="false">
