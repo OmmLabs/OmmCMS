@@ -304,7 +304,7 @@ public class ModuleController : AdminController
         }
 
         var infos = GetProviderInfos(provider);
-        if (infos.ReadPermission.HasValue() && !await Services.Permissions.AuthorizeAsync(infos.ReadPermission))
+        if (!await Services.Permissions.AuthorizeAsync(infos.ReadPermission ?? Permissions.Configuration.Module.Read))
         {
             throw new AccessDeniedException();
         }
@@ -357,6 +357,7 @@ public class ModuleController : AdminController
         });
 
         ViewBag.Title = pageTitle;
+        ViewBag.CanUpdateProvider = await Services.Permissions.AuthorizeAsync(infos.UpdatePermission ?? Permissions.Configuration.Module.Update);
 
         return View(model);
     }
@@ -372,7 +373,7 @@ public class ModuleController : AdminController
 
         var infos = GetProviderInfos(provider);
 
-        if (infos.UpdatePermission.HasValue() && !await Services.Permissions.AuthorizeAsync(infos.UpdatePermission))
+        if (!await Services.Permissions.AuthorizeAsync(infos.UpdatePermission ?? Permissions.Configuration.Module.Update))
         {
             throw new AccessDeniedException();
         }
@@ -397,15 +398,28 @@ public class ModuleController : AdminController
     {
         try
         {
-            var arr = providers.Split(',');
-            var ordinal = 5;
-            foreach (var systemName in arr)
+            if (string.IsNullOrWhiteSpace(providers))
+                return BadRequest();
+
+            var arr = providers.Split(',', StringSplitOptions.TrimEntries);
+            if (arr.Any(string.IsNullOrWhiteSpace) || arr.Distinct(StringComparer.OrdinalIgnoreCase).Count() != arr.Length)
+                return BadRequest();
+
+            var selected = arr.Select(x => _providerManager.GetProvider(x)).ToArray();
+            if (selected.Any(x => x == null))
+                return NotFound();
+
+            foreach (var provider in selected)
             {
-                var provider = _providerManager.GetProvider(systemName);
-                if (provider != null)
-                {
-                    await _moduleManager.SetUserDisplayOrderAsync(provider.Metadata, ordinal);
-                }
+                var infos = GetProviderInfos(provider);
+                if (!await Services.Permissions.AuthorizeAsync(infos.UpdatePermission ?? Permissions.Configuration.Module.Update))
+                    return Forbid();
+            }
+
+            var ordinal = 5;
+            foreach (var provider in selected)
+            {
+                await _moduleManager.SetUserDisplayOrderAsync(provider.Metadata, ordinal);
                 ordinal += 5;
             }
         }
