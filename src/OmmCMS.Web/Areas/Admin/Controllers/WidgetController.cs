@@ -29,14 +29,17 @@ public partial class WidgetController : AdminController
     }
 
     [Permission(Permissions.Cms.Widget.Read)]
-    public IActionResult Providers()
+    public async Task<IActionResult> Providers()
     {
+        var canUpdate = await Services.Permissions.AuthorizeAsync(Permissions.Cms.Widget.Update);
+        ViewBag.CanActivateProvider = await Services.Permissions.AuthorizeAsync(Permissions.Cms.Widget.Activate);
         var widgetsModel = new List<WidgetModel>();
         var widgets = _providerManager.GetAllProviders<IActivatableWidget>();
 
         foreach (var widget in widgets)
         {
             var model = _moduleManager.ToProviderModel<IActivatableWidget, WidgetModel>(widget);
+            model.IsEditable = model.IsEditable && canUpdate;
             model.IsActive = widget.IsWidgetActive(_widgetSettings);
             widgetsModel.Add(model);
         }
