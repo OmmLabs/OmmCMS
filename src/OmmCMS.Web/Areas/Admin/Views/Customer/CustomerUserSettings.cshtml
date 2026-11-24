@@ -1,10 +1,13 @@
 ﻿@using OmmCMS.Admin.Models.Customers
 @using OmmCMS.Core.Identity
 
+@using OmmCMS.Core.Security
+@inject IPermissionService CookiePermissions
 @model CustomerUserSettingsModel
 
 @{
     Layout = "_SettingLayout";
+    var canUpdate = await CookiePermissions.AuthorizeAsync(Permissions.Configuration.Setting.Update);
     ViewBag.Title = T("Admin.Configuration.Settings.CustomerUser").Value;
 }
 
@@ -15,7 +18,7 @@
             @T("Admin.Configuration.Settings.CustomerUser")
         </div>
         <div class="options">
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
