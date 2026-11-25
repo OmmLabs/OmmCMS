@@ -301,7 +301,9 @@
                 <span class="sysmetric">@Model.DatabaseSizeString.NaIfEmpty()</span>
                 @if (canExecute && Model.OptimizeDatabaseEnabled)
                 {
-                    <a href='@Url.Action("OptimizeDatabase")' class="fwm">@T("Common.Shrink")</a>
+                    <form asp-action="OptimizeDatabase" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-link p-0 fwm">@T("Common.Shrink")</button>
+                    </form>
                 }
             </div>
         </div>
