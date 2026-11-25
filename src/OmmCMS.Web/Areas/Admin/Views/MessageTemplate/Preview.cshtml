@@ -1,6 +1,8 @@
 ﻿@using OmmCMS.Admin.Models.Messages
 @using System.Net.Mail
 
+@using OmmCMS.Core.Security
+@inject IPermissionService MessagePermissions
 @model MessageTemplatePreviewModel
 
 @{
@@ -73,7 +75,7 @@
                     <span>@T("Admin.MessageTemplate.Preview.SendTestMail")</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" style="width: 500px">
-                    <form sm-ajax="true" asp-action="SendTestMail" asp-controller="MessageTemplate" class="px-4 py-3" sm-oncomplete="onTestMailSent">
+                    <form sm-if="await MessagePermissions.AuthorizeAsync(Permissions.System.Message.Send)" sm-ajax="true" asp-action="SendTestMail" asp-controller="MessageTemplate" class="px-4 py-3" sm-oncomplete="onTestMailSent">
                         <div class="input-group testmail-form">
                             <input type="email" class="form-control" name="to" placeholder="E-Mail" value="@Model.AccountEmail">
                             <input type="hidden" name="token" value="@Model.Token" />
