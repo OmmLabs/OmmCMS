@@ -513,6 +513,48 @@ def editorial_workflows(password):
     print("CMS navigation script, RTL styling and dynamic CSS bundles passed.")
 
 
+def sqlite_backup_workflow(password):
+    # Only run on the fresh, disposable CI fixture created by this script.
+    admin = browser()
+    page = get_page("/login?returnUrl=%2Fadmin%2Fmaintenance%2Findex", admin)
+    post_form("/login?returnUrl=%2Fadmin%2Fmaintenance%2Findex", admin, page, {
+        "CustomerLoginType": Inputs(page).values["CustomerLoginType"],
+        "UsernameOrEmail": "admin@ommcms.test", "Email": "admin@ommcms.test",
+        "Username": "admin@ommcms.test", "Password": password, "RememberMe": "false",
+    })
+    page = get_page("/admin/maintenance/index", admin, "execute-create-backup")
+    get_page("/admin/maintenance/backuplist", admin)
+    backup_dir = database.parent / "DbBackups"
+    before = set(backup_dir.glob("*.bak"))
+    post_form("/admin/maintenance/index", admin, page, {"execute-create-backup": "execute-create-backup"})
+    created = set(backup_dir.glob("*.bak")) - before
+    assert len(created) == 1, "Native backup did not create exactly one file"
+    backup = created.pop()
+    with sqlite3.connect(backup.as_uri() + "?mode=ro", uri=True) as snapshot:
+        assert snapshot.execute("PRAGMA integrity_check").fetchone() == ("ok",)
+        topic_id, original_title = snapshot.execute("SELECT Id, Title FROM Topic WHERE SystemName='AboutUs'").fetchone()
+    query = urllib.parse.urlencode({"name": backup.name})
+    with admin.open(base + "/admin/maintenance/downloadbackup?" + query, timeout=60) as response:
+        assert response.status == 200 and response.read() == backup.read_bytes(), "Backup download mismatch"
+
+    stop()
+    try:
+        with sqlite3.connect(database) as connection:
+            connection.execute("UPDATE Topic SET Title=? WHERE Id=?", ("Temporary restore test " + uuid.uuid4().hex, topic_id))
+        assert read_rows("SELECT Title FROM Topic WHERE Id=?", (topic_id,)) != [(original_title,)]
+    finally:
+        start()
+    wait_for("/")
+    page = get_page("/admin/maintenance/index", admin, "execute-create-backup")
+    post_form("/admin/maintenance/restorebackup", admin, page, {"name": backup.name})
+    assert read_rows("SELECT Title FROM Topic WHERE Id=?", (topic_id,)) == [(original_title,)], "Native restore did not recover the saved topic"
+    assert read_rows("PRAGMA integrity_check") == [("ok",)]
+    page = get_page("/admin/maintenance/index", admin)
+    post_form("/admin/maintenance/deletebackup", admin, page, {"selectedKeys": backup.name})
+    assert not backup.exists(), "Native backup deletion did not remove the file"
+    print("Disposable SQLite backup, download, restore and deletion passed.")
+
+
 def verify_trimmed_distribution():
     removed = ["OmmCMS.AmazonPay","OmmCMS.OfflinePayment","OmmCMS.PayPal","OmmCMS.Stripe","OmmCMS.Shipping","OmmCMS.ShippingByWeight","OmmCMS.Tax","OmmCMS.Google.MerchantCenter","OmmCMS.Clickatell","OmmCMS.WebApi"]
     retained = ["OmmCMS.Apple.Auth", "OmmCMS.Facebook.Auth", "OmmCMS.Google.Auth",
@@ -1078,6 +1120,7 @@ try:
     if "--editorial" in sys.argv:
         editorial_workflows(password)
         print("CMS authenticated editorial workflow smoke test passed.")
+        sqlite_backup_workflow(password)
 except Exception:
     if log.exists():
         print(log.read_text(errors="replace")[-25000:], file=sys.stderr)
