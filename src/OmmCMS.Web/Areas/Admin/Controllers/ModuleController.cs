@@ -149,6 +149,14 @@ public class ModuleController : AdminController
                 return NotFound("The plugin does not exist.");
             }
 
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            storeIds = (storeIds ?? Array.Empty<int>()).Distinct().ToArray();
+            var availableStoreIds = Services.StoreContext.GetAllStores().Select(x => x.Id).ToHashSet();
+            if (storeIds.Any(id => !availableStoreIds.Contains(id)))
+                return BadRequest();
+
             var settingKey = descriptor.GetSettingKey("LimitedToStores");
 
             if (storeIds.Length > 0)
