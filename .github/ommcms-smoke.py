@@ -150,6 +150,13 @@ def editorial_workflows(password):
     })
     page = get_page("/admin/topic/create", admin, 'id="topic-form"')
     print("Authenticated admin access passed.")
+    # Theme operations must reject GET and tokenless POST before any mutation.
+    for action in ("/admin/theme/reloadthemes", "/admin/theme/clearassetcache"):
+        status, _ = request(action, client=admin)
+        assert status in (404, 405), f"{action}: unsafe GET returned HTTP {status}"
+        status, _ = request(action, {}, client=admin)
+        assert status in (400, 403), f"{action}: tokenless POST returned HTTP {status}"
+    print("Protected theme action method and antiforgery checks passed.")
     media_settings = get_page("/admin/media/mediasettings", admin, "PreviewThumbnailSize")
     assert all(name not in media_settings for name in ("ProductThumbPictureSize", "ProductDetailsPictureSize", "CartThumbPictureSize", "ManufacturerThumbPictureSize")), "Retired media controls remain"
     customer_settings = get_page("/admin/customer/customerusersettings", admin, "FullNameOnContactUsRequired")
