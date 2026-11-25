@@ -150,6 +150,15 @@ def editorial_workflows(password):
     })
     page = get_page("/admin/topic/create", admin, 'id="topic-form"')
     print("Authenticated admin access passed.")
+    # Loading the restart screen must only present confirmation; a tokenless restart must fail.
+    restart_page = get_page("/admin/maintenance/restartapplication?returnUrl=https%3A%2F%2Fexample.invalid%2F", admin, 'id="restart-confirm"')
+    assert "https://example.invalid/" not in restart_page, "External restart return URL was reflected"
+    assert request("/admin/maintenance/restartapplication", {}, client=admin)[0] in (400, 403), "Restart accepted a tokenless POST"
+    # Invalid module names must be rejected even with a valid administrator token.
+    token = Inputs(page).values["__RequestVerificationToken"]
+    status, _ = request("/admin/module/executetasks", {"modulesToInstall": "OmmCMS.NonexistentSmokeModule", "__RequestVerificationToken": token}, client=admin)
+    assert status == 400, f"Unknown module installation returned HTTP {status}"
+    print("Restart confirmation and invalid module request checks passed.")
     # Scheduling operations must reject GET and tokenless POST before any mutation.
     for action in ("/admin/scheduling/runjob?id=0", "/admin/scheduling/canceljob?id=0"):
         status, _ = request(action, client=admin)
