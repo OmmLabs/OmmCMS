@@ -567,11 +567,19 @@ public class MaintenanceController : AdminController
     [Permission(Permissions.System.Maintenance.Execute)]
     public async Task<IActionResult> OptimizeTable(string tableName, long? size = null)
     {
+        if (!ModelState.IsValid || string.IsNullOrWhiteSpace(tableName) || size < 0)
+            return BadRequest();
+
         try
         {
             if (_db.DataProvider.CanOptimizeTable)
             {
-                await _db.DataProvider.OptimizeTableAsync(tableName);
+                var availableTables = await _db.DataProvider.ReadTableInfosAsync();
+                var selectedTable = availableTables.FirstOrDefault(x => x.TableName == tableName);
+                if (selectedTable == null)
+                    return BadRequest();
+
+                await _db.DataProvider.OptimizeTableAsync(selectedTable.TableName);
 
                 var tableInfos = await CommonHelper.TryAction(() => _db.DataProvider.ReadTableInfosAsync(), []);
                 var currentSize = tableInfos.FirstOrDefault(x => x.TableName == tableName)?.TotalSpace;
