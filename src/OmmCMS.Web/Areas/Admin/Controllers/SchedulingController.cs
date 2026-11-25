@@ -127,6 +127,7 @@ public class SchedulingController : AdminController
         return Json(new { lastRunHtml, nextRunHtml });
     }
 
+    [HttpPost]
     [Permission(Permissions.System.ScheduleTask.Execute)]
     public async Task<IActionResult> RunJob(int id, string returnUrl)
     {

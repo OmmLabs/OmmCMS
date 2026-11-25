@@ -44,7 +44,7 @@
                     }
 				</a>
             }
-			<a sm-if="canExecute" href="@Model.ExecuteUrl" class="dropdown-item confirm">
+			<a sm-if="canExecute" href="@Model.ExecuteUrl" class="dropdown-item task-post-action" data-confirm-post="true">
 				<icon name="play" class="icon-fw" />
 				<span>@T("Admin.System.ScheduleTasks.RunNow")</span>
 			</a>

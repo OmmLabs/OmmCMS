@@ -219,3 +219,29 @@ OmmCMS.Admin = {
         }
     })()
 };
+
+
+// Submit state-changing task actions as antiforgery-protected navigation requests.
+document.addEventListener('click', function (event) {
+    const link = event.target.closest('a.task-post-action');
+    if (!link) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    const url = new URL(link.href, document.baseURI);
+    const token = document.querySelector('meta[name="__rvt"]')?.content;
+    if (url.origin !== window.location.origin || !token) return;
+    if (link.dataset.confirmPost === 'true' && !window.confirm(link.dataset.confirmMessage || window.Res['Admin.Common.AskToProceed'])) return;
+
+    const form = document.createElement('form');
+    form.method = 'post';
+    form.action = url.href;
+    form.hidden = true;
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = '__RequestVerificationToken';
+    input.value = token;
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+}, true);

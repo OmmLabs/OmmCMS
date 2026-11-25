@@ -39,7 +39,7 @@
 			<button sm-if="canUpdate" type="submit" name="save" value="save-continue" class="btn btn-secondary">
 				<span>@T("Admin.Common.SaveContinue")</span>
 			</button>
-			<a sm-if="canExecute && !Model.LastExecutionInfo.IsRunning" href="@Model.ExecuteUrl" class="btn btn-secondary btn-to-danger">
+			<a sm-if="canExecute && !Model.LastExecutionInfo.IsRunning" href="@Model.ExecuteUrl" class="btn btn-secondary btn-to-danger task-post-action">
 				<icon name="play" />
 				<span>@T("Admin.System.ScheduleTasks.RunNow")</span>
 			</a>
