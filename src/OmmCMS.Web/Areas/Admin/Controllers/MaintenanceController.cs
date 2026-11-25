@@ -306,6 +306,9 @@ public class MaintenanceController : AdminController
     [Permission(Permissions.System.Maintenance.Execute)]
     public async Task<IActionResult> OffloadEmbeddedImages(int take = 200)
     {
+        if (!ModelState.IsValid || take < 1 || take > 1000)
+            return BadRequest();
+
         var result = await _imageOffloader.Value.BatchOffloadEmbeddedImagesAsync(take);
 
         var message = result.ToString();
