@@ -172,7 +172,10 @@ def editorial_workflows(password):
         assert status in (404, 405), f"{action}: unsafe GET returned HTTP {status}"
         status, _ = request(action, {}, client=admin)
         assert status in (400, 403), f"{action}: tokenless POST returned HTTP {status}"
-    print("Protected maintenance action method and antiforgery checks passed.")
+    for action in ("/admin/urlrecord/cleanup?batchSize=0", "/admin/urlrecord/cleanup?batchSize=1001", "/admin/maintenance/offloadembeddedimages?take=0", "/admin/maintenance/offloadembeddedimages?take=1001"):
+        status, _ = request(action, {"__RequestVerificationToken": token}, client=admin)
+        assert status == 400, f"{action}: invalid maintenance batch size returned HTTP {status}"
+    print("Protected maintenance action method, antiforgery and batch validation checks passed.")
     # Theme operations must reject GET and tokenless POST before any mutation.
     for action in ("/admin/theme/reloadthemes", "/admin/theme/clearassetcache"):
         status, _ = request(action, client=admin)
