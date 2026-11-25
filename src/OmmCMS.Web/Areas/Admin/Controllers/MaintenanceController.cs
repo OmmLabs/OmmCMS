@@ -301,6 +301,7 @@ public class MaintenanceController : AdminController
         }
     }
 
+    [HttpPost]
     [MaintenanceAction]
     [Permission(Permissions.System.Maintenance.Execute)]
     public async Task<IActionResult> OffloadEmbeddedImages(int take = 200)
