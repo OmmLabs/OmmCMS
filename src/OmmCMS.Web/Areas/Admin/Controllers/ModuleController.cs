@@ -337,7 +337,7 @@ public class ModuleController : AdminController
 
         var infos = GetProviderInfos(provider);
 
-        if (infos.ReadPermission.HasValue() && !await Services.Permissions.AuthorizeAsync(infos.ReadPermission))
+        if (!await Services.Permissions.AuthorizeAsync(infos.ReadPermission ?? Permissions.Configuration.Module.Read))
         {
             throw new AccessDeniedException();
         }
