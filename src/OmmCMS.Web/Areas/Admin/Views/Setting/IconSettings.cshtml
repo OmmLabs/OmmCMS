@@ -1,8 +1,11 @@
 ﻿@using System.Linq.Expressions
 @using OmmCMS.Admin.Models.Settings
+@using OmmCMS.Core.Security
+@inject IPermissionService SettingsPermissions
 @model IconSettingsModel
 
 @{
+    var canUpdate = await SettingsPermissions.AuthorizeAsync(Permissions.Configuration.Setting.Update);
     ViewBag.Title = T("Admin.Configuration.Settings.Icons").Value;
     Layout = "_SettingLayout";
 }
@@ -14,7 +17,7 @@
             @T("Admin.Configuration.Settings.Icons")
         </div>
         <div class="options">
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
