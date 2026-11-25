@@ -51,13 +51,13 @@
            title="@T("Admin.System.Maintenance.DbBackup.Download")">
             @T("Common.Download")
         </a>
-        <a datarow-action="DataRowAction.Custom" class="grid-dbbackups-restore"
+        <a sm-if="canExecute" datarow-action="DataRowAction.Custom" class="grid-dbbackups-restore"
            :data-key="item.row.Name"
            :data-matches-current-version="item.row.MatchesCurrentVersion"
            title="@T("Admin.System.Maintenance.DbBackup.Restore.Hint")">
             @T("Admin.System.Maintenance.DbBackup.Restore")
         </a>
-        <a datarow-action="DataRowAction.Delete">@T("Common.Delete")</a>
+        <a sm-if="canExecute" datarow-action="DataRowAction.Delete">@T("Common.Delete")</a>
     </row-commands>
     <columns>
         <column for="Name" hideable="false" width="2fr" />
