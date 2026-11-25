@@ -555,6 +555,117 @@ def sqlite_backup_workflow(password):
     print("Disposable SQLite backup, download, restore and deletion passed.")
 
 
+def administration_browser_workflow(password):
+    # Browser and permission fixtures are restricted to the disposable installer database.
+    from playwright.sync_api import expect, sync_playwright
+    import re
+
+    task_id = read_rows("SELECT Id FROM ScheduleTask WHERE Type='ClearCacheTask'")[0][0]
+    topic_id = read_rows("SELECT Id FROM Topic WHERE SystemName='AboutUs'")[0][0]
+    url_id = read_rows("SELECT Id FROM UrlRecord WHERE EntityName='Topic' AND EntityId=?", (topic_id,))[0][0]
+    task_path = f"/admin/scheduling/edit/{task_id}"
+    url_path = f"/admin/urlrecord/edit/{url_id}"
+
+    def open_page(page, path):
+        response = page.goto(base + path, wait_until="domcontentloaded", timeout=60000)
+        assert response and response.ok, (path, response.status if response else None)
+
+    def login(page):
+        open_page(page, "/login?returnUrl=%2Fadmin%2Fscheduling%2Flist")
+        page.wait_for_load_state("networkidle", timeout=60000)
+        dialog = page.locator("#cookie-manager-window")
+        if dialog.is_visible():
+            page.locator("#accept-selected").click()
+            expect(dialog).to_be_hidden(timeout=30000)
+        page.locator('input[name="UsernameOrEmail"], input[name="Email"], input[name="Username"]').fill("admin@ommcms.test")
+        page.locator('input[name="Password"]').fill(password)
+        page.locator("button.btn-login").click()
+        page.wait_for_url(re.compile(r".*/admin/scheduling/list/?$", re.I), timeout=60000)
+
+    def new_page(browser):
+        return browser.new_page(viewport={"width": 1440, "height": 1000},
+            user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36")
+
+    with sync_playwright() as playwright:
+        chromium = playwright.chromium.launch(headless=True)
+        try:
+            page = new_page(chromium)
+            login(page)
+            open_page(page, task_path)
+            expect(page.locator("#Name")).to_be_enabled()
+            save = page.locator('button[name="save"][value="save-continue"]')
+            expect(save).to_be_visible()
+            with page.expect_response(lambda r: r.request.method == "POST" and "/admin/scheduling/edit" in r.url.lower(), timeout=60000) as saved:
+                save.click()
+            assert saved.value.status in (200, 302, 303), "Task save did not succeed"
+
+            open_page(page, url_path)
+            delete = page.locator("#urlrecord-delete")
+            expect(delete).to_be_visible()
+            delete.click()
+            confirm = page.locator("#modal-urlrecord-delete")
+            expect(confirm).to_be_visible()
+            confirm.locator(".btn-cancel").click()
+            expect(confirm).to_be_hidden()
+            assert read_rows("SELECT Id FROM UrlRecord WHERE Id=?", (url_id,)) == [(url_id,)]
+
+            open_page(page, "/admin/maintenance/restartapplication")
+            expect(page.locator("#restart-confirm")).to_be_visible()
+            page.wait_for_timeout(1000)
+            expect(page.locator("#restart-confirm")).to_be_enabled()
+            assert process.poll() is None, "Opening restart screen stopped the app"
+            open_page(page, "/admin/maintenance/index")
+            expect(page.locator('button[name="execute-create-backup"]')).to_be_visible(timeout=30000)
+            page.context.close()
+            print("Browser administrator save, delete cancellation, restart confirmation and maintenance controls passed.")
+
+            # Preserve the original role mappings, then narrow this fixture's privileges.
+            # Restart to remove any cached grants. No permission data is changed in production.
+            stop()
+            original = None
+            role_id = None
+            try:
+                with sqlite3.connect(database) as connection:
+                    role_id = connection.execute("SELECT Id FROM CustomerRole WHERE SystemName='Administrators'").fetchone()[0]
+                    original = connection.execute("SELECT Id, PermissionRecordId, CustomerRoleId, Allow FROM PermissionRoleMapping WHERE CustomerRoleId=?", (role_id,)).fetchall()
+                    assert original, "Administrator permission fixture missing"
+                    grants = ("system.accessbackend", "system.accessshop", "system.scheduletask.read",
+                              "system.urlrecord.read", "system.maintenance.read", "cms.topic.read")
+                    permission_ids = connection.execute("SELECT Id FROM PermissionRecord WHERE lower(SystemName) IN (" + ",".join("?" for _ in grants) + ")", grants).fetchall()
+                    assert len(permission_ids) == len(grants), "Read-only permission fixture incomplete"
+                    connection.execute("DELETE FROM PermissionRoleMapping WHERE CustomerRoleId=?", (role_id,))
+                    connection.executemany("INSERT INTO PermissionRoleMapping (PermissionRecordId, CustomerRoleId, Allow) VALUES (?, ?, 1)", [(pid, role_id) for (pid,) in permission_ids])
+                start()
+                wait_for("/")
+                page = new_page(chromium)
+                login(page)
+                open_page(page, task_path)
+                expect(page.locator("#Name")).to_be_disabled()
+                expect(page.locator('button[name="save"], a.task-post-action')).to_have_count(0)
+                token = page.locator('meta[name="__rvt"]').get_attribute("content")
+                assert token
+                rejected = page.request.post(base + "/admin/scheduling/runjob", form={"id": task_id, "__RequestVerificationToken": token},
+                    headers={"X-Requested-With": "XMLHttpRequest"}, max_redirects=0)
+                assert rejected.status in (401, 403), f"Read-only task execution returned {rejected.status}"
+                open_page(page, url_path)
+                expect(page.locator("#Slug")).to_have_attribute("readonly", re.compile(".*"))
+                expect(page.locator('button[name="save"], #urlrecord-delete')).to_have_count(0)
+                open_page(page, f"/admin/topic/edit/{topic_id}")
+                expect(page.locator('#topic-form button[name="save"], #topic-delete')).to_have_count(0)
+                open_page(page, "/admin/maintenance/index")
+                expect(page.locator('button[name="execute-create-backup"], button[name="execute-sql-query"]')).to_have_count(0)
+                page.context.close()
+                print("Browser read-only schedule, SEO, topic and maintenance controls and server permission checks passed.")
+            finally:
+                stop()
+                if original is not None:
+                    with sqlite3.connect(database) as connection:
+                        connection.execute("DELETE FROM PermissionRoleMapping WHERE CustomerRoleId=?", (role_id,))
+                        connection.executemany("INSERT INTO PermissionRoleMapping (Id, PermissionRecordId, CustomerRoleId, Allow) VALUES (?, ?, ?, ?)", original)
+        finally:
+            chromium.close()
+
+
 def verify_trimmed_distribution():
     removed = ["OmmCMS.AmazonPay","OmmCMS.OfflinePayment","OmmCMS.PayPal","OmmCMS.Stripe","OmmCMS.Shipping","OmmCMS.ShippingByWeight","OmmCMS.Tax","OmmCMS.Google.MerchantCenter","OmmCMS.Clickatell","OmmCMS.WebApi"]
     retained = ["OmmCMS.Apple.Auth", "OmmCMS.Facebook.Auth", "OmmCMS.Google.Auth",
@@ -1121,6 +1232,8 @@ try:
         editorial_workflows(password)
         print("CMS authenticated editorial workflow smoke test passed.")
         sqlite_backup_workflow(password)
+        if "--browser" in sys.argv:
+            administration_browser_workflow(password)
 except Exception:
     if log.exists():
         print(log.read_text(errors="replace")[-25000:], file=sys.stderr)
