@@ -1,7 +1,10 @@
 ﻿@using OmmCMS.Admin.Models.Maintenance
 
+@using OmmCMS.Core.Security
+@inject IPermissionService PagePermissions
 @model PerformanceSettingsModel
 @{
+    var canUpdate = await PagePermissions.AuthorizeAsync(Permissions.Configuration.Setting.Update);
     ViewBag.Title = T("Admin.Configuration.Settings.Performance").Value;
     Layout = "_SettingLayout";
 }
@@ -12,7 +15,7 @@
             @T("Admin.Configuration.Settings.Performance")
         </div>
         <div class="options">
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
