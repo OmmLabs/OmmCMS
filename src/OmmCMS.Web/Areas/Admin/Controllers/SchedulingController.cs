@@ -131,6 +131,12 @@ public class SchedulingController : AdminController
     [Permission(Permissions.System.ScheduleTask.Execute)]
     public async Task<IActionResult> RunJob(int id, string returnUrl)
     {
+        if (!ModelState.IsValid || id <= 0)
+            return BadRequest();
+
+        if (await _taskStore.GetTaskByIdAsync(id) == null)
+            return NotFound();
+
         var taskParams = new Dictionary<string, string>
         {
             { TaskExecutor.CurrentCustomerIdParamName, Services.WorkContext.CurrentCustomer.Id.ToString() },
@@ -165,8 +171,14 @@ public class SchedulingController : AdminController
 
     [HttpPost]
     [Permission(Permissions.System.ScheduleTask.Execute)]
-    public IActionResult CancelJob(int id /* taskId */, string returnUrl)
+    public async Task<IActionResult> CancelJob(int id /* taskId */, string returnUrl)
     {
+        if (!ModelState.IsValid || id <= 0)
+            return BadRequest();
+
+        if (await _taskStore.GetTaskByIdAsync(id) == null)
+            return NotFound();
+
         if (_asyncState.Cancel<TaskDescriptor>(id.ToString()))
         {
             NotifyWarning(T("Admin.System.ScheduleTasks.CancellationRequested"));
