@@ -1,8 +1,12 @@
 ﻿@using OmmCMS.Admin.Models.Common
 
+@using OmmCMS.Core.Security
+@inject IPermissionService PagePermissions
 @model CountryModel
 
 @{
+    var canUpdate = await PagePermissions.AuthorizeAsync(Permissions.Configuration.Country.Update);
+    var canDelete = await PagePermissions.AuthorizeAsync(Permissions.Configuration.Country.Delete);
     ViewBag.Title = T("Admin.Configuration.Countries.EditCountryDetails").Value;
 }
 
@@ -13,18 +17,18 @@
             <span>@T("Admin.Configuration.Countries.EditCountryDetails") - @Model.Name</span>
         </div>
         <div class="options">
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
             <button type="submit" name="save" value="save-continue" class="btn btn-secondary">
                 <span>@T("Admin.Common.SaveContinue")</span>
             </button>
-            <span id="country-delete" class="btn btn-secondary btn-destructive">
+            <span sm-if="canDelete" id="country-delete" class="btn btn-secondary btn-destructive">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete")</span>
             </span>
-            <confirm button-id="country-delete" />
+            <confirm sm-if="canDelete" button-id="country-delete" />
         </div>
     </div>
 
