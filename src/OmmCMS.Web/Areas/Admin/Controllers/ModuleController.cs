@@ -51,31 +51,43 @@ public class ModuleController : AdminController
     [Permission(Permissions.Configuration.Module.Install)]
     public async Task<IActionResult> ExecuteTasks(IEnumerable<string> modulesToInstall, IEnumerable<string> modulesToUninstall)
     {
+        var installNames = (modulesToInstall ?? Enumerable.Empty<string>()).ToArray();
+        var uninstallNames = (modulesToUninstall ?? Enumerable.Empty<string>()).ToArray();
+
+        if (!ModelState.IsValid || installNames.Concat(uninstallNames).Any(string.IsNullOrWhiteSpace)
+            || installNames.Distinct(StringComparer.OrdinalIgnoreCase).Count() != installNames.Length
+            || uninstallNames.Distinct(StringComparer.OrdinalIgnoreCase).Count() != uninstallNames.Length
+            || installNames.Intersect(uninstallNames, StringComparer.OrdinalIgnoreCase).Any())
+        {
+            return BadRequest();
+        }
+
+        var install = installNames.Select(name => _moduleCatalog.GetModuleByName(name, false)).ToArray();
+        var uninstall = uninstallNames.Select(name => _moduleCatalog.GetModuleByName(name)).ToArray();
+
+        if (install.Any(x => x == null || x.Incompatible || x.IsInstalled()) || uninstall.Any(x => x == null))
+        {
+            return BadRequest();
+        }
+
         try
         {
             var numTasks = 0;
 
-            // Uninstall first.
-            if (modulesToUninstall != null && modulesToUninstall.Any())
+            // Uninstall first, after validating the entire request.
+            foreach (var descriptor in uninstall)
             {
-                foreach (var name in modulesToUninstall)
-                {
-                    var descriptor = _moduleCatalog.GetModuleByName(name);
-                    if (descriptor != null)
-                    {
-                        var instance = _moduleManager.CreateInstance(descriptor);
-                        await instance.UninstallAsync();
-                        numTasks++;
-                    }
-                }
+                var instance = _moduleManager.CreateInstance(descriptor);
+                await instance.UninstallAsync();
+                numTasks++;
             }
 
-            // Now execute installations (on next app start))
-            if (modulesToInstall != null && modulesToInstall.Any())
+            // Execute installations on next app start using canonical module names.
+            if (install.Length > 0)
             {
-                ModularState.Instance.PendingModules.AddRange(modulesToInstall);
+                ModularState.Instance.PendingModules.AddRange(install.Select(x => x.SystemName));
                 ModularState.Instance.Save();
-                numTasks += modulesToInstall.Count();
+                numTasks += install.Length;
             }
 
             // Restart application.
