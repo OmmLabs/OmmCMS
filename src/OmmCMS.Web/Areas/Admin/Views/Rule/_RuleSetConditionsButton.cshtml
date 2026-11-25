@@ -1,14 +1,17 @@
-﻿@model IRuleExpressionGroup
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService RulePermissions
+@model IRuleExpressionGroup
 
 @{
+    var canUpdate = await RulePermissions.AuthorizeAsync(Permissions.System.Rule.Update);
     var ruleOperator = (LogicalRuleOperator)ViewData["ruleOperator"];
 }
 
 <div class="btn-group" role="group">
-    <button type="button" class="btn btn-secondary btn-sm btn-flat font-weight-medium dropdown-toggle mx-1 px-1 no-chevron" data-toggle="dropdown">
+    <button type="button" disabled="@(!canUpdate)" class="btn btn-secondary btn-sm btn-flat font-weight-medium dropdown-toggle mx-1 px-1 no-chevron" data-toggle="dropdown">
         <span class="logical-operator">@T(ruleOperator == LogicalRuleOperator.And ? "Admin.Rules.Operator.All" : "Admin.Rules.Operator.One")</span>
     </button>
-    <div class="dropdown-menu logical-operator-chooser">
+    <div sm-if="canUpdate" class="dropdown-menu logical-operator-chooser">
         <a href="javascript:;" class="dropdown-item" data-value="And">@T("Admin.Rules.Operator.All")</a>
         <a href="javascript:;" class="dropdown-item" data-value="Or">@T("Admin.Rules.Operator.One")</a>
     </div>
