@@ -163,6 +163,7 @@ public class SchedulingController : AdminController
         return RedirectToReferrer(returnUrl, () => RedirectToAction(nameof(List)));
     }
 
+    [HttpPost]
     [Permission(Permissions.System.ScheduleTask.Execute)]
     public IActionResult CancelJob(int id /* taskId */, string returnUrl)
     {
