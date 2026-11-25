@@ -48,7 +48,14 @@ The CI workflow restores and builds the solution, runs unit and integration test
 
 Fresh-install validation covers SQLite. The other database providers compile; separate deployment and provider-specific acceptance testing are required before a stable release.
 
-Report security issues privately to the maintainers; do not publish sensitive details.
+### Remaining preview acceptance
+
+- [ ] Pass the latest full CI workflow after administration review changes.
+- [ ] Complete focused browser acceptance of administrator and restricted-role workflows, including save/delete confirmation, scheduling and maintenance controls.
+- [ ] Verify backup and restoration on a disposable database for each provider that supports those operations.
+- [ ] Select a tested engine revision and revalidate the separately pinned demo and official website before their deployment.
+
+Do not treat the passing SQLite CI gate as production certification. Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License
 
