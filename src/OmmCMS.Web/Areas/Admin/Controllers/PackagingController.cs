@@ -19,6 +19,12 @@ public class PackagingController : AdminController
     {
         returnUrl ??= Services.WebHelper.ClientInfo.UrlReferrer?.OriginalString;
 
+        var requiredPermission = expectTheme ? Permissions.Configuration.Theme.Upload : Permissions.Configuration.Module.Upload;
+        if (!await Services.Permissions.AuthorizeAsync(requiredPermission))
+        {
+            return Json(new { fileName = (string)null, message = T("Admin.AccessDenied.Description").Value, returnUrl });
+        }
+
         var message = (string)null;
         var file = (IFormFile)null;
 
@@ -50,14 +56,6 @@ public class PackagingController : AdminController
             if (isTheme != expectTheme)
             {
                 message = T("Admin.Packaging." + (isTheme ? "NotAModule" : "NotATheme")).Value;
-                return Json(new { fileName = file.FileName, message, returnUrl });
-            }
-
-            var requiredPermission = isTheme ? Permissions.Configuration.Theme.Upload : Permissions.Configuration.Module.Upload;
-
-            if (!await Services.Permissions.AuthorizeAsync(requiredPermission))
-            {
-                message = T("Admin.AccessDenied.Description").Value;
                 return Json(new { fileName = file.FileName, message, returnUrl });
             }
 
