@@ -1,11 +1,16 @@
 ﻿@using OmmCMS.Admin.Models.Common
+@using OmmCMS.Core.Security
+@inject IPermissionService PagePermissions
 @model StateProvinceModel
 
 @{
+    var canCreate = await PagePermissions.AuthorizeAsync(Permissions.Configuration.Country.Update);
+    var canUpdate = await PagePermissions.AuthorizeAsync(Permissions.Configuration.Country.Update);
+    var canDelete = await PagePermissions.AuthorizeAsync(Permissions.Configuration.Country.Update);
     var countryId = ViewData["CountryId"];
 }
 
-<datagrid id="states-grid" class="h-100" allow-resize="true" allow-row-selection="true" allow-edit="true" allow-column-reordering="true">
+<datagrid id="states-grid" class="h-100" allow-resize="true" allow-row-selection="@canDelete" allow-edit="@canUpdate" allow-column-reordering="true">
     <datasource read="@Url.Action("States", "Country", new { countryId = countryId })"
                 update="@Url.Action("StateUpdate", "Country")"
                 delete="@Url.Action("StateDelete", "Country")" />
@@ -15,15 +20,15 @@
     <paging position="Bottom" show-size-chooser="true" />
     <toolbar>
         <toolbar-group>
-            <a datagrid-action="DataGridToolAction.Custom" href="#" class="add-state-region btn btn-primary btn-flat">
+            <a sm-if="canCreate" datagrid-action="DataGridToolAction.Custom" href="#" class="add-state-region btn btn-primary btn-flat">
                 <icon name="plus"  />
                 <span>@T("Admin.Configuration.Countries.States.AddNew")...</span>
             </a>
-            <button datagrid-action="DataGridToolAction.SaveChanges" type="button" class="btn btn-primary no-anims btn-flat">
+            <button sm-if="canUpdate" datagrid-action="DataGridToolAction.SaveChanges" type="button" class="btn btn-primary no-anims btn-flat">
                 <icon name="check" />
                 <span>@T("Admin.Common.SaveChanges")</span>
             </button>
-            <button datagrid-action="DataGridToolAction.CancelEdit" type="button" class="btn btn-plain mr-auto">
+            <button sm-if="canUpdate" datagrid-action="DataGridToolAction.CancelEdit" type="button" class="btn btn-plain mr-auto">
                 <span>@T("Common.Cancel")</span>
             </button>
         </toolbar-group>
@@ -31,7 +36,7 @@
         <toolbar-group class="omega"></toolbar-group>
         <zone name="datagrid_toolbar_omega"></zone>
         <toolbar-group>
-            <button datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger no-anims btn-flat">
+            <button sm-if="canDelete" datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger no-anims btn-flat">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete.Selected")</span>
             </button>
@@ -51,7 +56,7 @@
     </columns>
     <row-commands>
         <a datarow-action="DataRowAction.Custom" class="grid-edit-state-region" :data-key="item.row.Id">@T("Common.Edit")</a>
-        <a datarow-action="DataRowAction.Delete">@T("Common.Delete")</a>
+        <a sm-if="canDelete" datarow-action="DataRowAction.Delete">@T("Common.Delete")</a>
     </row-commands>
 </datagrid>
 
