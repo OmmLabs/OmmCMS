@@ -1,6 +1,9 @@
-﻿@model List<OmmCMS.Admin.Models.Localization.LanguageModel>
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService LanguagePermissions
+@model List<OmmCMS.Admin.Models.Localization.LanguageModel>
 
 @{
+    var canCreate = await LanguagePermissions.AuthorizeAsync(Permissions.Configuration.Language.Create);
     ViewBag.Title = T("Admin.Configuration.Languages").Value;
 
     var defaultLanguageNote = ViewBag.DefaultLanguageNote as LocalizedString;
@@ -14,7 +17,7 @@
     <div class="options">
         <zone name="admin_button_toolbar_before" />
 
-        <a asp-action="Create" class="btn btn-primary">
+        <a sm-if="canCreate" asp-action="Create" class="btn btn-primary">
             <icon name="plus" />
             <span>@T("Admin.Common.AddNew")</span>
         </a>
