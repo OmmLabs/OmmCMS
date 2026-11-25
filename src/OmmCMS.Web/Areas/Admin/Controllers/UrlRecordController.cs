@@ -231,6 +231,7 @@ public class UrlRecordController : AdminController
         return Json(new { Success = true, Count = numDeleted });
     }
 
+    [HttpPost]
     [MaintenanceAction]
     [Permission(Permissions.System.UrlRecord.Delete)]
     public async Task<IActionResult> Cleanup(int batchSize = 128)
