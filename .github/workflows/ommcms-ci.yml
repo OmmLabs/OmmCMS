@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
@@ -22,13 +22,25 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - run: dotnet restore OmmCMS.sln
       - run: dotnet build OmmCMS.sln -c Release --no-restore
       - run: dotnet test OmmCMS.sln -c Release --no-build --no-restore --logger trx
-      - run: dotnet publish src/OmmCMS.Web/OmmCMS.Web.csproj -c Release --no-build --no-restore -o "$RUNNER_TEMP/ommcms-smoke"
-      - name: Install Chromium for administration acceptance
+      - name: Publish pristine disposable fixtures
+        id: publish
         run: |
-          python3 -m pip install playwright==1.55.0
-          python3 -m playwright install --with-deps chromium
-      - name: Fresh CMS installation and regression checks
-        run: python3 .github/ommcms-smoke.py "$RUNNER_TEMP/ommcms-smoke" --editorial --trimmed --controllers-trimmed --public-controllers-trimmed --account-trimmed --admin-commerce-trimmed --residual-commerce-trimmed --presentation-trimmed --core-commerce-trimmed --browser
+          dotnet publish src/OmmCMS.Web/OmmCMS.Web.csproj -c Release --no-build --no-restore -o "$RUNNER_TEMP/ommcms-smoke"
+          cp -a "$RUNNER_TEMP/ommcms-smoke" "$RUNNER_TEMP/ommcms-browser"
+      - name: Fresh CMS installation, editorial and backup regression checks
+        run: python .github/ommcms-smoke.py "$RUNNER_TEMP/ommcms-smoke" --editorial --trimmed --controllers-trimmed --public-controllers-trimmed --account-trimmed --admin-commerce-trimmed --residual-commerce-trimmed --presentation-trimmed --core-commerce-trimmed
+      - name: Install Chromium for administration acceptance
+        id: browser_setup
+        if: ${{ !cancelled() && steps.publish.outcome == 'success' }}
+        run: |
+          python -m pip install playwright==1.55.0
+          python -m playwright install --with-deps chromium
+      - name: Independent administration browser acceptance
+        if: ${{ !cancelled() && steps.publish.outcome == 'success' && steps.browser_setup.outcome == 'success' }}
+        run: python .github/ommcms-smoke.py "$RUNNER_TEMP/ommcms-browser" --trimmed --browser

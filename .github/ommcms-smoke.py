@@ -1232,8 +1232,8 @@ try:
         editorial_workflows(password)
         print("CMS authenticated editorial workflow smoke test passed.")
         sqlite_backup_workflow(password)
-        if "--browser" in sys.argv:
-            administration_browser_workflow(password)
+    if "--browser" in sys.argv:
+        administration_browser_workflow(password)
 except Exception:
     if log.exists():
         print(log.read_text(errors="replace")[-25000:], file=sys.stderr)
