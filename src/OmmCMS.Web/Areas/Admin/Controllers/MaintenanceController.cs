@@ -922,13 +922,10 @@ public class MaintenanceController : AdminController
     {
         var numDeleted = 0;
         var root = Services.ApplicationContext.TenantRoot;
-        var fileNames = selection.SelectedKeys;
+        var fileNames = selection.SelectedKeys.Distinct().ToArray();
 
-        var invalidFileName = fileNames.FirstOrDefault(x => !PathUtility.IsFileName(x));
-        if (invalidFileName.HasValue())
-        {
-            throw new BadHttpRequestException(T("Admin.Common.InvalidFileName", invalidFileName));
-        }
+        if (fileNames.Any(x => !PathUtility.IsFileName(x) || !_db.DataProvider.ValidateBackupFileName(x).IsValid))
+            return BadRequest();
 
         foreach (var fileName in fileNames)
         {
