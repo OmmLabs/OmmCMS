@@ -65,7 +65,7 @@ Selected SQLite preview engine: [`6241dd5f602951541bf6fd8be68587cdf9f66068`](htt
 - [ ] MySQL and PostgreSQL fresh installation and editorial acceptance; native backup/restore is not advertised by those providers.
 - [ ] Host-specific verification, release notes and stable-release decision.
 
-The SQLite preview checkpoint is not a stable-release or production certification.
+The SQLite preview checkpoint is not a stable-release or production certification. Subsequent website integration exposed an external-link sanitization defect; a follow-up revision must pass the full core gate and native website article-link verification before replacing the selected checkpoint.
 
 Report security issues privately to the maintainers; do not publish sensitive details.
 

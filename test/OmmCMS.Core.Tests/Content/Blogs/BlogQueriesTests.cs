@@ -32,6 +32,24 @@ public class BlogQueriesTests
     }
 
     [Test]
+    public void Web_source_links_survive_sanitization_but_unsafe_links_do_not()
+    {
+        var input = "<p><a href='https://example.org/source'>Source</a>"
+            + "<a href='http://example.org/reference'>Reference</a>"
+            + "<a href='/docs/start-here'>Internal</a>"
+            + "<a href='javascript:alert(1)'>Unsafe</a>"
+            + "<a href='data:text/html,unsafe'>Data</a>"
+            + "<a href='vbscript:unsafe'>Script</a></p>";
+        var html = BlogQueries.SanitizeBody(BlogQueries.SanitizeBody(input));
+        Assert.That(html, Does.Contain("href=\"https://example.org/source\"")
+            .And.Contain("href=\"http://example.org/reference\"")
+            .And.Contain("href=\"/docs/start-here\"")
+            .And.Not.Contain("javascript:")
+            .And.Not.Contain("data:text")
+            .And.Not.Contain("vbscript:"));
+    }
+
+    [Test]
     public void Rich_text_is_sanitized()
     {
         var html = BlogQueries.SanitizeBody("<p>Article</p><script>alert(1)</script><img src='/photo.jpg' onerror='alert(1)'>");

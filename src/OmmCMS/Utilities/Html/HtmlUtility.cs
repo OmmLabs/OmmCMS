@@ -57,6 +57,12 @@ public static partial class HtmlUtility
 
         var sanitizerOptions = new Ganss.Xss.HtmlSanitizerOptions();
 
+        // Explicitly permit ordinary web URLs with the custom sanitizer options.
+        // URI attributes remain filtered; executable and data schemes are not allowed.
+        sanitizerOptions.AllowedSchemes.Clear();
+        sanitizerOptions.AllowedSchemes.Add("http");
+        sanitizerOptions.AllowedSchemes.Add("https");
+
         MergeSets(sanitizerOptions.AllowedTags, options.AllowedTags ?? HtmlSanitizerOptions.DefaultAllowedTags, options.DisallowedTags);
         MergeSets(sanitizerOptions.AllowedAttributes, options.AllowedAttributes ?? HtmlSanitizerOptions.DefaultAllowedAttributes, options.DisallowedAttributes);
         MergeSets(sanitizerOptions.UriAttributes, options.UriAttributes ?? HtmlSanitizerOptions.DefaultUriAttributes, null);
