@@ -242,6 +242,9 @@ public class UrlRecordController : AdminController
     [Permission(Permissions.System.UrlRecord.Delete)]
     public async Task<IActionResult> Cleanup(int batchSize = 128)
     {
+        if (!ModelState.IsValid || batchSize < 1 || batchSize > 1000)
+            return BadRequest();
+
         var numTotalDeleted = 0;
 
         try
