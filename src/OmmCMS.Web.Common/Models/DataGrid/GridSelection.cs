@@ -9,7 +9,7 @@ public class GridSelection
 
     public IEnumerable<int> GetEntityIds()
     {
-        return SelectedKeys
+        return (SelectedKeys ?? Array.Empty<string>())
             .Select(x => x.ToInt())
             .Where(x => x > 0)
             .Distinct();
