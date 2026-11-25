@@ -1,8 +1,11 @@
 ﻿@using OmmCMS.Admin.Models.Messages
 
+@using OmmCMS.Core.Security
+@inject IPermissionService MessagePermissions
 @model QueuedEmailListModel
 
 @{
+    var canDelete = await MessagePermissions.AuthorizeAsync(Permissions.System.Message.Delete);
     ViewBag.Title = T("Admin.System.QueuedEmails").Value;
     Assets.BodyAttributes.AppendCssClass("spa-layout");
 }
@@ -22,11 +25,11 @@
                     </button>
                 </div>
             </div>
-            <button type="submit" id="delete-all" name="delete-all" value="delete-all" class="btn btn-danger">
+            <button sm-if="canDelete" type="submit" id="delete-all" name="delete-all" value="delete-all" class="btn btn-danger">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Cleanup")</span>
             </button>
-            <confirm button-id="delete-all" action="DeleteAll" message="@T("Admin.System.QueuedEmails.DeleteAll.Confirm")" />
+            <confirm sm-if="canDelete" button-id="delete-all" action="DeleteAll" message="@T("Admin.System.QueuedEmails.DeleteAll.Confirm")" />
         </div>
     </div>
 </form>
