@@ -1,11 +1,17 @@
 ﻿@using OmmCMS.Admin.Models.Maintenance;
 
+@using OmmCMS.Core.Security
+@inject IPermissionService PagePermissions
 @model DbBackupModel
+
+@{
+    var canExecute = await PagePermissions.AuthorizeAsync(Permissions.System.Maintenance.Execute);
+}
 
 <datagrid id="dbbackups-grid"
           key-member="Name"
           allow-resize="true"
-          allow-row-selection="true"
+          allow-row-selection="@canExecute"
           preserve-grid-state="true" preserve-command-state="true"
           allow-column-reordering="true"
           max-height="600px"
@@ -19,11 +25,11 @@
     <toolbar>
         <toolbar-group>
             <fragment>
-                <button type="submit" name="execute-create-backup" value="execute-create-backup" class="btn btn-primary btn-flat confirm">
+                <button sm-if="canExecute" type="submit" name="execute-create-backup" value="execute-create-backup" class="btn btn-primary btn-flat confirm">
                     <icon name="plus"  />
                     <span>@T("Admin.System.Maintenance.DbBackup.Create")</span>
                 </button>
-                <button type="button" class="btn btn-secondary btn-flat" data-toggle="modal" data-target="#upload-backup-dialog">
+                <button sm-if="canExecute" type="button" class="btn btn-secondary btn-flat" data-toggle="modal" data-target="#upload-backup-dialog">
                     <icon name="upload" />
                     <span>@T("Admin.System.Maintenance.DbBackup.Upload")</span>
                 </button>
@@ -33,14 +39,14 @@
         <toolbar-group class="omega"></toolbar-group>
         <zone name="datagrid_toolbar_omega"></zone>
         <toolbar-group>
-            <button datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger btn-flat">
+            <button sm-if="canExecute" datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger btn-flat">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete.Selected")</span>
             </button>
         </toolbar-group>
     </toolbar>
     <row-commands>
-        <a datarow-action="DataRowAction.Custom" class="grid-dbbackups-download"
+        <a sm-if="canExecute" datarow-action="DataRowAction.Custom" class="grid-dbbackups-download"
            :href="item.row.DownloadUrl"
            title="@T("Admin.System.Maintenance.DbBackup.Download")">
             @T("Common.Download")
@@ -62,7 +68,7 @@
     </columns>
 </datagrid>
 
-<modal id="upload-backup-dialog">
+<modal sm-if="canExecute" id="upload-backup-dialog">
     <modal-header sm-title="@T("Admin.System.Maintenance.DbBackup.Upload")"></modal-header>
     <modal-body>
         <form enctype="multipart/form-data" method="post" asp-action="UploadBackup">
