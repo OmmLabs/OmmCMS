@@ -6,6 +6,8 @@
 
 @{
     var canDelete = await LogPermissions.AuthorizeAsync(Permissions.System.Log.Delete);
+    bool IsWebUrl(string value) => Uri.TryCreate(value, UriKind.Absolute, out var uri)
+        && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
     Assets.AppendScriptFiles("~/lib/netstack/netstack.js");
     ViewBag.Title = T("Admin.System.Log.ViewLogDetails").Value;
 }
@@ -92,7 +94,14 @@
             <div class="adminData wide">
                 <div sm-if="Model.PageUrl.HasValue()" class="form-control-plaintext">
                     <span>@Model.HttpMethod </span>
-                    <a href="@Model.PageUrl" target="_blank">@Model.PageUrl</a>
+                    @if (IsWebUrl(Model.PageUrl))
+                    {
+                        <a href="@Model.PageUrl" target="_blank" rel="noopener noreferrer">@Model.PageUrl</a>
+                    }
+                    else
+                    {
+                        <span>@Model.PageUrl</span>
+                    }
                 </div>
             </div>
         </div>
@@ -102,7 +111,14 @@
             </div>
             <div class="adminData wide">
                 <div sm-if="Model.ReferrerUrl.HasValue()" class="form-control-plaintext">
-                    <a href="@Model.ReferrerUrl" target="_blank">@Model.ReferrerUrl</a>
+                    @if (IsWebUrl(Model.ReferrerUrl))
+                    {
+                        <a href="@Model.ReferrerUrl" target="_blank" rel="noopener noreferrer">@Model.ReferrerUrl</a>
+                    }
+                    else
+                    {
+                        <span>@Model.ReferrerUrl</span>
+                    }
                 </div>
             </div>
         </div>
