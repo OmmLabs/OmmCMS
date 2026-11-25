@@ -165,7 +165,10 @@ def editorial_workflows(password):
         assert status in (404, 405), f"{action}: unsafe GET returned HTTP {status}"
         status, _ = request(action, {}, client=admin)
         assert status in (400, 403), f"{action}: tokenless POST returned HTTP {status}"
-    print("Protected scheduling action method and antiforgery checks passed.")
+    for action in ("/admin/scheduling/runjob?id=0", "/admin/scheduling/canceljob?id=0", "/admin/scheduling/runjob?id=-1", "/admin/scheduling/canceljob?id=-1"):
+        status, _ = request(action, {"__RequestVerificationToken": token}, client=admin)
+        assert status == 400, f"{action}: invalid task ID returned HTTP {status}"
+    print("Protected scheduling action method, antiforgery and ID validation checks passed.")
     # Maintenance operations must reject GET and tokenless POST before any mutation.
     for action in ("/admin/maintenance/garbagecollect", "/admin/maintenance/optimizedatabase", "/admin/maintenance/optimizetable", "/admin/maintenance/offloadembeddedimages", "/admin/maintenance/reinitmediafilenames", "/admin/urlrecord/cleanup"):
         status, _ = request(action, client=admin)
