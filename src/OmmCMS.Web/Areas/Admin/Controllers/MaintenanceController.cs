@@ -366,7 +366,8 @@ public class MaintenanceController : AdminController
     [Permission(Permissions.System.Maintenance.Execute)]
     public IActionResult RestartApplication(string returnUrl = null)
     {
-        ViewBag.ReturnUrl = returnUrl ?? Services.WebHelper.ClientInfo.UrlReferrer?.PathAndQuery;
+        returnUrl ??= Services.WebHelper.ClientInfo.UrlReferrer?.PathAndQuery;
+        ViewBag.ReturnUrl = Url.IsLocalUrl(returnUrl) ? returnUrl : Url.Action("Index", "Home", new { area = "Admin" });
         return View();
     }
 
