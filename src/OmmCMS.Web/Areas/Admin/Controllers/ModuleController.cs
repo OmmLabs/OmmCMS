@@ -70,6 +70,13 @@ public class ModuleController : AdminController
             return BadRequest();
         }
 
+        var removedNames = uninstall.Select(x => x.SystemName).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var retained = _moduleCatalog.GetInstalledModules().Where(x => !removedNames.Contains(x.SystemName)).Concat(install);
+        if (retained.Any(x => (x.DependsOn ?? Array.Empty<string>()).Any(removedNames.Contains)))
+        {
+            return BadRequest("Cannot remove a module required by another selected or installed module.");
+        }
+
         try
         {
             var numTasks = 0;
