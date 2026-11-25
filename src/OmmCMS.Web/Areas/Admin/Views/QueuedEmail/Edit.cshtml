@@ -1,8 +1,13 @@
 ﻿@using OmmCMS.Admin.Models.Messages
 
+@using OmmCMS.Core.Security
+@inject IPermissionService MessagePermissions
 @model QueuedEmailModel
 
 @{
+    var canUpdate = await MessagePermissions.AuthorizeAsync(Permissions.System.Message.Update);
+    var canDelete = await MessagePermissions.AuthorizeAsync(Permissions.System.Message.Delete);
+    var canCreate = await MessagePermissions.AuthorizeAsync(Permissions.System.Message.Create);
     ViewBag.Title = T("Admin.System.QueuedEmails.EditQueuedEmailDetails").Value;
 }
 
@@ -14,29 +19,29 @@
             <span>@ViewBag.Title</span>
         </div>
         <div class="options">
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
             <button type="submit" name="save" value="save-continue" class="btn btn-secondary">
                 <span>@T("Admin.Common.SaveContinue")</span>
             </button>
-            <button type="submit" name="requeue" value="requeue" class="btn btn-secondary">
+            <button sm-if="canCreate" type="submit" name="requeue" value="requeue" class="btn btn-secondary">
                 <icon name="redo" />
                 <span>@T("Admin.System.QueuedEmails.Requeue")</span>
             </button>
-            @if (Model.SendManually)
+            @if (Model.SendManually && await MessagePermissions.AuthorizeAsync(Permissions.System.Message.Send))
             {
                 <button type="submit" name="sendnow" value="sendnow" class="btn btn-primary confirm">
                     <icon name="mail" />
                     <span>@T("Admin.Common.SendNow")</span>
                 </button>
             }
-            <button id="queuedEmail-delete" class="btn btn-secondary btn-destructive">
+            <button sm-if="canDelete" id="queuedEmail-delete" class="btn btn-secondary btn-destructive">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete")</span>
             </button>
-            <confirm button-id="queuedEmail-delete" />
+            <confirm sm-if="canDelete" button-id="queuedEmail-delete" />
         </div>
     </div>
 
