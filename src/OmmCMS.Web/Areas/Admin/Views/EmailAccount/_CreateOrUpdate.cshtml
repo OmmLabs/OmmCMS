@@ -1,6 +1,8 @@
 ﻿@using OmmCMS.Admin.Models.Messages
 @using OmmCMS.Net.Mail
 
+@using OmmCMS.Core.Security
+@inject IPermissionService EmailPermissions
 @model EmailAccountModel
 
 <div asp-validation-summary="All"></div>
@@ -107,7 +109,7 @@
                 <div class="input-group">
                     <input asp-for="SendTestEmailTo" type="email" />
                     <div class="input-group-append">
-                        <button type="submit" name="sendtestemail" value="sendtestemail" class="btn btn-secondary">
+                        <button sm-if="await EmailPermissions.AuthorizeAsync(Permissions.Configuration.EmailAccount.Update)" type="submit" name="sendtestemail" value="sendtestemail" class="btn btn-secondary">
                             <icon name="share"  />
                             <span>@T("Admin.Configuration.EmailAccounts.SendTestEmail.Button")</span>
                         </button>
