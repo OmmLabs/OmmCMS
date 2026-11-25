@@ -36,6 +36,14 @@
     }
 </style>
 
+<div class="card mx-auto mt-5" style="max-width: 420px">
+    <div class="card-body text-center">
+        <p>@T("Admin.Common.AskToProceed")</p>
+        <button id="restart-confirm" type="button" class="btn btn-danger">@T("Admin.Header.RestartApplication")</button>
+        <a href="@returnUrl" class="btn btn-secondary">@T("Common.Cancel")</a>
+    </div>
+</div>
+
 <script sm-target-zone="scripts" data-origin="RestartApplication">
     $(function () {
         let interval;
@@ -70,12 +78,14 @@
                 success() {
                     clearInterval(interval);
                     _.setCookie(".Smart.RestartingApp", null);
-                    location.replace("@returnUrl");
+                    location.replace(@Html.Raw(System.Text.Json.JsonSerializer.Serialize(returnUrl)));
                 }
             });
         }
 
-        $.throbber.show({
+        $("#restart-confirm").one("click", function () {
+            $(this).prop("disabled", true);
+            $.throbber.show({
             message: @T("Admin.Header.RestartApplication.Progress").JsValue + "...",
             speed: 0,
             white: false,
@@ -88,6 +98,7 @@
                     setTimeout(restartApplication, 250);
                 }
             }
+            });
         });
     });
 </script>
