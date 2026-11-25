@@ -923,6 +923,9 @@ public class MaintenanceController : AdminController
     {
         var numDeleted = 0;
         var root = Services.ApplicationContext.TenantRoot;
+        if (!ModelState.IsValid || selection?.SelectedKeys == null)
+            return BadRequest();
+
         var fileNames = selection.SelectedKeys.Distinct().ToArray();
 
         if (fileNames.Any(x => !PathUtility.IsFileName(x) || !_db.DataProvider.ValidateBackupFileName(x).IsValid))
