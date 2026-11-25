@@ -10,7 +10,7 @@
     ViewBag.Title = T("Admin.System.Log.ViewLogDetails").Value;
 }
 
-<form method="post">
+<form asp-action="Delete" method="post">
     <input asp-for="Id" type="hidden" />
 
     <div class="section-header">
