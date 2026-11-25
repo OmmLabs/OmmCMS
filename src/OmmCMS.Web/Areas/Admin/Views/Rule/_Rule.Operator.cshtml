@@ -1,16 +1,19 @@
-﻿@model IRuleExpression
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService PagePermissions
+@model IRuleExpression
 
 @inject ILocalizationService LocalizationService
 
 @{
+    var canUpdate = await PagePermissions.AuthorizeAsync(Permissions.System.Rule.Update);
     var resource = GetResourceFor(Model.Operator, false);
 }
 
 <div id="rule-operator@(Model.Id)" class="btn-group d-block rule-operator" role="group" data-value="@Model.Operator">
-    <button type="button" class="btn btn-outline-secondary btn-to-primary fwn btn-block dropdown-toggle justify-content-between" data-toggle="dropdown" title="@resource">
+    <button type="button" disabled="@(!canUpdate)" class="btn btn-outline-secondary btn-to-primary fwn btn-block dropdown-toggle justify-content-between" data-toggle="dropdown" title="@resource">
         <span class="text-truncate">@resource</span>
     </button>
-    <div class="dropdown-menu">
+    <div sm-if="canUpdate" class="dropdown-menu">
         @foreach (var op in Model.Descriptor.Operators)
         {
             <a href="javascript:void(0)" class="dropdown-item" data-value="@op.Operator" title="@GetResourceFor(op, true)">@GetResourceFor(op, false)</a>
