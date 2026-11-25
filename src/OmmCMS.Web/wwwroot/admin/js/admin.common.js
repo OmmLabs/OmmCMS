@@ -154,10 +154,9 @@ OmmCMS.Admin = {
         return themeVars;
     },
     TaskWatcher: (function () {
-        var interval;
-
         return {
             startWatching: function (opts) {
+                var interval;
                 function poll() {
                     $.ajax({
                         cache: false,
@@ -169,7 +168,7 @@ OmmCMS.Admin = {
                             data = data || [];
                             var runningElements = [];
                             $.each(data, function (i, task) {
-                                var el = $(opts.elementsSelector + '[data-task-id=' + task.id + ']');
+                                var el = opts.context.find(opts.elementsSelector + '[data-task-id=' + task.id + ']');
                                 if (el.length) {
                                     runningElements.push(el[0]);
                                     if (el.data('running') && el.text()) {
@@ -180,8 +179,8 @@ OmmCMS.Admin = {
                                     else {
                                         // new task
                                         var row1 = $('<div class="hint position-relative d-flex justify-content-between flex-nowrap"></div>').appendTo(el);
-                                        row1.append($('<div class="text text-truncate">' + (task.message || opts.defaultProgressMessage) + '</div>'));
-                                        row1.append($('<div class="percent">' + (task.percent >> 0 ? task.percent + ' %' : "") + '</div>'));
+                                        row1.append($('<div class="text text-truncate"></div>').text(task.message || opts.defaultProgressMessage));
+                                        row1.append($('<div class="percent"></div>').text(task.percent >> 0 ? task.percent + ' %' : ""));
                                         var row2 = $('<div class="loading-bar mt-2"></div>').appendTo(el);
                                         el.attr('data-running', 'true').data('running', true);
                                         if (_.isFunction(opts.onTaskStarted)) {
