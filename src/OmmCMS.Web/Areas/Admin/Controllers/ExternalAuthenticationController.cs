@@ -30,14 +30,17 @@ public partial class ExternalAuthenticationController : AdminController
     }
 
     [Permission(Permissions.Configuration.Authentication.Read)]
-    public IActionResult Providers()
+    public async Task<IActionResult> Providers()
     {
+        var canUpdate = await Services.Permissions.AuthorizeAsync(Permissions.Configuration.Authentication.Update);
+        ViewBag.CanActivateProvider = await Services.Permissions.AuthorizeAsync(Permissions.Configuration.Authentication.Activate);
         var widgetsModel = new List<AuthenticationMethodModel>();
         var methods = _providerManager.GetAllProviders<IExternalAuthenticationMethod>();
 
         foreach (var method in methods)
         {
             var model = _moduleManager.ToProviderModel<IExternalAuthenticationMethod, AuthenticationMethodModel>(method);
+            model.IsEditable = model.IsEditable && canUpdate;
             model.IsActive = method.IsMethodActive(_externalAuthenticationSettings);
             widgetsModel.Add(model);
         }
@@ -49,9 +52,12 @@ public partial class ExternalAuthenticationController : AdminController
     [Permission(Permissions.Configuration.Authentication.Activate)]
     public async Task<IActionResult> ActivateProvider(string systemName, bool activate)
     {
-        await _widgetService.ActivateWidgetAsync(systemName, activate);
+        if (string.IsNullOrWhiteSpace(systemName))
+            return BadRequest();
 
         var provider = _providerManager.GetProvider<IExternalAuthenticationMethod>(systemName);
+        if (provider == null)
+            return NotFound();
         var dirty = provider.IsMethodActive(_externalAuthenticationSettings) != activate;
 
         if (dirty)
