@@ -133,9 +133,9 @@
                         &nbsp;
                     </div>
                     <div class="adminData">
-                        <a sm-if="canUpdate" asp-action="ClearAssetCache" class="btn btn-danger">
+                        <button sm-if="canUpdate" type="submit" asp-action="ClearAssetCache" class="btn btn-danger">
                             <span>@T("Admin.Configuration.Themes.ClearAssetCache")</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

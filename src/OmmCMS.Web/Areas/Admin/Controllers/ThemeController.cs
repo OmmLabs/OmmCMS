@@ -352,6 +352,7 @@ public class ThemeController : AdminController
         return RedirectToAction("Configure", new { theme, storeId });
     }
 
+    [HttpPost]
     [Permission(Permissions.Configuration.Theme.Update)]
     public async Task<IActionResult> ClearAssetCache()
     {
