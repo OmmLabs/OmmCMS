@@ -1,8 +1,11 @@
 ﻿@using OmmCMS.Admin.Models.Localization
 
+@using OmmCMS.Core.Security
+@inject IPermissionService LanguagePermissions
 @model AvailableLanguageListModel
 
 @{
+    var canEditResources = await LanguagePermissions.AuthorizeAsync(Permissions.Configuration.Language.EditResource);
     var languages = Model.Languages
         .OrderByDescending(x => x.Published)
         .ThenBy(x => x.IsInstalled)
@@ -75,7 +78,7 @@
                             {
                                 if (language.IsInstalled)
                                 {
-                                    <a href="@Url.Action("Download", new { setId = language.Id })"
+                                    <a sm-if="canEditResources" href="@Url.Action("Download", new { setId = language.Id })"
                                        class="btn btn-sm btn-outline-secondary confirm download-language@(language.IsDownloadRunning ? " d-none" : "")">
                                         <icon name="refresh"  />
                                         <span>@T("Common.Refresh")</span>
