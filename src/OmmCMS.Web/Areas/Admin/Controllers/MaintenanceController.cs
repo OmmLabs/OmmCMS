@@ -557,6 +557,7 @@ public class MaintenanceController : AdminController
         return RedirectToReferrer();
     }
 
+    [HttpPost]
     [Permission(Permissions.System.Maintenance.Execute)]
     public async Task<IActionResult> OptimizeTable(string tableName, long? size = null)
     {
