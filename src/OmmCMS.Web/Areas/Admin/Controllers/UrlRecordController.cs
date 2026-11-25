@@ -188,7 +188,13 @@ public class UrlRecordController : AdminController
                 : RedirectToAction(nameof(List));
         }
 
-        PrepareUrlRecordModel(model, null);
+        var slug = model.Slug;
+        var isActive = model.IsActive;
+        var languageId = model.LanguageId;
+        PrepareUrlRecordModel(model, urlRecord);
+        model.Slug = slug;
+        model.IsActive = isActive;
+        model.LanguageId = languageId;
         await PrepareAvailableLanguages();
 
         return View(model);
