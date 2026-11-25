@@ -29,7 +29,7 @@
             <button sm-if="canUpdate" type="submit" name="save" value="save-continue" class="btn btn-secondary">
                 <span>@T("Admin.Common.SaveContinue")</span>
             </button>
-            <button sm-if="canDelete" type="submit" id="urlrecord-delete" name="urlrecord-delete" class="btn btn-secondary btn-destructive">
+            <button sm-if="canDelete" type="submit" asp-action="Delete" asp-route-id="@Model.Id" id="urlrecord-delete" name="urlrecord-delete" class="btn btn-secondary btn-destructive">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete")</span>
             </button>
