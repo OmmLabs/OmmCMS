@@ -181,7 +181,18 @@ def editorial_workflows(password):
     for action in ("/admin/maintenance/optimizetable", "/admin/maintenance/optimizetable?tableName=Topic&size=-1"):
         status, _ = request(action, {"__RequestVerificationToken": token}, client=admin)
         assert status == 400, f"{action}: invalid optimization request returned HTTP {status}"
-    print("Protected maintenance action method, antiforgery and input validation checks passed.")
+    for name in ("", ".", "..", "not-a-backup.txt"):
+        query = urllib.parse.urlencode({"name": name})
+        status, _ = request("/admin/maintenance/downloadbackup?" + query, client=admin)
+        assert status == 400, f"Invalid backup download returned HTTP {status}"
+        status, _ = request("/admin/maintenance/restorebackup", {"name": name, "__RequestVerificationToken": token}, client=admin)
+        assert status == 400, f"Invalid backup restore returned HTTP {status}"
+        status, _ = request("/admin/maintenance/deletebackup", {"selectedKeys": name, "__RequestVerificationToken": token}, client=admin)
+        assert status == 400, f"Invalid backup deletion returned HTTP {status}"
+    for action in ("/admin/maintenance/restorebackup", "/admin/maintenance/deletebackup", "/admin/maintenance/uploadbackup"):
+        assert request(action, client=admin)[0] in (404, 405), f"{action}: GET accepted"
+        assert request(action, {}, client=admin)[0] in (400, 403), f"{action}: tokenless POST accepted"
+    print("Protected maintenance, backup and input validation checks passed.")
     # Theme operations must reject GET and tokenless POST before any mutation.
     for action in ("/admin/theme/reloadthemes", "/admin/theme/clearassetcache"):
         status, _ = request(action, client=admin)
