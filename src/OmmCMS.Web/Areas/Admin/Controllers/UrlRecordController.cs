@@ -147,16 +147,14 @@ public class UrlRecordController : AdminController
         if (model.Slug?.StartsWith("blog/", StringComparison.OrdinalIgnoreCase) == true)
             ModelState.AddModelError(nameof(model.Slug), "Blog paths are managed by the blog editors.");
 
-        if (!urlRecord.IsActive && model.IsActive)
-        {
-            var urlRecords = (await _urlService.GetUrlRecordCollectionAsync(model.EntityName, [model.LanguageId], [model.EntityId]))
-                .Where(x => x.IsActive == true)
-                .ToList();
+        if (model.EntityName != urlRecord.EntityName || model.EntityId != urlRecord.EntityId)
+            return BadRequest();
 
-            if (urlRecords.Count > 0)
-            {
-                ModelState.AddModelError(nameof(UrlRecordModel.IsActive), T("Admin.System.SeNames.ActiveSlugAlreadyExist"));
-            }
+        if (model.IsActive && await _db.UrlRecords.AnyAsync(x => x.Id != urlRecord.Id
+            && x.EntityName == urlRecord.EntityName && x.EntityId == urlRecord.EntityId
+            && x.LanguageId == model.LanguageId && x.IsActive))
+        {
+            ModelState.AddModelError(nameof(UrlRecordModel.IsActive), T("Admin.System.SeNames.ActiveSlugAlreadyExist"));
         }
 
         if (ModelState.IsValid)
