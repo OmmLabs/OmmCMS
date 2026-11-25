@@ -150,6 +150,12 @@ public class UrlRecordController : AdminController
         if (model.EntityName != urlRecord.EntityName || model.EntityId != urlRecord.EntityId)
             return BadRequest();
 
+        if (model.LanguageId != 0 && !(await _languageService.GetAllLanguagesAsync(true)).Any(x => x.Id == model.LanguageId))
+            ModelState.AddModelError(nameof(model.LanguageId), "Select an existing language.");
+
+        if (string.IsNullOrWhiteSpace(model.Slug) || model.Slug.Length > 400)
+            ModelState.AddModelError(nameof(model.Slug), "Enter a slug between 1 and 400 characters.");
+
         if (model.IsActive && await _db.UrlRecords.AnyAsync(x => x.Id != urlRecord.Id
             && x.EntityName == urlRecord.EntityName && x.EntityId == urlRecord.EntityId
             && x.LanguageId == model.LanguageId && x.IsActive))
