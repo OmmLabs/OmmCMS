@@ -132,7 +132,7 @@ public class UrlRecordController : AdminController
 
     [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
     [Permission(Permissions.System.UrlRecord.Update)]
-    public async Task<IActionResult> Edit(UrlRecordModel model, bool continueEditing)
+    public async Task<IActionResult> Edit(UrlRecordModel model, bool continueEditing, [FromServices] IRouteHelper routeHelper)
     {
         var urlRecord = await _db.UrlRecords.FindByIdAsync(model.Id);
         if (urlRecord == null)
@@ -159,6 +159,9 @@ public class UrlRecordController : AdminController
         if (!string.IsNullOrWhiteSpace(model.Slug))
         {
             var normalizedSlug = model.Slug.ToLowerInvariant();
+            if (!string.Equals(model.Slug, urlRecord.Slug, StringComparison.OrdinalIgnoreCase)
+                && routeHelper.IsReservedPath(model.Slug.Trim()))
+                ModelState.AddModelError(nameof(model.Slug), "This path is reserved by the system.");
             if (await _db.UrlRecords.AnyAsync(x => x.Id != urlRecord.Id && x.Slug.ToLower() == normalizedSlug))
                 ModelState.AddModelError(nameof(model.Slug), "This slug is already in use.");
         }
