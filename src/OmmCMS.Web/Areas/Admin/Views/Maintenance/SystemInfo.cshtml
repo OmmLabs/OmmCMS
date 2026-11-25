@@ -189,7 +189,9 @@
                     <icon name="arrow-up" id="used-ram-up" class="text-danger" style="display: none" />
                     <icon name="arrow-down" id="used-ram-down" class="text-success" style="display: none" />
                 </span>
-                <a sm-if="canExecute" href='@Url.Action("GarbageCollect")' class="fwm">@T("Admin.System.SystemInfo.GarbageCollect")</a>
+                <form sm-if="canExecute" asp-action="GarbageCollect" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-link p-0 fwm">@T("Admin.System.SystemInfo.GarbageCollect")</button>
+                </form>
             </div>
         </div>
     </div>

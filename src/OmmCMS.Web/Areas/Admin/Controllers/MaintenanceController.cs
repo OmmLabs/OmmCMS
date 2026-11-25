@@ -507,6 +507,7 @@ public class MaintenanceController : AdminController
         }
     }
 
+    [HttpPost]
     [Permission(Permissions.System.Maintenance.Execute)]
     public async Task<IActionResult> GarbageCollect()
     {
