@@ -574,16 +574,34 @@ public class MaintenanceController : AdminController
         {
             if (_db.DataProvider.CanOptimizeTable)
             {
-                var availableTables = await _db.DataProvider.ReadTableInfosAsync();
-                var selectedTable = availableTables.FirstOrDefault(x => x.TableName == tableName);
-                if (selectedTable == null)
-                    return BadRequest();
+                var provider = _db.DataProvider;
+                var canReadTableInfo = provider.CanReadTableInfo;
+                if (canReadTableInfo)
+                {
+                    var availableTables = await provider.ReadTableInfosAsync();
+                    var selectedTable = availableTables.FirstOrDefault(x => x.TableName == tableName);
+                    if (selectedTable == null)
+                        return BadRequest();
 
-                size = selectedTable.TotalSpace;
-                await _db.DataProvider.OptimizeTableAsync(selectedTable.TableName);
+                    size = selectedTable.TotalSpace;
+                }
+                else
+                {
+                    // Some providers (including SQLite) support optimization without table statistics.
+                    if (!_db.Model.GetEntityTypes().Any(x => x.GetTableName() == tableName))
+                        return BadRequest();
 
-                var tableInfos = await CommonHelper.TryAction(() => _db.DataProvider.ReadTableInfosAsync(), []);
-                var currentSize = tableInfos.FirstOrDefault(x => x.TableName == tableName)?.TotalSpace;
+                    size = null;
+                }
+
+                await provider.OptimizeTableAsync(tableName);
+
+                long? currentSize = null;
+                if (canReadTableInfo)
+                {
+                    var tableInfos = await CommonHelper.TryAction(() => provider.ReadTableInfosAsync(), []);
+                    currentSize = tableInfos.FirstOrDefault(x => x.TableName == tableName)?.TotalSpace;
+                }
 
                 if (size.HasValue && currentSize.HasValue && currentSize.Value > 0 && size > currentSize)
                 {
