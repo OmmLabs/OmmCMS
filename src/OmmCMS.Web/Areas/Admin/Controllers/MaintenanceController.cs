@@ -329,6 +329,7 @@ public class MaintenanceController : AdminController
         return Content(message);
     }
 
+    [HttpPost]
     [MaintenanceAction]
     [Permission(Permissions.System.Maintenance.Execute)]
     public async Task<IActionResult> ReInitMediaFileNames(string folderName = "")
