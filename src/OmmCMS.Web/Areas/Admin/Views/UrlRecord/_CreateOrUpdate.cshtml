@@ -1,6 +1,12 @@
 ﻿@using OmmCMS.Admin.Models.UrlRecord
 
+@using OmmCMS.Core.Security
+@inject IPermissionService UrlPermissions
 @model UrlRecordModel
+
+@{
+    var canUpdate = await UrlPermissions.AuthorizeAsync(Permissions.System.UrlRecord.Update);
+}
 
 <div asp-validation-summary="All"></div>
 
@@ -18,7 +24,7 @@
             <smart-label asp-for="IsActive" />
         </div>
         <div class="adminData">
-            <input asp-for="IsActive" />
+            <input asp-for="IsActive" disabled="@(!canUpdate)" />
             <span asp-validation-for="IsActive"></span>
         </div>
     </div>
@@ -27,7 +33,7 @@
             <smart-label asp-for="LanguageId" />
         </div>
         <div class="adminData">
-            <select asp-for="LanguageId" asp-items="ViewBag.AvailableLanguages"></select>
+            <select asp-for="LanguageId" asp-items="ViewBag.AvailableLanguages" disabled="@(!canUpdate)"></select>
             <span asp-validation-for="LanguageId"></span>
         </div>
     </div>
@@ -54,7 +60,7 @@
             <smart-label asp-for="Slug" />
         </div>
         <div class="adminData">
-            <input asp-for="Slug" />
+            <input asp-for="Slug" readonly="@(!canUpdate)" />
             <span asp-validation-for="Slug"></span>
             @await Component.InvokeAsync("NamesPerEntity", new { entityName = Model.EntityName, entityId = Model.EntityId })
         </div>
