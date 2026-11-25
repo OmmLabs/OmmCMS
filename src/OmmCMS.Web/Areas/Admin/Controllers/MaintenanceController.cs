@@ -823,8 +823,7 @@ public class MaintenanceController : AdminController
         });
     }
 
-    [HttpPost, ActionName("Index")]
-    [FormValueRequired("execute-create-backup")]
+    [HttpPost]
     [Permission(Permissions.System.Maintenance.Execute)]
     public async Task<IActionResult> CreateBackup()
     {

@@ -25,7 +25,7 @@
     <toolbar>
         <toolbar-group>
             <fragment>
-                <button sm-if="canExecute" type="submit" name="execute-create-backup" value="execute-create-backup" class="btn btn-primary btn-flat confirm">
+                <button sm-if="canExecute" type="submit" asp-action="CreateBackup" name="execute-create-backup" value="execute-create-backup" class="btn btn-primary btn-flat confirm">
                     <icon name="plus"  />
                     <span>@T("Admin.System.Maintenance.DbBackup.Create")</span>
                 </button>

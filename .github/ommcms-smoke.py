@@ -526,7 +526,7 @@ def sqlite_backup_workflow(password):
     get_page("/admin/maintenance/backuplist", admin)
     backup_dir = database.parent / "DbBackups"
     before = set(backup_dir.glob("*.bak"))
-    post_form("/admin/maintenance/index", admin, page, {"execute-create-backup": "execute-create-backup"})
+    post_form("/admin/maintenance/createbackup", admin, page, {})
     created = set(backup_dir.glob("*.bak")) - before
     assert len(created) == 1, "Native backup did not create exactly one file"
     backup = created.pop()
