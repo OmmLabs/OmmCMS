@@ -156,6 +156,13 @@ public class UrlRecordController : AdminController
         if (string.IsNullOrWhiteSpace(model.Slug) || model.Slug.Length > 400)
             ModelState.AddModelError(nameof(model.Slug), "Enter a slug between 1 and 400 characters.");
 
+        if (!string.IsNullOrWhiteSpace(model.Slug))
+        {
+            var normalizedSlug = model.Slug.ToLowerInvariant();
+            if (await _db.UrlRecords.AnyAsync(x => x.Id != urlRecord.Id && x.Slug.ToLower() == normalizedSlug))
+                ModelState.AddModelError(nameof(model.Slug), "This slug is already in use.");
+        }
+
         if (model.IsActive && await _db.UrlRecords.AnyAsync(x => x.Id != urlRecord.Id
             && x.EntityName == urlRecord.EntityName && x.EntityId == urlRecord.EntityId
             && x.LanguageId == model.LanguageId && x.IsActive))
