@@ -1,12 +1,16 @@
-﻿@model RuleSetModel
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService RulePermissions
+@model RuleSetModel
 
 @{
+    var canCreate = await RulePermissions.AuthorizeAsync(Permissions.System.Rule.Create);
+    var canDelete = await RulePermissions.AuthorizeAsync(Permissions.System.Rule.Delete);
     var parentModel = ViewData["Parent"] as RuleListModel;
 }
 
 <datagrid id="rules-grid"
           allow-resize="true"
-          allow-row-selection="true"
+          allow-row-selection="@canDelete"
           allow-column-reordering="true"
           preserve-grid-state="true"
           onrowclass="rulesGrid_onRowClass">
@@ -18,7 +22,7 @@
     </sorting>
     <toolbar>
         <toolbar-group>
-            <a asp-action="Create" class="btn btn-primary btn-flat">
+            <a sm-if="canCreate" asp-action="Create" class="btn btn-primary btn-flat">
                 <icon name="plus"  />
                 <span>@T("Admin.Common.AddNew")…</span>
             </a>
@@ -27,7 +31,7 @@
         <toolbar-group class="omega"></toolbar-group>
         <zone name="datagrid_toolbar_omega"></zone>
         <toolbar-group>
-            <button datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger btn-flat">
+            <button sm-if="canDelete" datagrid-action="DataGridToolAction.DeleteSelectedRows" type="button" class="btn btn-danger btn-flat">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete.Selected")</span>
             </button>
