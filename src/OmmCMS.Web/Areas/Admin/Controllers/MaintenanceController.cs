@@ -579,6 +579,7 @@ public class MaintenanceController : AdminController
                 if (selectedTable == null)
                     return BadRequest();
 
+                size = selectedTable.TotalSpace;
                 await _db.DataProvider.OptimizeTableAsync(selectedTable.TableName);
 
                 var tableInfos = await CommonHelper.TryAction(() => _db.DataProvider.ReadTableInfosAsync(), []);
@@ -586,8 +587,8 @@ public class MaintenanceController : AdminController
 
                 if (size.HasValue && currentSize.HasValue && currentSize.Value > 0 && size > currentSize)
                 {
-                    var diffBytes = currentSize.Value - size.Value;
-                    var diffPercent = Math.Round(diffBytes / (double)currentSize.Value, 2);
+                    var diffBytes = size.Value - currentSize.Value;
+                    var diffPercent = diffBytes / (double)size.Value;
 
                     NotifySuccess(T("Common.OptimizeTableSuccess",
                         tableName,
