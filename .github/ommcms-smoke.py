@@ -178,7 +178,10 @@ def editorial_workflows(password):
     for action in ("/admin/urlrecord/cleanup?batchSize=0", "/admin/urlrecord/cleanup?batchSize=1001", "/admin/maintenance/offloadembeddedimages?take=0", "/admin/maintenance/offloadembeddedimages?take=1001"):
         status, _ = request(action, {"__RequestVerificationToken": token}, client=admin)
         assert status == 400, f"{action}: invalid maintenance batch size returned HTTP {status}"
-    print("Protected maintenance action method, antiforgery and batch validation checks passed.")
+    for action in ("/admin/maintenance/optimizetable", "/admin/maintenance/optimizetable?tableName=Topic&size=-1"):
+        status, _ = request(action, {"__RequestVerificationToken": token}, client=admin)
+        assert status == 400, f"{action}: invalid optimization request returned HTTP {status}"
+    print("Protected maintenance action method, antiforgery and input validation checks passed.")
     # Theme operations must reject GET and tokenless POST before any mutation.
     for action in ("/admin/theme/reloadthemes", "/admin/theme/clearassetcache"):
         status, _ = request(action, client=admin)
