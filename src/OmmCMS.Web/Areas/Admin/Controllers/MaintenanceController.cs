@@ -883,10 +883,8 @@ public class MaintenanceController : AdminController
     [Permission(Permissions.System.Maintenance.Execute)]
     public async Task<IActionResult> RestoreBackup(string name)
     {
-        if (PathUtility.HasInvalidFileNameChars(name))
-        {
-            throw new BadHttpRequestException(T("Admin.Common.InvalidFileName", name.NaIfEmpty()));
-        }
+        if (!PathUtility.IsFileName(name) || !_db.DataProvider.ValidateBackupFileName(name).IsValid)
+            return BadRequest();
 
         try
         {
@@ -894,9 +892,11 @@ public class MaintenanceController : AdminController
             {
                 var dir = await Services.ApplicationContext.TenantRoot.GetDirectoryAsync(BackupDir);
                 var fs = dir.FileSystem;
-                var fullPath = fs.MapPath(PathUtility.Join(dir.SubPath, name));
+                var backup = await fs.GetFileAsync(PathUtility.Join(dir.SubPath, name));
+                if (!backup.Exists)
+                    return NotFound();
 
-                await _db.DataProvider.RestoreDatabaseAsync(fullPath);
+                await _db.DataProvider.RestoreDatabaseAsync(backup.PhysicalPath);
 
                 await ClearCache();
                 await ClearDatabaseCache();
@@ -953,13 +953,14 @@ public class MaintenanceController : AdminController
     [Permission(Permissions.System.Maintenance.Execute)]
     public async Task<IActionResult> DownloadBackup(string name)
     {
-        if (PathUtility.HasInvalidFileNameChars(name))
-        {
-            throw new BadHttpRequestException(T("Admin.Common.InvalidFileName", name.NaIfEmpty()));
-        }
+        if (!PathUtility.IsFileName(name) || !_db.DataProvider.ValidateBackupFileName(name).IsValid)
+            return BadRequest();
 
         var root = Services.ApplicationContext.TenantRoot;
-        var backup = await root.GetFileAsync(BackupDir + "\\" + name);
+        var backup = await root.GetFileAsync(PathUtility.Join(BackupDir, name));
+        if (!backup.Exists)
+            return NotFound();
+
         var contentType = MimeTypes.MapNameToMimeType(backup.PhysicalPath);
 
         try
