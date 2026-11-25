@@ -109,9 +109,9 @@ public class SchedulingController : AdminController
     }
 
     [HttpPost]
+    [Permission(Permissions.System.ScheduleTask.Read)]
     public async Task<IActionResult> GetTaskRunInfo(int id /* taskId */)
     {
-        // We better not check permission here.
         var lastExecutionInfo = await _taskStore.GetLastExecutionInfoByTaskIdAsync(id);
         var task = lastExecutionInfo?.Task ?? await _taskStore.GetTaskByIdAsync(id);
         if (task == null)
