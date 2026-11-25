@@ -60,6 +60,7 @@ public partial class SettingController : AdminController
 
     #region General settings
 
+    [Permission(Permissions.Configuration.Setting.Read)]
     [LoadSetting]
     public async Task<IActionResult> GeneralCommon(
         int storeScope,
