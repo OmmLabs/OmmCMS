@@ -1,8 +1,11 @@
 ﻿@using OmmCMS.Core.Packaging
 
+@using OmmCMS.Core.Security
+@inject IPermissionService PagePermissions
 @model CheckUpdateResult
 
 @{
+    var canExecute = await PagePermissions.AuthorizeAsync(Permissions.System.Maintenance.Execute);
     ViewBag.Title = T("Admin.CheckUpdate").Value;
 }
 
@@ -41,7 +44,7 @@
             <h4>@T("Admin.CheckUpdate.AutoUpdatePossible")</h4>
             @Html.Raw(T("Admin.CheckUpdate.AutoUpdatePossibleInfo"))
             <p class="mt-4">
-                <a id="install-update" class="btn btn-primary confirm" href="#" data-url='@Url.Action("InstallUpdate")'>
+                <a sm-if="canExecute" id="install-update" class="btn btn-primary confirm" href="#" data-url='@Url.Action("InstallUpdate")'>
                     <icon name="arrow-turn-up"  />
                     <span>@T("Admin.CheckUpdate.UpdateNow")</span>
                 </a>
@@ -63,7 +66,7 @@
                 <span>@T("Common.Download")</span>
             </a>
 
-            <a id="check-update-suppress" class="btn btn-link ml-2" href="#" data-url="@Url.Action("CheckUpdateSuppress")">
+            <a sm-if="canExecute" id="check-update-suppress" class="btn btn-link ml-2" href="#" data-url="@Url.Action("CheckUpdateSuppress")">
                 <span>@T("Admin.CheckUpdate.DontNotifyAnymore")</span>
             </a>
         </div>
