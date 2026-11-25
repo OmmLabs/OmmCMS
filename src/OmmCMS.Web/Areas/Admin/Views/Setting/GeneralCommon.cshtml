@@ -1,7 +1,10 @@
-﻿@model GeneralCommonSettingsModel
+﻿@using OmmCMS.Core.Security
+@inject IPermissionService SettingsPermissions
+@model GeneralCommonSettingsModel
 
 @{
     Layout = "_SettingLayout";
+    var canUpdate = await SettingsPermissions.AuthorizeAsync(Permissions.Configuration.Setting.Update);
     ViewBag.Title = T("Admin.Configuration.Settings.GeneralCommon");
 }
 
@@ -12,7 +15,7 @@
             @T("Admin.Configuration.Settings.GeneralCommon")
         </div>
         <div class="options">
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
@@ -326,7 +329,7 @@
                         <div class="input-group">
                             <editor asp-for="SecuritySettings.EncryptionKey" />
                             <span class="input-group-append">
-                                <button type="submit" name="changeencryptionkey" id="changeencryptionkey" value="changeencryptionkey" class="btn btn-secondary confirm">
+                                <button sm-if="canUpdate" type="submit" name="changeencryptionkey" id="changeencryptionkey" value="changeencryptionkey" class="btn btn-secondary confirm">
                                     <span>@T("Admin.Common.Change")</span>
                                 </button>
                             </span>
@@ -401,7 +404,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <button type="button" class="d-none" id="btn-refresh-captcha"></button>
-                                    <button type="button" id="btn-configure-captcha" class="btn btn-secondary">
+                                    <button sm-if="canUpdate" type="button" id="btn-configure-captcha" class="btn btn-secondary">
                                         <icon name="gear" />
                                         <span>@T("Admin.Common.Configure")...</span>
                                     </button>
