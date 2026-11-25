@@ -53,6 +53,7 @@ public partial class TaskValidator : AbstractValidator<TaskModel>
         RuleSet("TaskEditing", () =>
         {
             RuleFor(x => x.Name).NotEmpty();
+            RuleFor(x => x.Priority).IsInEnum();
             RuleFor(x => x.CronExpression)
                 .Must(x => CronExpression.IsValid(x))
                 .WithMessage(T("Admin.System.ScheduleTasks.InvalidCronExpression"));
