@@ -48,14 +48,26 @@ The CI workflow restores and builds the solution, runs unit and integration test
 
 Fresh-install validation covers SQLite. The other database providers compile; separate deployment and provider-specific acceptance testing are required before a stable release.
 
-### Remaining preview acceptance
+### Preview acceptance checkpoint (25 November 2026)
 
-- [ ] Pass the latest full CI workflow after administration review changes.
-- [ ] Complete focused browser acceptance of administrator and restricted-role workflows, including save/delete confirmation, scheduling and maintenance controls.
-- [ ] Verify backup and restoration on a disposable database for each provider that supports those operations.
-- [ ] Select a tested engine revision and revalidate the separately pinned demo and official website before their deployment.
+Selected SQLite preview engine: [`6241dd5f602951541bf6fd8be68587cdf9f66068`](https://github.com/OmmLabs/OmmCMS/commit/6241dd5f602951541bf6fd8be68587cdf9f66068). [Full CI run 45547373289](https://github.com/OmmLabs/OmmCMS/actions/runs/45547373289) passed with zero build warnings/errors and 1,966 passing automated tests.
 
-Do not treat the passing SQLite CI gate as production certification. Report security issues privately to the maintainers; do not publish sensitive details.
+- [x] Pass the full CI workflow after administration review changes.
+- [x] Complete focused Chromium acceptance of administrator and restricted-role workflows, including save, delete cancellation, scheduling, restart confirmation and maintenance controls.
+- [x] Verify native backup creation, byte-identical download, restoration of changed content, SQLite integrity and deletion on a disposable SQLite database.
+- [x] Select a tested SQLite preview engine revision.
+- [ ] Finish official website content and acceptance on its existing pinned engine, then update both Demo and Website engine pins to the selected revision and revalidate their independent workflows.
+- [ ] Deploy and verify the revised demo first, then the official website.
+
+### Separate stable-release gates
+
+- [ ] SQL Server fresh installation, publishing, and native backup/restore on an isolated instance with a database-server-accessible backup path.
+- [ ] MySQL and PostgreSQL fresh installation and editorial acceptance; native backup/restore is not advertised by those providers.
+- [ ] Host-specific verification, release notes and stable-release decision.
+
+The SQLite preview checkpoint is not a stable-release or production certification.
+
+Report security issues privately to the maintainers; do not publish sensitive details.
 
 ## License
 
