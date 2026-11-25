@@ -1,8 +1,12 @@
 ﻿@using OmmCMS.Admin.Models.Common
 
+@using OmmCMS.Core.Security
+@inject IPermissionService PagePermissions
 @model StateProvinceModel
 
 @{
+    var canUpdate = await PagePermissions.AuthorizeAsync(Permissions.Configuration.Country.Update);
+    var canDelete = await PagePermissions.AuthorizeAsync(Permissions.Configuration.Country.Delete);
     ViewBag.Title = T("Admin.Configuration.Countries.States.EditStateDetails").Value;
     Layout = "_AdminPopupLayout";
 }
@@ -13,7 +17,7 @@
             @ViewBag.Title
         </div>
         <div class="options">
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 @T("Admin.Common.Save")
             </button>
