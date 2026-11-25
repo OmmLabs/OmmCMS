@@ -257,6 +257,7 @@ public class ThemeController : AdminController
         return fixedDict;
     }
 
+    [HttpPost]
     [Permission(Permissions.Configuration.Theme.Update)]
     public IActionResult ReloadThemes(int? storeId)
     {

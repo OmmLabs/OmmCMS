@@ -20,10 +20,10 @@
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
-            <a sm-if="canUpdate" asp-action="ReloadThemes" asp-route-storeId="@Model.StoreId" class="btn btn-secondary">
+            <button sm-if="canUpdate" type="submit" asp-action="ReloadThemes" asp-route-storeId="@Model.StoreId" class="btn btn-secondary">
                 <icon name="sync" />
                 <span>@T("Admin.Configuration.Themes.Reload")</span>
-            </a>
+            </button>
 
             <zone name="admin_button_toolbar_after"></zone>
         </div>
