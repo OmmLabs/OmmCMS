@@ -19,8 +19,17 @@
 
   Contact: Lyubomir Arsov, liubo (at) web-lobby.com
 */
+function roxyRequestToken() {
+	return $('#frmUpload input[name="__RequestVerificationToken"]').val();
+}
+
 $.ajaxSetup({
-	cache: false
+	cache: false,
+	beforeSend: function (xhr, settings) {
+		if (!settings.crossDomain && settings.type.toUpperCase() === 'POST') {
+			xhr.setRequestHeader('X-XSRF-Token', roxyRequestToken());
+		}
+	}
 });
 
 function selectFile(item) {
@@ -277,6 +286,7 @@ function fileUpload(f, i) {
 	var fData = new FormData();
 	var el = findUploadElement(i);
 	el.find('.removeUpload').remove();
+	fData.append("__RequestVerificationToken", roxyRequestToken());
 	fData.append("action", 'upload');
 	fData.append("method", 'ajax');
 	fData.append("d", $('#hdDir').attr('value'));

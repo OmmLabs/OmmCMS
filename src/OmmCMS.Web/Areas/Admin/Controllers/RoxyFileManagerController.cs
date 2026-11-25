@@ -51,12 +51,12 @@ public class RoxyFileManagerController : AdminController
             mediaStorageConfiguration);
     }
 
+    [Permission(Permissions.Media.Upload)]
     public IActionResult Index()
     {
         return View();
     }
 
-    [IgnoreAntiforgeryToken]
     [Permission(Permissions.Media.Upload)]
     public async Task<IActionResult> ProcessRequest(
         string a = null /* action */,
@@ -67,7 +67,19 @@ public class RoxyFileManagerController : AdminController
         string ext = null /* external */,
         string method = null)
     {
-        var action = (a.NullEmpty() ?? "DIRLIST").ToUpper();
+        var action = (a.NullEmpty() ?? "DIRLIST").ToUpperInvariant();
+        var requiredPermission = action switch
+        {
+            "DELETEDIR" or "DELETEFILE" => Permissions.Media.Delete,
+            "COPYDIR" or "COPYFILE" or "CREATEDIR" or "MOVEDIR" or "MOVEFILE" or "RENAMEDIR" or "RENAMEFILE" => Permissions.Media.Update,
+            _ => null
+        };
+
+        if ((requiredPermission != null || action == "UPLOAD") && !HttpMethods.IsPost(Request.Method))
+            return StatusCode(405);
+
+        if (requiredPermission != null && !await Services.Permissions.AuthorizeAsync(requiredPermission))
+            return Forbid();
 
         try
         {

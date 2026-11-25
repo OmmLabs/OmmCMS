@@ -412,6 +412,16 @@ def editorial_workflows(password):
         assert response.status == 200 and response.read().startswith(png[:8]), "Uploaded image not publicly readable"
     print("Authenticated media upload and public retrieval passed.")
 
+    # Roxy uses the same media service but must not allow unprotected writes.
+    roxy_page = get_page("/admin/roxyfilemanager", admin, 'id="frmUpload"')
+    assert Inputs(roxy_page).values.get("__RequestVerificationToken"), "Roxy upload form lacks antiforgery token"
+    roxy = "/admin/roxyfilemanager/processrequest"
+    assert request(roxy + "?a=CREATEDIR&d=file&n=csrf-smoke", client=admin)[0] == 405, "Roxy accepted a write over GET"
+    assert request(roxy + "?a=CREATEDIR", {"d": "file", "n": "csrf-smoke"}, client=admin)[0] in (400, 403), "Roxy accepted a write without antiforgery token"
+    roxy_dirs = json.loads(post_form(roxy + "?a=DIRLIST", admin, roxy_page, {}))
+    assert isinstance(roxy_dirs, list) and roxy_dirs, "Authorized Roxy directory list failed"
+    print("Roxy method and antiforgery checks passed.")
+
     # Check actual theme settings and configuration UI, then persist a different bundled theme.
     store_id = read_rows("SELECT Id FROM Store")[0][0]
     page = get_page("/admin/theme/list", admin, 'name="DefaultTheme"')

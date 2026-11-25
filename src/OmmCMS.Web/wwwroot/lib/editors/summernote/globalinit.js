@@ -350,6 +350,8 @@ let summernote_image_upload_url;
         data = new FormData();
         data.append("file", file);
         data.append("a", "UPLOAD");
+        data.append("__RequestVerificationToken", getAntiforgeryToken());
+        data.append("method", "ajax");
         data.append("d", "file");
         data.append("ext", true);
 
