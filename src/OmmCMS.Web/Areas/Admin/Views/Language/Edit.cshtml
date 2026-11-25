@@ -1,8 +1,13 @@
 ﻿@using OmmCMS.Admin.Models.Localization
 
+@using OmmCMS.Core.Security
+@inject IPermissionService LanguagePermissions
 @model OmmCMS.Admin.Models.Localization.LanguageModel
 
 @{
+    var canUpdate = await LanguagePermissions.AuthorizeAsync(Permissions.Configuration.Language.Update);
+    var canDelete = await LanguagePermissions.AuthorizeAsync(Permissions.Configuration.Language.Delete);
+    var canEditResources = await LanguagePermissions.AuthorizeAsync(Permissions.Configuration.Language.EditResource);
     ViewBag.Title = T("Admin.Configuration.Languages.EditLanguageDetails").Value;
 
     var downloadableLanguages = ViewBag.DownloadableLanguages as List<AvailableLanguageModel> ?? new List<AvailableLanguageModel>();
@@ -19,7 +24,7 @@
         <div class="options">
             <zone name="admin_button_toolbar_before" />
 
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
@@ -41,18 +46,18 @@
                         <icon name="upload" fw="true" />
                         <span>@T("Admin.Configuration.Languages.Export")</span>
                     </a>
-                    <a href="#importxml-window" data-toggle="modal" class="dropdown-item">
+                    <a sm-if="canEditResources" href="#importxml-window" data-toggle="modal" class="dropdown-item">
                         <icon name="download" fw="true" />
                         <span>@T("Admin.Configuration.Languages.Import")</span>
                     </a>
                 </div>
             </div>
 
-            <button type="submit" id="language-delete" name="language-delete" class="btn btn-secondary btn-destructive">
+            <button sm-if="canDelete" type="submit" id="language-delete" name="language-delete" class="btn btn-secondary btn-destructive">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete")</span>
             </button>
-            <confirm button-id="language-delete" />
+            <confirm sm-if="canDelete" button-id="language-delete" />
 
             <zone name="admin_button_toolbar_after" />
         </div>
@@ -61,7 +66,7 @@
     <partial name="_CreateOrUpdate" />
 </form>
 
-<modal id="importxml-window" sm-size="Large">
+<modal sm-if="canEditResources" id="importxml-window" sm-size="Large">
     <modal-header sm-title="@T("Admin.Configuration.Languages.Import")"></modal-header>
     <modal-body>
         <form enctype="multipart/form-data" method="post" asp-action="ImportXml" asp-route-id="@Model.Id">
