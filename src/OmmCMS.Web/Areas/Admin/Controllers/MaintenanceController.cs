@@ -831,7 +831,9 @@ public class MaintenanceController : AdminController
         {
             if (_db.DataProvider.CanBackup)
             {
-                var dir = await Services.ApplicationContext.TenantRoot.GetDirectoryAsync(BackupDir);
+                var root = Services.ApplicationContext.TenantRoot;
+                await root.TryCreateDirectoryAsync(BackupDir);
+                var dir = await root.GetDirectoryAsync(BackupDir);
                 var fs = dir.FileSystem;
 
                 var backupName = _db.DataProvider.CreateBackupFileName();
