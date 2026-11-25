@@ -1,8 +1,13 @@
 ﻿@using OmmCMS.Admin.Models.Messages
 
+@using OmmCMS.Core.Security
+@inject IPermissionService MessagePermissions
 @model MessageTemplateModel
 
 @{
+    var canUpdate = await MessagePermissions.AuthorizeAsync(Permissions.Cms.MessageTemplate.Update);
+    var canDelete = await MessagePermissions.AuthorizeAsync(Permissions.Cms.MessageTemplate.Delete);
+    var canCreate = await MessagePermissions.AuthorizeAsync(Permissions.Cms.MessageTemplate.Create);
     ViewBag.Title = T("Admin.ContentManagement.MessageTemplates.EditMessageTemplateDetails").Value;
 }
 
@@ -23,24 +28,24 @@
                 <icon name="eye" />
                 <span>@T("Admin.Common.Preview")</span>
             </a>
-            <button type="submit" name="message-template-copy" id="message-template-copy" class="btn btn-outline-secondary" value="@T("Admin.ContentManagement.MessageTemplates.Copy")">
+            <button sm-if="canCreate" type="submit" name="message-template-copy" id="message-template-copy" class="btn btn-outline-secondary" value="@T("Admin.ContentManagement.MessageTemplates.Copy")">
                 <icon name="copy" />
                 <span>@T("Admin.ContentManagement.MessageTemplates.Copy")</span>
             </button>
-            <confirm button-id="message-template-copy" action="CopyTemplate" type="Action" />
+            <confirm sm-if="canCreate" button-id="message-template-copy" action="CopyTemplate" type="Action" />
 
             <span class="vr"></span>
 
-            <button type="submit" name="save" value="save" class="btn btn-primary">
+            <button sm-if="canUpdate" type="submit" name="save" value="save" class="btn btn-primary">
                 <icon name="check" />
                 <span>@T("Admin.Common.Save")</span>
             </button>
             <button type="submit" name="save" value="save-continue" class="btn btn-secondary">@T("Admin.Common.SaveContinue")</button>
-            <button type="submit" name="message-template-delete" id="message-template-delete" class="btn btn-secondary btn-destructive">
+            <button sm-if="canDelete" type="submit" name="message-template-delete" id="message-template-delete" class="btn btn-secondary btn-destructive">
                 <icon name="trash" />
                 <span>@T("Admin.Common.Delete")</span>
             </button>
-            <confirm button-id="message-template-delete" />
+            <confirm sm-if="canDelete" button-id="message-template-delete" />
 
             <zone name="admin_button_toolbar_after"></zone>
         </div>
