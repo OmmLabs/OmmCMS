@@ -398,6 +398,13 @@ public class ModuleController : AdminController
             throw new AccessDeniedException();
         }
 
+        var languageIds = (await _languageService.GetAllLanguagesAsync(true)).Select(x => x.Id).ToHashSet();
+        if (!ModelState.IsValid || model.Locales.Any(x => x == null || !languageIds.Contains(x.LanguageId))
+            || model.Locales.Select(x => x.LanguageId).Distinct().Count() != model.Locales.Count)
+        {
+            return BadRequest();
+        }
+
         await _moduleManager.ApplySettingAsync(provider.Metadata, nameof(model.FriendlyName), model.FriendlyName);
         await _moduleManager.ApplySettingAsync(provider.Metadata, nameof(model.Description), model.Description);
 
