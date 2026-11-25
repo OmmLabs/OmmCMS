@@ -31,7 +31,7 @@ public class GenericAttributeController : AdminController
         {
             var (readPermission, _) = GetPermissionNames(entityName);
 
-            if (readPermission.IsEmpty() || Services.Permissions.Authorize(readPermission))
+            if (readPermission.HasValue() && Services.Permissions.Authorize(readPermission))
             {
                 var allAttributes = _genericAttributeService.GetAttributesForEntity(entityName, entityId).UnderlyingEntities;
                 var attributes = allAttributes
@@ -63,8 +63,19 @@ public class GenericAttributeController : AdminController
         return Json(gridModel);
     }
 
+    [HttpPost]
     public async Task<IActionResult> GenericAttributeInsert(GenericAttributeModel model, string entityName, int entityId)
     {
+        if (entityId <= 0 || GetPermissionNames(entityName).UpdatePermission.IsEmpty())
+            return BadRequest();
+
+        entityName = entityName.EqualsNoCase(nameof(Topic)) ? nameof(Topic) : nameof(Customer);
+        if (!await Services.Permissions.AuthorizeAsync(GetPermissionNames(entityName).UpdatePermission))
+            return Forbid();
+
+        if (entityName == nameof(Topic) ? !await _db.Topics.AnyAsync(x => x.Id == entityId) : !await _db.Customers.AnyAsync(x => x.Id == entityId))
+            return NotFound();
+
         model.Key = model.Key.TrimSafe();
         model.Value = model.Value.TrimSafe() ?? string.Empty;
 
@@ -111,10 +122,21 @@ public class GenericAttributeController : AdminController
         }
     }
 
+    [HttpPost]
     public async Task<IActionResult> GenericAttributeUpdate(GenericAttributeModel model)
     {
-        var entityName = model.EntityName;
-        var entityId = model.AttributeEntityId;
+        var attr = await _db.GenericAttributes.FindByIdAsync(model.Id);
+        if (attr == null)
+            return NotFound();
+
+        var entityName = attr.KeyGroup;
+        var entityId = attr.EntityId;
+        var currentStoreId = Services.StoreContext.CurrentStore.Id;
+        if (!entityName.EqualsNoCase(model.EntityName) || entityId != model.AttributeEntityId || (attr.StoreId != 0 && attr.StoreId != currentStoreId))
+            return BadRequest();
+
+        if (GetPermissionNames(entityName).UpdatePermission.IsEmpty())
+            return Forbid();
 
         model.Key = model.Key.TrimSafe();
         model.Value = model.Value.TrimSafe();
@@ -122,23 +144,24 @@ public class GenericAttributeController : AdminController
         if (ModelState.IsValid)
         {
             var storeId = Services.StoreContext.CurrentStore.Id;
-            var (readPermission, updatePermission) = GetPermissionNames(model.EntityName);
+            var (readPermission, updatePermission) = GetPermissionNames(entityName);
 
-            if (updatePermission.HasValue() && !await Services.Permissions.AuthorizeAsync(updatePermission))
+            if (updatePermission.IsEmpty() || entityId <= 0)
+                return BadRequest();
+
+            if (!await Services.Permissions.AuthorizeAsync(updatePermission))
             {
                 NotifyError(await Services.Permissions.GetUnauthorizedMessageAsync(updatePermission));
                 return Json(new { success = false });
             }
             else
             {
-                var attr = await _db.GenericAttributes.FindByIdAsync(model.Id);
-
                 // If the key changed, ensure it isn't being used by another attribute.
                 if (!attr.Key.EqualsNoCase(model.Key))
                 {
                     var attributes = _genericAttributeService.GetAttributesForEntity(entityName, entityId).UnderlyingEntities;
                     var attr2 = attributes
-                        .Where(x => x.StoreId == storeId && x.Key.Equals(model.Key, StringComparison.InvariantCultureIgnoreCase))
+                        .Where(x => x.StoreId == attr.StoreId && x.Key.Equals(model.Key, StringComparison.InvariantCultureIgnoreCase))
                         .FirstOrDefault();
 
                     if (attr2 != null && attr2.Id != attr.Id)
@@ -165,7 +188,7 @@ public class GenericAttributeController : AdminController
     }
 
     [HttpPost]
-    public async Task<IActionResult> GenericAttributeDelete(GridSelection selection, string entityName)
+    public async Task<IActionResult> GenericAttributeDelete(GridSelection selection, string entityName, int entityId)
     {
         var ids = selection.GetEntityIds();
         var numDeleted = 0;
@@ -174,15 +197,22 @@ public class GenericAttributeController : AdminController
         {
             var (readPermission, updatePermission) = GetPermissionNames(entityName);
 
-            if (updatePermission.HasValue() && !await Services.Permissions.AuthorizeAsync(updatePermission))
+            if (updatePermission.IsEmpty() || entityId <= 0)
+                return BadRequest();
+
+            if (!await Services.Permissions.AuthorizeAsync(updatePermission))
             {
                 NotifyError(await Services.Permissions.GetUnauthorizedMessageAsync(updatePermission));
                 return Json(new { Success = false, Count = numDeleted });
             }
 
-            numDeleted = await _db.GenericAttributes
-                .Where(x => ids.Contains(x.Id))
-                .ExecuteDeleteAsync();
+            var storeId = Services.StoreContext.CurrentStore.Id;
+            var canonicalName = entityName.EqualsNoCase(nameof(Topic)) ? nameof(Topic) : nameof(Customer);
+            var scoped = _db.GenericAttributes.Where(x => ids.Contains(x.Id) && x.KeyGroup == canonicalName && x.EntityId == entityId && (x.StoreId == 0 || x.StoreId == storeId));
+            if (await scoped.CountAsync() != ids.Distinct().Count())
+                return BadRequest();
+
+            numDeleted = await scoped.ExecuteDeleteAsync();
         }
 
         return Json(new { Success = true, Count = numDeleted });
