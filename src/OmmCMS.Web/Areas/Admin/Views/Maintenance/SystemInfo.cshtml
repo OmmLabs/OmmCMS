@@ -189,7 +189,7 @@
                     <icon name="arrow-up" id="used-ram-up" class="text-danger" style="display: none" />
                     <icon name="arrow-down" id="used-ram-down" class="text-success" style="display: none" />
                 </span>
-                <a href='@Url.Action("GarbageCollect")' class="fwm">@T("Admin.System.SystemInfo.GarbageCollect")</a>
+                <a sm-if="canExecute" href='@Url.Action("GarbageCollect")' class="fwm">@T("Admin.System.SystemInfo.GarbageCollect")</a>
             </div>
         </div>
     </div>
@@ -297,7 +297,7 @@
         <div class="adminData">
             <div class="form-control-plaintext">
                 <span class="sysmetric">@Model.DatabaseSizeString.NaIfEmpty()</span>
-                @if (Model.OptimizeDatabaseEnabled)
+                @if (canExecute && Model.OptimizeDatabaseEnabled)
                 {
                     <a href='@Url.Action("OptimizeDatabase")' class="fwm">@T("Common.Shrink")</a>
                 }
@@ -325,7 +325,7 @@
                                 <th class="text-right" nowrap>@T("Admin.System.SystemInfo.DbTableInfo.TotalSpace")</th>
                                 <th class="text-right" nowrap>@T("Admin.System.SystemInfo.DbTableInfo.UsedSpace")</th>
                                 <th class="text-right" nowrap>@T("Admin.System.SystemInfo.DbTableInfo.UnusedSpace")</th>
-                                @if (Model.OptimizeTableEnabled)
+                                @if (canExecute && Model.OptimizeTableEnabled)
                                 {
                                     <th nowrap>&nbsp;</th>
                                 }
@@ -340,7 +340,7 @@
                                     <td class="text-right fwm" nowrap>@Prettifier.HumanizeBytes(info.TotalSpace)</td>
                                     <td class="text-right" nowrap>@Prettifier.HumanizeBytes(info.UsedSpace)</td>
                                     <td class="text-right" nowrap>@Prettifier.HumanizeBytes(info.TotalSpace - info.UsedSpace)</td>
-                                    @if (Model.OptimizeTableEnabled)
+                                    @if (canExecute && Model.OptimizeTableEnabled)
                                     {
                                         <td nowrap><a sm-if="canExecute" asp-action="OptimizeTable" asp-route-tableName="@info.TableName" asp-route-size="@info.TotalSpace" class="pl-2">@T("Common.Shrink")</a></td>
                                     }
