@@ -26,5 +26,9 @@ jobs:
       - run: dotnet build OmmCMS.sln -c Release --no-restore
       - run: dotnet test OmmCMS.sln -c Release --no-build --no-restore --logger trx
       - run: dotnet publish src/OmmCMS.Web/OmmCMS.Web.csproj -c Release --no-build --no-restore -o "$RUNNER_TEMP/ommcms-smoke"
+      - name: Install Chromium for administration acceptance
+        run: |
+          python3 -m pip install playwright==1.55.0
+          python3 -m playwright install --with-deps chromium
       - name: Fresh CMS installation and regression checks
-        run: python3 .github/ommcms-smoke.py "$RUNNER_TEMP/ommcms-smoke" --editorial --trimmed --controllers-trimmed --public-controllers-trimmed --account-trimmed --admin-commerce-trimmed --residual-commerce-trimmed --presentation-trimmed --core-commerce-trimmed
+        run: python3 .github/ommcms-smoke.py "$RUNNER_TEMP/ommcms-smoke" --editorial --trimmed --controllers-trimmed --public-controllers-trimmed --account-trimmed --admin-commerce-trimmed --residual-commerce-trimmed --presentation-trimmed --core-commerce-trimmed --browser
