@@ -1,6 +1,14 @@
 ﻿@using OmmCMS.Admin.Models.Stores
 
+@using OmmCMS.Core.Security
+@inject IPermissionService PagePermissions
 @model StoreModel
+
+@{
+    var canCreate = await PagePermissions.AuthorizeAsync(Permissions.Configuration.Store.Create);
+    var canUpdate = await PagePermissions.AuthorizeAsync(Permissions.Configuration.Store.Update);
+    var canDelete = await PagePermissions.AuthorizeAsync(Permissions.Configuration.Store.Delete);
+}
 
 <datagrid id="stores-grid" allow-resize="true">
     <datasource read="@Url.Action("StoreList", "Store")" />
@@ -9,7 +17,7 @@
     </sorting>
     <toolbar>
         <toolbar-group>
-            <a asp-action="Create" class="btn btn-primary btn-flat">
+            <a sm-if="canCreate" asp-action="Create" class="btn btn-primary btn-flat">
                 <icon name="plus"  />
                 <span>@T("Admin.Common.AddNew")...</span>
             </a>
