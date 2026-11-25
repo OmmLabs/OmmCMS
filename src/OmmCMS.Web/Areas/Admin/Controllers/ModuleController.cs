@@ -71,7 +71,12 @@ public class ModuleController : AdminController
         }
 
         var removedNames = uninstall.Select(x => x.SystemName).ToHashSet(StringComparer.OrdinalIgnoreCase);
-        var retained = _moduleCatalog.GetInstalledModules().Where(x => !removedNames.Contains(x.SystemName)).Concat(install);
+        var retained = _moduleCatalog.GetInstalledModules().Where(x => !removedNames.Contains(x.SystemName)).Concat(install).ToArray();
+        var retainedNames = retained.Select(x => x.SystemName).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        if (install.Any(x => (x.DependsOn ?? Array.Empty<string>()).Any(name => !retainedNames.Contains(name))))
+        {
+            return BadRequest("Select all required module dependencies before installation.");
+        }
         if (retained.Any(x => (x.DependsOn ?? Array.Empty<string>()).Any(removedNames.Contains)))
         {
             return BadRequest("Cannot remove a module required by another selected or installed module.");
