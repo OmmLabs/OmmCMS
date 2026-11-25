@@ -212,7 +212,7 @@
                             {
                                 <tr>
                                     <td class="sv-key" style="min-width: 200px">@(header.Key):</td>
-                                    <td><div class="sv-value">@header.Value</div></td>
+                                    <td><div class="sv-value">@(header.Key.Equals("Accept", StringComparison.OrdinalIgnoreCase) || header.Key.Equals("Accept-Language", StringComparison.OrdinalIgnoreCase) || header.Key.Equals("User-Agent", StringComparison.OrdinalIgnoreCase) ? header.Value.ToString() : "[hidden]")</div></td>
                                 </tr>
                             }
                         </tbody>
@@ -240,7 +240,7 @@
                             {
                                 <tr>
                                     <td class="sv-key" style="min-width: 200px">@(key):</td>
-                                    <td><div class="sv-value">@variables[key]</div></td>
+                                    <td><div class="sv-value">[hidden]</div></td>
                                 </tr>
                             }
                         </tbody>
