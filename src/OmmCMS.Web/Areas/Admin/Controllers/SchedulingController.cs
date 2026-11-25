@@ -199,7 +199,7 @@ public class SchedulingController : AdminController
 
         var model = await task.MapAsync(lastExecutionInfo);
 
-        ViewBag.ReturnUrl = returnUrl;
+        ViewBag.ReturnUrl = Url.IsLocalUrl(returnUrl) ? returnUrl : null;
         ViewBag.HistoryCleanupNote = T("Admin.System.ScheduleTasks.HistoryCleanupNote").Value.FormatInvariant(
             _commonSettings.MaxNumberOfScheduleHistoryEntries,
             _commonSettings.MaxScheduleHistoryAgeInDays);
@@ -211,17 +211,28 @@ public class SchedulingController : AdminController
     [Permission(Permissions.System.ScheduleTask.Update)]
     public async Task<IActionResult> Edit([CustomizeValidator(RuleSet = "TaskEditing")] TaskModel model, bool continueEditing, string returnUrl = null)
     {
+        returnUrl = Url.IsLocalUrl(returnUrl) ? returnUrl : null;
         ViewBag.ReturnUrl = returnUrl;
-
-        if (!ModelState.IsValid)
-        {
-            return View(model);
-        }
 
         var task = await _taskStore.GetTaskByIdAsync(model.Id);
         if (task == null)
         {
             return NotFound();
+        }
+
+        if (!ModelState.IsValid)
+        {
+            var lastExecutionInfo = await _taskStore.GetLastExecutionInfoByTaskIdAsync(task.Id);
+            var persisted = await task.MapAsync(lastExecutionInfo);
+            persisted.Name = model.Name;
+            persisted.Enabled = model.Enabled;
+            persisted.StopOnError = model.StopOnError;
+            persisted.CronExpression = model.CronExpression;
+            persisted.Priority = model.Priority;
+            ViewBag.HistoryCleanupNote = T("Admin.System.ScheduleTasks.HistoryCleanupNote").Value.FormatInvariant(
+                _commonSettings.MaxNumberOfScheduleHistoryEntries,
+                _commonSettings.MaxScheduleHistoryAgeInDays);
+            return View(persisted);
         }
 
         task.Name = model.Name;
