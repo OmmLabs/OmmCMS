@@ -84,7 +84,8 @@ public class SchedulingController : AdminController
     [HttpPost]
     public async Task<IActionResult> GetRunningTasks()
     {
-        // We better not check permission here.
+        // Embedded task widgets still need running state; restrict detailed messages to schedule readers.
+        var canRead = await Services.Permissions.AuthorizeAsync(Permissions.System.ScheduleTask.Read);
         var runningExecutionInfos = await _taskStore.GetExecutionInfoQuery(false)
             .ApplyCurrentMachineNameFilter()
             .ApplyTaskFilter(0, true)
@@ -93,7 +94,7 @@ public class SchedulingController : AdminController
 
         if (!runningExecutionInfos.Any())
         {
-            return Json(new EmptyResult());
+            return Json(Array.Empty<object>());
         }
 
         var models = runningExecutionInfos
@@ -101,7 +102,7 @@ public class SchedulingController : AdminController
             {
                 id = x.TaskDescriptorId,
                 percent = x.ProgressPercent,
-                message = x.ProgressMessage
+                message = canRead ? x.ProgressMessage : null
             })
             .ToArray();
 
