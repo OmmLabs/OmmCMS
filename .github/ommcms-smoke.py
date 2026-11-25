@@ -150,6 +150,13 @@ def editorial_workflows(password):
     })
     page = get_page("/admin/topic/create", admin, 'id="topic-form"')
     print("Authenticated admin access passed.")
+    # Scheduling operations must reject GET and tokenless POST before any mutation.
+    for action in ("/admin/scheduling/runjob?id=0", "/admin/scheduling/canceljob?id=0"):
+        status, _ = request(action, client=admin)
+        assert status in (404, 405), f"{action}: unsafe GET returned HTTP {status}"
+        status, _ = request(action, {}, client=admin)
+        assert status in (400, 403), f"{action}: tokenless POST returned HTTP {status}"
+    print("Protected scheduling action method and antiforgery checks passed.")
     # Maintenance operations must reject GET and tokenless POST before any mutation.
     for action in ("/admin/maintenance/garbagecollect", "/admin/maintenance/optimizedatabase", "/admin/maintenance/optimizetable", "/admin/maintenance/offloadembeddedimages", "/admin/maintenance/reinitmediafilenames", "/admin/urlrecord/cleanup"):
         status, _ = request(action, client=admin)
