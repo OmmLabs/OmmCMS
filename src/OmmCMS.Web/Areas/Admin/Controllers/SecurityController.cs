@@ -51,6 +51,7 @@ public class SecurityController : AdminController
         return Json(data);
     }
 
+    [Permission(Permissions.Configuration.Setting.Update)]
     [LoadSetting]
     public IActionResult GoogleRecaptcha(GoogleRecaptchaSettings settings, string btnId)
     {
@@ -59,6 +60,7 @@ public class SecurityController : AdminController
         return View(model);
     }
 
+    [Permission(Permissions.Configuration.Setting.Update)]
     [SaveSetting]
     [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
     public IActionResult GoogleRecaptcha(GoogleRecaptchaModel model, GoogleRecaptchaSettings settings, string btnId, bool continueEditing)
@@ -106,6 +108,7 @@ public class SecurityController : AdminController
         }, "Value", "Text", model.BadgePosition);
     }
 
+    [Permission(Permissions.Configuration.Setting.Read)]
     public IActionResult CheckCaptchaConfigured(string systemName)
     {
         var captchaManager = Services.Resolve<ICaptchaManager>();
